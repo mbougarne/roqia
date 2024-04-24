@@ -119,9 +119,9 @@ android {
         }
         release {
             storeFile file('roqia.keystore')
-            storePassword 'mourad2023'
-            keyAlias 'mourad2023'
-            keyPassword 'mourad2023'
+            storePassword '2024mourad'
+            keyAlias 'roqia-key'
+            keyPassword '2024mourad'
         }
     }
     buildTypes {
@@ -131,7 +131,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
