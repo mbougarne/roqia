@@ -31,15 +31,11 @@ export default function App(): JSX.Element {
         style={styles.background}
         imageStyle={styles.cover}>
         <ScrollView>
+          <Header />
           <View style={styles.container}>
-            <Header />
             {content.length &&
               content.map((item: DataProps) => (
-                <Section
-                  key={getID()}
-                  caption={item.caption}
-                  content={item.content}
-                />
+                <Section key={getID()} {...item} />
               ))}
           </View>
         </ScrollView>
@@ -51,9 +47,10 @@ export default function App(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
   },
   background: {
-    paddingBottom: 40,
+    paddingBottom: 20,
   },
   cover: {
     resizeMode: 'repeat',
