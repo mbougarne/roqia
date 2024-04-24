@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   content: {
-    fontSize: 22,
-    fontWeight: '600',
+    fontFamily: 'NotoSansArabic',
+    fontSize: 18,
+    fontWeight: '400',
     color: '#17202A',
   },
   caption: {
