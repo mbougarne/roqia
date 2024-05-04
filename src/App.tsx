@@ -35,15 +35,13 @@ export default function App(): JSX.Element {
     setContent(data);
   }, []);
 
-  const style = styles(themes[mode].bg);
-
   return (
     <Provider value={{mode, toggleMode}}>
       <SafeAreaView>
         <ImageBackground
           source={require('./assets/images/asfalt-dark.png')}
-          style={style.background}
-          imageStyle={style.cover}>
+          style={[styles.background, {backgroundColor: themes[mode].bg}]}
+          imageStyle={styles.cover}>
           <FlatList
             data={content}
             renderItem={({item}) => <Section {...item} />}
@@ -56,13 +54,11 @@ export default function App(): JSX.Element {
   );
 }
 
-const styles = (bg: string) =>
-  StyleSheet.create({
-    background: {
-      paddingBottom: 20,
-      backgroundColor: bg,
-    },
-    cover: {
-      resizeMode: 'repeat',
-    },
-  });
+const styles = StyleSheet.create({
+  background: {
+    paddingBottom: 20,
+  },
+  cover: {
+    resizeMode: 'repeat',
+  },
+});

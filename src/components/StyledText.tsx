@@ -1,5 +1,11 @@
-import React, {FC} from 'react';
-import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
+import React, {type FC} from 'react';
+import {
+  type StyleProp,
+  StyleSheet,
+  Text,
+  type TextProps,
+  type TextStyle,
+} from 'react-native';
 
 type StyledProps = TextProps & {
   customStyle: StyleProp<TextStyle>;
