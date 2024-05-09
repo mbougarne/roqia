@@ -1,6 +1,7 @@
 import React, {type FC, useContext, useState} from 'react';
 import {View, StyleSheet, ImageBackground, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 import {type DataProps} from '../data';
 import {type ContextState, themeContext, themes} from '../store';
@@ -20,6 +21,9 @@ export const Section: FC<SectionProp> = item => {
     }
     setCount(c => (c === 0 ? 0 : c - 1));
   };
+  const onCopy = () => {
+    Clipboard.setString(item.content!);
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -30,43 +34,49 @@ export const Section: FC<SectionProp> = item => {
           {backgroundColor: isDone ? theme.activeBg : theme.bg},
         ]}
         imageStyle={styles.backgroundStyle}>
-        <View style={styles.container}>
-          <StyledText
-            customStyle={[
-              styles.content,
-              {color: isDone ? theme.secondaryColor : theme.color},
-            ]}>
-            {item.content}
-          </StyledText>
-          <StyledText
-            customStyle={[
-              styles.caption,
-              {color: isDone ? theme.secondaryColor : theme.color},
-            ]}>
-            {item.caption}
-          </StyledText>
-          <StyledText
-            customStyle={[
-              styles.repeat,
-              {color: isDone ? theme.secondaryColor : theme.color},
-            ]}>
-            {item.repeatDescription}
-          </StyledText>
-          <Pressable
-            onPress={onPress}
-            style={[styles.button, {backgroundColor: theme.activeBg}]}>
+        <Pressable onPress={onPress}>
+          <View style={styles.container}>
             <StyledText
               customStyle={[
-                styles.repeatNumber,
-                {
-                  color: isDone ? theme.secondaryColor : theme.secondaryColor,
-                },
+                styles.content,
+                {color: isDone ? theme.secondaryColor : theme.color},
               ]}>
-              {count}
+              {item.content}
             </StyledText>
-            <Icon name="arrow-left" size={54} color={theme.secondaryColor} />
-          </Pressable>
-        </View>
+            <StyledText
+              customStyle={[
+                styles.caption,
+                {color: isDone ? theme.secondaryColor : theme.color},
+              ]}>
+              {item.caption}
+            </StyledText>
+            <StyledText
+              customStyle={[
+                styles.repeat,
+                {color: isDone ? theme.secondaryColor : theme.color},
+              ]}>
+              {item.repeatDescription}
+            </StyledText>
+            <View style={styles.bottomContainer}>
+              <StyledText
+                customStyle={[
+                  styles.repeatNumber,
+                  {
+                    color: isDone ? theme.secondaryColor : theme.tertiaryColor,
+                  },
+                ]}>
+                {count}
+              </StyledText>
+              <Pressable onPress={onCopy}>
+                <Icon
+                  name="content-copy"
+                  color={isDone ? theme.secondaryColor : theme.tertiaryColor}
+                  size={28}
+                />
+              </Pressable>
+            </View>
+          </View>
+        </Pressable>
       </ImageBackground>
     </View>
   );
@@ -114,18 +124,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   repeatNumber: {
-    marginRight: -15,
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
   },
-  button: {
-    position: 'absolute',
-    bottom: -10,
-    left: 10,
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    justifyContent: 'flex-end',
+  bottomContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },
