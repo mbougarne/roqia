@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import {Header, Section} from './components';
+import {Header, Note, Section} from './components';
 import {data} from './data';
 import {type Mode, themeContext, themes} from './store';
 
@@ -24,12 +24,15 @@ export default function App(): JSX.Element {
   const [mode, setMode] = useState<Mode>('light');
   const [icon, setIcon] = useState<string>('sunny');
   const [modeText, setModeText] = useState<string>('وضع نهاري');
+  const [showNote, setShowNote] = useState<boolean>(false);
 
   const toggleMode = () => {
     setIcon(icon === 'sunny' ? 'nightlight-round' : 'sunny');
     setModeText(modeText === 'وضع ليلي' ? 'وضع نهاري' : 'وضع ليلي');
     setMode(mode === 'dark' ? 'light' : 'dark');
   };
+
+  const toggleNote = () => setShowNote(!showNote);
 
   useEffect(() => {
     setContent(data);
@@ -38,6 +41,7 @@ export default function App(): JSX.Element {
   return (
     <Provider value={{mode, toggleMode}}>
       <SafeAreaView>
+        {showNote && <Note />}
         <ImageBackground
           source={require('./assets/images/asfalt-dark.png')}
           style={[styles.background, {backgroundColor: themes[mode].bg}]}
@@ -46,7 +50,9 @@ export default function App(): JSX.Element {
             data={content}
             renderItem={({item}) => <Section {...item} />}
             key={getID()}
-            ListHeaderComponent={<Header icon={icon} modeText={modeText} />}
+            ListHeaderComponent={
+              <Header toggleNote={toggleNote} icon={icon} modeText={modeText} />
+            }
           />
         </ImageBackground>
       </SafeAreaView>

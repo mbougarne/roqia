@@ -8,13 +8,15 @@ import {themeContext, themes} from '../store';
 type Props = {
   icon: string;
   modeText: string;
+  toggleNote: () => void;
 };
 
-export const Header: FC<Props> = ({icon, modeText}) => {
+export const Header: FC<Props> = ({icon, modeText, toggleNote}) => {
   const {mode, toggleMode} = useContext(themeContext);
 
   const theme = themes[mode];
   const onIconPress = () => toggleMode();
+  const onNotePress = () => toggleNote();
 
   return (
     <ImageBackground
@@ -22,14 +24,35 @@ export const Header: FC<Props> = ({icon, modeText}) => {
       style={[styles.backgroundContainer, {backgroundColor: theme.secondaryBg}]}
       imageStyle={styles.backgroundStyle}>
       <View style={styles.container}>
-        <Pressable onPress={onIconPress} style={styles.icon}>
-          <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
-            <StyledText
-              customStyle={[styles.changeMode, {color: theme.tertiaryColor}]}>
-              {modeText}
-            </StyledText>
-          </Icon>
-        </Pressable>
+        <View style={styles.iconsContainer}>
+          <View style={styles.iconsInnerContainer}>
+            <Pressable onPress={onNotePress}>
+              <Icon
+                name="speaker-notes"
+                size={24}
+                color={themes[mode].tertiaryColor}>
+                <StyledText
+                  customStyle={[
+                    styles.changeMode,
+                    {color: theme.tertiaryColor},
+                  ]}>
+                  قبل القراءة
+                </StyledText>
+              </Icon>
+            </Pressable>
+            <Pressable onPress={onIconPress}>
+              <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
+                <StyledText
+                  customStyle={[
+                    styles.changeMode,
+                    {color: theme.tertiaryColor},
+                  ]}>
+                  {modeText}
+                </StyledText>
+              </Icon>
+            </Pressable>
+          </View>
+        </View>
         <StyledText
           customStyle={[styles.headline, {color: theme.tertiaryColor}]}>
           الرقية الشرعية
@@ -58,10 +81,16 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     textAlign: 'center',
   },
-  icon: {
+  iconsContainer: {
     position: 'absolute',
     top: 10,
-    right: 10,
+    paddingHorizontal: 10,
+    width: '100%',
+  },
+  iconsInnerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   changeMode: {
     marginVertical: 5,
