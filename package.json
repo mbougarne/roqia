@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "gen:keystore": "keytool -genkey -v -keystore roqia.keystore -alias roqia-key -keyalg RSA -keysize 2048 -validity 10000"
+    "gen:keystore": "keytool -genkey -v -keystore roqia.keystore -alias roqia-key -keyalg RSA -keysize 2048 -validity 10000",
+    "build:release": "yarn gen:keystore && cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-native-clipboard/clipboard": "^1.14.1",
