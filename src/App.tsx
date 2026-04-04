@@ -3,6 +3,7 @@ import {ImageBackground, StyleSheet} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import {MainTabNavigation} from './navigation/MainTabNavigation';
+import {SplashScreen} from './screens';
 import {
   createInitialRepeatCounts,
   type Mode,
@@ -17,6 +18,7 @@ const {Provider: RepeatProvider} = repeatContext;
 export default function App(): JSX.Element {
   const [mode, setMode] = useState<Mode>('light');
   const [repeatCounts, setRepeatCounts] = useState(createInitialRepeatCounts);
+  const [showSplash, setShowSplash] = useState(true);
   const theme = themes[mode];
 
   const toggleMode = () => {
@@ -40,7 +42,11 @@ export default function App(): JSX.Element {
           imageStyle={styles.backgroundStyle}>
           <SafeAreaView
             style={styles.safeArea}>
-            <MainTabNavigation />
+            {showSplash ? (
+              <SplashScreen onFinish={() => setShowSplash(false)} />
+            ) : (
+              <MainTabNavigation />
+            )}
           </SafeAreaView>
         </ImageBackground>
         </RepeatProvider>
