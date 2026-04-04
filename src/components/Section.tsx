@@ -1,4 +1,4 @@
-import React, {type FC, useContext, useState} from 'react';
+import React, {type FC, useContext} from 'react';
 import {View, StyleSheet, ImageBackground, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -7,20 +7,16 @@ import {type DataProps} from '../data';
 import {type ContextState, themeContext, themes} from '../store';
 import {StyledText} from './StyledText';
 
-type SectionProp = DataProps;
+type SectionProp = DataProps & {
+  count: number;
+  onPress: () => void;
+};
 
 export const Section: FC<SectionProp> = item => {
-  const [count, setCount] = useState<number>(item.repeat!);
-  const [isDone, setIsDone] = useState<boolean>(false);
   const {mode} = useContext<ContextState>(themeContext);
-
+  const isDone = item.count === 0;
   const theme = themes[mode];
-  const onPress = () => {
-    if (count === 1) {
-      setIsDone(true);
-    }
-    setCount(c => (c === 0 ? 0 : c - 1));
-  };
+
   const onCopy = () => {
     Clipboard.setString(item.content!);
   };
@@ -34,7 +30,7 @@ export const Section: FC<SectionProp> = item => {
           {backgroundColor: isDone ? theme.activeBg : theme.bg},
         ]}
         imageStyle={styles.backgroundStyle}>
-        <Pressable onPress={onPress}>
+        <Pressable onPress={item.onPress}>
           <View style={styles.container}>
             <StyledText
               customStyle={[
@@ -65,7 +61,7 @@ export const Section: FC<SectionProp> = item => {
                     color: isDone ? theme.secondaryColor : theme.tertiaryColor,
                   },
                 ]}>
-                {count}
+                {item.count}
               </StyledText>
               <Pressable onPress={onCopy}>
                 <Icon
