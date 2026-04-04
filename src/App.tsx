@@ -1,70 +1,46 @@
-import React, {useState, useEffect} from 'react';
-import {
-  FlatList,
-  ImageBackground,
-  StyleSheet,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, {useState} from 'react';
+import {ImageBackground, StyleSheet} from 'react-native';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
-import {Header, Note, Section} from './components';
-import {data} from './data';
+import {MainTabNavigation} from './navigation/MainTabNavigation';
 import {type Mode, themeContext, themes} from './store';
 
 const {Provider} = themeContext;
 
-const getID = () => {
-  const timeStamp = Date.now().toString();
-  const randomNumber = Math.random().toString().split('.')[1];
-
-  return `${timeStamp}-${randomNumber}`;
-};
-
 export default function App(): JSX.Element {
-  const [content, setContent] = useState([{}]);
   const [mode, setMode] = useState<Mode>('light');
-  const [icon, setIcon] = useState<string>('sunny');
-  const [modeText, setModeText] = useState<string>('وضع نهاري');
-  const [showNote, setShowNote] = useState<boolean>(false);
+  const theme = themes[mode];
 
   const toggleMode = () => {
-    setIcon(icon === 'sunny' ? 'nightlight-round' : 'sunny');
-    setModeText(modeText === 'وضع ليلي' ? 'وضع نهاري' : 'وضع ليلي');
     setMode(mode === 'dark' ? 'light' : 'dark');
   };
 
-  const toggleNote = () => setShowNote(!showNote);
-
-  useEffect(() => {
-    setContent(data);
-  }, []);
-
   return (
-    <Provider value={{mode, toggleMode}}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: themes[mode].activeBg }}>
-        {showNote && <Note />}
+    <SafeAreaProvider>
+      <Provider value={{mode, toggleMode}}>
         <ImageBackground
-          source={require('./assets/images/asfalt-dark.png')}
-          style={[styles.background, {backgroundColor: themes[mode].bg}]}
-          imageStyle={styles.cover}>
-          <FlatList
-            data={content}
-            renderItem={({item}) => <Section {...item} />}
-            key={getID()}
-            ListHeaderComponent={
-              <Header toggleNote={toggleNote} icon={icon} modeText={modeText} />
-            }
-          />
+          source={require('./assets/images/arabesque.png')}
+          style={[styles.backgroundContainer, {backgroundColor: theme.secondaryBg}]}
+          imageStyle={styles.backgroundStyle}>
+          <SafeAreaView
+            style={styles.safeArea}>
+            <MainTabNavigation />
+          </SafeAreaView>
         </ImageBackground>
-      </SafeAreaView>
-    </Provider>
+      </Provider>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    paddingBottom: 20,
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
-  cover: {
+  backgroundContainer: {
+    flex: 1,
+  },
+  backgroundStyle: {
     resizeMode: 'repeat',
   },
 });
