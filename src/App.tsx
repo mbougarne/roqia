@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {
   FlatList,
   ImageBackground,
-  SafeAreaView,
   StyleSheet,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import {Header, Note, Section} from './components';
 import {data} from './data';
@@ -40,7 +40,7 @@ export default function App(): JSX.Element {
 
   return (
     <Provider value={{mode, toggleMode}}>
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1, backgroundColor: themes[mode].activeBg }}>
         {showNote && <Note />}
         <ImageBackground
           source={require('./assets/images/asfalt-dark.png')}
