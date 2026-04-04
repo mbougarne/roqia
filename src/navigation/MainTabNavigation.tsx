@@ -4,7 +4,7 @@ import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {AboutScreen, HomeScreen, MoreScreen} from '../screens';
+import {AboutScreen, HomeScreen, AdkarScreen} from '../screens';
 import {themeContext, themes} from '../store';
 
 const Tab = createBottomTabNavigator();
@@ -32,8 +32,8 @@ export const MainTabNavigation = () => {
           tabBarIcon: ({color, size}) => {
             const iconByRoute = {
               Home: 'home',
-              About: 'info-outline',
-              More: 'more-vert',
+              About: 'feedback',
+              Adkar: 'hourglass-bottom',
             } as const;
 
             const iconName = iconByRoute[route.name as keyof typeof iconByRoute] ?? 'home';
@@ -67,14 +67,14 @@ export const MainTabNavigation = () => {
           options={{tabBarLabel: 'الرقية'}}
         />
         <Tab.Screen
-          name="About"
-          component={AboutScreen}
-          options={{tabBarLabel: 'عن التطبيق'}}
+          name="Adkar"
+          component={AdkarScreen}
+          options={{tabBarLabel: 'أذكار'}}
         />
         <Tab.Screen
-          name="More"
-          component={MoreScreen}
-          options={{tabBarLabel: 'المزيد'}}
+          name="About"
+          component={AboutScreen}
+          options={{tabBarLabel: 'نبذة'}}
         />
       </Tab.Navigator>
     </NavigationContainer>

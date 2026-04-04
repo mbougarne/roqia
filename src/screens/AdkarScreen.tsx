@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {StyledText} from '../components/StyledText';
 import {themeContext, themes} from '../store';
 
-export const MoreScreen = () => {
+export const AdkarScreen = () => {
   const {mode} = useContext(themeContext);
   const theme = themes[mode];
 

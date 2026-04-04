@@ -1,3 +1,3 @@
-export {HomeScreen} from './HomeScreen';
 export {AboutScreen} from './AboutScreen';
-export {MoreScreen} from './MoreScreen';
+export {AdkarScreen} from './AdkarScreen';
+export {HomeScreen} from './HomeScreen';

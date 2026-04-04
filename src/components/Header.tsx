@@ -8,15 +8,13 @@ import {themeContext, themes} from '../store';
 type Props = {
   icon: string;
   modeText: string;
-  toggleNote: () => void;
 };
 
-export const Header: FC<Props> = ({icon, modeText, toggleNote}) => {
+export const Header: FC<Props> = ({icon, modeText}) => {
   const {mode, toggleMode} = useContext(themeContext);
 
   const theme = themes[mode];
   const onIconPress = () => toggleMode();
-  const onNotePress = () => toggleNote();
 
   return (
     <ImageBackground
@@ -26,20 +24,6 @@ export const Header: FC<Props> = ({icon, modeText, toggleNote}) => {
       <View style={styles.container}>
         <View style={styles.iconsContainer}>
           <View style={styles.iconsInnerContainer}>
-            <Pressable onPress={onNotePress}>
-              <Icon
-                name="speaker-notes"
-                size={24}
-                color={themes[mode].tertiaryColor}>
-                <StyledText
-                  customStyle={[
-                    styles.changeMode,
-                    {color: theme.tertiaryColor},
-                  ]}>
-                  قبل القراءة
-                </StyledText>
-              </Icon>
-            </Pressable>
             <Pressable onPress={onIconPress}>
               <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
                 <StyledText
@@ -89,7 +73,7 @@ const styles = StyleSheet.create({
   },
   iconsInnerContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-between',
   },
   changeMode: {

@@ -52,7 +52,7 @@ export const HomeScreen = () => {
           renderItem={({item}) => <Section {...item} />}
           key={getID()}
           ListHeaderComponent={
-            <Header toggleNote={toggleNote} icon={icon} modeText={modeText} />
+            <Header icon={icon} modeText={modeText} />
           }
         />
       </ImageBackground>
