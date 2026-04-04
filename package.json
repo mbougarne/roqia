@@ -21,7 +21,10 @@
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.2",
     "@babel/runtime": "^7.29.2",
+    "@react-native/babel-preset": "0.84.1",
+    "@react-native-community/cli": "^20.1.3",
     "@react-native-community/eslint-config": "^3.2.0",
+    "@react-native/metro-config": "0.84.1",
     "@tsconfig/react-native": "^3.0.9",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.14",
@@ -30,12 +33,12 @@
     "babel-jest": "^30.3.0",
     "eslint": "^10.2.0",
     "jest": "^30.3.0",
-    "metro-react-native-babel-preset": "0.77.0",
     "prettier": "^3.8.1",
     "react-test-renderer": "19.2.4",
     "typescript": "6.0.2"
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
