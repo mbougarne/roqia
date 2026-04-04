@@ -18,12 +18,12 @@ export type RepeatContextState = {
 
 export const themes = {
   dark: {
-    bg: '#222',
-    secondaryBg: '#282828',
-    activeBg: '#353535',
-    color: '#F5EFE6',
+    bg: '#161A18',
+    secondaryBg: '#202621',
+    activeBg: '#234232',
+    color: '#B8C3B6',
     secondaryColor: '#F5EFE6',
-    tertiaryColor: '#F5EFE6',
+    tertiaryColor: '#8FBF9A',
   },
   light: {
     bg: '#fff',

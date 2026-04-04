@@ -43,11 +43,20 @@ export const MainTabNavigation = () => {
           tabBarInactiveTintColor: theme.color,
           tabBarStyle: {
             backgroundColor: 'transparent',
-            borderTopColor: theme.color,
+            borderTopColor: 'transparent',
+            borderTopWidth: 0,
             paddingBottom: 8,
             paddingTop: 8,
             height: 60,
             position: 'absolute',
+            elevation: 0,
+            shadowColor: 'transparent',
+            shadowOpacity: 0,
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowRadius: 0,
           },
           tabBarBackground: () => (
             <ImageBackground
