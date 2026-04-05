@@ -5,8 +5,8 @@
     <title>رقية</title>
     <script>
       // GitHub Pages SPA fallback: redirect unknown routes to index with encoded path.
-      // segmentCount=1 for project pages like /roqia/...; use 0 for user pages.
-      var segmentCount = 1;
+      // segmentCount=0 for custom domain (root); use 1 for project pages like /username.github.io/repo.
+      var segmentCount = 0;
       var l = window.location;
       l.replace(
         l.protocol +

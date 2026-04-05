@@ -42,7 +42,7 @@ jobs:
       - name: Build web app
         working-directory: web
         env:
-          VITE_BASE_PATH: /roqia/
+          VITE_BASE_PATH: /
         run: npm run build
 
       - name: Upload Pages Artifact
