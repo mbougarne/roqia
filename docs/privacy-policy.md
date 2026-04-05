@@ -16,15 +16,15 @@ Roqia is an offline mobile application.
 
 - The app may include links to external websites (for example, policy pages or source references).
 - Audio/content references in the app are attributed to:
-  - https://alazkar.today/
-  - https://www.mp3quran.net/ar
+  - <https://alazkar.today/>
+  - <https://www.mp3quran.net/ar>
 
 ### Open Source and Contact
 
-- Project repository: https://github.com/mbougarne/roqia
+- Project repository: <https://github.com/mbougarne/roqia>
 - Author: Mourad Bougarne
-- Email: mouradbougarne@gmail.com
-- GitHub: https://github.com/mbougarne
+- Email: <mouradbougarne@gmail.com>
+- GitHub: <https://github.com/mbougarne>
 
 If this privacy policy changes, the updated version will be published at roqia.name/privacy.
 
@@ -42,14 +42,14 @@ If this privacy policy changes, the updated version will be published at roqia.n
 
 - قد يحتوي التطبيق على روابط خارجية (مثل صفحات السياسة أو مراجع المصادر).
 - تمت الإشارة إلى مصادر بعض الملفات الصوتية/المحتوى داخل التطبيق:
-  - https://alazkar.today/
-  - https://www.mp3quran.net/ar
+  - <https://alazkar.today/>
+  - <https://www.mp3quran.net/ar>
 
 ### المصدر المفتوح والتواصل
 
-- مستودع المشروع: https://github.com/mbougarne/roqia
+- مستودع المشروع: <https://github.com/mbougarne/roqia>
 - المؤلف: Mourad Bougarne
-- البريد الإلكتروني: mouradbougarne@gmail.com
-- GitHub: https://github.com/mbougarne
+- البريد الإلكتروني: <mouradbougarne@gmail.com>
+- GitHub: <https://github.com/mbougarne>
 
 عند تعديل سياسة الخصوصية سيتم نشر النسخة الأحدث على roqia.name/privacy.
