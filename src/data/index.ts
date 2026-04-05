@@ -1,4 +1,4 @@
-type Category = CategoryEnum.Morning | CategoryEnum.Night | 'BeforeSleep';
+export type Category = 'Morning' | 'Night' | 'BeforeSleep';
 type AudioFile = {
   fileName: string;
   title: string;
@@ -15,7 +15,7 @@ export type DataProps = {
   isStacked?: boolean;
 }
 
-enum CategoryEnum {
+export enum CategoryEnum {
   Morning = 'Morning',
   Night = 'Night',
   BeforeSleep = 'BeforeSleep',
@@ -347,7 +347,7 @@ export const noteData = {
   email: 'mouradbougarne@gmail.com',
 };
 
-export const azkarData: DataProps[] = [
+export const adkarData: DataProps[] = [
   {
     category: CategoryEnum.Morning,
     caption: '[سورة البقرة: 255]',
@@ -626,7 +626,7 @@ export const azkarData: DataProps[] = [
     audioFile: "17.mp3"
   },
   {
-    category: CategoryEnum.Morning,
+    category: CategoryEnum.Night,
     caption: '[رواه أبو داود]',
     content: "اللّهُمَّ عافِني في بَدَني، اللّهُمَّ عافِني في سَمْعي، اللّهُمَّ عافِني في بَصَري، لا إلهَ إلاّ أَنْتَ.",
     repeatDescription: '3 مرات',
@@ -635,7 +635,7 @@ export const azkarData: DataProps[] = [
 
   },
   {
-    category: CategoryEnum.Morning,
+    category: CategoryEnum.Night,
     caption: '[رواه النسائي]',
     content: " اللّهُمَّ إِنّي أَعوذُ بِكَ مِنَ الْكُفْر، وَالفَقْر، وَأَعوذُ بِكَ مِنْ عَذابِ القَبْر، لا إلهَ إلاّ أَنْتَ.",
     repeatDescription: '3 مرات',
@@ -706,7 +706,7 @@ export const azkarData: DataProps[] = [
     isStacked: true,
   },
   {
-    category: CategoryEnum.Night,
+    category: CategoryEnum.BeforeSleep,
     caption: '[سورة الفلق]',
     content: "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾",
     repeatDescription: '3 مرات',
@@ -716,7 +716,7 @@ export const azkarData: DataProps[] = [
     isStacked: true,
   },
   {
-    category: CategoryEnum.Night,
+    category: CategoryEnum.BeforeSleep,
     caption: '[سورة الناس]',
     content: "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ ﴿١﴾ مَلِكِ ٱلنَّاسِ ﴿٢﴾ إِلَٰهِ ٱلنَّاسِ ﴿٣﴾ مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ ﴿٤﴾ ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ ﴿٥﴾ مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ ﴿٦﴾",
     repeatDescription: '3 مرات',

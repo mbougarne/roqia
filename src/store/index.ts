@@ -1,6 +1,6 @@
 import {createContext} from 'react';
 
-import {data} from '../data';
+import {adkarData, type DataProps, data} from '../data';
 
 export type Mode = 'dark' | 'light';
 export type Themes = typeof themes;
@@ -40,14 +40,36 @@ const initialContextState: ContextState = {
   toggleMode: () => undefined,
 };
 
-export const getRepeatItemKey = (content?: string, index?: number) =>
-  content ?? String(index);
+export const getRepeatItemKey = (
+  item: Pick<DataProps, 'audioFile' | 'caption' | 'category' | 'content'>,
+  index: number,
+  scope = 'default',
+) =>
+  [
+    scope,
+    item.category ?? 'NoCategory',
+    item.caption ?? 'NoCaption',
+    item.audioFile ?? 'NoAudio',
+    item.content ?? String(index),
+    String(index),
+  ].join('::');
 
-export const createInitialRepeatCounts = (): RepeatCounts =>
-  data.reduce<RepeatCounts>((acc, item, index) => {
-    acc[getRepeatItemKey(item.content, index)] = item.repeat ?? 0;
+export const createInitialRepeatCounts = (): RepeatCounts => {
+  const homeCounts = data.reduce<RepeatCounts>((acc, item, index) => {
+    acc[getRepeatItemKey(item, index, 'data')] = item.repeat ?? 0;
     return acc;
   }, {});
+
+  const adkarCounts = adkarData.reduce<RepeatCounts>((acc, item, index) => {
+    acc[getRepeatItemKey(item, index, 'adkar')] = item.repeat ?? 0;
+    return acc;
+  }, {});
+
+  return {
+    ...homeCounts,
+    ...adkarCounts,
+  };
+};
 
 const initialRepeatContextState: RepeatContextState = {
   repeatCounts: createInitialRepeatCounts(),

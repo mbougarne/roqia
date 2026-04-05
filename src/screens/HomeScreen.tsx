@@ -13,8 +13,6 @@ import {Header, Section, Note} from '../components';
 import {data} from '../data';
 import {getRepeatItemKey, repeatContext, themeContext, themes} from '../store';
 
-type AudioStatus = 'idle' | 'paused' | 'playing';
-
 export const HomeScreen = () => {
   const [showNote, setShowNote] = useState<boolean>(false);
   const [activeAudioFile, setActiveAudioFile] = useState<string | null>(null);
@@ -23,18 +21,8 @@ export const HomeScreen = () => {
   const {mode} = useContext(themeContext);
   const {decrementRepeat, repeatCounts} = useContext(repeatContext);
   const theme = themes[mode];
-  const icon = mode === 'light' ? 'nightlight-round' : 'sunny';
-  const modeText = mode === 'light' ? 'وضع ليلي' : 'وضع نهاري';
 
   const toggleNote = () => setShowNote(!showNote);
-
-  const getAudioStatus = (audioFile?: string): AudioStatus => {
-    if (!audioFile || activeAudioFile !== audioFile) {
-      return 'idle';
-    }
-
-    return isAudioPaused ? 'paused' : 'playing';
-  };
 
   const onAudioPress = (audioFile: string) => {
     if (activeAudioFile === audioFile) {
@@ -72,27 +60,22 @@ export const HomeScreen = () => {
         <FlatList
           data={data}
           extraData={{activeAudioFile, isAudioPaused, repeatCounts}}
-          keyExtractor={(item, index) => getRepeatItemKey(item.content, index)}
+          keyExtractor={(item, index) => getRepeatItemKey(item, index, 'data')}
           renderItem={({item, index}) => {
-            const itemKey = getRepeatItemKey(item.content, index);
+            const itemKey = getRepeatItemKey(item, index, 'data');
 
             return (
               <Section
                 {...item}
-                audioStatus={getAudioStatus(item.audioFile)}
+                activeAudioFile={activeAudioFile}
                 count={repeatCounts[itemKey] ?? item.repeat ?? 0}
+                isAudioPaused={isAudioPaused}
                 onPress={() => decrementRepeat(itemKey)}
-                onAudioPress={
-                  item.audioFile && audioAssets[item.audioFile]
-                    ? () => onAudioPress(item.audioFile!)
-                    : undefined
-                }
+                onAudioFilePress={onAudioPress}
               />
             );
           }}
-          ListHeaderComponent={
-            <Header icon={icon} modeText={modeText} />
-          }
+          ListHeaderComponent={<Header />}
         />
         {resolvedActiveAudioUri ? (
           <Video

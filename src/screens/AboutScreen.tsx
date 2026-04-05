@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
 
 import {noteData} from '../data';
-import {StyledText} from '../components/StyledText';
+import {Header, StyledText} from '../components';
 import {themeContext, themes} from '../store';
 
 export const AboutScreen = () => {
@@ -17,6 +17,7 @@ export const AboutScreen = () => {
 
   return (
     <View style={[styles.container, {backgroundColor: theme.bg}]}> 
+      <Header title="نبذة عنا" />
       <View style={styles.innerContainer}>
         <StyledText customStyle={[styles.title, {color: theme.tertiaryColor}]}>
           {noteData.title}
@@ -27,10 +28,10 @@ export const AboutScreen = () => {
         <StyledText customStyle={[styles.contact, {color: theme.color}]}>
           {noteData.contact}
         </StyledText>
-        <TouchableOpacity onPress={onCopy}>
-          <StyledText customStyle={[styles.email, {color: theme.color}]}>
-            <Icon name="content-copy" color={theme.tertiaryColor} size={16} />
-            {' ' + noteData.email}
+        <TouchableOpacity onPress={onCopy} style={styles.emailButton}>
+          <Icon name="content-copy" color={theme.tertiaryColor} size={16} />
+          <StyledText customStyle={[styles.email, {color: theme.color}]}> 
+            {noteData.email}
           </StyledText>
         </TouchableOpacity>
       </View>
@@ -41,15 +42,12 @@ export const AboutScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 25,
-    paddingVertical: 20,
   },
   innerContainer: {
     flex: 1,
-    paddingHorizontal: 15,
+    paddingHorizontal: 40,
   },
   title: {
-    marginTop: 25,
     fontSize: 22,
     fontWeight: 'bold',
   },
@@ -68,6 +66,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'right',
+  },
+  emailButton: {
     marginTop: 10,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    gap: 8,
   },
 });

@@ -6,14 +6,21 @@ import {StyledText} from './StyledText';
 import {themeContext, themes} from '../store';
 
 type Props = {
-  icon: string;
-  modeText: string;
+  onBackPress?: () => void;
+  showBackButton?: boolean;
+  title?: string;
 };
 
-export const Header: FC<Props> = ({icon, modeText}) => {
+export const Header: FC<Props> = ({
+  onBackPress,
+  showBackButton = false,
+  title = 'الرقية الشرعية',
+}) => {
   const {mode, toggleMode} = useContext(themeContext);
 
   const theme = themes[mode];
+  const icon = mode === 'light' ? 'nightlight-round' : 'sunny';
+  const modeText = mode === 'light' ? 'وضع ليلي' : 'وضع نهاري';
   const onIconPress = () => toggleMode();
 
   return (
@@ -24,6 +31,20 @@ export const Header: FC<Props> = ({icon, modeText}) => {
       <View style={styles.container}>
         <View style={styles.iconsContainer}>
           <View style={styles.iconsInnerContainer}>
+            {showBackButton ? (
+              <Pressable onPress={onBackPress} style={styles.backButton}>
+                <Icon name="arrow-back" size={24} color={themes[mode].tertiaryColor} />
+                <StyledText
+                  customStyle={[
+                    styles.backText,
+                    {color: theme.tertiaryColor},
+                  ]}>
+                  رجوع
+                </StyledText>
+              </Pressable>
+            ) : (
+              <View style={styles.sideSpacer} />
+            )}
             <Pressable onPress={onIconPress} style={styles.modeButton}>
               <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
               </Icon>
@@ -39,7 +60,7 @@ export const Header: FC<Props> = ({icon, modeText}) => {
         </View>
         <StyledText
           customStyle={[styles.headline, {color: theme.tertiaryColor}]}>
-          الرقية الشرعية
+          {title}
         </StyledText>
       </View>
     </ImageBackground>
@@ -48,14 +69,12 @@ export const Header: FC<Props> = ({icon, modeText}) => {
 
 const styles = StyleSheet.create({
   backgroundContainer: {
-    flex: 1,
     marginBottom: 25,
   },
   backgroundStyle: {
     resizeMode: 'repeat',
   },
   container: {
-    flex: 1,
     justifyContent: 'center',
     paddingTop: 25,
     minHeight: 175,
@@ -73,11 +92,22 @@ const styles = StyleSheet.create({
   },
   iconsInnerContainer: {
     flex: 1,
-    flexDirection: 'row-reverse',
+    flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  sideSpacer: {
+    width: 48,
   },
   modeButton: {
     alignItems: 'center',
+  },
+  backButton: {
+    alignItems: 'center',
+  },
+  backText: {
+    marginVertical: 5,
+    fontSize: 12,
+    fontWeight: '700',
   },
   changeMode: {
     marginVertical: 5,
