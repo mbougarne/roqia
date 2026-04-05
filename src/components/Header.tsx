@@ -24,16 +24,16 @@ export const Header: FC<Props> = ({icon, modeText}) => {
       <View style={styles.container}>
         <View style={styles.iconsContainer}>
           <View style={styles.iconsInnerContainer}>
-            <Pressable onPress={onIconPress}>
+            <Pressable onPress={onIconPress} style={styles.modeButton}>
               <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
-                <StyledText
-                  customStyle={[
-                    styles.changeMode,
-                    {color: theme.tertiaryColor},
-                  ]}>
-                  {modeText}
-                </StyledText>
               </Icon>
+              <StyledText
+                customStyle={[
+                  styles.changeMode,
+                  {color: theme.tertiaryColor},
+                ]}>
+                {modeText}
+              </StyledText>
             </Pressable>
           </View>
         </View>
@@ -75,6 +75,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row-reverse',
     justifyContent: 'space-between',
+  },
+  modeButton: {
+    alignItems: 'center',
   },
   changeMode: {
     marginVertical: 5,

@@ -1,5 +1,11 @@
 import React, {type FC, useContext} from 'react';
-import {View, StyleSheet, ImageBackground, Pressable} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Pressable,
+  type GestureResponderEvent,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
 
@@ -7,18 +13,34 @@ import {type DataProps} from '../data';
 import {type ContextState, themeContext, themes} from '../store';
 import {StyledText} from './StyledText';
 
+type AudioStatus = 'idle' | 'paused' | 'playing';
+
 type SectionProp = DataProps & {
+  audioStatus?: AudioStatus;
   count: number;
   onPress: () => void;
+  onAudioPress?: () => void;
 };
 
 export const Section: FC<SectionProp> = item => {
   const {mode} = useContext<ContextState>(themeContext);
   const isDone = item.count === 0;
   const theme = themes[mode];
+  const isPlaying = item.audioStatus === 'playing';
+  const canPlayAudio = !!item.audioFile && !!item.onAudioPress;
 
   const onCopy = () => {
     Clipboard.setString(item.content!);
+  };
+
+  const onCopyPress = (event: GestureResponderEvent) => {
+    event.stopPropagation();
+    onCopy();
+  };
+
+  const onAudioButtonPress = (event: GestureResponderEvent) => {
+    event.stopPropagation();
+    item.onAudioPress?.();
   };
 
   return (
@@ -30,8 +52,8 @@ export const Section: FC<SectionProp> = item => {
           {backgroundColor: isDone ? theme.activeBg : theme.bg},
         ]}
         imageStyle={styles.backgroundStyle}>
-        <Pressable onPress={item.onPress}>
-          <View style={styles.container}>
+        <Pressable onPress={item.onPress} style={styles.container}>
+          <View>
             <StyledText
               customStyle={[
                 styles.content,
@@ -53,7 +75,9 @@ export const Section: FC<SectionProp> = item => {
               ]}>
               {item.repeatDescription}
             </StyledText>
-            <View style={styles.bottomContainer}>
+          </View>
+          <View style={styles.bottomContainer}>
+            <View style={styles.bottomItem}>
               <StyledText
                 customStyle={[
                   styles.repeatNumber,
@@ -63,7 +87,29 @@ export const Section: FC<SectionProp> = item => {
                 ]}>
                 {item.count}
               </StyledText>
-              <Pressable onPress={onCopy}>
+            </View>
+            <View style={styles.bottomItem}>
+              {canPlayAudio ? (
+                <Pressable onPress={onAudioButtonPress} style={styles.audioButton}>
+                  <Icon
+                    name={isPlaying ? 'pause' : 'play-arrow'}
+                    color={isDone ? theme.secondaryColor : theme.tertiaryColor}
+                    size={28}
+                  />
+                  <StyledText
+                    customStyle={[
+                      styles.audioText,
+                      {
+                        color: isDone ? theme.secondaryColor : theme.tertiaryColor,
+                      },
+                    ]}>
+                    {isPlaying ? 'إيقاف' : 'إستمع'}
+                  </StyledText>
+                </Pressable>
+              ) : null}
+            </View>
+            <View style={styles.bottomItem}>
+              <Pressable onPress={onCopyPress}>
                 <Icon
                   name="content-copy"
                   color={isDone ? theme.secondaryColor : theme.tertiaryColor}
@@ -124,9 +170,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   bottomContainer: {
-    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: 12,
+  },
+  bottomItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  audioButton: {
     alignItems: 'center',
     flexDirection: 'row',
+    gap: 4,
+  },
+  audioText: {
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
