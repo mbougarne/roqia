@@ -6,17 +6,22 @@ import {StyledText} from './StyledText';
 import {themeContext, themes} from '../store';
 
 type Props = {
-  icon: string;
-  modeText: string;
-  toggleNote: () => void;
+  onBackPress?: () => void;
+  showBackButton?: boolean;
+  title?: string;
 };
 
-export const Header: FC<Props> = ({icon, modeText, toggleNote}) => {
+export const Header: FC<Props> = ({
+  onBackPress,
+  showBackButton = false,
+  title = 'الرقية الشرعية',
+}) => {
   const {mode, toggleMode} = useContext(themeContext);
 
   const theme = themes[mode];
+  const icon = mode === 'light' ? 'nightlight-round' : 'sunny';
+  const modeText = mode === 'light' ? 'وضع ليلي' : 'وضع نهاري';
   const onIconPress = () => toggleMode();
-  const onNotePress = () => toggleNote();
 
   return (
     <ImageBackground
@@ -26,36 +31,36 @@ export const Header: FC<Props> = ({icon, modeText, toggleNote}) => {
       <View style={styles.container}>
         <View style={styles.iconsContainer}>
           <View style={styles.iconsInnerContainer}>
-            <Pressable onPress={onNotePress}>
-              <Icon
-                name="speaker-notes"
-                size={24}
-                color={themes[mode].tertiaryColor}>
+            {showBackButton ? (
+              <Pressable onPress={onBackPress} style={styles.backButton}>
+                <Icon name="arrow-back" size={24} color={themes[mode].tertiaryColor} />
                 <StyledText
                   customStyle={[
-                    styles.changeMode,
+                    styles.backText,
                     {color: theme.tertiaryColor},
                   ]}>
-                  قبل القراءة
+                  رجوع
                 </StyledText>
-              </Icon>
-            </Pressable>
-            <Pressable onPress={onIconPress}>
+              </Pressable>
+            ) : (
+              <View style={styles.sideSpacer} />
+            )}
+            <Pressable onPress={onIconPress} style={styles.modeButton}>
               <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
-                <StyledText
-                  customStyle={[
-                    styles.changeMode,
-                    {color: theme.tertiaryColor},
-                  ]}>
-                  {modeText}
-                </StyledText>
               </Icon>
+              <StyledText
+                customStyle={[
+                  styles.changeMode,
+                  {color: theme.tertiaryColor},
+                ]}>
+                {modeText}
+              </StyledText>
             </Pressable>
           </View>
         </View>
         <StyledText
           customStyle={[styles.headline, {color: theme.tertiaryColor}]}>
-          الرقية الشرعية
+          {title}
         </StyledText>
       </View>
     </ImageBackground>
@@ -64,14 +69,12 @@ export const Header: FC<Props> = ({icon, modeText, toggleNote}) => {
 
 const styles = StyleSheet.create({
   backgroundContainer: {
-    flex: 1,
     marginBottom: 25,
   },
   backgroundStyle: {
     resizeMode: 'repeat',
   },
   container: {
-    flex: 1,
     justifyContent: 'center',
     paddingTop: 25,
     minHeight: 175,
@@ -91,6 +94,20 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  sideSpacer: {
+    width: 48,
+  },
+  modeButton: {
+    alignItems: 'center',
+  },
+  backButton: {
+    alignItems: 'center',
+  },
+  backText: {
+    marginVertical: 5,
+    fontSize: 12,
+    fontWeight: '700',
   },
   changeMode: {
     marginVertical: 5,

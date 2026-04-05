@@ -1,4 +1,29 @@
 {
   "name": "roqia",
-  "displayName": "الرقية"
+  "displayName": "الرقية",
+  "version": "0.0.1",
+  "description": "تطبيق للرقية الشرعية والأذكار اليومية",
+  "author": {
+    "name": "Mourad Bougarne",
+    "email": "mouradbougarne@gmail.com",
+    "github": " https://github.com/mbougarne"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ruqya",
+    "adhkar",
+    "islamic",
+    "audio"
+  ],
+  "metadata": {
+    "defaultLocale": "ar",
+    "direction": "rtl",
+    "supportEmail": "mouradbougarne@gmail.com"
+  },
+  "appLinks": {
+    "website": "https://roqia.name",
+    "privacyPolicy": "https://roqia.name/privacy",
+    "termsOfService": "https://roqia.name/terms",
+    "support": "https://roqia.name/support"
+  }
 }

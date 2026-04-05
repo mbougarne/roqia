@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "jsx": "react"
   },
   "extends": "@tsconfig/react-native/tsconfig.json"

@@ -1,70 +1,101 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+import {ImageBackground, StyleSheet, useColorScheme} from 'react-native';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+
+import {MainTabNavigation} from './navigation/MainTabNavigation';
+import {SplashScreen} from './screens';
+import {initializeDailyReminders} from './services/notifications';
+import {loadPersistedAppState, persistAppState} from './services/persistence';
 import {
-  FlatList,
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
+  createInitialRepeatCounts,
+  type Mode,
+  repeatContext,
+  themeContext,
+  themes,
+} from './store';
 
-import {Header, Note, Section} from './components';
-import {data} from './data';
-import {type Mode, themeContext, themes} from './store';
-
-const {Provider} = themeContext;
-
-const getID = () => {
-  const timeStamp = Date.now().toString();
-  const randomNumber = Math.random().toString().split('.')[1];
-
-  return `${timeStamp}-${randomNumber}`;
-};
+const {Provider: ThemeProvider} = themeContext;
+const {Provider: RepeatProvider} = repeatContext;
 
 export default function App(): JSX.Element {
-  const [content, setContent] = useState([{}]);
-  const [mode, setMode] = useState<Mode>('light');
-  const [icon, setIcon] = useState<string>('sunny');
-  const [modeText, setModeText] = useState<string>('وضع نهاري');
-  const [showNote, setShowNote] = useState<boolean>(false);
-
-  const toggleMode = () => {
-    setIcon(icon === 'sunny' ? 'nightlight-round' : 'sunny');
-    setModeText(modeText === 'وضع ليلي' ? 'وضع نهاري' : 'وضع ليلي');
-    setMode(mode === 'dark' ? 'light' : 'dark');
-  };
-
-  const toggleNote = () => setShowNote(!showNote);
+  const deviceColorScheme = useColorScheme();
+  const defaultMode: Mode = deviceColorScheme === 'dark' ? 'dark' : 'light';
+  const [mode, setMode] = useState<Mode>(defaultMode);
+  const [repeatCounts, setRepeatCounts] = useState(createInitialRepeatCounts);
+  const [isStateHydrated, setIsStateHydrated] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+  const theme = themes[mode];
 
   useEffect(() => {
-    setContent(data);
+    initializeDailyReminders();
   }, []);
 
+  useEffect(() => {
+    const hydrateState = async () => {
+      const persisted = await loadPersistedAppState();
+
+      if (persisted.mode) {
+        setMode(persisted.mode);
+      }
+
+      setRepeatCounts(persisted.repeatCounts);
+      setIsStateHydrated(true);
+    };
+
+    hydrateState();
+  }, []);
+
+  useEffect(() => {
+    if (!isStateHydrated) {
+      return;
+    }
+
+    persistAppState(mode, repeatCounts);
+  }, [isStateHydrated, mode, repeatCounts]);
+
+  const toggleMode = () => {
+    setMode(currentMode => (currentMode === 'dark' ? 'light' : 'dark'));
+  };
+
+  const decrementRepeat = (key: string) => {
+    setRepeatCounts(currentCounts => ({
+      ...currentCounts,
+      [key]: currentCounts[key] === 0 ? 0 : currentCounts[key] - 1,
+    }));
+  };
+
   return (
-    <Provider value={{mode, toggleMode}}>
-      <SafeAreaView>
-        {showNote && <Note />}
+    <SafeAreaProvider>
+      <ThemeProvider value={{mode, toggleMode}}>
+        <RepeatProvider value={{repeatCounts, decrementRepeat}}>
         <ImageBackground
-          source={require('./assets/images/asfalt-dark.png')}
-          style={[styles.background, {backgroundColor: themes[mode].bg}]}
-          imageStyle={styles.cover}>
-          <FlatList
-            data={content}
-            renderItem={({item}) => <Section {...item} />}
-            key={getID()}
-            ListHeaderComponent={
-              <Header toggleNote={toggleNote} icon={icon} modeText={modeText} />
-            }
-          />
+          source={require('./assets/images/arabesque.png')}
+          style={[styles.backgroundContainer, {backgroundColor: theme.secondaryBg}]}
+          imageStyle={styles.backgroundStyle}>
+          <SafeAreaView
+            style={styles.safeArea}>
+            {showSplash ? (
+              <SplashScreen onFinish={() => setShowSplash(false)} />
+            ) : (
+              <MainTabNavigation />
+            )}
+          </SafeAreaView>
         </ImageBackground>
-      </SafeAreaView>
-    </Provider>
+        </RepeatProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    paddingBottom: 20,
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
-  cover: {
+  backgroundContainer: {
+    flex: 1,
+  },
+  backgroundStyle: {
     resizeMode: 'repeat',
   },
 });

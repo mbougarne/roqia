@@ -41,7 +41,7 @@ export const Note: FC = () => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 60,
+    top: 45,
     paddingTop: 75,
     paddingBottom: 100,
     paddingHorizontal: 25,

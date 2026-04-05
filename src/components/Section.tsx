@@ -1,5 +1,11 @@
-import React, {type FC, useContext, useState} from 'react';
-import {View, StyleSheet, ImageBackground, Pressable} from 'react-native';
+import React, {type FC, useContext} from 'react';
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Pressable,
+  type GestureResponderEvent,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
 
@@ -7,22 +13,47 @@ import {type DataProps} from '../data';
 import {type ContextState, themeContext, themes} from '../store';
 import {StyledText} from './StyledText';
 
-type SectionProp = DataProps;
+type AudioStatus = 'idle' | 'paused' | 'playing';
+
+type SectionProp = DataProps & {
+  activeAudioFile?: string | null;
+  isAudioPaused?: boolean;
+  count: number;
+  onPress: () => void;
+  onAudioFilePress?: (fileName: string) => void;
+};
 
 export const Section: FC<SectionProp> = item => {
-  const [count, setCount] = useState<number>(item.repeat!);
-  const [isDone, setIsDone] = useState<boolean>(false);
   const {mode} = useContext<ContextState>(themeContext);
-
+  const isDone = item.count === 0;
   const theme = themes[mode];
-  const onPress = () => {
-    if (count === 1) {
-      setIsDone(true);
-    }
-    setCount(c => (c === 0 ? 0 : c - 1));
-  };
+  const canPlayAudio = !!item.audioFile && !!item.onAudioFilePress;
+  const hasPlaylist = !!item.audioArray?.length && !!item.onAudioFilePress;
+  const isSingleAudioPlaying =
+    !!item.audioFile && item.activeAudioFile === item.audioFile && !item.isAudioPaused;
+
   const onCopy = () => {
     Clipboard.setString(item.content!);
+  };
+
+  const onCopyPress = (event: GestureResponderEvent) => {
+    event.stopPropagation();
+    onCopy();
+  };
+
+  const onAudioButtonPress = (event: GestureResponderEvent) => {
+    event.stopPropagation();
+    if (item.audioFile) {
+      item.onAudioFilePress?.(item.audioFile);
+    }
+  };
+
+  const onPlaylistAudioPress = (
+    event: GestureResponderEvent,
+    fileName: string,
+  ) => {
+    event.stopPropagation();
+    item.onAudioFilePress?.(fileName);
   };
 
   return (
@@ -34,15 +65,17 @@ export const Section: FC<SectionProp> = item => {
           {backgroundColor: isDone ? theme.activeBg : theme.bg},
         ]}
         imageStyle={styles.backgroundStyle}>
-        <Pressable onPress={onPress}>
-          <View style={styles.container}>
-            <StyledText
-              customStyle={[
-                styles.content,
-                {color: isDone ? theme.secondaryColor : theme.color},
-              ]}>
-              {item.content}
-            </StyledText>
+        <Pressable onPress={item.onPress} style={styles.container}>
+          <View>
+            {item.isStacked && item.note ? (
+              <StyledText
+                customStyle={[
+                  styles.note,
+                  {color: isDone ? theme.secondaryColor : theme.tertiaryColor},
+                ]}>
+                {item.note}
+              </StyledText>
+            ) : null}
             <StyledText
               customStyle={[
                 styles.caption,
@@ -52,12 +85,64 @@ export const Section: FC<SectionProp> = item => {
             </StyledText>
             <StyledText
               customStyle={[
+                styles.content,
+                {color: isDone ? theme.secondaryColor : theme.color},
+              ]}>
+              {item.content}
+            </StyledText>
+            <StyledText
+              customStyle={[
                 styles.repeat,
                 {color: isDone ? theme.secondaryColor : theme.color},
               ]}>
               {item.repeatDescription}
             </StyledText>
-            <View style={styles.bottomContainer}>
+            {hasPlaylist ? (
+              <View style={styles.playlistContainer}>
+                {item.audioArray?.map(audioItem => {
+                  const isTrackPlaying =
+                    item.activeAudioFile === audioItem.fileName && !item.isAudioPaused;
+
+                  return (
+                    <Pressable
+                      key={audioItem.fileName}
+                      onPress={event =>
+                        onPlaylistAudioPress(event, audioItem.fileName)
+                      }
+                      style={styles.playlistItem}>
+                      <StyledText
+                        customStyle={[
+                          styles.playlistTitle,
+                          {
+                            color: isDone ? theme.secondaryColor : theme.color,
+                          },
+                        ]}>
+                        {audioItem.title}
+                      </StyledText>
+                      <View style={styles.playlistAction}>
+                        <Icon
+                          name={isTrackPlaying ? 'pause' : 'play-arrow'}
+                          color={isDone ? theme.secondaryColor : theme.tertiaryColor}
+                          size={24}
+                        />
+                        <StyledText
+                          customStyle={[
+                            styles.audioText,
+                            {
+                              color: isDone ? theme.secondaryColor : theme.tertiaryColor,
+                            },
+                          ]}>
+                          {isTrackPlaying ? 'إيقاف' : 'إستمع'}
+                        </StyledText>
+                      </View>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            ) : null}
+          </View>
+          <View style={styles.bottomContainer}>
+            <View style={styles.bottomItem}>
               <StyledText
                 customStyle={[
                   styles.repeatNumber,
@@ -65,9 +150,31 @@ export const Section: FC<SectionProp> = item => {
                     color: isDone ? theme.secondaryColor : theme.tertiaryColor,
                   },
                 ]}>
-                {count}
+                {item.count}
               </StyledText>
-              <Pressable onPress={onCopy}>
+            </View>
+            <View style={styles.bottomItem}>
+              {canPlayAudio ? (
+                <Pressable onPress={onAudioButtonPress} style={styles.audioButton}>
+                  <Icon
+                    name={isSingleAudioPlaying ? 'pause' : 'play-arrow'}
+                    color={isDone ? theme.secondaryColor : theme.tertiaryColor}
+                    size={28}
+                  />
+                  <StyledText
+                    customStyle={[
+                      styles.audioText,
+                      {
+                        color: isDone ? theme.secondaryColor : theme.tertiaryColor,
+                      },
+                    ]}>
+                    {isSingleAudioPlaying ? 'إيقاف' : 'إستمع'}
+                  </StyledText>
+                </Pressable>
+              ) : null}
+            </View>
+            <View style={styles.bottomItem}>
+              <Pressable onPress={onCopyPress}>
                 <Icon
                   name="content-copy"
                   color={isDone ? theme.secondaryColor : theme.tertiaryColor}
@@ -114,6 +221,12 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 18,
   },
+  note: {
+    fontSize: 13,
+    fontWeight: '700',
+    marginBottom: 8,
+    textAlign: 'right',
+  },
   caption: {
     marginVertical: 5,
     fontWeight: '200',
@@ -128,9 +241,43 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   bottomContainer: {
-    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: 12,
+  },
+  bottomItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  audioButton: {
     alignItems: 'center',
     flexDirection: 'row',
+    gap: 4,
+  },
+  playlistContainer: {
+    marginTop: 10,
+    gap: 10,
+  },
+  playlistItem: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  playlistTitle: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: '700',
+    marginRight: 10,
+    textAlign: 'right',
+  },
+  playlistAction: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 4,
+  },
+  audioText: {
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
