@@ -345,6 +345,12 @@ export const noteData = {
   هذا التطبيق غير ربحي بالمرة، قمت بتصميمه من أجل استعمال خاص لي فقط، إذ كان هناك أي خطأ أو ملاحظة يمكنكم التواصل معي عبر البريد
   `,
   email: 'mouradbougarne@gmail.com',
+  policyUrl: 'https://roqia.name/privacy',
+  termsUrl: 'https://roqia.name/terms',
+  githubRepoUrl: 'https://github.com/mbougarne/roqia',
+  authorGithubUrl: 'https://github.com/mbougarne',
+  audioSourceOneUrl: 'https://alazkar.today/',
+  audioSourceTwoUrl: 'https://www.mp3quran.net/ar',
 };
 
 export const adkarData: DataProps[] = [
