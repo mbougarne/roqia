@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
-import {ImageBackground, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {ImageBackground, StyleSheet, useColorScheme} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import {MainTabNavigation} from './navigation/MainTabNavigation';
 import {SplashScreen} from './screens';
+import {initializeDailyReminders} from './services/notifications';
+import {loadPersistedAppState, persistAppState} from './services/persistence';
 import {
   createInitialRepeatCounts,
   type Mode,
@@ -16,13 +18,43 @@ const {Provider: ThemeProvider} = themeContext;
 const {Provider: RepeatProvider} = repeatContext;
 
 export default function App(): JSX.Element {
-  const [mode, setMode] = useState<Mode>('light');
+  const deviceColorScheme = useColorScheme();
+  const defaultMode: Mode = deviceColorScheme === 'dark' ? 'dark' : 'light';
+  const [mode, setMode] = useState<Mode>(defaultMode);
   const [repeatCounts, setRepeatCounts] = useState(createInitialRepeatCounts);
+  const [isStateHydrated, setIsStateHydrated] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const theme = themes[mode];
 
+  useEffect(() => {
+    initializeDailyReminders();
+  }, []);
+
+  useEffect(() => {
+    const hydrateState = async () => {
+      const persisted = await loadPersistedAppState();
+
+      if (persisted.mode) {
+        setMode(persisted.mode);
+      }
+
+      setRepeatCounts(persisted.repeatCounts);
+      setIsStateHydrated(true);
+    };
+
+    hydrateState();
+  }, []);
+
+  useEffect(() => {
+    if (!isStateHydrated) {
+      return;
+    }
+
+    persistAppState(mode, repeatCounts);
+  }, [isStateHydrated, mode, repeatCounts]);
+
   const toggleMode = () => {
-    setMode(mode === 'dark' ? 'light' : 'dark');
+    setMode(currentMode => (currentMode === 'dark' ? 'light' : 'dark'));
   };
 
   const decrementRepeat = (key: string) => {
