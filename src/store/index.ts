@@ -14,6 +14,8 @@ export type RepeatCounts = Record<string, number>;
 export type RepeatContextState = {
   repeatCounts: RepeatCounts;
   decrementRepeat: (key: string) => void;
+  resetRepeats: (nextCounts: RepeatCounts) => void;
+  resetAllRepeats: () => void;
 };
 
 export const themes = {
@@ -55,15 +57,8 @@ export const getRepeatItemKey = (
   ].join('::');
 
 export const createInitialRepeatCounts = (): RepeatCounts => {
-  const homeCounts = data.reduce<RepeatCounts>((acc, item, index) => {
-    acc[getRepeatItemKey(item, index, 'data')] = item.repeat ?? 0;
-    return acc;
-  }, {});
-
-  const adkarCounts = adkarData.reduce<RepeatCounts>((acc, item, index) => {
-    acc[getRepeatItemKey(item, index, 'adkar')] = item.repeat ?? 0;
-    return acc;
-  }, {});
+  const homeCounts = createRepeatCountsForItems(data, 'data');
+  const adkarCounts = createRepeatCountsForItems(adkarData, 'adkar');
 
   return {
     ...homeCounts,
@@ -71,9 +66,20 @@ export const createInitialRepeatCounts = (): RepeatCounts => {
   };
 };
 
+export const createRepeatCountsForItems = (
+  items: DataProps[],
+  scope: string,
+): RepeatCounts =>
+  items.reduce<RepeatCounts>((acc, item, index) => {
+    acc[getRepeatItemKey(item, index, scope)] = item.repeat ?? 0;
+    return acc;
+  }, {});
+
 const initialRepeatContextState: RepeatContextState = {
   repeatCounts: createInitialRepeatCounts(),
   decrementRepeat: () => undefined,
+  resetRepeats: () => undefined,
+  resetAllRepeats: () => undefined,
 };
 
 export const themeContext = createContext<ContextState>(initialContextState);

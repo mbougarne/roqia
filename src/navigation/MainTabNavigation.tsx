@@ -73,17 +73,29 @@ export const MainTabNavigation = () => {
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          options={{tabBarLabel: 'الرقية'}}
+          options={{
+            tabBarAccessibilityHint: 'يفتح صفحة الرقية الشرعية',
+            tabBarAccessibilityLabel: 'تبويب الرقية',
+            tabBarLabel: 'الرقية',
+          }}
         />
         <Tab.Screen
           name="Adkar"
           component={AdkarScreen}
-          options={{tabBarLabel: 'أذكار'}}
+          options={{
+            tabBarAccessibilityHint: 'يفتح صفحة الأذكار',
+            tabBarAccessibilityLabel: 'تبويب الأذكار',
+            tabBarLabel: 'أذكار',
+          }}
         />
         <Tab.Screen
           name="About"
           component={AboutScreen}
-          options={{tabBarLabel: 'نبذة'}}
+          options={{
+            tabBarAccessibilityHint: 'يفتح صفحة النبذة ومعلومات التطبيق',
+            tabBarAccessibilityLabel: 'تبويب نبذة',
+            tabBarLabel: 'نبذة',
+          }}
         />
       </Tab.Navigator>
     </NavigationContainer>

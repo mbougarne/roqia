@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
+import InAppBrowser from 'react-native-inappbrowser-reborn';
 
 import {noteData} from '../data';
 import {Header, StyledText} from '../components';
@@ -24,10 +25,13 @@ export const AboutScreen = () => {
 
   const openLink = async (url: string) => {
     try {
-      const canOpen = await Linking.canOpenURL(url);
-
-      if (!canOpen) {
-        Alert.alert('تعذر فتح الرابط', 'يرجى المحاولة لاحقًا.');
+      if (await InAppBrowser.isAvailable()) {
+        await InAppBrowser.open(url, {
+          showTitle: true,
+          enableUrlBarHiding: true,
+          enableDefaultShare: true,
+          dismissButtonStyle: 'close',
+        });
         return;
       }
 
@@ -52,7 +56,12 @@ export const AboutScreen = () => {
         <StyledText customStyle={[styles.contact, {color: theme.color}]}>
           {noteData.contact}
         </StyledText>
-        <TouchableOpacity onPress={onCopy} style={styles.emailButton}>
+        <TouchableOpacity
+          accessibilityHint="ينسخ البريد الإلكتروني إلى الحافظة"
+          accessibilityLabel="نسخ البريد الإلكتروني"
+          accessibilityRole="button"
+          onPress={onCopy}
+          style={styles.emailButton}>
           <Icon name="content-copy" color={theme.tertiaryColor} size={16} />
           <StyledText customStyle={[styles.email, {color: theme.color}]}> 
             {noteData.email}
@@ -65,6 +74,9 @@ export const AboutScreen = () => {
           </StyledText>
 
           <TouchableOpacity
+            accessibilityHint="يفتح صفحة سياسة الخصوصية داخل المتصفح"
+            accessibilityLabel="سياسة الخصوصية"
+            accessibilityRole="button"
             onPress={() => openLink(noteData.policyUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
@@ -74,6 +86,9 @@ export const AboutScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            accessibilityHint="يفتح صفحة شروط الاستخدام داخل المتصفح"
+            accessibilityLabel="شروط الاستخدام"
+            accessibilityRole="button"
             onPress={() => openLink(noteData.termsUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
@@ -87,6 +102,9 @@ export const AboutScreen = () => {
           </StyledText>
 
           <TouchableOpacity
+            accessibilityHint="يفتح مستودع المشروع على GitHub"
+            accessibilityLabel="مستودع المشروع"
+            accessibilityRole="button"
             onPress={() => openLink(noteData.githubRepoUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
@@ -96,6 +114,9 @@ export const AboutScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            accessibilityHint="يفتح حساب المطور على GitHub"
+            accessibilityLabel="حساب المطور"
+            accessibilityRole="button"
             onPress={() => openLink(noteData.authorGithubUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
@@ -105,6 +126,9 @@ export const AboutScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            accessibilityHint="يفتح المصدر الصوتي الأول داخل المتصفح"
+            accessibilityLabel="المصدر الصوتي الأول"
+            accessibilityRole="button"
             onPress={() => openLink(noteData.audioSourceOneUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
@@ -114,6 +138,9 @@ export const AboutScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            accessibilityHint="يفتح المصدر الصوتي الثاني داخل المتصفح"
+            accessibilityLabel="المصدر الصوتي الثاني"
+            accessibilityRole="button"
             onPress={() => openLink(noteData.audioSourceTwoUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />

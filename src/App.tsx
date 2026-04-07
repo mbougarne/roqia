@@ -64,10 +64,21 @@ export default function App(): JSX.Element {
     }));
   };
 
+  const resetRepeats = (nextCounts: Record<string, number>) => {
+    setRepeatCounts(currentCounts => ({
+      ...currentCounts,
+      ...nextCounts,
+    }));
+  };
+
+  const resetAllRepeats = () => {
+    setRepeatCounts(createInitialRepeatCounts());
+  };
+
   return (
     <SafeAreaProvider>
       <ThemeProvider value={{mode, toggleMode}}>
-        <RepeatProvider value={{repeatCounts, decrementRepeat}}>
+        <RepeatProvider value={{repeatCounts, decrementRepeat, resetRepeats, resetAllRepeats}}>
         <ImageBackground
           source={require('./assets/images/arabesque.png')}
           style={[styles.backgroundContainer, {backgroundColor: theme.secondaryBg}]}

@@ -20,6 +20,7 @@ type SectionProp = DataProps & {
   isAudioPaused?: boolean;
   count: number;
   onPress: () => void;
+  onReset?: () => void;
   onAudioFilePress?: (fileName: string) => void;
 };
 
@@ -48,6 +49,11 @@ export const Section: FC<SectionProp> = item => {
     }
   };
 
+  const onResetPress = (event: GestureResponderEvent) => {
+    event.stopPropagation();
+    item.onReset?.();
+  };
+
   const onPlaylistAudioPress = (
     event: GestureResponderEvent,
     fileName: string,
@@ -65,7 +71,12 @@ export const Section: FC<SectionProp> = item => {
           {backgroundColor: isDone ? theme.activeBg : theme.bg},
         ]}
         imageStyle={styles.backgroundStyle}>
-        <Pressable onPress={item.onPress} style={styles.container}>
+        <Pressable
+          accessibilityHint="ينقص العداد الحالي بمقدار واحد"
+          accessibilityLabel={`الذكر ${item.caption ?? ''}. المتبقي ${item.count}`}
+          accessibilityRole="button"
+          onPress={item.onPress}
+          style={styles.container}>
           <View>
             {item.isStacked && item.note ? (
               <StyledText
@@ -105,6 +116,9 @@ export const Section: FC<SectionProp> = item => {
 
                   return (
                     <Pressable
+                      accessibilityHint="يشغل أو يوقف المقطع الصوتي لهذا العنصر"
+                      accessibilityLabel={`تشغيل أو إيقاف ${audioItem.title}`}
+                      accessibilityRole="button"
                       key={audioItem.fileName}
                       onPress={event =>
                         onPlaylistAudioPress(event, audioItem.fileName)
@@ -143,19 +157,46 @@ export const Section: FC<SectionProp> = item => {
           </View>
           <View style={styles.bottomContainer}>
             <View style={styles.bottomItem}>
-              <StyledText
-                customStyle={[
-                  styles.repeatNumber,
-                  {
-                    color: isDone ? theme.secondaryColor : theme.tertiaryColor,
-                  },
-                ]}>
-                {item.count}
-              </StyledText>
+              {isDone ? (
+                <Pressable
+                  accessibilityHint="يعيد هذا العداد إلى قيمته الأصلية"
+                  accessibilityLabel="إعادة عداد هذا الذكر"
+                  accessibilityRole="button"
+                  onPress={onResetPress}
+                  style={styles.resetButton}>
+                  <Icon
+                    name="restart-alt"
+                    color={theme.secondaryColor}
+                    size={24}
+                  />
+                  <StyledText
+                    customStyle={[
+                      styles.resetText,
+                      {color: theme.secondaryColor},
+                    ]}>
+                    إعادة
+                  </StyledText>
+                </Pressable>
+              ) : (
+                <StyledText
+                  customStyle={[
+                    styles.repeatNumber,
+                    {
+                      color: theme.tertiaryColor,
+                    },
+                  ]}>
+                  {item.count}
+                </StyledText>
+              )}
             </View>
             <View style={styles.bottomItem}>
               {canPlayAudio ? (
-                <Pressable onPress={onAudioButtonPress} style={styles.audioButton}>
+                <Pressable
+                  accessibilityHint="يشغل أو يوقف التلاوة الصوتية"
+                  accessibilityLabel={isSingleAudioPlaying ? 'إيقاف الصوت' : 'تشغيل الصوت'}
+                  accessibilityRole="button"
+                  onPress={onAudioButtonPress}
+                  style={styles.audioButton}>
                   <Icon
                     name={isSingleAudioPlaying ? 'pause' : 'play-arrow'}
                     color={isDone ? theme.secondaryColor : theme.tertiaryColor}
@@ -174,7 +215,11 @@ export const Section: FC<SectionProp> = item => {
               ) : null}
             </View>
             <View style={styles.bottomItem}>
-              <Pressable onPress={onCopyPress}>
+              <Pressable
+                accessibilityHint="ينسخ نص الذكر إلى الحافظة"
+                accessibilityLabel="نسخ النص"
+                accessibilityRole="button"
+                onPress={onCopyPress}>
                 <Icon
                   name="content-copy"
                   color={isDone ? theme.secondaryColor : theme.tertiaryColor}
@@ -249,6 +294,15 @@ const styles = StyleSheet.create({
   bottomItem: {
     flex: 1,
     alignItems: 'center',
+  },
+  resetButton: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 4,
+  },
+  resetText: {
+    fontSize: 14,
+    fontWeight: '700',
   },
   audioButton: {
     alignItems: 'center',

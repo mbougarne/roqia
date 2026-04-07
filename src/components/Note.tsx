@@ -27,7 +27,11 @@ export const Note: FC = () => {
         <StyledText customStyle={[styles.contact, {color: theme.color}]}>
           {noteData.contact}
         </StyledText>
-        <TouchableOpacity onPress={onCopy}>
+        <TouchableOpacity
+          accessibilityHint="ينسخ البريد الإلكتروني إلى الحافظة"
+          accessibilityLabel="نسخ البريد الإلكتروني"
+          accessibilityRole="button"
+          onPress={onCopy}>
           <StyledText customStyle={[styles.content, {color: theme.color}]}>
             <Icon name="content-copy" color={theme.tertiaryColor} size={16} />
             {noteData.email}
