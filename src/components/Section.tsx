@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
 
 import {type DataProps} from '../data';
+import {getPressableScaleStyle} from './pressableStyles';
 import {type ContextState, themeContext, themes} from '../store';
 import {StyledText} from './StyledText';
 
@@ -26,8 +27,14 @@ type SectionProp = DataProps & {
 
 export const Section: FC<SectionProp> = item => {
   const {mode} = useContext<ContextState>(themeContext);
-  const isDone = item.count === 0;
+  const safeCount = Number.isFinite(item.count) ? Math.max(0, item.count) : item.repeat ?? 0;
+  const isDone = safeCount === 0;
   const theme = themes[mode];
+  const sectionBackgroundColor = isDone
+    ? theme.activeBg
+    : mode === 'dark'
+      ? theme.secondaryBg
+      : theme.bg;
   const canPlayAudio = !!item.audioFile && !!item.onAudioFilePress;
   const hasPlaylist = !!item.audioArray?.length && !!item.onAudioFilePress;
   const isSingleAudioPlaying =
@@ -68,15 +75,21 @@ export const Section: FC<SectionProp> = item => {
         source={require('../assets/images/arabesque.png')}
         style={[
           styles.backgroundContainer,
-          {backgroundColor: isDone ? theme.activeBg : theme.bg},
+          {backgroundColor: sectionBackgroundColor},
         ]}
-        imageStyle={styles.backgroundStyle}>
+        imageStyle={[
+          styles.backgroundStyle,
+          mode === 'dark' && !isDone && styles.darkInactiveBackgroundStyle,
+        ]}>
         <Pressable
           accessibilityHint="ينقص العداد الحالي بمقدار واحد"
-          accessibilityLabel={`الذكر ${item.caption ?? ''}. المتبقي ${item.count}`}
+          accessibilityLabel={`الذكر ${item.caption ?? ''}. المتبقي ${safeCount}`}
           accessibilityRole="button"
           onPress={item.onPress}
-          style={styles.container}>
+          style={({pressed}) => [
+            styles.container,
+            getPressableScaleStyle(pressed, 0.92, 0.992),
+          ]}>
           <View>
             {item.isStacked && item.note ? (
               <StyledText
@@ -123,7 +136,10 @@ export const Section: FC<SectionProp> = item => {
                       onPress={event =>
                         onPlaylistAudioPress(event, audioItem.fileName)
                       }
-                      style={styles.playlistItem}>
+                      style={({pressed}) => [
+                        styles.playlistItem,
+                        getPressableScaleStyle(pressed, 0.82, 0.98),
+                      ]}>
                       <StyledText
                         customStyle={[
                           styles.playlistTitle,
@@ -163,7 +179,10 @@ export const Section: FC<SectionProp> = item => {
                   accessibilityLabel="إعادة عداد هذا الذكر"
                   accessibilityRole="button"
                   onPress={onResetPress}
-                  style={styles.resetButton}>
+                  style={({pressed}) => [
+                    styles.resetButton,
+                    getPressableScaleStyle(pressed, 0.82, 0.94),
+                  ]}>
                   <Icon
                     name="restart-alt"
                     color={theme.secondaryColor}
@@ -185,7 +204,7 @@ export const Section: FC<SectionProp> = item => {
                       color: theme.tertiaryColor,
                     },
                   ]}>
-                  {item.count}
+                  {safeCount}
                 </StyledText>
               )}
             </View>
@@ -196,7 +215,10 @@ export const Section: FC<SectionProp> = item => {
                   accessibilityLabel={isSingleAudioPlaying ? 'إيقاف الصوت' : 'تشغيل الصوت'}
                   accessibilityRole="button"
                   onPress={onAudioButtonPress}
-                  style={styles.audioButton}>
+                  style={({pressed}) => [
+                    styles.audioButton,
+                    getPressableScaleStyle(pressed, 0.82, 0.94),
+                  ]}>
                   <Icon
                     name={isSingleAudioPlaying ? 'pause' : 'play-arrow'}
                     color={isDone ? theme.secondaryColor : theme.tertiaryColor}
@@ -219,7 +241,11 @@ export const Section: FC<SectionProp> = item => {
                 accessibilityHint="ينسخ نص الذكر إلى الحافظة"
                 accessibilityLabel="نسخ النص"
                 accessibilityRole="button"
-                onPress={onCopyPress}>
+                onPress={onCopyPress}
+                style={({pressed}) => [
+                  styles.copyButton,
+                  getPressableScaleStyle(pressed, 0.82, 0.94),
+                ]}>
                 <Icon
                   name="content-copy"
                   color={isDone ? theme.secondaryColor : theme.tertiaryColor}
@@ -256,6 +282,9 @@ const styles = StyleSheet.create({
   },
   backgroundStyle: {
     resizeMode: 'repeat',
+  },
+  darkInactiveBackgroundStyle: {
+    opacity: 0.22,
   },
   container: {
     flex: 1,
@@ -308,6 +337,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap: 4,
+  },
+  copyButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 36,
   },
   playlistContainer: {
     marginTop: 10,

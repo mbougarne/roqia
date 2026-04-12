@@ -3,6 +3,7 @@ import {View, StyleSheet, ImageBackground, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {StyledText} from './StyledText';
+import {getPressableScaleStyle} from './pressableStyles';
 import {themeContext, themes} from '../store';
 
 type Props = {
@@ -49,7 +50,10 @@ export const Header: FC<Props> = ({
                 accessibilityLabel="زر الرجوع"
                 accessibilityRole="button"
                 onPress={onBackPress}
-                style={styles.backButton}>
+                style={({pressed}) => [
+                  styles.backButton,
+                  getPressableScaleStyle(pressed, 0.82, 0.94),
+                ]}>
                 <Icon name="arrow-back" size={24} color={themes[mode].tertiaryColor} />
                 <StyledText
                   customStyle={[
@@ -69,7 +73,10 @@ export const Header: FC<Props> = ({
                   accessibilityLabel="إعادة عداد الصفحة"
                   accessibilityRole="button"
                   onPress={onResetScreenPress}
-                  style={styles.actionButton}>
+                  style={({pressed}) => [
+                    styles.actionButton,
+                    getPressableScaleStyle(pressed, 0.82, 0.94),
+                  ]}>
                   <Icon name="restart-alt" size={24} color={theme.tertiaryColor} />
                   <StyledText
                     customStyle={[
@@ -86,7 +93,10 @@ export const Header: FC<Props> = ({
                   accessibilityLabel="إعادة جميع العدادات"
                   accessibilityRole="button"
                   onPress={onResetAllPress}
-                  style={styles.actionButton}>
+                  style={({pressed}) => [
+                    styles.actionButton,
+                    getPressableScaleStyle(pressed, 0.82, 0.94),
+                  ]}>
                   <Icon name="restore-page" size={24} color={theme.tertiaryColor} />
                   <StyledText
                     customStyle={[
@@ -102,7 +112,10 @@ export const Header: FC<Props> = ({
                 accessibilityLabel={mode === 'light' ? 'تفعيل الوضع الليلي' : 'تفعيل الوضع النهاري'}
                 accessibilityRole="button"
                 onPress={onIconPress}
-                style={styles.modeButton}>
+                style={({pressed}) => [
+                  styles.modeButton,
+                  getPressableScaleStyle(pressed, 0.82, 0.94),
+                ]}>
                 <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
                 </Icon>
                 <StyledText
@@ -156,7 +169,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   headline: {
-    fontSize: 56,
+    fontSize: 36,
     fontWeight: '900',
     textAlign: 'center',
   },

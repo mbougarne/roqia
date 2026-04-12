@@ -1,9 +1,10 @@
 import React, {FC, useContext} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
 
 import {noteData} from '../data';
+import {getPressableScaleStyle} from './pressableStyles';
 import {StyledText} from './StyledText';
 import {themeContext, themes} from '../store';
 
@@ -27,16 +28,17 @@ export const Note: FC = () => {
         <StyledText customStyle={[styles.contact, {color: theme.color}]}>
           {noteData.contact}
         </StyledText>
-        <TouchableOpacity
+        <Pressable
           accessibilityHint="ينسخ البريد الإلكتروني إلى الحافظة"
           accessibilityLabel="نسخ البريد الإلكتروني"
           accessibilityRole="button"
-          onPress={onCopy}>
+          onPress={onCopy}
+          style={({pressed}) => getPressableScaleStyle(pressed, 0.86, 0.98)}>
           <StyledText customStyle={[styles.content, {color: theme.color}]}>
             <Icon name="content-copy" color={theme.tertiaryColor} size={16} />
             {noteData.email}
           </StyledText>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

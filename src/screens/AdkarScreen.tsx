@@ -18,9 +18,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {audioAssets} from '../assets/audio';
 import {adkarData} from '../data';
-import {Header, Section, StyledText} from '../components';
+import {getPressableScaleStyle, Header, Section, StyledText} from '../components';
 import {
-  createRepeatCountsForItems,
   getRepeatItemKey,
   repeatContext,
   themeContext,
@@ -77,11 +76,17 @@ const AdkarMenuScreen = ({navigation}: AdkarMenuScreenProps) => {
               accessibilityRole="button"
               key={routeName}
               onPress={() => navigation.navigate(routeName)}
-              style={styles.menuButtonWrapper}>
+              style={({pressed}) => [
+                styles.menuButtonWrapper,
+                getPressableScaleStyle(pressed, 0.9, 0.98),
+              ]}>
               <ImageBackground
                 source={require('../assets/images/arabesque.png')}
                 style={[styles.menuButton, {backgroundColor: theme.secondaryBg}]}
-                imageStyle={styles.menuButtonBackground}>
+                imageStyle={[
+                  styles.menuButtonBackground,
+                  mode === 'dark' && styles.darkMenuButtonBackground,
+                ]}>
                 <Icon color={theme.tertiaryColor} name={config.icon} size={34} />
                 <StyledText
                   customStyle={[styles.menuButtonText, {color: theme.tertiaryColor}]}> 
@@ -106,8 +111,20 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
   const {mode} = useContext(themeContext);
   const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(repeatContext);
   const theme = themes[mode];
-  const filteredData = adkarData.filter(item => item.category === route.name);
-  const categoryRepeatCounts = createRepeatCountsForItems(filteredData, 'adkar');
+  const filteredEntries = adkarData.reduce<Array<{item: (typeof adkarData)[number]; index: number}>>(
+    (acc, item, index) => {
+      if (item.category === route.name) {
+        acc.push({item, index});
+      }
+
+      return acc;
+    },
+    [],
+  );
+  const categoryRepeatCounts = filteredEntries.reduce<Record<string, number>>((acc, entry) => {
+    acc[getRepeatItemKey(entry.item, entry.index, 'adkar')] = entry.item.repeat ?? 0;
+    return acc;
+  }, {});
 
   const onAudioPress = (audioFile: string) => {
     if (activeAudioFile === audioFile) {
@@ -185,22 +202,22 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
       ) : null}
       <FlatList
         ref={listRef}
-        data={filteredData}
+        data={filteredEntries}
         contentContainerStyle={styles.categoryListContent}
         extraData={{activeAudioFile, isAudioPaused, repeatCounts}}
-        keyExtractor={(item, index) => getRepeatItemKey(item, index, 'adkar')}
+        keyExtractor={({item, index}) => getRepeatItemKey(item, index, 'adkar')}
         onScroll={({nativeEvent}) => onListScroll(nativeEvent.contentOffset.y)}
-        renderItem={({item, index}) => {
-          const itemKey = getRepeatItemKey(item, index, 'adkar');
+        renderItem={({item: entry}) => {
+          const itemKey = getRepeatItemKey(entry.item, entry.index, 'adkar');
 
           return (
             <Section
-              {...item}
+              {...entry.item}
               activeAudioFile={activeAudioFile}
-              count={repeatCounts[itemKey] ?? item.repeat ?? 0}
+              count={repeatCounts[itemKey] ?? entry.item.repeat ?? 0}
               isAudioPaused={isAudioPaused}
               onPress={() => decrementRepeat(itemKey)}
-              onReset={() => resetRepeats({[itemKey]: item.repeat ?? 0})}
+              onReset={() => resetRepeats({[itemKey]: entry.item.repeat ?? 0})}
               onAudioFilePress={onAudioPress}
             />
           );
@@ -223,7 +240,11 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
           accessibilityLabel="العودة إلى الأعلى"
           accessibilityRole="button"
           onPress={onScrollTopPress}
-          style={[styles.scrollTopButton, {backgroundColor: theme.activeBg}]}> 
+          style={({pressed}) => [
+            styles.scrollTopButton,
+            {backgroundColor: theme.activeBg},
+            getPressableScaleStyle(pressed, 0.9, 0.94),
+          ]}> 
           <Icon color={theme.secondaryColor} name="keyboard-double-arrow-up" size={22} />
         </Pressable>
       ) : null}
@@ -286,6 +307,9 @@ const styles = StyleSheet.create({
   },
   menuButtonBackground: {
     resizeMode: 'repeat',
+  },
+  darkMenuButtonBackground: {
+    opacity: 0.22,
   },
   menuButtonText: {
     fontSize: 24,

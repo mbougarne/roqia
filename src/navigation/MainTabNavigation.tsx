@@ -29,6 +29,8 @@ export const MainTabNavigation = () => {
           sceneStyle: {
             backgroundColor: 'transparent',
           },
+          tabBarPressColor:
+            mode === 'dark' ? 'rgba(184, 195, 182, 0.16)' : 'rgba(26, 77, 46, 0.12)',
           tabBarIcon: ({color, size}) => {
             const iconByRoute = {
               Home: 'home',

@@ -60,7 +60,7 @@ export default function App(): JSX.Element {
   const decrementRepeat = (key: string) => {
     setRepeatCounts(currentCounts => ({
       ...currentCounts,
-      [key]: currentCounts[key] === 0 ? 0 : currentCounts[key] - 1,
+      [key]: Math.max(0, (currentCounts[key] ?? 0) - 1),
     }));
   };
 

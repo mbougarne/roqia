@@ -13,7 +13,7 @@ import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {audioAssets} from '../assets/audio';
-import {Header, Section, Note} from '../components';
+import {getPressableScaleStyle, Header, Section, Note} from '../components';
 import {data} from '../data';
 import {
   createRepeatCountsForItems,
@@ -147,7 +147,11 @@ export const HomeScreen = () => {
             accessibilityLabel="العودة إلى الأعلى"
             accessibilityRole="button"
             onPress={onScrollTopPress}
-            style={[styles.scrollTopButton, {backgroundColor: theme.activeBg}]}> 
+            style={({pressed}) => [
+              styles.scrollTopButton,
+              {backgroundColor: theme.activeBg},
+              getPressableScaleStyle(pressed, 0.9, 0.94),
+            ]}> 
             <Icon color={theme.secondaryColor} name="keyboard-double-arrow-up" size={22} />
           </Pressable>
         ) : null}
