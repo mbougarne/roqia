@@ -4,6 +4,7 @@ import {
   FlatList,
   Image,
   ImageBackground,
+  Platform,
   Pressable,
   StyleSheet,
   View,
@@ -20,8 +21,8 @@ import {audioAssets} from '../assets/audio';
 import {adkarData} from '../data';
 import {getPressableScaleStyle, Header, Section, StyledText} from '../components';
 import {
+  adkarRepeatContext,
   getRepeatItemKey,
-  repeatContext,
   themeContext,
   themes,
 } from '../store';
@@ -61,10 +62,15 @@ const categoryConfig: Record<AdkarCategoryRouteName, {icon: string; title: strin
 const AdkarMenuScreen = ({navigation}: AdkarMenuScreenProps) => {
   const {mode} = useContext(themeContext);
   const theme = themes[mode];
+  const onMenuPress = () => {
+    (navigation as any).openDrawer?.();
+    (navigation as any).getParent?.()?.openDrawer?.();
+    (navigation as any).getParent?.()?.getParent?.()?.openDrawer?.();
+  };
 
   return (
     <View style={[styles.container, {backgroundColor: theme.bg}]}> 
-      <Header title="أذكار اليوم" />
+      <Header onMenuPress={onMenuPress} showMenuButton title="أذكار اليوم" />
       <View style={styles.menuContainer}>
         {(Object.keys(categoryConfig) as AdkarCategoryRouteName[]).map(routeName => {
           const config = categoryConfig[routeName];
@@ -109,7 +115,7 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
   const [isAudioPaused, setIsAudioPaused] = useState(false);
   const isFocused = useIsFocused();
   const {mode} = useContext(themeContext);
-  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(repeatContext);
+  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(adkarRepeatContext);
   const theme = themes[mode];
   const filteredEntries = adkarData.reduce<Array<{item: (typeof adkarData)[number]; index: number}>>(
     (acc, item, index) => {
@@ -164,7 +170,9 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
   const activeAudioSource = activeAudioFile ? audioAssets[activeAudioFile] : null;
   const resolvedActiveAudioUri = activeAudioSource
     ? Image.resolveAssetSource(activeAudioSource).uri
-    : undefined;
+    : activeAudioFile && Platform.OS === 'android'
+      ? `asset:/${activeAudioFile}`
+      : undefined;
   const onListScroll = (offsetY: number) => {
     const shouldShowSticky = offsetY > 170;
     const shouldShowScrollTop = shouldShowSticky && offsetY > 350;
@@ -187,19 +195,19 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
       source={require('../assets/images/asfalt-dark.png')}
       style={[styles.container, {backgroundColor: theme.bg}]}
       imageStyle={styles.cover}>
-      {showStickyHeader ? (
-        <View style={styles.stickyHeaderWrapper}>
-          <Header
-            compact
-            onBackPress={navigation.goBack}
-            onResetAllPress={onResetAllPress}
-            onResetScreenPress={onResetScreenPress}
-            showBackButton
-            showResetActions
-            title={categoryConfig[route.name].title}
-          />
-        </View>
-      ) : null}
+      <View
+        pointerEvents={showStickyHeader ? 'auto' : 'none'}
+        style={[styles.stickyHeaderWrapper, !showStickyHeader && styles.stickyHeaderHidden]}>
+        <Header
+          compact
+          onBackPress={navigation.goBack}
+          onResetAllPress={onResetAllPress}
+          onResetScreenPress={onResetScreenPress}
+          showBackButton
+          showResetActions
+          title={categoryConfig[route.name].title}
+        />
+      </View>
       <FlatList
         ref={listRef}
         data={filteredEntries}
@@ -330,6 +338,9 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     zIndex: 10,
+  },
+  stickyHeaderHidden: {
+    opacity: 0,
   },
   scrollTopButton: {
     alignItems: 'center',

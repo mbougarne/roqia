@@ -1,10 +1,11 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import {useIsFocused} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {
   Alert,
   FlatList,
   ImageBackground,
   Image,
+  Platform,
   Pressable,
   StyleSheet,
   View,
@@ -18,7 +19,7 @@ import {data} from '../data';
 import {
   createRepeatCountsForItems,
   getRepeatItemKey,
-  repeatContext,
+  homeRepeatContext,
   themeContext,
   themes,
 } from '../store';
@@ -31,8 +32,9 @@ export const HomeScreen = () => {
   const [activeAudioFile, setActiveAudioFile] = useState<string | null>(null);
   const [isAudioPaused, setIsAudioPaused] = useState(false);
   const isFocused = useIsFocused();
+  const navigation = useNavigation<any>();
   const {mode} = useContext(themeContext);
-  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(repeatContext);
+  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(homeRepeatContext);
   const theme = themes[mode];
   const homeRepeatCounts = createRepeatCountsForItems(data, 'data');
 
@@ -76,7 +78,9 @@ export const HomeScreen = () => {
   const activeAudioSource = activeAudioFile ? audioAssets[activeAudioFile] : null;
   const resolvedActiveAudioUri = activeAudioSource
     ? Image.resolveAssetSource(activeAudioSource).uri
-    : undefined;
+    : activeAudioFile && Platform.OS === 'android'
+      ? `asset:/${activeAudioFile}`
+      : undefined;
   const onListScroll = (offsetY: number) => {
     const shouldShowSticky = offsetY > 170;
     const shouldShowScrollTop = shouldShowSticky && offsetY > 350;
@@ -94,6 +98,12 @@ export const HomeScreen = () => {
     listRef.current?.scrollToOffset({animated: true, offset: 0});
   };
 
+  const onMenuPress = () => {
+    navigation.openDrawer?.();
+    navigation.getParent?.()?.openDrawer?.();
+    navigation.getParent?.()?.getParent?.()?.openDrawer?.();
+  };
+
   return (
     <>
       {showNote && <Note />}
@@ -101,16 +111,18 @@ export const HomeScreen = () => {
         source={require('../assets/images/asfalt-dark.png')}
         style={[styles.background, {backgroundColor: theme.bg}]}
         imageStyle={styles.cover}>
-        {showStickyHeader ? (
-          <View style={styles.stickyHeaderWrapper}>
-            <Header
-              compact
-              onResetAllPress={onResetAllPress}
-              onResetScreenPress={onResetScreenPress}
-              showResetActions
-            />
-          </View>
-        ) : null}
+        <View
+          pointerEvents={showStickyHeader ? 'auto' : 'none'}
+          style={[styles.stickyHeaderWrapper, !showStickyHeader && styles.stickyHeaderHidden]}>
+          <Header
+            compact
+            onMenuPress={onMenuPress}
+            onResetAllPress={onResetAllPress}
+            onResetScreenPress={onResetScreenPress}
+            showMenuButton
+            showResetActions
+          />
+        </View>
         <FlatList
           ref={listRef}
           data={data}
@@ -134,8 +146,10 @@ export const HomeScreen = () => {
           }}
           ListHeaderComponent={
             <Header
+              onMenuPress={onMenuPress}
               onResetAllPress={onResetAllPress}
               onResetScreenPress={onResetScreenPress}
+              showMenuButton
               showResetActions
             />
           }
@@ -190,6 +204,9 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     zIndex: 10,
+  },
+  stickyHeaderHidden: {
+    opacity: 0,
   },
   scrollTopButton: {
     alignItems: 'center',

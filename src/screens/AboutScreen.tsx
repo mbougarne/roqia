@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   Alert,
   Linking,
@@ -16,8 +17,17 @@ import {Header, StyledText} from '../components';
 import {themeContext, themes} from '../store';
 
 export const AboutScreen = () => {
+  const navigation = useNavigation<any>();
   const {mode} = useContext(themeContext);
   const theme = themes[mode];
+  const onMenuPress = () => {
+    navigation.openDrawer?.();
+    navigation.getParent?.()?.openDrawer?.();
+    navigation.getParent?.()?.getParent?.()?.openDrawer?.();
+  };
+  const onBackToHomePress = () => {
+    navigation.navigate('MainTabs');
+  };
 
   const onCopy = () => {
     Clipboard.setString(noteData.email!);
@@ -43,7 +53,13 @@ export const AboutScreen = () => {
 
   return (
     <View style={[styles.container, {backgroundColor: theme.bg}]}> 
-      <Header title="نبذة عنا" />
+      <Header
+        onBackPress={onBackToHomePress}
+        onMenuPress={onMenuPress}
+        showBackButton
+        showMenuButton
+        title="نبذة عنا"
+      />
       <ScrollView
         contentContainerStyle={styles.innerContainer}
         showsVerticalScrollIndicator={false}>

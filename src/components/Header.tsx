@@ -8,20 +8,24 @@ import {themeContext, themes} from '../store';
 
 type Props = {
   onBackPress?: () => void;
+  onMenuPress?: () => void;
   onResetAllPress?: () => void;
   onResetScreenPress?: () => void;
   compact?: boolean;
   showBackButton?: boolean;
+  showMenuButton?: boolean;
   showResetActions?: boolean;
   title?: string;
 };
 
 export const Header: FC<Props> = ({
   onBackPress,
+  onMenuPress,
   onResetAllPress,
   onResetScreenPress,
   compact = false,
   showBackButton = false,
+  showMenuButton = false,
   showResetActions = false,
   title = 'الرقية الشرعية',
 }) => {
@@ -34,6 +38,7 @@ export const Header: FC<Props> = ({
 
   return (
     <ImageBackground
+      fadeDuration={0}
       source={require('../assets/images/arabesque.png')}
       style={[
         styles.backgroundContainer,
@@ -67,6 +72,26 @@ export const Header: FC<Props> = ({
               <View style={styles.sideSpacer} />
             )}
             <View style={styles.actionsContainer}>
+              {showMenuButton ? (
+                <Pressable
+                  accessibilityHint="يفتح قائمة إضافية"
+                  accessibilityLabel="فتح القائمة"
+                  accessibilityRole="button"
+                  onPress={onMenuPress}
+                  style={({pressed}) => [
+                    styles.menuButton,
+                    getPressableScaleStyle(pressed, 0.82, 0.94),
+                  ]}>
+                  <Icon name="more-vert" size={24} color={themes[mode].tertiaryColor} />
+                  <StyledText
+                    customStyle={[
+                      styles.menuText,
+                      {color: theme.tertiaryColor},
+                    ]}>
+                    المزيد
+                  </StyledText>
+                </Pressable>
+              ) : null}
               {showResetActions ? (
                 <Pressable
                   accessibilityHint="يعيد عدادات الصفحة الحالية إلى القيم الأصلية"
@@ -207,7 +232,15 @@ const styles = StyleSheet.create({
   backButton: {
     alignItems: 'center',
   },
+  menuButton: {
+    alignItems: 'center',
+  },
   backText: {
+    marginVertical: 5,
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  menuText: {
     marginVertical: 5,
     fontSize: 12,
     fontWeight: '700',

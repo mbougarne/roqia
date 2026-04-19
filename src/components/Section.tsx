@@ -25,7 +25,7 @@ type SectionProp = DataProps & {
   onAudioFilePress?: (fileName: string) => void;
 };
 
-export const Section: FC<SectionProp> = item => {
+export const Section: FC<SectionProp> = React.memo(item => {
   const {mode} = useContext<ContextState>(themeContext);
   const safeCount = Number.isFinite(item.count) ? Math.max(0, item.count) : item.repeat ?? 0;
   const isDone = safeCount === 0;
@@ -258,7 +258,11 @@ export const Section: FC<SectionProp> = item => {
       </ImageBackground>
     </View>
   );
-};
+}, (prev, next) =>
+  prev.count === next.count &&
+  prev.activeAudioFile === next.activeAudioFile &&
+  prev.isAudioPaused === next.isAudioPaused,
+);
 
 const styles = StyleSheet.create({
   mainContainer: {

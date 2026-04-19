@@ -1,6 +1,6 @@
 import {createContext} from 'react';
 
-import {adkarData, type DataProps, data} from '../data';
+import {adkarData, type DataProps, data, duaaData, tasbihatData} from '../data';
 
 export type Mode = 'dark' | 'light';
 export type Themes = typeof themes;
@@ -17,6 +17,13 @@ export type RepeatContextState = {
   resetRepeats: (nextCounts: RepeatCounts) => void;
   resetAllRepeats: () => void;
 };
+
+const makeInitialRepeatContextState = (counts: RepeatCounts): RepeatContextState => ({
+  repeatCounts: counts,
+  decrementRepeat: () => undefined,
+  resetRepeats: () => undefined,
+  resetAllRepeats: () => undefined,
+});
 
 export const themes = {
   dark: {
@@ -59,10 +66,14 @@ export const getRepeatItemKey = (
 export const createInitialRepeatCounts = (): RepeatCounts => {
   const homeCounts = createRepeatCountsForItems(data, 'data');
   const adkarCounts = createRepeatCountsForItems(adkarData, 'adkar');
+  const duaaCounts = createRepeatCountsForItems(duaaData, 'duaa');
+  const tasbihatCounts = createRepeatCountsForItems(tasbihatData, 'tasbihat');
 
   return {
     ...homeCounts,
     ...adkarCounts,
+    ...duaaCounts,
+    ...tasbihatCounts,
   };
 };
 
@@ -83,5 +94,20 @@ const initialRepeatContextState: RepeatContextState = {
 };
 
 export const themeContext = createContext<ContextState>(initialContextState);
+
+/** @deprecated Use one of the scoped contexts instead */
 export const repeatContext =
   createContext<RepeatContextState>(initialRepeatContextState);
+
+export const homeRepeatContext = createContext<RepeatContextState>(
+  makeInitialRepeatContextState(createRepeatCountsForItems(data, 'data')),
+);
+export const adkarRepeatContext = createContext<RepeatContextState>(
+  makeInitialRepeatContextState(createRepeatCountsForItems(adkarData, 'adkar')),
+);
+export const duaaRepeatContext = createContext<RepeatContextState>(
+  makeInitialRepeatContextState(createRepeatCountsForItems(duaaData, 'duaa')),
+);
+export const tasbihatRepeatContext = createContext<RepeatContextState>(
+  makeInitialRepeatContextState(createRepeatCountsForItems(tasbihatData, 'tasbihat')),
+);
