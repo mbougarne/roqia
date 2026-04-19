@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import {ImageBackground, StyleSheet} from 'react-native';
-import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import {ImageBackground, Linking, StyleSheet} from 'react-native';
+import {DefaultTheme, NavigationContainer, type LinkingOptions} from '@react-navigation/native';
 import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
@@ -9,9 +9,57 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 
 import {AboutScreen, HomeScreen, AdkarScreen, DuaaScreen, TasbihatScreen} from '../screens';
 import {themeContext, themes} from '../store';
+import {getInitialNotificationDeepLink, subscribeToNotificationDeepLinks} from '../services/notifications';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+
+const linking: LinkingOptions<any> = {
+  prefixes: ['roqia://'],
+  async getInitialURL() {
+    const initialUrl = await Linking.getInitialURL();
+
+    if (initialUrl) {
+      return initialUrl;
+    }
+
+    return getInitialNotificationDeepLink();
+  },
+  subscribe(listener) {
+    const linkingSubscription = Linking.addEventListener('url', ({url}) => {
+      listener(url);
+    });
+    const unsubscribeNotifee = subscribeToNotificationDeepLinks(listener);
+
+    return () => {
+      linkingSubscription.remove();
+      unsubscribeNotifee();
+    };
+  },
+  config: {
+    screens: {
+      MainTabs: {
+        screens: {
+          Home: {
+            path: 'home',
+          },
+          Adkar: {
+            path: 'adkar',
+            screens: {
+              AdkarHome: '',
+              Morning: 'morning',
+              Night: 'night',
+              BeforeSleep: 'before-sleep',
+            },
+          },
+        },
+      },
+      DuaaDrawer: 'duaa',
+      TasbihatDrawer: 'tasbihat',
+      AboutDrawer: 'about',
+    },
+  },
+};
 
 const MainTabs = () => {
   const {mode} = useContext(themeContext);
@@ -99,7 +147,7 @@ export const MainTabNavigation = () => {
   };
 
   return (
-    <NavigationContainer theme={navigationTheme}>
+    <NavigationContainer linking={linking} theme={navigationTheme}>
       <Drawer.Navigator
         screenOptions={{
           drawerPosition: 'right',

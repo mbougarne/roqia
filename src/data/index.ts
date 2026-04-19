@@ -357,6 +357,7 @@ export const noteData = {
   authorGithubUrl: 'https://github.com/mbougarne',
   audioSourceOneUrl: 'https://alazkar.today/',
   audioSourceTwoUrl: 'https://www.mp3quran.net/ar',
+  audioSourceThreeUrl: 'https://lahajati.ai/',
 };
 
 export const adkarData: DataProps[] = [

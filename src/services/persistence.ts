@@ -3,6 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createInitialRepeatCounts, type Mode, type RepeatCounts} from '../store';
 
 const STORAGE_KEY = '@roqia/app-state';
+const WALKTHROUGH_SEEN_KEY = '@roqia/walkthrough-seen';
+const INTRO_NOTE_SEEN_KEY = '@roqia/intro-note-seen';
 const MAX_PERSISTED_BYTES = 512 * 1024 * 1024;
 
 type PersistedAppState = {
@@ -93,5 +95,41 @@ export const persistAppState = async (mode: Mode, repeatCounts: RepeatCounts) =>
     await AsyncStorage.setItem(STORAGE_KEY, serialized);
   } catch {
     // Ignore persistence failures to keep app startup and interactions responsive.
+  }
+};
+
+export const loadWalkthroughSeen = async () => {
+  try {
+    const raw = await AsyncStorage.getItem(WALKTHROUGH_SEEN_KEY);
+
+    return raw === '1';
+  } catch {
+    return false;
+  }
+};
+
+export const persistWalkthroughSeen = async () => {
+  try {
+    await AsyncStorage.setItem(WALKTHROUGH_SEEN_KEY, '1');
+  } catch {
+    // Keep app usable even if flag persistence fails.
+  }
+};
+
+export const loadIntroNoteSeen = async () => {
+  try {
+    const raw = await AsyncStorage.getItem(INTRO_NOTE_SEEN_KEY);
+
+    return raw === '1';
+  } catch {
+    return false;
+  }
+};
+
+export const persistIntroNoteSeen = async () => {
+  try {
+    await AsyncStorage.setItem(INTRO_NOTE_SEEN_KEY, '1');
+  } catch {
+    // Keep app usable even if flag persistence fails.
   }
 };

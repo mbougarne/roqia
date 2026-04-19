@@ -164,6 +164,18 @@ export const AboutScreen = () => {
               Audio Source: mp3quran.net
             </StyledText>
           </TouchableOpacity>
+          
+          <TouchableOpacity
+            accessibilityHint="يفتح المصدر الصوتي الثالث داخل المتصفح"
+            accessibilityLabel="المصدر الصوتي الثالث"
+            accessibilityRole="button"
+            onPress={() => openLink(noteData.audioSourceThreeUrl)}
+            style={styles.linkButton}>
+            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+              Audio Source: lahajati.ai
+            </StyledText>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

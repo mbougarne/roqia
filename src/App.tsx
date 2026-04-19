@@ -1,11 +1,21 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {ImageBackground, StyleSheet, useColorScheme} from 'react-native';
+import {ImageBackground, StatusBar, StyleSheet, useColorScheme} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
+import {IntroNoteModal, WalkthroughModal} from './components';
 import {MainTabNavigation} from './navigation/MainTabNavigation';
 import {SplashScreen} from './screens';
-import {initializeDailyReminders} from './services/notifications';
-import {loadPersistedAppState, persistAppState} from './services/persistence';
+import {
+  initializeDailyReminders,
+} from './services/notifications';
+import {
+  loadIntroNoteSeen,
+  loadPersistedAppState,
+  loadWalkthroughSeen,
+  persistIntroNoteSeen,
+  persistAppState,
+  persistWalkthroughSeen,
+} from './services/persistence';
 import {
   adkarData,
   data,
@@ -43,7 +53,11 @@ export default function App(): JSX.Element {
   const [tasbihatCounts, setTasbihatCounts] = useState(() => createRepeatCountsForItems(tasbihatData, 'tasbihat'));
   const [isStateHydrated, setIsStateHydrated] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
+  const [showWalkthrough, setShowWalkthrough] = useState(false);
+  const [showIntroNote, setShowIntroNote] = useState(false);
+  const [introNoteSeen, setIntroNoteSeen] = useState(false);
   const theme = themes[mode];
+  const statusBarStyle = mode === 'dark' ? 'light-content' : 'dark-content';
 
   useEffect(() => {
     initializeDailyReminders();
@@ -51,7 +65,11 @@ export default function App(): JSX.Element {
 
   useEffect(() => {
     const hydrateState = async () => {
-      const persisted = await loadPersistedAppState();
+      const [persisted, walkthroughSeen, loadedIntroNoteSeen] = await Promise.all([
+        loadPersistedAppState(),
+        loadWalkthroughSeen(),
+        loadIntroNoteSeen(),
+      ]);
 
       if (persisted.mode) {
         setMode(persisted.mode);
@@ -62,6 +80,9 @@ export default function App(): JSX.Element {
       setAdkarCounts(prev => ({...prev, ...splitCountsByScope(flat, 'adkar')}));
       setDuaaCounts(prev => ({...prev, ...splitCountsByScope(flat, 'duaa')}));
       setTasbihatCounts(prev => ({...prev, ...splitCountsByScope(flat, 'tasbihat')}));
+      setIntroNoteSeen(loadedIntroNoteSeen);
+      setShowWalkthrough(!walkthroughSeen);
+      setShowIntroNote(walkthroughSeen && !loadedIntroNoteSeen);
       setIsStateHydrated(true);
     };
 
@@ -146,6 +167,21 @@ export default function App(): JSX.Element {
     resetAllRepeats,
   }), [tasbihatCounts, decrementTasbihat, resetTasbihat, resetAllRepeats]);
 
+  const onWalkthroughFinish = useCallback(() => {
+    setShowWalkthrough(false);
+    persistWalkthroughSeen();
+
+    if (!introNoteSeen) {
+      setShowIntroNote(true);
+    }
+  }, [introNoteSeen]);
+
+  const onIntroNoteClose = useCallback(() => {
+    setShowIntroNote(false);
+    setIntroNoteSeen(true);
+    persistIntroNoteSeen();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <ThemeProvider value={themeValue}>
@@ -153,6 +189,11 @@ export default function App(): JSX.Element {
           <AdkarRepeatProvider value={adkarValue}>
             <DuaaRepeatProvider value={duaaValue}>
               <TasbihatRepeatProvider value={tasbihatValue}>
+                <StatusBar
+                  animated
+                  barStyle={statusBarStyle}
+                  translucent={false}
+                />
                 <ImageBackground
                   source={require('./assets/images/arabesque.png')}
                   style={[styles.backgroundContainer, {backgroundColor: theme.secondaryBg}]}
@@ -164,6 +205,14 @@ export default function App(): JSX.Element {
                     ) : (
                       <MainTabNavigation />
                     )}
+                    <WalkthroughModal
+                      onFinish={onWalkthroughFinish}
+                      visible={!showSplash && showWalkthrough}
+                    />
+                    <IntroNoteModal
+                      onClose={onIntroNoteClose}
+                      visible={!showSplash && !showWalkthrough && showIntroNote}
+                    />
                   </SafeAreaView>
                 </ImageBackground>
               </TasbihatRepeatProvider>

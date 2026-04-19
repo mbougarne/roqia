@@ -1,14 +1,19 @@
-import {Platform} from 'react-native';
+import {Linking, Platform} from 'react-native';
 import notifee, {
   AndroidImportance,
   AuthorizationStatus,
+  EventType,
   RepeatFrequency,
   TriggerType,
+  type Event,
+  type InitialNotification,
   type TimestampTrigger,
 } from '@notifee/react-native';
+import {CategoryEnum} from '../data';
 
 type DailyReminder = {
   body: string;
+  category: CategoryEnum;
   hour: number;
   id: string;
   minute: number;
@@ -16,10 +21,21 @@ type DailyReminder = {
 };
 
 const CHANNEL_ID = 'daily-adhkar-reminders';
+const DEEP_LINK_SCHEME = 'roqia://';
+
+const categoryPathByEnum: Record<CategoryEnum, string> = {
+  [CategoryEnum.Morning]: 'adkar/morning',
+  [CategoryEnum.Night]: 'adkar/night',
+  [CategoryEnum.BeforeSleep]: 'adkar/before-sleep',
+};
+
+const getCategoryDeepLink = (category: CategoryEnum) =>
+  `${DEEP_LINK_SCHEME}${categoryPathByEnum[category]}`;
 
 const DAILY_REMINDERS: DailyReminder[] = [
   {
     id: 'adhkar-morning-0600',
+    category: CategoryEnum.Morning,
     hour: 6,
     minute: 0,
     title: 'تذكير أذكار الصباح',
@@ -27,6 +43,7 @@ const DAILY_REMINDERS: DailyReminder[] = [
   },
   {
     id: 'adhkar-night-1800',
+    category: CategoryEnum.Night,
     hour: 18,
     minute: 0,
     title: 'تذكير أذكار المساء',
@@ -34,6 +51,7 @@ const DAILY_REMINDERS: DailyReminder[] = [
   },
   {
     id: 'adhkar-before-sleep-2230',
+    category: CategoryEnum.BeforeSleep,
     hour: 22,
     minute: 30,
     title: 'تذكير أذكار النوم',
@@ -76,6 +94,7 @@ const ensureAndroidChannel = async () => {
 };
 
 const scheduleReminder = async (reminder: DailyReminder) => {
+  const deepLink = getCategoryDeepLink(reminder.category);
   const trigger: TimestampTrigger = {
     type: TriggerType.TIMESTAMP,
     timestamp: getNextTriggerTimestamp(reminder.hour, reminder.minute),
@@ -89,6 +108,9 @@ const scheduleReminder = async (reminder: DailyReminder) => {
       id: reminder.id,
       title: reminder.title,
       body: reminder.body,
+      data: {
+        deepLink,
+      },
       android: {
         channelId: CHANNEL_ID,
         pressAction: {
@@ -101,6 +123,74 @@ const scheduleReminder = async (reminder: DailyReminder) => {
     },
     trigger,
   );
+};
+
+const extractDeepLinkFromNotification = (
+  notification?: Event['detail']['notification'] | InitialNotification['notification'],
+) => {
+  const deepLink = notification?.data?.deepLink;
+
+  if (!deepLink || typeof deepLink !== 'string') {
+    return null;
+  }
+
+  return deepLink;
+};
+
+const openDeepLinkFromNotification = async (
+  notification?: Event['detail']['notification'] | InitialNotification['notification'],
+) => {
+  const deepLink = extractDeepLinkFromNotification(notification);
+
+  if (!deepLink) {
+    return;
+  }
+
+  try {
+    await Linking.openURL(deepLink);
+  } catch {
+    // Ignore deep-link failures to avoid crashing from malformed payloads.
+  }
+};
+
+export const onBackgroundNotificationPress = async (event: Event) => {
+  if (event.type !== EventType.PRESS) {
+    return;
+  }
+
+  await openDeepLinkFromNotification(event.detail.notification);
+};
+
+export const getInitialNotificationDeepLink = async () => {
+  try {
+    const initial = await notifee.getInitialNotification();
+
+    if (!initial) {
+      return null;
+    }
+
+    return extractDeepLinkFromNotification(initial.notification);
+  } catch {
+    return null;
+  }
+};
+
+export const subscribeToNotificationDeepLinks = (listener: (url: string) => void) => {
+  const unsubscribe = notifee.onForegroundEvent(event => {
+    if (event.type !== EventType.PRESS) {
+      return;
+    }
+
+    const deepLink = extractDeepLinkFromNotification(event.detail.notification);
+
+    if (!deepLink) {
+      return;
+    }
+
+    listener(deepLink);
+  });
+
+  return unsubscribe;
 };
 
 export const initializeDailyReminders = async () => {
