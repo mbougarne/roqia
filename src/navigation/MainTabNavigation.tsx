@@ -1,8 +1,10 @@
 import React, {useContext} from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 import {AboutScreen, HomeScreen, AdkarScreen} from '../screens';
 import {themeContext, themes} from '../store';
@@ -33,9 +35,11 @@ export const MainTabNavigation = () => {
             mode === 'dark' ? 'rgba(184, 195, 182, 0.16)' : 'rgba(26, 77, 46, 0.12)',
           tabBarIcon: ({color, size}) => {
             const iconByRoute = {
-              Home: 'home',
-              About: 'feedback',
-              Adkar: 'hourglass-bottom',
+              Home: 'book-quran',
+              About: 'ellipsis',
+              Adkar: 'clock',
+              Duaa: 'hands-holding',
+              Tasbihat: 'spinner',
             } as const;
 
             const iconName = iconByRoute[route.name as keyof typeof iconByRoute] ?? 'home';
@@ -76,7 +80,6 @@ export const MainTabNavigation = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            tabBarAccessibilityHint: 'يفتح صفحة الرقية الشرعية',
             tabBarAccessibilityLabel: 'تبويب الرقية',
             tabBarLabel: 'الرقية',
           }}
@@ -85,16 +88,30 @@ export const MainTabNavigation = () => {
           name="Adkar"
           component={AdkarScreen}
           options={{
-            tabBarAccessibilityHint: 'يفتح صفحة الأذكار',
             tabBarAccessibilityLabel: 'تبويب الأذكار',
             tabBarLabel: 'أذكار',
+          }}
+        />
+        <Tab.Screen
+          name="Duaa"
+          component={() => null}
+          options={{
+            tabBarAccessibilityLabel: 'تبويب الأذعية',
+            tabBarLabel: 'أذعية',
+          }}
+        />
+        <Tab.Screen
+          name="Tasbihat"
+          component={() => null}
+          options={{
+            tabBarAccessibilityLabel: 'تبويب التسبيحات',
+            tabBarLabel: 'تسبيحات',
           }}
         />
         <Tab.Screen
           name="About"
           component={AboutScreen}
           options={{
-            tabBarAccessibilityHint: 'يفتح صفحة النبذة ومعلومات التطبيق',
             tabBarAccessibilityLabel: 'تبويب نبذة',
             tabBarLabel: 'نبذة',
           }}
