@@ -4,18 +4,15 @@ import {
   Alert,
   FlatList,
   ImageBackground,
-  Image,
-  Platform,
   Pressable,
   StyleSheet,
   View,
 } from 'react-native';
-import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {audioAssets} from '../assets/audio';
-import {getPressableScaleStyle, Header, Section, Note} from '../components';
+import {getPressableScaleStyle, Header, Section, Note, StyledText} from '../components';
 import {data} from '../data';
+import {useHomeAudioPlayback} from '../hooks/useHomeAudioPlayback';
 import {
   createRepeatCountsForItems,
   getRepeatItemKey,
@@ -24,42 +21,43 @@ import {
   themes,
 } from '../store';
 
+const waveformHeights = [
+  12, 20, 15, 24, 18, 28, 16,
+  22, 14, 26, 19, 12, 12, 20,
+  15, 24, 18, 28, 16, 22, 14,
+  26, 19, 12, 18, 28, 16, 22,
+  22, 14, 26, 19, 12, 18, 28,
+  20, 15, 18, 22
+];
+
 export const HomeScreen = () => {
   const listRef = useRef<FlatList<any>>(null);
   const [showNote, setShowNote] = useState<boolean>(false);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const [activeAudioFile, setActiveAudioFile] = useState<string | null>(null);
-  const [isAudioPaused, setIsAudioPaused] = useState(false);
   const isFocused = useIsFocused();
   const navigation = useNavigation<any>();
   const {mode} = useContext(themeContext);
   const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(homeRepeatContext);
   const theme = themes[mode];
   const homeRepeatCounts = createRepeatCountsForItems(data, 'data');
+  const {
+    activeAudioFile,
+    isAudioPaused,
+    isPlaylistActive,
+    onAudioPress,
+    onPlayAllPress,
+    stopPlayback,
+    togglePlayback,
+  } = useHomeAudioPlayback(data);
 
   const toggleNote = () => setShowNote(!showNote);
 
-  const onAudioPress = (audioFile: string) => {
-    if (activeAudioFile === audioFile) {
-      setIsAudioPaused(currentValue => !currentValue);
-      return;
-    }
-
-    setActiveAudioFile(audioFile);
-    setIsAudioPaused(false);
-  };
-
-  const onAudioFinished = () => {
-    setActiveAudioFile(null);
-    setIsAudioPaused(false);
-  };
-
   useEffect(() => {
     if (!isFocused) {
-      onAudioFinished();
+      stopPlayback();
     }
-  }, [isFocused]);
+  }, [isFocused, stopPlayback]);
 
   const onResetScreenPress = () => {
     Alert.alert('إعادة عدادات هذه الصفحة', 'سيتم إعادة جميع العدادات في هذه الصفحة إلى القيم الأصلية.', [
@@ -75,12 +73,8 @@ export const HomeScreen = () => {
     ]);
   };
 
-  const activeAudioSource = activeAudioFile ? audioAssets[activeAudioFile] : null;
-  const resolvedActiveAudioUri = activeAudioSource
-    ? Image.resolveAssetSource(activeAudioSource).uri
-    : activeAudioFile && Platform.OS === 'android'
-      ? `asset:/${activeAudioFile}`
-      : undefined;
+  const activeAudioItem = activeAudioFile ? data.find(item => item.audioFile === activeAudioFile) : undefined;
+  const isPlayerVisible = Boolean(activeAudioFile && !isAudioPaused);
   const onListScroll = (offsetY: number) => {
     const shouldShowSticky = offsetY > 170;
     const shouldShowScrollTop = shouldShowSticky && offsetY > 350;
@@ -155,6 +149,74 @@ export const HomeScreen = () => {
           }
           scrollEventThrottle={16}
         />
+        {!isPlayerVisible ? (
+          <Pressable
+            accessibilityHint="يشغل جميع المقاطع الصوتية في الصفحة ويكرر كل مقطع حسب عدده"
+            accessibilityLabel={isPlaylistActive && isAudioPaused ? 'متابعة تشغيل جميع المقاطع' : 'تشغيل جميع المقاطع'}
+            accessibilityRole="button"
+            onPress={onPlayAllPress}
+            style={({pressed}) => [
+              styles.playAllButton,
+              {backgroundColor: theme.activeBg},
+              getPressableScaleStyle(pressed, 0.9, 0.94),
+            ]}>
+            <Icon color={theme.secondaryColor} name="play-arrow" size={22} />
+          </Pressable>
+        ) : null}
+        {isPlayerVisible ? (
+          <View
+            style={[
+              styles.playerTray,
+              {
+                backgroundColor: theme.secondaryBg,
+                top: showStickyHeader ? 70 : 80,
+              },
+            ]}> 
+            <View style={styles.playerContent}>
+              <View style={styles.playerMeta}>
+                <View style={styles.playerTitleRow}>
+                  <StyledText customStyle={[styles.playerTitle, {color: theme.tertiaryColor}]}> 
+                    {activeAudioItem?.caption ?? 'تشغيل الرقية'}
+                  </StyledText>
+                  <StyledText customStyle={[styles.playerSubtitle, {color: theme.color}]}> 
+                    {isPlaylistActive ? 'تشغيل متتال' : 'تشغيل صوتي'}
+                  </StyledText>
+                </View>
+                <View style={styles.waveformRow}>
+                  {waveformHeights.map((height, index) => (
+                    <View
+                      key={`${height}-${index}`}
+                      style={[
+                        styles.waveBar,
+                        {
+                          backgroundColor:
+                            !isAudioPaused && index % 3 !== 0 ? theme.tertiaryColor : theme.activeBg,
+                          height,
+                        },
+                      ]}
+                    />
+                  ))}
+                </View>
+              </View>
+              <Pressable
+                accessibilityHint="يشغل أو يوقف الصوت الحالي"
+                accessibilityLabel={isAudioPaused ? 'متابعة الصوت' : 'إيقاف الصوت مؤقتا'}
+                accessibilityRole="button"
+                onPress={togglePlayback}
+                style={({pressed}) => [
+                  styles.playerButton,
+                  {backgroundColor: theme.activeBg},
+                  getPressableScaleStyle(pressed, 0.9, 0.94),
+                ]}>
+                <Icon
+                  color={theme.secondaryColor}
+                  name={isAudioPaused ? 'play-arrow' : 'pause'}
+                  size={24}
+                />
+              </Pressable>
+            </View>
+          </View>
+        ) : null}
         {showScrollTopButton ? (
           <Pressable
             accessibilityHint="يعيدك إلى أعلى الصفحة"
@@ -169,18 +231,6 @@ export const HomeScreen = () => {
             <Icon color={theme.secondaryColor} name="keyboard-double-arrow-up" size={22} />
           </Pressable>
         ) : null}
-        {resolvedActiveAudioUri ? (
-          <Video
-            ignoreSilentSwitch="ignore"
-            onEnd={onAudioFinished}
-            onError={onAudioFinished}
-            paused={isAudioPaused}
-            playInBackground={false}
-            playWhenInactive={false}
-            source={{uri: resolvedActiveAudioUri}}
-            style={styles.hiddenPlayer}
-          />
-        ) : null}
       </ImageBackground>
     </>
   );
@@ -194,9 +244,58 @@ const styles = StyleSheet.create({
   cover: {
     resizeMode: 'repeat',
   },
-  hiddenPlayer: {
-    width: 0,
-    height: 0,
+  playerTray: {
+    alignItems: 'center',
+    borderRadius: 0,
+    left: 0,
+    minHeight: 50,
+    paddingHorizontal: 14,
+    paddingTop: 12,
+    paddingBottom: 0,
+    position: 'absolute',
+    right: 0,
+    zIndex: 11,
+  },
+  playerContent: {
+    alignItems: 'center',
+    flexDirection: 'row-reverse',
+    gap: 12,
+    width: '100%',
+  },
+  playerMeta: {
+    flex: 1,
+    gap: 8,
+  },
+  playerTitleRow: {
+    alignItems: 'flex-end',
+    gap: 2,
+  },
+  playerTitle: {
+    fontSize: 14,
+    fontWeight: '800',
+    textAlign: 'right',
+  },
+  playerSubtitle: {
+    fontSize: 11,
+    fontWeight: '700',
+    textAlign: 'right',
+  },
+  waveformRow: {
+    alignItems: 'flex-end',
+    flexDirection: 'row-reverse',
+    gap: 4,
+    height: 30,
+  },
+  waveBar: {
+    borderRadius: 999,
+    width: 4,
+  },
+  playerButton: {
+    alignItems: 'center',
+    borderRadius: 18,
+    height: 40,
+    justifyContent: 'center',
+    width: 40,
   },
   stickyHeaderWrapper: {
     left: 0,
@@ -216,6 +315,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     right: 5,
+    width: 36,
+    zIndex: 12,
+  },
+  playAllButton: {
+    alignItems: 'center',
+    borderRadius: 22,
+    bottom: 75,
+    height: 36,
+    justifyContent: 'center',
+    left: 5,
+    position: 'absolute',
     width: 36,
     zIndex: 12,
   },

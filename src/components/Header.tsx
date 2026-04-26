@@ -9,24 +9,32 @@ import {themeContext, themes} from '../store';
 type Props = {
   onBackPress?: () => void;
   onMenuPress?: () => void;
+  onPlayAllPress?: () => void;
   onResetAllPress?: () => void;
   onResetScreenPress?: () => void;
   compact?: boolean;
   showBackButton?: boolean;
   showMenuButton?: boolean;
+  showPlayAllAction?: boolean;
   showResetActions?: boolean;
+  isPlayAllActive?: boolean;
+  isPlayAllPaused?: boolean;
   title?: string;
 };
 
 export const Header: FC<Props> = ({
   onBackPress,
   onMenuPress,
+  onPlayAllPress,
   onResetAllPress,
   onResetScreenPress,
   compact = false,
   showBackButton = false,
   showMenuButton = false,
+  showPlayAllAction = false,
   showResetActions = false,
+  isPlayAllActive = false,
+  isPlayAllPaused = false,
   title = 'الرقية الشرعية',
 }) => {
   const {mode, toggleMode} = useContext(themeContext);
@@ -34,6 +42,8 @@ export const Header: FC<Props> = ({
   const theme = themes[mode];
   const icon = mode === 'light' ? 'nightlight-round' : 'sunny';
   const modeText = mode === 'light' ? 'وضع ليلي' : 'وضع نهاري';
+  const playAllIcon = isPlayAllActive && !isPlayAllPaused ? 'pause-circle-outline' : 'playlist-play';
+  const playAllText = isPlayAllActive && isPlayAllPaused ? 'متابعة' : 'الكل';
   const onIconPress = () => toggleMode();
 
   return (
@@ -89,6 +99,26 @@ export const Header: FC<Props> = ({
                       {color: theme.tertiaryColor},
                     ]}>
                     المزيد
+                  </StyledText>
+                </Pressable>
+              ) : null}
+              {showPlayAllAction ? (
+                <Pressable
+                  accessibilityHint="يشغل أو يوقف جميع المقاطع الصوتية في هذه الصفحة"
+                  accessibilityLabel={isPlayAllActive && !isPlayAllPaused ? 'إيقاف مؤقت لتشغيل الكل' : 'تشغيل كل المقاطع'}
+                  accessibilityRole="button"
+                  onPress={onPlayAllPress}
+                  style={({pressed}) => [
+                    styles.actionButton,
+                    getPressableScaleStyle(pressed, 0.82, 0.94),
+                  ]}>
+                  <Icon name={playAllIcon} size={24} color={theme.tertiaryColor} />
+                  <StyledText
+                    customStyle={[
+                      styles.actionText,
+                      {color: theme.tertiaryColor},
+                    ]}>
+                    {playAllText}
                   </StyledText>
                 </Pressable>
               ) : null}

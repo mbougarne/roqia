@@ -20,6 +20,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {audioAssets} from '../assets/audio';
 import {adkarData} from '../data';
 import {getPressableScaleStyle, Header, Section, StyledText} from '../components';
+import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
 import {
   adkarRepeatContext,
   getRepeatItemKey,
@@ -111,8 +112,6 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
   const listRef = useRef<FlatList<any>>(null);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const [activeAudioFile, setActiveAudioFile] = useState<string | null>(null);
-  const [isAudioPaused, setIsAudioPaused] = useState(false);
   const isFocused = useIsFocused();
   const {mode} = useContext(themeContext);
   const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(adkarRepeatContext);
@@ -131,27 +130,20 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
     acc[getRepeatItemKey(entry.item, entry.index, 'adkar')] = entry.item.repeat ?? 0;
     return acc;
   }, {});
-
-  const onAudioPress = (audioFile: string) => {
-    if (activeAudioFile === audioFile) {
-      setIsAudioPaused(currentValue => !currentValue);
-      return;
-    }
-
-    setActiveAudioFile(audioFile);
-    setIsAudioPaused(false);
-  };
-
-  const onAudioFinished = () => {
-    setActiveAudioFile(null);
-    setIsAudioPaused(false);
-  };
+  const {
+    activeAudioFile,
+    isAudioPaused,
+    onAudioFinished,
+    onAudioPress,
+    playbackInstanceId,
+    stopPlayback,
+  } = useScreenAudioPlayback(filteredEntries.map(entry => entry.item));
 
   useEffect(() => {
     if (!isFocused) {
-      onAudioFinished();
+      stopPlayback();
     }
-  }, [isFocused]);
+  }, [isFocused, stopPlayback]);
 
   const onResetScreenPress = () => {
     Alert.alert('إعادة عدادات هذه الصفحة', 'سيتم إعادة جميع العدادات في هذا القسم إلى القيم الأصلية.', [
@@ -259,6 +251,7 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
       {resolvedActiveAudioUri ? (
         <Video
           ignoreSilentSwitch="ignore"
+          key={`${activeAudioFile}-${playbackInstanceId}`}
           onEnd={onAudioFinished}
           onError={onAudioFinished}
           paused={isAudioPaused}

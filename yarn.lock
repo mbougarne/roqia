@@ -2174,12 +2174,12 @@
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
-"@react-navigation/drawer@^7.9.8":
-  version "7.9.8"
-  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-7.9.8.tgz#a7c06d80efb0dcae93357ea7281e5af9272bd80f"
-  integrity sha512-mSR5tgMaq5rtPQdpXL0ijzll8MSCGzpaflATitdyRZWEF29qS1XfQ2YHc0m4B/V4HyVQtaF7euEF5f7NMrc87w==
+"@react-navigation/drawer@^7.9.9":
+  version "7.9.9"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-7.9.9.tgz#73b00c7b2269813e101ea352b1a49b29118340aa"
+  integrity sha512-ZeHhx5MH7Y/qG+28KU0PDtBjNcNnpvnafPwIoSzSrN8M55HvtQex90TP3ylmHtErhw2RDWlp30vpmWvG0wvFIA==
   dependencies:
-    "@react-navigation/elements" "^2.9.14"
+    "@react-navigation/elements" "^2.9.15"
     color "^4.2.3"
     react-native-drawer-layout "^4.2.2"
     use-latest-callback "^0.2.4"
@@ -2188,6 +2188,15 @@
   version "2.9.14"
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-2.9.14.tgz#48b9e3cf16e38818df1e633a13a17c0fa96e9c43"
   integrity sha512-lKqzu+su2pI/YIZmR7L7xdOs4UL+rVXKJAMpRMBrwInEy96SjIFst6QDGpE89Dunnu3VjVpjWfByo9f2GWBHDQ==
+  dependencies:
+    color "^4.2.3"
+    use-latest-callback "^0.2.4"
+    use-sync-external-store "^1.5.0"
+
+"@react-navigation/elements@^2.9.15":
+  version "2.9.15"
+  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-2.9.15.tgz#384380f8d7f0c5b35e960aa5a6bdf4cc2bcb78b4"
+  integrity sha512-cyz/pPiyyC6gaTVLsGFc1g0MYgrmuCFqklAWGXMWPscr5YU3ui94vPI4vnZwcsEy0T758TQWLzmS5XudZeRKcA==
   dependencies:
     color "^4.2.3"
     use-latest-callback "^0.2.4"
@@ -4208,7 +4217,7 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
 
-fsevents@^2.3.2:
+fsevents@2.3.2, fsevents@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
@@ -6216,6 +6225,20 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
+playwright-core@1.59.1:
+  version "1.59.1"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.59.1.tgz#d8a2b28bcb8f2bd08ef3df93b02ae83c813244b2"
+  integrity sha512-HBV/RJg81z5BiiZ9yPzIiClYV/QMsDCKUyogwH9p3MCP6IYjUFu/MActgYAvK0oWyV9NlwM3GLBjADyWgydVyg==
+
+playwright@^1.59.1:
+  version "1.59.1"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.59.1.tgz#f7b0ca61637ae25264cec370df671bbe1f368a4a"
+  integrity sha512-C8oWjPR3F81yljW9o5OxcWzfh6avkVwDD2VYdwIGqTkl+OGFISgypqzfu7dOe4QNLL2aqcWBmI3PMtLIK233lw==
+  dependencies:
+    playwright-core "1.59.1"
+  optionalDependencies:
+    fsevents "2.3.2"
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -6370,7 +6393,7 @@ react-native-drawer-layout@^4.2.2:
     color "^4.2.3"
     use-latest-callback "^0.2.4"
 
-react-native-gesture-handler@^2.31.1:
+react-native-gesture-handler@^2.28.0:
   version "2.31.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.31.1.tgz#0881209146ad272350f86277eccf189e5b44353f"
   integrity sha512-wQDlECdEzHhYKTnQXFnSqWUtJ5TS3MGQi7EWvQczTnEVKfk6XVSBecnpWAoI/CqlYQ7IWMJEyutY6BxwEBoxeg==
@@ -6413,6 +6436,11 @@ react-native-screens@^4.24.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-track-player@5.0.0-alpha0:
+  version "5.0.0-alpha0"
+  resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-5.0.0-alpha0.tgz#687c9376ce71e59bd7703ee0ec0d98b5c119c489"
+  integrity sha512-dxMI8aX75wS9S5/DM7dWN060uGjEitX3fhvLGtrQ96AgIKvOorKy3HkBU7DgvCF/6YDAMxez2PaZA+4A3DQWAQ==
 
 react-native-vector-icons@^10.3.0:
   version "10.3.0"

@@ -127,6 +127,7 @@ const MainTabs = () => {
         name="Adkar"
         component={AdkarScreen}
         options={{
+          popToTopOnBlur: true,
           tabBarAccessibilityLabel: 'تبويب الأذكار',
           tabBarLabel: 'أذكار',
         }}
