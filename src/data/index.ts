@@ -96,6 +96,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "bakara-1-5.mp3",
   },
   {
     caption: '[سورة البقرة، آية: 255]',
@@ -104,7 +105,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: '3 مرات',
     repeat: 3,
-    audioFile: "1.mp3"
+    audioFile: "bakara-255.mp3"
   },
   {
     caption: '[سورة البقرة، آية: 102]',
@@ -113,6 +114,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "bakara-102.mp3",
   },
   {
     caption: '[سورة البقرة، آية: 285-286]',
@@ -121,7 +123,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
-    audioFile: "37.mp3",
+    audioFile: "bakara-285-286.mp3",
   },
   {
     caption: '[سورة آل عمران، آية: 1-5]',
@@ -130,6 +132,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alimran-1-5.mp3",
   },
   {
     caption: '[سورة آل عمران، آية: 26-27]',
@@ -138,6 +141,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alimran-26-27.mp3",
   },
   {
     caption: '[سورة الأعراف، آية: 117-122]',
@@ -146,14 +150,16 @@ export const data: DataProps[] = [
     `,
     repeatDescription: '3 مرات',
     repeat: 3,
+    audioFile: "alaraf-117-122.mp3",
   },
   {
-    caption: '[طه 69]',
+    caption: '[سورة طه، آية: 69]',
     content: `
     {وَأَلْقِ مَا فِي يَمِينِكَ تَلْقَفْ مَا صَنَعُوا إِنَّمَا صَنَعُوا كَيْدُ سَاحِرٍ وَلَا يُفْلِحُ السَّاحِرُ حَيْثُ أَتَى}
     `,
     repeatDescription: '3 مرات',
     repeat: 3,
+    audioFile: "taha-69.mp3",
   },
   {
     caption: '[سورة يونس، آية: 79-82]',
@@ -162,6 +168,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: '3 مرات',
     repeat: 3,
+    audioFile: "youness-79-82.mp3",
   },
   {
     caption: '[سورة المؤمنون، آية: 97-98]',
@@ -170,46 +177,52 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "almominon-97-98.mp3",
   },
   {
-    caption: '[الأنبياء 8]',
+    caption: '[سورة الأنبياء، آية: 87]',
     content: `
     {وَذَا النُّونِ إِذ ذَّهَبَ مُغَاضِبًا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ فَنَادَى فِي الظُّلُمَاتِ أَن لَّا إِلَهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ . فَاسْتَجَبْنَا لَهُ وَنَجَّيْنَاهُ مِنَ الْغَمِّ وَكَذَلِكَ نُنجِي الْمُؤْمِنِينَ}
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alanbiaa-87.mp3",
   },
   {
-    caption: '[الأنبياء 83]',
+    caption: '[سورة الأنبياء، آية: 83-84]',
     content: `
     {وَأَيُّوبَ إِذْ نَادَى رَبَّهُ أَنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِين فَاسْتَجَبْنَا لَهُ فَكَشَفْنَا مَا بِهِ مِن ضُرٍّ وَآتَيْنَاهُ أَهْلَهُ وَمِثْلَهُم مَّعَهُمْ رَحْمَةً مِّنْ عِندِنَا وَذِكْرَى لِلْعَابِدِينَ}
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alanbia-83-84.mp3",
   },
   {
-    caption: '[مريم – 68 ، 72]',
+    caption: '[سورة مريم، آية: 68-72]',
     content: `
     {فَوَرَبِّكَ لَنَحْشُرَنَّهُمْ وَالشَّيَاطِينَ ثُمَّ لَنُحْضِرَنَّهُمْ حَوْلَ جَهَنَّمَ جِثِيًّا * ثُمَّ لَنَنزِعَنَّ مِنْ كُلِّ شِيعَـــةٍ أَيُّهُـــمْ أَشَــدُّ عَلَى الرَّحْمَنِ عِتِيـًّا * ثُـمَّ لَنَحـْنُ أَعْلَـمُ بِالَّذِينَ هُـمْ أَوْلَى بِهَا صِلِيـًّا * وَإِنْ مِنْكُـمْ إِلا وَارِدُهَا كَانَ عَلَى رَبِّكَ حَتْمًا مَقْضِيًّا * ثُمَّ نُنَجِّى الَّذِينَ اتَّقَوْا وَنَذَرُ الظَّالِمِينَ فِيهَا جِثِيًّا}
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "maryam-68-72.mp3",
   },
   {
-    caption: '[إبراهيم – 15 ، 17]',
+    caption: '[سورة أبراهيم، آية: 15-17]',
     content: `
     {وَاسْتَفْتَحُوا وَخَابَ كُلُّ جَبَّارٍ عَنِيدٍ * مِنْ وَرَائِهِ جَهَنَّمُ وَيُسْقَى مِنْ مَاءٍ صَدِيدٍ * يَتَجَرَّعُهُ وَلا يَكَادُ يُسِيغُهُ وَيَأْتِيهِ الْمَوْتُ مِنْ كُلِّ مَكَانٍ وَمَا هُوَ بِمَيِّتٍ وَمِنْ وَرَائِهِ عَذَابٌ غَلِيظٌ}
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "ibrahim-15-17.mp3"
   },
   {
-    caption: '[غافر : 44]',
+    caption: '[سورة عافر، أية: 44-45]',
     content: `
-    {وَأُفَوِّضُ أَمْرِي إِلَى اللَّهِ إِنَّ اللَّهَ بَصِيرٌ بِالْعِبَادِ . فَوَقَاهُ اللَّهُ سَيِّئَاتِ مَا مَكَرُوا وَحَاقَ بِآلِ فِرْعَوْنَ سُوءُ الْعَذَابِ}
+    {فَسَتَذۡكُرُونَ مَآ أَقُولُ لَكُمۡۚ وَأُفَوِّضُ أَمۡرِيٓ إِلَى ٱللَّهِۚ إِنَّ ٱللَّهَ بَصِيرُۢ بِٱلۡعِبَادِ * فَوَقَىٰهُ ٱللَّهُ سَيِّـَٔاتِ مَا مَكَرُواْۖ وَحَاقَ بِـَٔالِ فِرۡعَوۡنَ سُوٓءُ ٱلۡعَذَابِ}
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "ghafir-44-45.mp3",
   },
   {
     caption: '[سورة الإسراء، آية: 80-82]',
@@ -218,6 +231,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alisraa-80-82.mp3",
   },
   {
     caption: '[سورة النور، آية، 35]',
@@ -226,6 +240,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "nour-35.mp3",
   },
   {
     caption: '[سورة يس، آية: 1-9]',
@@ -234,6 +249,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "yassin-1-9.mp3",
   },
   {
     caption: '[سورة الصافات، آية: 1-18]',
@@ -242,6 +258,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "safat-1-18.mp3",
   },
   {
     caption: '[سورة الصافات، آية: 177-182]',
@@ -250,6 +267,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "safat-177-182.mp3",
   },
   {
     caption: '[سورة الجن، آية: 1-9]',
@@ -258,6 +276,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "aljin-1-9.mp3",
   },
   {
     caption: '[سورة الطارق، آية 1-17]',
@@ -266,6 +285,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "atarik.mp3",
   },
   {
     caption: '[سورة الحشر آية: 21-24]',
@@ -274,6 +294,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alhashr-21-24.mp3",
   },
   {
     caption: '[سورة الشرح، آية: 1-8]',
@@ -291,6 +312,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alnissa-56.mp3",
   },
   {
     caption: '[سورة الأنفال، آية:50]',
@@ -299,6 +321,7 @@ export const data: DataProps[] = [
     `,
     repeatDescription: 'مرة واحدة',
     repeat: 1,
+    audioFile: "alanfal-50.mp3",
   },
   {
     caption: '[سورة الكافرون، آية: 1-6]',

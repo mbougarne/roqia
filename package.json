@@ -16,19 +16,17 @@
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-clipboard/clipboard": "^1.16.3",
     "@react-navigation/bottom-tabs": "^7.15.9",
-    "@react-navigation/drawer": "^7.9.8",
     "@react-navigation/native": "^7.2.2",
     "@react-navigation/native-stack": "^7.3.25",
+    "playwright": "^1.59.1",
     "react": "19.2.3",
     "react-native": "^0.84.1",
-    "react-native-gesture-handler": "^2.31.1",
+    "react-native-gesture-handler": "^2.28.0",
     "react-native-inappbrowser-reborn": "^3.7.1",
-    "react-native-reanimated": "^4.3.0",
     "react-native-safe-area-context": "^5.7.0",
     "react-native-screens": "^4.24.0",
     "react-native-vector-icons": "^10.3.0",
-    "react-native-video": "^6.18.0",
-    "react-native-worklets": "^0.8.1"
+    "react-native-video": "^6.18.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
