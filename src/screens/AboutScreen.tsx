@@ -137,7 +137,7 @@ export const AboutScreen = () => {
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
             <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
-              Author: Mourad Bougarne
+              المبرمج: مراج بوگرن Mourad Bougarne
             </StyledText>
           </TouchableOpacity>
 
@@ -149,7 +149,7 @@ export const AboutScreen = () => {
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
             <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
-              Audio Source: alazkar.today
+              الصوتيات: alazkar.today
             </StyledText>
           </TouchableOpacity>
 
@@ -161,7 +161,7 @@ export const AboutScreen = () => {
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
             <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
-              Audio Source: mp3quran.net
+              الصوتيات: mp3quran.net
             </StyledText>
           </TouchableOpacity>
           
@@ -173,7 +173,31 @@ export const AboutScreen = () => {
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
             <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
-              Audio Source: lahajati.ai
+              الصوتيات: lahajati.ai
+            </StyledText>
+          </TouchableOpacity>
+          
+          <TouchableOpacity
+            accessibilityHint="يفتح الأدعية داخل المتصفح"
+            accessibilityLabel="الأدعية"
+            accessibilityRole="button"
+            onPress={() => openLink(noteData.duaaSourceUrl)}
+            style={styles.linkButton}>
+            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+              الأدعية: kalemtayeb.com
+            </StyledText>
+          </TouchableOpacity>
+         
+         <TouchableOpacity
+            accessibilityHint="يفتح التسبيحات داخل المتصفح"
+            accessibilityLabel="التسبيحات"
+            accessibilityRole="button"
+            onPress={() => openLink(noteData.tasbihatSourceUrl)}
+            style={styles.linkButton}>
+            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+              التسبيحات: islambook.com
             </StyledText>
           </TouchableOpacity>
         </View>

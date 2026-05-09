@@ -381,6 +381,8 @@ export const noteData = {
   audioSourceOneUrl: 'https://alazkar.today/',
   audioSourceTwoUrl: 'https://www.mp3quran.net/ar',
   audioSourceThreeUrl: 'https://lahajati.ai/',
+  duaaSourceUrl: 'https://kalemtayeb.com/',
+  tasbihatSourceUrl: 'https://www.islambook.com/',
 };
 
 export const adkarData: DataProps[] = [
