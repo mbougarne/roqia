@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 7 first visual batch RQ-051/RQ-052 implemented and Android-tested with both-theme reference comparisons. Next RQ-053, then RQ-054 through RQ-062. Four of 96 main-theme captures recorded; other 46 screens remain pending. M6 closure RQ-040/RQ-042/RQ-044 and RQ-046 final acceptance remain open.",
+  "status": "Phase 8 audio delivery implemented; Android validation and PR review. Functionality remains first: next RQ-026, then the remaining functional queue, whole-app visual parity including Prayer/Qibla re-review, final acceptance/release and deferred iOS testing.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -976,11 +976,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 6,
-      "evidence": "../../../docs/feasibility/android/README.md",
+      "evidence": "../../../docs/implementation/phase-8/README.md",
       "verifiedOn": "2026-10-18",
-      "scope": "android",
-      "progress": "Curated two recording sets using explicit provider riwaya/recording IDs. Verified six real MP3 samples with hashes and decoder metadata; other chapters, tariq and unsupported qualities remain explicit pending/unknown values.",
-      "remaining": "Evaluate King Fahd audio first and Al-Mushaf Al-Mohammadi where suitable recordings are unavailable. Verify actual access, every offered chapter, redistribution, offline download and riwaya/tariq compatibility; existing MP3Quran samples are feasibility evidence, not a final provider commitment."
+      "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
+      "progress": "Two complete publisher-identified Warsh/Hafs recordings published; all 228 original MP3 files acquired and pinned. King Fahd/Moroccan priority evaluated; MP3Quran fallback has explicit developer-use permission.",
+      "remaining": "Broader listening/editorial acceptance remains RQ-047; tariq is unknown and is not inferred."
     },
     {
       "id": "RQ-032",
@@ -1072,12 +1072,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 36,
-      "progress": "Riwaya-filtered recording sets, actual quality/partial coverage, selected/all-available chapters, exact totals and deduplicated downloads implemented. Local verified files provide preview.",
-      "remaining": "RQ-031 recording/listening/redistribution approval remains open. No unreviewed public recording catalog or automatic streaming is introduced.",
-      "evidence": [
-        "docs/implementation/phase-4/README.md",
-        "docs/implementation/phase-4/SOURCES.md"
-      ]
+      "progress": "Production surah selection/downloads now resolve real verified files for both riwayas; normal app Android download and offline playback tested.",
+      "remaining": "Broader download network/recovery matrix remains RQ-020/RQ-021; complete screen parity remains deferred.",
+      "evidence": "../../../docs/implementation/phase-8/README.md",
+      "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
+      "verifiedOn": "2026-10-18"
     },
     {
       "id": "RQ-035",
@@ -1106,12 +1105,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 37,
-      "progress": "Installed audio library, shared full player, seek/repeat/rate/queue controls and explicit paused downloaded-session restoration implemented. Files are checked again before playback.",
-      "remaining": "Native sleep-deadline API remains unproved and the UI explicitly reports the sleep timer unavailable. Physical-device focus/remote controls, process lifecycle and iOS validation remain open.",
-      "evidence": [
-        "docs/implementation/phase-4/README.md",
-        "docs/implementation/phase-4/SOURCES.md"
-      ]
+      "progress": "Real downloaded Warsh/Hafs playback works offline; adhan takes focus and Quran pauses.",
+      "remaining": "Native sleep timer and full background/remote/physical/iOS matrix remain open.",
+      "evidence": "../../../docs/implementation/phase-8/README.md",
+      "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
+      "verifiedOn": "2026-10-18"
     },
     {
       "id": "RQ-036",
@@ -1255,11 +1253,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 10,
-      "evidence": "../../../docs/feasibility/android/README.md",
+      "evidence": "../../../docs/implementation/phase-8/README.md",
       "verifiedOn": "2026-10-18",
-      "scope": "android",
-      "progress": "Debug-only exact alarm to native foreground playback passed with denied-access handling and locked forced-idle API 36 delivery/playback/completion. Boot reconciliation and notification Stop paths are implemented but not fully exercised.",
-      "remaining": "Test actual Stop action, notification/channel denial, calls, reboot, force-stop/reopen, multi-minute audio and physical Android 12–16 devices."
+      "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
+      "progress": "Real full adhan foreground service, exact alarms, Stop, private-file verification, focus, bounded persisted schedules and notification fallback implemented; API 36 emulator locked/Doze path tested.",
+      "remaining": "Physical Android/API/OEM/call/volume/DND/reboot matrix and longer unattended renewal remain open."
     },
     {
       "id": "RQ-041",
@@ -1284,11 +1282,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 41,
-      "scope": "android",
+      "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
       "verifiedOn": "2026-10-18",
-      "evidence": "../../../docs/implementation/phase-6/README.md",
-      "progress": "Five prayer modes and optional pre-reminders persist before serialized reconciliation. Permission/channel state and notification coverage are visible; full mode explicitly falls back to notification only. Sunrise is excluded.",
-      "remaining": "Full-adhan playback, Quran pause/focus integration and physical delivery matrix depend on RQ-040/RQ-042."
+      "evidence": "../../../docs/implementation/phase-8/README.md",
+      "progress": "Desired full modes now resolve to native alarms when capabilities/files allow, with visible fallback counts and no duplicate Notifee event. Normal/Fajr choices are separate.",
+      "remaining": "Physical lifecycle/permission matrix and final UI/accessibility acceptance remain open."
     },
     {
       "id": "RQ-042",
@@ -1315,11 +1313,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 42,
-      "scope": "android",
+      "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
       "verifiedOn": "2026-10-18",
-      "evidence": "../../../docs/implementation/phase-6/README.md",
-      "progress": "The sounds route shows an explicit unavailable state and links to system notification-sound settings. It makes no fabricated Moroccan/Makkah/Fajr attribution and does not publish the unidentified bundled recording.",
-      "remaining": "Acquire attributable normal/Fajr recordings, implement real preview/download selection and verify audio-focus/volume behavior after RQ-040. This ticket is not complete."
+      "evidence": "../../../docs/implementation/phase-8/README.md",
+      "progress": "Two original downloadable Doha recordings (normal/Fajr), attributed to the source with unknown muezzin explicitly stated, offline preview and Stop delivered.",
+      "remaining": "Moroccan/Makkah/short recordings are not offered without a verified source. Human listening/volume/device acceptance remains open; do not present Doha as another location."
     },
     {
       "id": "RQ-043",
@@ -1378,11 +1376,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 44,
-      "scope": "android",
+      "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
       "verifiedOn": "2026-10-18",
-      "evidence": "../../../docs/implementation/phase-6/README.md",
-      "progress": "Revision-based IDs, future-only three-day planning, 27 prayer/48 overall trigger budget, owned-only cancellation, retry after partial failure, launch/resume and live clock/date/zone reconciliation are implemented. UI discloses the coverage horizon and OS delays.",
-      "remaining": "Boot/package replacement, Doze, long inactivity and physical-device delivery/renewal acceptance remain. Saved Notifee triggers are not proof of indefinite unattended renewal. No full adhan is scheduled."
+      "evidence": "../../../docs/implementation/phase-8/README.md",
+      "progress": "Native future alarms persist and restore after boot/package/time events; expired events are not replayed. The 3-day horizon is disclosed.",
+      "remaining": "Automatic rolling renewal without opening the app, authoritative timetable expiry and physical reboot/time-change matrix remain open."
     },
     {
       "id": "RQ-045",
@@ -1645,7 +1643,7 @@
     {
       "id": "RQ-051",
       "title": "Restore shared screen framing and Prayer dashboard",
-      "status": "done",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-002",
@@ -1672,12 +1670,12 @@
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-7/README.md",
       "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
-      "remaining": "Whole-app visual/accessibility acceptance remains RQ-046. Physical compass/other native acceptance remains RQ-048; iOS testing deferred."
+      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open."
     },
     {
       "id": "RQ-052",
       "title": "Restore the Qibla compass design",
-      "status": "done",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-051"
@@ -1703,7 +1701,7 @@
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-7/README.md",
       "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
-      "remaining": "Whole-app visual/accessibility acceptance remains RQ-046. Physical compass/other native acceptance remains RQ-048; iOS testing deferred."
+      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open."
     },
     {
       "id": "RQ-053",
@@ -2012,5 +2010,61 @@
       "executionOrder": 56
     }
   ],
-  "executionPlan": "implementation/IMPLEMENTATION-ORDER.md"
+  "executionPlan": "implementation/IMPLEMENTATION-ORDER.md",
+  "remainingWorkOrder": [
+    {
+      "stage": "phase_8",
+      "tickets": [
+        "RQ-031",
+        "RQ-034",
+        "RQ-035",
+        "RQ-042",
+        "RQ-040",
+        "RQ-041",
+        "RQ-044"
+      ]
+    },
+    {
+      "stage": "functional_completion",
+      "tickets": [
+        "RQ-026",
+        "RQ-020",
+        "RQ-021",
+        "RQ-032",
+        "RQ-035",
+        "RQ-024",
+        "RQ-025",
+        "RQ-037",
+        "RQ-044"
+      ]
+    },
+    {
+      "stage": "visual_parity",
+      "tickets": [
+        "RQ-051",
+        "RQ-052",
+        "RQ-053",
+        "RQ-054",
+        "RQ-055",
+        "RQ-056",
+        "RQ-057",
+        "RQ-058",
+        "RQ-059",
+        "RQ-060",
+        "RQ-061",
+        "RQ-062"
+      ]
+    },
+    {
+      "stage": "final_acceptance",
+      "tickets": [
+        "RQ-045",
+        "RQ-046",
+        "RQ-047",
+        "RQ-048",
+        "RQ-049",
+        "RQ-050"
+      ]
+    }
+  ]
 }

@@ -17,6 +17,7 @@ import {parseHabous, sourceUrl} from './habous';
 import {civilDate, clock} from './time';
 import bundled from './timetables.json';
 import cities from './cities.json';
+import {adhanCapability, adhanNative} from './sounds';
 export const CHANNEL = 'prayer-notifications';
 export const owned = (id: string) => id.startsWith('roqia-prayer:');
 export const loadPreferences = async () =>
@@ -50,6 +51,9 @@ export type Coverage = {
   blocked: boolean;
   signature: string;
   refreshedAt: number;
+  fullAdhan?: number;
+  exact?: boolean;
+  fullFallback?: number;
 };
 async function reconcile(): Promise<Coverage> {
   const p = await loadPreferences(),
@@ -63,20 +67,56 @@ async function reconcile(): Promise<Coverage> {
     await loadTables(),
     others.length,
   );
+  const capability = await adhanCapability();
   const effective = status.authorized && !status.blocked ? plan : [];
+  const full = effective.flatMap(e => {
+    const sound = e.name === 'fajr' ? capability.fajr : capability.normal;
+    return !e.pre &&
+      p.modes[e.name] === 'full' &&
+      capability.exact &&
+      capability.notifications &&
+      sound
+      ? [{...e, ...sound, title: `حان وقت ${labels[e.name]} · ${sound.title}`}]
+      : [];
+  });
+  const notifications = effective.filter(e => !full.some(f => f.id === e.id));
   const signature = JSON.stringify([
     p.revision,
     status,
+    [
+      capability.exact,
+      capability.notifications,
+      capability.normal,
+      capability.fajr,
+    ],
+    full,
     effective.map(e => [e.id, e.at]),
   ]);
   const previous = await readRecord<Coverage>('prayer', 'coverage'),
     existing = ids.filter(owned);
-  if (
+  const unchanged =
     previous?.signature === signature &&
-    existing.length === effective.length &&
-    effective.every(e => existing.includes(e.id))
-  )
-    return previous;
+    existing.length === notifications.length &&
+    notifications.every(e => existing.includes(e.id)) &&
+    capability.events.length === full.length &&
+    full.every(e => capability.events.some(f => f.id === e.id));
+  // Native scheduling verifies local files again. On failure, preserve desired full
+  // mode but deliver an ordinary notification and expose the fallback count.
+  let deliveredFull = full;
+  if (adhanNative()?.scheduleAdhan) {
+    try {
+      await adhanNative().scheduleAdhan(JSON.stringify(full));
+    } catch {
+      await adhanNative().scheduleAdhan('[]');
+      deliveredFull = [];
+    }
+  }
+  // A force-stop can clear AlarmManager while the persisted desired IDs survive.
+  // Reinstall native alarms even when the JS/Notifee signature is unchanged.
+  if (unchanged && deliveredFull.length === full.length) return previous!;
+  const notificationEvents = effective.filter(
+    e => !deliveredFull.some(f => f.id === e.id),
+  );
   // Persist desired prefs before this reconciliation; failure leaves the signature stale.
   if (existing.length) await notifee.cancelTriggerNotifications(existing);
   if (effective.length && Platform.OS === 'android')
@@ -86,7 +126,7 @@ async function reconcile(): Promise<Coverage> {
       importance: AndroidImportance.HIGH,
       sound: 'default',
     });
-  for (const e of effective) {
+  for (const e of notificationEvents) {
     const at = clock(p.location!.zone, e.at, p.format);
     await notifee.createTriggerNotification(
       {
@@ -109,6 +149,11 @@ async function reconcile(): Promise<Coverage> {
   const result = {
     coveredUntil: effective.length ? coveredUntil : now,
     scheduled: effective.length,
+    fullAdhan: deliveredFull.length,
+    exact: capability.exact,
+    fullFallback:
+      effective.filter(e => !e.pre && p.modes[e.name] === 'full').length -
+      deliveredFull.length,
     ...status,
     signature,
     refreshedAt: now,

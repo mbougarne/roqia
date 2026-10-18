@@ -1,0 +1,36 @@
+[
+  {
+    "source": "mp3quran-rights",
+    "bytes": 88563,
+    "sha256": "d91354edb74394c0da64001a5f371765ea029246308b873b4eaf00e7827a04ff"
+  },
+  {
+    "source": "reciters-warsh",
+    "bytes": 7585,
+    "sha256": "e42d2155cfa53e3cd203a257df58d4742a9dfbcc84b8b48658dded56324c8c9c"
+  },
+  {
+    "source": "reciters-hafs",
+    "bytes": 126560,
+    "sha256": "0ec7d4987aacfa4ce7dded71e193e08a284578788d867fcf51b4fd82ac893678"
+  },
+  {
+    "source": "archive",
+    "bytes": 14576,
+    "sha256": "eae65aa64ea5b9034ac55c4c9c56cc96c5fc5b6dfbb82b6d101a5c0e4d01f56a"
+  },
+  {
+    "source": "moroccan-audio-api-response",
+    "httpStatus": 200,
+    "bytes": 2118,
+    "sha256": "5d013fe29bdb18dd5fd4406b8b3b1f3212de1ab46de098092ed1291f8aa48218",
+    "authorizationHeaderSent": false
+  },
+  {
+    "source": "moroccan-audio-sample",
+    "httpStatus": 403,
+    "bytes": 74,
+    "sha256": "3209726e8e0974b72eba03ca46f8be528c39b0ae5b19683f8fa1b179a99086bb",
+    "authorizationHeaderSent": false
+  }
+]

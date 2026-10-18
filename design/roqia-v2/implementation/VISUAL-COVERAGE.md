@@ -1,6 +1,6 @@
 # Visual implementation coverage
 
-Owner tickets follow the single order in [IMPLEMENTATION-ORDER.md](IMPLEMENTATION-ORDER.md). Every reference screen has one implementation owner. Theme evidence must come from the normal Android app; each screenshot is its own file. “Pending” means unverified visual parity, even if functional screenshots exist from earlier phases. Final acceptance remains RQ-046. **Current main-screen coverage: 4 / 96 theme captures; 2 / 48 screens implemented in this visual pass. Next: RQ-053.**
+Owner tickets follow the single order in [IMPLEMENTATION-ORDER.md](IMPLEMENTATION-ORDER.md). Every reference screen has one implementation owner. Theme evidence must come from the normal Android app; each screenshot is its own file. “Pending” means unverified visual parity, even if functional screenshots exist from earlier phases. Final acceptance remains RQ-046. **Current main-screen coverage: 4 / 96 theme captures; 2 / 48 screens implemented in this visual pass. Functionality-first work now takes priority. Revisit RQ-051/RQ-052, which the user has not accepted as matching the references, before continuing RQ-053.**
 
 Compare hierarchy, layout, artwork/icons, typography, spacing, controls and navigation. Capture unavailable/loading/offline/error states additionally, without inventing source content or supported capabilities. Document data/platform differences explicitly. Preserve Western UI digits and verified scripture fonts.
 

@@ -55,6 +55,7 @@ import {
 } from './service';
 import {adapter, locate, onHeading, onPrayerTimeChanged} from './native';
 import cities from './cities.json';
+import {adhanNative} from './sounds';
 import {themeContext} from '../../store';
 import {PrayerLandmark, QiblaCompass, OrnamentDivider} from './visuals';
 const civilDate = (zone: string, at = Date.now()) => {
@@ -891,8 +892,9 @@ export function AdhanScreen({navigation}: any) {
       <Status error={error} retry={load} />
       <Card>
         <AppText>
-          الأذان الكامل غير متاح حاليا. اختيار الأذان الكامل يحفظ رغبتك ويستخدم
-          تنبيه إشعار فقط في هذا الإصدار، دون تشغيل تسجيل.
+          لتشغيل الأذان الكامل، نزّل واختر صوت الأذان ونسخة الفجر، ثم فعّل إذن
+          المنبهات والإشعارات. إذا تعذر ذلك، يستخدم التطبيق إشعارا فقط ويحفظ
+          اختيارك.
         </AppText>
         <AppText>
           قد يؤخر توفير الطاقة الإشعار. افتح التطبيق لتجديد المواعيد؛ لا نضمن
@@ -914,6 +916,16 @@ export function AdhanScreen({navigation}: any) {
         label="إعدادات الإشعارات في الجهاز"
         onPress={() => attempt(openPrayerSettings)}
       />
+      <AppText>{`أذان كامل مجدول: ${number(coverage?.fullAdhan ?? 0)} · إشعار بديل: ${number(coverage?.fullFallback ?? 0)}`}</AppText>
+      <Button
+        secondary
+        label="إذن المنبهات والتذكيرات"
+        onPress={() =>
+          attempt(async () => {
+            await adhanNative()?.openAdhanAlarms();
+          })
+        }
+      />
       {draft && (
         <>
           {prayers.map(n => (
@@ -923,7 +935,7 @@ export function AdhanScreen({navigation}: any) {
                 <Button
                   key={m}
                   secondary={draft.modes[n] !== m}
-                  label={`${labels[n]}: ${['متوقف', 'إشعار فقط', 'أذان كامل (إشعار حاليا)'][i]}`}
+                  label={`${labels[n]}: ${['متوقف', 'إشعار فقط', 'أذان كامل'][i]}`}
                   onPress={() =>
                     setDraft({...draft, modes: {...draft.modes, [n]: m}})
                   }
@@ -985,25 +997,7 @@ export function AdhanScreen({navigation}: any) {
     </Page>
   );
 }
-export function SoundsScreen({navigation}: any) {
-  return (
-    <Page title="أصوات الأذان" onBack={() => navigation.goBack()}>
-      <StateView
-        title="لا توجد تسجيلات أذان متاحة للاختيار بعد"
-        description="ستظهر التسجيلات مع اسم المؤذن والمصدر ونسخة الفجر عند توفرها. التنبيه الحالي يستخدم صوت إشعارات الجهاز؛ لا يشغّل أذانا كاملا."
-      />
-      <Button
-        secondary
-        label="إعداد صوت الإشعار في الجهاز"
-        onPress={() => attempt(openPrayerSettings)}
-      />
-      <AppText>
-        نتبع مستوى الصوت ووضع عدم الإزعاج في الجهاز. لا نرفع مستوى الصوت
-        تلقائيا.
-      </AppText>
-    </Page>
-  );
-}
+export {SoundsScreen} from './SoundsScreen';
 export function PrayerSourcesScreen({navigation}: any) {
   return (
     <Page title="مصادر الصلاة والقبلة" onBack={() => navigation.goBack()}>

@@ -1,3 +1,4 @@
+import {NativeModules} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
 import {type DownloadTask} from '@kesha-antonov/react-native-background-downloader';
 import {
@@ -143,8 +144,13 @@ export const nativeDownloadPorts: DownloadPorts = {
   },
   remove: path => removeIfPresent(privatePath(path)),
   free: async () => (await FileSystem.df()).internal_free,
-  release: (paths, remove) =>
-    playback.releaseFiles(paths.map(privatePath), remove),
+  release: async (paths, remove) => {
+    if (NativeModules?.RoqiaPrayer?.releaseAdhan)
+      await NativeModules.RoqiaPrayer.releaseAdhan(
+        JSON.stringify(paths.map(privatePath)),
+      );
+    await playback.releaseFiles(paths.map(privatePath), remove);
+  },
   now: Date.now,
 };
 export const downloads = new DownloadCoordinator(catalog, nativeDownloadPorts);

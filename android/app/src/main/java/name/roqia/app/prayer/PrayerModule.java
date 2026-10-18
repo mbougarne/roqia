@@ -42,6 +42,28 @@ public final class PrayerModule extends ReactContextBaseJavaModule implements Li
       } catch(Exception error) {promise.reject("source_unavailable",error);}
     },"prayer-timetable").start();
   }
+  @ReactMethod public void adhanStatus(Promise promise){
+    try{WritableMap r=Arguments.createMap();r.putBoolean("exact",AdhanAlarms.exact(getReactApplicationContext()));r.putBoolean("notifications",AdhanAlarms.allowed(getReactApplicationContext()));r.putString("events",AdhanAlarms.stored(getReactApplicationContext()).toString());r.putString("lastEvent",AdhanAlarms.prefs(getReactApplicationContext()).getString("lastEvent",""));promise.resolve(r);}catch(Exception e){promise.reject("adhan_status",e);}
+  }
+  @ReactMethod public void scheduleAdhan(String json,Promise promise){new Thread(()->{try{AdhanAlarms.replacePrayers(getReactApplicationContext(),new org.json.JSONArray(json));promise.resolve(true);}catch(Exception e){promise.reject("adhan_schedule",e);}},"adhan-schedule").start();}
+  @ReactMethod public void testAdhan(String json,Promise promise){new Thread(()->{try{AdhanAlarms.test(getReactApplicationContext(),new org.json.JSONObject(json));promise.resolve(true);}catch(Exception e){promise.reject("adhan_test",e);}},"adhan-test").start();}
+  @ReactMethod public void releaseAdhan(String paths,Promise promise){try{AdhanAlarms.release(getReactApplicationContext(),paths);promise.resolve(true);}catch(Exception e){promise.reject("adhan_release",e);}}
+  @ReactMethod public void previewAdhan(String json,Promise promise){
+    new Thread(()->{
+      try{AdhanAlarms.verify(getReactApplicationContext(),new org.json.JSONObject(json));}
+      catch(Exception e){promise.reject("adhan_integrity",e);return;}
+      handler.post(()->{try{
+        if(getReactApplicationContext().getCurrentActivity()==null||!AdhanAlarms.allowed(getReactApplicationContext()))throw new IllegalStateException("preview_unavailable");
+        Intent service=new Intent(getReactApplicationContext(),AdhanService.class).putExtra("event",json);
+        if(Build.VERSION.SDK_INT>=26)getReactApplicationContext().startForegroundService(service);else getReactApplicationContext().startService(service);
+        promise.resolve(true);
+      }catch(Exception e){promise.reject("adhan_preview",e);}});
+    },"adhan-preview").start();
+  }
+  @ReactMethod public void stopAdhan(){getReactApplicationContext().stopService(new Intent(getReactApplicationContext(),AdhanService.class));new Thread(()->{try{AdhanAlarms.cancelTest(getReactApplicationContext());}catch(Exception e){AdhanAlarms.audit(getReactApplicationContext(),"cancel_test_failed");}},"adhan-stop").start();}
+  @ReactMethod public void openAdhanAlarms(Promise promise){try{
+    if(Build.VERSION.SDK_INT>=31)getReactApplicationContext().startActivity(new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,android.net.Uri.parse("package:"+getReactApplicationContext().getPackageName())).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));promise.resolve(true);
+  }catch(Exception e){promise.reject("alarm_settings",e);}}
   @ReactMethod public void addListener(String event) {}
   @ReactMethod public void removeListeners(double count) {}
   private void finishLocation(Location location, String error) {
