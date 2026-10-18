@@ -1,10 +1,7 @@
 import React, {type FC, useContext} from 'react';
-import {View, StyleSheet, ImageBackground, Pressable} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import {StyledText} from './StyledText';
-import {getPressableScaleStyle} from './pressableStyles';
-import {themeContext, themes} from '../store';
+import {I18nManager, View} from 'react-native';
+import {AppText, IconButton, usePalette} from '../design/ui';
+import {themeContext} from '../store';
 
 type Props = {
   onBackPress?: () => void;
@@ -28,261 +25,81 @@ export const Header: FC<Props> = ({
   onPlayAllPress,
   onResetAllPress,
   onResetScreenPress,
-  compact = false,
-  showBackButton = false,
-  showMenuButton = false,
-  showPlayAllAction = false,
-  showResetActions = false,
-  isPlayAllActive = false,
-  isPlayAllPaused = false,
+  showBackButton,
+  showMenuButton,
+  showPlayAllAction,
+  showResetActions,
+  isPlayAllActive,
+  isPlayAllPaused,
   title = 'الرقية الشرعية',
 }) => {
-  const {mode, toggleMode} = useContext(themeContext);
-
-  const theme = themes[mode];
-  const icon = mode === 'light' ? 'nightlight-round' : 'sunny';
-  const modeText = mode === 'light' ? 'وضع ليلي' : 'وضع نهاري';
-  const playAllIcon = isPlayAllActive && !isPlayAllPaused ? 'pause-circle-outline' : 'playlist-play';
-  const playAllText = isPlayAllActive && isPlayAllPaused ? 'متابعة' : 'الكل';
-  const onIconPress = () => toggleMode();
-
+  const p = usePalette(),
+    {mode, toggleMode} = useContext(themeContext);
   return (
-    <ImageBackground
-      fadeDuration={0}
-      source={require('../assets/images/arabesque.png')}
-      style={[
-        styles.backgroundContainer,
-        compact && styles.compactBackgroundContainer,
-        {backgroundColor: theme.secondaryBg},
-      ]}
-      imageStyle={styles.backgroundStyle}>
-      <View style={[styles.container, compact && styles.compactContainer]}>
-        <View style={[styles.iconsContainer, compact && styles.compactIconsContainer]}>
-          <View style={styles.iconsInnerContainer}>
-            {showBackButton ? (
-              <Pressable
-                accessibilityHint="ينقلك إلى الصفحة السابقة"
-                accessibilityLabel="زر الرجوع"
-                accessibilityRole="button"
-                onPress={onBackPress}
-                style={({pressed}) => [
-                  styles.backButton,
-                  getPressableScaleStyle(pressed, 0.82, 0.94),
-                ]}>
-                <Icon name="arrow-back" size={24} color={themes[mode].tertiaryColor} />
-                <StyledText
-                  customStyle={[
-                    styles.backText,
-                    {color: theme.tertiaryColor},
-                  ]}>
-                  رجوع
-                </StyledText>
-              </Pressable>
-            ) : (
-              <View style={styles.sideSpacer} />
-            )}
-            <View style={styles.actionsContainer}>
-              {showMenuButton ? (
-                <Pressable
-                  accessibilityHint="يفتح قائمة إضافية"
-                  accessibilityLabel="فتح القائمة"
-                  accessibilityRole="button"
-                  onPress={onMenuPress}
-                  style={({pressed}) => [
-                    styles.menuButton,
-                    getPressableScaleStyle(pressed, 0.82, 0.94),
-                  ]}>
-                  <Icon name="more-vert" size={24} color={themes[mode].tertiaryColor} />
-                  <StyledText
-                    customStyle={[
-                      styles.menuText,
-                      {color: theme.tertiaryColor},
-                    ]}>
-                    المزيد
-                  </StyledText>
-                </Pressable>
-              ) : null}
-              {showPlayAllAction ? (
-                <Pressable
-                  accessibilityHint="يشغل أو يوقف جميع المقاطع الصوتية في هذه الصفحة"
-                  accessibilityLabel={isPlayAllActive && !isPlayAllPaused ? 'إيقاف مؤقت لتشغيل الكل' : 'تشغيل كل المقاطع'}
-                  accessibilityRole="button"
-                  onPress={onPlayAllPress}
-                  style={({pressed}) => [
-                    styles.actionButton,
-                    getPressableScaleStyle(pressed, 0.82, 0.94),
-                  ]}>
-                  <Icon name={playAllIcon} size={24} color={theme.tertiaryColor} />
-                  <StyledText
-                    customStyle={[
-                      styles.actionText,
-                      {color: theme.tertiaryColor},
-                    ]}>
-                    {playAllText}
-                  </StyledText>
-                </Pressable>
-              ) : null}
-              {showResetActions ? (
-                <Pressable
-                  accessibilityHint="يعيد عدادات الصفحة الحالية إلى القيم الأصلية"
-                  accessibilityLabel="إعادة عداد الصفحة"
-                  accessibilityRole="button"
-                  onPress={onResetScreenPress}
-                  style={({pressed}) => [
-                    styles.actionButton,
-                    getPressableScaleStyle(pressed, 0.82, 0.94),
-                  ]}>
-                  <Icon name="restart-alt" size={24} color={theme.tertiaryColor} />
-                  <StyledText
-                    customStyle={[
-                      styles.actionText,
-                      {color: theme.tertiaryColor},
-                    ]}>
-                    إعادة
-                  </StyledText>
-                </Pressable>
-              ) : null}
-              {showResetActions ? (
-                <Pressable
-                  accessibilityHint="يعيد جميع العدادات في التطبيق إلى القيم الأصلية"
-                  accessibilityLabel="إعادة جميع العدادات"
-                  accessibilityRole="button"
-                  onPress={onResetAllPress}
-                  style={({pressed}) => [
-                    styles.actionButton,
-                    getPressableScaleStyle(pressed, 0.82, 0.94),
-                  ]}>
-                  <Icon name="restore-page" size={24} color={theme.tertiaryColor} />
-                  <StyledText
-                    customStyle={[
-                      styles.actionText,
-                      {color: theme.tertiaryColor},
-                    ]}>
-                    الكل
-                  </StyledText>
-                </Pressable>
-              ) : null}
-              <Pressable
-                accessibilityHint="يبدل بين الوضع النهاري والوضع الليلي"
-                accessibilityLabel={mode === 'light' ? 'تفعيل الوضع الليلي' : 'تفعيل الوضع النهاري'}
-                accessibilityRole="button"
-                onPress={onIconPress}
-                style={({pressed}) => [
-                  styles.modeButton,
-                  getPressableScaleStyle(pressed, 0.82, 0.94),
-                ]}>
-                <Icon name={icon} size={24} color={themes[mode].tertiaryColor}>
-                </Icon>
-                <StyledText
-                  customStyle={[
-                    styles.changeMode,
-                    {color: theme.tertiaryColor},
-                  ]}>
-                  {modeText}
-                </StyledText>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-        {!compact ? (
-          <StyledText
-            accessibilityRole="header"
-            customStyle={[styles.headline, {color: theme.tertiaryColor}]}>
-            {title}
-          </StyledText>
-        ) : null}
+    <View
+      style={{
+        backgroundColor: p.background,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        gap: 4,
+      }}>
+      <View
+        style={{
+          minHeight: 48,
+          flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
+          alignItems: 'center',
+          gap: 8,
+        }}>
+        {showBackButton && onBackPress && (
+          <IconButton label="رجوع" name="chevron-right" onPress={onBackPress} />
+        )}
+        <AppText
+          accessibilityRole="header"
+          role="screenTitle"
+          style={{flex: 1}}>
+          {title}
+        </AppText>
+        {showMenuButton && onMenuPress && (
+          <IconButton label="المزيد" name="more" onPress={onMenuPress} />
+        )}
       </View>
-    </ImageBackground>
+      <View
+        style={{
+          flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start',
+        }}>
+        {showPlayAllAction && onPlayAllPress && (
+          <IconButton
+            label={
+              isPlayAllActive && !isPlayAllPaused ? 'إيقاف مؤقت' : 'تشغيل الكل'
+            }
+            name={isPlayAllActive && !isPlayAllPaused ? 'pause' : 'play'}
+            onPress={onPlayAllPress}
+          />
+        )}
+        {showResetActions && onResetScreenPress && (
+          <IconButton
+            label="إعادة عدادات الصفحة"
+            name="reset"
+            onPress={onResetScreenPress}
+          />
+        )}
+        {showResetActions && onResetAllPress && (
+          <IconButton
+            label="إعادة جميع العدادات"
+            name="repeat"
+            onPress={onResetAllPress}
+          />
+        )}
+        <IconButton
+          label={
+            mode === 'light' ? 'تفعيل الوضع الليلي' : 'تفعيل الوضع النهاري'
+          }
+          name={mode === 'light' ? 'moon' : 'sun'}
+          onPress={toggleMode}
+        />
+      </View>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  backgroundContainer: {
-    marginBottom: 25,
-  },
-  compactBackgroundContainer: {
-    marginBottom: 0,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.12,
-    shadowRadius: 1.2,
-    elevation: 2,
-  },
-  backgroundStyle: {
-    resizeMode: 'repeat',
-  },
-  container: {
-    justifyContent: 'center',
-    paddingTop: 25,
-    minHeight: 175,
-  },
-  compactContainer: {
-    minHeight: 66,
-    paddingTop: 0,
-  },
-  headline: {
-    fontSize: 36,
-    fontWeight: '900',
-    textAlign: 'center',
-  },
-  iconsContainer: {
-    position: 'absolute',
-    top: 10,
-    paddingHorizontal: 10,
-    width: '100%',
-  },
-  compactIconsContainer: {
-    position: 'relative',
-    top: 0,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  iconsInnerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  sideSpacer: {
-    width: 48,
-  },
-  actionsContainer: {
-    alignItems: 'center',
-    flexDirection: 'row-reverse',
-    gap: 14,
-  },
-  actionButton: {
-    alignItems: 'center',
-  },
-  modeButton: {
-    alignItems: 'center',
-  },
-  backButton: {
-    alignItems: 'center',
-  },
-  menuButton: {
-    alignItems: 'center',
-  },
-  backText: {
-    marginVertical: 5,
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  menuText: {
-    marginVertical: 5,
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  changeMode: {
-    marginVertical: 5,
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  actionText: {
-    marginVertical: 5,
-    fontSize: 12,
-    fontWeight: '700',
-  },
-});

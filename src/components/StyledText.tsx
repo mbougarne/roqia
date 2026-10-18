@@ -8,11 +8,31 @@ import {
 } from 'react-native';
 
 type StyledProps = TextProps & {
-  customStyle: StyleProp<TextStyle>;
+  customStyle?: StyleProp<TextStyle>;
 };
 
-export const StyledText: FC<StyledProps> = ({children, customStyle}) => {
-  return <Text style={[style.text, customStyle]}>{children}</Text>;
+export const StyledText: FC<StyledProps> = ({
+  children,
+  customStyle,
+  style: textStyle,
+  ...props
+}) => {
+  const resolved = StyleSheet.flatten([style.text, customStyle, textStyle]);
+  const value =
+    resolved.fontWeight === 'bold' ? 700 : Number(resolved.fontWeight) || 400;
+  const weight =
+    value >= 700 ? 700 : value >= 600 ? 600 : value >= 500 ? 500 : 400;
+  return (
+    <Text
+      {...props}
+      allowFontScaling
+      style={[
+        resolved,
+        {fontFamily: `RoqiaArabic${weight}`, fontWeight: 'normal'},
+      ]}>
+      {children}
+    </Text>
+  );
 };
 
 const style = StyleSheet.create({

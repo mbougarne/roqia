@@ -21,12 +21,10 @@ export const AboutScreen = () => {
   const {mode} = useContext(themeContext);
   const theme = themes[mode];
   const onMenuPress = () => {
-    navigation.openDrawer?.();
-    navigation.getParent?.()?.openDrawer?.();
-    navigation.getParent?.()?.getParent?.()?.openDrawer?.();
+    navigation.navigate('MainTabs', {screen: 'More'});
   };
   const onBackToHomePress = () => {
-    navigation.navigate('MainTabs');
+    navigation.goBack();
   };
 
   const onCopy = () => {
@@ -52,7 +50,7 @@ export const AboutScreen = () => {
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: theme.bg}]}> 
+    <View style={[styles.container, {backgroundColor: theme.bg}]}>
       <Header
         onBackPress={onBackToHomePress}
         onMenuPress={onMenuPress}
@@ -79,13 +77,14 @@ export const AboutScreen = () => {
           onPress={onCopy}
           style={styles.emailButton}>
           <Icon name="content-copy" color={theme.tertiaryColor} size={16} />
-          <StyledText customStyle={[styles.email, {color: theme.color}]}> 
+          <StyledText customStyle={[styles.email, {color: theme.color}]}>
             {noteData.email}
           </StyledText>
         </TouchableOpacity>
 
         <View style={styles.linksContainer}>
-          <StyledText customStyle={[styles.sectionTitle, {color: theme.tertiaryColor}]}> 
+          <StyledText
+            customStyle={[styles.sectionTitle, {color: theme.tertiaryColor}]}>
             الروابط القانونية
           </StyledText>
 
@@ -96,7 +95,7 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.policyUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               سياسة الخصوصية / Privacy Policy
             </StyledText>
           </TouchableOpacity>
@@ -108,12 +107,13 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.termsUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               شروط الاستخدام / Terms of Use
             </StyledText>
           </TouchableOpacity>
 
-          <StyledText customStyle={[styles.sectionTitle, {color: theme.tertiaryColor}]}> 
+          <StyledText
+            customStyle={[styles.sectionTitle, {color: theme.tertiaryColor}]}>
             المصادر والمشروع
           </StyledText>
 
@@ -124,7 +124,7 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.githubRepoUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               GitHub Repository
             </StyledText>
           </TouchableOpacity>
@@ -136,7 +136,7 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.authorGithubUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               المبرمج: مراج بوگرن Mourad Bougarne
             </StyledText>
           </TouchableOpacity>
@@ -148,7 +148,7 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.audioSourceOneUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               الصوتيات: alazkar.today
             </StyledText>
           </TouchableOpacity>
@@ -160,11 +160,11 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.audioSourceTwoUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               الصوتيات: mp3quran.net
             </StyledText>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             accessibilityHint="يفتح المصدر الصوتي الثالث داخل المتصفح"
             accessibilityLabel="المصدر الصوتي الثالث"
@@ -172,11 +172,11 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.audioSourceThreeUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               الصوتيات: lahajati.ai
             </StyledText>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             accessibilityHint="يفتح الأدعية داخل المتصفح"
             accessibilityLabel="الأدعية"
@@ -184,19 +184,19 @@ export const AboutScreen = () => {
             onPress={() => openLink(noteData.duaaSourceUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               الأدعية: kalemtayeb.com
             </StyledText>
           </TouchableOpacity>
-         
-         <TouchableOpacity
+
+          <TouchableOpacity
             accessibilityHint="يفتح التسبيحات داخل المتصفح"
             accessibilityLabel="التسبيحات"
             accessibilityRole="button"
             onPress={() => openLink(noteData.tasbihatSourceUrl)}
             style={styles.linkButton}>
             <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
               التسبيحات: islambook.com
             </StyledText>
           </TouchableOpacity>

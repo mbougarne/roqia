@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+import React, {useContext, useRef, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   Alert,
   FlatList,
@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {getPressableScaleStyle, Header, Section, Note, StyledText} from '../components';
+import {getPressableScaleStyle, Header, Section, Note} from '../components';
 import {data} from '../data';
 import {useHomeAudioPlayback} from '../hooks/useHomeAudioPlayback';
 import {
@@ -21,60 +21,46 @@ import {
   themes,
 } from '../store';
 
-const waveformHeights = [
-  12, 20, 15, 24, 18, 28, 16,
-  22, 14, 26, 19, 12, 12, 20,
-  15, 24, 18, 28, 16, 22, 14,
-  26, 19, 12, 18, 28, 16, 22,
-  22, 14, 26, 19, 12, 18, 28,
-  20, 15, 18, 22
-];
-
 export const HomeScreen = () => {
   const listRef = useRef<FlatList<any>>(null);
-  const [showNote, setShowNote] = useState<boolean>(false);
+  const [showNote] = useState<boolean>(false);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const isFocused = useIsFocused();
   const navigation = useNavigation<any>();
   const {mode} = useContext(themeContext);
-  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(homeRepeatContext);
+  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} =
+    useContext(homeRepeatContext);
   const theme = themes[mode];
   const homeRepeatCounts = createRepeatCountsForItems(data, 'data');
-  const {
-    activeAudioFile,
-    isAudioPaused,
-    isPlaylistActive,
-    onAudioPress,
-    onPlayAllPress,
-    stopPlayback,
-    togglePlayback,
-  } = useHomeAudioPlayback(data);
-
-  const toggleNote = () => setShowNote(!showNote);
-
-  useEffect(() => {
-    if (!isFocused) {
-      stopPlayback();
-    }
-  }, [isFocused, stopPlayback]);
+  const {activeAudioFile, isAudioPaused, onAudioPress, onPlayAllPress} =
+    useHomeAudioPlayback(data);
 
   const onResetScreenPress = () => {
-    Alert.alert('إعادة عدادات هذه الصفحة', 'سيتم إعادة جميع العدادات في هذه الصفحة إلى القيم الأصلية.', [
-      {text: 'إلغاء', style: 'cancel'},
-      {text: 'إعادة', style: 'destructive', onPress: () => resetRepeats(homeRepeatCounts)},
-    ]);
+    Alert.alert(
+      'إعادة عدادات هذه الصفحة',
+      'سيتم إعادة جميع العدادات في هذه الصفحة إلى القيم الأصلية.',
+      [
+        {text: 'إلغاء', style: 'cancel'},
+        {
+          text: 'إعادة',
+          style: 'destructive',
+          onPress: () => resetRepeats(homeRepeatCounts),
+        },
+      ],
+    );
   };
 
   const onResetAllPress = () => {
-    Alert.alert('إعادة جميع العدادات', 'سيتم إعادة جميع العدادات في التطبيق إلى القيم الأصلية.', [
-      {text: 'إلغاء', style: 'cancel'},
-      {text: 'إعادة الكل', style: 'destructive', onPress: resetAllRepeats},
-    ]);
+    Alert.alert(
+      'إعادة جميع العدادات',
+      'سيتم إعادة جميع العدادات في التطبيق إلى القيم الأصلية.',
+      [
+        {text: 'إلغاء', style: 'cancel'},
+        {text: 'إعادة الكل', style: 'destructive', onPress: resetAllRepeats},
+      ],
+    );
   };
 
-  const activeAudioItem = activeAudioFile ? data.find(item => item.audioFile === activeAudioFile) : undefined;
-  const isPlayerVisible = Boolean(activeAudioFile && !isAudioPaused);
   const onListScroll = (offsetY: number) => {
     const shouldShowSticky = offsetY > 170;
     const shouldShowScrollTop = shouldShowSticky && offsetY > 350;
@@ -93,9 +79,7 @@ export const HomeScreen = () => {
   };
 
   const onMenuPress = () => {
-    navigation.openDrawer?.();
-    navigation.getParent?.()?.openDrawer?.();
-    navigation.getParent?.()?.getParent?.()?.openDrawer?.();
+    navigation.navigate('MainTabs', {screen: 'More'});
   };
 
   return (
@@ -106,8 +90,15 @@ export const HomeScreen = () => {
         style={[styles.background, {backgroundColor: theme.bg}]}
         imageStyle={styles.cover}>
         <View
+          importantForAccessibility={
+            showStickyHeader ? 'auto' : 'no-hide-descendants'
+          }
+          accessibilityElementsHidden={!showStickyHeader}
           pointerEvents={showStickyHeader ? 'auto' : 'none'}
-          style={[styles.stickyHeaderWrapper, !showStickyHeader && styles.stickyHeaderHidden]}>
+          style={[
+            styles.stickyHeaderWrapper,
+            !showStickyHeader && styles.stickyHeaderHidden,
+          ]}>
           <Header
             compact
             onMenuPress={onMenuPress}
@@ -122,7 +113,9 @@ export const HomeScreen = () => {
           data={data}
           extraData={{activeAudioFile, isAudioPaused, repeatCounts}}
           keyExtractor={(item, index) => getRepeatItemKey(item, index, 'data')}
-          onScroll={({nativeEvent}) => onListScroll(nativeEvent.contentOffset.y)}
+          onScroll={({nativeEvent}) =>
+            onListScroll(nativeEvent.contentOffset.y)
+          }
           renderItem={({item, index}) => {
             const itemKey = getRepeatItemKey(item, index, 'data');
 
@@ -149,74 +142,13 @@ export const HomeScreen = () => {
           }
           scrollEventThrottle={16}
         />
-        {!isPlayerVisible ? (
-          <Pressable
-            accessibilityHint="يشغل جميع المقاطع الصوتية في الصفحة ويكرر كل مقطع حسب عدده"
-            accessibilityLabel={isPlaylistActive && isAudioPaused ? 'متابعة تشغيل جميع المقاطع' : 'تشغيل جميع المقاطع'}
-            accessibilityRole="button"
-            onPress={onPlayAllPress}
-            style={({pressed}) => [
-              styles.playAllButton,
-              {backgroundColor: theme.activeBg},
-              getPressableScaleStyle(pressed, 0.9, 0.94),
-            ]}>
-            <Icon color={theme.secondaryColor} name="play-arrow" size={22} />
-          </Pressable>
-        ) : null}
-        {isPlayerVisible ? (
-          <View
-            style={[
-              styles.playerTray,
-              {
-                backgroundColor: theme.secondaryBg,
-                top: showStickyHeader ? 70 : 80,
-              },
-            ]}> 
-            <View style={styles.playerContent}>
-              <View style={styles.playerMeta}>
-                <View style={styles.playerTitleRow}>
-                  <StyledText customStyle={[styles.playerTitle, {color: theme.tertiaryColor}]}> 
-                    {activeAudioItem?.caption ?? 'تشغيل الرقية'}
-                  </StyledText>
-                  <StyledText customStyle={[styles.playerSubtitle, {color: theme.color}]}> 
-                    {isPlaylistActive ? 'تشغيل متتال' : 'تشغيل صوتي'}
-                  </StyledText>
-                </View>
-                <View style={styles.waveformRow}>
-                  {waveformHeights.map((height, index) => (
-                    <View
-                      key={`${height}-${index}`}
-                      style={[
-                        styles.waveBar,
-                        {
-                          backgroundColor:
-                            !isAudioPaused && index % 3 !== 0 ? theme.tertiaryColor : theme.activeBg,
-                          height,
-                        },
-                      ]}
-                    />
-                  ))}
-                </View>
-              </View>
-              <Pressable
-                accessibilityHint="يشغل أو يوقف الصوت الحالي"
-                accessibilityLabel={isAudioPaused ? 'متابعة الصوت' : 'إيقاف الصوت مؤقتا'}
-                accessibilityRole="button"
-                onPress={togglePlayback}
-                style={({pressed}) => [
-                  styles.playerButton,
-                  {backgroundColor: theme.activeBg},
-                  getPressableScaleStyle(pressed, 0.9, 0.94),
-                ]}>
-                <Icon
-                  color={theme.secondaryColor}
-                  name={isAudioPaused ? 'play-arrow' : 'pause'}
-                  size={24}
-                />
-              </Pressable>
-            </View>
-          </View>
-        ) : null}
+        <Pressable
+          accessibilityLabel="تشغيل جميع المقاطع"
+          accessibilityRole="button"
+          onPress={onPlayAllPress}
+          style={[styles.playAllButton, {backgroundColor: theme.activeBg}]}>
+          <Icon name="play-arrow" color={theme.secondaryColor} size={24} />
+        </Pressable>
         {showScrollTopButton ? (
           <Pressable
             accessibilityHint="يعيدك إلى أعلى الصفحة"
@@ -227,8 +159,12 @@ export const HomeScreen = () => {
               styles.scrollTopButton,
               {backgroundColor: theme.activeBg},
               getPressableScaleStyle(pressed, 0.9, 0.94),
-            ]}> 
-            <Icon color={theme.secondaryColor} name="keyboard-double-arrow-up" size={22} />
+            ]}>
+            <Icon
+              color={theme.secondaryColor}
+              name="keyboard-double-arrow-up"
+              size={22}
+            />
           </Pressable>
         ) : null}
       </ImageBackground>
@@ -237,6 +173,14 @@ export const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  stickyHeaderWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 4,
+  },
+  stickyHeaderHidden: {opacity: 0},
   background: {
     flex: 1,
     paddingBottom: 20,
@@ -244,89 +188,26 @@ const styles = StyleSheet.create({
   cover: {
     resizeMode: 'repeat',
   },
-  playerTray: {
-    alignItems: 'center',
-    borderRadius: 0,
-    left: 0,
-    minHeight: 50,
-    paddingHorizontal: 14,
-    paddingTop: 12,
-    paddingBottom: 0,
-    position: 'absolute',
-    right: 0,
-    zIndex: 11,
-  },
-  playerContent: {
-    alignItems: 'center',
-    flexDirection: 'row-reverse',
-    gap: 12,
-    width: '100%',
-  },
-  playerMeta: {
-    flex: 1,
-    gap: 8,
-  },
-  playerTitleRow: {
-    alignItems: 'flex-end',
-    gap: 2,
-  },
-  playerTitle: {
-    fontSize: 14,
-    fontWeight: '800',
-    textAlign: 'right',
-  },
-  playerSubtitle: {
-    fontSize: 11,
-    fontWeight: '700',
-    textAlign: 'right',
-  },
-  waveformRow: {
-    alignItems: 'flex-end',
-    flexDirection: 'row-reverse',
-    gap: 4,
-    height: 30,
-  },
-  waveBar: {
-    borderRadius: 999,
-    width: 4,
-  },
-  playerButton: {
-    alignItems: 'center',
-    borderRadius: 18,
-    height: 40,
-    justifyContent: 'center',
-    width: 40,
-  },
-  stickyHeaderWrapper: {
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    zIndex: 10,
-  },
-  stickyHeaderHidden: {
-    opacity: 0,
-  },
   scrollTopButton: {
     alignItems: 'center',
     borderRadius: 22,
     bottom: 75,
-    height: 36,
+    height: 48,
     justifyContent: 'center',
     position: 'absolute',
     right: 5,
-    width: 36,
+    width: 48,
     zIndex: 12,
   },
   playAllButton: {
     alignItems: 'center',
     borderRadius: 22,
     bottom: 75,
-    height: 36,
+    height: 48,
     justifyContent: 'center',
     left: 5,
     position: 'absolute',
-    width: 36,
+    width: 48,
     zIndex: 12,
   },
 });

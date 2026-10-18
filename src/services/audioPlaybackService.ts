@@ -1,15 +1,33 @@
 import TrackPlayer, {Event} from 'react-native-track-player';
-
-module.exports = async () => {
+import {
+  playback,
+  persistPlayback,
+  playbackFailed,
+} from '../features/audio/controller';
+export default async function audioPlaybackService() {
   TrackPlayer.addEventListener(Event.RemotePlay, () => {
-    void TrackPlayer.play();
+    void playback.play();
   });
-
   TrackPlayer.addEventListener(Event.RemotePause, () => {
-    void TrackPlayer.pause();
+    void playback.pause();
   });
-
   TrackPlayer.addEventListener(Event.RemoteStop, () => {
-    void TrackPlayer.reset();
+    void playback.stop();
   });
-};
+  TrackPlayer.addEventListener(Event.RemoteSeek, e => {
+    void playback.seek(e.position);
+  });
+  TrackPlayer.addEventListener(Event.RemoteNext, () => {
+    void playback.next();
+  });
+  TrackPlayer.addEventListener(Event.RemotePrevious, () => {
+    void playback.previous();
+  });
+  TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, () => {
+    void persistPlayback().catch(playbackFailed);
+  });
+  TrackPlayer.addEventListener(Event.PlaybackActiveTrackChanged, () => {
+    void persistPlayback().catch(playbackFailed);
+  });
+  TrackPlayer.addEventListener(Event.PlaybackError, playbackFailed);
+}

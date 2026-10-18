@@ -1,0 +1,246 @@
+[
+  {
+    "at": 1792329091173,
+    "event": "scenario-start",
+    "detail": {
+      "scenario": "foundation-pause"
+    }
+  },
+  {
+    "at": 1792329091817,
+    "event": "foundation-migration",
+    "detail": {
+      "counters": 207,
+      "theme": "light",
+      "onboarding": 1,
+      "guidance": true,
+      "receipt": {
+        "migrationId": "legacy-v2",
+        "fromVersion": 1,
+        "toVersion": 2,
+        "inputHash": "4ed053c3774926cd3835fafb427a2281039adcf8b10149d059bde3a6be825b8f",
+        "legacyBackupPath": "recovery/legacy-v2-4ed053c3774926cd3835fafb427a2281039adcf8b10149d059bde3a6be825b8f.json",
+        "committedAt": 1792327277009,
+        "unmappedCount": 0
+      }
+    }
+  },
+  {
+    "at": 1792329092654,
+    "event": "foundation-sqlite",
+    "detail": {
+      "rollback": "before",
+      "reopen": "before"
+    }
+  },
+  {
+    "at": 1792329096620,
+    "event": "foundation-paused",
+    "detail": {
+      "jobs": [
+        {
+          "jobId": "foundation-probe.audio@1",
+          "assetId": "audio",
+          "packId": "foundation-probe",
+          "version": "1",
+          "nativeTaskId": null,
+          "generation": 4,
+          "state": "installing",
+          "pauseReason": null,
+          "relativeTempPath": "staging/foundation-probe.audio@1.part",
+          "relativeFinalPath": "content/foundation-probe/1/audio.mp3",
+          "bytesReceived": 90742,
+          "expectedBytes": 90742,
+          "expectedHash": "7174e5809c1a81660919578243c92caf5641fd2456d6336a142455dee9f19489",
+          "etag": null,
+          "lastModified": null,
+          "attempt": 1,
+          "errorCode": null,
+          "consentNetworkPolicy": "wifi",
+          "updatedAt": 1792327322324,
+          "retryAt": 0
+        },
+        {
+          "jobId": "foundation-probe.data@1",
+          "assetId": "data",
+          "packId": "foundation-probe",
+          "version": "1",
+          "nativeTaskId": "roqia.foundation-probe.data@1.10",
+          "generation": 11,
+          "state": "paused_user",
+          "pauseReason": "user",
+          "relativeTempPath": "staging/foundation-probe.data@1.part",
+          "relativeFinalPath": "content/foundation-probe/1/data.json",
+          "bytesReceived": 24416,
+          "expectedBytes": 2097220,
+          "expectedHash": "da09cb43f9bd6a9b1f3cd03615c1347472c2971e045f08dc2a5b973aa5b4b24f",
+          "etag": null,
+          "lastModified": null,
+          "attempt": 1,
+          "errorCode": null,
+          "consentNetworkPolicy": "wifi",
+          "updatedAt": 1792329096036,
+          "retryAt": 0
+        }
+      ]
+    }
+  },
+  {
+    "at": 1792329096880,
+    "event": "scenario-finished",
+    "detail": {
+      "scenario": "foundation-pause"
+    }
+  },
+  {
+    "at": 1792329138345,
+    "event": "scenario-start",
+    "detail": {
+      "scenario": "foundation-resume"
+    }
+  },
+  {
+    "at": 1792329140262,
+    "event": "foundation-migration",
+    "detail": {
+      "counters": 207,
+      "theme": "light",
+      "onboarding": 1,
+      "guidance": true,
+      "receipt": {
+        "migrationId": "legacy-v2",
+        "fromVersion": 1,
+        "toVersion": 2,
+        "inputHash": "4ed053c3774926cd3835fafb427a2281039adcf8b10149d059bde3a6be825b8f",
+        "legacyBackupPath": "recovery/legacy-v2-4ed053c3774926cd3835fafb427a2281039adcf8b10149d059bde3a6be825b8f.json",
+        "committedAt": 1792327277009,
+        "unmappedCount": 0
+      }
+    }
+  },
+  {
+    "at": 1792329141109,
+    "event": "foundation-sqlite",
+    "detail": {
+      "rollback": "before",
+      "reopen": "before"
+    }
+  },
+  {
+    "at": 1792329142312,
+    "event": "foundation-recovered-pause",
+    "detail": {
+      "state": "paused_user"
+    }
+  },
+  {
+    "at": 1792329147653,
+    "event": "foundation-installed",
+    "detail": {
+      "jobs": [
+        {
+          "jobId": "foundation-probe.audio@1",
+          "assetId": "audio",
+          "packId": "foundation-probe",
+          "version": "1",
+          "nativeTaskId": null,
+          "generation": 4,
+          "state": "ready",
+          "pauseReason": null,
+          "relativeTempPath": "staging/foundation-probe.audio@1.part",
+          "relativeFinalPath": "content/foundation-probe/1/audio.mp3",
+          "bytesReceived": 90742,
+          "expectedBytes": 90742,
+          "expectedHash": "7174e5809c1a81660919578243c92caf5641fd2456d6336a142455dee9f19489",
+          "etag": null,
+          "lastModified": null,
+          "attempt": 1,
+          "errorCode": null,
+          "consentNetworkPolicy": "wifi",
+          "updatedAt": 1792327322324,
+          "retryAt": 0
+        },
+        {
+          "jobId": "foundation-probe.data@1",
+          "assetId": "data",
+          "packId": "foundation-probe",
+          "version": "1",
+          "nativeTaskId": null,
+          "generation": 13,
+          "state": "ready",
+          "pauseReason": null,
+          "relativeTempPath": "staging/foundation-probe.data@1.part",
+          "relativeFinalPath": "content/foundation-probe/1/data.json",
+          "bytesReceived": 2097220,
+          "expectedBytes": 2097220,
+          "expectedHash": "da09cb43f9bd6a9b1f3cd03615c1347472c2971e045f08dc2a5b973aa5b4b24f",
+          "etag": null,
+          "lastModified": null,
+          "attempt": 1,
+          "errorCode": null,
+          "consentNetworkPolicy": "wifi",
+          "updatedAt": 1792329145594,
+          "retryAt": 0
+        }
+      ],
+      "installed": {
+        "active": true,
+        "packId": "foundation-probe",
+        "version": "1",
+        "relativeDirectory": "content/foundation-probe/1",
+        "manifestHash": "da09cb43f9bd6a9b1f3cd03615c1347472c2971e045f08dc2a5b973aa5b4b24f",
+        "capabilities": [
+          "fixture"
+        ],
+        "state": "ready",
+        "activatedAt": 1792329147465,
+        "sourceMetadata": {
+          "source": "local-debug-fixture"
+        },
+        "files": [
+          "content/foundation-probe/1/data.json",
+          "content/foundation-probe/1/audio.mp3"
+        ]
+      },
+      "usage": {
+        "installed": 2187962,
+        "partial": 0,
+        "free": 661065728
+      }
+    }
+  },
+  {
+    "at": 1792329149837,
+    "event": "foundation-before-delete",
+    "detail": {
+      "state": {
+        "state": "paused"
+      },
+      "progress": {
+        "position": 1.362,
+        "buffered": 5.668,
+        "duration": 5.668
+      }
+    }
+  },
+  {
+    "at": 1792329150183,
+    "event": "foundation-deleted",
+    "detail": {
+      "queueLength": 0,
+      "usage": {
+        "installed": 0,
+        "partial": 0,
+        "free": 744267776
+      },
+      "bookmarksRetained": true
+    }
+  },
+  {
+    "at": 1792329150186,
+    "event": "scenario-finished",
+    "detail": {
+      "scenario": "foundation-resume"
+    }
+  }
+]

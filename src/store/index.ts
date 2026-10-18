@@ -1,4 +1,6 @@
 import {createContext} from 'react';
+import {palettes} from '../design/tokens';
+import {type ThemePreference} from '../repositories/models';
 
 import {adkarData, type DataProps, data, duaaData, tasbihatData} from '../data';
 
@@ -7,6 +9,8 @@ export type Themes = typeof themes;
 export type ContextState = {
   mode: Mode;
   toggleMode: () => void;
+  preference: ThemePreference;
+  setPreference: (mode: ThemePreference) => void;
 };
 
 export type RepeatCounts = Record<string, number>;
@@ -18,50 +22,41 @@ export type RepeatContextState = {
   resetAllRepeats: () => void;
 };
 
-const makeInitialRepeatContextState = (counts: RepeatCounts): RepeatContextState => ({
+const makeInitialRepeatContextState = (
+  counts: RepeatCounts,
+): RepeatContextState => ({
   repeatCounts: counts,
   decrementRepeat: () => undefined,
   resetRepeats: () => undefined,
   resetAllRepeats: () => undefined,
 });
 
+const legacyTheme = (p: typeof palettes.light) => ({
+  bg: p.background,
+  secondaryBg: p.surfaceMuted,
+  activeBg: p.actionPrimary,
+  color: p.textPrimary,
+  secondaryColor: p.textOnAction,
+  tertiaryColor: p.iconPrimary,
+});
 export const themes = {
-  dark: {
-    bg: '#161A18',
-    secondaryBg: '#202621',
-    activeBg: '#234232',
-    color: '#B8C3B6',
-    secondaryColor: '#F5EFE6',
-    tertiaryColor: '#8FBF9A',
-  },
-  light: {
-    bg: '#fff',
-    secondaryBg: '#E8DFCA',
-    activeBg: '#1A4D2E',
-    color: '#17202A',
-    secondaryColor: '#F5EFE6',
-    tertiaryColor: '#1A4D2E',
-  },
+  light: legacyTheme(palettes.light),
+  dark: legacyTheme(palettes.dark),
 };
 
 const initialContextState: ContextState = {
   mode: 'light',
+  preference: 'system',
+  setPreference: () => undefined,
   toggleMode: () => undefined,
 };
 
+// Legacy arguments remain temporarily for existing callers; identity comes only from the explicit ID.
 export const getRepeatItemKey = (
-  item: Pick<DataProps, 'audioFile' | 'caption' | 'category' | 'content'>,
-  index: number,
-  scope = 'default',
-) =>
-  [
-    scope,
-    item.category ?? 'NoCategory',
-    item.caption ?? 'NoCaption',
-    item.audioFile ?? 'NoAudio',
-    item.content ?? String(index),
-    String(index),
-  ].join('::');
+  item: Pick<DataProps, 'id'>,
+  _index?: number,
+  _scope?: string,
+) => item.id;
 
 export const createInitialRepeatCounts = (): RepeatCounts => {
   const homeCounts = createRepeatCountsForItems(data, 'data');
@@ -96,8 +91,9 @@ const initialRepeatContextState: RepeatContextState = {
 export const themeContext = createContext<ContextState>(initialContextState);
 
 /** @deprecated Use one of the scoped contexts instead */
-export const repeatContext =
-  createContext<RepeatContextState>(initialRepeatContextState);
+export const repeatContext = createContext<RepeatContextState>(
+  initialRepeatContextState,
+);
 
 export const homeRepeatContext = createContext<RepeatContextState>(
   makeInitialRepeatContextState(createRepeatCountsForItems(data, 'data')),
@@ -109,5 +105,7 @@ export const duaaRepeatContext = createContext<RepeatContextState>(
   makeInitialRepeatContextState(createRepeatCountsForItems(duaaData, 'duaa')),
 );
 export const tasbihatRepeatContext = createContext<RepeatContextState>(
-  makeInitialRepeatContextState(createRepeatCountsForItems(tasbihatData, 'tasbihat')),
+  makeInitialRepeatContextState(
+    createRepeatCountsForItems(tasbihatData, 'tasbihat'),
+  ),
 );

@@ -1,222 +1,186 @@
-import React, {useContext} from 'react';
-import {ImageBackground, Linking, StyleSheet} from 'react-native';
-import {DefaultTheme, NavigationContainer, type LinkingOptions} from '@react-navigation/native';
+import React, {useContext, useEffect, useRef} from 'react';
+import {I18nManager, Pressable, View} from 'react-native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import {
   createBottomTabNavigator,
+  type BottomTabBarProps,
 } from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/FontAwesome6';
-
-import {AboutScreen, HomeScreen, AdkarScreen, DuaaScreen, TasbihatScreen} from '../screens';
-import {themeContext, themes} from '../store';
-import {getInitialNotificationDeepLink, subscribeToNotificationDeepLinks} from '../services/notifications';
-
-const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
-
-const linking: LinkingOptions<any> = {
-  prefixes: ['roqia://'],
-  async getInitialURL() {
-    const initialUrl = await Linking.getInitialURL();
-
-    if (initialUrl) {
-      return initialUrl;
-    }
-
-    return getInitialNotificationDeepLink();
-  },
-  subscribe(listener) {
-    const linkingSubscription = Linking.addEventListener('url', ({url}) => {
-      listener(url);
-    });
-    const unsubscribeNotifee = subscribeToNotificationDeepLinks(listener);
-
-    return () => {
-      linkingSubscription.remove();
-      unsubscribeNotifee();
-    };
-  },
-  config: {
-    screens: {
-      MainTabs: {
-        screens: {
-          Home: {
-            path: 'home',
-          },
-          Adkar: {
-            path: 'adkar',
-            screens: {
-              AdkarHome: '',
-              Morning: 'morning',
-              Night: 'night',
-              BeforeSleep: 'before-sleep',
-            },
-          },
-        },
-      },
-      DuaaDrawer: 'duaa',
-      TasbihatDrawer: 'tasbihat',
-      AboutDrawer: 'about',
-    },
-  },
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {HomeScreen, DuaaScreen, TasbihatScreen, AboutScreen} from '../screens';
+import {AdkarMenuScreen, AdkarCategoryScreen} from '../screens/AdkarScreen';
+import {
+  MoreScreen,
+  QuranScreen,
+  PrayerScreen,
+  SettingsScreen,
+  RecoveryScreen,
+} from '../screens/FoundationScreens';
+import {StorageScreen, DownloadsScreen} from '../features/downloads/Screens';
+import {MiniPlayer, PlayerScreen} from '../features/audio/Player';
+import {AppIcon, AppText, usePalette, type IconName} from '../design/ui';
+import {themeContext} from '../store';
+import {consumeLinks} from './linkInbox';
+import {resolveLink, type Tabs, type RootRoutes} from './routes';
+const Tab = createBottomTabNavigator<Tabs>(),
+  Stack = createNativeStackNavigator<RootRoutes>();
+const labels: Record<keyof Tabs, {title: string; icon: IconName}> = {
+  Home: {title: 'الرقية', icon: 'shield'},
+  Adkar: {title: 'الأذكار', icon: 'sun'},
+  Quran: {title: 'القرآن', icon: 'book'},
+  Prayer: {title: 'الصلاة', icon: 'mosque'},
+  More: {title: 'المزيد', icon: 'more'},
 };
-
-const MainTabs = () => {
-  const {mode} = useContext(themeContext);
-  const theme = themes[mode];
-
+function TabBar({state, navigation: tabs}: BottomTabBarProps) {
+  const p = usePalette();
+  return (
+    <View
+      style={{
+        backgroundColor: p.surface,
+        borderTopWidth: 1,
+        borderColor: p.borderSubtle,
+      }}>
+      <MiniPlayer onOpen={() => tabs.getParent()?.navigate('Player')} />
+      <View style={{flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse'}}>
+        {state.routes.map((route, index) => {
+          const selected = state.index === index,
+            meta = labels[route.name as keyof Tabs];
+          return (
+            <Pressable
+              key={route.key}
+              accessibilityRole="tab"
+              accessibilityLabel={meta.title}
+              accessibilityState={{selected}}
+              onPress={() => {
+                const e = tabs.emit({
+                  type: 'tabPress',
+                  target: route.key,
+                  canPreventDefault: true,
+                });
+                if (!e.defaultPrevented) tabs.navigate(route.name);
+              }}
+              style={{
+                flex: 1,
+                minHeight: 64,
+                paddingVertical: 8,
+                alignItems: 'center',
+                gap: 4,
+                backgroundColor: selected ? p.surfaceMuted : p.surface,
+              }}>
+              <AppIcon
+                name={meta.icon}
+                color={selected ? p.iconPrimary : p.textSecondary}
+              />
+              <AppText
+                role="tabLabel"
+                style={{
+                  textAlign: 'center',
+                  color: selected ? p.textPrimary : p.textSecondary,
+                }}>
+                {meta.title}
+              </AppText>
+            </Pressable>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+function MainTabs() {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
-        headerShown: false,
-        sceneStyle: {
-          backgroundColor: 'transparent',
-        },
-        tabBarPressColor:
-          mode === 'dark' ? 'rgba(184, 195, 182, 0.16)' : 'rgba(26, 77, 46, 0.12)',
-        tabBarIcon: ({color, size}) => {
-          const iconByRoute = {
-            Home: 'book-quran',
-            Adkar: 'clock',
-          } as const;
-
-          const iconName = iconByRoute[route.name as keyof typeof iconByRoute] ?? 'home';
-          return <Icon name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: theme.tertiaryColor,
-        tabBarInactiveTintColor: theme.color,
-        tabBarStyle: {
-          backgroundColor: 'transparent',
-          borderTopColor: 'transparent',
-          borderTopWidth: 0,
-          paddingBottom: 8,
-          paddingTop: 8,
-          height: 60,
-          position: 'absolute',
-          elevation: 0,
-          shadowColor: 'transparent',
-          shadowOpacity: 0,
-          shadowOffset: {
-            width: 0,
-            height: 0,
-          },
-          shadowRadius: 0,
-        },
-        tabBarBackground: () => (
-          <ImageBackground
-            source={require('../assets/images/arabesque.png')}
-            style={[styles.tabBackground, {backgroundColor: theme.secondaryBg}]}
-            imageStyle={styles.tabBackgroundImage}
-          />
-        ),
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontFamily: 'NotoSansArabic',
-          fontWeight: '700',
-        },
-      })}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarAccessibilityLabel: 'تبويب الرقية',
-          tabBarLabel: 'الرقية',
-        }}
-      />
+      tabBar={props => <TabBar {...props} />}
+      screenOptions={{headerShown: false}}>
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen
         name="Adkar"
-        component={AdkarScreen}
-        options={{
-          popToTopOnBlur: true,
-          tabBarAccessibilityLabel: 'تبويب الأذكار',
-          tabBarLabel: 'أذكار',
-        }}
+        component={AdkarMenuScreen as React.ComponentType<any>}
       />
+      <Tab.Screen name="Quran" component={QuranScreen} />
+      <Tab.Screen name="Prayer" component={PrayerScreen} />
+      <Tab.Screen name="More" component={MoreScreen} />
     </Tab.Navigator>
   );
-};
-
-export const MainTabNavigation = () => {
-  const {mode} = useContext(themeContext);
-  const navigationTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: 'transparent',
-      card: 'transparent',
-    },
+}
+function withPlayer(Component: React.ComponentType<any>) {
+  return function Detail(props: any) {
+    return (
+      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
+          <Component {...props} />
+        </View>
+        <MiniPlayer onOpen={() => props.navigation.navigate('Player')} />
+      </View>
+    );
   };
-
+}
+const details = {
+  Morning: withPlayer(AdkarCategoryScreen),
+  Night: withPlayer(AdkarCategoryScreen),
+  BeforeSleep: withPlayer(AdkarCategoryScreen),
+  Duaa: withPlayer(DuaaScreen),
+  Tasbihat: withPlayer(TasbihatScreen),
+  About: withPlayer(AboutScreen),
+  Settings: withPlayer(SettingsScreen),
+  Downloads: withPlayer(DownloadsScreen),
+  Storage: withPlayer(StorageScreen),
+  Recovery: withPlayer(RecoveryScreen),
+};
+export function MainTabNavigation() {
+  const navigation = useNavigationContainerRef<RootRoutes>();
+  const {mode} = useContext(themeContext),
+    p = usePalette(),
+    unsubscribe = useRef<(() => void) | undefined>(undefined);
+  useEffect(() => () => unsubscribe.current?.(), []);
   return (
-    <NavigationContainer linking={linking} theme={navigationTheme}>
-      <Drawer.Navigator
+    <NavigationContainer
+      ref={navigation}
+      theme={{
+        ...DefaultTheme,
+        dark: mode === 'dark',
+        colors: {
+          ...DefaultTheme.colors,
+          background: p.background,
+          card: p.surface,
+          text: p.textPrimary,
+          primary: p.actionPrimary,
+          border: p.borderSubtle,
+        },
+      }}
+      onReady={() => {
+        unsubscribe.current = consumeLinks(url => {
+          if (!navigation.isReady()) return false;
+          const target = resolveLink(url);
+          if ('tab' in target)
+            navigation.navigate('MainTabs', {screen: target.tab});
+          else if ('recovery' in target)
+            navigation.navigate('Recovery', {reason: target.recovery});
+          else navigation.navigate(target.screen);
+          return true;
+        });
+      }}>
+      <Stack.Navigator
         screenOptions={{
-          drawerPosition: 'right',
-          drawerType: 'slide',
           headerShown: false,
-          drawerActiveTintColor: themes[mode].tertiaryColor,
-          drawerInactiveTintColor: themes[mode].color,
-          drawerStyle: {
-            width: '50%',
-            backgroundColor: themes[mode].secondaryBg,
-          },
-          drawerLabelStyle: {
-            fontFamily: 'NotoSansArabic',
-            fontSize: 12,
-            fontWeight: '700',
-            color: themes[mode].tertiaryColor,
-          },
-          drawerItemStyle: {
-            borderRadius: 10,
-            marginHorizontal: 0,
-          },
-          overlayColor: mode === 'dark' ? 'rgba(0, 0, 0, 0.45)' : 'rgba(0, 0, 0, 0.22)',
+          contentStyle: {backgroundColor: p.background},
+          animation: 'none',
         }}>
-        <Drawer.Screen
-          component={MainTabs}
-          name="MainTabs"
-          options={{
-            drawerItemStyle: {display: 'none'},
-            swipeEdgeWidth: 24,
-          }}
-        />
-        <Drawer.Screen
-          component={DuaaScreen}
-          name="DuaaDrawer"
-          options={{
-            drawerLabel: 'الأدعية',
-            drawerIcon: ({size}) => <Icon color={themes[mode].tertiaryColor} name="hands-holding" size={size} />,
-            title: 'الأدعية',
-          }}
-        />
-        <Drawer.Screen
-          component={TasbihatScreen}
-          name="TasbihatDrawer"
-          options={{
-            drawerLabel: 'التسبيحات',
-            drawerIcon: ({size}) => <Icon color={themes[mode].tertiaryColor} name="spinner" size={size} />,
-            title: 'التسبيحات',
-          }}
-        />
-        <Drawer.Screen
-          component={AboutScreen}
-          name="AboutDrawer"
-          options={{
-            drawerLabel: 'نبذة',
-            drawerIcon: ({size}) => <Icon color={themes[mode].tertiaryColor} name="ellipsis" size={size} />,
-            title: 'نبذة',
-          }}
-        />
-      </Drawer.Navigator>
+        <Stack.Screen name="MainTabs" component={MainTabs} />
+        <Stack.Screen name="Morning" component={details.Morning} />
+        <Stack.Screen name="Night" component={details.Night} />
+        <Stack.Screen name="BeforeSleep" component={details.BeforeSleep} />
+        <Stack.Screen name="Duaa" component={details.Duaa} />
+        <Stack.Screen name="Tasbihat" component={details.Tasbihat} />
+        <Stack.Screen name="About" component={details.About} />
+        <Stack.Screen name="Settings" component={details.Settings} />
+        <Stack.Screen name="Downloads" component={details.Downloads} />
+        <Stack.Screen name="Storage" component={details.Storage} />
+        <Stack.Screen name="Player" component={PlayerScreen} />
+        <Stack.Screen name="Recovery" component={details.Recovery} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  tabBackground: {
-    flex: 1,
-  },
-  tabBackgroundImage: {
-    resizeMode: 'repeat',
-  },
-});
+}

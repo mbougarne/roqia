@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Android feasibility implementation in progress; source, editorial, timezone and device gates remain open",
+  "status": "Phase 2 shared foundations implemented and tested on Android; signed-release, source, editorial, accessibility and device acceptance remain explicitly open",
   "tickets": [
     {
       "id": "RQ-001",
@@ -29,7 +29,7 @@
     {
       "id": "RQ-002",
       "title": "Implement tokens and shared UI primitives",
-      "status": "planned",
+      "status": "done",
       "milestone": "M1",
       "dependsOn": [
         "RQ-001"
@@ -45,12 +45,17 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 11
+      "executionOrder": 11,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Shared semantic kit tokens, 53 SVG icons and text/button/card/row/header/sheet/state primitives are integrated. Genuine Arabic weights 400/500/600/700; light/dark/system themes; Android 320 dp and 200% text screenshots.",
+      "remaining": "Final per-screen parity and full accessibility review remain RQ-046; iOS native/build/device verification is deferred."
     },
     {
       "id": "RQ-003",
       "title": "Build five-tab shell and preserve deep links",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M1",
       "dependsOn": [
         "RQ-002"
@@ -72,12 +77,17 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 14
+      "executionOrder": 14,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Five RTL-ordered tabs and shared detail stack replace the drawer. Legacy URL aliases, cold/warm link buffering and invalid/missing-pack recovery are implemented. Android URL/back journeys and tab-free detail screens pass.",
+      "remaining": "Complete real notification-tap and TalkBack traversal acceptance with RQ-014/RQ-046. iOS native/build/device verification is deferred."
     },
     {
       "id": "RQ-004",
       "title": "Define stable IDs and local repository foundation",
-      "status": "planned",
+      "status": "done",
       "milestone": "M1",
       "dependsOn": [
         "RQ-001"
@@ -93,12 +103,17 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 12
+      "executionOrder": 12,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "207 permanent devotional IDs and reviewed historical aliases; pinned OP-SQLite 18.2.5, transactional repositories and serialized writes. Native Android rollback/reopen and real SQLite repository tests pass.",
+      "remaining": "iOS native integration/build/device verification is deferred."
     },
     {
       "id": "RQ-005",
       "title": "Migrate released state without data loss",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M1",
       "dependsOn": [
         "RQ-004"
@@ -118,7 +133,12 @@
         "architecture/MIGRATION.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 13
+      "executionOrder": 13,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Checksummed backup, atomic migration receipt, hydration barrier and recoverable save errors implemented. Populated Android debug upgrade preserved 207 counters from 293 legacy keys, theme and education flags. Rollback/retry/reset isolation tests pass.",
+      "remaining": "Actual signed Play production-artifact upgrade and notification delivery verification remain required with RQ-048. The emulator debug upgrade is not that evidence."
     },
     {
       "id": "RQ-006",
@@ -379,7 +399,7 @@
     {
       "id": "RQ-015",
       "title": "Complete accessibility and Arabic formatting foundation",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -404,7 +424,12 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 15
+      "executionOrder": 15,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Central latn number/time/byte formatting and Arabic plurals, forwarded Text props, genuine font weights, labelled 48 dp controls and motion-free shared controls. Both-theme Android 320 dp/200% text checks pass.",
+      "remaining": "Complete TalkBack traversal, Arabic-device-locale and mixed-direction reader checks when the final screens exist; full per-screen harakat and accessibility review remains RQ-046."
     },
     {
       "id": "RQ-016",
@@ -567,7 +592,7 @@
     {
       "id": "RQ-021",
       "title": "Implement durable download/install coordinator",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M3",
       "dependsOn": [
         "RQ-004",
@@ -590,12 +615,17 @@
         "specs/DOWNLOADS.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 16
+      "executionOrder": 16,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Durable coordinator implements deduplication, two transfers, bounded retries, network/user-pause separation, exact size/hash/signature verification, journaled whole-pack activation and recovery. Android native pause/process-restart/install/delete probe passes.",
+      "remaining": "Approved production catalog remains gated by RQ-019/RQ-047. Physical-device/background/network acceptance remains RQ-020/RQ-048. Resume restarts affected partial files from zero; verified range append is not claimed."
     },
     {
       "id": "RQ-022",
       "title": "Implement storage management and safe deletion",
-      "status": "planned",
+      "status": "done",
       "milestone": "M3",
       "dependsOn": [
         "RQ-021"
@@ -613,7 +643,12 @@
         "specs/DOWNLOADS.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 18
+      "executionOrder": 18,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Storage UI shows actual installed/partial/free bytes and selected-pack totals, confirms deletion and releases active/paused/queued audio before file removal. Native paused-file deletion and domain checks for unrelated packs, missing files and interrupted deletion pass.",
+      "remaining": "Physical-device release matrix remains RQ-048 and source-specific production packs remain gated. iOS verification is deferred."
     },
     {
       "id": "RQ-023",
@@ -882,7 +917,7 @@
     {
       "id": "RQ-033",
       "title": "Unify devotional and Quran playback",
-      "status": "planned",
+      "status": "done",
       "milestone": "M5",
       "dependsOn": [
         "RQ-004",
@@ -907,7 +942,12 @@
         "specs/AUDIO.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 17
+      "executionOrder": 17,
+      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "One serialized TrackPlayer controller now owns devotional playback and verified installed-audio playback. All original recording/array/repeat mappings are preserved; paused controls survive Android tab/detail navigation; explicit stop and deletion release are tested.",
+      "remaining": "Production Quran audio integration depends on approved RQ-031/RQ-034 assets. Full player UI is RQ-035; remaining physical-device/background acceptance stays RQ-032/RQ-048. iOS verification is deferred."
     },
     {
       "id": "RQ-034",

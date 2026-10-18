@@ -1,0 +1,1486 @@
+{
+  "rule": "Exact equality of all original fields, unique within original dataset. No fuzzy text matching. Current IDs are checked-in constants.",
+  "sources": [
+    {
+      "revision": "9fa3b6d",
+      "sourceSha256": "54094d688b45eef612be4825afd70160811b7da6c1a682b3791cd24fd3006770",
+      "added": 414
+    },
+    {
+      "revision": "153bda8fb4f18df8c583951050000201783db347",
+      "sourceSha256": "54094d688b45eef612be4825afd70160811b7da6c1a682b3791cd24fd3006770",
+      "added": 0
+    },
+    {
+      "revision": "25d46ba43662a3f8096c2562a9f5ceb18350704f",
+      "sourceSha256": "10d9c8d11bed2df54ff490e6a257d0c69f1f6e0d91c87a6c841b51fe3abcc941",
+      "added": 0
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "sourceSha256": "4f30ab3e95d6aeb38da19a375582df1696c0ec4613e1d8c694c814317245cc2d",
+      "added": 0
+    },
+    {
+      "revision": "e4bf720083342c1eafdc1879ffde2626fd21c3b4",
+      "sourceSha256": "41604ec038fc2d5af7f84103bf1004bba1b3f35746b2becbd402a1c64ab2a1cd",
+      "added": 0
+    },
+    {
+      "revision": "1ed06e19054744fd5ce81af862829678a848bc9e",
+      "sourceSha256": "ba0d3ea9a7544dbb707558a38ec22b91ee639b3810855a801b715eb878e8298b",
+      "added": 0
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "sourceSha256": "8fdfd090174ed43112cedd8cfcc339c608c0168306cec08ea5b911ed21fb34ca",
+      "added": 0
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "sourceSha256": "40969742d1ff0c16bf5f5f1a8b5c53fc1038dd7db6e22cd3652bb5af7b3b6e64",
+      "added": 2
+    },
+    {
+      "revision": "49308445f0490136f5b6c226f56bea85d5430e1c",
+      "sourceSha256": "cb36f5c1bf3f2d8955119a04d3b6d42cc79baa524d7eb507a502bc60c2a332a8",
+      "added": 0
+    },
+    {
+      "revision": "f4802c2d38dd9e3b3bbc95b6d34d44af2a86db12",
+      "sourceSha256": "567cc1abdd4e196f2e769d96cea6897695832074d0cf9ac4118d72271fcb26da",
+      "added": 0
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "sourceSha256": "64c910fa0c982adffa9ac8d839cf2eb98a6f2371b9c77c82fe4310c7450ca164",
+      "added": 0
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "sourceSha256": "f5709416dcc0233a04939640766f832fce676d45fd1b424543d52ddf97d73075",
+      "added": 0
+    },
+    {
+      "revision": "40f047f17121a56557ec73dbfb9ba931621c6008",
+      "sourceSha256": "801a67a04d63010918e3ec1e0c36f72de4650694fc8cce7e9ec7ea0b0bb4a805",
+      "added": 0
+    },
+    {
+      "revision": "8a9e454acdaccef1f4e7799a1be1405d545b13e1",
+      "sourceSha256": "d282ae51fe5cb6611f906a31d91e8ea7a7ed1b6fa9e336460223c0627d4805fa",
+      "added": 0
+    }
+  ],
+  "metadataOnlyAliases": [
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 8,
+      "contentId": "devotional.ruqya.0009",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 8,
+      "contentId": "devotional.ruqya.0009",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 9,
+      "contentId": "devotional.ruqya.0010",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 9,
+      "contentId": "devotional.ruqya.0010",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 10,
+      "contentId": "devotional.ruqya.0011",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 10,
+      "contentId": "devotional.ruqya.0011",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 11,
+      "contentId": "devotional.ruqya.0012",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 11,
+      "contentId": "devotional.ruqya.0012",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 12,
+      "contentId": "devotional.ruqya.0013",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 12,
+      "contentId": "devotional.ruqya.0013",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 13,
+      "contentId": "devotional.ruqya.0014",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 13,
+      "contentId": "devotional.ruqya.0014",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 14,
+      "contentId": "devotional.ruqya.0015",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 14,
+      "contentId": "devotional.ruqya.0015",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 15,
+      "contentId": "devotional.ruqya.0016",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 15,
+      "contentId": "devotional.ruqya.0016",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 16,
+      "contentId": "devotional.ruqya.0017",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 16,
+      "contentId": "devotional.ruqya.0017",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 17,
+      "contentId": "devotional.ruqya.0018",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 17,
+      "contentId": "devotional.ruqya.0018",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 18,
+      "contentId": "devotional.ruqya.0019",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 18,
+      "contentId": "devotional.ruqya.0019",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 19,
+      "contentId": "devotional.ruqya.0020",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 19,
+      "contentId": "devotional.ruqya.0020",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 20,
+      "contentId": "devotional.ruqya.0021",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 20,
+      "contentId": "devotional.ruqya.0021",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 21,
+      "contentId": "devotional.ruqya.0022",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 21,
+      "contentId": "devotional.ruqya.0022",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 23,
+      "contentId": "devotional.ruqya.0024",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 23,
+      "contentId": "devotional.ruqya.0024",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 24,
+      "contentId": "devotional.ruqya.0025",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 24,
+      "contentId": "devotional.ruqya.0025",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 25,
+      "contentId": "devotional.ruqya.0026",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 25,
+      "contentId": "devotional.ruqya.0026",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 26,
+      "contentId": "devotional.ruqya.0027",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 26,
+      "contentId": "devotional.ruqya.0027",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 27,
+      "contentId": "devotional.ruqya.0028",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 27,
+      "contentId": "devotional.ruqya.0028",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 28,
+      "contentId": "devotional.ruqya.0029",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 28,
+      "contentId": "devotional.ruqya.0029",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 29,
+      "contentId": "devotional.ruqya.0030",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 29,
+      "contentId": "devotional.ruqya.0030",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 30,
+      "contentId": "devotional.ruqya.0031",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 30,
+      "contentId": "devotional.ruqya.0031",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 32,
+      "contentId": "devotional.ruqya.0033",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 32,
+      "contentId": "devotional.ruqya.0033",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 33,
+      "contentId": "devotional.ruqya.0034",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d222b48224da50337709a4a3e100cd6614596cd",
+      "group": "data",
+      "index": 33,
+      "contentId": "devotional.ruqya.0034",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "data",
+      "index": 31,
+      "contentId": "devotional.ruqya.0032",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "data",
+      "index": 31,
+      "contentId": "devotional.ruqya.0032",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 12,
+      "contentId": "devotional.tasbih.0013",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 12,
+      "contentId": "devotional.tasbih.0013",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 13,
+      "contentId": "devotional.tasbih.0014",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 13,
+      "contentId": "devotional.tasbih.0014",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 14,
+      "contentId": "devotional.tasbih.0015",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 14,
+      "contentId": "devotional.tasbih.0015",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 15,
+      "contentId": "devotional.tasbih.0016",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 15,
+      "contentId": "devotional.tasbih.0016",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 16,
+      "contentId": "devotional.tasbih.0017",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "8d13a111382d3b1dc79cb3af7e56457b9da194ca",
+      "group": "tasbihatData",
+      "index": 16,
+      "contentId": "devotional.tasbih.0017",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "data",
+      "index": 35,
+      "contentId": "devotional.ruqya.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "data",
+      "index": 35,
+      "contentId": "devotional.ruqya.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "data",
+      "index": 36,
+      "contentId": "devotional.ruqya.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "data",
+      "index": 36,
+      "contentId": "devotional.ruqya.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "data",
+      "index": 37,
+      "contentId": "devotional.ruqya.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "data",
+      "index": 37,
+      "contentId": "devotional.ruqya.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 1,
+      "contentId": "devotional.adhkar.0002",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 1,
+      "contentId": "devotional.adhkar.0002",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 2,
+      "contentId": "devotional.adhkar.0003",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 2,
+      "contentId": "devotional.adhkar.0003",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 3,
+      "contentId": "devotional.adhkar.0004",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 3,
+      "contentId": "devotional.adhkar.0004",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 4,
+      "contentId": "devotional.adhkar.0005",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 4,
+      "contentId": "devotional.adhkar.0005",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 5,
+      "contentId": "devotional.adhkar.0006",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 5,
+      "contentId": "devotional.adhkar.0006",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 6,
+      "contentId": "devotional.adhkar.0007",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 6,
+      "contentId": "devotional.adhkar.0007",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 7,
+      "contentId": "devotional.adhkar.0008",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 7,
+      "contentId": "devotional.adhkar.0008",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 8,
+      "contentId": "devotional.adhkar.0009",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 8,
+      "contentId": "devotional.adhkar.0009",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 9,
+      "contentId": "devotional.adhkar.0010",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 9,
+      "contentId": "devotional.adhkar.0010",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 10,
+      "contentId": "devotional.adhkar.0011",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 10,
+      "contentId": "devotional.adhkar.0011",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 11,
+      "contentId": "devotional.adhkar.0012",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 11,
+      "contentId": "devotional.adhkar.0012",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 12,
+      "contentId": "devotional.adhkar.0013",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 12,
+      "contentId": "devotional.adhkar.0013",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 13,
+      "contentId": "devotional.adhkar.0014",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 13,
+      "contentId": "devotional.adhkar.0014",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 14,
+      "contentId": "devotional.adhkar.0015",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 14,
+      "contentId": "devotional.adhkar.0015",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 15,
+      "contentId": "devotional.adhkar.0016",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 15,
+      "contentId": "devotional.adhkar.0016",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 16,
+      "contentId": "devotional.adhkar.0017",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 16,
+      "contentId": "devotional.adhkar.0017",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 17,
+      "contentId": "devotional.adhkar.0018",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 17,
+      "contentId": "devotional.adhkar.0018",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 18,
+      "contentId": "devotional.adhkar.0019",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 18,
+      "contentId": "devotional.adhkar.0019",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 19,
+      "contentId": "devotional.adhkar.0020",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 19,
+      "contentId": "devotional.adhkar.0020",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 21,
+      "contentId": "devotional.adhkar.0022",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 21,
+      "contentId": "devotional.adhkar.0022",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 22,
+      "contentId": "devotional.adhkar.0023",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 22,
+      "contentId": "devotional.adhkar.0023",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 23,
+      "contentId": "devotional.adhkar.0024",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 23,
+      "contentId": "devotional.adhkar.0024",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 24,
+      "contentId": "devotional.adhkar.0025",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 24,
+      "contentId": "devotional.adhkar.0025",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 25,
+      "contentId": "devotional.adhkar.0026",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 25,
+      "contentId": "devotional.adhkar.0026",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 26,
+      "contentId": "devotional.adhkar.0027",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 26,
+      "contentId": "devotional.adhkar.0027",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 27,
+      "contentId": "devotional.adhkar.0028",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 27,
+      "contentId": "devotional.adhkar.0028",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 28,
+      "contentId": "devotional.adhkar.0029",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 28,
+      "contentId": "devotional.adhkar.0029",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 29,
+      "contentId": "devotional.adhkar.0030",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 29,
+      "contentId": "devotional.adhkar.0030",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 30,
+      "contentId": "devotional.adhkar.0031",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 30,
+      "contentId": "devotional.adhkar.0031",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 31,
+      "contentId": "devotional.adhkar.0032",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 31,
+      "contentId": "devotional.adhkar.0032",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 32,
+      "contentId": "devotional.adhkar.0033",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 32,
+      "contentId": "devotional.adhkar.0033",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 33,
+      "contentId": "devotional.adhkar.0034",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 33,
+      "contentId": "devotional.adhkar.0034",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 34,
+      "contentId": "devotional.adhkar.0035",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 34,
+      "contentId": "devotional.adhkar.0035",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 35,
+      "contentId": "devotional.adhkar.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 35,
+      "contentId": "devotional.adhkar.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 36,
+      "contentId": "devotional.adhkar.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 36,
+      "contentId": "devotional.adhkar.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 37,
+      "contentId": "devotional.adhkar.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 37,
+      "contentId": "devotional.adhkar.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 38,
+      "contentId": "devotional.adhkar.0039",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 38,
+      "contentId": "devotional.adhkar.0039",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 39,
+      "contentId": "devotional.adhkar.0040",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 39,
+      "contentId": "devotional.adhkar.0040",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 42,
+      "contentId": "devotional.adhkar.0044",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 42,
+      "contentId": "devotional.adhkar.0044",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 43,
+      "contentId": "devotional.adhkar.0045",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 43,
+      "contentId": "devotional.adhkar.0045",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 44,
+      "contentId": "devotional.adhkar.0046",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 44,
+      "contentId": "devotional.adhkar.0046",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 45,
+      "contentId": "devotional.adhkar.0047",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 45,
+      "contentId": "devotional.adhkar.0047",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 46,
+      "contentId": "devotional.adhkar.0048",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 46,
+      "contentId": "devotional.adhkar.0048",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 47,
+      "contentId": "devotional.adhkar.0049",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 47,
+      "contentId": "devotional.adhkar.0049",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 48,
+      "contentId": "devotional.adhkar.0050",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 48,
+      "contentId": "devotional.adhkar.0050",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 49,
+      "contentId": "devotional.adhkar.0051",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 49,
+      "contentId": "devotional.adhkar.0051",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 50,
+      "contentId": "devotional.adhkar.0052",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 50,
+      "contentId": "devotional.adhkar.0052",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 51,
+      "contentId": "devotional.adhkar.0053",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 51,
+      "contentId": "devotional.adhkar.0053",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 53,
+      "contentId": "devotional.adhkar.0055",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 53,
+      "contentId": "devotional.adhkar.0055",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 54,
+      "contentId": "devotional.adhkar.0056",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "56ecea101a7d98ea987790f95fde3c04c620c402",
+      "group": "adkarData",
+      "index": 54,
+      "contentId": "devotional.adhkar.0056",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 6,
+      "contentId": "devotional.ruqya.0007",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 6,
+      "contentId": "devotional.ruqya.0007",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 7,
+      "contentId": "devotional.ruqya.0008",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 7,
+      "contentId": "devotional.ruqya.0008",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 9,
+      "contentId": "devotional.ruqya.0010",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 9,
+      "contentId": "devotional.ruqya.0010",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 11,
+      "contentId": "devotional.ruqya.0012",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 11,
+      "contentId": "devotional.ruqya.0012",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 34,
+      "contentId": "devotional.ruqya.0035",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 34,
+      "contentId": "devotional.ruqya.0035",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 35,
+      "contentId": "devotional.ruqya.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 35,
+      "contentId": "devotional.ruqya.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 36,
+      "contentId": "devotional.ruqya.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 36,
+      "contentId": "devotional.ruqya.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 37,
+      "contentId": "devotional.ruqya.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "701711fe5d812b0ac97db0c64f9e778e9d2433b2",
+      "group": "data",
+      "index": 37,
+      "contentId": "devotional.ruqya.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 27,
+      "contentId": "devotional.ruqya.0029",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 27,
+      "contentId": "devotional.ruqya.0029",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 28,
+      "contentId": "devotional.ruqya.0032",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 28,
+      "contentId": "devotional.ruqya.0032",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 29,
+      "contentId": "devotional.ruqya.0035",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 29,
+      "contentId": "devotional.ruqya.0035",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 30,
+      "contentId": "devotional.ruqya.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 30,
+      "contentId": "devotional.ruqya.0036",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 31,
+      "contentId": "devotional.ruqya.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 31,
+      "contentId": "devotional.ruqya.0037",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 32,
+      "contentId": "devotional.ruqya.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    },
+    {
+      "revision": "c4fa38350fab1d3bb56ca30c7920c691dca5cdf3",
+      "group": "data",
+      "index": 32,
+      "contentId": "devotional.ruqya.0038",
+      "rule": "Exact unmodified content and category; unique in destination. Metadata-only changes."
+    }
+  ],
+  "explicitReviewedAliases": [
+    {
+      "revision": "14c029f",
+      "index": 0,
+      "contentId": "devotional.ruqya.0001",
+      "legacyRecordSha256": "c2ed1ee0aa3c397e463d0bd3bbf66d7f6c9bced1d852250de5b8f684dfd63ebc",
+      "evidence": "Diff 14c029f..1ed06e1 updates this same opening supplication and audio association."
+    },
+    {
+      "revision": "14c029f",
+      "index": 1,
+      "contentId": "devotional.ruqya.0002",
+      "legacyRecordSha256": "d72861aa1acc2ca8b271ab3e5fb42527f771332e1c9234fe2307f86ba9a2cc6a",
+      "evidence": "Diff 14c029f..1ed06e1 updates this same opening supplication and audio association."
+    },
+    {
+      "revision": "14c029f",
+      "index": 2,
+      "contentId": "devotional.ruqya.0003",
+      "legacyRecordSha256": "705fab28e2578bcf1150fbaac6c1c171bd08d7cc8c2dece1a60c5862afb0673a",
+      "evidence": "Diff 14c029f..1ed06e1 updates this same opening supplication and audio association."
+    },
+    {
+      "revision": "14c029f",
+      "index": 3,
+      "contentId": "devotional.ruqya.0004",
+      "legacyRecordSha256": "da4d39d32a6e480a49080805dade31afb4d3b2e6a779ad497fb24d3c9d0f47ea",
+      "evidence": "Diff 14c029f..1ed06e1 updates this same opening supplication and audio association."
+    },
+    {
+      "revision": "14c029f",
+      "index": 4,
+      "contentId": "devotional.ruqya.0005",
+      "legacyRecordSha256": "59741e377c471d43aeff7c00549e8980f92d5e6479152a831e5efada82004a4d",
+      "evidence": "Diff 14c029f..1ed06e1 updates this same opening supplication and audio association."
+    },
+    {
+      "revision": "14c029f",
+      "index": 5,
+      "contentId": "devotional.ruqya.0006",
+      "legacyRecordSha256": "22ba4ad861a977895bf283610f8b9e5aeb10adcf74ee7190de3b4f186cfdaadc",
+      "evidence": "Diff 14c029f..1ed06e1 updates this same opening supplication and audio association."
+    },
+    {
+      "revision": "14c029f",
+      "index": 22,
+      "contentId": "devotional.ruqya.0023",
+      "legacyRecordSha256": "b22847825b71a7c64caad167b9d13355a2a2cc2cb20ee7303c3dd64b9be79b0f",
+      "evidence": "Diff 1ed06e1..9fa3b6d expands Ghafir 44-45 within the same devotional entry."
+    }
+  ]
+}

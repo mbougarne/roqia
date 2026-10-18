@@ -1,10 +1,8 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import {
   Alert,
   FlatList,
-  Image,
   ImageBackground,
-  Platform,
   Pressable,
   StyleSheet,
   View,
@@ -13,13 +11,12 @@ import {
   createNativeStackNavigator,
   type NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import {type RouteProp, useIsFocused} from '@react-navigation/native';
-import Video from 'react-native-video';
+import {type RouteProp} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {audioAssets} from '../assets/audio';
 import {adkarData} from '../data';
-import {getPressableScaleStyle, Header, Section, StyledText} from '../components';
+import {Page, Row} from '../design/ui';
+import {getPressableScaleStyle, Header, Section} from '../components';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
 import {
   adkarRepeatContext,
@@ -37,7 +34,10 @@ type AdkarStackParamList = {
 
 type AdkarCategoryRouteName = Exclude<keyof AdkarStackParamList, 'AdkarHome'>;
 type AdkarCategoryScreenProps = {
-  navigation: NativeStackNavigationProp<AdkarStackParamList, AdkarCategoryRouteName>;
+  navigation: NativeStackNavigationProp<
+    AdkarStackParamList,
+    AdkarCategoryRouteName
+  >;
   route: RouteProp<AdkarStackParamList, AdkarCategoryRouteName>;
 };
 type AdkarMenuScreenProps = {
@@ -45,7 +45,10 @@ type AdkarMenuScreenProps = {
 };
 const Stack = createNativeStackNavigator<AdkarStackParamList>();
 
-const categoryConfig: Record<AdkarCategoryRouteName, {icon: string; title: string}> = {
+const categoryConfig: Record<
+  AdkarCategoryRouteName,
+  {icon: string; title: string}
+> = {
   Morning: {
     icon: 'wb-sunny',
     title: 'أذكار الصباح',
@@ -60,111 +63,84 @@ const categoryConfig: Record<AdkarCategoryRouteName, {icon: string; title: strin
   },
 };
 
-const AdkarMenuScreen = ({navigation}: AdkarMenuScreenProps) => {
-  const {mode} = useContext(themeContext);
-  const theme = themes[mode];
-  const onMenuPress = () => {
-    (navigation as any).openDrawer?.();
-    (navigation as any).getParent?.()?.openDrawer?.();
-    (navigation as any).getParent?.()?.getParent?.()?.openDrawer?.();
-  };
+export const AdkarMenuScreen = ({navigation}: AdkarMenuScreenProps) => (
+  <Page title="أذكار اليوم">
+    <Row
+      title="أذكار الصباح"
+      icon="sun"
+      onPress={() => navigation.navigate('Morning')}
+    />
+    <Row
+      title="أذكار المساء"
+      icon="moon"
+      onPress={() => navigation.navigate('Night')}
+    />
+    <Row
+      title="أذكار قبل النوم"
+      icon="bed"
+      onPress={() => navigation.navigate('BeforeSleep')}
+    />
+  </Page>
+);
 
-  return (
-    <View style={[styles.container, {backgroundColor: theme.bg}]}> 
-      <Header onMenuPress={onMenuPress} showMenuButton title="أذكار اليوم" />
-      <View style={styles.menuContainer}>
-        {(Object.keys(categoryConfig) as AdkarCategoryRouteName[]).map(routeName => {
-          const config = categoryConfig[routeName];
-
-          return (
-            <Pressable
-              accessibilityHint={`يفتح صفحة ${config.title}`}
-              accessibilityLabel={config.title}
-              accessibilityRole="button"
-              key={routeName}
-              onPress={() => navigation.navigate(routeName)}
-              style={({pressed}) => [
-                styles.menuButtonWrapper,
-                getPressableScaleStyle(pressed, 0.9, 0.98),
-              ]}>
-              <ImageBackground
-                source={require('../assets/images/arabesque.png')}
-                style={[styles.menuButton, {backgroundColor: theme.secondaryBg}]}
-                imageStyle={[
-                  styles.menuButtonBackground,
-                  mode === 'dark' && styles.darkMenuButtonBackground,
-                ]}>
-                <Icon color={theme.tertiaryColor} name={config.icon} size={34} />
-                <StyledText
-                  customStyle={[styles.menuButtonText, {color: theme.tertiaryColor}]}> 
-                  {config.title}
-                </StyledText>
-              </ImageBackground>
-            </Pressable>
-          );
-        })}
-      </View>
-    </View>
-  );
-};
-
-const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
+export const AdkarCategoryScreen = ({
+  navigation,
+  route,
+}: AdkarCategoryScreenProps) => {
   const listRef = useRef<FlatList<any>>(null);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const isFocused = useIsFocused();
   const {mode} = useContext(themeContext);
-  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(adkarRepeatContext);
+  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} =
+    useContext(adkarRepeatContext);
   const theme = themes[mode];
-  const filteredEntries = adkarData.reduce<Array<{item: (typeof adkarData)[number]; index: number}>>(
-    (acc, item, index) => {
-      if (item.category === route.name) {
-        acc.push({item, index});
-      }
+  const filteredEntries = adkarData.reduce<
+    Array<{item: (typeof adkarData)[number]; index: number}>
+  >((acc, item, index) => {
+    if (item.category === route.name) {
+      acc.push({item, index});
+    }
 
+    return acc;
+  }, []);
+  const categoryRepeatCounts = filteredEntries.reduce<Record<string, number>>(
+    (acc, entry) => {
+      acc[getRepeatItemKey(entry.item, entry.index, 'adkar')] =
+        entry.item.repeat ?? 0;
       return acc;
     },
-    [],
+    {},
   );
-  const categoryRepeatCounts = filteredEntries.reduce<Record<string, number>>((acc, entry) => {
-    acc[getRepeatItemKey(entry.item, entry.index, 'adkar')] = entry.item.repeat ?? 0;
-    return acc;
-  }, {});
-  const {
-    activeAudioFile,
-    isAudioPaused,
-    onAudioFinished,
-    onAudioPress,
-    playbackInstanceId,
-    stopPlayback,
-  } = useScreenAudioPlayback(filteredEntries.map(entry => entry.item));
-
-  useEffect(() => {
-    if (!isFocused) {
-      stopPlayback();
-    }
-  }, [isFocused, stopPlayback]);
+  const {activeAudioFile, isAudioPaused, onAudioPress} = useScreenAudioPlayback(
+    filteredEntries.map(entry => entry.item),
+  );
 
   const onResetScreenPress = () => {
-    Alert.alert('إعادة عدادات هذه الصفحة', 'سيتم إعادة جميع العدادات في هذا القسم إلى القيم الأصلية.', [
-      {text: 'إلغاء', style: 'cancel'},
-      {text: 'إعادة', style: 'destructive', onPress: () => resetRepeats(categoryRepeatCounts)},
-    ]);
+    Alert.alert(
+      'إعادة عدادات هذه الصفحة',
+      'سيتم إعادة جميع العدادات في هذا القسم إلى القيم الأصلية.',
+      [
+        {text: 'إلغاء', style: 'cancel'},
+        {
+          text: 'إعادة',
+          style: 'destructive',
+          onPress: () => resetRepeats(categoryRepeatCounts),
+        },
+      ],
+    );
   };
 
   const onResetAllPress = () => {
-    Alert.alert('إعادة جميع العدادات', 'سيتم إعادة جميع العدادات في التطبيق إلى القيم الأصلية.', [
-      {text: 'إلغاء', style: 'cancel'},
-      {text: 'إعادة الكل', style: 'destructive', onPress: resetAllRepeats},
-    ]);
+    Alert.alert(
+      'إعادة جميع العدادات',
+      'سيتم إعادة جميع العدادات في التطبيق إلى القيم الأصلية.',
+      [
+        {text: 'إلغاء', style: 'cancel'},
+        {text: 'إعادة الكل', style: 'destructive', onPress: resetAllRepeats},
+      ],
+    );
   };
 
-  const activeAudioSource = activeAudioFile ? audioAssets[activeAudioFile] : null;
-  const resolvedActiveAudioUri = activeAudioSource
-    ? Image.resolveAssetSource(activeAudioSource).uri
-    : activeAudioFile && Platform.OS === 'android'
-      ? `asset:/${activeAudioFile}`
-      : undefined;
   const onListScroll = (offsetY: number) => {
     const shouldShowSticky = offsetY > 170;
     const shouldShowScrollTop = shouldShowSticky && offsetY > 350;
@@ -188,8 +164,15 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
       style={[styles.container, {backgroundColor: theme.bg}]}
       imageStyle={styles.cover}>
       <View
+        importantForAccessibility={
+          showStickyHeader ? 'auto' : 'no-hide-descendants'
+        }
+        accessibilityElementsHidden={!showStickyHeader}
         pointerEvents={showStickyHeader ? 'auto' : 'none'}
-        style={[styles.stickyHeaderWrapper, !showStickyHeader && styles.stickyHeaderHidden]}>
+        style={[
+          styles.stickyHeaderWrapper,
+          !showStickyHeader && styles.stickyHeaderHidden,
+        ]}>
         <Header
           compact
           onBackPress={navigation.goBack}
@@ -244,22 +227,13 @@ const AdkarCategoryScreen = ({navigation, route}: AdkarCategoryScreenProps) => {
             styles.scrollTopButton,
             {backgroundColor: theme.activeBg},
             getPressableScaleStyle(pressed, 0.9, 0.94),
-          ]}> 
-          <Icon color={theme.secondaryColor} name="keyboard-double-arrow-up" size={22} />
+          ]}>
+          <Icon
+            color={theme.secondaryColor}
+            name="keyboard-double-arrow-up"
+            size={22}
+          />
         </Pressable>
-      ) : null}
-      {resolvedActiveAudioUri ? (
-        <Video
-          ignoreSilentSwitch="ignore"
-          key={`${activeAudioFile}-${playbackInstanceId}`}
-          onEnd={onAudioFinished}
-          onError={onAudioFinished}
-          paused={isAudioPaused}
-          playInBackground={false}
-          playWhenInactive={false}
-          source={{uri: resolvedActiveAudioUri}}
-          style={styles.hiddenPlayer}
-        />
       ) : null}
     </ImageBackground>
   );
@@ -321,10 +295,6 @@ const styles = StyleSheet.create({
   categoryListContent: {
     paddingBottom: 50,
   },
-  hiddenPlayer: {
-    width: 0,
-    height: 0,
-  },
   stickyHeaderWrapper: {
     left: 0,
     position: 'absolute',
@@ -339,11 +309,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 22,
     bottom: 75,
-    height: 36,
+    height: 48,
     justifyContent: 'center',
     position: 'absolute',
     right: 5,
-    width: 36,
+    width: 48,
     zIndex: 12,
   },
 });
