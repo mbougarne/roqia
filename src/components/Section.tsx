@@ -13,8 +13,7 @@ import {type DataProps} from '../data';
 import {getPressableScaleStyle} from './pressableStyles';
 import {type ContextState, themeContext, themes} from '../store';
 import {StyledText} from './StyledText';
-
-type AudioStatus = 'idle' | 'paused' | 'playing';
+import {number} from '../design/format';
 
 type SectionProp = DataProps & {
   activeAudioFile?: string | null;
@@ -25,243 +24,268 @@ type SectionProp = DataProps & {
   onAudioFilePress?: (fileName: string) => void;
 };
 
-export const Section: FC<SectionProp> = React.memo(item => {
-  const {mode} = useContext<ContextState>(themeContext);
-  const safeCount = Number.isFinite(item.count) ? Math.max(0, item.count) : item.repeat ?? 0;
-  const isDone = safeCount === 0;
-  const theme = themes[mode];
-  const sectionBackgroundColor = isDone
-    ? theme.activeBg
-    : mode === 'dark'
-      ? theme.secondaryBg
-      : theme.bg;
-  const canPlayAudio = !!item.audioFile && !!item.onAudioFilePress;
-  const hasPlaylist = !!item.audioArray?.length && !!item.onAudioFilePress;
-  const isSingleAudioPlaying =
-    !!item.audioFile && item.activeAudioFile === item.audioFile && !item.isAudioPaused;
+export const Section: FC<SectionProp> = React.memo(
+  item => {
+    const {mode} = useContext<ContextState>(themeContext);
+    const safeCount = Number.isFinite(item.count)
+      ? Math.max(0, item.count)
+      : (item.repeat ?? 0);
+    const isDone = safeCount === 0;
+    const theme = themes[mode];
+    const sectionBackgroundColor = isDone
+      ? theme.activeBg
+      : mode === 'dark'
+        ? theme.secondaryBg
+        : theme.bg;
+    const canPlayAudio = !!item.audioFile && !!item.onAudioFilePress;
+    const hasPlaylist = !!item.audioArray?.length && !!item.onAudioFilePress;
+    const isSingleAudioPlaying =
+      !!item.audioFile &&
+      item.activeAudioFile === item.audioFile &&
+      !item.isAudioPaused;
 
-  const onCopy = () => {
-    Clipboard.setString(item.content!);
-  };
+    const onCopy = () => {
+      Clipboard.setString(item.content!);
+    };
 
-  const onCopyPress = (event: GestureResponderEvent) => {
-    event.stopPropagation();
-    onCopy();
-  };
+    const onCopyPress = (event: GestureResponderEvent) => {
+      event.stopPropagation();
+      onCopy();
+    };
 
-  const onAudioButtonPress = (event: GestureResponderEvent) => {
-    event.stopPropagation();
-    if (item.audioFile) {
-      item.onAudioFilePress?.(item.audioFile);
-    }
-  };
+    const onAudioButtonPress = (event: GestureResponderEvent) => {
+      event.stopPropagation();
+      if (item.audioFile) {
+        item.onAudioFilePress?.(item.audioFile);
+      }
+    };
 
-  const onResetPress = (event: GestureResponderEvent) => {
-    event.stopPropagation();
-    item.onReset?.();
-  };
+    const onResetPress = (event: GestureResponderEvent) => {
+      event.stopPropagation();
+      item.onReset?.();
+    };
 
-  const onPlaylistAudioPress = (
-    event: GestureResponderEvent,
-    fileName: string,
-  ) => {
-    event.stopPropagation();
-    item.onAudioFilePress?.(fileName);
-  };
+    const onPlaylistAudioPress = (
+      event: GestureResponderEvent,
+      fileName: string,
+    ) => {
+      event.stopPropagation();
+      item.onAudioFilePress?.(fileName);
+    };
 
-  return (
-    <View style={styles.mainContainer}>
-      <ImageBackground
-        source={require('../assets/images/arabesque.png')}
-        style={[
-          styles.backgroundContainer,
-          {backgroundColor: sectionBackgroundColor},
-        ]}
-        imageStyle={[
-          styles.backgroundStyle,
-          mode === 'dark' && !isDone && styles.darkInactiveBackgroundStyle,
-        ]}>
-        <Pressable
-          accessibilityHint="ينقص العداد الحالي بمقدار واحد"
-          accessibilityLabel={`الذكر ${item.caption ?? ''}. المتبقي ${safeCount}`}
-          accessibilityRole="button"
-          onPress={item.onPress}
-          style={({pressed}) => [
-            styles.container,
-            getPressableScaleStyle(pressed, 0.92, 0.992),
+    return (
+      <View style={styles.mainContainer}>
+        <ImageBackground
+          source={require('../assets/images/arabesque.png')}
+          style={[
+            styles.backgroundContainer,
+            {backgroundColor: sectionBackgroundColor},
+          ]}
+          imageStyle={[
+            styles.backgroundStyle,
+            mode === 'dark' && !isDone && styles.darkInactiveBackgroundStyle,
           ]}>
-          <View>
-            {item.isStacked && item.note ? (
-              <StyledText
-                customStyle={[
-                  styles.note,
-                  {color: isDone ? theme.secondaryColor : theme.tertiaryColor},
-                ]}>
-                {item.note}
-              </StyledText>
-            ) : null}
-            <StyledText
-              customStyle={[
-                styles.caption,
-                {color: isDone ? theme.secondaryColor : theme.color},
-              ]}>
-              {item.caption}
-            </StyledText>
-            <StyledText
-              customStyle={[
-                styles.content,
-                {color: isDone ? theme.secondaryColor : theme.color},
-              ]}>
-              {item.content}
-            </StyledText>
-            <StyledText
-              customStyle={[
-                styles.repeat,
-                {color: isDone ? theme.secondaryColor : theme.color},
-              ]}>
-              {item.repeatDescription}
-            </StyledText>
-            {hasPlaylist ? (
-              <View style={styles.playlistContainer}>
-                {item.audioArray?.map(audioItem => {
-                  const isTrackPlaying =
-                    item.activeAudioFile === audioItem.fileName && !item.isAudioPaused;
-
-                  return (
-                    <Pressable
-                      accessibilityHint="يشغل أو يوقف المقطع الصوتي لهذا العنصر"
-                      accessibilityLabel={`تشغيل أو إيقاف ${audioItem.title}`}
-                      accessibilityRole="button"
-                      key={audioItem.fileName}
-                      onPress={event =>
-                        onPlaylistAudioPress(event, audioItem.fileName)
-                      }
-                      style={({pressed}) => [
-                        styles.playlistItem,
-                        getPressableScaleStyle(pressed, 0.82, 0.98),
-                      ]}>
-                      <StyledText
-                        customStyle={[
-                          styles.playlistTitle,
-                          {
-                            color: isDone ? theme.secondaryColor : theme.color,
-                          },
-                        ]}>
-                        {audioItem.title}
-                      </StyledText>
-                      <View style={styles.playlistAction}>
-                        <Icon
-                          name={isTrackPlaying ? 'pause' : 'play-arrow'}
-                          color={isDone ? theme.secondaryColor : theme.tertiaryColor}
-                          size={24}
-                        />
-                        <StyledText
-                          customStyle={[
-                            styles.audioText,
-                            {
-                              color: isDone ? theme.secondaryColor : theme.tertiaryColor,
-                            },
-                          ]}>
-                          {isTrackPlaying ? 'إيقاف' : 'إستمع'}
-                        </StyledText>
-                      </View>
-                    </Pressable>
-                  );
-                })}
-              </View>
-            ) : null}
-          </View>
-          <View style={styles.bottomContainer}>
-            <View style={styles.bottomItem}>
-              {isDone ? (
-                <Pressable
-                  accessibilityHint="يعيد هذا العداد إلى قيمته الأصلية"
-                  accessibilityLabel="إعادة عداد هذا الذكر"
-                  accessibilityRole="button"
-                  onPress={onResetPress}
-                  style={({pressed}) => [
-                    styles.resetButton,
-                    getPressableScaleStyle(pressed, 0.82, 0.94),
-                  ]}>
-                  <Icon
-                    name="restart-alt"
-                    color={theme.secondaryColor}
-                    size={24}
-                  />
-                  <StyledText
-                    customStyle={[
-                      styles.resetText,
-                      {color: theme.secondaryColor},
-                    ]}>
-                    إعادة
-                  </StyledText>
-                </Pressable>
-              ) : (
+          <Pressable
+            accessibilityHint="ينقص العداد الحالي بمقدار واحد"
+            accessibilityLabel={`الذكر ${item.caption ?? ''}. المتبقي ${number(safeCount)}`}
+            accessibilityRole="button"
+            onPress={item.onPress}
+            style={({pressed}) => [
+              styles.container,
+              getPressableScaleStyle(pressed, 0.92, 0.992),
+            ]}>
+            <View>
+              {item.isStacked && item.note ? (
                 <StyledText
                   customStyle={[
-                    styles.repeatNumber,
+                    styles.note,
                     {
-                      color: theme.tertiaryColor,
+                      color: isDone
+                        ? theme.secondaryColor
+                        : theme.tertiaryColor,
                     },
                   ]}>
-                  {safeCount}
+                  {item.note}
                 </StyledText>
-              )}
+              ) : null}
+              <StyledText
+                customStyle={[
+                  styles.caption,
+                  {color: isDone ? theme.secondaryColor : theme.color},
+                ]}>
+                {item.caption}
+              </StyledText>
+              <StyledText
+                customStyle={[
+                  styles.content,
+                  {color: isDone ? theme.secondaryColor : theme.color},
+                ]}>
+                {item.content}
+              </StyledText>
+              <StyledText
+                customStyle={[
+                  styles.repeat,
+                  {color: isDone ? theme.secondaryColor : theme.color},
+                ]}>
+                {item.repeatDescription}
+              </StyledText>
+              {hasPlaylist ? (
+                <View style={styles.playlistContainer}>
+                  {item.audioArray?.map(audioItem => {
+                    const isTrackPlaying =
+                      item.activeAudioFile === audioItem.fileName &&
+                      !item.isAudioPaused;
+
+                    return (
+                      <Pressable
+                        accessibilityHint="يشغل أو يوقف المقطع الصوتي لهذا العنصر"
+                        accessibilityLabel={`تشغيل أو إيقاف ${audioItem.title}`}
+                        accessibilityRole="button"
+                        key={audioItem.fileName}
+                        onPress={event =>
+                          onPlaylistAudioPress(event, audioItem.fileName)
+                        }
+                        style={({pressed}) => [
+                          styles.playlistItem,
+                          getPressableScaleStyle(pressed, 0.82, 0.98),
+                        ]}>
+                        <StyledText
+                          customStyle={[
+                            styles.playlistTitle,
+                            {
+                              color: isDone
+                                ? theme.secondaryColor
+                                : theme.color,
+                            },
+                          ]}>
+                          {audioItem.title}
+                        </StyledText>
+                        <View style={styles.playlistAction}>
+                          <Icon
+                            name={isTrackPlaying ? 'pause' : 'play-arrow'}
+                            color={
+                              isDone
+                                ? theme.secondaryColor
+                                : theme.tertiaryColor
+                            }
+                            size={24}
+                          />
+                          <StyledText
+                            customStyle={[
+                              styles.audioText,
+                              {
+                                color: isDone
+                                  ? theme.secondaryColor
+                                  : theme.tertiaryColor,
+                              },
+                            ]}>
+                            {isTrackPlaying ? 'إيقاف' : 'إستمع'}
+                          </StyledText>
+                        </View>
+                      </Pressable>
+                    );
+                  })}
+                </View>
+              ) : null}
             </View>
-            <View style={styles.bottomItem}>
-              {canPlayAudio ? (
+            <View style={styles.bottomContainer}>
+              <View style={styles.bottomItem}>
+                {isDone ? (
+                  <Pressable
+                    accessibilityHint="يعيد هذا العداد إلى قيمته الأصلية"
+                    accessibilityLabel="إعادة عداد هذا الذكر"
+                    accessibilityRole="button"
+                    onPress={onResetPress}
+                    style={({pressed}) => [
+                      styles.resetButton,
+                      getPressableScaleStyle(pressed, 0.82, 0.94),
+                    ]}>
+                    <Icon
+                      name="restart-alt"
+                      color={theme.secondaryColor}
+                      size={24}
+                    />
+                    <StyledText
+                      customStyle={[
+                        styles.resetText,
+                        {color: theme.secondaryColor},
+                      ]}>
+                      إعادة
+                    </StyledText>
+                  </Pressable>
+                ) : (
+                  <StyledText
+                    customStyle={[
+                      styles.repeatNumber,
+                      {
+                        color: theme.tertiaryColor,
+                      },
+                    ]}>
+                    {number(safeCount)}
+                  </StyledText>
+                )}
+              </View>
+              <View style={styles.bottomItem}>
+                {canPlayAudio ? (
+                  <Pressable
+                    accessibilityHint="يشغل أو يوقف التلاوة الصوتية"
+                    accessibilityLabel={
+                      isSingleAudioPlaying ? 'إيقاف الصوت' : 'تشغيل الصوت'
+                    }
+                    accessibilityRole="button"
+                    onPress={onAudioButtonPress}
+                    style={({pressed}) => [
+                      styles.audioButton,
+                      getPressableScaleStyle(pressed, 0.82, 0.94),
+                    ]}>
+                    <Icon
+                      name={isSingleAudioPlaying ? 'pause' : 'play-arrow'}
+                      color={
+                        isDone ? theme.secondaryColor : theme.tertiaryColor
+                      }
+                      size={28}
+                    />
+                    <StyledText
+                      customStyle={[
+                        styles.audioText,
+                        {
+                          color: isDone
+                            ? theme.secondaryColor
+                            : theme.tertiaryColor,
+                        },
+                      ]}>
+                      {isSingleAudioPlaying ? 'إيقاف' : 'إستمع'}
+                    </StyledText>
+                  </Pressable>
+                ) : null}
+              </View>
+              <View style={styles.bottomItem}>
                 <Pressable
-                  accessibilityHint="يشغل أو يوقف التلاوة الصوتية"
-                  accessibilityLabel={isSingleAudioPlaying ? 'إيقاف الصوت' : 'تشغيل الصوت'}
+                  accessibilityHint="ينسخ نص الذكر إلى الحافظة"
+                  accessibilityLabel="نسخ النص"
                   accessibilityRole="button"
-                  onPress={onAudioButtonPress}
+                  onPress={onCopyPress}
                   style={({pressed}) => [
-                    styles.audioButton,
+                    styles.copyButton,
                     getPressableScaleStyle(pressed, 0.82, 0.94),
                   ]}>
                   <Icon
-                    name={isSingleAudioPlaying ? 'pause' : 'play-arrow'}
+                    name="content-copy"
                     color={isDone ? theme.secondaryColor : theme.tertiaryColor}
                     size={28}
                   />
-                  <StyledText
-                    customStyle={[
-                      styles.audioText,
-                      {
-                        color: isDone ? theme.secondaryColor : theme.tertiaryColor,
-                      },
-                    ]}>
-                    {isSingleAudioPlaying ? 'إيقاف' : 'إستمع'}
-                  </StyledText>
                 </Pressable>
-              ) : null}
+              </View>
             </View>
-            <View style={styles.bottomItem}>
-              <Pressable
-                accessibilityHint="ينسخ نص الذكر إلى الحافظة"
-                accessibilityLabel="نسخ النص"
-                accessibilityRole="button"
-                onPress={onCopyPress}
-                style={({pressed}) => [
-                  styles.copyButton,
-                  getPressableScaleStyle(pressed, 0.82, 0.94),
-                ]}>
-                <Icon
-                  name="content-copy"
-                  color={isDone ? theme.secondaryColor : theme.tertiaryColor}
-                  size={28}
-                />
-              </Pressable>
-            </View>
-          </View>
-        </Pressable>
-      </ImageBackground>
-    </View>
-  );
-}, (prev, next) =>
-  prev.count === next.count &&
-  prev.activeAudioFile === next.activeAudioFile &&
-  prev.isAudioPaused === next.isAudioPaused,
+          </Pressable>
+        </ImageBackground>
+      </View>
+    );
+  },
+  (prev, next) =>
+    prev.count === next.count &&
+    prev.activeAudioFile === next.activeAudioFile &&
+    prev.isAudioPaused === next.isAudioPaused,
 );
 
 const styles = StyleSheet.create({
@@ -269,11 +293,14 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
+    paddingHorizontal: 16,
   },
   backgroundContainer: {
-    marginBottom: 50,
+    marginBottom: 16,
     paddingVertical: 25,
-    width: 320,
+    width: '100%',
+    maxWidth: 560,
+    borderRadius: 16,
     minHeight: 175,
     shadowColor: '#000000',
     shadowOffset: {
@@ -297,7 +324,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   content: {
-    fontSize: 18,
+    fontSize: 21,
+    lineHeight: 38,
   },
   note: {
     fontSize: 13,
@@ -329,6 +357,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   resetButton: {
+    minHeight: 48,
+    minWidth: 48,
     alignItems: 'center',
     flexDirection: 'row',
     gap: 4,
@@ -338,6 +368,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   audioButton: {
+    minHeight: 48,
+    minWidth: 48,
     alignItems: 'center',
     flexDirection: 'row',
     gap: 4,
@@ -345,13 +377,15 @@ const styles = StyleSheet.create({
   copyButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: 36,
+    minWidth: 48,
+    minHeight: 48,
   },
   playlistContainer: {
     marginTop: 10,
     gap: 10,
   },
   playlistItem: {
+    minHeight: 48,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',

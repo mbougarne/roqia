@@ -1,0 +1,26 @@
+yarn run v1.22.22
+warning Skipping preferred cache folder "/Users/mbougarne/Library/Caches/Yarn" because it is not writable.
+warning Selected the next writable cache folder in the list, will be "/var/folders/vl/3gj0pzns3fgby9s4ssk7y7d80000gp/T/.yarn-cache-502".
+$ python3 -m unittest discover -s tools/feasibility -p "test_*.py" && node --test tools/feasibility/*.test.cjs
+warning Cannot find a suitable global folder. Tried these: "/usr/local, /Users/mbougarne/.yarn"
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 0.127s
+
+OK
+✔ unapproved Morocco profile cannot masquerade as production configuration (0.528333ms)
+✔ civil date and zone validation, including leap and year boundaries (10.467125ms)
+✔ UTC prayer instants do not depend on the developer/device time zone (176.886542ms)
+✔ Morocco Ramadan offsets come from IANA rules, not fixed UTC+1 (1.035792ms)
+✔ user adjustment applies exactly once and sunrise is not the next prayer (1.930209ms)
+✔ unresolvable polar times stay unavailable instead of midnight placeholders (0.248792ms)
+✔ runtime includes the Morocco September 2026 IANA transition (0.10825ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 247.653916
+Done in 0.69s.

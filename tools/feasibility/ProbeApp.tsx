@@ -199,7 +199,9 @@ async function audio() {
 
 async function run(scenario: string) {
   log('scenario-start', {scenario});
-  if (scenario === 'timezone')
+  if (scenario.startsWith('foundation'))
+    await require('../foundation/androidProbe').foundationProbe(scenario);
+  else if (scenario === 'timezone')
     log(
       'timezone-compatibility',
       require('./timezone.cjs').checkMoroccoTimeZoneData(),

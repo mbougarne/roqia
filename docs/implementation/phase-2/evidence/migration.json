@@ -1,0 +1,32 @@
+{
+  "legacyKeys": 293,
+  "mappedKeys": 293,
+  "stableCounters": 207,
+  "aliasGroups": 207,
+  "mismatches": 0,
+  "legacyCountsAndModeUnchanged": true,
+  "migrationInputUnchanged": true,
+  "backupHashVerified": true,
+  "receipt": {
+    "migrationId": "legacy-v2",
+    "fromVersion": 1,
+    "toVersion": 2,
+    "inputHash": "4ed053c3774926cd3835fafb427a2281039adcf8b10149d059bde3a6be825b8f",
+    "legacyBackupPath": "recovery/legacy-v2-4ed053c3774926cd3835fafb427a2281039adcf8b10149d059bde3a6be825b8f.json",
+    "committedAt": 1792327277009,
+    "unmappedCount": 0
+  },
+  "settings": {
+    "schemaVersion": 2,
+    "themePreference": "light",
+    "uiScale": 1,
+    "readerSizeSp": 21,
+    "readerLineHeightRatio": 1.8,
+    "wifiOnly": true,
+    "preferredEditionId": null,
+    "translationId": null,
+    "onboardingVersion": 1,
+    "guidanceSeen": true,
+    "updatedAt": 1792327277037
+  }
+}

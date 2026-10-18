@@ -52,6 +52,11 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>NotoSansArabic.ttf</string>
+		<string>RoqiaArabic400.ttf</string>
+		<string>RoqiaArabic500.ttf</string>
+		<string>RoqiaArabic600.ttf</string>
+		<string>RoqiaArabic700.ttf</string>
+
 	</array>
 </dict>
 </plist>

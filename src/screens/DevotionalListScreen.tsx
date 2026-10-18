@@ -1,21 +1,18 @@
-import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+import React, {useContext, useMemo, useRef, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   Alert,
   FlatList,
-  Image,
   ImageBackground,
-  Platform,
   Pressable,
   StyleSheet,
   View,
 } from 'react-native';
-import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {audioAssets} from '../assets/audio';
 import {getPressableScaleStyle, Header, Section} from '../components';
 import {type DataProps} from '../data';
+import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
 import {
   type RepeatContextState,
   createRepeatCountsForItems,
@@ -31,70 +28,60 @@ type DevotionalListScreenProps = {
   repeatCtx: React.Context<RepeatContextState>;
 };
 
-export const DevotionalListScreen = ({items, scope, title, repeatCtx}: DevotionalListScreenProps) => {
+export const DevotionalListScreen = ({
+  items,
+  scope,
+  title,
+  repeatCtx,
+}: DevotionalListScreenProps) => {
   const listRef = useRef<FlatList<DataProps>>(null);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const [activeAudioFile, setActiveAudioFile] = useState<string | null>(null);
-  const [isAudioPaused, setIsAudioPaused] = useState(false);
-  const isFocused = useIsFocused();
+  const {activeAudioFile, isAudioPaused, onAudioPress} =
+    useScreenAudioPlayback(items);
   const navigation = useNavigation<any>();
   const {mode} = useContext(themeContext);
-  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} = useContext(repeatCtx);
+  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} =
+    useContext(repeatCtx);
   const theme = themes[mode];
-  const screenRepeatCounts = useMemo(() => createRepeatCountsForItems(items, scope), [items, scope]);
+  const screenRepeatCounts = useMemo(
+    () => createRepeatCountsForItems(items, scope),
+    [items, scope],
+  );
 
-  const openDrawer = () => {
-    navigation.openDrawer?.();
-    navigation.getParent?.()?.openDrawer?.();
-    navigation.getParent?.()?.getParent?.()?.openDrawer?.();
+  const openMore = () => {
+    navigation.navigate('MainTabs', {screen: 'More'});
   };
 
   const onBackToHomePress = () => {
-    navigation.navigate('MainTabs');
+    navigation.goBack();
   };
-
-  const onAudioPress = (audioFile: string) => {
-    if (activeAudioFile === audioFile) {
-      setIsAudioPaused(currentValue => !currentValue);
-      return;
-    }
-
-    setActiveAudioFile(audioFile);
-    setIsAudioPaused(false);
-  };
-
-  const onAudioFinished = () => {
-    setActiveAudioFile(null);
-    setIsAudioPaused(false);
-  };
-
-  useEffect(() => {
-    if (!isFocused) {
-      onAudioFinished();
-    }
-  }, [isFocused]);
 
   const onResetScreenPress = () => {
-    Alert.alert('إعادة عدادات هذه الصفحة', 'سيتم إعادة جميع العدادات في هذه الصفحة إلى القيم الأصلية.', [
-      {text: 'إلغاء', style: 'cancel'},
-      {text: 'إعادة', style: 'destructive', onPress: () => resetRepeats(screenRepeatCounts)},
-    ]);
+    Alert.alert(
+      'إعادة عدادات هذه الصفحة',
+      'سيتم إعادة جميع العدادات في هذه الصفحة إلى القيم الأصلية.',
+      [
+        {text: 'إلغاء', style: 'cancel'},
+        {
+          text: 'إعادة',
+          style: 'destructive',
+          onPress: () => resetRepeats(screenRepeatCounts),
+        },
+      ],
+    );
   };
 
   const onResetAllPress = () => {
-    Alert.alert('إعادة جميع العدادات', 'سيتم إعادة جميع العدادات في التطبيق إلى القيم الأصلية.', [
-      {text: 'إلغاء', style: 'cancel'},
-      {text: 'إعادة الكل', style: 'destructive', onPress: resetAllRepeats},
-    ]);
+    Alert.alert(
+      'إعادة جميع العدادات',
+      'سيتم إعادة جميع العدادات في التطبيق إلى القيم الأصلية.',
+      [
+        {text: 'إلغاء', style: 'cancel'},
+        {text: 'إعادة الكل', style: 'destructive', onPress: resetAllRepeats},
+      ],
+    );
   };
-
-  const activeAudioSource = activeAudioFile ? audioAssets[activeAudioFile] : null;
-  const resolvedActiveAudioUri = activeAudioSource
-    ? Image.resolveAssetSource(activeAudioSource).uri
-    : activeAudioFile && Platform.OS === 'android'
-      ? `asset:/${activeAudioFile}`
-      : undefined;
 
   const onListScroll = (offsetY: number) => {
     const shouldShowSticky = offsetY > 170;
@@ -119,12 +106,19 @@ export const DevotionalListScreen = ({items, scope, title, repeatCtx}: Devotiona
       style={[styles.background, {backgroundColor: theme.bg}]}
       imageStyle={styles.cover}>
       <View
+        importantForAccessibility={
+          showStickyHeader ? 'auto' : 'no-hide-descendants'
+        }
+        accessibilityElementsHidden={!showStickyHeader}
         pointerEvents={showStickyHeader ? 'auto' : 'none'}
-        style={[styles.stickyHeaderWrapper, !showStickyHeader && styles.stickyHeaderHidden]}>
+        style={[
+          styles.stickyHeaderWrapper,
+          !showStickyHeader && styles.stickyHeaderHidden,
+        ]}>
         <Header
           compact
           onBackPress={onBackToHomePress}
-          onMenuPress={openDrawer}
+          onMenuPress={openMore}
           onResetAllPress={onResetAllPress}
           onResetScreenPress={onResetScreenPress}
           showBackButton
@@ -160,7 +154,7 @@ export const DevotionalListScreen = ({items, scope, title, repeatCtx}: Devotiona
         ListHeaderComponent={
           <Header
             onBackPress={onBackToHomePress}
-            onMenuPress={openDrawer}
+            onMenuPress={openMore}
             onResetAllPress={onResetAllPress}
             onResetScreenPress={onResetScreenPress}
             showBackButton
@@ -184,20 +178,12 @@ export const DevotionalListScreen = ({items, scope, title, repeatCtx}: Devotiona
             {backgroundColor: theme.activeBg},
             getPressableScaleStyle(pressed, 0.9, 0.94),
           ]}>
-          <Icon color={theme.secondaryColor} name="keyboard-double-arrow-up" size={22} />
+          <Icon
+            color={theme.secondaryColor}
+            name="keyboard-double-arrow-up"
+            size={22}
+          />
         </Pressable>
-      ) : null}
-      {resolvedActiveAudioUri ? (
-        <Video
-          ignoreSilentSwitch="ignore"
-          onEnd={onAudioFinished}
-          onError={onAudioFinished}
-          paused={isAudioPaused}
-          playInBackground={false}
-          playWhenInactive={false}
-          source={{uri: resolvedActiveAudioUri}}
-          style={styles.hiddenPlayer}
-        />
       ) : null}
     </ImageBackground>
   );
@@ -210,10 +196,6 @@ const styles = StyleSheet.create({
   },
   cover: {
     resizeMode: 'repeat',
-  },
-  hiddenPlayer: {
-    width: 0,
-    height: 0,
   },
   stickyHeaderWrapper: {
     left: 0,
@@ -229,11 +211,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 22,
     bottom: 75,
-    height: 36,
+    height: 48,
     justifyContent: 'center',
     position: 'absolute',
     right: 5,
-    width: 36,
+    width: 48,
     zIndex: 12,
   },
 });

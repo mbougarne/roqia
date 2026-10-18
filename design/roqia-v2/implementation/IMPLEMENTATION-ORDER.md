@@ -1,6 +1,6 @@
 # Roqia v2 — implement one ticket at a time
 
-Updated 18 October 2026. This is the authoritative execution order for all 50 existing tickets. Work down this checklist and pick the first unfinished item. You do not need START-HERE.md, milestone tables or dependency lists to decide what comes next.
+Updated 18 October 2026. This is the authoritative execution order for all 50 existing tickets. Work down this checklist from the latest explicit implementation checkpoint below; unchecked acceptance gates remain tracked even when independent implementation is authorized to continue. You do not need START-HERE.md, milestone tables or dependency lists to decide what comes next.
 
 The RQ numbers remain stable identifiers; the step numbers below define the work order. RQ-001 is the single baseline prerequisite, then the new-feature work starts with RQ-016 as requested. Earlier foundation tickets are included at the point where they are needed. Do not assume RQ-001–RQ-015 are complete: the current backlog records partial Android feasibility work and open gates. If work is already implemented, verify its acceptance evidence and mark it complete instead of doing it twice.
 
@@ -16,7 +16,7 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
 
-Starting with the next phase, name branches `phase_<number>/<short-description>`, for example `phase_2/design-system`. Leave the existing PR branch unchanged.
+Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; the next implementation group should use `phase_3/<short-description>`.
 
 ## Ordered checklist
 
@@ -88,13 +88,17 @@ Starting with the next phase, name branches `phase_<number>/<short-description>`
 
 ### Steps 11 onward · Foundation, migration and shared services
 
-11. [ ] **[RQ-002 — Implement tokens and shared UI primitives](tickets/RQ-002.md)**
+**2026-10-18 phase 2 checkpoint:** shared foundations are implemented with [Android evidence](../../../docs/implementation/phase-2/README.md). RQ-002/RQ-004/RQ-033/RQ-022 are complete for this foundation scope. RQ-003/RQ-005/RQ-015/RQ-021 retain the specific notification, signed-upgrade, accessibility, source or physical-device acceptance work in their tickets. The user authorized proceeding after phase 1; the explicit scope adjustment is to build/test generic download and playback infrastructure with isolated fixtures while keeping the production catalog empty. No source or release gate is waived.
+
+**Next implementation pickup after phase 2 review: step 19 / RQ-006.** Continue steps 19 onward in order. Revisit the named open acceptance checks at their integration/release tickets; do not rebuild completed foundation work or present unchecked items as accepted.
+
+11. [x] **[RQ-002 — Implement tokens and shared UI primitives](tickets/RQ-002.md)**
 
    **Deliver:** Adopt kit tokens and supplied assets. Build text, icon, button, card, row, header, sheet and state components. Support light/dark/system and actual Arabic font weights; forward Text props.
 
    **Finish when:** Semantic colors and type roles drive both themes; 48 dp targets and compact headings work at 200% text; No screenshot PNG is imported into the app.
 
-12. [ ] **[RQ-004 — Define stable IDs and local repository foundation](tickets/RQ-004.md)**
+12. [x] **[RQ-004 — Define stable IDs and local repository foundation](tickets/RQ-004.md)**
 
    **Deliver:** Assign explicit permanent devotional IDs and define metadata records. Spike/pin the local SQLite adapter on RN 0.84. Add transactional repository APIs and serialized writes; keep UI state scoped.
 
@@ -124,13 +128,13 @@ Starting with the next phase, name branches `phase_<number>/<short-description>`
 
    **Finish when:** Only validated installed bytes become ready; User pause differs from network wait; Crash during file rename/DB commit recovers idempotently.
 
-17. [ ] **[RQ-033 — Unify devotional and Quran playback](tickets/RQ-033.md)**
+17. [x] **[RQ-033 — Unify devotional and Quran playback](tickets/RQ-033.md)**
 
    **Deliver:** Define the controller interface independently of redesigned screen completion. Adapt the existing devotional screens first, then let RQ-007–RQ-010 compose that controller. Their final acceptance depends on this integration; this ticket does not depend on those UI tickets being done. Replace per-screen Video playback with the shared controller after parity. Preserve audio arrays/repeats, expose failures, keep paused mini player and stop on explicit action rather than screen blur.
 
    **Finish when:** No simultaneous players; All original devotional audio remains mapped; Counters remain independent and paused playback remains controllable.
 
-18. [ ] **[RQ-022 — Implement storage management and safe deletion](tickets/RQ-022.md)**
+18. [x] **[RQ-022 — Implement storage management and safe deletion](tickets/RQ-022.md)**
 
    **Deliver:** Show actual installed/partial bytes and selected-file totals. Confirm deletion, stop active file use, retain bookmarks and reconcile interrupted deletions. Preserve bundled core content.
 

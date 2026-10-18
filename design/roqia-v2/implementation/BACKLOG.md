@@ -4,6 +4,8 @@
 
 50 local implementation tickets. None has been created in an external issue tracker. The first 10 execution steps have Android feasibility evidence; their ticket statuses distinguish work in progress from blocked source/review gates. No feature is marked complete solely from a spike. Dependencies are start dependencies; integration completion requirements are explicit inside each ticket.
 
+Phase 2 delivers shared foundations for steps 11–18 with [Android validation](../../../docs/implementation/phase-2/README.md). Follow the current checkpoint in the ordered plan for the next implementation pickup (step 19 / RQ-006). Unchecked source, signed-upgrade, accessibility and device acceptance gates remain open.
+
 Early feasibility tickets RQ-016, RQ-020, RQ-032, RQ-037 and RQ-040 should be resolved before dependent feature work is committed to a release. Existing-feature UI can proceed independently.
 
 | Ticket | Work | Milestone | Start dependencies |
