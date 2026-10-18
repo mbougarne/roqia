@@ -204,7 +204,9 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 **2026-10-18 phase 4 checkpoint:** steps 28–37 now have a source-gated runtime implementation and [Android evidence](../../../docs/implementation/phase-4/README.md). They remain `in_progress` for the specific source, publication, rendering, accessibility or native acceptance items recorded in each ticket. This phase implements readers against locked private fixtures; it does not waive RQ-016–RQ-019/RQ-026/RQ-031/RQ-047. The normal runtime catalog remains empty. Sleep timer remains explicitly unavailable pending a proven native deadline API. Android font fallback inspection currently requires API 31+; older Android and iOS readers fail closed.
 
-**Next independent implementation pickup after phase 4 review: step 38 / RQ-036.** Recheck RQ-037 before enabling prayer times and RQ-040 before promising full adhan. Do not silently skip those gates or treat independent UI/runtime work as approval of unverified content or native behavior.
+**Owner decision — 18 October 2026:** further manual Arabic reading review is deferred, not a prerequisite for download delivery. See the [recorded decision](../../../docs/implementation/phase-4/REVIEW-DECISION.md). Preserve automated source/font checks; do not record unperformed review as passed. Finish the concrete phase 4 package/catalog/download gap before moving on.
+
+**After that delivery and phase 4 review, the next independent implementation pickup is step 38 / RQ-036.** Recheck RQ-037 before enabling prayer times and RQ-040 before promising full adhan. Do not silently skip those gates or treat independent UI/runtime work as approval of unverified content or native behavior.
 
 28. [ ] **[RQ-023 — Build Quran library and edition selection](tickets/RQ-023.md)**
 

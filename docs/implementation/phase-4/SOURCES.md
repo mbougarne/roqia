@@ -10,6 +10,10 @@ The implementation consumes only approved runtime descriptors. `src/features/qur
 - Translations are **Hafs-only** until a reviewed Warsh correspondence map exists. This implementation rejects a Warsh translation descriptor instead of aligning equal verse numbers.
 - Audio fixtures use only the six already acquired, hash-pinned MP3Quran chapter samples from phase 1. Recording identity/listening/redistribution approval remains RQ-031. King Fahd remains the first intended source to evaluate, then Al-Mohammadi where suitable recordings are unavailable. This PR does not replace that acquisition decision or publish the MP3Quran samples.
 
+## Owner decision update
+
+[The owner deferred further manual Arabic reading review](REVIEW-DECISION.md). That deferral supersedes the Arabic qualified-review prerequisites in this historical source recheck. It does not claim completed review, alter the selected sources/fonts, or bypass automated validation. Packaging, source-derived chapter openings and download delivery remain implementation work.
+
 ## Publication handoff
 
 Before adding runtime descriptors, close RQ-016–RQ-019/RQ-026/RQ-031/RQ-047 for the exact versions, host immutable files over HTTPS, retain original notices, validate all 114 chapter assets against the locked source and retain source-to-render review. Text packs require their exact font asset; translation descriptors name the exact text version and numbering scheme; audio chapters are separately installable packs so a failure in one chapter does not disable another.

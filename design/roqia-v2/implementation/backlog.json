@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 4 Quran runtime implemented with source-gated private Android validation; publication, qualified review, older Android/iOS reader adapter, native sleep timer and release gates remain explicit",
+  "status": "Phase 4 Quran runtime implemented; owner defers further manual Arabic reading review. Production package/catalog/download delivery remains unfinished; automated integrity, redistribution, platform and release requirements remain explicit.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -506,7 +506,8 @@
       "verifiedOn": "2026-10-18",
       "scope": "android",
       "progress": "Acquired the locked KFGQPC Warsh v2.1/update 6 archive; hashes match the indexed publisher page. JSON/CSV agree on 114 surahs and 6,214 ordered records. Android API 36 shapes all records with zero fallback using the matching font; AL Maghribi fails the same dataset. Font distribution EULA recorded; light/dark captures retained.",
-      "remaining": "Finish primary evidence for derived text-pack redistribution, exact numbering/tariq documentation and qualified source/render review. Production Warsh packaging and catalog integration remain RQ-018/RQ-019 work; do not publish a ready pack."
+      "remaining": "Finish primary evidence for derived text-pack redistribution, exact numbering/tariq documentation and qualified source/render review. Production Warsh packaging and catalog integration remain RQ-018/RQ-019 work; do not publish a ready pack.",
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-017",
@@ -537,7 +538,8 @@
       "verifiedOn": "2026-10-18",
       "scope": "android",
       "progress": "Acquired and locked Tanzil Uthmani 1.1 plus metadata 1.0. Imported 114 surahs / 6,236 verses with exact canonical round-trip and original notice; generated 117 hashed assets in a draft pack.",
-      "remaining": "Representative Arabic/font rendering and qualified content review remain pending. Do not publish the pack as ready."
+      "remaining": "Representative Arabic/font rendering and qualified content review remain pending. Do not publish the pack as ready.",
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-018",
@@ -570,7 +572,8 @@
       "verifiedOn": "2026-10-18",
       "scope": "android",
       "progress": "Implemented corruption/order/duplicate/hash/path tests, canonical pack revalidation against the independent source lock, a review template bound to the manifest hash and devotional provenance inventory.",
-      "remaining": "Finish production Warsh pack revalidation and data redistribution evidence; obtain qualified source/font reviews for both editions and resolve devotional provenance."
+      "remaining": "Finish production Warsh pack revalidation and data redistribution evidence; obtain qualified source/font reviews for both editions and resolve devotional provenance.",
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-019",
@@ -603,7 +606,8 @@
       "verifiedOn": "2026-10-18",
       "scope": "android",
       "progress": "Implemented a guarded catalog exporter and asset MIME support. Pending or stale review cannot produce a ready catalog. No content was uploaded.",
-      "remaining": "Add the source-aware Warsh pack/export path with the original matching font and notices; close data redistribution and qualified-review gates, then publish and verify the real immutable host/catalog and bundled seed."
+      "remaining": "Add the source-aware Warsh pack/export path with the original matching font and notices; close data redistribution and qualified-review gates, then publish and verify the real immutable host/catalog and bundled seed.",
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-020",
@@ -758,7 +762,8 @@
       "evidence": [
         "docs/implementation/phase-4/README.md",
         "docs/implementation/phase-4/SOURCES.md"
-      ]
+      ],
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-025",
@@ -790,7 +795,8 @@
       "evidence": [
         "docs/implementation/phase-4/README.md",
         "docs/implementation/phase-4/SOURCES.md"
-      ]
+      ],
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-026",
@@ -885,7 +891,8 @@
       "evidence": [
         "docs/implementation/phase-4/README.md",
         "docs/implementation/phase-4/SOURCES.md"
-      ]
+      ],
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-029",
@@ -916,7 +923,8 @@
       "evidence": [
         "docs/implementation/phase-4/README.md",
         "docs/implementation/phase-4/SOURCES.md"
-      ]
+      ],
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-030",
@@ -948,7 +956,8 @@
       "evidence": [
         "docs/implementation/phase-4/README.md",
         "docs/implementation/phase-4/SOURCES.md"
-      ]
+      ],
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-031",
@@ -1496,7 +1505,8 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 47
+      "executionOrder": 47,
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-048",

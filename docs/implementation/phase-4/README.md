@@ -13,6 +13,10 @@ Branch `phase_4/quran-reading-listening`, based on merged phase 3 (`50f8497`). I
 - Offline audio library and shared full player: real position/duration, seek, repeat, speed, queue and explicit paused restoration of a saved downloaded session. No ayah timing/highlight is fabricated.
 - Full-size testing exposed expensive download metadata writes. The existing serialized transaction now compares rows and writes only changes, preserving atomic snapshot semantics and rollback. A 460-job regression test verifies one-row progress updates and multi-collection rollback.
 
+## Owner review decision
+
+[Manual Arabic reading review is deferred by the owner](REVIEW-DECISION.md). It is not a further prerequisite for download delivery. Earlier review-gate wording below is superseded by that decision; automated integrity/font checks and concrete packaging/publication work remain. This documentation update does not enable downloads.
+
 ## Source/publication boundary
 
 [Source recheck and handoff](SOURCES.md) records exact artifacts and remaining approval. The production Quran catalog stays empty. No Quran corpus, translation, new Quran font or recording is bundled/published by this PR. Android fixtures come from the locked originals and are injected only through the debug Activity; fixture approval flags exercise transport, not content certification.
@@ -52,4 +56,4 @@ Final playback review added a regression check for failed restoration: corrupted
 
 ## Acceptance status
 
-Qualified source/rendering/translation/listening review, redistribution evidence, public immutable hosting, full TalkBack traversal, final visual review, signed upgrade and physical-device lifecycle acceptance remain open. RQ-035 additionally retains the native sleep timer. Existing repository-wide Jest/ESLint baseline issues are not reported as passing. Android evidence does not imply iOS readiness.
+Further manual Arabic reading review is deferred under the owner decision above. Translation/listening review, redistribution evidence, public immutable hosting, full TalkBack traversal, final visual review, signed upgrade and physical-device lifecycle acceptance remain open. RQ-035 additionally retains the native sleep timer. Existing repository-wide Jest/ESLint baseline issues are not reported as passing. Android evidence does not imply iOS readiness.
