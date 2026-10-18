@@ -1,0 +1,23 @@
+{
+  "counterRowsUnchanged": 207,
+  "recordsBefore": 21,
+  "recordsAfter": 21,
+  "unchangedRecords": 20,
+  "changedRecordFields": [
+    {
+      "collection": "settings",
+      "id": "singleton",
+      "fields": [
+        "updatedAt"
+      ]
+    }
+  ],
+  "existingFilesVerifiedBySha256": 241,
+  "changedFiles": [
+    "profileInstalled"
+  ],
+  "changedFilesNote": "Only profileInstalled installation marker changed; all other existing app files are byte-identical. No private database or pack contents committed.",
+  "themeRestored": true,
+  "fontScaleRestored": 1,
+  "densityRestored": 420
+}

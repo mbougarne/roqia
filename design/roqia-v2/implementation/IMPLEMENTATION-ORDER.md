@@ -1,8 +1,16 @@
 # Roqia v2 — implement one ticket at a time
 
-Updated 18 October 2026. This is the authoritative execution order for all 50 existing tickets. Work down this checklist from the latest explicit implementation checkpoint below; unchecked acceptance gates remain tracked even when independent implementation is authorized to continue. You do not need START-HERE.md, milestone tables or dependency lists to decide what comes next.
+Updated 18 October 2026. This is the authoritative execution order for all 62 tickets. Work down this checklist from the latest explicit implementation checkpoint below; unchecked acceptance gates remain tracked even when independent implementation is authorized to continue. You do not need START-HERE.md, milestone tables or dependency lists to decide what comes next.
 
 The RQ numbers remain stable identifiers; the step numbers below define the work order. RQ-001 is the single baseline prerequisite, then the new-feature work starts with RQ-016 as requested. Earlier foundation tickets are included at the point where they are needed. Do not assume RQ-001–RQ-015 are complete: the current backlog records partial Android feasibility work and open gates. If work is already implemented, verify its acceptance evidence and mark it complete instead of doing it twice.
+
+## Current pickup — Phase 7 visual implementation
+
+**User-authorized correction, 18 October 2026:** functional screens from phases 3–6 do not yet match the approved designs. Implement **RQ-051 → RQ-052 → RQ-053 → RQ-054 → RQ-055 → RQ-056 → RQ-057 → RQ-058 → RQ-059 → RQ-060 → RQ-061 → RQ-062**, in this order. **RQ-051/RQ-052 (Prayer dashboard, shared framing and Qibla) are implemented and Android-tested:** [reference comparisons and evidence](../../../docs/implementation/phase-7/README.md). **Next ticket: RQ-053 — calibration and city selection.** Continue RQ-054 through RQ-062 afterward. These are implementation tickets, not a final cosmetic audit. The [coverage index](VISUAL-COVERAGE.md) assigns every one of the 48 screens to exactly one owner and tracks light/dark evidence separately.
+
+After this visual sequence, close the still-open **RQ-040 → RQ-042 → RQ-044** full-adhan/audio/lifecycle work, then finish **RQ-045 → RQ-046 → RQ-047 → RQ-048 → RQ-049 → RQ-050**. Earlier unchecked acceptance obligations remain attached to those final gates; this sequence does not waive them. Keep unavailable capabilities honest while their UI is implemented. The user's previously deferred exhaustive manual Quran reading review is not reinstated by visual acceptance; exact corpus/font integrity checks still apply.
+
+Both themes are required per ticket. Compare composition, assets, typography, spacing, hierarchy, interaction controls and navigation—not just colors. Real content and platform/accessibility needs take precedence over mockup sample values; record intentional differences. RQ-046 remains open until the complete 96-capture audit and accessibility work pass. No claim of whole-app visual completion from this first batch.
 
 ## Working rule
 
@@ -16,7 +24,7 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
 
-Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; phase 5 uses `phase_5/quran-download-delivery`. Phase 6 uses `phase_6/prayer-qibla-adhan`. Subsequent phase branches retain the same numbered convention.
+Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; phase 5 uses `phase_5/quran-download-delivery`. Phase 6 uses `phase_6/prayer-qibla-adhan`. Phase 7 uses `phase_7/design-parity`. Subsequent phase branches retain the same numbered convention.
 
 ## Ordered checklist
 
@@ -208,7 +216,7 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 **Phase 5 delivery checkpoint — 18 October 2026:** [original-source Quran downloads](../../../docs/implementation/phase-5/README.md) now replace the empty normal catalog. Warsh uses the unchanged King Fahd archive and matching font; Hafs uses original Tanzil text. On-device preparation verifies every chapter. This closes the concrete download/import implementation gap; it does not claim completed manual Arabic review, translation/audio delivery or full platform/release acceptance.
 
-**Phase 6 implements the Android runtime for steps 38–44 with notification-only fallback.** [Evidence and exact remaining work](../../../docs/implementation/phase-6/README.md). RQ-037 now supports an attributed finite Habous timetable and pinned offline timezone rules; the custom Morocco formula is still unavailable. Full adhan and sound acquisition remain open. **Next M6 closure, in order: RQ-040 native full playback → RQ-042 attributable normal/Fajr recordings and previews → RQ-044 unattended lifecycle/device matrix.** Steps 45 onward may audit implemented fallback behavior independently; do not treat these unresolved capabilities as delivered.
+**Phase 6 implements the Android runtime for steps 38–44 with notification-only fallback.** [Evidence and exact remaining work](../../../docs/implementation/phase-6/README.md). RQ-037 now supports an attributed finite Habous timetable and pinned offline timezone rules; the custom Morocco formula is still unavailable. Full adhan and sound acquisition remain open. **Remaining M6 closure after the authorized visual sequence, in order: RQ-040 native full playback → RQ-042 attributable normal/Fajr recordings and previews → RQ-044 unattended lifecycle/device matrix.** Steps 57 onward may audit implemented fallback behavior independently; do not treat these unresolved capabilities as delivered.
 
 28. [ ] **[RQ-023 — Build Quran library and edition selection](tickets/RQ-023.md)**
 
@@ -328,39 +336,113 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
    **Finish when:** No duplicate or expired adhan replay; Schedule remains within adapter capacity; Boot reschedules without starting playback; unsupported renewal is disclosed.
 
-### Steps 45 onward · Verification and release preparation
+### Steps 45–56 · Explicit design implementation (both themes)
 
-45. [ ] **[RQ-045 — Complete missing, offline and permission states](tickets/RQ-045.md)**
+45. [x] **[RQ-051 — Restore shared screen framing and Prayer dashboard](tickets/RQ-051.md)**
+
+   **Screens:** 39. **Deliver:** Centered compact headers, theme-specific tab selection, illustrated location and next-prayer cards, one compact six-row timetable, next-prayer highlight, effective notification icons, method row and paired Qibla/adhan shortcuts. Keep live source dates, expiry/refresh and unavailable-location recovery.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+46. [x] **[RQ-052 — Restore the Qibla compass design](tickets/RQ-052.md)**
+
+   **Screens:** 40. **Deliver:** Full-width themed compass with gold rim, tick marks, cardinal points, geometric center and Kaaba pointer; city card, prominent Western bearing, accuracy state, calibration action and guidance. Rotate the compass rose and pointer consistently with true heading; preserve static north-up fallback and stop sensors off-screen.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+47. [ ] **[RQ-053 — Match calibration and city selection](tickets/RQ-053.md)**
+
+   **Screens:** 41, 42. **Deliver:** Rebuild illustrated calibration steps, city search/selection list, selected-state indicators and contextual location action. Keep manual coordinate/timezone fallback, denial, stale reading and timeout states accessible.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+48. [ ] **[RQ-054 — Match adhan and calculation preferences](tickets/RQ-054.md)**
+
+   **Screens:** 43, 44, 45. **Deliver:** Replace stacked generic buttons with reference-grouped per-prayer controls, recording rows/previews and compact adjustment controls. Match layout in both themes; show actual unavailable-recording/full-adhan states until RQ-040/RQ-042 are implemented. Never turn a screenshot sample into a selectable recording.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+49. [ ] **[RQ-055 — Match launch, onboarding and guidance](tickets/RQ-055.md)**
+
+   **Screens:** 01, 02, 03, 04, 05, 06, 07. **Deliver:** Restore hero artwork, step indicators, compact typography, content grouping and bottom actions. Preserve first-run/revisit flow, skip/back, saved preferences and pending deep links.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+50. [ ] **[RQ-056 — Match devotional home, readers and counters](tickets/RQ-056.md)**
+
+   **Screens:** 08, 09, 10, 11, 12, 13, 14, 20. **Deliver:** Match home hero/action layout, illustrated category cards, reading surfaces, progress/counter controls, tasbih and page-reset sheet. Preserve exact devotional text, stable IDs, counts, playback and scoped reset; include bookmarks/search detail routes using the same visual language.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+51. [ ] **[RQ-057 — Match More, settings, reminders and information](tickets/RQ-057.md)**
+
+   **Screens:** 15, 16, 17, 18, 19, 21, 46, 47. **Deliver:** Restore grouped menu rows, icons, theme/text controls, reminder time controls, About/legal typography, unavailable-link recovery and global-reset sheet. Preserve settings, reminder schedules and reset scope.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+52. [ ] **[RQ-058 — Match Quran library and mushaf downloads](tickets/RQ-058.md)**
+
+   **Screens:** 22, 23, 24. **Deliver:** Match library header/continue-reading card, surah rows, Warsh/Hafs choice cards and selected-pack download composition. Use real edition metadata, file sizes and progress; preserve installed content and bookmarks when switching edition.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+53. [ ] **[RQ-059 — Match Quran readers, translations and preferences](tickets/RQ-059.md)**
+
+   **Screens:** 25, 26, 27, 28, 29. **Deliver:** Match reader chrome, verse surfaces/actions, bilingual translation blocks, translation download rows and reading controls. Keep exact King Fahd Warsh text with matching font, Hafs source text, separate Western badges and LTR French/English. Preserve independent edition positions; unavailable translation states remain explicit.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+54. [ ] **[RQ-060 — Match Quran search, bookmarks and sources](tickets/RQ-060.md)**
+
+   **Screens:** 30, 31, 32. **Deliver:** Match search field/filter/result hierarchy, bookmark groups and source/edition cards. Include empty/no-match/missing-pack recovery and user-controlled reporting; retain canonical locators and truthful provenance.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+55. [ ] **[RQ-061 — Match reciters, audio selection and player](tickets/RQ-061.md)**
+
+   **Screens:** 33, 34, 36, 38. **Deliver:** Match reciter cards, surah checkboxes, selected-size summary, offline library, mini-player and full-player composition. Retain actual supported controls, recording identity, download selection, seek/repeat/speed/timer and media-session ownership. No fake duration or recording.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+56. [ ] **[RQ-062 — Match queue, storage and download recovery](tickets/RQ-062.md)**
+
+   **Screens:** 35, 37, 48. **Deliver:** Match grouped progress rows, storage summary/categories, deletion confirmation and paused/failed-download recovery. Preserve durable job state, real sizes, resume/retry/cancel and active-file safety.
+
+   **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
+
+### Steps 57 onward · Verification and release preparation
+
+57. [ ] **[RQ-045 — Complete missing, offline and permission states](tickets/RQ-045.md)**
 
    **Deliver:** Audit additional states listed in EXISTING-FEATURES.md. Replace false-ready/blank/silent-error states with localized explanation and a concrete recovery action.
 
    **Finish when:** Every unavailable capability has an honest state; Existing offline content remains usable; Actions do not loop or discard user progress on failure.
 
-46. [ ] **[RQ-046 — Verify visual parity and accessibility](tickets/RQ-046.md)**
+58. [ ] **[RQ-046 — Verify visual parity and accessibility](tickets/RQ-046.md)**
 
    **Deliver:** Capture all 48 screens in both themes from the running app and compare semantic layout to kit. Resolve differences consistently via tokens; validate TalkBack and large text.
 
    **Finish when:** 96 implementation captures indexed; Compact headings/Western digits and all target sizes pass; No clipped Arabic/translation text or inaccessible action.
 
-47. [ ] **[RQ-047 — Verify religious content and media integrity](tickets/RQ-047.md)**
+59. [ ] **[RQ-047 — Verify religious content and media integrity](tickets/RQ-047.md)**
 
    **Deliver:** Perform release-version canonical/hash/structure verification and qualified edition/translation/recording review. Check attribution, source updates and correction response.
 
    **Finish when:** No unknown or draft pack is published; Edition/translation/audio mappings are accepted; Review scope, versions and unresolved issues are documented.
 
-48. [ ] **[RQ-048 — Verify native offline and upgrade journeys](tickets/RQ-048.md)**
+60. [ ] **[RQ-048 — Verify native offline and upgrade journeys](tickets/RQ-048.md)**
 
    **Deliver:** Run the device matrix in qa/ACCEPTANCE.md on a real upgrade and fresh install, including native download, audio, alarm and sensor limitations.
 
    **Finish when:** Populated upgrade preserves user state; Offline/download recovery and background scenarios pass; Actual device/OS evidence supports every reliability claim.
 
-49. [ ] **[RQ-049 — Measure performance and app/storage size](tickets/RQ-049.md)**
+61. [ ] **[RQ-049 — Measure performance and app/storage size](tickets/RQ-049.md)**
 
    **Deliver:** Measure against RQ-001 and agreed targets; bound startup/corpus work, memory and network concurrency. Exclude design references from runtime and assess bundled-audio size without removing offline content prematurely.
 
    **Finish when:** Reference PNGs absent from APK/AAB; Measured startup/search/scroll/memory results recorded; Any audio size migration has a verified offline upgrade path.
 
-50. [ ] **[RQ-050 — Prepare signed release candidate and rollout](tickets/RQ-050.md)**
+62. [ ] **[RQ-050 — Prepare signed release candidate and rollout](tickets/RQ-050.md)**
 
    **Deliver:** Complete RELEASE.md, increment version safely, verify application/signing identity, prepare internal-track candidate and staged rollout/rollback criteria. Publishing remains a separate explicit action.
 

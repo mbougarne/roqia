@@ -1,7 +1,16 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {Alert, AppState, Linking, View} from 'react-native';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {
+  Alert,
+  AppState,
+  Linking,
+  Pressable,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {
+  AppIcon,
   AppText,
   Button,
   Card,
@@ -20,7 +29,6 @@ import {
   events,
   day,
   bearing,
-  normalize,
   smoothHeading,
   validateLocation,
   type Preferences,
@@ -47,6 +55,8 @@ import {
 } from './service';
 import {adapter, locate, onHeading, onPrayerTimeChanged} from './native';
 import cities from './cities.json';
+import {themeContext} from '../../store';
+import {PrayerLandmark, QiblaCompass, OrnamentDivider} from './visuals';
 const civilDate = (zone: string, at = Date.now()) => {
   try {
     return sourceDate(zone, at);
@@ -126,6 +136,12 @@ function Status({error, retry}: {error: boolean; retry: () => void}) {
 }
 export function PrayerScreen({navigation}: any) {
   const {prefs, tables, coverage, error, now, load} = usePrayer();
+  const p = usePalette(),
+    {mode, uiScale} = useContext(themeContext);
+  const {fontScale, width} = useWindowDimensions();
+  const expanded = fontScale * uiScale > 1.3;
+  const showArtwork = !expanded && width >= 350;
+  const [refreshing, setRefreshing] = useState(false);
   if (!prefs)
     return (
       <Page title="الصلاة">
@@ -149,60 +165,169 @@ export function PrayerScreen({navigation}: any) {
       r => r.name !== 'sunrise' && r.at > now,
     ),
     remaining = next ? Math.max(0, Math.ceil((next.at - now) / 1000)) : 0;
+  const humanDate = /^\d{4}-\d{2}-\d{2}$/.test(date)
+    ? new Intl.DateTimeFormat('ar-MA-u-nu-latn', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        timeZone: 'UTC',
+        numberingSystem: 'latn',
+      }).format(new Date(date + 'T12:00:00Z'))
+    : date;
+  const adhan = () => navigation.navigate('PrayerAdhan');
   return (
-    <Page title="الصلاة">
+    <Page title="مواقيت الصلاة" contentStyle={visual.page}>
       <Status error={error} retry={load} />
-      <Row
-        title={l?.name ?? 'اختر مدينتك'}
-        detail={
-          l ? `${date} · ${l.zone}` : 'تعمل المدينة اليدوية دون إذن الموقع'
-        }
-        icon="location"
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="المدينة والموقع"
         onPress={() => navigation.navigate('PrayerLocation')}
-      />
+        style={({pressed}) => [
+          visual.location,
+          {
+            backgroundColor: pressed ? p.surfaceMuted : p.surface,
+            borderColor: p.borderSubtle,
+          },
+        ]}>
+        <View style={[visual.iconCircle, {backgroundColor: p.surfaceMuted}]}>
+          <AppIcon name="location" />
+        </View>
+        <View style={{flex: 1}}>
+          <AppText role="sectionTitle">{l?.name ?? 'اختر مدينتك'}</AppText>
+          <AppText role="caption" style={{color: p.textSecondary}}>
+            {l ? humanDate : 'تعمل المدينة اليدوية دون إذن الموقع'}
+          </AppText>
+        </View>
+        {showArtwork && mode === 'light' ? (
+          <View style={{width: 72}}>
+            <PrayerLandmark />
+          </View>
+        ) : (
+          <AppIcon name="edit" size={20} />
+        )}
+      </Pressable>
       {next && l && (
-        <Card>
-          <AppText role="caption">الصلاة القادمة</AppText>
-          <AppText role="sectionTitle">
-            {labels[next.name]} · {ltr(clock(l.zone, next.at, prefs.format))}
-          </AppText>
-          <AppText>
-            المتبقي{' '}
-            {ltr(
-              `${Math.floor(remaining / 3600)}:${String(Math.floor(remaining / 60) % 60).padStart(2, '0')}:${String(remaining % 60).padStart(2, '0')}`,
-            )}
-          </AppText>
-        </Card>
+        <View
+          style={[
+            visual.next,
+            {backgroundColor: p.surfaceMuted, borderColor: p.borderSubtle},
+          ]}>
+          <View style={{flex: 1, gap: 2}}>
+            <AppText role="caption">الصلاة القادمة</AppText>
+            <AppText role="sectionTitle">{labels[next.name]}</AppText>
+            <AppText role="prayerTime" style={visual.time}>
+              {clock(l.zone, next.at, prefs.format)}
+            </AppText>
+            <AppText role="caption" style={{color: p.textSecondary}}>
+              المتبقي{' '}
+              {ltr(
+                `${Math.floor(remaining / 3600)}:${String(Math.floor(remaining / 60) % 60).padStart(2, '0')}:${String(remaining % 60).padStart(2, '0')}`,
+              )}
+            </AppText>
+          </View>
+          {showArtwork && (
+            <View style={{width: 100}}>
+              <PrayerLandmark clock />
+            </View>
+          )}
+        </View>
       )}
+      {mode === 'dark' && <OrnamentDivider />}
       {today && l ? (
         <>
-          <AppText role="caption">
-            {methods[prefs.method]}
-            {prefs.method === 'habous'
-              ? ' · حصة محفوظة'
-              : ' · أوقات محسوبة وليست حصة الوزارة'}
-          </AppText>
-          {today.rows.map(r => (
-            <Card key={r.name}>
-              <View
-                style={{
-                  flexDirection: 'row-reverse',
-                  justifyContent: 'space-between',
-                }}>
-                <AppText role="bodyStrong">{labels[r.name]}</AppText>
-                <AppText>{ltr(clock(l.zone, r.at, prefs.format))}</AppText>
-              </View>
-              <AppText role="caption">
-                {r.name === 'sunrise'
-                  ? 'وقت إرشادي بلا تنبيه'
-                  : prefs.modes[r.name] === 'off'
-                    ? 'التنبيه متوقف'
-                    : !coverage?.authorized || coverage?.blocked
-                      ? 'التنبيه محفوظ، الإذن أو القناة غير متاحين'
-                      : 'تنبيه إشعار، قد يؤخره توفير الطاقة'}
-              </AppText>
-            </Card>
-          ))}
+          <View
+            style={[
+              visual.timetable,
+              {backgroundColor: p.surface, borderColor: p.borderSubtle},
+            ]}>
+            {today.rows.map((r, index) => {
+              const selected = r.at === next?.at;
+              const foreground = selected ? p.textOnSelection : p.textPrimary;
+              const enabled =
+                r.name !== 'sunrise' && prefs.modes[r.name] !== 'off';
+              const allowed =
+                enabled && coverage?.authorized && !coverage.blocked;
+              const status = !enabled
+                ? 'التنبيه متوقف'
+                : !allowed
+                  ? 'التنبيه محفوظ، الإذن أو القناة غير متاحين'
+                  : 'تنبيه إشعار، قد يؤخره توفير الطاقة';
+              return (
+                <View
+                  key={r.name}
+                  style={{
+                    borderTopWidth:
+                      index && !selected ? StyleSheet.hairlineWidth : 0,
+                    borderColor: p.borderSubtle,
+                  }}>
+                  <View
+                    style={[
+                      visual.prayerRow,
+                      {
+                        backgroundColor: selected ? p.selection : undefined,
+                        flexWrap: expanded ? 'wrap' : 'nowrap',
+                      },
+                    ]}>
+                    <View
+                      style={[
+                        visual.prayerName,
+                        expanded && {width: '100%', flex: undefined},
+                      ]}>
+                      <AppIcon
+                        name={
+                          r.name === 'sunrise'
+                            ? 'sun'
+                            : r.name === 'isha'
+                              ? 'moon'
+                              : 'mosque'
+                        }
+                        size={20}
+                        color={selected ? p.textOnSelection : p.accent}
+                      />
+                      <AppText
+                        role="bodyStrong"
+                        style={{color: foreground, flexShrink: 1}}>
+                        {labels[r.name]}
+                      </AppText>
+                    </View>
+                    <AppText
+                      role="bodyStrong"
+                      style={[visual.time, {color: foreground, flexShrink: 1}]}>
+                      {clock(l.zone, r.at, prefs.format)}
+                    </AppText>
+                    {r.name === 'sunrise' ? (
+                      <View
+                        style={visual.bell}
+                        accessible
+                        accessibilityLabel="الشروق: وقت إرشادي بلا تنبيه"
+                      />
+                    ) : (
+                      <Pressable
+                        accessibilityRole="button"
+                        accessibilityLabel={`${labels[r.name]}: ${status}. إعدادات التنبيه`}
+                        onPress={adhan}
+                        style={({pressed}) => [
+                          visual.bell,
+                          {opacity: pressed ? 0.6 : 1},
+                        ]}>
+                        <AppIcon
+                          name={
+                            enabled
+                              ? allowed
+                                ? 'bell'
+                                : 'warning'
+                              : 'bell-off'
+                          }
+                          size={22}
+                          color={foreground}
+                        />
+                      </Pressable>
+                    )}
+                  </View>
+                </View>
+              );
+            })}
+          </View>
           {!next && (
             <AppText>
               موعد الصلاة التالية خارج الحصة المحفوظة. حدّث الحصة أو اختر طريقة
@@ -222,41 +347,88 @@ export function PrayerScreen({navigation}: any) {
           }
         />
       )}
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="طريقة الحساب والتوقيت"
+        onPress={() => navigation.navigate('PrayerCalculation')}
+        style={({pressed}) => [
+          visual.method,
+          {
+            backgroundColor: pressed ? p.surfaceMuted : p.surface,
+            borderColor: p.borderSubtle,
+          },
+        ]}>
+        <AppIcon name="settings" />
+        <AppText role="caption" style={{flex: 1}}>
+          طريقة الحساب:{' '}
+          {prefs.method === 'habous'
+            ? 'حصة الوزارة المغربية'
+            : methods[prefs.method]}
+        </AppText>
+        <AppIcon name="chevron-left" size={18} />
+      </Pressable>
+      <View style={[visual.shortcuts, expanded && {flexDirection: 'column'}]}>
+        {[
+          {title: 'القبلة', icon: 'compass' as const, route: 'Qibla'},
+          {
+            title: 'إعدادات الأذان',
+            icon: 'volume' as const,
+            route: 'PrayerAdhan',
+          },
+        ].map(item => (
+          <Pressable
+            key={item.route}
+            accessibilityRole="button"
+            accessibilityLabel={item.title}
+            onPress={() => navigation.navigate(item.route)}
+            style={({pressed}) => [
+              visual.shortcut,
+              {
+                backgroundColor: pressed ? p.surfaceMuted : p.surface,
+                borderColor: p.borderSubtle,
+              },
+            ]}>
+            <AppIcon
+              name={item.icon}
+              color={mode === 'dark' ? p.accent : p.iconPrimary}
+            />
+            <AppText role="label" style={{flex: 1}}>
+              {item.title}
+            </AppText>
+            <AppIcon name="chevron-left" size={16} />
+          </Pressable>
+        ))}
+      </View>
+      <AppText role="caption" style={{color: p.textSecondary}}>
+        {prefs.method === 'habous'
+          ? 'حصة محفوظة · وزارة الأوقاف والشؤون الإسلامية'
+          : 'أوقات محسوبة وليست حصة الوزارة'}
+      </AppText>
       {l?.cityId && prefs.method === 'habous' && (
         <>
-          <AppText role="caption">
+          <AppText role="caption" style={{color: p.textSecondary}}>
             {table
-              ? `الحصة محفوظة حتى ${Object.keys(table.dates).sort().at(-1)}`
-              : 'الحصة غير محفوظة'}{' '}
-            · وزارة الأوقاف والشؤون الإسلامية
+              ? `الحصة محفوظة حتى ${ltr(Object.keys(table.dates).sort().at(-1)!)}`
+              : 'الحصة غير محفوظة'}
           </AppText>
           <Button
             secondary
-            label="تحديث حصة المدينة"
+            label={refreshing ? 'جار تحديث الحصة' : 'تحديث حصة المدينة'}
+            disabled={refreshing}
             onPress={() =>
               attempt(async () => {
-                await refreshTable(l.cityId!);
-                await load();
+                setRefreshing(true);
+                try {
+                  await refreshTable(l.cityId!);
+                  await load();
+                } finally {
+                  setRefreshing(false);
+                }
               })
             }
           />
         </>
       )}
-      <Row
-        title="اتجاه القبلة"
-        icon="compass"
-        onPress={() => navigation.navigate('Qibla')}
-      />
-      <Row
-        title="تنبيهات الصلاة والأذان"
-        icon="bell"
-        onPress={() => navigation.navigate('PrayerAdhan')}
-      />
-      <Row
-        title="طريقة الحساب والتوقيت"
-        icon="settings"
-        onPress={() => navigation.navigate('PrayerCalculation')}
-      />
       <Row
         title="مصادر المواقيت والموقع"
         icon="info"
@@ -265,6 +437,7 @@ export function PrayerScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function LocationScreen({navigation}: any) {
   const {prefs, error, load} = usePrayer(),
     [draft, setDraft] = useState({
@@ -445,11 +618,12 @@ export function QiblaScreen({navigation}: any) {
   try {
     if (l) target = bearing(l);
   } catch {}
-  const live = heading && now - heading.at < 2500 && heading.accuracy >= 2,
-    angle =
-      target === null ? 0 : normalize(target - (live ? heading!.heading : 0));
+  const live = !!heading && now - heading.at < 2500 && heading.accuracy >= 2;
   return (
-    <Page title="اتجاه القبلة" onBack={() => navigation.goBack()}>
+    <Page
+      title="القبلة"
+      onBack={() => navigation.goBack()}
+      contentStyle={visual.page}>
       <Status error={error} retry={load} />
       {!l || target === null ? (
         <StateView
@@ -461,51 +635,90 @@ export function QiblaScreen({navigation}: any) {
         />
       ) : (
         <>
-          <AppText role="sectionTitle">{l.name}</AppText>
-          <AppText>{ltr(target.toFixed(1))}° من الشمال الحقيقي</AppText>
-          <Card>
-            <AppText style={{textAlign: 'center'}}>
-              {live ? 'أعلى الجهاز ↑' : 'الشمال ↑'}
-            </AppText>
-            <View
-              accessibilityLabel={
-                live ? 'اتجاه نسبي للجهاز' : 'مخطط ثابت، الشمال إلى أعلى'
-              }
-              style={{
-                alignSelf: 'center',
-                width: 220,
-                height: 220,
-                borderRadius: 110,
-                borderWidth: 2,
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="المدينة والموقع"
+            onPress={() => navigation.navigate('PrayerLocation')}
+            style={({pressed}) => [
+              visual.location,
+              {
+                backgroundColor: pressed ? p.surfaceMuted : p.surface,
                 borderColor: p.borderSubtle,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <View style={{transform: [{rotate: `${angle}deg`}]}}>
-                <AppText
-                  style={{fontSize: 80, lineHeight: 100, textAlign: 'center'}}>
-                  ↑
-                </AppText>
-              </View>
+              },
+            ]}>
+            <View
+              style={[visual.iconCircle, {backgroundColor: p.surfaceMuted}]}>
+              <AppIcon name="location" />
             </View>
-            <AppText style={{textAlign: 'center'}}>
-              {live
-                ? 'اتجاه حي مصحح إلى الشمال الحقيقي'
-                : 'مخطط ثابت: الشمال إلى أعلى'}
+            <AppText role="sectionTitle" style={{flex: 1}}>
+              {l.name}
             </AppText>
-          </Card>
-          <AppText>
-            {live
-              ? 'ضع الجهاز بشكل مسطح بعيدا عن المعادن.'
-              : heading
-                ? 'دقة الاتجاه منخفضة أو القراءة قديمة. استخدم المخطط الثابت.'
-                : state}
+          </Pressable>
+          <View
+            accessible
+            accessibilityLabel={`اتجاه القبلة ${target.toFixed(1)} درجة من الشمال الحقيقي. ${live ? 'اتجاه حي نسبي لأعلى الجهاز' : 'مخطط ثابت، الشمال إلى أعلى'}`}>
+            <QiblaCompass
+              bearing={target}
+              heading={live ? heading!.heading : null}
+            />
+          </View>
+          <View
+            style={[
+              visual.bearing,
+              {backgroundColor: p.surface, borderColor: p.borderSubtle},
+            ]}>
+            <AppText
+              role="prayerTime"
+              style={[visual.time, {textAlign: 'center'}]}>
+              {target.toFixed(1)}°
+            </AppText>
+            <AppText
+              role="caption"
+              style={{textAlign: 'center', color: p.textSecondary}}>
+              من الشمال الحقيقي
+            </AppText>
+          </View>
+          <AppText
+            role="bodyStrong"
+            style={[visual.instruction, {backgroundColor: p.surfaceMuted}]}>
+            {live ? 'وجّه الهاتف نحو السهم' : 'مخطط ثابت: الشمال إلى أعلى'}
           </AppText>
+          <View
+            style={[
+              visual.accuracy,
+              {
+                backgroundColor: live ? p.successSurface : p.warningSurface,
+                borderColor: p.borderSubtle,
+              },
+            ]}>
+            <AppText
+              role="bodyStrong"
+              style={{flex: 1, color: live ? p.success : p.warning}}>
+              {live
+                ? 'قراءة البوصلة متاحة'
+                : heading
+                  ? 'دقة منخفضة أو قراءة قديمة'
+                  : state}
+            </AppText>
+            <AppIcon
+              name={live ? 'check' : 'warning'}
+              color={live ? p.success : p.warning}
+            />
+          </View>
           <Button
-            secondary
-            label="إرشادات معايرة البوصلة"
+            label="معايرة البوصلة"
+            icon="compass"
             onPress={() => navigation.navigate('QiblaCalibration')}
           />
+          <View style={visual.guidance}>
+            <AppIcon name="warning" size={20} color={p.accent} />
+            <AppText role="caption" style={{flex: 1, color: p.textSecondary}}>
+              ضع الجهاز بشكل مسطح بعيدا عن المعادن والأجهزة المغناطيسية.{' '}
+              {live
+                ? 'أعلى البوصلة يمثل أعلى الجهاز.'
+                : 'استخدم زاوية القبلة مع الشمال الحقيقي.'}
+            </AppText>
+          </View>
           <Button
             secondary
             label="فتح الموقع في الخرائط الخارجية"
@@ -839,3 +1052,112 @@ export function PrayerSourcesScreen({navigation}: any) {
     </Page>
   );
 }
+
+const visual = StyleSheet.create({
+  page: {gap: 10, paddingTop: 8, paddingHorizontal: 16},
+  location: {
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    gap: 10,
+    minHeight: 64,
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  iconCircle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  next: {
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    gap: 12,
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  time: {
+    writingDirection: 'ltr',
+    textAlign: 'right',
+    fontVariant: ['tabular-nums'],
+  },
+  timetable: {
+    borderRadius: 16,
+    padding: 4,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  prayerRow: {
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    minHeight: 48,
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    gap: 8,
+  },
+  prayerName: {
+    flex: 1,
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    gap: 10,
+    paddingVertical: 4,
+  },
+  bell: {
+    width: 48,
+    minHeight: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  method: {
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    gap: 10,
+    borderRadius: 14,
+    borderWidth: StyleSheet.hairlineWidth,
+    minHeight: 48,
+    padding: 10,
+  },
+  shortcuts: {flexDirection: 'row-reverse', direction: 'ltr', gap: 10},
+  shortcut: {
+    flex: 1,
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    gap: 6,
+    borderRadius: 14,
+    borderWidth: StyleSheet.hairlineWidth,
+    minHeight: 52,
+    padding: 10,
+  },
+  bearing: {
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: 10,
+  },
+  instruction: {textAlign: 'center', padding: 12, borderRadius: 12},
+  accuracy: {
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    gap: 12,
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: 12,
+  },
+  guidance: {
+    flexDirection: 'row-reverse',
+    direction: 'ltr',
+    alignItems: 'center',
+    gap: 10,
+    padding: 8,
+  },
+});

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 6 implements Android prayer location/dashboard, official finite Habous snapshots, offline timezone rules, Qibla and notification-only preferences/reconciliation. Full adhan, actual sound acquisition and unattended lifecycle/device acceptance remain open. Next M6 closure: RQ-040 then RQ-042 then RQ-044; RQ-045 onward can audit the implemented fallbacks independently.",
+  "status": "Phase 7 first visual batch RQ-051/RQ-052 implemented and Android-tested with both-theme reference comparisons. Next RQ-053, then RQ-054 through RQ-062. Four of 96 main-theme captures recorded; other 46 screens remain pending. M6 closure RQ-040/RQ-042/RQ-044 and RQ-046 final acceptance remain open.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -1425,7 +1425,7 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 45
+      "executionOrder": 57
     },
     {
       "id": "RQ-046",
@@ -1434,7 +1434,19 @@
       "milestone": "M7",
       "dependsOn": [
         "RQ-015",
-        "RQ-045"
+        "RQ-045",
+        "RQ-051",
+        "RQ-052",
+        "RQ-053",
+        "RQ-054",
+        "RQ-055",
+        "RQ-056",
+        "RQ-057",
+        "RQ-058",
+        "RQ-059",
+        "RQ-060",
+        "RQ-061",
+        "RQ-062"
       ],
       "screens": [
         "01",
@@ -1496,7 +1508,7 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 46
+      "executionOrder": 58
     },
     {
       "id": "RQ-047",
@@ -1534,7 +1546,7 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 47,
+      "executionOrder": 59,
       "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
@@ -1572,7 +1584,7 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 48
+      "executionOrder": 60
     },
     {
       "id": "RQ-049",
@@ -1604,7 +1616,7 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 49
+      "executionOrder": 61
     },
     {
       "id": "RQ-050",
@@ -1628,7 +1640,376 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
+      "executionOrder": 62
+    },
+    {
+      "id": "RQ-051",
+      "title": "Restore shared screen framing and Prayer dashboard",
+      "status": "done",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-002",
+        "RQ-003"
+      ],
+      "screens": [
+        "39"
+      ],
+      "file": "implementation/tickets/RQ-051.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Centered compact headers, theme-specific tab selection, illustrated location and next-prayer cards, one compact six-row timetable, next-prayer highlight, effective notification icons, method row and paired Qibla/adhan shortcuts. Keep live source dates, expiry/refresh and unavailable-location recovery.",
+      "touchpoints": "src/design/ui.tsx; src/navigation/MainTabNavigation.tsx; src/features/prayer/Screens.tsx",
+      "executionOrder": 45,
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-7/README.md",
+      "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
+      "remaining": "Whole-app visual/accessibility acceptance remains RQ-046. Physical compass/other native acceptance remains RQ-048; iOS testing deferred."
+    },
+    {
+      "id": "RQ-052",
+      "title": "Restore the Qibla compass design",
+      "status": "done",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-051"
+      ],
+      "screens": [
+        "40"
+      ],
+      "file": "implementation/tickets/RQ-052.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Full-width themed compass with gold rim, tick marks, cardinal points, geometric center and Kaaba pointer; city card, prominent Western bearing, accuracy state, calibration action and guidance. Rotate the compass rose and pointer consistently with true heading; preserve static north-up fallback and stop sensors off-screen.",
+      "touchpoints": "src/features/prayer/Screens.tsx; src/features/prayer/visuals.tsx",
+      "executionOrder": 46,
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-7/README.md",
+      "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
+      "remaining": "Whole-app visual/accessibility acceptance remains RQ-046. Physical compass/other native acceptance remains RQ-048; iOS testing deferred."
+    },
+    {
+      "id": "RQ-053",
+      "title": "Match calibration and city selection",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-052"
+      ],
+      "screens": [
+        "41",
+        "42"
+      ],
+      "file": "implementation/tickets/RQ-053.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Rebuild illustrated calibration steps, city search/selection list, selected-state indicators and contextual location action. Keep manual coordinate/timezone fallback, denial, stale reading and timeout states accessible.",
+      "touchpoints": "src/features/prayer/Screens.tsx",
+      "executionOrder": 47
+    },
+    {
+      "id": "RQ-054",
+      "title": "Match adhan and calculation preferences",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-053"
+      ],
+      "screens": [
+        "43",
+        "44",
+        "45"
+      ],
+      "file": "implementation/tickets/RQ-054.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Replace stacked generic buttons with reference-grouped per-prayer controls, recording rows/previews and compact adjustment controls. Match layout in both themes; show actual unavailable-recording/full-adhan states until RQ-040/RQ-042 are implemented. Never turn a screenshot sample into a selectable recording.",
+      "touchpoints": "src/features/prayer/Screens.tsx",
+      "executionOrder": 48
+    },
+    {
+      "id": "RQ-055",
+      "title": "Match launch, onboarding and guidance",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-054"
+      ],
+      "screens": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07"
+      ],
+      "file": "implementation/tickets/RQ-055.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Restore hero artwork, step indicators, compact typography, content grouping and bottom actions. Preserve first-run/revisit flow, skip/back, saved preferences and pending deep links.",
+      "touchpoints": "src/screens/EducationScreens.tsx; src/App.tsx",
+      "executionOrder": 49
+    },
+    {
+      "id": "RQ-056",
+      "title": "Match devotional home, readers and counters",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-055"
+      ],
+      "screens": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "20"
+      ],
+      "file": "implementation/tickets/RQ-056.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Match home hero/action layout, illustrated category cards, reading surfaces, progress/counter controls, tasbih and page-reset sheet. Preserve exact devotional text, stable IDs, counts, playback and scoped reset; include bookmarks/search detail routes using the same visual language.",
+      "touchpoints": "src/screens; src/features/devotional; src/features/audio",
       "executionOrder": 50
+    },
+    {
+      "id": "RQ-057",
+      "title": "Match More, settings, reminders and information",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-056"
+      ],
+      "screens": [
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "21",
+        "46",
+        "47"
+      ],
+      "file": "implementation/tickets/RQ-057.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Restore grouped menu rows, icons, theme/text controls, reminder time controls, About/legal typography, unavailable-link recovery and global-reset sheet. Preserve settings, reminder schedules and reset scope.",
+      "touchpoints": "src/screens/FoundationScreens.tsx; src/screens/AboutScreen; src/features/settings",
+      "executionOrder": 51
+    },
+    {
+      "id": "RQ-058",
+      "title": "Match Quran library and mushaf downloads",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-057"
+      ],
+      "screens": [
+        "22",
+        "23",
+        "24"
+      ],
+      "file": "implementation/tickets/RQ-058.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Match library header/continue-reading card, surah rows, Warsh/Hafs choice cards and selected-pack download composition. Use real edition metadata, file sizes and progress; preserve installed content and bookmarks when switching edition.",
+      "touchpoints": "src/features/quran/LibraryScreens.tsx",
+      "executionOrder": 52
+    },
+    {
+      "id": "RQ-059",
+      "title": "Match Quran readers, translations and preferences",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-058"
+      ],
+      "screens": [
+        "25",
+        "26",
+        "27",
+        "28",
+        "29"
+      ],
+      "file": "implementation/tickets/RQ-059.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Match reader chrome, verse surfaces/actions, bilingual translation blocks, translation download rows and reading controls. Keep exact King Fahd Warsh text with matching font, Hafs source text, separate Western badges and LTR French/English. Preserve independent edition positions; unavailable translation states remain explicit.",
+      "touchpoints": "src/features/quran/ReaderScreen.tsx; src/features/quran/DetailScreens.tsx",
+      "executionOrder": 53
+    },
+    {
+      "id": "RQ-060",
+      "title": "Match Quran search, bookmarks and sources",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-059"
+      ],
+      "screens": [
+        "30",
+        "31",
+        "32"
+      ],
+      "file": "implementation/tickets/RQ-060.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Match search field/filter/result hierarchy, bookmark groups and source/edition cards. Include empty/no-match/missing-pack recovery and user-controlled reporting; retain canonical locators and truthful provenance.",
+      "touchpoints": "src/features/quran/DetailScreens.tsx",
+      "executionOrder": 54
+    },
+    {
+      "id": "RQ-061",
+      "title": "Match reciters, audio selection and player",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-060"
+      ],
+      "screens": [
+        "33",
+        "34",
+        "36",
+        "38"
+      ],
+      "file": "implementation/tickets/RQ-061.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Match reciter cards, surah checkboxes, selected-size summary, offline library, mini-player and full-player composition. Retain actual supported controls, recording identity, download selection, seek/repeat/speed/timer and media-session ownership. No fake duration or recording.",
+      "touchpoints": "src/features/quran/AudioScreens.tsx; src/features/audio/Player.tsx",
+      "executionOrder": 55
+    },
+    {
+      "id": "RQ-062",
+      "title": "Match queue, storage and download recovery",
+      "status": "planned",
+      "milestone": "M7-UI",
+      "dependsOn": [
+        "RQ-061"
+      ],
+      "screens": [
+        "35",
+        "37",
+        "48"
+      ],
+      "file": "implementation/tickets/RQ-062.md",
+      "acceptanceCriteria": [
+        "Both light and dark Android captures linked beside their original references; layout, artwork, typography, spacing, controls and navigation compared explicitly",
+        "Western 0–9, compact headings, correct RTL/LTR runs and minimum 48 dp actions; no clipped text at 200% font scale or 320 dp width",
+        "Real data, offline/error/permission states and existing persistence/actions preserved; intentional differences documented without claiming unsupported features",
+        "Remaining visual differences listed; emulator screenshots are not physical-device, TalkBack or iOS acceptance"
+      ],
+      "specifications": [
+        "specs/DESIGN-SYSTEM.md",
+        "qa/ACCEPTANCE.md"
+      ],
+      "completionIntegrationRequires": [],
+      "scope": "Match grouped progress rows, storage summary/categories, deletion confirmation and paused/failed-download recovery. Preserve durable job state, real sizes, resume/retry/cancel and active-file safety.",
+      "touchpoints": "src/features/downloads/Screens.tsx",
+      "executionOrder": 56
     }
   ],
   "executionPlan": "implementation/IMPLEMENTATION-ORDER.md"
