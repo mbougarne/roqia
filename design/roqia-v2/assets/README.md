@@ -9,3 +9,7 @@ Illustrations have transparent backgrounds, a 240 × 180 viewBox (96 × 96 for t
 The existing Arabic variable font is copied unchanged, with its OFL license. UI text uses this font. Quran fonts belong to the content edition pack and must be validated with that edition. Latin text can use the native sans-serif fallback.
 
 Copy/adopt only required assets into the runtime in the relevant ticket. No automatic import or app configuration has been added. Do not bundle reference screenshots. Existing launcher icons and the app identity remain until a separate launcher/icon review; these illustrations are not launcher assets.
+
+## Phase 7 live prayer artwork
+
+The prayer landmark, ornamental divider and Qibla compass are original SVG primitives in `src/features/prayer/visuals.tsx`, colored exclusively from the kit's semantic palette. The compass is a live component: its rose rotates by negative true heading, its pointer by bearing minus heading, and its Kaaba marker stays upright. With no reliable heading it becomes a labeled north-up diagram. These components contain no scripture, publisher logo or cropped screenshot pixels. Keep their geometry in the component rather than exporting a static compass image that would misrepresent live heading. Existing standalone icons remain in `icons/`.

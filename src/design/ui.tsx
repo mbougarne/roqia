@@ -12,6 +12,8 @@ import {
   View,
   type TextProps,
   type ViewProps,
+  type StyleProp,
+  type ViewStyle,
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {themeContext} from '../store';
@@ -218,10 +220,12 @@ export function Page({
   title,
   children,
   onBack,
+  contentStyle,
 }: {
   title: string;
   children: React.ReactNode;
   onBack?: () => void;
+  contentStyle?: StyleProp<ViewStyle>;
 }) {
   const p = usePalette();
   return (
@@ -233,11 +237,14 @@ export function Page({
         <AppText
           accessibilityRole="header"
           role="screenTitle"
-          style={{flex: 1}}>
+          style={{flex: 1, textAlign: 'center'}}>
           {title}
         </AppText>
+        {onBack && <View style={{width: 48}} />}
       </View>
-      <ScrollView contentContainerStyle={styles.page}>{children}</ScrollView>
+      <ScrollView contentContainerStyle={[styles.page, contentStyle]}>
+        {children}
+      </ScrollView>
     </View>
   );
 }

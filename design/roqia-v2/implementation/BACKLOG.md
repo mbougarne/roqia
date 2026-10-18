@@ -2,9 +2,9 @@
 
 **For day-to-day work, follow [IMPLEMENTATION-ORDER.md](IMPLEMENTATION-ORDER.md) from top to bottom.** This file remains the ticket catalog, sorted by stable ID; its numerical order is not the execution sequence.
 
-50 local implementation tickets. None has been created in an external issue tracker. The first 10 execution steps have Android feasibility evidence; their ticket statuses distinguish work in progress from blocked source/review gates. No feature is marked complete solely from a spike. Dependencies are start dependencies; integration completion requirements are explicit inside each ticket.
+62 local implementation tickets. None has been created in an external issue tracker. The first 10 execution steps have Android feasibility evidence; their ticket statuses distinguish work in progress from blocked source/review gates. No feature is marked complete solely from a spike. Dependencies are start dependencies; integration completion requirements are explicit inside each ticket.
 
-Phase 2 delivers shared foundations for steps 11–18 with [Android validation](../../../docs/implementation/phase-2/README.md). Phases 3 and 4 subsequently implemented the existing-screen redesign and Quran runtime. Phase 5 delivers [normal Warsh/Hafs downloads](../../../docs/implementation/phase-5/README.md); [Phase 6](../../../docs/implementation/phase-6/README.md) now adds Android prayer/Qibla and notification fallback. Continue M6 closure at RQ-040 → RQ-042 → RQ-044 as listed in the ordered plan. Unchecked source, signed-upgrade, accessibility and device acceptance gates remain open.
+Phase 2 delivers shared foundations for steps 11–18 with [Android validation](../../../docs/implementation/phase-2/README.md). Phases 3 and 4 subsequently implemented the existing-screen redesign and Quran runtime. Phase 5 delivers [normal Warsh/Hafs downloads](../../../docs/implementation/phase-5/README.md); [Phase 6](../../../docs/implementation/phase-6/README.md) now adds Android prayer/Qibla and notification fallback. RQ-051/RQ-052 now have [both-theme Android comparisons](../../../docs/implementation/phase-7/README.md). The current authorized pickup is RQ-053 → RQ-062 visual implementation, followed by remaining M6 closure and final acceptance as listed in the ordered plan. Unchecked source, signed-upgrade, accessibility and device acceptance gates remain open.
 
 Early feasibility tickets RQ-016, RQ-020, RQ-032, RQ-037 and RQ-040 should be resolved before dependent feature work is committed to a release. Existing-feature UI can proceed independently.
 
@@ -55,11 +55,24 @@ Early feasibility tickets RQ-016, RQ-020, RQ-032, RQ-037 and RQ-040 should be re
 | [RQ-043](tickets/RQ-043.md) | Implement calculation and time preferences | M6 | RQ-036, RQ-037, RQ-038 |
 | [RQ-044](tickets/RQ-044.md) | Reconcile notifications across lifecycle/time changes | M6 | RQ-014, RQ-041, RQ-042, RQ-043 |
 | [RQ-045](tickets/RQ-045.md) | Complete missing, offline and permission states | M7 | RQ-006, RQ-012, RQ-013, RQ-023, RQ-027, RQ-028, RQ-029, RQ-030, RQ-035, RQ-039, RQ-044 |
-| [RQ-046](tickets/RQ-046.md) | Verify visual parity and accessibility | M7 | RQ-015, RQ-045 |
+| [RQ-046](tickets/RQ-046.md) | Verify visual parity and accessibility | M7 | RQ-015, RQ-045, RQ-051–RQ-062 |
 | [RQ-047](tickets/RQ-047.md) | Verify religious content and media integrity | M7 | RQ-018, RQ-024, RQ-025, RQ-026, RQ-029, RQ-031, RQ-035, RQ-042 |
 | [RQ-048](tickets/RQ-048.md) | Verify native offline and upgrade journeys | M7 | RQ-005, RQ-035, RQ-039, RQ-044, RQ-045 |
 | [RQ-049](tickets/RQ-049.md) | Measure performance and app/storage size | M7 | RQ-035, RQ-044, RQ-045 |
 | [RQ-050](tickets/RQ-050.md) | Prepare signed release candidate and rollout | M7 | RQ-046, RQ-047, RQ-048, RQ-049 |
+
+| [RQ-051](tickets/RQ-051.md) | Restore shared screen framing and Prayer dashboard | M7-UI | RQ-002, RQ-003 |
+| [RQ-052](tickets/RQ-052.md) | Restore the Qibla compass design | M7-UI | RQ-051 |
+| [RQ-053](tickets/RQ-053.md) | Match calibration and city selection | M7-UI | RQ-052 |
+| [RQ-054](tickets/RQ-054.md) | Match adhan and calculation preferences | M7-UI | RQ-053 |
+| [RQ-055](tickets/RQ-055.md) | Match launch, onboarding and guidance | M7-UI | RQ-054 |
+| [RQ-056](tickets/RQ-056.md) | Match devotional home, readers and counters | M7-UI | RQ-055 |
+| [RQ-057](tickets/RQ-057.md) | Match More, settings, reminders and information | M7-UI | RQ-056 |
+| [RQ-058](tickets/RQ-058.md) | Match Quran library and mushaf downloads | M7-UI | RQ-057 |
+| [RQ-059](tickets/RQ-059.md) | Match Quran readers, translations and preferences | M7-UI | RQ-058 |
+| [RQ-060](tickets/RQ-060.md) | Match Quran search, bookmarks and sources | M7-UI | RQ-059 |
+| [RQ-061](tickets/RQ-061.md) | Match reciters, audio selection and player | M7-UI | RQ-060 |
+| [RQ-062](tickets/RQ-062.md) | Match queue, storage and download recovery | M7-UI | RQ-061 |
 
 ## Completing existing audio integration
 

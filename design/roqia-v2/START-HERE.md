@@ -24,6 +24,7 @@ The first useful deliverable is a stable app shell with the new typography, colo
 | M4: Quran | Edition choice, readers, translations, search and bookmarks | RQ-023–RQ-030; offline and source-integrity evidence |
 | M5: listening | One audio session and selective downloads | RQ-031–RQ-035; lock-screen, focus and restart evidence |
 | M6: prayer | Location, calculations, Qibla and reliable adhan | RQ-036–RQ-044; real Android device matrix |
+| M7-UI: visual implementation | All 48 screens matched in both themes | RQ-051–RQ-062, then RQ-046 final visual/accessibility audit |
 | M7: release | Failure states, accessibility, performance, upgrade and release verification | RQ-045–RQ-050; signed internal-track candidate |
 
 Milestones describe outcomes, not calendar estimates. Tickets have dependencies; independent feasibility work can happen early. A visual screen is not complete until its missing/error/offline/permission states and relevant acceptance checks work.

@@ -65,7 +65,7 @@ import {resolveLink, type Tabs, type RootRoutes} from './routes';
 const Tab = createBottomTabNavigator<Tabs>(),
   Stack = createNativeStackNavigator<RootRoutes>();
 const labels: Record<keyof Tabs, {title: string; icon: IconName}> = {
-  Home: {title: 'الرقية', icon: 'shield'},
+  Home: {title: 'الرقية', icon: 'headphones'},
   Adkar: {title: 'الأذكار', icon: 'sun'},
   Quran: {title: 'القرآن', icon: 'book'},
   Prayer: {title: 'الصلاة', icon: 'mosque'},
@@ -73,6 +73,7 @@ const labels: Record<keyof Tabs, {title: string; icon: IconName}> = {
 };
 function TabBar({state, navigation: tabs}: BottomTabBarProps) {
   const p = usePalette();
+  const {mode} = useContext(themeContext);
   return (
     <View
       style={{
@@ -104,22 +105,52 @@ function TabBar({state, navigation: tabs}: BottomTabBarProps) {
                 minHeight: 64,
                 paddingVertical: 8,
                 alignItems: 'center',
-                gap: 4,
-                backgroundColor: selected ? p.surfaceMuted : p.surface,
+                gap: 2,
               }}>
-              <AppIcon
-                name={meta.icon}
-                color={selected ? p.iconPrimary : p.textSecondary}
-              />
+              <View
+                style={{
+                  width: 40,
+                  height: 36,
+                  borderRadius: 20,
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor:
+                    selected && mode === 'light' ? p.surfaceMuted : undefined,
+                }}>
+                <AppIcon
+                  name={meta.icon}
+                  color={
+                    selected
+                      ? mode === 'dark'
+                        ? p.accent
+                        : p.iconPrimary
+                      : p.textSecondary
+                  }
+                />
+              </View>
               <AppText
                 role="tabLabel"
                 style={{
                   textAlign: 'center',
                   width: '100%',
-                  color: selected ? p.textPrimary : p.textSecondary,
+                  color: selected
+                    ? mode === 'dark'
+                      ? p.accent
+                      : p.textPrimary
+                    : p.textSecondary,
                 }}>
                 {meta.title}
               </AppText>
+              <View
+                style={{
+                  height: 2,
+                  width: 24,
+                  borderRadius: 1,
+                  backgroundColor:
+                    selected && mode === 'dark' ? p.accent : 'transparent',
+                }}
+              />
             </Pressable>
           );
         })}
@@ -133,11 +164,11 @@ function MainTabs() {
       tabBar={props => <TabBar {...props} />}
       screenOptions={{headerShown: false}}>
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Quran" component={QuranLibraryScreen} />
       <Tab.Screen
         name="Adkar"
         component={AdkarMenuScreen as React.ComponentType<any>}
       />
-      <Tab.Screen name="Quran" component={QuranLibraryScreen} />
       <Tab.Screen name="Prayer" component={PrayerScreen} />
       <Tab.Screen name="More" component={MoreScreen} />
     </Tab.Navigator>
