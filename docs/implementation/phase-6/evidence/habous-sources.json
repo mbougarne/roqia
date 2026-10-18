@@ -1,0 +1,57 @@
+[
+  {
+    "cityId": "58",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=58",
+    "sha256": "3c5afbb47b59727622a13c26f1e5ce9d31f6d1ebddbeee15c79d9322aa438f30"
+  },
+  {
+    "cityId": "1",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=1",
+    "sha256": "ff79e891fd3e451265aa2e21a1255a9cb7c26bab8e902381bcd23ff3516611bf"
+  },
+  {
+    "cityId": "81",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=81",
+    "sha256": "11979c027da892ec70c5204b7a2f903fcd4699f03cd6e8ed8c52bbefb6dc71eb"
+  },
+  {
+    "cityId": "14",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=14",
+    "sha256": "6f2aaee0fd367ba575faaf79a0d4cc6ed4ac83e64a85726d01c53ef648849040"
+  },
+  {
+    "cityId": "104",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=104",
+    "sha256": "56d80b38ef702cd971f3660df40fefed5b315c251bea044a9b35d398b2b88883"
+  },
+  {
+    "cityId": "117",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=117",
+    "sha256": "640f6b0a40b950571ce5b756876e89a67c14ab6e9278830ff7e3d04fb2963633"
+  },
+  {
+    "cityId": "99",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=99",
+    "sha256": "a287c0b2fdc9cd5dc79be1986b122abf79155c9474c222b8f0431e16b1a99ad9"
+  },
+  {
+    "cityId": "31",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=31",
+    "sha256": "db8abe1bc886179ebd23837d7f4cf7d0c256a0385ed92cdd2fd4e101520666cf"
+  },
+  {
+    "cityId": "7",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=7",
+    "sha256": "f8e937ff0ba62a72bc62b168b241a7c0e45f33b785564421325995e3218631e3"
+  },
+  {
+    "cityId": "15",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=15",
+    "sha256": "bf8f4a5a58cceb52dcb2bf5c9530b3075027481b0f4a65cd1292e0156067b6aa"
+  },
+  {
+    "cityId": "23",
+    "url": "https://www.habous.gov.ma/prieres/index.php?ville=23",
+    "sha256": "7763327c4508f267a98279ddac1c0975ac7e90cdf5fa756f0b9c892d294cec96"
+  }
+]

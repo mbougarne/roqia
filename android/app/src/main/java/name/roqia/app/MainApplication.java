@@ -27,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           packages.add(new name.roqia.app.reader.ReaderPackage());
+          packages.add(new name.roqia.app.prayer.PrayerPackage());
           if ("debug".equals(BuildConfig.BUILD_TYPE)) {
             try {
               packages.add((ReactPackage) Class.forName("name.roqia.app.feasibility.ProbePackage").getDeclaredConstructor().newInstance());

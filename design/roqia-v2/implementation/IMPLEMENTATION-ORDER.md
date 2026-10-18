@@ -16,7 +16,7 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
 
-Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; phase 5 uses `phase_5/quran-download-delivery`. The next group uses `phase_6/<short-description>`.
+Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; phase 5 uses `phase_5/quran-download-delivery`. Phase 6 uses `phase_6/prayer-qibla-adhan`. Subsequent phase branches retain the same numbered convention.
 
 ## Ordered checklist
 
@@ -208,7 +208,7 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 **Phase 5 delivery checkpoint — 18 October 2026:** [original-source Quran downloads](../../../docs/implementation/phase-5/README.md) now replace the empty normal catalog. Warsh uses the unchanged King Fahd archive and matching font; Hafs uses original Tanzil text. On-device preparation verifies every chapter. This closes the concrete download/import implementation gap; it does not claim completed manual Arabic review, translation/audio delivery or full platform/release acceptance.
 
-**After phase 5 review, start phase 6 at step 38 / RQ-036.** Recheck RQ-037 before enabling prayer times and RQ-040 before promising full adhan. Do not silently skip those gates or treat independent UI/runtime work as approval of unverified content or native behavior.
+**Phase 6 implements the Android runtime for steps 38–44 with notification-only fallback.** [Evidence and exact remaining work](../../../docs/implementation/phase-6/README.md). RQ-037 now supports an attributed finite Habous timetable and pinned offline timezone rules; the custom Morocco formula is still unavailable. Full adhan and sound acquisition remain open. **Next M6 closure, in order: RQ-040 native full playback → RQ-042 attributable normal/Fajr recordings and previews → RQ-044 unattended lifecycle/device matrix.** Steps 45 onward may audit implemented fallback behavior independently; do not treat these unresolved capabilities as delivered.
 
 28. [ ] **[RQ-023 — Build Quran library and edition selection](tickets/RQ-023.md)**
 
@@ -274,11 +274,15 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 38. [ ] **[RQ-036 — Implement manual city and one-shot location](tickets/RQ-036.md)**
 
+   **Phase 6:** Offline city choices, explicit manual coordinates/zone and foreground one-shot Android GPS are implemented. Location is persisted without background tracking or automatic travel changes. **Remaining:** Physical-device location accuracy/timeout matrix and iOS adapter acceptance remain.
+
    **Deliver:** Bundle verified Moroccan city coordinates/zones and manual coordinate/zone fallback. Add contextual foreground GPS request, stale/denied/timeout handling and explicit travel behavior.
 
    **Finish when:** Prayer/Qibla work with manual city without location permission; Coordinates/zone/source are persisted correctly; No background tracking or silent city changes.
 
 39. [ ] **[RQ-038 — Build prayer dashboard](tickets/RQ-038.md)**
+
+   **Phase 6:** Prayer tab displays source-backed times, next prayer/countdown, tomorrow rollover, informational sunrise, source expiry/refresh and effective notification state. Missing location/table has a recovery action. **Remaining:** Final visual/accessibility parity, broader dates/devices and iOS acceptance remain.
 
    **Deliver:** Display calculated/attributed schedule, city, next prayer/countdown, informational sunrise and links to Qibla/adhan/method settings. Show effective notification modes.
 
@@ -286,11 +290,15 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 40. [ ] **[RQ-039 — Implement Qibla and sensor calibration states](tickets/RQ-039.md)**
 
+   **Phase 6:** Great-circle bearing and Android rotation-vector heading include display remapping and east-positive declination once. Circular smoothing, live/stale/low-accuracy states, fixed north-up fallback, calibration guidance and external map are implemented. **Remaining:** Physical compass/rotation/accuracy matrix and iOS heading adapter remain; emulator sensor output does not establish real compass accuracy.
+
    **Deliver:** Implement sourced-coordinate bearing, true-heading adapter, display rotation and circular smoothing. Add accuracy/no-sensor states, guidance and external-map/north-up fallback.
 
    **Finish when:** True and magnetic references are not mixed; No-sensor state never pretends to be live compass; Sensor listeners stop off-screen.
 
 41. [ ] **[RQ-041 — Implement per-prayer adhan preferences](tickets/RQ-041.md)**
+
+   **Phase 6:** Five prayer modes and optional pre-reminders persist before serialized reconciliation. Permission/channel state and notification coverage are visible; full mode explicitly falls back to notification only. Sunrise is excluded. **Remaining:** Full-adhan playback, Quran pause/focus integration and physical delivery matrix depend on RQ-040/RQ-042.
 
    **Deliver:** Add off/notification/full modes, pre-prayer reminder and effective permission state. Save desired settings then reconcile; pause Quran for adhan and leave it paused afterward.
 
@@ -298,17 +306,23 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 42. [ ] **[RQ-042 — Acquire sounds and implement previews](tickets/RQ-042.md)**
 
+   **Phase 6:** The sounds route shows an explicit unavailable state and links to system notification-sound settings. It makes no fabricated Moroccan/Makkah/Fajr attribution and does not publish the unidentified bundled recording. **Remaining:** Acquire attributable normal/Fajr recordings, implement real preview/download selection and verify audio-focus/volume behavior after RQ-040. This ticket is not complete.
+
    **Deliver:** Validate actual Moroccan/Makkah/short sound sources and normal/Fajr variants. Reuse bundled adan.mp3 only after review. Add preview, download status and supported volume behavior.
 
    **Finish when:** Attribution and Fajr variant match actual audio; No fabricated recording or synthetic phrase splice; Preview stops correctly and respects system audio policy.
 
 43. [ ] **[RQ-043 — Implement calculation and time preferences](tickets/RQ-043.md)**
 
+   **Phase 6:** Explicit Habous/named-method selection, Asr/high-latitude settings, bounded offsets applied once, Western 12/24-hour output and confirmed reset invalidate the scheduler generation. **Remaining:** Physical timezone/travel matrix and iOS acceptance remain. No unapproved custom Morocco formula is exposed.
+
    **Deliver:** Expose method, supported Asr/high-latitude options, bounded per-prayer minute adjustments and 12/24-hour formatting. Reset defaults explicitly; changing settings invalidates schedules.
 
    **Finish when:** Offsets apply once; Setting changes update dashboard and scheduler generation; Unsupported/undefined method states are explained.
 
 44. [ ] **[RQ-044 — Reconcile notifications across lifecycle/time changes](tickets/RQ-044.md)**
+
+   **Phase 6:** Revision-based IDs, future-only three-day planning, 27 prayer/48 overall trigger budget, owned-only cancellation, retry after partial failure, launch/resume and live clock/date/zone reconciliation are implemented. UI discloses the coverage horizon and OS delays. **Remaining:** Boot/package replacement, Doze, long inactivity and physical-device delivery/renewal acceptance remain. Saved Notifee triggers are not proof of indefinite unattended renewal. No full adhan is scheduled.
 
    **Deliver:** Implement deterministic IDs/generations, bounded scheduling window, cancellation/replenishment, boot/package/time/zone/permission handling and covered-until diagnostics.
 

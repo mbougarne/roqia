@@ -31,6 +31,14 @@ export type RootRoutes = {
   Terms: undefined;
   Sources: undefined;
   Reminders: undefined;
+  PrayerLocation: undefined;
+  Qibla: undefined;
+  QiblaCalibration: undefined;
+  PrayerCalculation: undefined;
+  PrayerAdhan: undefined;
+  PrayerSounds: undefined;
+  PrayerSources: undefined;
+
   QuranEditions: undefined;
   QuranDownload: {editionId: EditionId};
   QuranReader: {
@@ -102,6 +110,14 @@ export function resolveLink(url: string): LinkTarget {
     'quran/audio': {screen: 'QuranAudio'},
     'quran/offline-audio': {screen: 'QuranOfflineAudio'},
     prayer: {tab: 'Prayer'},
+    'prayer/location': {screen: 'PrayerLocation'},
+    qibla: {screen: 'Qibla'},
+    'qibla/calibration': {screen: 'QiblaCalibration'},
+    'prayer/calculation': {screen: 'PrayerCalculation'},
+    'prayer/adhan': {screen: 'PrayerAdhan'},
+    'prayer/sounds': {screen: 'PrayerSounds'},
+    'prayer/sources': {screen: 'PrayerSources'},
+
     settings: {screen: 'Settings'},
     storage: {screen: 'Storage'},
     downloads: {screen: 'Downloads'},

@@ -1,0 +1,7 @@
+{
+  "source": "http://crt.sectigo.com/SectigoPublicServerAuthenticationCADVR36.crt",
+  "sourceDeclaredBy": "Habous leaf certificate Authority Information Access",
+  "retrievedAt": "2026-10-18",
+  "pemSha256": "b40358316fd9e1caaaab92c382927d2c13ef51b481eec9371a82e16c86f2a687",
+  "policy": "Untrusted chain candidate only. Android system trust roots, certificate validation and default hostname verifier remain required. Transport is scoped to www.habous.gov.ma and rejects redirects."
+}

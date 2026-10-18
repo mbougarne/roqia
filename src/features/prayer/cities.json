@@ -1,0 +1,101 @@
+[
+  {
+    "cityId": "58",
+    "name": "الدار البيضاء",
+    "latitude": 33.588,
+    "longitude": -7.611,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "1",
+    "name": "الرباط",
+    "latitude": 34.013,
+    "longitude": -6.833,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "81",
+    "name": "فاس",
+    "latitude": 34.033,
+    "longitude": -5,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "14",
+    "name": "طنجة",
+    "latitude": 35.767,
+    "longitude": -5.8,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "104",
+    "name": "مراكش",
+    "latitude": 31.634,
+    "longitude": -8,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "117",
+    "name": "أكادير",
+    "latitude": 30.42,
+    "longitude": -9.598,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "99",
+    "name": "مكناس",
+    "latitude": 33.894,
+    "longitude": -5.547,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "31",
+    "name": "وجدة",
+    "latitude": 34.681,
+    "longitude": -1.909,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "7",
+    "name": "القنيطرة",
+    "latitude": 34.261,
+    "longitude": -6.58,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "15",
+    "name": "تطوان",
+    "latitude": 35.578,
+    "longitude": -5.368,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  },
+  {
+    "cityId": "23",
+    "name": "الحسيمة",
+    "latitude": 35.252,
+    "longitude": -3.937,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
+  }
+]

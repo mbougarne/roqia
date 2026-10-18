@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 5 delivers downloadable original-source Warsh/Hafs Quran in the normal Android app. Manual Arabic review remains owner-deferred; older Android, iOS, translation/audio and final release acceptance remain explicit. Next implementation pickup: phase 6, step 38 / RQ-036.",
+  "status": "Phase 6 implements Android prayer location/dashboard, official finite Habous snapshots, offline timezone rules, Qibla and notification-only preferences/reconciliation. Full adhan, actual sound acquisition and unattended lifecycle/device acceptance remain open. Next M6 closure: RQ-040 then RQ-042 then RQ-044; RQ-045 onward can audit the implemented fallbacks independently.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -1116,7 +1116,7 @@
     {
       "id": "RQ-036",
       "title": "Implement manual city and one-shot location",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M6",
       "dependsOn": [
         "RQ-004",
@@ -1135,12 +1135,17 @@
         "specs/PRAYER.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 38
+      "executionOrder": 38,
+      "scope": "android",
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
+      "progress": "Offline city choices, explicit manual coordinates/zone and foreground one-shot Android GPS are implemented. Location is persisted without background tracking or automatic travel changes.",
+      "remaining": "Physical-device location accuracy/timeout matrix and iOS adapter acceptance remain."
     },
     {
       "id": "RQ-037",
       "title": "Validate local prayer engine and Morocco profile",
-      "status": "blocked",
+      "status": "in_progress",
       "milestone": "M0",
       "dependsOn": [
         "RQ-001"
@@ -1160,16 +1165,16 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 9,
-      "evidence": "../../../docs/feasibility/android/README.md",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "android",
-      "progress": "Pinned Adhan 4.4.6; added civil-date/UTC/offset/polar tests and 12 Habous comparisons across three cities. Research-only 19/17 profile remains unapproved. Detected stale Android Intl after Morocco September 2026 transition.",
-      "remaining": "Validate authoritative method parameters and seasonal residuals, choose reviewed offline tzdata for stale Android ICU, and verify it in Hermes. Do not ship a fixed UTC+1 assumption."
+      "progress": "The default Moroccan path now uses 330 exact Habous city/date schedules with provenance, expiry and explicit refresh. IANA 2026c transitions remove dependence on stale ICU. Named Adhan methods are explicit alternatives.",
+      "remaining": "The research-only custom Morocco 19/17 profile remains unapproved. Seasonal formula validation is still required before offering it; it is not a fallback for expired tables."
     },
     {
       "id": "RQ-038",
       "title": "Build prayer dashboard",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M6",
       "dependsOn": [
         "RQ-003",
@@ -1189,12 +1194,17 @@
         "specs/PRAYER.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 39
+      "executionOrder": 39,
+      "scope": "android",
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
+      "progress": "Prayer tab displays source-backed times, next prayer/countdown, tomorrow rollover, informational sunrise, source expiry/refresh and effective notification state. Missing location/table has a recovery action.",
+      "remaining": "Final visual/accessibility parity, broader dates/devices and iOS acceptance remain."
     },
     {
       "id": "RQ-039",
       "title": "Implement Qibla and sensor calibration states",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M6",
       "dependsOn": [
         "RQ-036"
@@ -1213,7 +1223,12 @@
         "specs/PRAYER.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 40
+      "executionOrder": 40,
+      "scope": "android",
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
+      "progress": "Great-circle bearing and Android rotation-vector heading include display remapping and east-positive declination once. Circular smoothing, live/stale/low-accuracy states, fixed north-up fallback, calibration guidance and external map are implemented.",
+      "remaining": "Physical compass/rotation/accuracy matrix and iOS heading adapter remain; emulator sensor output does not establish real compass accuracy."
     },
     {
       "id": "RQ-040",
@@ -1249,7 +1264,7 @@
     {
       "id": "RQ-041",
       "title": "Implement per-prayer adhan preferences",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M6",
       "dependsOn": [
         "RQ-038",
@@ -1268,12 +1283,17 @@
         "specs/PRAYER.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 41
+      "executionOrder": 41,
+      "scope": "android",
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
+      "progress": "Five prayer modes and optional pre-reminders persist before serialized reconciliation. Permission/channel state and notification coverage are visible; full mode explicitly falls back to notification only. Sunrise is excluded.",
+      "remaining": "Full-adhan playback, Quran pause/focus integration and physical delivery matrix depend on RQ-040/RQ-042."
     },
     {
       "id": "RQ-042",
       "title": "Acquire sounds and implement previews",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M6",
       "dependsOn": [
         "RQ-031",
@@ -1294,12 +1314,17 @@
         "specs/PRAYER.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 42
+      "executionOrder": 42,
+      "scope": "android",
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
+      "progress": "The sounds route shows an explicit unavailable state and links to system notification-sound settings. It makes no fabricated Moroccan/Makkah/Fajr attribution and does not publish the unidentified bundled recording.",
+      "remaining": "Acquire attributable normal/Fajr recordings, implement real preview/download selection and verify audio-focus/volume behavior after RQ-040. This ticket is not complete."
     },
     {
       "id": "RQ-043",
       "title": "Implement calculation and time preferences",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M6",
       "dependsOn": [
         "RQ-036",
@@ -1319,12 +1344,17 @@
         "specs/PRAYER.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 43
+      "executionOrder": 43,
+      "scope": "android",
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
+      "progress": "Explicit Habous/named-method selection, Asr/high-latitude settings, bounded offsets applied once, Western 12/24-hour output and confirmed reset invalidate the scheduler generation.",
+      "remaining": "Physical timezone/travel matrix and iOS acceptance remain. No unapproved custom Morocco formula is exposed."
     },
     {
       "id": "RQ-044",
       "title": "Reconcile notifications across lifecycle/time changes",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M6",
       "dependsOn": [
         "RQ-014",
@@ -1347,7 +1377,12 @@
         "specs/PRAYER.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 44
+      "executionOrder": 44,
+      "scope": "android",
+      "verifiedOn": "2026-10-18",
+      "evidence": "../../../docs/implementation/phase-6/README.md",
+      "progress": "Revision-based IDs, future-only three-day planning, 27 prayer/48 overall trigger budget, owned-only cancellation, retry after partial failure, launch/resume and live clock/date/zone reconciliation are implemented. UI discloses the coverage horizon and OS delays.",
+      "remaining": "Boot/package replacement, Doze, long inactivity and physical-device delivery/renewal acceptance remain. Saved Notifee triggers are not proof of indefinite unattended renewal. No full adhan is scheduled."
     },
     {
       "id": "RQ-045",
