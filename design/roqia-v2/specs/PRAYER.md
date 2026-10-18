@@ -10,6 +10,10 @@ Store coordinates, city ID/name, zone, source (manual/GPS), accuracy and acquisi
 
 Use Africa/Casablanca with current IANA rules, including Ramadan-related offset changes; never hard-code UTC+1 or add 24 hours to calculate the next civil day. Test Ramadan transitions, midnight, year change and device zone differing from selected city. If zone data is outdated, disclose/repair it through the supported OS/data update path.
 
+## Phase 6 implementation decision
+
+The current Moroccan default is an attributed Habous city/date snapshot with explicit expiry and refresh, not the unvalidated research formula. Eleven cities are bundled for 2026-10-13 through 2026-11-11. Expiry never silently selects another method. Prayer date/time conversion uses bundled IANA 2026c transitions, independent of Android ICU, bounded to 2024–2030. See [phase 6 provenance and limitations](../../../docs/implementation/phase-6/README.md). Full adhan remains notification-only fallback pending native playback and actual normal/Fajr recording acceptance.
+
 ## Prayer calculation
 
 Adhan JS is the preferred local calculation candidate. It accepts coordinates/date/parameters and returns absolute times. Its documented method list does not provide a Morocco preset in the version reviewed here; do not call an invented CalculationMethod.Morocco(). RQ-037 creates a versioned custom Morocco profile from authoritative local reference parameters and validates dates/cities across seasons. [Adhan JS](https://github.com/batoulapps/adhan-js), [method definitions](https://github.com/batoulapps/adhan-js/blob/develop/METHODS.md).

@@ -4,7 +4,7 @@
 
 50 local implementation tickets. None has been created in an external issue tracker. The first 10 execution steps have Android feasibility evidence; their ticket statuses distinguish work in progress from blocked source/review gates. No feature is marked complete solely from a spike. Dependencies are start dependencies; integration completion requirements are explicit inside each ticket.
 
-Phase 2 delivers shared foundations for steps 11–18 with [Android validation](../../../docs/implementation/phase-2/README.md). Phases 3 and 4 subsequently implemented the existing-screen redesign and Quran runtime. Phase 5 delivers [normal Warsh/Hafs downloads](../../../docs/implementation/phase-5/README.md); after review, pick up phase 6 at step 38 / RQ-036 in the ordered plan. Unchecked source, signed-upgrade, accessibility and device acceptance gates remain open.
+Phase 2 delivers shared foundations for steps 11–18 with [Android validation](../../../docs/implementation/phase-2/README.md). Phases 3 and 4 subsequently implemented the existing-screen redesign and Quran runtime. Phase 5 delivers [normal Warsh/Hafs downloads](../../../docs/implementation/phase-5/README.md); [Phase 6](../../../docs/implementation/phase-6/README.md) now adds Android prayer/Qibla and notification fallback. Continue M6 closure at RQ-040 → RQ-042 → RQ-044 as listed in the ordered plan. Unchecked source, signed-upgrade, accessibility and device acceptance gates remain open.
 
 Early feasibility tickets RQ-016, RQ-020, RQ-032, RQ-037 and RQ-040 should be resolved before dependent feature work is committed to a release. Existing-feature UI can proceed independently.
 

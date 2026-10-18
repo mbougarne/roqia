@@ -36,16 +36,6 @@ export function MoreScreen({navigation}: any) {
     </Page>
   );
 }
-export function PrayerScreen() {
-  return (
-    <Page title="الصلاة">
-      <StateView
-        title="مواقيت الصلاة والقبلة"
-        description="هذه الميزة قيد الإعداد. لن نعرض مواقيت قبل التحقق من طريقة الحساب والتوقيت المحلي."
-      />
-    </Page>
-  );
-}
 export function RecoveryScreen({route, navigation}: any) {
   return (
     <Page title="تعذر فتح الصفحة" onBack={() => navigation.goBack()}>

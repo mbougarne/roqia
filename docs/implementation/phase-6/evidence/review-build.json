@@ -1,0 +1,11 @@
+{
+  "device": "emulator-5554",
+  "android": 16,
+  "api": 36,
+  "abi": "arm64-v8a",
+  "variant": "review",
+  "metroRequired": false,
+  "install": "in-place adb install -r; app data backed up first",
+  "apkSha256": "4da2941c451e205bc19d42b1e0cf505bca108536c491c3dca63c5d3d3cee63d0",
+  "build": "BUILD SUCCESSFUL in 38s; 449 tasks, 23 executed, 426 up-to-date"
+}

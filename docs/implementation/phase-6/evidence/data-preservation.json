@@ -1,0 +1,21 @@
+{
+  "preexistingRecords": 18,
+  "changedPreexistingRecords": [
+    [
+      "reminder-runtime",
+      "signature"
+    ],
+    [
+      "settings",
+      "singleton"
+    ]
+  ],
+  "counterRowsUnchanged": 207,
+  "quranContentFilesByteIdentical": 235,
+  "ministryRefreshPersisted": true,
+  "refreshRetrievedAt": 1792342947191,
+  "cachedDays": 30,
+  "prayerDefaultsRestored": true,
+  "settingsValuesUnchangedIgnoringUpdatedAt": true,
+  "expectedMetadataChanges": "Settings save timestamp and daily-reminder reconciliation signature only; all existing user preference values, bookmarks, Quran positions and downloads are unchanged."
+}

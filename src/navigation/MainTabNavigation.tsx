@@ -1,7 +1,18 @@
+import {
+  PrayerScreen,
+  LocationScreen,
+  QiblaScreen,
+  CalibrationScreen,
+  CalculationScreen,
+  AdhanScreen,
+  SoundsScreen,
+  PrayerSourcesScreen,
+} from '../features/prayer/Screens';
 import React, {useContext, useEffect, useRef} from 'react';
 import {I18nManager, Pressable, View} from 'react-native';
 import {
   NavigationContainer,
+  CommonActions,
   DefaultTheme,
   useNavigationContainerRef,
 } from '@react-navigation/native';
@@ -14,7 +25,6 @@ import {HomeScreen, DuaaScreen, TasbihatScreen, AboutScreen} from '../screens';
 import {AdkarMenuScreen, AdkarCategoryScreen} from '../screens/AdkarScreen';
 import {
   MoreScreen,
-  PrayerScreen,
   SettingsScreen,
   RecoveryScreen,
 } from '../screens/FoundationScreens';
@@ -146,6 +156,13 @@ function withPlayer(Component: React.ComponentType<any>) {
   };
 }
 const details = {
+  PrayerLocation: withPlayer(LocationScreen),
+  Qibla: withPlayer(QiblaScreen),
+  QiblaCalibration: withPlayer(CalibrationScreen),
+  PrayerCalculation: withPlayer(CalculationScreen),
+  PrayerAdhan: withPlayer(AdhanScreen),
+  PrayerSounds: withPlayer(SoundsScreen),
+  PrayerSources: withPlayer(PrayerSourcesScreen),
   QuranEditions: withPlayer(EditionScreen),
   QuranDownload: withPlayer(MushafDownloadScreen),
   QuranReader: withPlayer(QuranReaderScreen),
@@ -209,7 +226,8 @@ export function MainTabNavigation() {
             navigation.navigate('Recovery', {reason: target.recovery});
           else if ('reader' in target)
             navigation.navigate('QuranReader', target.reader);
-          else navigation.navigate(target.screen);
+          else
+            navigation.dispatch(CommonActions.navigate({name: target.screen}));
           return true;
         });
       }}>
@@ -220,6 +238,23 @@ export function MainTabNavigation() {
           animation: 'none',
         }}>
         <Stack.Screen name="MainTabs" component={MainTabs} />
+        <Stack.Screen
+          name="PrayerLocation"
+          component={details.PrayerLocation}
+        />
+        <Stack.Screen name="Qibla" component={details.Qibla} />
+        <Stack.Screen
+          name="QiblaCalibration"
+          component={details.QiblaCalibration}
+        />
+        <Stack.Screen
+          name="PrayerCalculation"
+          component={details.PrayerCalculation}
+        />
+        <Stack.Screen name="PrayerAdhan" component={details.PrayerAdhan} />
+        <Stack.Screen name="PrayerSounds" component={details.PrayerSounds} />
+        <Stack.Screen name="PrayerSources" component={details.PrayerSources} />
+
         <Stack.Screen name="QuranEditions" component={details.QuranEditions} />
         <Stack.Screen name="QuranDownload" component={details.QuranDownload} />
         <Stack.Screen name="QuranReader" component={details.QuranReader} />

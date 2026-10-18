@@ -14,6 +14,8 @@ import {MainTabNavigation} from './navigation/MainTabNavigation';
 
 import {StateView} from './design/ui';
 import {ResetConfirmationProvider} from './features/devotional/ResetConfirmation';
+import {onPrayerTimeChanged} from './features/prayer/native';
+import {reconcilePrayer} from './features/prayer/service';
 import {reconcileReminders} from './features/settings/reminders/service';
 import {useQuran} from './features/quran/context';
 import {contentGroups, defaultCounts} from './repositories/content';
@@ -131,13 +133,20 @@ export default function App() {
     if (!isStateHydrated) return;
     // No permission request here. Retry saved schedules after restart/zone changes.
     const reconcile = () => {
-      void reconcileReminders().catch(() => undefined);
+      void reconcileReminders()
+        .catch(() => undefined)
+        .then(() => reconcilePrayer())
+        .catch(() => undefined);
     };
     reconcile();
+    const removeTimeListener = onPrayerTimeChanged(reconcile);
     const sub = AppState.addEventListener('change', state => {
       if (state === 'active') reconcile();
     });
-    return () => sub.remove();
+    return () => {
+      sub.remove();
+      removeTimeListener();
+    };
   }, [isStateHydrated]);
 
   const toggleMode = useCallback(() => {
