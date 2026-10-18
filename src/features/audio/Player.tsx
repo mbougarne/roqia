@@ -4,7 +4,13 @@ import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
-import {AppState, I18nManager, View} from 'react-native';
+import {
+  AppState,
+  I18nManager,
+  Pressable,
+  View,
+  useWindowDimensions,
+} from 'react-native';
 import {
   useActiveTrack,
   usePlaybackState,
@@ -12,6 +18,8 @@ import {
   State,
 } from 'react-native-track-player';
 import {
+  AppIcon,
+  Sheet,
   AppText,
   Button,
   Card,
@@ -23,6 +31,17 @@ import {
 import {number, ltr} from '../../design/format';
 import {audioErrors, playback, restoreDownloadedSession} from './controller';
 import {readRecord} from '../../repositories/database';
+import {Illustration} from '../../design/Illustration';
+import {
+  Disclosure,
+  Group,
+  Ornament,
+  Progress,
+  Range,
+  Segments,
+  SettingRow,
+  rtlRow,
+} from '../../design/components';
 import {sleepDeadline, sleepSupported} from './sleep';
 export function MiniPlayer({onOpen}: {onOpen: () => void}) {
   const track = useActiveTrack(),
@@ -32,50 +51,58 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
     audioErrors.subscribe,
     audioErrors.getSnapshot,
   );
+  const {position, duration} = useProgress();
   if (!track && !error) return null;
   return (
     <View
       style={{
-        backgroundColor: p.surfaceRaised,
-        borderTopColor: p.borderSubtle,
+        backgroundColor: p.surface,
+        paddingHorizontal: 12,
+        paddingVertical: 6,
         borderTopWidth: 1,
-        padding: 8,
+        borderColor: p.borderSubtle,
       }}>
       {error && (
-        <AppText accessibilityLiveRegion="polite" style={{color: p.danger}}>
+        <AppText role="caption" style={{color: p.danger}}>
           {error}
         </AppText>
       )}
       {track && (
-        <View
-          style={{
-            flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
-            alignItems: 'center',
-          }}>
-          <View style={{flex: 1}}>
-            <AppText role="caption">{track.title}</AppText>
-            <Button compact label="المشغل" onPress={onOpen} secondary />
+        <>
+          <View style={rtlRow}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="المشغل"
+              onPress={onOpen}
+              style={{flex: 1, minHeight: 48, justifyContent: 'center'}}>
+              <AppText role="bodyStrong" numberOfLines={1}>
+                {track.title}
+              </AppText>
+              <AppText role="caption" numberOfLines={1}>
+                {track.artist}
+              </AppText>
+            </Pressable>
+            <IconButton
+              name={state === State.Playing ? 'pause' : 'play'}
+              label={state === State.Playing ? 'إيقاف مؤقت' : 'متابعة الصوت'}
+              onPress={() => void playback.toggle()}
+            />
+            <IconButton
+              name="stop"
+              label="إيقاف الصوت"
+              onPress={() => void playback.stop()}
+            />
           </View>
-          <IconButton
-            name={state === State.Playing ? 'pause' : 'play'}
-            label={state === State.Playing ? 'إيقاف مؤقت' : 'متابعة الصوت'}
-            onPress={() => {
-              void playback.toggle();
-            }}
-          />
-          <IconButton
-            name="stop"
-            label="إيقاف الصوت"
-            onPress={() => {
-              void playback.stop();
-            }}
-          />
-        </View>
+          <Progress value={duration ? position / duration : 0} />
+        </>
       )}
     </View>
   );
 }
 export function PlayerScreen({navigation}: any) {
+  const p = usePalette();
+  const {width, fontScale} = useWindowDimensions();
+  const stackOptions = width < 360 || fontScale > 1.2;
   const track = useActiveTrack(),
     {position, duration} = useProgress(),
     state = usePlaybackState().state;
@@ -85,7 +112,8 @@ export function PlayerScreen({navigation}: any) {
     [seek, setSeek] = useState(''),
     [resume, setResume] = useState(false),
     [deadline, setDeadline] = useState<number | null>(null),
-    [now, setNow] = useState(Date.now());
+    [now, setNow] = useState(Date.now()),
+    [panel, setPanel] = useState<'rate' | 'repeat' | 'sleep' | null>(null);
   const error = useSyncExternalStore(
     audioErrors.subscribe,
     audioErrors.getSnapshot,
@@ -132,52 +160,163 @@ export function PlayerScreen({navigation}: any) {
       `${number(Math.floor(s / 60))}:${String(Math.floor(s % 60)).padStart(2, '0')}`,
     );
   return (
-    <Page title="المشغل" onBack={() => navigation.goBack()}>
-      <Card>
-        <AppText role="sectionTitle">
-          {track?.title ?? 'اختر مقطعاً للاستماع'}
+    <Page title="الاستماع" onBack={() => navigation.goBack()}>
+      <Illustration name="quran-book" height={150} />
+      <AppText role="screenTitle" style={{textAlign: 'center'}}>
+        {track?.title ?? 'اختر مقطعا للاستماع'}
+      </AppText>
+      {track?.artist && (
+        <AppText role="caption" style={{textAlign: 'center'}}>
+          {track.artist}
         </AppText>
-        {error && <AppText accessibilityLiveRegion="polite">{error}</AppText>}
-        {!track && resume && (
-          <Button
-            label="استعادة موضع الاستماع دون تشغيل"
-            onPress={() => {
-              void restoreDownloadedSession().catch(() => setResume(false));
-            }}
+      )}
+      {error && <AppText accessibilityLiveRegion="polite">{error}</AppText>}
+      {!track && resume && (
+        <Button
+          label="استعادة موضع الاستماع دون تشغيل"
+          onPress={() =>
+            void restoreDownloadedSession().catch(() => setResume(false))
+          }
+        />
+      )}
+      {track && duration > 0 ? (
+        <Range
+          label="موضع الاستماع"
+          min={0}
+          max={duration}
+          value={Math.min(position, duration)}
+          onChange={v => void playback.seek(v)}
+        />
+      ) : (
+        <Progress value={0} />
+      )}
+      <View style={{...rtlRow, justifyContent: 'space-between'}}>
+        <AppText role="caption">{clock(duration)}</AppText>
+        <AppText role="caption">{clock(position)}</AppText>
+      </View>
+      <View
+        style={{
+          ...rtlRow,
+          justifyContent: 'center',
+          gap: 24,
+          paddingVertical: 8,
+        }}>
+        <IconButton
+          name="next"
+          label="المقطع التالي"
+          disabled={!track || queue.length < 2}
+          onPress={() => void playback.next()}
+        />
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={state === State.Playing ? 'إيقاف مؤقت' : 'تشغيل'}
+          accessibilityState={{disabled: !track}}
+          disabled={!track}
+          onPress={() => void playback.toggle()}
+          style={({pressed}) => ({
+            width: 72,
+            height: 72,
+            borderRadius: 36,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: p.actionPrimary,
+            opacity: !track || pressed ? 0.5 : 1,
+          })}>
+          <AppIcon
+            name={state === State.Playing ? 'pause' : 'play'}
+            size={32}
+            color={p.textOnAction}
           />
-        )}
-        <AppText style={{textAlign: 'center', writingDirection: 'ltr'}}>
-          {clock(position)} / {clock(duration)}
-        </AppText>
-        <Button
-          label={state === State.Playing ? 'إيقاف مؤقت' : 'تشغيل'}
-          disabled={!track}
-          onPress={() => {
-            void playback.toggle();
-          }}
+        </Pressable>
+        <IconButton
+          name="previous"
+          label="المقطع السابق"
+          disabled={!track || queue.length < 2}
+          onPress={() => void playback.previous()}
         />
-        <Button
-          secondary
-          label="تقديم 15 ثانية"
-          disabled={!track || !duration}
-          onPress={() => {
-            void playback.seek(Math.min(duration, position + 15));
-          }}
+      </View>
+      <Ornament />
+      <View
+        style={{
+          ...rtlRow,
+          flexDirection: stackOptions ? 'column' : 'row-reverse',
+          alignItems: 'stretch',
+        }}>
+        {(
+          [
+            {
+              key: 'sleep',
+              label: deadline
+                ? 'مؤقت النوم · ' +
+                  number(Math.max(0, Math.ceil((deadline - now) / 60000))) +
+                  ' دقيقة'
+                : 'مؤقت النوم',
+              icon: 'moon',
+            },
+            {
+              key: 'repeat',
+              label:
+                repeat === RepeatMode.Off
+                  ? 'التكرار'
+                  : repeat === RepeatMode.Track
+                    ? 'تكرار المقطع'
+                    : 'تكرار القائمة',
+              icon: 'repeat',
+            },
+            {
+              key: 'rate',
+              label: number(rate, {maximumFractionDigits: 2}) + '×',
+              icon: 'timer',
+            },
+          ] as const
+        ).map(c => (
+          <View key={c.key} style={{flex: stackOptions ? undefined : 1}}>
+            <Button
+              secondary
+              icon={c.icon}
+              label={c.label}
+              disabled={!track}
+              onPress={() => setPanel(c.key)}
+            />
+          </View>
+        ))}
+      </View>
+      <Group>
+        <SettingRow
+          title="قائمة الاستماع"
+          detail={number(queue.length) + ' مقاطع'}
+          icon="headphones"
         />
-        <Button
-          secondary
-          label="رجوع 15 ثانية"
-          disabled={!track}
-          onPress={() => {
-            void playback.seek(Math.max(0, position - 15));
-          }}
-        />
+      </Group>
+      <Disclosure title="القائمة وأدوات التشغيل">
+        {queue.slice(0, 114).map((title, i) => (
+          <AppText key={i}>
+            {number(i + 1)} · {title}
+          </AppText>
+        ))}
+        <View style={rtlRow}>
+          <Button
+            compact
+            secondary
+            label="تقديم 15 ثانية"
+            disabled={!track || !duration}
+            onPress={() =>
+              void playback.seek(Math.min(duration, position + 15))
+            }
+          />
+          <Button
+            compact
+            secondary
+            label="رجوع 15 ثانية"
+            disabled={!track}
+            onPress={() => void playback.seek(Math.max(0, position - 15))}
+          />
+        </View>
         <Input
           label="الانتقال إلى الثانية"
           value={seek}
           onChangeText={setSeek}
           keyboardType="numeric"
-          style={{writingDirection: 'ltr', textAlign: 'left'}}
         />
         <Button
           secondary
@@ -185,114 +324,90 @@ export function PlayerScreen({navigation}: any) {
           disabled={
             !track || !/^\d+(\.\d+)?$/.test(seek) || Number(seek) > duration
           }
-          onPress={() => {
-            void playback.seek(Number(seek));
-          }}
+          onPress={() => void playback.seek(Number(seek))}
         />
-        <Button
-          secondary
-          label="المقطع التالي"
-          disabled={!track || queue.length < 2}
-          onPress={() => {
-            void playback.next();
-          }}
-        />
-        <Button
-          secondary
-          label="المقطع السابق"
-          disabled={!track || queue.length < 2}
-          onPress={() => {
-            void playback.previous();
-          }}
-        />
-        <Button
-          secondary
-          label="إيقاف الصوت"
-          disabled={!track}
-          onPress={() => {
-            void playback.stop();
-          }}
-        />
-      </Card>
-      <AppText role="sectionTitle">سرعة التشغيل</AppText>
-      {[0.75, 1, 1.25, 1.5].map(r => (
-        <Button
-          key={r}
-          label={`${ltr(String(r))}×`}
-          selected={rate === r}
-          secondary={rate !== r}
-          disabled={!track}
-          onPress={() => {
-            void playback.rate(r).then(refresh);
-          }}
-        />
-      ))}
-      <AppText role="sectionTitle">التكرار</AppText>
-      {[
-        [RepeatMode.Off, 'دون تكرار'],
-        [RepeatMode.Track, 'تكرار المقطع'],
-        [RepeatMode.Queue, 'تكرار القائمة'],
-      ].map(([m, label]) => (
-        <Button
-          key={m}
-          label={String(label)}
-          selected={repeat === m}
-          secondary={repeat !== m}
-          disabled={!track}
-          onPress={() => {
-            void playback.repeat(m as RepeatMode).then(refresh);
-          }}
-        />
-      ))}
-      <AppText role="sectionTitle">مؤقت النوم</AppText>
-      {sleepSupported() ? (
-        <>
-          <AppText accessibilityLiveRegion="polite">
-            {deadline
-              ? `يتوقف الصوت خلال ${number(Math.max(0, Math.ceil((deadline - now) / 60000)))} دقيقة`
-              : 'المؤقت متوقف'}
-          </AppText>
-          <AppText role="caption">
-            يتوقف الصوت مؤقتا عند انتهاء المدة، حتى مع إغلاق الشاشة. لا يستأنف
-            تلقائيا.
-          </AppText>
-          {[15, 30, 60].map(minutes => (
-            <Button
-              key={minutes}
-              secondary
-              disabled={!track}
-              label={`${number(minutes)} دقيقة`}
-              onPress={() => {
-                void playback
-                  .sleep(minutes)
-                  .then(() => sleepDeadline())
-                  .then(setDeadline);
-              }}
-            />
-          ))}
-          <Button
-            secondary
-            disabled={!deadline}
-            label="إلغاء مؤقت النوم"
-            onPress={() => {
-              void playback
-                .sleep(0)
-                .then(() => sleepDeadline())
-                .then(setDeadline);
-            }}
+      </Disclosure>
+      <Button
+        secondary
+        icon="stop"
+        label="إيقاف الصوت"
+        disabled={!track}
+        onPress={() => void playback.stop()}
+      />
+      <Sheet
+        title={
+          panel === 'rate'
+            ? 'سرعة التشغيل'
+            : panel === 'repeat'
+              ? 'التكرار'
+              : 'مؤقت النوم'
+        }
+        visible={panel !== null}
+        onClose={() => setPanel(null)}>
+        {panel === 'rate' && (
+          <Segments
+            value={rate}
+            options={[0.75, 1, 1.25, 1.5].map(value => ({
+              value,
+              label: number(value, {maximumFractionDigits: 2}) + '×',
+            }))}
+            onChange={v => void playback.rate(v).then(refresh)}
           />
-        </>
-      ) : (
-        <AppText>مؤقت النوم غير متاح على هذا الجهاز بعد.</AppText>
-      )}
-      <AppText role="sectionTitle">
-        قائمة الاستماع · {number(queue.length)}
-      </AppText>
-      {queue.slice(0, 114).map((title, i) => (
-        <AppText key={i}>
-          {number(i + 1)} · {title}
-        </AppText>
-      ))}
+        )}
+        {panel === 'repeat' && (
+          <Segments
+            value={repeat}
+            options={[
+              {value: RepeatMode.Off, label: 'دون تكرار'},
+              {value: RepeatMode.Track, label: 'تكرار المقطع'},
+              {value: RepeatMode.Queue, label: 'تكرار القائمة'},
+            ]}
+            onChange={v => void playback.repeat(v).then(refresh)}
+          />
+        )}
+        {panel === 'sleep' &&
+          (sleepSupported() ? (
+            <>
+              <AppText>
+                {deadline
+                  ? 'يتوقف الصوت خلال ' +
+                    number(Math.max(0, Math.ceil((deadline - now) / 60000))) +
+                    ' دقيقة'
+                  : 'المؤقت متوقف'}
+              </AppText>
+              <AppText role="caption">
+                يتوقف الصوت مؤقتا عند انتهاء المدة، حتى مع إغلاق الشاشة. لا
+                يستأنف تلقائيا.
+              </AppText>
+              {[15, 30, 60].map(minutes => (
+                <Button
+                  secondary
+                  key={minutes}
+                  label={number(minutes) + ' دقيقة'}
+                  onPress={() =>
+                    void playback
+                      .sleep(minutes)
+                      .then(() => sleepDeadline())
+                      .then(setDeadline)
+                  }
+                />
+              ))}
+              <Button
+                secondary
+                label="إلغاء مؤقت النوم"
+                disabled={!deadline}
+                onPress={() =>
+                  void playback
+                    .sleep(0)
+                    .then(() => sleepDeadline())
+                    .then(setDeadline)
+                }
+              />
+            </>
+          ) : (
+            <AppText>مؤقت النوم غير متاح على هذا الجهاز بعد.</AppText>
+          ))}
+      </Sheet>
     </Page>
   );
 }

@@ -1,10 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {FlatList, I18nManager, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {type DataProps} from '../data';
 import {type RepeatContextState} from '../store';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
 import {AppText, Button, IconButton, usePalette} from '../design/ui';
+import {
+  SearchField,
+  Segments,
+  FeatureCard,
+  Progress,
+  rtlRow,
+} from '../design/components';
+import {matches} from '../features/devotional/discovery';
 import {number, ltr} from '../design/format';
 import {ReadingCard} from '../features/devotional/ReadingCard';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
@@ -22,6 +30,9 @@ export function DevotionalListScreen({
   root?: boolean;
 }) {
   const confirmReset = useConfirmReset();
+  const [query, setQuery] = useState(''),
+    [filter, setFilter] = useState<'all' | 'saved'>('all');
+  const dua = title === 'الأدعية';
   const navigation = useNavigation<any>(),
     p = usePalette();
   const {repeatCounts, decrementRepeat, resetRepeats} = useContext(repeatCtx);
@@ -51,7 +62,7 @@ export function DevotionalListScreen({
         <AppText
           role="screenTitle"
           accessibilityRole="header"
-          style={{flex: 1}}>
+          style={{flex: 1, textAlign: 'center'}}>
           {title}
         </AppText>
         {!root && (
@@ -63,19 +74,55 @@ export function DevotionalListScreen({
         )}
       </View>
       <FlatList
-        data={items}
+        data={
+          dua
+            ? items.filter(
+                i =>
+                  matches(i, query, 'all') &&
+                  (filter === 'all' ||
+                    saved.items.some(
+                      b => b.kind === 'devotional' && b.contentId === i.id,
+                    )),
+              )
+            : items
+        }
         keyExtractor={item => item.id}
         initialNumToRender={3}
         windowSize={5}
         contentContainerStyle={{
-          padding: 20,
-          gap: 16,
+          padding: 16,
+          paddingTop: 8,
+          gap: 12,
           maxWidth: 560,
           width: '100%',
           alignSelf: 'center',
         }}
         ListHeaderComponent={
           <View style={{gap: 12}}>
+            {dua && (
+              <>
+                <SearchField
+                  label="ابحث في الأدعية"
+                  value={query}
+                  onChange={setQuery}
+                />
+                <Segments
+                  value={filter}
+                  options={[
+                    {value: 'all', label: 'الكل'},
+                    {value: 'saved', label: 'المحفوظات'},
+                  ]}
+                  onChange={setFilter}
+                />
+              </>
+            )}
+            {!root && !dua && (
+              <FeatureCard
+                title={title === 'أذكار الصباح' ? 'بداية يوم مبارك' : title}
+                detail="من أذكار اليوم · اقرأ بهدوء وطمأنينة"
+                art={title === 'أذكار الصباح' ? 'morning' : 'evening'}
+              />
+            )}
             <AppText role="caption">{`${ltr(`${number(completed)} / ${number(total)}`)} مكتمل · يبقى تقدمك محفوظا`}</AppText>
             <Button
               icon={
@@ -92,18 +139,7 @@ export function DevotionalListScreen({
                 void audio.onPlayAllPress();
               }}
             />
-            <Button
-              secondary
-              icon="reset"
-              label="إعادة عدادات هذه الصفحة"
-              onPress={() =>
-                confirmReset('إعادة عدادات هذه الصفحة؟', () =>
-                  resetRepeats(
-                    Object.fromEntries(items.map(i => [i.id, i.repeat ?? 0])),
-                  ),
-                )
-              }
-            />
+            <Progress value={total ? completed / total : 0} />
             {audio.error && (
               <AppText accessibilityRole="alert">
                 تعذر تشغيل الصوت. أعد المحاولة من زر الاستماع.
@@ -119,6 +155,20 @@ export function DevotionalListScreen({
               />
             )}
           </View>
+        }
+        ListFooterComponent={
+          <Button
+            secondary
+            icon="reset"
+            label="إعادة عدادات هذه الصفحة"
+            onPress={() =>
+              confirmReset('إعادة عدادات هذه الصفحة؟', () =>
+                resetRepeats(
+                  Object.fromEntries(items.map(i => [i.id, i.repeat ?? 0])),
+                ),
+              )
+            }
+          />
         }
         renderItem={({item, index}) => (
           <ReadingCard

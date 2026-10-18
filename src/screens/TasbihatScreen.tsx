@@ -1,5 +1,13 @@
 import React, {useContext, useState} from 'react';
-import {View} from 'react-native';
+import {Pressable, View, useWindowDimensions} from 'react-native';
+import {
+  Disclosure,
+  Segments,
+  Ornament,
+  Group,
+  SettingRow,
+  rtlRow,
+} from '../design/components';
 import Svg, {Circle} from 'react-native-svg';
 import {tasbihatData} from '../data';
 import {tasbihatRepeatContext} from '../store';
@@ -12,6 +20,7 @@ import {itemTitle} from '../features/devotional/discovery';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
 export function TasbihatScreen({navigation}: any) {
   const confirmReset = useConfirmReset();
+  const {fontScale} = useWindowDimensions();
   const [id, setId] = useState(tasbihatData[0].id),
     [choosing, setChoosing] = useState(false);
   const state = useContext(tasbihatRepeatContext),
@@ -24,22 +33,30 @@ export function TasbihatScreen({navigation}: any) {
     max = item.repeat ?? 0;
   return (
     <Page title="التسبيح" onBack={() => navigation.goBack()}>
-      <Button
-        secondary
-        label="اختيار التسبيح"
-        onPress={() => setChoosing(true)}
+      <Segments
+        value={id}
+        options={tasbihatData
+          .slice(0, 3)
+          .map(i => ({value: i.id, label: itemTitle(i)}))}
+        onChange={setId}
       />
+      {fontScale > 1.2 && (
+        <AppText role="devotional" style={{textAlign: 'center'}}>
+          {item.content}
+        </AppText>
+      )}
       <View style={{alignItems: 'center', gap: 12}}>
         <View
           style={{
-            width: 200,
-            height: 200,
+            width: 240,
+            height: 240,
             alignItems: 'center',
             justifyContent: 'center',
           }}>
           <Svg
-            width={200}
-            height={200}
+            width={240}
+            height={240}
+            viewBox="0 0 200 200"
             style={{position: 'absolute'}}
             accessible={false}>
             <Circle
@@ -62,20 +79,40 @@ export function TasbihatScreen({navigation}: any) {
               origin="100,100"
             />
           </Svg>
-          <AppText role="screenTitle" style={{textAlign: 'center'}}>
+          {fontScale <= 1.2 && (
+            <AppText role="devotional" style={{textAlign: 'center'}}>
+              {item.content}
+            </AppText>
+          )}
+          <AppText role="counter" style={{textAlign: 'center'}}>
             {number(count)}
           </AppText>
           <AppText role="caption">المتبقي</AppText>
         </View>
         <AppText role="caption">{`العدد الأصلي ${number(max)}`}</AppText>
       </View>
-      <Button
-        label={count === 0 ? 'اكتمل التسبيح' : 'اضغط بعد التسبيح'}
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="اضغط بعد التسبيح"
+        accessibilityState={{disabled: count === 0}}
         disabled={count === 0}
-        onPress={() => {
-          state.decrementRepeat(id);
-        }}
-      />
+        onPress={() => state.decrementRepeat(id)}
+        style={({pressed}) => ({
+          alignSelf: 'center',
+          width: 104,
+          height: 104,
+          borderRadius: 52,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: p.actionPrimary,
+          opacity: pressed || count === 0 ? 0.6 : 1,
+        })}>
+        <AppText
+          role="label"
+          style={{color: p.textOnAction, textAlign: 'center'}}>
+          {count === 0 ? 'اكتمل' : 'سبّح'}
+        </AppText>
+      </Pressable>
       {saved.error && (
         <Button
           secondary
@@ -85,19 +122,22 @@ export function TasbihatScreen({navigation}: any) {
           }}
         />
       )}
-      <ReadingCard
-        item={item}
-        index={index}
-        count={count}
-        hideCounter
-        audio={audio}
-        bookmarkReady={saved.loaded && !saved.error}
-        saved={saved.items.some(
-          b => b.kind === 'devotional' && b.contentId === id,
+      <Ornament />
+      <Group>
+        <SettingRow title="العدد الأصلي" detail={number(max)} icon="tasbih" />
+        <SettingRow
+          title="اختيار التسبيح"
+          icon="book"
+          onPress={() => setChoosing(true)}
+        />
+        {item.audioFile && (
+          <SettingRow
+            title="استماع"
+            icon="volume"
+            onPress={() => void audio.onAudioPress(item.audioFile!)}
+          />
         )}
-        onCount={() => state.decrementRepeat(id)}
-        onReset={() => state.resetRepeats({[id]: max})}
-      />
+      </Group>
       <Button
         secondary
         label="إعادة عدادات هذه الصفحة"
@@ -109,6 +149,20 @@ export function TasbihatScreen({navigation}: any) {
           )
         }
       />
+      <Disclosure title="النص والمحفوظات">
+        <ReadingCard
+          item={item}
+          index={index}
+          count={count}
+          bookmarkReady={saved.loaded && !saved.error}
+          saved={saved.items.some(
+            b => b.kind === 'devotional' && b.contentId === id,
+          )}
+          audio={audio}
+          onCount={() => state.decrementRepeat(id)}
+          onReset={() => state.resetRepeats({[id]: max})}
+        />
+      </Disclosure>
       <Sheet
         title="اختيار التسبيح"
         visible={choosing}

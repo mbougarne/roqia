@@ -1,8 +1,10 @@
 import React, {useContext} from 'react';
 import {adkarData} from '../data';
-import {adkarRepeatContext} from '../store';
-import {AppText, Card, Page, Row} from '../design/ui';
+import {adkarRepeatContext, themeContext} from '../store';
+import {AppText, Button, Page, Row} from '../design/ui';
 import {Illustration} from '../design/Illustration';
+import {FeatureCard, rtlRow} from '../design/components';
+import {View} from 'react-native';
 import {number, ltr} from '../design/format';
 import {DevotionalListScreen} from './DevotionalListScreen';
 const categories = [
@@ -15,30 +17,39 @@ const groups = Object.fromEntries(
 );
 export function AdkarMenuScreen({navigation}: any) {
   const {repeatCounts} = useContext(adkarRepeatContext);
+  const {mode} = useContext(themeContext);
   return (
     <Page title="أذكار اليوم">
       <AppText>وردك اليومي، في وقتك المناسب</AppText>
       {categories.map(c => (
-        <Card key={c.id}>
-          <Illustration name={c.art} height={90} />
-          <Row
-            title={c.title}
-            icon={c.icon}
-            detail={`${ltr(`${number(groups[c.id].filter(i => repeatCounts[i.id] === 0).length)} / ${number(groups[c.id].length)}`)} مكتمل`}
-            onPress={() => navigation.navigate(c.id)}
-          />
-        </Card>
+        <FeatureCard
+          roomy
+          key={c.id}
+          emphasized={c.id === 'BeforeSleep' && mode === 'light'}
+          title={c.title}
+          detail={`${ltr(`${number(groups[c.id].filter(i => repeatCounts[i.id] === 0).length)} / ${number(groups[c.id].length)}`)} مكتمل`}
+          art={c.art}
+          onPress={() => navigation.navigate(c.id)}
+        />
       ))}
-      <Row
-        title="الأدعية"
-        icon="hands"
-        onPress={() => navigation.navigate('Duaa')}
-      />
-      <Row
-        title="التسبيح"
-        icon="tasbih"
-        onPress={() => navigation.navigate('Tasbihat')}
-      />
+      <View style={{...rtlRow, alignItems: 'stretch'}}>
+        <View style={{flex: 1}}>
+          <Button
+            secondary
+            label="الأدعية"
+            icon="hands"
+            onPress={() => navigation.navigate('Duaa')}
+          />
+        </View>
+        <View style={{flex: 1}}>
+          <Button
+            secondary
+            label="التسبيح"
+            icon="tasbih"
+            onPress={() => navigation.navigate('Tasbihat')}
+          />
+        </View>
+      </View>
     </Page>
   );
 }

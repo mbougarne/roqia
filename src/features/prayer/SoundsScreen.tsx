@@ -1,6 +1,22 @@
 import React, {useState} from 'react';
-import {Linking, Platform} from 'react-native';
-import {AppText, Button, Card, Page, StateView} from '../../design/ui';
+import {Linking, Platform, View} from 'react-native';
+import {
+  AppText,
+  Button,
+  Card,
+  Page,
+  StateView,
+  IconButton,
+} from '../../design/ui';
+import {
+  Banner,
+  Disclosure,
+  Group,
+  SettingRow,
+  RadioRow,
+  Ornament,
+  rtlRow,
+} from '../../design/components';
 import {number} from '../../design/format';
 import {useLibrary, useOnFocus} from '../quran/context';
 import {
@@ -63,9 +79,8 @@ export function SoundsScreen({navigation}: any) {
   };
   return (
     <Page title="أصوات الأذان" onBack={() => navigation.goBack()}>
-      <AppText>
-        نزّل التسجيل الذي تختاره مرة واحدة للاستماع دون اتصال. اختر نسخة الفجر
-        بشكل مستقل؛ لا نضيف أي عبارة إلى التسجيل.
+      <AppText role="caption">
+        اختر تسجيلا محفوظا، ونسخة مستقلة لأذان الفجر.
       </AppText>
       {(!ready || error) && (
         <StateView
@@ -88,75 +103,75 @@ export function SoundsScreen({navigation}: any) {
         const installed = !!runtime.installed(sound.pack),
           chosen = selected[sound.variant] === sound.id;
         return (
-          <Card key={sound.id}>
-            <AppText role="sectionTitle">{sound.title}</AppText>
-            <AppText>
-              {sound.variant === 'fajr'
-                ? 'نسخة الفجر'
-                : 'للظهر والعصر والمغرب والعشاء'}{' '}
-              ·{' '}
-              {number(sound.pack.assets[0].bytes / 1048576, {
-                maximumFractionDigits: 1,
-              })}{' '}
-              MB
-            </AppText>
-            <AppText role="caption">{sound.notice}</AppText>
-            {!installed ? (
-              <Button
-                label={`تنزيل ${sound.title}`}
-                disabled={!ready || busy}
-                onPress={() =>
+          <Group key={sound.id}>
+            <RadioRow
+              title={sound.title}
+              detail={
+                (sound.variant === 'fajr' ? 'نسخة الفجر' : 'باقي الصلوات') +
+                ' · ' +
+                (installed
+                  ? 'متاح دون اتصال'
+                  : number(sound.pack.assets[0].bytes / 1048576, {
+                      maximumFractionDigits: 1,
+                    }) + ' MB')
+              }
+              icon="mosque"
+              selected={chosen}
+              onPress={() => {
+                if (!busy)
                   void act(async () => {
-                    await runtime.download(sound.pack);
-                    navigation.navigate('Downloads');
-                  })
-                }
-              />
-            ) : (
-              <>
-                <Button
-                  label={
-                    chosen ? `✓ مختار: ${sound.title}` : `اختيار ${sound.title}`
-                  }
-                  disabled={busy}
-                  secondary={!chosen}
-                  onPress={() =>
-                    void act(async () => {
+                    if (!installed) {
+                      await runtime.download(sound.pack);
+                      navigation.navigate('Downloads');
+                    } else {
                       await selectSound(sound);
                       setSelected(await selectedSounds());
                       await reconcilePrayer();
-                    })
-                  }
-                />
-                <Button
-                  label={`استماع: ${sound.title}`}
-                  secondary
+                    }
+                  });
+              }}
+            />
+            {installed && (
+              <SettingRow title={'معاينة ' + sound.title} icon="headphones">
+                <IconButton
+                  name="play"
+                  label={'استماع: ' + sound.title}
                   disabled={busy || Platform.OS !== 'android'}
                   onPress={() => void act(() => preview(sound))}
                 />
+                <IconButton
+                  name="stop"
+                  label="إيقاف الأذان"
+                  onPress={() => adhanNative()?.stopAdhan()}
+                />
+              </SettingRow>
+            )}
+            <Disclosure title={'معلومات ' + sound.title}>
+              <AppText role="caption">{sound.notice}</AppText>
+              <Button
+                secondary
+                label={'مصدر ' + sound.title}
+                onPress={() =>
+                  void Linking.openURL(sound.pack.sourceMetadata.sourceUrl)
+                }
+              />
+              <Button
+                secondary
+                label={'حقوق استخدام ' + sound.title}
+                onPress={() =>
+                  void Linking.openURL(sound.pack.sourceMetadata.rightsUrl)
+                }
+              />
+              {installed && (
                 <Button
-                  label={`تجربة بعد 10 ثوان: ${sound.title}`}
                   secondary
+                  label={'تجربة بعد 10 ثوان: ' + sound.title}
                   disabled={busy || Platform.OS !== 'android'}
                   onPress={() => void act(() => preview(sound, true))}
                 />
-              </>
-            )}
-            <Button
-              label={`مصدر ${sound.title}`}
-              secondary
-              onPress={() =>
-                void Linking.openURL(sound.pack.sourceMetadata.sourceUrl)
-              }
-            />
-            <Button
-              label={`حقوق استخدام ${sound.title}`}
-              secondary
-              onPress={() =>
-                void Linking.openURL(sound.pack.sourceMetadata.rightsUrl)
-              }
-            />
-          </Card>
+              )}
+            </Disclosure>
+          </Group>
         );
       })}
       <Button
@@ -169,10 +184,10 @@ export function SoundsScreen({navigation}: any) {
         label="إدارة التنزيلات والمساحة"
         onPress={() => navigation.navigate('Storage')}
       />
-      <AppText>
-        نتبع مستوى صوت المنبه وعدم الإزعاج. لا نرفع الصوت تلقائيا. معاينة الأذان
-        لا تفعّل تنبيهات الصلاة.
-      </AppText>
+      <Banner
+        text="نتبع مستوى صوت المنبه وعدم الإزعاج في الجهاز. معاينة الأذان لا تفعّل تنبيهات الصلاة."
+        icon="volume"
+      />
     </Page>
   );
 }

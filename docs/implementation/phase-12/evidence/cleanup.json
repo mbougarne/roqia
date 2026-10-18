@@ -1,0 +1,21 @@
+{
+  "before": {
+    "installed": 8,
+    "downloadStates": {
+      "ready": 9,
+      "removed": 1
+    },
+    "playback": []
+  },
+  "after": {
+    "installed": 8,
+    "downloadStates": {
+      "ready": 9,
+      "removed": 1,
+      "cancelled": 1
+    },
+    "playback": [
+      null
+    ]
+  }
+}

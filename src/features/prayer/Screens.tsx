@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {
+  Sheet,
+  IconButton,
   AppIcon,
   AppText,
   Button,
@@ -20,6 +22,19 @@ import {
   StateView,
   usePalette,
 } from '../../design/ui';
+import {
+  Banner,
+  Disclosure,
+  Group,
+  Ornament,
+  RadioRow,
+  SearchField,
+  Segments,
+  SettingRow,
+  Toggle,
+  rtlRow,
+} from '../../design/components';
+import {Illustration} from '../../design/Illustration';
 import {ltr, number} from '../../design/format';
 import {
   defaults,
@@ -215,7 +230,7 @@ export function PrayerScreen({navigation}: any) {
           ]}>
           <View style={{flex: 1, gap: 2}}>
             <AppText role="caption">الصلاة القادمة</AppText>
-            <AppText role="sectionTitle">{labels[next.name]}</AppText>
+            <AppText role="bodyStrong">{labels[next.name]}</AppText>
             <AppText role="prayerTime" style={visual.time}>
               {clock(l.zone, next.at, prefs.format)}
             </AppText>
@@ -252,7 +267,12 @@ export function PrayerScreen({navigation}: any) {
                 ? 'التنبيه متوقف'
                 : !allowed
                   ? 'التنبيه محفوظ، الإذن أو القناة غير متاحين'
-                  : 'تنبيه إشعار، قد يؤخره توفير الطاقة';
+                  : prefs.modes[r.name as keyof typeof prefs.modes] ===
+                        'full' &&
+                      coverage?.exact &&
+                      !coverage?.fullFallback
+                    ? 'أذان كامل'
+                    : 'تنبيه إشعار، قد يؤخره توفير الطاقة';
               return (
                 <View
                   key={r.name}
@@ -448,7 +468,9 @@ export function LocationScreen({navigation}: any) {
       zone: 'Africa/Casablanca',
     }),
     [gps, setGps] = useState<Awaited<ReturnType<typeof locate>> | null>(null),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [query, setQuery] = useState(''),
+    [choice, setChoice] = useState<Location | null>(null);
   useEffect(() => {
     if (prefs?.location) {
       const l = prefs.location;
@@ -476,21 +498,6 @@ export function LocationScreen({navigation}: any) {
   return (
     <Page title="المدينة والموقع" onBack={() => navigation.goBack()}>
       <Status error={error} retry={load} />
-      <AppText>
-        اختر المدينة دون إذن الموقع. عند السفر غيّر المكان بنفسك؛ لا نتتبع موقعك
-        ولا نغيّر مدينتك تلقائيا.
-      </AppText>
-      {cities.map(c => (
-        <Button
-          key={c.cityId}
-          label={c.name}
-          secondary
-          disabled={!prefs || busy}
-          onPress={() =>
-            attempt(() => save({...c, source: 'city', acquiredAt: Date.now()}))
-          }
-        />
-      ))}
       <Button
         label={busy ? 'جار تحديد الموقع' : 'استخدام موقعي مرة واحدة'}
         disabled={busy || !prefs}
@@ -500,6 +507,7 @@ export function LocationScreen({navigation}: any) {
             try {
               const result = await locate();
               setGps(result);
+              setChoice(null);
               setDraft(d => ({
                 ...d,
                 name: 'موقعي',
@@ -512,56 +520,93 @@ export function LocationScreen({navigation}: any) {
           })
         }
       />
-      {gps && (
-        <AppText>
-          دقة الموقع {number(Math.round(gps.accuracy!))} متر. راجع المنطقة
-          الزمنية ثم احفظ. إحداثيات GPS لا تختار مدينة تلقائيا.
-        </AppText>
-      )}
-      <AppText role="sectionTitle">إحداثيات ومنطقة زمنية يدويا</AppText>
-      {(['name', 'latitude', 'longitude', 'zone'] as const).map((k, i) => (
-        <Input
-          key={k}
-          label={
-            [
-              'اسم المكان',
-              'خط العرض (-90 إلى 90)',
-              'خط الطول (-180 إلى 180)',
-              'المنطقة الزمنية، مثل Europe/Paris',
-            ][i]
-          }
-          value={draft[k]}
-          autoCapitalize="none"
-          onChangeText={v => {
-            if (k === 'latitude' || k === 'longitude') setGps(null);
-            setDraft(d => ({...d, [k]: v}));
-          }}
-        />
-      ))}
-      <AppText role="caption">
-        المنطقة الزمنية تخص المكان المختار، وقد تختلف عن منطقة جهازك. مثال آخر:
-        Asia/Riyadh.
+      <AppText role="caption" style={{textAlign: 'center'}}>
+        لتحديد مواقيت الصلاة واتجاه القبلة
       </AppText>
+      {gps && (
+        <Banner text="تم تحديد موقعك. راجع الإحداثيات والمنطقة الزمنية أدناه ثم احفظ الموقع." />
+      )}
+      <Ornament title="أو اختر المدينة" />
+      <SearchField label="ابحث عن مدينة" value={query} onChange={setQuery} />
+      <Group>
+        {cities
+          .filter(c => !query || c.name.includes(query))
+          .map(c => (
+            <RadioRow
+              key={c.cityId}
+              title={c.name}
+              detail="المغرب"
+              icon="location"
+              selected={
+                (choice?.cityId ?? prefs?.location?.cityId) === c.cityId
+              }
+              onPress={() =>
+                setChoice({...c, source: 'city', acquiredAt: Date.now()})
+              }
+            />
+          ))}
+      </Group>
+      <Banner text="يمكنك اختيار المدينة دون السماح بالموقع." />
       <Button
-        label="حفظ الموقع"
-        disabled={!prefs || busy}
-        onPress={() =>
-          attempt(async () => {
-            if (!draft.latitude.trim() || !draft.longitude.trim())
-              throw Error('invalid_location');
-            await save({
-              cityId: null,
-              name: draft.name.trim(),
-              latitude: Number(draft.latitude),
-              longitude: Number(draft.longitude),
-              zone: draft.zone.trim(),
-              source: gps ? 'gps' : 'manual',
-              acquiredAt: gps?.acquiredAt ?? Date.now(),
-              ...(gps ? {accuracy: gps.accuracy} : {}),
-            });
-          })
-        }
+        label="حفظ المدينة"
+        disabled={!prefs || !choice || busy}
+        onPress={() => attempt(() => save(choice!))}
       />
+      <Disclosure
+        key={gps?.acquiredAt ?? 'manual'}
+        initiallyOpen={!!gps}
+        title="إحداثيات ومنطقة زمنية يدويا">
+        {gps && (
+          <AppText>
+            دقة الموقع {number(Math.round(gps.accuracy!))} متر. راجع المنطقة
+            الزمنية ثم احفظ. إحداثيات GPS لا تختار مدينة تلقائيا.
+          </AppText>
+        )}
+
+        {(['name', 'latitude', 'longitude', 'zone'] as const).map((k, i) => (
+          <Input
+            key={k}
+            label={
+              [
+                'اسم المكان',
+                'خط العرض (-90 إلى 90)',
+                'خط الطول (-180 إلى 180)',
+                'المنطقة الزمنية، مثل Europe/Paris',
+              ][i]
+            }
+            value={draft[k]}
+            autoCapitalize="none"
+            onChangeText={v => {
+              if (k === 'latitude' || k === 'longitude') setGps(null);
+              setDraft(d => ({...d, [k]: v}));
+            }}
+          />
+        ))}
+        <AppText role="caption">
+          المنطقة الزمنية تخص المكان المختار، وقد تختلف عن منطقة جهازك. مثال
+          آخر: Asia/Riyadh.
+        </AppText>
+        <Button
+          label="حفظ الموقع"
+          disabled={!prefs || busy}
+          onPress={() =>
+            attempt(async () => {
+              if (!draft.latitude.trim() || !draft.longitude.trim())
+                throw Error('invalid_location');
+              await save({
+                cityId: null,
+                name: draft.name.trim(),
+                latitude: Number(draft.latitude),
+                longitude: Number(draft.longitude),
+                zone: draft.zone.trim(),
+                source: gps ? 'gps' : 'manual',
+                acquiredAt: gps?.acquiredAt ?? Date.now(),
+                ...(gps ? {accuracy: gps.accuracy} : {}),
+              });
+            })
+          }
+        />
+      </Disclosure>
     </Page>
   );
 }
@@ -746,25 +791,45 @@ export function QiblaScreen({navigation}: any) {
 }
 export function CalibrationScreen({navigation}: any) {
   return (
-    <Page title="معايرة البوصلة" onBack={() => navigation.goBack()}>
-      <Card>
-        <AppText>
-          أبعد الجهاز عن المغناطيس والمعادن. ضع الهاتف بشكل مسطح، وحركه بلطف على
-          شكل 8 إذا كانت الدقة منخفضة.
-        </AppText>
-        <AppText>
-          قارن الاتجاه بمعلم معروف. هذه إرشادات فقط؛ لا تضمن المعايرة دقة
-          الجهاز. عند غياب الحساس استخدم زاوية القبلة مع الشمال الحقيقي.
-        </AppText>
-      </Card>
-      <Button label="العودة إلى القبلة" onPress={() => navigation.goBack()} />
+    <Page
+      title="معايرة البوصلة"
+      onBack={() => navigation.goBack()}
+      contentStyle={{flexGrow: 1}}>
+      <Illustration name="qibla" height={230} />
+      <AppText role="screenTitle" style={{textAlign: 'center'}}>
+        حرّك الهاتف على شكل 8
+      </AppText>
+      <AppText role="caption" style={{textAlign: 'center'}}>
+        أبعد الهاتف عن المعادن، ثم حركه بهدوء لتحسين دقة الاتجاه.
+      </AppText>
+      <Banner
+        icon="compass"
+        text="ارجع إلى القبلة للتحقق من القراءة الحية. المعايرة لا تضمن دقة الحساس؛ عند غيابه يبقى الاتجاه الرقمي متاحا."
+      />
+      <Row
+        title="عرض الاتجاه في البوصلة"
+        icon="compass"
+        onPress={() => navigation.goBack()}
+      />
+      <View style={{flex: 1, minHeight: 20}} />
+      <Button
+        label="إعادة القياس"
+        icon="reset"
+        onPress={() => navigation.goBack()}
+      />
+      <Button
+        secondary
+        label="اختيار المدينة يدويا"
+        onPress={() => navigation.navigate('PrayerLocation')}
+      />
     </Page>
   );
 }
 export function CalculationScreen({navigation}: any) {
   const {prefs, error, load} = usePrayer(),
     [draft, setDraft] = useState<Preferences | null>(null),
-    [offsets, setOffsets] = useState<Record<string, string>>({});
+    [offsets, setOffsets] = useState<Record<string, string>>({}),
+    [choosing, setChoosing] = useState(false);
   useEffect(() => {
     if (prefs) {
       setDraft(prefs);
@@ -778,22 +843,39 @@ export function CalculationScreen({navigation}: any) {
       <Status error={error} retry={load} />
       {draft && (
         <>
-          <AppText>
-            الحصة المغربية تخص المدن والتواريخ المحفوظة فقط. الطرق الأخرى حسابات
-            فلكية؛ اختر ما يناسب مكانك ولا تعتبرها حصة الوزارة.
-          </AppText>
-          {Object.entries(methods).map(([id, label]) => (
-            <Button
-              key={id}
-              label={label}
-              secondary={draft.method !== id}
-              onPress={() =>
-                setDraft({...draft, method: id as Preferences['method']})
-              }
+          <Group>
+            <SettingRow
+              title="طريقة الحساب"
+              detail={methods[draft.method]}
+              icon="settings"
+              onPress={() => setChoosing(true)}
             />
-          ))}
+            <SettingRow
+              title="الموقع"
+              detail={draft.location?.name ?? 'اختر موقعك'}
+              icon="location"
+              onPress={() => navigation.navigate('PrayerLocation')}
+            />
+          </Group>
+          <Sheet
+            title="طريقة الحساب"
+            visible={choosing}
+            onClose={() => setChoosing(false)}>
+            {Object.entries(methods).map(([id, label]) => (
+              <RadioRow
+                key={id}
+                title={label}
+                selected={draft.method === id}
+                icon="mosque"
+                onPress={() => {
+                  setDraft({...draft, method: id as Preferences['method']});
+                  setChoosing(false);
+                }}
+              />
+            ))}
+          </Sheet>
           {draft.method !== 'habous' && (
-            <>
+            <Disclosure title="خيارات الحساب المتقدمة">
               <AppText role="sectionTitle">حساب العصر</AppText>
               {(['shafi', 'hanafi'] as const).map((v, i) => (
                 <Button
@@ -812,26 +894,54 @@ export function CalculationScreen({navigation}: any) {
                   onPress={() => setDraft({...draft, highLatitude: v})}
                 />
               ))}
-            </>
+            </Disclosure>
           )}
           <AppText role="sectionTitle">تعديل الدقائق (-30 إلى 30)</AppText>
-          {events.map(n => (
-            <Input
-              key={n}
-              label={labels[n]}
-              value={offsets[n] ?? '0'}
-              keyboardType="numbers-and-punctuation"
-              onChangeText={v => setOffsets(o => ({...o, [n]: v}))}
-            />
-          ))}
-          {(['24', '12'] as const).map(f => (
-            <Button
-              key={f}
-              secondary={draft.format !== f}
-              label={`${f} ساعة`}
-              onPress={() => setDraft({...draft, format: f})}
-            />
-          ))}
+          <Group>
+            {events.map(n => (
+              <SettingRow key={n} title={labels[n]}>
+                <IconButton
+                  name="minus"
+                  label={'إنقاص ' + labels[n]}
+                  disabled={Number(offsets[n]) <= -30}
+                  onPress={() =>
+                    setOffsets(o => ({
+                      ...o,
+                      [n]: String(Math.max(-30, Number(o[n]) - 1)),
+                    }))
+                  }
+                />
+                <AppText
+                  style={{
+                    minWidth: 24,
+                    textAlign: 'center',
+                    writingDirection: 'ltr',
+                  }}>
+                  {offsets[n] ?? '0'}
+                </AppText>
+                <IconButton
+                  name="plus"
+                  label={'زيادة ' + labels[n]}
+                  disabled={Number(offsets[n]) >= 30}
+                  onPress={() =>
+                    setOffsets(o => ({
+                      ...o,
+                      [n]: String(Math.min(30, Number(o[n]) + 1)),
+                    }))
+                  }
+                />
+              </SettingRow>
+            ))}
+          </Group>
+          <Banner text="تطبق التعديلات مرة واحدة على المواقيت المعتمدة." />
+          <Segments
+            value={draft.format}
+            options={[
+              {value: '24', label: '24 ساعة'},
+              {value: '12', label: '12 ساعة'},
+            ]}
+            onChange={format => setDraft({...draft, format})}
+          />
           <Button
             secondary
             label="إعادة إعدادات الحساب الافتراضية"
@@ -884,7 +994,8 @@ export function AdhanScreen({navigation}: any) {
   const {prefs, coverage, error, load} = usePrayer(),
     [draft, setDraft] = useState<Preferences | null>(null),
     [pre, setPre] = useState('0'),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [editing, setEditing] = useState<(typeof prayers)[number] | null>(null);
   useEffect(() => {
     if (prefs) {
       setDraft(prefs);
@@ -894,66 +1005,90 @@ export function AdhanScreen({navigation}: any) {
   return (
     <Page title="تنبيهات الصلاة والأذان" onBack={() => navigation.goBack()}>
       <Status error={error} retry={load} />
-      <Card>
-        <AppText>
-          لتشغيل الأذان الكامل، نزّل واختر صوت الأذان ونسخة الفجر، ثم فعّل إذن
-          المنبهات والإشعارات. إذا تعذر ذلك، يستخدم التطبيق إشعارا فقط ويحفظ
-          اختيارك.
-        </AppText>
-        <AppText>
-          {coverage?.backgroundRenewal
-            ? 'تتجدد المواعيد في الخلفية عندما يسمح النظام. قد يؤخر توفير الطاقة التجديد والإشعارات. تظهر أدناه التغطية المحفوظة فعليا؛ بعد إيقاف التطبيق إجباريا افتحه لتجديدها.'
-            : 'قد يؤخر توفير الطاقة الإشعار. افتح التطبيق لتجديد المواعيد؛ التجديد في الخلفية غير متاح على هذا الجهاز.'}
-        </AppText>
-      </Card>
-      <AppText>
-        {coverage?.authorized && !coverage.blocked
-          ? 'إذن الإشعارات متاح'
-          : 'إذن الإشعارات أو القناة غير مفعل'}
-      </AppText>
-      <AppText role="caption">
-        {coverage && prefs?.location
-          ? `${number(coverage.scheduled)} إشعارات مجدولة · التغطية حتى ${civilDate(prefs.location.zone, coverage.coveredUntil)} ${clock(prefs.location.zone, coverage.coveredUntil)}`
-          : 'لا توجد تغطية مجدولة'}
-      </AppText>
-      <Button
-        secondary
-        label="إعدادات الإشعارات في الجهاز"
-        onPress={() => attempt(openPrayerSettings)}
-      />
-      <AppText>{`أذان كامل مجدول: ${number(coverage?.fullAdhan ?? 0)} · إشعار بديل: ${number(coverage?.fullFallback ?? 0)}`}</AppText>
-      <Button
-        secondary
-        label="إذن المنبهات والتذكيرات"
-        onPress={() =>
-          attempt(async () => {
-            await adhanNative()?.openAdhanAlarms();
-          })
-        }
+      <Row
+        title="صوت الأذان"
+        detail="التسجيل المختار ونسخة الفجر"
+        icon="volume"
+        onPress={() => navigation.navigate('PrayerSounds')}
       />
       {draft && (
         <>
-          {prayers.map(n => (
-            <Card key={n}>
-              <AppText role="sectionTitle">{labels[n]}</AppText>
-              {(['off', 'notification', 'full'] as const).map((m, i) => (
-                <Button
-                  key={m}
-                  secondary={draft.modes[n] !== m}
-                  label={`${labels[n]}: ${['متوقف', 'إشعار فقط', 'أذان كامل'][i]}`}
-                  onPress={() =>
-                    setDraft({...draft, modes: {...draft.modes, [n]: m}})
+          <Group>
+            {prayers.map(n => (
+              <SettingRow
+                key={n}
+                title={labels[n]}
+                detail={
+                  {off: 'صامت', notification: 'إشعار فقط', full: 'أذان كامل'}[
+                    draft.modes[n]
+                  ]
+                }
+                icon={n === 'isha' ? 'moon' : 'mosque'}>
+                <IconButton
+                  name="settings"
+                  label={'نوع تنبيه ' + labels[n]}
+                  onPress={() => setEditing(n)}
+                />
+                <Toggle
+                  label={'تفعيل تنبيه ' + labels[n]}
+                  value={draft.modes[n] !== 'off'}
+                  onChange={enabled =>
+                    setDraft({
+                      ...draft,
+                      modes: {
+                        ...draft.modes,
+                        [n]: enabled ? 'notification' : 'off',
+                      },
+                    })
                   }
                 />
+              </SettingRow>
+            ))}
+          </Group>
+          <Sheet
+            title={editing ? labels[editing] : ''}
+            visible={editing !== null}
+            onClose={() => setEditing(null)}>
+            {editing &&
+              (['off', 'notification', 'full'] as const).map(m => (
+                <RadioRow
+                  key={m}
+                  title={
+                    {
+                      off: 'متوقف',
+                      notification: 'إشعار فقط',
+                      full: 'أذان كامل',
+                    }[m]
+                  }
+                  selected={draft.modes[editing] === m}
+                  icon="bell"
+                  onPress={() => {
+                    setDraft({...draft, modes: {...draft.modes, [editing]: m}});
+                    setEditing(null);
+                  }}
+                />
               ))}
-            </Card>
-          ))}
-          <Input
-            label="تذكير قبل الصلاة بالدقائق (0 لإيقافه، حتى 30)"
-            value={pre}
-            keyboardType="number-pad"
-            onChangeText={setPre}
-          />
+          </Sheet>
+          <Group>
+            <SettingRow
+              title="تنبيه قبل الصلاة"
+              detail="بالدقائق · 0 لإيقافه، حتى 30"
+              icon="bell">
+              <IconButton
+                name="minus"
+                label="تقليل دقائق التذكير"
+                disabled={Number(pre) <= 0}
+                onPress={() => setPre(String(Math.max(0, Number(pre) - 1)))}
+              />
+              <AppText>{pre}</AppText>
+              <IconButton
+                name="plus"
+                label="زيادة دقائق التذكير"
+                disabled={Number(pre) >= 30}
+                onPress={() => setPre(String(Math.min(30, Number(pre) + 1)))}
+              />
+            </SettingRow>
+          </Group>
           <Button
             label="حفظ تنبيهات الصلاة"
             disabled={busy}
@@ -978,6 +1113,45 @@ export function AdhanScreen({navigation}: any) {
           />
         </>
       )}
+      <Disclosure title="الإذن والتغطية المحفوظة">
+        <Card>
+          <AppText>
+            لتشغيل الأذان الكامل، نزّل واختر صوت الأذان ونسخة الفجر، ثم فعّل إذن
+            المنبهات والإشعارات. إذا تعذر ذلك، يستخدم التطبيق إشعارا فقط ويحفظ
+            اختيارك.
+          </AppText>
+          <AppText>
+            {coverage?.backgroundRenewal
+              ? 'تتجدد المواعيد في الخلفية عندما يسمح النظام. قد يؤخر توفير الطاقة التجديد والإشعارات. تظهر أدناه التغطية المحفوظة فعليا؛ بعد إيقاف التطبيق إجباريا افتحه لتجديدها.'
+              : 'قد يؤخر توفير الطاقة الإشعار. افتح التطبيق لتجديد المواعيد؛ التجديد في الخلفية غير متاح على هذا الجهاز.'}
+          </AppText>
+        </Card>
+        <AppText>
+          {coverage?.authorized && !coverage.blocked
+            ? 'إذن الإشعارات متاح'
+            : 'إذن الإشعارات أو القناة غير مفعل'}
+        </AppText>
+        <AppText role="caption">
+          {coverage && prefs?.location
+            ? `${number(coverage.scheduled)} إشعارات مجدولة · التغطية حتى ${civilDate(prefs.location.zone, coverage.coveredUntil)} ${clock(prefs.location.zone, coverage.coveredUntil)}`
+            : 'لا توجد تغطية مجدولة'}
+        </AppText>
+        <Button
+          secondary
+          label="إعدادات الإشعارات في الجهاز"
+          onPress={() => attempt(openPrayerSettings)}
+        />
+        <AppText>{`أذان كامل مجدول: ${number(coverage?.fullAdhan ?? 0)} · إشعار بديل: ${number(coverage?.fullFallback ?? 0)}`}</AppText>
+        <Button
+          secondary
+          label="إذن المنبهات والتذكيرات"
+          onPress={() =>
+            attempt(async () => {
+              await adhanNative()?.openAdhanAlarms();
+            })
+          }
+        />
+      </Disclosure>
       <Button
         secondary
         label="تجربة الإشعار"
@@ -1080,7 +1254,7 @@ const visual = StyleSheet.create({
     borderRadius: 16,
     borderWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical: 8,
   },
   time: {
     writingDirection: 'ltr',

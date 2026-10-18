@@ -1,7 +1,24 @@
 import React, {useState} from 'react';
-import {AccessibilityInfo, Linking} from 'react-native';
+import {AccessibilityInfo, Linking, Modal, View} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
-import {AppText, Button, Card, Page, Row, StateView} from '../design/ui';
+import {
+  AppIcon,
+  AppText,
+  Button,
+  Card,
+  Page,
+  Row,
+  StateView,
+  usePalette,
+} from '../design/ui';
+import {
+  Banner,
+  Disclosure,
+  Group,
+  Ornament,
+  SettingRow,
+} from '../design/components';
+import {editions} from '../features/quran/domain';
 import {Illustration} from '../design/Illustration';
 import {noteData} from '../data';
 import legal from '../features/settings/legal-copy.json';
@@ -10,10 +27,23 @@ export function AboutScreen({navigation}: any) {
     navigation.navigate('ExternalLink', {title, url});
   return (
     <Page title="حول التطبيق" onBack={() => navigation.goBack()}>
-      <Illustration name="quran-book" height={140} />
-      <AppText role="screenTitle">رقية</AppText>
-      <AppText selectable>{noteData.contact}</AppText>
-      <AppText>Mourad Bougarne</AppText>
+      <View style={{alignItems: 'center', gap: 8, paddingVertical: 16}}>
+        <AppIcon name="medallion" size={64} />
+        <AppText role="screenTitle">الرقية</AppText>
+        <AppText role="caption">رفيقك للرقية والأذكار والقرآن</AppText>
+      </View>
+      <Group>
+        <SettingRow
+          title="مجاني بالكامل"
+          detail="بلا إعلانات أو اشتراكات"
+          icon="medallion"
+        />
+        <SettingRow
+          title="من القلب"
+          detail="تطبيق يساعدك على القراءة والذكر والاستماع في أي وقت."
+          icon="book"
+        />
+      </Group>
       <Row
         title="التواصل عبر البريد"
         detail={noteData.email}
@@ -54,10 +84,60 @@ export function LegalScreen({navigation, route}: any) {
     <Page
       title={privacy ? 'سياسة الخصوصية' : 'شروط الاستخدام'}
       onBack={() => navigation.goBack()}>
-      <AppText role="caption">
-        نسخة محلية للقراءة دون اتصال · 2026-10-18
+      <Ornament />
+      <AppText role="sectionTitle" style={{textAlign: 'center'}}>
+        {privacy ? 'خصوصيتك أولا' : 'استخدام التطبيق'}
       </AppText>
-      <AppText selectable>{legal[privacy ? 'Privacy' : 'Terms']}</AppText>
+      {(privacy
+        ? [
+            ['على جهازك', 'نحفظ اختياراتك وتقدمك محليا على جهازك.', 'storage'],
+            [
+              'الموقع',
+              'يستخدم لتحديد القبلة ومواقيت الصلاة؛ يمكنك اختيار المدينة يدويا.',
+              'location',
+            ],
+            [
+              'التنزيلات',
+              'المحتوى الاختياري يحتاج إلى اتصال بمصدره، ثم يعمل دون اتصال.',
+              'download',
+            ],
+            [
+              'بدون حساب',
+              'لا تحتاج إلى إنشاء حساب لاستخدام التطبيق.',
+              'shield',
+            ],
+          ]
+        : [
+            [
+              'استخدام التطبيق',
+              'التطبيق مجاني ومتاح للقراءة والذكر والاستماع.',
+              'book',
+            ],
+            [
+              'المحتوى والمصادر',
+              'تظهر مصادر النصوص والترجمات والتلاوات داخل التطبيق.',
+              'info',
+            ],
+            [
+              'النسخ والتحديثات',
+              'يمكن الاطلاع على معلومات الإصدار والمصدر.',
+              'reset',
+            ],
+            ['التواصل', 'أبلغنا عن أي خطأ أو ملاحظة.', 'mail'],
+          ]
+      ).map(([title, detail, icon]) => (
+        <Card key={title}>
+          <SettingRow title={title} detail={detail} icon={icon as any} />
+        </Card>
+      ))}
+      <Disclosure
+        title={
+          privacy
+            ? 'قراءة السياسة الكاملة دون اتصال'
+            : 'قراءة الشروط الكاملة دون اتصال'
+        }>
+        <AppText selectable>{legal[privacy ? 'Privacy' : 'Terms']}</AppText>
+      </Disclosure>
       <Button
         secondary
         label="فتح الصفحة المنشورة"
@@ -74,7 +154,22 @@ export function LegalScreen({navigation, route}: any) {
 export function SourcesScreen({navigation}: any) {
   return (
     <Page title="المصادر" onBack={() => navigation.goBack()}>
-      <AppText>مصادر المحتوى والصوت الحالي</AppText>
+      <AppText role="caption" style={{textAlign: 'center'}}>
+        تعرف على مصدر كل محتوى
+      </AppText>
+      \n{' '}
+      {editions.map(e => (
+        <Group key={e.id}>
+          <SettingRow
+            title={e.title}
+            detail={e.publisher}
+            icon="book"
+            onPress={() =>
+              navigation.navigate('QuranSource', {editionId: e.id})
+            }
+          />
+        </Group>
+      ))}
       {[
         ['الأذكار', noteData.audioSourceOneUrl],
         ['القرآن الصوتي', noteData.audioSourceTwoUrl],
@@ -90,14 +185,7 @@ export function SourcesScreen({navigation}: any) {
           onPress={() => navigation.navigate('ExternalLink', {title, url})}
         />
       ))}
-      <Card>
-        <AppText>حزم القرآن الجديدة</AppText>
-        <AppText>
-          ورش: حزمة مجمع الملك فهد مع خطها المطابق. لن تتاح الحزم قبل إتمام
-          التحقق من النص والخط وحقوق التوزيع. لا يستخدم التطبيق خط المغرب مع نص
-          المجمع.
-        </AppText>
-      </Card>
+      <Banner text="النص والخط الأصلي لكل مصحف محفوظان معا. لا تعني إتاحة المصدر اعتماد التطبيق من الناشر." />
     </Page>
   );
 }
@@ -105,6 +193,7 @@ export function ExternalLinkScreen({route, navigation}: any) {
   const {url, title} = route.params,
     [failed, setFailed] = useState(false),
     [busy, setBusy] = useState(false);
+  const p = usePalette();
   async function open() {
     setBusy(true);
     setFailed(false);
@@ -125,12 +214,41 @@ export function ExternalLinkScreen({route, navigation}: any) {
       <AppText>
         يفتح الرابط في تطبيق خارجي. قد يحتاج إلى الإنترنت أو تطبيق بريد مثبت.
       </AppText>
-      {failed && (
-        <StateView
-          title="تعذر فتح الرابط"
-          description="تحقق من الاتصال والتطبيق المناسب، أو انسخ الرابط وافتحه لاحقا."
-        />
-      )}
+      <Modal
+        visible={failed}
+        transparent
+        onRequestClose={() => setFailed(false)}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: p.scrim,
+            justifyContent: 'center',
+            padding: 32,
+          }}>
+          <Card>
+            <View style={{alignItems: 'center'}}>
+              <AppIcon name="external" size={48} color={p.accent} />
+            </View>
+            <AppText role="sectionTitle" style={{textAlign: 'center'}}>
+              تعذر فتح الرابط
+            </AppText>
+            <AppText role="caption" style={{textAlign: 'center'}}>
+              تحقق من الاتصال أو حاول مرة أخرى لاحقا.
+            </AppText>
+            <Button label="إعادة المحاولة" onPress={() => void open()} />
+            <Button
+              secondary
+              icon="copy"
+              label="نسخ الرابط"
+              onPress={() => {
+                Clipboard.setString(url);
+                AccessibilityInfo.announceForAccessibility('تم نسخ الرابط');
+              }}
+            />
+            <Button secondary label="إغلاق" onPress={() => setFailed(false)} />
+          </Card>
+        </View>
+      </Modal>
       <Button
         label={failed ? 'إعادة المحاولة' : 'فتح الرابط'}
         disabled={busy}

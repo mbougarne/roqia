@@ -136,7 +136,7 @@ export function QiblaCompass({
             strokeLinejoin="round">
             <Polygon
               points="151,65 160,61 169,65 169,76 160,80 151,76"
-              fill={p.surfaceMuted}
+              fill={p.actionPrimary}
             />
             <Path d="M151 65L160 69L169 65M160 69V80M151 69L160 73L169 69" />
           </G>
@@ -167,7 +167,7 @@ export function OrnamentDivider() {
   );
 }
 const styles = StyleSheet.create({
-  compass: {width: '100%', maxWidth: 340, aspectRatio: 1, alignSelf: 'center'},
+  compass: {width: '100%', maxWidth: 360, aspectRatio: 1, alignSelf: 'center'},
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
