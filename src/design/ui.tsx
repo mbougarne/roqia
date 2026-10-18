@@ -25,10 +25,12 @@ export function AppIcon({
   name,
   size = 24,
   color,
+  strokeWidth,
 }: {
   name: IconName;
   size?: number;
   color?: string;
+  strokeWidth?: number;
 }) {
   const p = usePalette();
   return (
@@ -44,7 +46,12 @@ export function AppIcon({
                 ' 24 24)"/>',
             ).join('') +
             '<path d="M24 18L30 24L24 30L18 24Z"/></g></svg>'
-          : icons[name]
+          : strokeWidth === undefined
+            ? icons[name]
+            : icons[name].replace(
+                /stroke-width="[^"]+"/g,
+                `stroke-width="${strokeWidth}"`,
+              )
       }
       width={size}
       height={size}

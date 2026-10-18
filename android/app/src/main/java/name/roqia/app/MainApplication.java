@@ -33,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication, an
           // packages.add(new MyReactNativePackage());
           packages.add(new name.roqia.app.reader.ReaderPackage());
           packages.add(new name.roqia.app.audio.AudioPackage());
+          packages.add(new name.roqia.app.appearance.AppearancePackage());
           packages.add(new name.roqia.app.prayer.PrayerPackage());
           packages.add(new name.roqia.app.downloads.DownloadFilesPackage());
           if ("debug".equals(BuildConfig.BUILD_TYPE)) {
@@ -69,6 +70,7 @@ public class MainApplication extends Application implements ReactApplication, an
   @Override
   public void onCreate() {
     super.onCreate();
+    name.roqia.app.appearance.LaunchAppearance.initialize(this);
     ReactNativeApplicationEntryPoint.loadReactNative(this);
     // Boot broadcasts can be lost if Android kills an early startup. A subsequent
     // worker/service/Activity process must also replenish the saved prayer window.

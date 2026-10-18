@@ -422,5 +422,29 @@
     "strokeWidth": 1.75,
     "mirrorInRTL": false,
     "note": ""
+  },
+  {
+    "key": "icon.gift",
+    "file": "assets/icons/gift.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.2,
+    "mirrorInRTL": false,
+    "note": "Phase 12 owner review: onboarding reference icon"
+  },
+  {
+    "key": "icon.no-ads",
+    "file": "assets/icons/no-ads.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.2,
+    "mirrorInRTL": false,
+    "note": "Phase 12 owner review: onboarding reference icon"
+  },
+  {
+    "key": "icon.sunset",
+    "file": "assets/icons/sunset.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.2,
+    "mirrorInRTL": false,
+    "note": "Phase 12 owner review: onboarding reference icon"
   }
 ]

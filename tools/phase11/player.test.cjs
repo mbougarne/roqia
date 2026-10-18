@@ -104,7 +104,7 @@ Module._load = function (name, parent, isMain) {
                 jobId: id,
               },
     };
-  if (name.endsWith('assets/audio')) return {audioAssets: {}};
+  if (name.endsWith('assets/audio')) return {audioAssets: {'test.mp3': 701}};
   return load.call(this, name, parent, isMain);
 };
 const {
@@ -147,4 +147,18 @@ test('deleting a queued file clears native playback, sleep deadline and saved re
   assert.equal(session, null);
   await persistPlayback();
   assert.equal(session, null, 'late progress cannot recreate deleted session');
+});
+
+test('bundled playback preserves require handles for native raw resource resolution', async () => {
+  const item = {
+    id: 'bundled-test',
+    caption: 'Bundled',
+    audioFile: 'test.mp3',
+    repeat: 2,
+  };
+  await playback.all([item], 'bundled-test');
+  assert.equal(queue.length, 2);
+  assert.equal(queue[0].url, 701);
+  assert.equal(queue[1].url, 701);
+  assert.equal(state, 'playing');
 });

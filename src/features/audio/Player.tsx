@@ -1,4 +1,9 @@
-import React, {useEffect, useState, useSyncExternalStore} from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import TrackPlayer, {
   RepeatMode,
   Event,
@@ -28,9 +33,11 @@ import {
   Page,
   usePalette,
 } from '../../design/ui';
+import {themeContext} from '../../store';
 import {number, ltr} from '../../design/format';
 import {audioErrors, playback, restoreDownloadedSession} from './controller';
 import {readRecord} from '../../repositories/database';
+import {Waveform} from '../../design/Waveform';
 import {Illustration} from '../../design/Illustration';
 import {
   Disclosure,
@@ -52,18 +59,24 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
     audioErrors.getSnapshot,
   );
   const {position, duration} = useProgress();
+  const light = useContext(themeContext).mode === 'light';
+  const ink = '#F7F5EF';
+  const control = light ? '#FFFFFF' : p.actionPrimary;
   if (!track && !error) return null;
   return (
     <View
       style={{
-        backgroundColor: p.surface,
+        backgroundColor: light ? p.actionPrimary : p.surface,
+        marginHorizontal: 12,
+        marginBottom: 6,
+        borderRadius: 14,
         paddingHorizontal: 12,
-        paddingVertical: 6,
-        borderTopWidth: 1,
+        paddingVertical: 8,
+        borderWidth: 1,
         borderColor: p.borderSubtle,
       }}>
       {error && (
-        <AppText role="caption" style={{color: p.danger}}>
+        <AppText accessibilityRole="alert" role="caption" style={{color: ink}}>
           {error}
         </AppText>
       )}
@@ -75,25 +88,61 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
               accessibilityLabel="المشغل"
               onPress={onOpen}
               style={{flex: 1, minHeight: 48, justifyContent: 'center'}}>
-              <AppText role="bodyStrong" numberOfLines={1}>
+              <AppText role="bodyStrong" numberOfLines={1} style={{color: ink}}>
                 {track.title}
               </AppText>
-              <AppText role="caption" numberOfLines={1}>
+              <AppText
+                role="caption"
+                numberOfLines={1}
+                style={{color: ink, opacity: 0.75}}>
                 {track.artist}
               </AppText>
             </Pressable>
-            <IconButton
-              name={state === State.Playing ? 'pause' : 'play'}
-              label={state === State.Playing ? 'إيقاف مؤقت' : 'متابعة الصوت'}
+            <View style={{flex: 0.8}}>
+              <Waveform color={control} />
+            </View>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={
+                state === State.Playing ? 'إيقاف مؤقت' : 'متابعة الصوت'
+              }
               onPress={() => void playback.toggle()}
-            />
-            <IconButton
-              name="stop"
-              label="إيقاف الصوت"
-              onPress={() => void playback.stop()}
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: 24,
+                backgroundColor: control,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <AppIcon
+                name={state === State.Playing ? 'pause' : 'play'}
+                color="#12392E"
+              />
+            </Pressable>
+          </View>
+          <View
+            accessibilityRole="progressbar"
+            accessibilityValue={{
+              min: 0,
+              max: 100,
+              now: Math.round(duration ? (position / duration) * 100 : 0),
+            }}
+            style={{
+              height: 3,
+              backgroundColor: '#FFFFFF25',
+              borderRadius: 2,
+              overflow: 'hidden',
+              marginTop: 6,
+            }}>
+            <View
+              style={{
+                height: 3,
+                width: `${Math.min(100, duration ? (position / duration) * 100 : 0)}%`,
+                backgroundColor: control,
+              }}
             />
           </View>
-          <Progress value={duration ? position / duration : 0} />
         </>
       )}
     </View>

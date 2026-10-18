@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
-import {FlatList, I18nManager, View} from 'react-native';
+import {FlatList, I18nManager, Pressable, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {type DataProps} from '../data';
 import {type RepeatContextState} from '../store';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
-import {AppText, Button, IconButton, usePalette} from '../design/ui';
+import {AppIcon, AppText, Button, IconButton, usePalette} from '../design/ui';
 import {
   SearchField,
   Segments,
@@ -62,9 +62,14 @@ export function DevotionalListScreen({
         <AppText
           role="screenTitle"
           accessibilityRole="header"
-          style={{flex: 1, textAlign: 'center'}}>
+          style={{
+            flex: 1,
+            textAlign: root ? 'right' : 'center',
+            paddingHorizontal: 8,
+          }}>
           {title}
         </AppText>
+        {root && <AppIcon name="medallion" size={32} color={p.accent} />}
         {!root && (
           <IconButton
             name="chevron-right"
@@ -123,23 +128,68 @@ export function DevotionalListScreen({
                 art={title === 'أذكار الصباح' ? 'morning' : 'evening'}
               />
             )}
-            <AppText role="caption">{`${ltr(`${number(completed)} / ${number(total)}`)} مكتمل · يبقى تقدمك محفوظا`}</AppText>
-            <Button
-              icon={
-                audio.isPlaylistActive && !audio.isAudioPaused
-                  ? 'pause'
-                  : 'play'
-              }
-              label={
-                audio.isPlaylistActive && !audio.isAudioPaused
-                  ? 'إيقاف مؤقت'
-                  : 'استماع للكل'
-              }
-              onPress={() => {
-                void audio.onPlayAllPress();
-              }}
-            />
-            <Progress value={total ? completed / total : 0} />
+            {root ? (
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={
+                  audio.isPlaylistActive && !audio.isAudioPaused
+                    ? 'إيقاف مؤقت'
+                    : 'استماع للكل'
+                }
+                onPress={() => void audio.onPlayAllPress()}
+                style={({pressed}) => ({
+                  ...rtlRow,
+                  minHeight: 88,
+                  padding: 16,
+                  borderRadius: 14,
+                  backgroundColor: p.actionPrimary,
+                  opacity: pressed ? 0.8 : 1,
+                })}>
+                <View
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 25,
+                    backgroundColor: p.textOnAction,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <AppIcon
+                    name={
+                      audio.isPlaylistActive && !audio.isAudioPaused
+                        ? 'pause'
+                        : 'play'
+                    }
+                    color={p.actionPrimary}
+                    size={28}
+                  />
+                </View>
+                <AppText
+                  role="sectionTitle"
+                  style={{flex: 1, textAlign: 'center', color: p.textOnAction}}>
+                  استماع للكل
+                </AppText>
+                <AppIcon name="headphones" size={44} color={p.textOnAction} />
+              </Pressable>
+            ) : (
+              <>
+                <AppText role="caption">{`${ltr(`${number(completed)} / ${number(total)}`)} مكتمل · يبقى تقدمك محفوظا`}</AppText>
+                <Button
+                  icon={
+                    audio.isPlaylistActive && !audio.isAudioPaused
+                      ? 'pause'
+                      : 'play'
+                  }
+                  label={
+                    audio.isPlaylistActive && !audio.isAudioPaused
+                      ? 'إيقاف مؤقت'
+                      : 'استماع للكل'
+                  }
+                  onPress={() => void audio.onPlayAllPress()}
+                />
+                <Progress value={total ? completed / total : 0} />
+              </>
+            )}
             {audio.error && (
               <AppText accessibilityRole="alert">
                 تعذر تشغيل الصوت. أعد المحاولة من زر الاستماع.
@@ -157,18 +207,26 @@ export function DevotionalListScreen({
           </View>
         }
         ListFooterComponent={
-          <Button
-            secondary
-            icon="reset"
-            label="إعادة عدادات هذه الصفحة"
-            onPress={() =>
-              confirmReset('إعادة عدادات هذه الصفحة؟', () =>
-                resetRepeats(
-                  Object.fromEntries(items.map(i => [i.id, i.repeat ?? 0])),
-                ),
-              )
-            }
-          />
+          <View style={{gap: 12}}>
+            {root && (
+              <>
+                <AppText role="caption">{`${number(completed)} / ${number(total)} مكتمل · يبقى تقدمك محفوظا`}</AppText>
+                <Progress value={total ? completed / total : 0} />
+              </>
+            )}
+            <Button
+              secondary
+              icon="reset"
+              label="إعادة عدادات هذه الصفحة"
+              onPress={() =>
+                confirmReset('إعادة عدادات هذه الصفحة؟', () =>
+                  resetRepeats(
+                    Object.fromEntries(items.map(i => [i.id, i.repeat ?? 0])),
+                  ),
+                )
+              }
+            />
+          </View>
         }
         renderItem={({item, index}) => (
           <ReadingCard

@@ -422,6 +422,7 @@ export function Progress({value}: {value: number}) {
 }
 export function Range({
   label,
+  hideLabel = false,
   value,
   min,
   max,
@@ -430,6 +431,7 @@ export function Range({
   onChange,
 }: {
   label: string;
+  hideLabel?: boolean;
   value: number;
   min: number;
   max: number;
@@ -458,14 +460,16 @@ export function Range({
   const ratio = (value - min) / (max - min);
   return (
     <View style={{gap: 2}}>
-      <View style={rtlRow}>
-        <AppText role="label" style={{flex: 1}}>
-          {label}
-        </AppText>
-        <AppText role="label" style={{writingDirection: 'ltr'}}>
-          {number(value, {maximumFractionDigits: 2})}
-        </AppText>
-      </View>
+      {!hideLabel && (
+        <View style={rtlRow}>
+          <AppText role="label" style={{flex: 1}}>
+            {label}
+          </AppText>
+          <AppText role="label" style={{writingDirection: 'ltr'}}>
+            {number(value, {maximumFractionDigits: 2})}
+          </AppText>
+        </View>
+      )}
       <View
         accessible
         accessibilityRole="adjustable"
