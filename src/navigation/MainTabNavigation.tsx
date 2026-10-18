@@ -14,7 +14,6 @@ import {HomeScreen, DuaaScreen, TasbihatScreen, AboutScreen} from '../screens';
 import {AdkarMenuScreen, AdkarCategoryScreen} from '../screens/AdkarScreen';
 import {
   MoreScreen,
-  QuranScreen,
   PrayerScreen,
   SettingsScreen,
   RecoveryScreen,
@@ -29,6 +28,23 @@ import {
   SourcesScreen,
   ExternalLinkScreen,
 } from '../screens/AboutScreen';
+import {
+  QuranLibraryScreen,
+  EditionScreen,
+  MushafDownloadScreen,
+} from '../features/quran/LibraryScreens';
+import {QuranReaderScreen} from '../features/quran/ReaderScreen';
+import {
+  QuranPreferencesScreen,
+  TranslationScreen,
+  QuranSearchScreen,
+  QuranBookmarksScreen,
+  QuranSourceScreen,
+} from '../features/quran/DetailScreens';
+import {
+  QuranAudioScreen,
+  OfflineAudioScreen,
+} from '../features/quran/AudioScreens';
 import {RemindersScreen} from '../features/settings/reminders/Screen';
 import {StorageScreen, DownloadsScreen} from '../features/downloads/Screens';
 import {MiniPlayer, PlayerScreen} from '../features/audio/Player';
@@ -111,7 +127,7 @@ function MainTabs() {
         name="Adkar"
         component={AdkarMenuScreen as React.ComponentType<any>}
       />
-      <Tab.Screen name="Quran" component={QuranScreen} />
+      <Tab.Screen name="Quran" component={QuranLibraryScreen} />
       <Tab.Screen name="Prayer" component={PrayerScreen} />
       <Tab.Screen name="More" component={MoreScreen} />
     </Tab.Navigator>
@@ -130,6 +146,17 @@ function withPlayer(Component: React.ComponentType<any>) {
   };
 }
 const details = {
+  QuranEditions: withPlayer(EditionScreen),
+  QuranDownload: withPlayer(MushafDownloadScreen),
+  QuranReader: withPlayer(QuranReaderScreen),
+  QuranPreferences: withPlayer(QuranPreferencesScreen),
+  QuranTranslations: withPlayer(TranslationScreen),
+  QuranSearch: withPlayer(QuranSearchScreen),
+  QuranBookmarks: withPlayer(QuranBookmarksScreen),
+  QuranSource: withPlayer(QuranSourceScreen),
+  QuranAudio: withPlayer(QuranAudioScreen),
+  QuranOfflineAudio: withPlayer(OfflineAudioScreen),
+
   Bookmarks: withPlayer(DiscoveryScreen),
   Search: withPlayer(DiscoveryScreen),
   Content: withPlayer(ContentScreen),
@@ -180,6 +207,8 @@ export function MainTabNavigation() {
             navigation.navigate('MainTabs', {screen: target.tab});
           else if ('recovery' in target)
             navigation.navigate('Recovery', {reason: target.recovery});
+          else if ('reader' in target)
+            navigation.navigate('QuranReader', target.reader);
           else navigation.navigate(target.screen);
           return true;
         });
@@ -191,6 +220,28 @@ export function MainTabNavigation() {
           animation: 'none',
         }}>
         <Stack.Screen name="MainTabs" component={MainTabs} />
+        <Stack.Screen name="QuranEditions" component={details.QuranEditions} />
+        <Stack.Screen name="QuranDownload" component={details.QuranDownload} />
+        <Stack.Screen name="QuranReader" component={details.QuranReader} />
+        <Stack.Screen
+          name="QuranPreferences"
+          component={details.QuranPreferences}
+        />
+        <Stack.Screen
+          name="QuranTranslations"
+          component={details.QuranTranslations}
+        />
+        <Stack.Screen name="QuranSearch" component={details.QuranSearch} />
+        <Stack.Screen
+          name="QuranBookmarks"
+          component={details.QuranBookmarks}
+        />
+        <Stack.Screen name="QuranSource" component={details.QuranSource} />
+        <Stack.Screen name="QuranAudio" component={details.QuranAudio} />
+        <Stack.Screen
+          name="QuranOfflineAudio"
+          component={details.QuranOfflineAudio}
+        />
         <Stack.Screen name="Bookmarks" component={details.Bookmarks} />
         <Stack.Screen name="Search" component={details.Search} />
         <Stack.Screen name="Content" component={details.Content} />

@@ -134,21 +134,32 @@ export function IconButton({
   name,
   onPress,
   disabled = false,
+  selected,
 }: {
   label: string;
   name: IconName;
   onPress: () => void;
   disabled?: boolean;
+  selected?: boolean;
 }) {
   const p = usePalette();
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityState={{disabled}}
+      accessibilityState={{disabled, selected}}
       disabled={disabled}
       onPress={onPress}
-      style={({pressed}) => [styles.iconButton, {opacity: pressed ? 0.65 : 1}]}>
+      style={({pressed}) => [
+        styles.iconButton,
+        {
+          opacity: pressed ? 0.65 : 1,
+          backgroundColor: selected ? p.surfaceMuted : undefined,
+          borderWidth: selected ? 1 : 0,
+          borderColor: p.borderControl,
+          borderRadius: 12,
+        },
+      ]}>
       <AppIcon name={name} color={disabled ? p.disabledText : p.iconPrimary} />
     </Pressable>
   );

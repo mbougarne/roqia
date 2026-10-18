@@ -1,3 +1,8 @@
+import {
+  type EditionId,
+  editionById,
+  validateLocator,
+} from '../features/quran/domain';
 import {type NavigatorScreenParams} from '@react-navigation/native';
 export type Tabs = {
   Home: undefined;
@@ -26,6 +31,27 @@ export type RootRoutes = {
   Terms: undefined;
   Sources: undefined;
   Reminders: undefined;
+  QuranEditions: undefined;
+  QuranDownload: {editionId: EditionId};
+  QuranReader: {
+    editionId: EditionId;
+    surah: number;
+    verse?: number;
+    packVersion?: string;
+    numberingScheme?: string;
+  };
+  QuranPreferences: {editionId: EditionId};
+  QuranTranslations: {editionId: EditionId};
+  QuranSearch: undefined;
+  QuranBookmarks: undefined;
+  QuranSource: {
+    editionId: EditionId;
+    surah?: number;
+    verse?: number;
+    packVersion?: string;
+  };
+  QuranAudio: {editionId?: EditionId; surah?: number} | undefined;
+  QuranOfflineAudio: undefined;
   Content: {contentId: string};
   ExternalLink: {title: string; url: string};
   Recovery: {reason: 'invalid-link' | 'missing-pack'};
@@ -35,9 +61,18 @@ export type LinkTarget =
   | {
       screen: Exclude<
         keyof RootRoutes,
-        'MainTabs' | 'Recovery' | 'Content' | 'ExternalLink'
+        | 'MainTabs'
+        | 'Recovery'
+        | 'Content'
+        | 'ExternalLink'
+        | 'QuranDownload'
+        | 'QuranReader'
+        | 'QuranPreferences'
+        | 'QuranTranslations'
+        | 'QuranSource'
       >;
     }
+  | {reader: RootRoutes['QuranReader']}
   | {recovery: 'invalid-link' | 'missing-pack'};
 export function resolveLink(url: string): LinkTarget {
   if (!url.startsWith('roqia://') || url.length > 2048)
@@ -61,6 +96,11 @@ export function resolveLink(url: string): LinkTarget {
     about: {screen: 'About'},
     more: {tab: 'More'},
     quran: {tab: 'Quran'},
+    'quran/editions': {screen: 'QuranEditions'},
+    'quran/search': {screen: 'QuranSearch'},
+    'quran/bookmarks': {screen: 'QuranBookmarks'},
+    'quran/audio': {screen: 'QuranAudio'},
+    'quran/offline-audio': {screen: 'QuranOfflineAudio'},
     prayer: {tab: 'Prayer'},
     settings: {screen: 'Settings'},
     storage: {screen: 'Storage'},
@@ -76,7 +116,27 @@ export function resolveLink(url: string): LinkTarget {
     reminders: {screen: 'Reminders'},
   };
   if (aliases[path]) return aliases[path];
-  if (/^quran\/[a-z0-9-]+\/[1-9][0-9]{0,2}(\/[1-9][0-9]{0,2})?$/.test(path))
-    return {recovery: 'missing-pack'};
+  const match =
+    /^quran\/([a-z0-9.-]+)\/([1-9][0-9]{0,2})(?:\/([1-9][0-9]{0,2}))?$/.exec(
+      path,
+    );
+  if (match) {
+    if (['warsh', 'hafs'].includes(match[1])) return {recovery: 'missing-pack'};
+    try {
+      const e = editionById(match[1]),
+        surah = Number(match[2]),
+        verse = Number(match[3] ?? 1);
+      validateLocator({
+        editionId: e.id,
+        numberingScheme: e.numbering,
+        surah,
+        verse,
+        packVersion: 'link',
+      });
+      return {reader: {editionId: e.id, surah, verse}};
+    } catch {
+      return {recovery: 'invalid-link'};
+    }
+  }
   return {recovery: 'invalid-link'};
 }

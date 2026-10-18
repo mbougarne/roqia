@@ -235,6 +235,10 @@ async function run(scenario: string) {
 }
 
 export default function ProbeApp({scenario}: {scenario?: string}) {
+  if (scenario?.startsWith('phase4-')) {
+    const Phase4Probe=require('../phase4/Probe').default;
+    return <Phase4Probe scenario={scenario}/>;
+  }
   if (scenario?.startsWith('fonts-'))
     return <WarshFontProbe scenario={scenario} />;
   return <ScenarioProbe scenario={scenario} />;

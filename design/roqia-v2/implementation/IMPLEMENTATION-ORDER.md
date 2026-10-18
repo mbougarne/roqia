@@ -16,7 +16,7 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
 
-Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. The next group should use `phase_4/<short-description>`.
+Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; the next group should use `phase_5/<short-description>`.
 
 ## Ordered checklist
 
@@ -144,7 +144,7 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 **2026-10-18 phase 3 checkpoint:** RQ-006–RQ-014 are implemented with [Android evidence](../../../docs/implementation/phase-3/README.md). RQ-010 retains TalkBack acceptance; RQ-013 retains owner/editorial approval of legal copy. Full device/lifecycle and iOS acceptance remain explicitly open at the integration/release gates.
 
-**Next implementation pickup after phase 3 review: step 28 / RQ-023.** Recheck its source dependencies before creating a production pack. King Fahd Warsh must use its matching font; no unreviewed Quran text, translation or audio may enter the catalog. This checkpoint does not waive RQ-016–RQ-019 or other source gates.
+**Phase 4 pickup was step 28 / RQ-023.** Recheck its source dependencies before creating a production pack. King Fahd Warsh must use its matching font; no unreviewed Quran text, translation or audio may enter the catalog. This checkpoint does not waive RQ-016–RQ-019 or other source gates.
 
 19. [x] **[RQ-006 — Redesign launch, onboarding and guidance](tickets/RQ-006.md)**
 
@@ -201,6 +201,12 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
    **Finish when:** Fresh install sends nothing before opt-in; Existing times are preserved; Changing/turning off a reminder cancels old events without duplicates.
 
 ### Steps 28 onward · Quran reading and listening
+
+**2026-10-18 phase 4 checkpoint:** steps 28–37 now have a source-gated runtime implementation and [Android evidence](../../../docs/implementation/phase-4/README.md). They remain `in_progress` for the specific source, publication, rendering, accessibility or native acceptance items recorded in each ticket. This phase implements readers against locked private fixtures; it does not waive RQ-016–RQ-019/RQ-026/RQ-031/RQ-047. The normal runtime catalog remains empty. Sleep timer remains explicitly unavailable pending a proven native deadline API. Android font fallback inspection currently requires API 31+; older Android and iOS readers fail closed.
+
+**Owner decision — 18 October 2026:** further manual Arabic reading review is deferred, not a prerequisite for download delivery. See the [recorded decision](../../../docs/implementation/phase-4/REVIEW-DECISION.md). Preserve automated source/font checks; do not record unperformed review as passed. Finish the concrete phase 4 package/catalog/download gap before moving on.
+
+**After that delivery and phase 4 review, the next independent implementation pickup is step 38 / RQ-036.** Recheck RQ-037 before enabling prayer times and RQ-040 before promising full adhan. Do not silently skip those gates or treat independent UI/runtime work as approval of unverified content or native behavior.
 
 28. [ ] **[RQ-023 — Build Quran library and edition selection](tickets/RQ-023.md)**
 

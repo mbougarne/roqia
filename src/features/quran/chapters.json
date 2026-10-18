@@ -1,0 +1,914 @@
+[
+  {
+    "number": 1,
+    "name": "الفاتحة",
+    "english": "The Opening",
+    "transliteration": "Al-Faatiha",
+    "hafsVerses": 7,
+    "warshVerses": 7
+  },
+  {
+    "number": 2,
+    "name": "البقرة",
+    "english": "The Cow",
+    "transliteration": "Al-Baqara",
+    "hafsVerses": 286,
+    "warshVerses": 285
+  },
+  {
+    "number": 3,
+    "name": "آل عمران",
+    "english": "The Family of Imraan",
+    "transliteration": "Aal-i-Imraan",
+    "hafsVerses": 200,
+    "warshVerses": 200
+  },
+  {
+    "number": 4,
+    "name": "النساء",
+    "english": "The Women",
+    "transliteration": "An-Nisaa",
+    "hafsVerses": 176,
+    "warshVerses": 175
+  },
+  {
+    "number": 5,
+    "name": "المائدة",
+    "english": "The Table",
+    "transliteration": "Al-Maaida",
+    "hafsVerses": 120,
+    "warshVerses": 122
+  },
+  {
+    "number": 6,
+    "name": "الأنعام",
+    "english": "The Cattle",
+    "transliteration": "Al-An'aam",
+    "hafsVerses": 165,
+    "warshVerses": 167
+  },
+  {
+    "number": 7,
+    "name": "الأعراف",
+    "english": "The Heights",
+    "transliteration": "Al-A'raaf",
+    "hafsVerses": 206,
+    "warshVerses": 206
+  },
+  {
+    "number": 8,
+    "name": "الأنفال",
+    "english": "The Spoils of War",
+    "transliteration": "Al-Anfaal",
+    "hafsVerses": 75,
+    "warshVerses": 76
+  },
+  {
+    "number": 9,
+    "name": "التوبة",
+    "english": "The Repentance",
+    "transliteration": "At-Tawba",
+    "hafsVerses": 129,
+    "warshVerses": 130
+  },
+  {
+    "number": 10,
+    "name": "يونس",
+    "english": "Jonas",
+    "transliteration": "Yunus",
+    "hafsVerses": 109,
+    "warshVerses": 109
+  },
+  {
+    "number": 11,
+    "name": "هود",
+    "english": "Hud",
+    "transliteration": "Hud",
+    "hafsVerses": 123,
+    "warshVerses": 121
+  },
+  {
+    "number": 12,
+    "name": "يوسف",
+    "english": "Joseph",
+    "transliteration": "Yusuf",
+    "hafsVerses": 111,
+    "warshVerses": 111
+  },
+  {
+    "number": 13,
+    "name": "الرعد",
+    "english": "The Thunder",
+    "transliteration": "Ar-Ra'd",
+    "hafsVerses": 43,
+    "warshVerses": 44
+  },
+  {
+    "number": 14,
+    "name": "ابراهيم",
+    "english": "Abraham",
+    "transliteration": "Ibrahim",
+    "hafsVerses": 52,
+    "warshVerses": 54
+  },
+  {
+    "number": 15,
+    "name": "الحجر",
+    "english": "The Rock",
+    "transliteration": "Al-Hijr",
+    "hafsVerses": 99,
+    "warshVerses": 99
+  },
+  {
+    "number": 16,
+    "name": "النحل",
+    "english": "The Bee",
+    "transliteration": "An-Nahl",
+    "hafsVerses": 128,
+    "warshVerses": 128
+  },
+  {
+    "number": 17,
+    "name": "الإسراء",
+    "english": "The Night Journey",
+    "transliteration": "Al-Israa",
+    "hafsVerses": 111,
+    "warshVerses": 110
+  },
+  {
+    "number": 18,
+    "name": "الكهف",
+    "english": "The Cave",
+    "transliteration": "Al-Kahf",
+    "hafsVerses": 110,
+    "warshVerses": 105
+  },
+  {
+    "number": 19,
+    "name": "مريم",
+    "english": "Mary",
+    "transliteration": "Maryam",
+    "hafsVerses": 98,
+    "warshVerses": 99
+  },
+  {
+    "number": 20,
+    "name": "طه",
+    "english": "Taa-Haa",
+    "transliteration": "Taa-Haa",
+    "hafsVerses": 135,
+    "warshVerses": 134
+  },
+  {
+    "number": 21,
+    "name": "الأنبياء",
+    "english": "The Prophets",
+    "transliteration": "Al-Anbiyaa",
+    "hafsVerses": 112,
+    "warshVerses": 111
+  },
+  {
+    "number": 22,
+    "name": "الحج",
+    "english": "The Pilgrimage",
+    "transliteration": "Al-Hajj",
+    "hafsVerses": 78,
+    "warshVerses": 76
+  },
+  {
+    "number": 23,
+    "name": "المؤمنون",
+    "english": "The Believers",
+    "transliteration": "Al-Muminoon",
+    "hafsVerses": 118,
+    "warshVerses": 119
+  },
+  {
+    "number": 24,
+    "name": "النور",
+    "english": "The Light",
+    "transliteration": "An-Noor",
+    "hafsVerses": 64,
+    "warshVerses": 62
+  },
+  {
+    "number": 25,
+    "name": "الفرقان",
+    "english": "The Criterion",
+    "transliteration": "Al-Furqaan",
+    "hafsVerses": 77,
+    "warshVerses": 77
+  },
+  {
+    "number": 26,
+    "name": "الشعراء",
+    "english": "The Poets",
+    "transliteration": "Ash-Shu'araa",
+    "hafsVerses": 227,
+    "warshVerses": 226
+  },
+  {
+    "number": 27,
+    "name": "النمل",
+    "english": "The Ant",
+    "transliteration": "An-Naml",
+    "hafsVerses": 93,
+    "warshVerses": 95
+  },
+  {
+    "number": 28,
+    "name": "القصص",
+    "english": "The Stories",
+    "transliteration": "Al-Qasas",
+    "hafsVerses": 88,
+    "warshVerses": 88
+  },
+  {
+    "number": 29,
+    "name": "العنكبوت",
+    "english": "The Spider",
+    "transliteration": "Al-Ankaboot",
+    "hafsVerses": 69,
+    "warshVerses": 69
+  },
+  {
+    "number": 30,
+    "name": "الروم",
+    "english": "The Romans",
+    "transliteration": "Ar-Room",
+    "hafsVerses": 60,
+    "warshVerses": 59
+  },
+  {
+    "number": 31,
+    "name": "لقمان",
+    "english": "Luqman",
+    "transliteration": "Luqman",
+    "hafsVerses": 34,
+    "warshVerses": 33
+  },
+  {
+    "number": 32,
+    "name": "السجدة",
+    "english": "The Prostration",
+    "transliteration": "As-Sajda",
+    "hafsVerses": 30,
+    "warshVerses": 30
+  },
+  {
+    "number": 33,
+    "name": "الأحزاب",
+    "english": "The Clans",
+    "transliteration": "Al-Ahzaab",
+    "hafsVerses": 73,
+    "warshVerses": 73
+  },
+  {
+    "number": 34,
+    "name": "سبإ",
+    "english": "Sheba",
+    "transliteration": "Saba",
+    "hafsVerses": 54,
+    "warshVerses": 54
+  },
+  {
+    "number": 35,
+    "name": "فاطر",
+    "english": "The Originator",
+    "transliteration": "Faatir",
+    "hafsVerses": 45,
+    "warshVerses": 46
+  },
+  {
+    "number": 36,
+    "name": "يس",
+    "english": "Yaseen",
+    "transliteration": "Yaseen",
+    "hafsVerses": 83,
+    "warshVerses": 82
+  },
+  {
+    "number": 37,
+    "name": "الصافات",
+    "english": "Those drawn up in Ranks",
+    "transliteration": "As-Saaffaat",
+    "hafsVerses": 182,
+    "warshVerses": 182
+  },
+  {
+    "number": 38,
+    "name": "ص",
+    "english": "The letter Saad",
+    "transliteration": "Saad",
+    "hafsVerses": 88,
+    "warshVerses": 86
+  },
+  {
+    "number": 39,
+    "name": "الزمر",
+    "english": "The Groups",
+    "transliteration": "Az-Zumar",
+    "hafsVerses": 75,
+    "warshVerses": 72
+  },
+  {
+    "number": 40,
+    "name": "غافر",
+    "english": "The Forgiver",
+    "transliteration": "Al-Ghaafir",
+    "hafsVerses": 85,
+    "warshVerses": 84
+  },
+  {
+    "number": 41,
+    "name": "فصلت",
+    "english": "Explained in detail",
+    "transliteration": "Fussilat",
+    "hafsVerses": 54,
+    "warshVerses": 53
+  },
+  {
+    "number": 42,
+    "name": "الشورى",
+    "english": "Consultation",
+    "transliteration": "Ash-Shura",
+    "hafsVerses": 53,
+    "warshVerses": 50
+  },
+  {
+    "number": 43,
+    "name": "الزخرف",
+    "english": "Ornaments of gold",
+    "transliteration": "Az-Zukhruf",
+    "hafsVerses": 89,
+    "warshVerses": 89
+  },
+  {
+    "number": 44,
+    "name": "الدخان",
+    "english": "The Smoke",
+    "transliteration": "Ad-Dukhaan",
+    "hafsVerses": 59,
+    "warshVerses": 56
+  },
+  {
+    "number": 45,
+    "name": "الجاثية",
+    "english": "Crouching",
+    "transliteration": "Al-Jaathiya",
+    "hafsVerses": 37,
+    "warshVerses": 36
+  },
+  {
+    "number": 46,
+    "name": "الأحقاف",
+    "english": "The Dunes",
+    "transliteration": "Al-Ahqaf",
+    "hafsVerses": 35,
+    "warshVerses": 34
+  },
+  {
+    "number": 47,
+    "name": "محمد",
+    "english": "Muhammad",
+    "transliteration": "Muhammad",
+    "hafsVerses": 38,
+    "warshVerses": 39
+  },
+  {
+    "number": 48,
+    "name": "الفتح",
+    "english": "The Victory",
+    "transliteration": "Al-Fath",
+    "hafsVerses": 29,
+    "warshVerses": 29
+  },
+  {
+    "number": 49,
+    "name": "الحجرات",
+    "english": "The Inner Apartments",
+    "transliteration": "Al-Hujuraat",
+    "hafsVerses": 18,
+    "warshVerses": 18
+  },
+  {
+    "number": 50,
+    "name": "ق",
+    "english": "The letter Qaaf",
+    "transliteration": "Qaaf",
+    "hafsVerses": 45,
+    "warshVerses": 45
+  },
+  {
+    "number": 51,
+    "name": "الذاريات",
+    "english": "The Winnowing Winds",
+    "transliteration": "Adh-Dhaariyat",
+    "hafsVerses": 60,
+    "warshVerses": 60
+  },
+  {
+    "number": 52,
+    "name": "الطور",
+    "english": "The Mount",
+    "transliteration": "At-Tur",
+    "hafsVerses": 49,
+    "warshVerses": 47
+  },
+  {
+    "number": 53,
+    "name": "النجم",
+    "english": "The Star",
+    "transliteration": "An-Najm",
+    "hafsVerses": 62,
+    "warshVerses": 61
+  },
+  {
+    "number": 54,
+    "name": "القمر",
+    "english": "The Moon",
+    "transliteration": "Al-Qamar",
+    "hafsVerses": 55,
+    "warshVerses": 55
+  },
+  {
+    "number": 55,
+    "name": "الرحمن",
+    "english": "The Beneficent",
+    "transliteration": "Ar-Rahmaan",
+    "hafsVerses": 78,
+    "warshVerses": 77
+  },
+  {
+    "number": 56,
+    "name": "الواقعة",
+    "english": "The Inevitable",
+    "transliteration": "Al-Waaqia",
+    "hafsVerses": 96,
+    "warshVerses": 99
+  },
+  {
+    "number": 57,
+    "name": "الحديد",
+    "english": "The Iron",
+    "transliteration": "Al-Hadid",
+    "hafsVerses": 29,
+    "warshVerses": 28
+  },
+  {
+    "number": 58,
+    "name": "المجادلة",
+    "english": "The Pleading Woman",
+    "transliteration": "Al-Mujaadila",
+    "hafsVerses": 22,
+    "warshVerses": 21
+  },
+  {
+    "number": 59,
+    "name": "الحشر",
+    "english": "The Exile",
+    "transliteration": "Al-Hashr",
+    "hafsVerses": 24,
+    "warshVerses": 24
+  },
+  {
+    "number": 60,
+    "name": "الممتحنة",
+    "english": "She that is to be examined",
+    "transliteration": "Al-Mumtahana",
+    "hafsVerses": 13,
+    "warshVerses": 13
+  },
+  {
+    "number": 61,
+    "name": "الصف",
+    "english": "The Ranks",
+    "transliteration": "As-Saff",
+    "hafsVerses": 14,
+    "warshVerses": 14
+  },
+  {
+    "number": 62,
+    "name": "الجمعة",
+    "english": "Friday",
+    "transliteration": "Al-Jumu'a",
+    "hafsVerses": 11,
+    "warshVerses": 11
+  },
+  {
+    "number": 63,
+    "name": "المنافقون",
+    "english": "The Hypocrites",
+    "transliteration": "Al-Munaafiqoon",
+    "hafsVerses": 11,
+    "warshVerses": 11
+  },
+  {
+    "number": 64,
+    "name": "التغابن",
+    "english": "Mutual Disillusion",
+    "transliteration": "At-Taghaabun",
+    "hafsVerses": 18,
+    "warshVerses": 18
+  },
+  {
+    "number": 65,
+    "name": "الطلاق",
+    "english": "Divorce",
+    "transliteration": "At-Talaaq",
+    "hafsVerses": 12,
+    "warshVerses": 12
+  },
+  {
+    "number": 66,
+    "name": "التحريم",
+    "english": "The Prohibition",
+    "transliteration": "At-Tahrim",
+    "hafsVerses": 12,
+    "warshVerses": 12
+  },
+  {
+    "number": 67,
+    "name": "الملك",
+    "english": "The Sovereignty",
+    "transliteration": "Al-Mulk",
+    "hafsVerses": 30,
+    "warshVerses": 31
+  },
+  {
+    "number": 68,
+    "name": "القلم",
+    "english": "The Pen",
+    "transliteration": "Al-Qalam",
+    "hafsVerses": 52,
+    "warshVerses": 52
+  },
+  {
+    "number": 69,
+    "name": "الحاقة",
+    "english": "The Reality",
+    "transliteration": "Al-Haaqqa",
+    "hafsVerses": 52,
+    "warshVerses": 52
+  },
+  {
+    "number": 70,
+    "name": "المعارج",
+    "english": "The Ascending Stairways",
+    "transliteration": "Al-Ma'aarij",
+    "hafsVerses": 44,
+    "warshVerses": 44
+  },
+  {
+    "number": 71,
+    "name": "نوح",
+    "english": "Noah",
+    "transliteration": "Nooh",
+    "hafsVerses": 28,
+    "warshVerses": 30
+  },
+  {
+    "number": 72,
+    "name": "الجن",
+    "english": "The Jinn",
+    "transliteration": "Al-Jinn",
+    "hafsVerses": 28,
+    "warshVerses": 28
+  },
+  {
+    "number": 73,
+    "name": "المزمل",
+    "english": "The Enshrouded One",
+    "transliteration": "Al-Muzzammil",
+    "hafsVerses": 20,
+    "warshVerses": 18
+  },
+  {
+    "number": 74,
+    "name": "المدثر",
+    "english": "The Cloaked One",
+    "transliteration": "Al-Muddaththir",
+    "hafsVerses": 56,
+    "warshVerses": 55
+  },
+  {
+    "number": 75,
+    "name": "القيامة",
+    "english": "The Resurrection",
+    "transliteration": "Al-Qiyaama",
+    "hafsVerses": 40,
+    "warshVerses": 39
+  },
+  {
+    "number": 76,
+    "name": "الانسان",
+    "english": "Man",
+    "transliteration": "Al-Insaan",
+    "hafsVerses": 31,
+    "warshVerses": 31
+  },
+  {
+    "number": 77,
+    "name": "المرسلات",
+    "english": "The Emissaries",
+    "transliteration": "Al-Mursalaat",
+    "hafsVerses": 50,
+    "warshVerses": 50
+  },
+  {
+    "number": 78,
+    "name": "النبإ",
+    "english": "The Announcement",
+    "transliteration": "An-Naba",
+    "hafsVerses": 40,
+    "warshVerses": 40
+  },
+  {
+    "number": 79,
+    "name": "النازعات",
+    "english": "Those who drag forth",
+    "transliteration": "An-Naazi'aat",
+    "hafsVerses": 46,
+    "warshVerses": 45
+  },
+  {
+    "number": 80,
+    "name": "عبس",
+    "english": "He frowned",
+    "transliteration": "Abasa",
+    "hafsVerses": 42,
+    "warshVerses": 42
+  },
+  {
+    "number": 81,
+    "name": "التكوير",
+    "english": "The Overthrowing",
+    "transliteration": "At-Takwir",
+    "hafsVerses": 29,
+    "warshVerses": 29
+  },
+  {
+    "number": 82,
+    "name": "الإنفطار",
+    "english": "The Cleaving",
+    "transliteration": "Al-Infitaar",
+    "hafsVerses": 19,
+    "warshVerses": 19
+  },
+  {
+    "number": 83,
+    "name": "المطففين",
+    "english": "Defrauding",
+    "transliteration": "Al-Mutaffifin",
+    "hafsVerses": 36,
+    "warshVerses": 36
+  },
+  {
+    "number": 84,
+    "name": "الإنشقاق",
+    "english": "The Splitting Open",
+    "transliteration": "Al-Inshiqaaq",
+    "hafsVerses": 25,
+    "warshVerses": 25
+  },
+  {
+    "number": 85,
+    "name": "البروج",
+    "english": "The Constellations",
+    "transliteration": "Al-Burooj",
+    "hafsVerses": 22,
+    "warshVerses": 22
+  },
+  {
+    "number": 86,
+    "name": "الطارق",
+    "english": "The Morning Star",
+    "transliteration": "At-Taariq",
+    "hafsVerses": 17,
+    "warshVerses": 17
+  },
+  {
+    "number": 87,
+    "name": "الأعلى",
+    "english": "The Most High",
+    "transliteration": "Al-A'laa",
+    "hafsVerses": 19,
+    "warshVerses": 19
+  },
+  {
+    "number": 88,
+    "name": "الغاشية",
+    "english": "The Overwhelming",
+    "transliteration": "Al-Ghaashiya",
+    "hafsVerses": 26,
+    "warshVerses": 26
+  },
+  {
+    "number": 89,
+    "name": "الفجر",
+    "english": "The Dawn",
+    "transliteration": "Al-Fajr",
+    "hafsVerses": 30,
+    "warshVerses": 32
+  },
+  {
+    "number": 90,
+    "name": "البلد",
+    "english": "The City",
+    "transliteration": "Al-Balad",
+    "hafsVerses": 20,
+    "warshVerses": 20
+  },
+  {
+    "number": 91,
+    "name": "الشمس",
+    "english": "The Sun",
+    "transliteration": "Ash-Shams",
+    "hafsVerses": 15,
+    "warshVerses": 15
+  },
+  {
+    "number": 92,
+    "name": "الليل",
+    "english": "The Night",
+    "transliteration": "Al-Lail",
+    "hafsVerses": 21,
+    "warshVerses": 21
+  },
+  {
+    "number": 93,
+    "name": "الضحى",
+    "english": "The Morning Hours",
+    "transliteration": "Ad-Dhuhaa",
+    "hafsVerses": 11,
+    "warshVerses": 11
+  },
+  {
+    "number": 94,
+    "name": "الشرح",
+    "english": "The Consolation",
+    "transliteration": "Ash-Sharh",
+    "hafsVerses": 8,
+    "warshVerses": 8
+  },
+  {
+    "number": 95,
+    "name": "التين",
+    "english": "The Fig",
+    "transliteration": "At-Tin",
+    "hafsVerses": 8,
+    "warshVerses": 8
+  },
+  {
+    "number": 96,
+    "name": "العلق",
+    "english": "The Clot",
+    "transliteration": "Al-Alaq",
+    "hafsVerses": 19,
+    "warshVerses": 20
+  },
+  {
+    "number": 97,
+    "name": "القدر",
+    "english": "The Power, Fate",
+    "transliteration": "Al-Qadr",
+    "hafsVerses": 5,
+    "warshVerses": 5
+  },
+  {
+    "number": 98,
+    "name": "البينة",
+    "english": "The Evidence",
+    "transliteration": "Al-Bayyina",
+    "hafsVerses": 8,
+    "warshVerses": 8
+  },
+  {
+    "number": 99,
+    "name": "الزلزلة",
+    "english": "The Earthquake",
+    "transliteration": "Az-Zalzala",
+    "hafsVerses": 8,
+    "warshVerses": 9
+  },
+  {
+    "number": 100,
+    "name": "العاديات",
+    "english": "The Chargers",
+    "transliteration": "Al-Aadiyaat",
+    "hafsVerses": 11,
+    "warshVerses": 11
+  },
+  {
+    "number": 101,
+    "name": "القارعة",
+    "english": "The Calamity",
+    "transliteration": "Al-Qaari'a",
+    "hafsVerses": 11,
+    "warshVerses": 10
+  },
+  {
+    "number": 102,
+    "name": "التكاثر",
+    "english": "Competition",
+    "transliteration": "At-Takaathur",
+    "hafsVerses": 8,
+    "warshVerses": 8
+  },
+  {
+    "number": 103,
+    "name": "العصر",
+    "english": "The Declining Day, Epoch",
+    "transliteration": "Al-Asr",
+    "hafsVerses": 3,
+    "warshVerses": 3
+  },
+  {
+    "number": 104,
+    "name": "الهمزة",
+    "english": "The Traducer",
+    "transliteration": "Al-Humaza",
+    "hafsVerses": 9,
+    "warshVerses": 9
+  },
+  {
+    "number": 105,
+    "name": "الفيل",
+    "english": "The Elephant",
+    "transliteration": "Al-Fil",
+    "hafsVerses": 5,
+    "warshVerses": 5
+  },
+  {
+    "number": 106,
+    "name": "قريش",
+    "english": "Quraysh",
+    "transliteration": "Quraish",
+    "hafsVerses": 4,
+    "warshVerses": 5
+  },
+  {
+    "number": 107,
+    "name": "الماعون",
+    "english": "Almsgiving",
+    "transliteration": "Al-Maa'un",
+    "hafsVerses": 7,
+    "warshVerses": 6
+  },
+  {
+    "number": 108,
+    "name": "الكوثر",
+    "english": "Abundance",
+    "transliteration": "Al-Kawthar",
+    "hafsVerses": 3,
+    "warshVerses": 3
+  },
+  {
+    "number": 109,
+    "name": "الكافرون",
+    "english": "The Disbelievers",
+    "transliteration": "Al-Kaafiroon",
+    "hafsVerses": 6,
+    "warshVerses": 6
+  },
+  {
+    "number": 110,
+    "name": "النصر",
+    "english": "Divine Support",
+    "transliteration": "An-Nasr",
+    "hafsVerses": 3,
+    "warshVerses": 3
+  },
+  {
+    "number": 111,
+    "name": "المسد",
+    "english": "The Palm Fibre",
+    "transliteration": "Al-Masad",
+    "hafsVerses": 5,
+    "warshVerses": 5
+  },
+  {
+    "number": 112,
+    "name": "الإخلاص",
+    "english": "Sincerity",
+    "transliteration": "Al-Ikhlaas",
+    "hafsVerses": 4,
+    "warshVerses": 4
+  },
+  {
+    "number": 113,
+    "name": "الفلق",
+    "english": "The Dawn",
+    "transliteration": "Al-Falaq",
+    "hafsVerses": 5,
+    "warshVerses": 5
+  },
+  {
+    "number": 114,
+    "name": "الناس",
+    "english": "Mankind",
+    "transliteration": "An-Naas",
+    "hafsVerses": 6,
+    "warshVerses": 6
+  }
+]

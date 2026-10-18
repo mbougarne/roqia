@@ -69,25 +69,36 @@ export const nativeDownloadPorts: DownloadPorts = {
   }),
   commit: async (jobs, installed, journals) =>
     write(async tx => {
-      for (const collection of ['downloads', 'installed', 'install-journals'])
-        await tx.execute('DELETE FROM records WHERE collection=?', [
-          collection,
-        ]);
-      for (const job of jobs) await putRecord(tx, 'downloads', job.jobId, job);
-      for (const pack of installed)
-        await putRecord(
-          tx,
-          'installed',
-          `${pack.packId}@${pack.version}`,
-          pack,
-        );
-      for (const journal of journals)
-        await putRecord(
-          tx,
+      // A Quran pack has hundreds of assets. Keep each snapshot atomic while
+      // writing only changed rows, rather than rewriting every job on progress.
+      const collections: [string, [string, unknown][]][] = [
+        ['downloads', jobs.map(j => [j.jobId, j])],
+        ['installed', installed.map(p => [`${p.packId}@${p.version}`, p])],
+        [
           'install-journals',
-          `${journal.packId}@${journal.version}:${journal.phase}`,
-          journal,
+          journals.map(j => [`${j.packId}@${j.version}:${j.phase}`, j]),
+        ],
+      ];
+      for (const [collection, records] of collections) {
+        const existing = new Map(
+          (
+            await tx.execute(
+              'SELECT id,value FROM records WHERE collection=?',
+              [collection],
+            )
+          ).rows.map(row => [row.id as string, row.value as string]),
         );
+        for (const [id, value] of records) {
+          if (existing.get(id) !== JSON.stringify(value))
+            await putRecord(tx, collection, id, value);
+          existing.delete(id);
+        }
+        for (const id of existing.keys())
+          await tx.execute('DELETE FROM records WHERE collection=? AND id=?', [
+            collection,
+            id,
+          ]);
+      }
     }),
   existing: async () => {
     await ensurePrivateRoot();
