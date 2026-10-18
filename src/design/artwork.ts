@@ -26,14 +26,14 @@ export function artwork(
       '" stroke-width=".7"/>' +
       '<g fill="none" stroke="' +
       gold +
-      '" stroke-width="1"><path d="M120 6V20M120 158V173M113 13h14M113 165h14"/><path d="M120 20l6 6-6 6-6-6zM120 148l6 6-6 6-6-6z"/></g>' +
-      '<path d="M67 133L166 155L171 149L83 119Z" fill="#8B641F" stroke="' +
-      green +
-      '" stroke-width="2"/><path d="M169 133L76 155L70 149L154 119Z" fill="#BFA16A" stroke="' +
-      green +
+      '" stroke-width="1"><path d="M120 4V6M120 10V12M120 158V160M120 164V166"/><path d="M120 17l3 5 6-1-1 6 5 3-5 3 1 6-6-1-3 5-3-5-6 1 1-6-5-3 5-3-1-6 6 1z"/></g>' +
+      '<path d="M65 130L171 151L173 144L81 116Z" fill="#8B641F" stroke="' +
+      '#164C3D' +
+      '" stroke-width="2"/><path d="M175 130L69 151L67 144L159 116Z" fill="#BFA16A" stroke="' +
+      '#164C3D' +
       '" stroke-width="2"/>' +
       '<path d="M120 125L48 106L59 53Q89 48 120 69Q151 48 181 53L192 106Z" fill="' +
-      green +
+      '#164C3D' +
       '" stroke="' +
       gold +
       '" stroke-width="2"/>' +
@@ -64,6 +64,22 @@ export function artwork(
       ).join('') +
       end
     );
+  if (name === 'listening') {
+    const ink = dark ? gold : green;
+    return (
+      start +
+      (dark
+        ? `<path d="M27 172V83Q27 61 51 61V51Q51 29 87 22Q111 16 120 5Q129 16 153 22Q189 29 189 51V61Q213 61 213 83V172" fill="none" stroke="${gold}" opacity=".25"/>`
+        : `<circle cx="120" cy="87" r="65" fill="${p.surfaceMuted}" opacity=".5"/><path d="M64 111A66 66 0 1 1 181 104M23 151Q47 140 76 157T145 163T218 156" fill="none" stroke="${gold}" stroke-width=".8"/>`) +
+      `<g fill="none" stroke="${ink}" stroke-width="1.5"><path d="M78 112V88a42 42 0 0 1 84 0v24M82 109V88a38 38 0 0 1 76 0v21"/>
+      <rect x="75" y="99" width="22" height="44" rx="9" transform="rotate(-12 86 121)" fill="${p.background}"/><path d="M84 101v40" transform="rotate(-12 86 121)"/>
+      <rect x="143" y="99" width="22" height="44" rx="9" transform="rotate(12 154 121)" fill="${p.background}"/><path d="M156 101v40" transform="rotate(12 154 121)"/></g>` +
+      (dark
+        ? `<path d="M43 111v8m7-15v22m7-28v34M183 98v34m7-28v22m7-15v8M120 31l3 3-3 3-3-3z" fill="none" stroke="${gold}" stroke-width="1"/>`
+        : '') +
+      end
+    );
+  }
   if (name === 'morning')
     return (
       start +

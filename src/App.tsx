@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   StatusBar,
+  NativeModules,
   Alert,
   AppState,
   StyleSheet,
@@ -65,7 +66,9 @@ export default function App() {
     await updateSettings({uiScale: scale});
     setScale((await getSettings()).uiScale);
   }, []);
-  const [preference, setPreference] = useState<ThemePreference>('system');
+  const [preference, setPreference] = useState<ThemePreference>(
+    NativeModules.RoqiaAppearance?.initialPreference ?? 'system',
+  );
   const mode = preference === 'system' ? defaultMode : preference;
   const [storageError, setStorageError] = useState(false);
   const [hydrationAttempt, setHydrationAttempt] = useState(0);
@@ -124,9 +127,12 @@ export default function App() {
 
   useEffect(() => {
     if (!isStateHydrated) return;
-    void updateSettings({themePreference: preference}).catch(() =>
-      setStorageError(true),
-    );
+    void updateSettings({themePreference: preference})
+      .then(() => getSettings())
+      .then(settings =>
+        NativeModules.RoqiaAppearance?.sync(settings.themePreference),
+      )
+      .catch(() => setStorageError(true));
   }, [isStateHydrated, preference]);
 
   useEffect(() => {
@@ -343,6 +349,12 @@ export default function App() {
                                   void updateSettings({
                                     themePreference: preference,
                                   })
+                                    .then(() => getSettings())
+                                    .then(settings =>
+                                      NativeModules.RoqiaAppearance?.sync(
+                                        settings.themePreference,
+                                      ),
+                                    )
                                     .then(() => setStorageError(false))
                                     .catch(() => setStorageError(true));
                                 } else setHydrationAttempt(n => n + 1);

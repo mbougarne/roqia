@@ -1,5 +1,4 @@
 import {sleepDeadline, setSleepTimer, clearSleepTimer} from './sleep';
-import {Image} from 'react-native';
 import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
@@ -86,7 +85,10 @@ const tracksFor = (
     if (!asset) throw new Error('missing_bundled_audio');
     return {
       ...entry,
-      url: Image.resolveAssetSource(asset).uri,
+      // Keep the require() handle: RNTP resolves packaged Android raw resources.
+      // RNTP alpha declares AddTrack as an intersection with Track's string URL;
+      // its add() implementation explicitly accepts numeric imported assets.
+      url: asset as unknown as AddTrack['url'],
       artist: 'الرقية الشرعية',
       scope,
       assetVersion: 'bundled-v1',

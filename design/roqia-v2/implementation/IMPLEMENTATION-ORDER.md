@@ -28,6 +28,10 @@ All start dependencies and completion-integration dependencies occur earlier in 
 
 If an acquisition or feasibility ticket is blocked, record the missing evidence and resolve the issue or explicitly revise the scope/order. Do not mark it complete or silently skip it to build an unsupported feature. A documented page-only Warsh capability or native-platform limitation is an output to resolve against the intended feature; it is not permission to substitute content or promise unavailable behavior.
 
+### Owner review follow-up: screens 01–08
+
+PR #15 is merged. The first owner review is addressed on `phase_12/splash-onboarding-ruqya-review`, from updated main (`407ca03`). Scope: saved-theme splash/corner ornaments, welcome and walkthrough artwork/layout, guidance cards, Ruqya listen hero/mini-player and the bundled-audio playback defect. [Review evidence and light/dark comparisons](../../../docs/implementation/phase-12/review-01/README.md). Content wording and screens 09–48 await subsequent owner feedback; this does not start Phase 13 or mark visual acceptance complete.
+
 ## Platform sequence and branches
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.

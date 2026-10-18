@@ -1,0 +1,6 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/roqia_launch_background" />
+    <item android:gravity="top|left" android:width="180dp" android:height="180dp"><rotate android:fromDegrees="0" android:toDegrees="0" android:drawable="@drawable/roqia_launch_corner" /></item>
+    <item android:gravity="bottom|right" android:width="180dp" android:height="180dp"><rotate android:fromDegrees="180" android:toDegrees="180" android:drawable="@drawable/roqia_launch_corner" /></item>
+    <item android:gravity="center" android:width="288dp" android:height="288dp" android:drawable="@drawable/roqia_launch_mark" />
+</layer-list>

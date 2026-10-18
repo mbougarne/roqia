@@ -1,0 +1,162 @@
+[
+  {
+    "screen": "01-splash",
+    "theme": "light",
+    "file": "01-splash-light.png",
+    "sha256": "0a2b1714a5a2de1a642af4e9fae49cd15e62c88260e47f92c8a380f9b07cb517",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "02-welcome",
+    "theme": "light",
+    "file": "02-welcome-light.png",
+    "sha256": "54a92747f97e34667519cdd70712ff5868d599e3844c2ddfb6fe9d25e729b4c4",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "03-guide-audio",
+    "theme": "light",
+    "file": "03-guide-audio-light.png",
+    "sha256": "5e2d52a87d1ec78dd722b9729d56f27ef14b1a577ddd4c0d79cfb650f213537f",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "04-guide-navigation",
+    "theme": "light",
+    "file": "04-guide-navigation-light.png",
+    "sha256": "014c9dedacbd38f17d4cc175f7b437a733044bf555982220e3fee3bf1b250c81",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "05-guide-adhkar",
+    "theme": "light",
+    "file": "05-guide-adhkar-light.png",
+    "sha256": "91b5555c8b153357a47f1d6bc61279a1e0b06a885d19fcbd43d5d83a5c1a616b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "06-guide-personalize",
+    "theme": "light",
+    "file": "06-guide-personalize-light.png",
+    "sha256": "a7153ccc94ab22fe9698091dfab5868a91cfc4ac3c8e1b03da33cc63076c4e88",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "07-guidance",
+    "theme": "light",
+    "file": "07-guidance-light.png",
+    "sha256": "d4b5453fbed73309e34a2fc7b24becd512fdbfdc0a9b7b937f1142d038d218e2",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "08-ruqya",
+    "theme": "light",
+    "file": "08-ruqya-light.png",
+    "sha256": "e49c9309195846b1d8d67a64a52d0fa3004d3a592c3739d1b6141d8208db9d26",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "01-splash",
+    "theme": "dark",
+    "file": "01-splash-dark.png",
+    "sha256": "7ba63e97c0aab50f8b970318ff3234666cf31b9b956920acac2037d287f642ce",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "02-welcome",
+    "theme": "dark",
+    "file": "02-welcome-dark.png",
+    "sha256": "3da13a9f7d10ea25b924c8be849a78eeaf5ca53928821c4a683e5b463d785b01",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "03-guide-audio",
+    "theme": "dark",
+    "file": "03-guide-audio-dark.png",
+    "sha256": "d46dbbc277a97cd0031e01c51fdf752f6bc334fbb32b770a19263c12a4683f03",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "04-guide-navigation",
+    "theme": "dark",
+    "file": "04-guide-navigation-dark.png",
+    "sha256": "f8d723711155b0fd10cf5362cc1d9a66da3a114e6e0a53592045ced5e8754c7b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "05-guide-adhkar",
+    "theme": "dark",
+    "file": "05-guide-adhkar-dark.png",
+    "sha256": "b47d90d0dc5f398bfcc2eeb2479d3c2955008ba048a6d9d7317110f67b4362e6",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "06-guide-personalize",
+    "theme": "dark",
+    "file": "06-guide-personalize-dark.png",
+    "sha256": "afb66bc95e5e218443fefd1646623343c4aee88340c96542230e66351d33d7bb",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "07-guidance",
+    "theme": "dark",
+    "file": "07-guidance-dark.png",
+    "sha256": "c4c9d531acf5d815bc3bc3de4f14a818de170563002bb0193e48355437baa785",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "08-ruqya",
+    "theme": "dark",
+    "file": "08-ruqya-dark.png",
+    "sha256": "0a8f28992367d327076a17a6312048dacece0cd1d5dfdb47403af9459bf3df42",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  }
+]

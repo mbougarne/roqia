@@ -50,11 +50,13 @@ def capture(name):
         root=tree();text=' '.join(values(root))
         if len(text)>25:break
         time.sleep(.3)
+    assert any(n.get('package')=='name.roqia.app' for n in root.iter('node')), 'App is not in the foreground: '+text
     assert len(text)>25 and 'جار تجهيز التطبيق' not in text,text
     # Source verse markers are immutable scripture, not UI numerals.
     ui_text=re.sub(r'﴿[\u0660-\u0669\u06f0-\u06f9]+﴾', '', text)
     assert not re.search('[\u0660-\u0669\u06f0-\u06f9]',ui_text),ui_text
     assert 'Open debugger' not in text and 'Render Error' not in text,text
+    assert 'تعذر حفظ أو استرجاع بياناتك' not in text,text
     (out/(name+'.png')).write_bytes(run('exec-out','screencap','-p'))
     (out/(name+'.xml')).write_bytes(ET.tostring(root,encoding='utf-8'))
     print(name+': captured',flush=True)
