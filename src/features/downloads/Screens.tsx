@@ -3,6 +3,8 @@ import {Alert} from 'react-native';
 import {AppText, Button, Card, Page, StateView} from '../../design/ui';
 import {bytes, ltr, number} from '../../design/format';
 import {nativeDownloadPorts} from './native';
+import {catalog} from './catalog';
+const packTitle = (id: string) => catalog.find(p => p.id === id)?.title ?? id;
 import {useQuran} from '../quran/context';
 import {type DownloadState, type InstalledPack} from './types';
 const displayBytes = (value: number) => ltr(bytes(value));
@@ -75,10 +77,7 @@ export function DownloadsScreen({navigation}: any) {
       ) : (
         jobs.map(job => (
           <Card key={job.jobId}>
-            <AppText role="bodyStrong">
-              {runtime.catalog.texts.find(t => t.pack.id === job.packId)?.pack
-                .title ?? job.packId}
-            </AppText>
+            <AppText role="bodyStrong">{packTitle(job.packId)}</AppText>
             <AppText role="caption">
               {job.assetId === 'source-font'
                 ? 'الخط'
@@ -207,7 +206,7 @@ export function StorageScreen({navigation}: any) {
             <Button
               key={key(pack)}
               secondary={!selected.includes(key(pack))}
-              label={`${selected.includes(key(pack)) ? '✓ ' : ''}${pack.packId} · ${displayBytes(sizes[key(pack)] ?? 0)}`}
+              label={`${selected.includes(key(pack)) ? '✓ ' : ''}${packTitle(pack.packId)} · ${displayBytes(sizes[key(pack)] ?? 0)}`}
               onPress={() =>
                 setSelected(s =>
                   s.includes(key(pack))

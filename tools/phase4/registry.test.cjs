@@ -4,6 +4,7 @@ const db=new DatabaseSync(':memory:');let writes=0,failAt=0;
 const execute=async(q,a=[])=>{if(/^(INSERT|DELETE)/.test(q)){writes++;if(failAt===writes)throw Error('disk_full');}return{rows:db.prepare(q).all(...a)};};
 const adapter={execute,transaction:async fn=>{db.exec('BEGIN');try{await fn({execute});db.exec('COMMIT');}catch(e){db.exec('ROLLBACK');throw e;}}};
 const load=Module._load;Module._load=function(name,parent,isMain){
+ if(name==='react-native')return{NativeModules:{}};
  if(name==='@op-engineering/op-sqlite')return{open:()=>adapter};
  if(name==='react-native-file-access')return{Dirs:{DocumentDir:'/test'},FileSystem:{}};
  if(name.endsWith('audio/controller'))return{playback:{}};

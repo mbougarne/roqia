@@ -34,12 +34,13 @@ const report = (value: string | null) => {
 export function ensurePlayer() {
   return (setup ??= (async () => {
     try {
-      await TrackPlayer.setupPlayer();
+      await TrackPlayer.setupPlayer({autoHandleInterruptions: false});
     } catch (e) {
       if ((e as {code?: string}).code !== 'player_already_initialized') throw e;
     }
     await TrackPlayer.updateOptions({
       android: {
+        alwaysPauseOnInterruption: true,
         appKilledPlaybackBehavior: AppKilledPlaybackBehavior.ContinuePlayback,
       },
       capabilities: [

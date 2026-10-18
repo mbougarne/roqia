@@ -5,6 +5,10 @@ import {
   playbackFailed,
 } from '../features/audio/controller';
 export default async function audioPlaybackService() {
+  // Adhan/calls take focus; leave the Quran paused when focus returns.
+  TrackPlayer.addEventListener(Event.RemoteDuck, e => {
+    if (e.paused || e.permanent) void playback.pause();
+  });
   TrackPlayer.addEventListener(Event.RemotePlay, () => {
     void playback.play();
   });

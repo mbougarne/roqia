@@ -1,0 +1,40 @@
+{
+  "device": "Android 16 / API 36 arm64 emulator-5554",
+  "lockedDoze": {
+    "service": "name.roqia.app/.prayer.AdhanService",
+    "foreground": true,
+    "alarmAllowlist": true,
+    "quranPaused": true
+  },
+  "offlinePreviews": {
+    "normal": true,
+    "fajr": true,
+    "notificationStop": true
+  },
+  "tests": {
+    "passed": 66,
+    "failed": 0
+  },
+  "apkSha256": "37f7661ec2ef5dafd5d4ee3631e4cdd8d8f641868589e193078e41b7507a5dee",
+  "build": "assembleReview arm64-v8a; TypeScript noEmit passed",
+  "finalPermission": "SCHEDULE_EXACT_ALARM restored to original default; user can enable via app settings button",
+  "retainedDownloads": [
+    "Warsh Al-Fatiha",
+    "Hafs Al-Fatiha",
+    "Doha normal adhan",
+    "Doha Fajr adhan"
+  ],
+  "notClaimed": [
+    "Physical audio/call/OEM matrix",
+    "iOS",
+    "Whole-app screenshot parity",
+    "Unattended scheduling past the 3-day window",
+    "Playback of all 228 surahs"
+  ],
+  "forceStopRecovery": {
+    "before": 2,
+    "afterForceStop": 0,
+    "afterReopen": 2,
+    "passed": true
+  }
+}

@@ -8,7 +8,7 @@ test('normal catalog delivers original sources and explicitly defers manual revi
  validateQuranCatalog(quranCatalog);validateCatalog(quranCatalog.texts.map(t=>t.pack));
  assert.equal(quranCatalog.texts.length,2);
  for(const t of quranCatalog.texts){assert.equal(t.pack.sourceMetadata.manualArabicReview,'deferred-owner-2026-10-18');assert.equal(Object.keys(t.chapterAssets).length,114);assert.ok(t.pack.derivedAssets.length>=114);assert.ok(t.pack.assets.every(a=>a.url.startsWith('https://')));assert.ok(!t.notice.includes('Private local test'));}
- assert.equal(quranCatalog.translations.length,0);assert.equal(quranCatalog.recordings.length,0);
+ assert.equal(quranCatalog.translations.length,0);assert.equal(quranCatalog.recordings.length,2);
 });
 test('Hafs importer preserves strings, rejects missing/duplicate/reordered data and missing notice',()=>{
  const p=quranCatalog.texts[1].pack.preparation;

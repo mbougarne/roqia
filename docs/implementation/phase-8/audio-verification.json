@@ -1,0 +1,2302 @@
+[
+  {
+    "id": "mp3quran-120-warsh-001",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/001.mp3",
+    "bytes": 473723,
+    "sha256": "182bd7ad3599923bf74d050e200c8805f9f56cdd1384d822752ee8924b6c7258",
+    "mime": "audio/mpeg",
+    "duration": "58.357500",
+    "bit_rate": "64940"
+  },
+  {
+    "id": "mp3quran-120-warsh-002",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/002.mp3",
+    "bytes": 99486582,
+    "sha256": "fb2fecc8ec5e77acb2e8a5a8fc0e1e9e21833e7abde2487b52da83ddbeb44b3e",
+    "mime": "audio/mpeg",
+    "duration": "12434.964878",
+    "bit_rate": "64004"
+  },
+  {
+    "id": "mp3quran-120-warsh-003",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/003.mp3",
+    "bytes": 58665760,
+    "sha256": "ea6ea9cb12a39c665fc8d7e98f405c599148e5a00954e43ad9ae7941727c9397",
+    "mime": "audio/mpeg",
+    "duration": "7332.362378",
+    "bit_rate": "64007"
+  },
+  {
+    "id": "mp3quran-120-warsh-004",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/004.mp3",
+    "bytes": 62791853,
+    "sha256": "a5588373473676a3dd7a31394512316aedf9aeb5cab1f54b3ceeed8b9d08656e",
+    "mime": "audio/mpeg",
+    "duration": "7848.124000",
+    "bit_rate": "64006"
+  },
+  {
+    "id": "mp3quran-120-warsh-005",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/005.mp3",
+    "bytes": 48199646,
+    "sha256": "42b6b3b2306ba81f4ba84dde61c0d3988433004b1657cb64301d32efbd7cf8c5",
+    "mime": "audio/mpeg",
+    "duration": "6024.097878",
+    "bit_rate": "64009"
+  },
+  {
+    "id": "mp3quran-120-warsh-006",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/006.mp3",
+    "bytes": 47637489,
+    "sha256": "9b243ce1b77b381ad3be8516320b2dbac64e78eb8fe90c4a36b755f14b03c5c2",
+    "mime": "audio/mpeg",
+    "duration": "5953.828500",
+    "bit_rate": "64009"
+  },
+  {
+    "id": "mp3quran-120-warsh-007",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/007.mp3",
+    "bytes": 52449035,
+    "sha256": "7799e192ffa5175b312163b1034987decbf9f5b110e0521462f95c94a17a4ea1",
+    "mime": "audio/mpeg",
+    "duration": "6555.271756",
+    "bit_rate": "64008"
+  },
+  {
+    "id": "mp3quran-120-warsh-008",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/008.mp3",
+    "bytes": 20918612,
+    "sha256": "7913b34255507746494369a717da32af487aa2140fcf726502fafb14615c3097",
+    "mime": "audio/mpeg",
+    "duration": "2613.968878",
+    "bit_rate": "64020"
+  },
+  {
+    "id": "mp3quran-120-warsh-009",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/009.mp3",
+    "bytes": 41539048,
+    "sha256": "16d0653500c42c7df9ca47f656867a96c0bec35882a811f515870b699e521f3f",
+    "mime": "audio/mpeg",
+    "duration": "5191.523256",
+    "bit_rate": "64010"
+  },
+  {
+    "id": "mp3quran-120-warsh-010",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/010.mp3",
+    "bytes": 30650889,
+    "sha256": "fc1cdfe76db612180084af91970bd8d876c77cce75efa27696ac122556acdf8d",
+    "mime": "audio/mpeg",
+    "duration": "3830.491378",
+    "bit_rate": "64014"
+  },
+  {
+    "id": "mp3quran-120-warsh-011",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/011.mp3",
+    "bytes": 32052109,
+    "sha256": "d4bf8dd077bd69697b3dcae8b4ea14097980a1c02f10e80b8d2cb079917c92f2",
+    "mime": "audio/mpeg",
+    "duration": "4005.616256",
+    "bit_rate": "64014"
+  },
+  {
+    "id": "mp3quran-120-warsh-012",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/012.mp3",
+    "bytes": 29324091,
+    "sha256": "31cafbb43bbf9442da234247ef1f5df042b1c2be3b2277a961978408e54e774a",
+    "mime": "audio/mpeg",
+    "duration": "3664.613878",
+    "bit_rate": "64015"
+  },
+  {
+    "id": "mp3quran-120-warsh-013",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/013.mp3",
+    "bytes": 13540378,
+    "sha256": "d3e4a9d3636cd2c93935a6f8b1c7588dc2adb9631816653513b97d9915d50d50",
+    "mime": "audio/mpeg",
+    "duration": "1691.689756",
+    "bit_rate": "64032"
+  },
+  {
+    "id": "mp3quran-120-warsh-014",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/014.mp3",
+    "bytes": 14573887,
+    "sha256": "3e2bac4ac81f8ea9527d396d7291bbcb1e080814618d08edb01c2c62e2cadb54",
+    "mime": "audio/mpeg",
+    "duration": "1820.839125",
+    "bit_rate": "64031"
+  },
+  {
+    "id": "mp3quran-120-warsh-015",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/015.mp3",
+    "bytes": 11508574,
+    "sha256": "b0f2c93e740116e8ce19d10ed110a569c6bddc599fa7f5262b5ce23202cd71a7",
+    "mime": "audio/mpeg",
+    "duration": "1437.675000",
+    "bit_rate": "64039"
+  },
+  {
+    "id": "mp3quran-120-warsh-016",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/016.mp3",
+    "bytes": 29196293,
+    "sha256": "237873edd502449b1f13568f54fd78506deb2d30b3f645cbf115586884cd9563",
+    "mime": "audio/mpeg",
+    "duration": "3648.679125",
+    "bit_rate": "64015"
+  },
+  {
+    "id": "mp3quran-120-warsh-017",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/017.mp3",
+    "bytes": 24739176,
+    "sha256": "9c6441f1c6f039b46d5b8cb25125997f20869e8129281d0f85cd95342b1fd6de",
+    "mime": "audio/mpeg",
+    "duration": "3091.539500",
+    "bit_rate": "64017"
+  },
+  {
+    "id": "mp3quran-120-warsh-018",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/018.mp3",
+    "bytes": 24391852,
+    "sha256": "2251fd36e19cf8a3f22d1e561712424a65733bd75def93b56a3fddf8cc820664",
+    "mime": "audio/mpeg",
+    "duration": "3048.124000",
+    "bit_rate": "64018"
+  },
+  {
+    "id": "mp3quran-120-warsh-019",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/019.mp3",
+    "bytes": 14364592,
+    "sha256": "b29a09326804b7f5f13cd94a8a7362e597409907f85f440bcc7d973faf5c400f",
+    "mime": "audio/mpeg",
+    "duration": "1794.716625",
+    "bit_rate": "64030"
+  },
+  {
+    "id": "mp3quran-120-warsh-020",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/020.mp3",
+    "bytes": 20581317,
+    "sha256": "6945086ae593fa4f5c5a51df52e62178446ce17baffdecb86a99ff0580d1603b",
+    "mime": "audio/mpeg",
+    "duration": "2571.807256",
+    "bit_rate": "64021"
+  },
+  {
+    "id": "mp3quran-120-warsh-021",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/021.mp3",
+    "bytes": 20180498,
+    "sha256": "95db51ca611ca051bd66308c6e6ecc43322584a14a4ee42c4e75a178031ab834",
+    "mime": "audio/mpeg",
+    "duration": "2521.704378",
+    "bit_rate": "64021"
+  },
+  {
+    "id": "mp3quran-120-warsh-022",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/022.mp3",
+    "bytes": 20643594,
+    "sha256": "92b232eccd7644eba0e9dbc698f47a1854ca566855e9d10471e431306d6543e2",
+    "mime": "audio/mpeg",
+    "duration": "2579.591756",
+    "bit_rate": "64021"
+  },
+  {
+    "id": "mp3quran-120-warsh-023",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/023.mp3",
+    "bytes": 17887987,
+    "sha256": "286880392c0f6610cf5ccfb3e9e1d78bf5639ccff3b241d3dafd2f5c695d79d7",
+    "mime": "audio/mpeg",
+    "duration": "2235.088878",
+    "bit_rate": "64026"
+  },
+  {
+    "id": "mp3quran-120-warsh-024",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/024.mp3",
+    "bytes": 22032472,
+    "sha256": "deedadd4a398ca5b1920674566b5b171eb223594e29cefbccd844fbafbcf3170",
+    "mime": "audio/mpeg",
+    "duration": "2753.201625",
+    "bit_rate": "64019"
+  },
+  {
+    "id": "mp3quran-120-warsh-025",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/025.mp3",
+    "bytes": 14681820,
+    "sha256": "e58e65c7c707b032c4c323e67918c9d66584fc45909c1f75abebe2e992a795c7",
+    "mime": "audio/mpeg",
+    "duration": "1834.318256",
+    "bit_rate": "64031"
+  },
+  {
+    "id": "mp3quran-120-warsh-026",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/026.mp3",
+    "bytes": 22882707,
+    "sha256": "90033ccd43856247907fffcb21ea5d20056f1b3bd22820dc0381d2590664e1b5",
+    "mime": "audio/mpeg",
+    "duration": "2859.467756",
+    "bit_rate": "64019"
+  },
+  {
+    "id": "mp3quran-120-warsh-027",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/027.mp3",
+    "bytes": 20036712,
+    "sha256": "660e8c679d9f5a2907603019d2fec42d70171969b8a68dea241248a5b054deff",
+    "mime": "audio/mpeg",
+    "duration": "2503.680000",
+    "bit_rate": "64023"
+  },
+  {
+    "id": "mp3quran-120-warsh-028",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/028.mp3",
+    "bytes": 23509959,
+    "sha256": "87313acd48f4a591a23bc3e8a04a88f5bba2534f678de4e6fa5632765fb39c82",
+    "mime": "audio/mpeg",
+    "duration": "2937.887256",
+    "bit_rate": "64018"
+  },
+  {
+    "id": "mp3quran-120-warsh-029",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/029.mp3",
+    "bytes": 16762847,
+    "sha256": "054c258d47b9e6591c0fc8bb61a19ef250e571e1efc2303bfcd876eff1dbe410",
+    "mime": "audio/mpeg",
+    "duration": "2094.497878",
+    "bit_rate": "64026"
+  },
+  {
+    "id": "mp3quran-120-warsh-030",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/030.mp3",
+    "bytes": 13219386,
+    "sha256": "c1aac7a695f279ef142a018799badc983a5cf7d60410e9f7e04d5b30f24abbfc",
+    "mime": "audio/mpeg",
+    "duration": "1651.565625",
+    "bit_rate": "64033"
+  },
+  {
+    "id": "mp3quran-120-warsh-031",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/031.mp3",
+    "bytes": 8570842,
+    "sha256": "080a3587abea36d6301676f99e3dde2e262d17c8f4c66432b4849189bb2f3bd7",
+    "mime": "audio/mpeg",
+    "duration": "1070.497878",
+    "bit_rate": "64051"
+  },
+  {
+    "id": "mp3quran-120-warsh-032",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/032.mp3",
+    "bytes": 6369037,
+    "sha256": "1412121108368dce611e769572b154a4efad644bd590458f0999f316d5e5dd22",
+    "mime": "audio/mpeg",
+    "duration": "795.271756",
+    "bit_rate": "64069"
+  },
+  {
+    "id": "mp3quran-120-warsh-033",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/033.mp3",
+    "bytes": 21554747,
+    "sha256": "a266ea5a5d69946b94aefebd7caeb3b29ea459757d696b63e36185cb37d42337",
+    "mime": "audio/mpeg",
+    "duration": "2693.485625",
+    "bit_rate": "64020"
+  },
+  {
+    "id": "mp3quran-120-warsh-034",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/034.mp3",
+    "bytes": 13572559,
+    "sha256": "0a1949e1c877bb8a77e0d4a54c5cb27667374131b06bd2833e90a1a366f5f429",
+    "mime": "audio/mpeg",
+    "duration": "1695.712625",
+    "bit_rate": "64032"
+  },
+  {
+    "id": "mp3quran-120-warsh-035",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/035.mp3",
+    "bytes": 11871883,
+    "sha256": "3baa14619dc6362fa4a10f015d045a0b1636e3a71bde0ef9d404521afe59f3e2",
+    "mime": "audio/mpeg",
+    "duration": "1483.128125",
+    "bit_rate": "64036"
+  },
+  {
+    "id": "mp3quran-120-warsh-036",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/036.mp3",
+    "bytes": 11421325,
+    "sha256": "de1016e690f4f0218184fe451dbc5d88bacffd443a427088e8cb657a03f47b26",
+    "mime": "audio/mpeg",
+    "duration": "1426.808125",
+    "bit_rate": "64038"
+  },
+  {
+    "id": "mp3quran-120-warsh-037",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/037.mp3",
+    "bytes": 15559641,
+    "sha256": "22c4b018f5f901c69bf560ebea679e361b5bb5e583bbe56044b8eedff919e03b",
+    "mime": "audio/mpeg",
+    "duration": "1944.084878",
+    "bit_rate": "64028"
+  },
+  {
+    "id": "mp3quran-120-warsh-038",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/038.mp3",
+    "bytes": 11259147,
+    "sha256": "9aa2a21f84b16b81280d0d7093b7a504b5192d783f93f367c70fd2142378f0c8",
+    "mime": "audio/mpeg",
+    "duration": "1406.484878",
+    "bit_rate": "64041"
+  },
+  {
+    "id": "mp3quran-120-warsh-039",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/039.mp3",
+    "bytes": 17666154,
+    "sha256": "d4abc4e54d45f14e8a3decdd5076e5a9d282ad6eecc6f3f89cf4723f24b10cbd",
+    "mime": "audio/mpeg",
+    "duration": "2207.399125",
+    "bit_rate": "64025"
+  },
+  {
+    "id": "mp3quran-120-warsh-040",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/040.mp3",
+    "bytes": 20102436,
+    "sha256": "841fb8ba199cc962275c9454a05be4b9017baaf91e2633e08d7448e024dc054f",
+    "mime": "audio/mpeg",
+    "duration": "2511.934625",
+    "bit_rate": "64022"
+  },
+  {
+    "id": "mp3quran-120-warsh-041",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/041.mp3",
+    "bytes": 12676875,
+    "sha256": "07f08f993cfa37031f3433f226b2ec04d25f551a3aa7eabab6b272ad11f45dd0",
+    "mime": "audio/mpeg",
+    "duration": "1583.751756",
+    "bit_rate": "64034"
+  },
+  {
+    "id": "mp3quran-120-warsh-042",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/042.mp3",
+    "bytes": 13626162,
+    "sha256": "7c1ad27f28872f77c3d91c021fd82fffee12a36add2a805d93b90ace85c30e1c",
+    "mime": "audio/mpeg",
+    "duration": "1702.400000",
+    "bit_rate": "64032"
+  },
+  {
+    "id": "mp3quran-120-warsh-043",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/043.mp3",
+    "bytes": 13633998,
+    "sha256": "cc0e79c504ac184e7ad4fd81d77c979c4ad9da6b56b94574a0fdfccd722e66d6",
+    "mime": "audio/mpeg",
+    "duration": "1703.340378",
+    "bit_rate": "64034"
+  },
+  {
+    "id": "mp3quran-120-warsh-044",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/044.mp3",
+    "bytes": 5712940,
+    "sha256": "88619235733fa059c9d904e47bbdd8588bb8e27969fbcc6f42f1ecf92c7e7b34",
+    "mime": "audio/mpeg",
+    "duration": "713.247256",
+    "bit_rate": "64078"
+  },
+  {
+    "id": "mp3quran-120-warsh-045",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/045.mp3",
+    "bytes": 7636807,
+    "sha256": "09405b32a6913aa32b46fc709fb4c60ce2983e787d979137b96a50453a9830f8",
+    "mime": "audio/mpeg",
+    "duration": "953.730500",
+    "bit_rate": "64058"
+  },
+  {
+    "id": "mp3quran-120-warsh-046",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/046.mp3",
+    "bytes": 11254242,
+    "sha256": "cada6bc24808c2ee5fb4d26baa2661f0467428b747f3cfff248de7c19aef3ef3",
+    "mime": "audio/mpeg",
+    "duration": "1405.910125",
+    "bit_rate": "64039"
+  },
+  {
+    "id": "mp3quran-120-warsh-047",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/047.mp3",
+    "bytes": 9528489,
+    "sha256": "cb3db3e5bcbb1e025b460a1b75c8fda5732699ae4a4ce4fa67082336036d1409",
+    "mime": "audio/mpeg",
+    "duration": "1190.191000",
+    "bit_rate": "64046"
+  },
+  {
+    "id": "mp3quran-120-warsh-048",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/048.mp3",
+    "bytes": 8915242,
+    "sha256": "e83acba8b8f8bf90c5c07988210aec70fcb5a4d49497d0414ac361b6cba364c3",
+    "mime": "audio/mpeg",
+    "duration": "1113.547756",
+    "bit_rate": "64049"
+  },
+  {
+    "id": "mp3quran-120-warsh-049",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/049.mp3",
+    "bytes": 6099872,
+    "sha256": "4a1d21ecf0a5216ad1f36c7c862cb7241fb4ebf1af2ff0ef2ca4fdf020b004fe",
+    "mime": "audio/mpeg",
+    "duration": "761.626125",
+    "bit_rate": "64072"
+  },
+  {
+    "id": "mp3quran-120-warsh-050",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/050.mp3",
+    "bytes": 5655574,
+    "sha256": "c8d4c2d2f9b0731588f3a76dfbc38422a11e405590a605e681557f256a0e1519",
+    "mime": "audio/mpeg",
+    "duration": "706.089756",
+    "bit_rate": "64077"
+  },
+  {
+    "id": "mp3quran-120-warsh-051",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/051.mp3",
+    "bytes": 6355245,
+    "sha256": "fd5a8694486f49942caa01c9cafb0a3b99145081e7244b1311888760d56c6026",
+    "mime": "audio/mpeg",
+    "duration": "793.547756",
+    "bit_rate": "64069"
+  },
+  {
+    "id": "mp3quran-120-warsh-052",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/052.mp3",
+    "bytes": 5629663,
+    "sha256": "ee4643a59d6b3cb1e6a6060e32558fe97d7f78f1c084cef9db5696a34f566a7c",
+    "mime": "audio/mpeg",
+    "duration": "702.850500",
+    "bit_rate": "64078"
+  },
+  {
+    "id": "mp3quran-120-warsh-053",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/053.mp3",
+    "bytes": 5809387,
+    "sha256": "de2c1a8c1cbb06cd8d694d43c69b66bc7d7077f87c5a19219f69f7b22a63e423",
+    "mime": "audio/mpeg",
+    "duration": "725.315878",
+    "bit_rate": "64075"
+  },
+  {
+    "id": "mp3quran-120-warsh-054",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/054.mp3",
+    "bytes": 5837299,
+    "sha256": "87915942abcf903164e7e211ac40081a568ec81aca91bf0c5cc467edff37aef6",
+    "mime": "audio/mpeg",
+    "duration": "728.764000",
+    "bit_rate": "64078"
+  },
+  {
+    "id": "mp3quran-120-warsh-055",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/055.mp3",
+    "bytes": 7920083,
+    "sha256": "47df3ddc9851bf2b0870b58ec28aa554563c619d0c47924dc508b2a4893ccce9",
+    "mime": "audio/mpeg",
+    "duration": "989.152625",
+    "bit_rate": "64055"
+  },
+  {
+    "id": "mp3quran-120-warsh-056",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/056.mp3",
+    "bytes": 8069295,
+    "sha256": "5793fbecf1f32ce4d017b9b16d0e154e363b646d5e99b054d406bddee7d2b675",
+    "mime": "audio/mpeg",
+    "duration": "1007.804000",
+    "bit_rate": "64054"
+  },
+  {
+    "id": "mp3quran-120-warsh-057",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/057.mp3",
+    "bytes": 9444379,
+    "sha256": "02622e39986796a76679800c57d90dee75ebeccc2cdae4a613594501212a0932",
+    "mime": "audio/mpeg",
+    "duration": "1179.689756",
+    "bit_rate": "64046"
+  },
+  {
+    "id": "mp3quran-120-warsh-058",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/058.mp3",
+    "bytes": 7936804,
+    "sha256": "74d2b25c44215ee14bc7fda3216cf6f9a3c1a10d809c0ccac76bc245df4afcae",
+    "mime": "audio/mpeg",
+    "duration": "991.242378",
+    "bit_rate": "64055"
+  },
+  {
+    "id": "mp3quran-120-warsh-059",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/059.mp3",
+    "bytes": 7542247,
+    "sha256": "6a307577dd1859c972e1fd93a39e532ac5bdca9cae5853ff22dc0697b234be64",
+    "mime": "audio/mpeg",
+    "duration": "941.923256",
+    "bit_rate": "64058"
+  },
+  {
+    "id": "mp3quran-120-warsh-060",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/060.mp3",
+    "bytes": 6559992,
+    "sha256": "fa015d4a22fbd33cc8e9ee46be71f23dd5e36fcd501dc413dad6fdbaa27566ff",
+    "mime": "audio/mpeg",
+    "duration": "819.095500",
+    "bit_rate": "64070"
+  },
+  {
+    "id": "mp3quran-120-warsh-061",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/061.mp3",
+    "bytes": 3816919,
+    "sha256": "94179ca10c6103b2713247bb713512490b91574c78c990e8dfe6dedbe58ca1d3",
+    "mime": "audio/mpeg",
+    "duration": "476.212125",
+    "bit_rate": "64121"
+  },
+  {
+    "id": "mp3quran-120-warsh-062",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/062.mp3",
+    "bytes": 3003630,
+    "sha256": "affc5e342498fe8337c91cf548996422ac17bac2b917a5ed3c6a21e33f5f7ae1",
+    "mime": "audio/mpeg",
+    "duration": "374.595878",
+    "bit_rate": "64146"
+  },
+  {
+    "id": "mp3quran-120-warsh-063",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/063.mp3",
+    "bytes": 3327132,
+    "sha256": "17a90da6bbb58a3cad572f3ee030d3f6f8dd4ec8809f1a7fc035b44fe2ae4090",
+    "mime": "audio/mpeg",
+    "duration": "415.033378",
+    "bit_rate": "64132"
+  },
+  {
+    "id": "mp3quran-120-warsh-064",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/064.mp3",
+    "bytes": 4563817,
+    "sha256": "6420193bc7bd8ea3c9e1acef9bb36fee4d0fb8efda88c5245db425ab8125d7c5",
+    "mime": "audio/mpeg",
+    "duration": "569.573878",
+    "bit_rate": "64101"
+  },
+  {
+    "id": "mp3quran-120-warsh-065",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/065.mp3",
+    "bytes": 4372388,
+    "sha256": "436b73f622f44df8413463febce1f9b206ce7ef62aedc21daa13d9420c277088",
+    "mime": "audio/mpeg",
+    "duration": "545.645625",
+    "bit_rate": "64105"
+  },
+  {
+    "id": "mp3quran-120-warsh-066",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/066.mp3",
+    "bytes": 4659945,
+    "sha256": "2823227ea70e13f477f56c731e74a956169d617726d57becac1e377b5fa883c6",
+    "mime": "audio/mpeg",
+    "duration": "581.590125",
+    "bit_rate": "64099"
+  },
+  {
+    "id": "mp3quran-120-warsh-067",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/067.mp3",
+    "bytes": 5196235,
+    "sha256": "862d13005285fd7f750e7e6ad43aa3923baa734600efa144b4e07f7c94bfa863",
+    "mime": "audio/mpeg",
+    "duration": "648.620378",
+    "bit_rate": "64089"
+  },
+  {
+    "id": "mp3quran-120-warsh-068",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/068.mp3",
+    "bytes": 5329479,
+    "sha256": "6cdfa7ac18e302eeb5c3371b091c80518b3e20b1e180b98ffd8f8848d07b67f6",
+    "mime": "audio/mpeg",
+    "duration": "665.286500",
+    "bit_rate": "64086"
+  },
+  {
+    "id": "mp3quran-120-warsh-069",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/069.mp3",
+    "bytes": 4549186,
+    "sha256": "f1ba335ed0f8a110f55774bd5c81664737de2be0455a93bf9041f77b8df90625",
+    "mime": "audio/mpeg",
+    "duration": "567.745256",
+    "bit_rate": "64101"
+  },
+  {
+    "id": "mp3quran-120-warsh-070",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/070.mp3",
+    "bytes": 3799368,
+    "sha256": "8a326ef6c802b3d9442fc04c56c2d91ce7deb64579478e63e4f2f662834fb47e",
+    "mime": "audio/mpeg",
+    "duration": "474.017878",
+    "bit_rate": "64121"
+  },
+  {
+    "id": "mp3quran-120-warsh-071",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/071.mp3",
+    "bytes": 3779874,
+    "sha256": "59f38652f43785ad692503c2590bf7620655e9f2e6b57f3474b8a25aac2487ea",
+    "mime": "audio/mpeg",
+    "duration": "471.614625",
+    "bit_rate": "64118"
+  },
+  {
+    "id": "mp3quran-120-warsh-072",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/072.mp3",
+    "bytes": 4123022,
+    "sha256": "af0da17646ba4a5b01f58e322117ec68346f3ab9cef02f993a06468a3c77ecf3",
+    "mime": "audio/mpeg",
+    "duration": "514.507756",
+    "bit_rate": "64108"
+  },
+  {
+    "id": "mp3quran-120-warsh-073",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/073.mp3",
+    "bytes": 3144484,
+    "sha256": "d5e3bba8db41ad812fdb4014f6939935e458dd0adfbde0ba70f10eab2446dc47",
+    "mime": "audio/mpeg",
+    "duration": "392.202378",
+    "bit_rate": "64140"
+  },
+  {
+    "id": "mp3quran-120-warsh-074",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/074.mp3",
+    "bytes": 4358758,
+    "sha256": "a14d97e53a7093ef9e8756dd02b0284fd4b5572923658e70599ebafe85d3f8c6",
+    "mime": "audio/mpeg",
+    "duration": "543.973878",
+    "bit_rate": "64102"
+  },
+  {
+    "id": "mp3quran-120-warsh-075",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/075.mp3",
+    "bytes": 2637080,
+    "sha256": "d3976f465a225bfe433a3708623285ab529303762ca1d2eaa7d9a77c8147e1fd",
+    "mime": "audio/mpeg",
+    "duration": "328.777125",
+    "bit_rate": "64166"
+  },
+  {
+    "id": "mp3quran-120-warsh-076",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/076.mp3",
+    "bytes": 4328658,
+    "sha256": "328853d0f86c65f0695cc4862f590e4b395c27c10c713f289b7c0a185e7dfdf1",
+    "mime": "audio/mpeg",
+    "duration": "540.212125",
+    "bit_rate": "64103"
+  },
+  {
+    "id": "mp3quran-120-warsh-077",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/077.mp3",
+    "bytes": 3493061,
+    "sha256": "fe55f20f210c19f1b8383e2143edd0fe469ef14d592532b0ca0508dd468ff3a7",
+    "mime": "audio/mpeg",
+    "duration": "435.774625",
+    "bit_rate": "64126"
+  },
+  {
+    "id": "mp3quran-120-warsh-078",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/078.mp3",
+    "bytes": 3390658,
+    "sha256": "99a1af06ddc6719f95cbe41a96ee7554ca963167ee2ec1134a225ec2d543ab70",
+    "mime": "audio/mpeg",
+    "duration": "422.974625",
+    "bit_rate": "64129"
+  },
+  {
+    "id": "mp3quran-120-warsh-079",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/079.mp3",
+    "bytes": 3962294,
+    "sha256": "24dd20e5110d13622aa4c2de1f91b163f666417f29bd2bea0f864d319f3e30ac",
+    "mime": "audio/mpeg",
+    "duration": "329.613089",
+    "bit_rate": "96168"
+  },
+  {
+    "id": "mp3quran-120-warsh-080",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/080.mp3",
+    "bytes": 2434365,
+    "sha256": "08028c3b7dcf630983444ee1f58e2dca032e0a1360c4fa0bebe4d2a6eadcef29",
+    "mime": "audio/mpeg",
+    "duration": "303.438256",
+    "bit_rate": "64180"
+  },
+  {
+    "id": "mp3quran-120-warsh-081",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/081.mp3",
+    "bytes": 1707119,
+    "sha256": "246c0874623d0b5bdc7d6ea731c469a620c67e3749bb9b85b1fe560ccb7d4ccc",
+    "mime": "audio/mpeg",
+    "duration": "212.532125",
+    "bit_rate": "64258"
+  },
+  {
+    "id": "mp3quran-120-warsh-082",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/082.mp3",
+    "bytes": 1394069,
+    "sha256": "d67562eb05f5a4a3a593c3c6f5e3d7147716c156c25d82dc14afbde2a2e0a201",
+    "mime": "audio/mpeg",
+    "duration": "173.400756",
+    "bit_rate": "64316"
+  },
+  {
+    "id": "mp3quran-120-warsh-083",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/083.mp3",
+    "bytes": 3275306,
+    "sha256": "a2ca839e0b2914dc70fecba56acd9711c420fa1c3a08a65a2287cb8ed0d53ed1",
+    "mime": "audio/mpeg",
+    "duration": "408.555000",
+    "bit_rate": "64134"
+  },
+  {
+    "id": "mp3quran-120-warsh-084",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/084.mp3",
+    "bytes": 1939925,
+    "sha256": "3f349da29efe14df4273b0829b49524c4c6cfb9e5943e6d6f9ce4b3aa2b34821",
+    "mime": "audio/mpeg",
+    "duration": "241.632625",
+    "bit_rate": "64227"
+  },
+  {
+    "id": "mp3quran-120-warsh-085",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/085.mp3",
+    "bytes": 1906485,
+    "sha256": "abb01d7f5e40436f7e99c5fd3d6ad3e32ea3b9b263018e4fdb14074c9f00cb43",
+    "mime": "audio/mpeg",
+    "duration": "237.453000",
+    "bit_rate": "64231"
+  },
+  {
+    "id": "mp3quran-120-warsh-086",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/086.mp3",
+    "bytes": 1088121,
+    "sha256": "4d9072d2684d8e165cfb1137b09110ff046a19b7448a62f887aeec405d90fde0",
+    "mime": "audio/mpeg",
+    "duration": "135.157500",
+    "bit_rate": "64406"
+  },
+  {
+    "id": "mp3quran-120-warsh-087",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/087.mp3",
+    "bytes": 1248616,
+    "sha256": "9c3027b6def050e99d8e587c4e62c2e94f3b3d83ea1d968f308d9c8f0a4e42a9",
+    "mime": "audio/mpeg",
+    "duration": "155.219500",
+    "bit_rate": "64353"
+  },
+  {
+    "id": "mp3quran-120-warsh-088",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/088.mp3",
+    "bytes": 1574629,
+    "sha256": "91dc2b360040d34ec1438cded5629315166d30932bb795c6ca11d46836d0d193",
+    "mime": "audio/mpeg",
+    "duration": "195.970500",
+    "bit_rate": "64280"
+  },
+  {
+    "id": "mp3quran-120-warsh-089",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/089.mp3",
+    "bytes": 2436038,
+    "sha256": "0e9b6c69ea022cd7834839e5444780a0dff965ff17cb65eb001f01c5a6f759a4",
+    "mime": "audio/mpeg",
+    "duration": "303.647256",
+    "bit_rate": "64180"
+  },
+  {
+    "id": "mp3quran-120-warsh-090",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/090.mp3",
+    "bytes": 1389887,
+    "sha256": "7b352ead676d466e97ae655d5f03a2487117e6d19dfc0540cebef1c3fd3242ae",
+    "mime": "audio/mpeg",
+    "duration": "172.878256",
+    "bit_rate": "64317"
+  },
+  {
+    "id": "mp3quran-120-warsh-091",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/091.mp3",
+    "bytes": 1034205,
+    "sha256": "ec9f416efc6ed911694d23b6e25a564066a78fce8ca9c1fb6e372864ca5e9654",
+    "mime": "audio/mpeg",
+    "duration": "128.417878",
+    "bit_rate": "64427"
+  },
+  {
+    "id": "mp3quran-120-warsh-092",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/092.mp3",
+    "bytes": 1321341,
+    "sha256": "21c3bf07aa07fb31cfc7dfb38003ed05bfe899dc4ecff81c64d2bb1a7b58b94f",
+    "mime": "audio/mpeg",
+    "duration": "164.310125",
+    "bit_rate": "64334"
+  },
+  {
+    "id": "mp3quran-120-warsh-093",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/093.mp3",
+    "bytes": 759186,
+    "sha256": "d44293fe3cc992dfb9f640c61b0761fba448171439b8dfbca03881e585bbfccb",
+    "mime": "audio/mpeg",
+    "duration": "94.040756",
+    "bit_rate": "64583"
+  },
+  {
+    "id": "mp3quran-120-warsh-094",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/094.mp3",
+    "bytes": 458675,
+    "sha256": "4ed86e51271169e8c57acde6271c0c3986fcc318795e5ea8d0469b3b6033a2c7",
+    "mime": "audio/mpeg",
+    "duration": "56.476625",
+    "bit_rate": "64972"
+  },
+  {
+    "id": "mp3quran-120-warsh-095",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/095.mp3",
+    "bytes": 706104,
+    "sha256": "b3d4ed761834f5d5f333bbdb9147c89f6634e23168e2ae717338fc15baab82b2",
+    "mime": "audio/mpeg",
+    "duration": "87.405625",
+    "bit_rate": "64627"
+  },
+  {
+    "id": "mp3quran-120-warsh-096",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/096.mp3",
+    "bytes": 1208493,
+    "sha256": "6b2044423583465c4b2c8e8f116faab31198cdff9499e0a87efd799dbe4f3d20",
+    "mime": "audio/mpeg",
+    "duration": "150.204000",
+    "bit_rate": "64365"
+  },
+  {
+    "id": "mp3quran-120-warsh-097",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/097.mp3",
+    "bytes": 493364,
+    "sha256": "dd148765264c3849a999791579aecb51c0ee299d9d6f009a330462960983fd57",
+    "mime": "audio/mpeg",
+    "duration": "60.813000",
+    "bit_rate": "64902"
+  },
+  {
+    "id": "mp3quran-120-warsh-098",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/098.mp3",
+    "bytes": 1433358,
+    "sha256": "0cb58db1bdfca17001e97da7b3299ade2baa86085b5fb11865d891a1b2dd38e3",
+    "mime": "audio/mpeg",
+    "duration": "178.311756",
+    "bit_rate": "64307"
+  },
+  {
+    "id": "mp3quran-120-warsh-099",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/099.mp3",
+    "bytes": 651357,
+    "sha256": "d22cb09af2154418570d9eee94febb99b9c1ba5f84fd98e0d2921b7bdd78e8c4",
+    "mime": "audio/mpeg",
+    "duration": "80.561625",
+    "bit_rate": "64681"
+  },
+  {
+    "id": "mp3quran-120-warsh-100",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/100.mp3",
+    "bytes": 708198,
+    "sha256": "071df6bb54280881f2dd0c341b1997a5e79bc3a32dc0f8c51d92e1d6e2ef8f40",
+    "mime": "audio/mpeg",
+    "duration": "87.666878",
+    "bit_rate": "64626"
+  },
+  {
+    "id": "mp3quran-120-warsh-101",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/101.mp3",
+    "bytes": 720319,
+    "sha256": "39fde65dd623273812221bfd81137dcf1d7084ff6b7caaa892fecd0cfb338acd",
+    "mime": "audio/mpeg",
+    "duration": "89.182000",
+    "bit_rate": "64615"
+  },
+  {
+    "id": "mp3quran-120-warsh-102",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/102.mp3",
+    "bytes": 631713,
+    "sha256": "17d07af4f9bdad3bb0296ba942e77c0f3a378c445a445e22e09d49dd7db39dec",
+    "mime": "audio/mpeg",
+    "duration": "78.106125",
+    "bit_rate": "64703"
+  },
+  {
+    "id": "mp3quran-120-warsh-103",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/103.mp3",
+    "bytes": 311134,
+    "sha256": "b01c238dbe944c929b716188ddeb7533ffbd3b19da9bba4ab03245649caeb789",
+    "mime": "audio/mpeg",
+    "duration": "38.034256",
+    "bit_rate": "65442"
+  },
+  {
+    "id": "mp3quran-120-warsh-104",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/104.mp3",
+    "bytes": 641325,
+    "sha256": "8774f001b8c3706fedf7def2dba2dd600838859b19fba8b607ce6716ad735ada",
+    "mime": "audio/mpeg",
+    "duration": "79.307756",
+    "bit_rate": "64692"
+  },
+  {
+    "id": "mp3quran-120-warsh-105",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/105.mp3",
+    "bytes": 461598,
+    "sha256": "1c4961788a3cf4eebcb040e47288433fa80fa4afaeebce21411c5716de01cafe",
+    "mime": "audio/mpeg",
+    "duration": "56.842378",
+    "bit_rate": "64965"
+  },
+  {
+    "id": "mp3quran-120-warsh-106",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/106.mp3",
+    "bytes": 454494,
+    "sha256": "27bad4743e812bfb8e474997f23653f9403b8ac459e33d7e892f4dc253d43dc4",
+    "mime": "audio/mpeg",
+    "duration": "55.954256",
+    "bit_rate": "64980"
+  },
+  {
+    "id": "mp3quran-120-warsh-107",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/107.mp3",
+    "bytes": 594093,
+    "sha256": "838e86154792560bb04d9b20f2a3a128159e1dfb912c17cc15ea393b68907780",
+    "mime": "audio/mpeg",
+    "duration": "73.404000",
+    "bit_rate": "64747"
+  },
+  {
+    "id": "mp3quran-120-warsh-108",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/108.mp3",
+    "bytes": 237576,
+    "sha256": "83d05909c306c6ded4e631cb557690188cb6a4a0ec99ed971b39b8458dbdc349",
+    "mime": "audio/mpeg",
+    "duration": "28.839125",
+    "bit_rate": "65903"
+  },
+  {
+    "id": "mp3quran-120-warsh-109",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/109.mp3",
+    "bytes": 553971,
+    "sha256": "34a4d578b00a18cd2485f1d97e135eb6bef4cbc694ac286b54636f449ade8ba4",
+    "mime": "audio/mpeg",
+    "duration": "68.388500",
+    "bit_rate": "64802"
+  },
+  {
+    "id": "mp3quran-120-warsh-110",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/110.mp3",
+    "bytes": 393054,
+    "sha256": "6593f2b44b5943779d578eb4f1c960cec4f34116c2884b5c8c52e2a878e3e2c7",
+    "mime": "audio/mpeg",
+    "duration": "48.274256",
+    "bit_rate": "65136"
+  },
+  {
+    "id": "mp3quran-120-warsh-111",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/111.mp3",
+    "bytes": 444464,
+    "sha256": "1a5ac4e2116ed4dcc7af18272ffd33754346e63c347cba8db4a616d07fb341f7",
+    "mime": "audio/mpeg",
+    "duration": "54.700378",
+    "bit_rate": "65003"
+  },
+  {
+    "id": "mp3quran-120-warsh-112",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/112.mp3",
+    "bytes": 243008,
+    "sha256": "54d14cd7120f423dc83fe9e1b3d382065e636be36a85789aab9ce19bb68e6bae",
+    "mime": "audio/mpeg",
+    "duration": "29.518256",
+    "bit_rate": "65859"
+  },
+  {
+    "id": "mp3quran-120-warsh-113",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/113.mp3",
+    "bytes": 337048,
+    "sha256": "2d83bcb01a662aa3acd802050f075d2b0afc505459adeeab3c0b52ded303f77b",
+    "mime": "audio/mpeg",
+    "duration": "41.273378",
+    "bit_rate": "65329"
+  },
+  {
+    "id": "mp3quran-120-warsh-114",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/114.mp3",
+    "bytes": 438192,
+    "sha256": "e4ab4d30e8cf3097861caae6d796267a4aed48db446a54b12f519d1b6c0d98c4",
+    "mime": "audio/mpeg",
+    "duration": "53.916625",
+    "bit_rate": "65017"
+  },
+  {
+    "id": "mp3quran-1-hafs-001",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/001.mp3",
+    "bytes": 375643,
+    "sha256": "f1ddcda825cca9dcae06b8267ccdb91db6ae7946322115da0a8144e749d6b7bc",
+    "mime": "audio/mpeg",
+    "duration": "61.121667",
+    "bit_rate": "49166"
+  },
+  {
+    "id": "mp3quran-1-hafs-002",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/002.mp3",
+    "bytes": 56622866,
+    "sha256": "1c271c38af23c4d54104e45511e9830a96a27ece90f90af1717587c9e427ee53",
+    "mime": "audio/mpeg",
+    "duration": "9435.658833",
+    "bit_rate": "48007"
+  },
+  {
+    "id": "mp3quran-1-hafs-003",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/003.mp3",
+    "bytes": 32869249,
+    "sha256": "14d3e3870a3ed7c40dc6cad76f96c23bf45aacb6fcbc3d7d3c48e23ebb8de455",
+    "mime": "audio/mpeg",
+    "duration": "5476.723333",
+    "bit_rate": "48013"
+  },
+  {
+    "id": "mp3quran-1-hafs-004",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/004.mp3",
+    "bytes": 32636655,
+    "sha256": "cd9f94dcd95a850c8ed760e0e29ab83b33f446823482570bc09b2bd6d875f023",
+    "mime": "audio/mpeg",
+    "duration": "5437.957667",
+    "bit_rate": "48013"
+  },
+  {
+    "id": "mp3quran-1-hafs-005",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/005.mp3",
+    "bytes": 25246619,
+    "sha256": "cab81306f458e4cf4ffc764d3046aca98d813deb0d9ed2de3309228fcaf5cdb4",
+    "mime": "audio/mpeg",
+    "duration": "4206.284333",
+    "bit_rate": "48016"
+  },
+  {
+    "id": "mp3quran-1-hafs-006",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/006.mp3",
+    "bytes": 27853739,
+    "sha256": "9adb50d2e350838058dd20db739e41390f6b52ebb507665c6814bf24b417fdf9",
+    "mime": "audio/mpeg",
+    "duration": "4640.805000",
+    "bit_rate": "48015"
+  },
+  {
+    "id": "mp3quran-1-hafs-007",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/007.mp3",
+    "bytes": 30581079,
+    "sha256": "b578d11d7ba1898b5dac169344a76ad430f6c8770cc5efd777d973630eee9775",
+    "mime": "audio/mpeg",
+    "duration": "5095.361667",
+    "bit_rate": "48013"
+  },
+  {
+    "id": "mp3quran-1-hafs-008",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/008.mp3",
+    "bytes": 11486562,
+    "sha256": "e083e67756f31f0de3587f787f4aedd9b1961d9c0a935b8b264ebeb18d82427b",
+    "mime": "audio/mpeg",
+    "duration": "1912.942167",
+    "bit_rate": "48037"
+  },
+  {
+    "id": "mp3quran-1-hafs-009",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/009.mp3",
+    "bytes": 22517708,
+    "sha256": "45c4e6c48d2555d1be29f23b7a54213fccf7a6584ac138cb64ee0008d1bdd1fe",
+    "mime": "audio/mpeg",
+    "duration": "3751.466167",
+    "bit_rate": "48019"
+  },
+  {
+    "id": "mp3quran-1-hafs-010",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/010.mp3",
+    "bytes": 16594383,
+    "sha256": "3f8ba90476359fb5b321c1d4b8a8b323f25b378d31f10bfe266a93a173bc20bf",
+    "mime": "audio/mpeg",
+    "duration": "2764.246667",
+    "bit_rate": "48025"
+  },
+  {
+    "id": "mp3quran-1-hafs-011",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/011.mp3",
+    "bytes": 17326490,
+    "sha256": "8db9bcbe31f62694d53b9278b08b9554882c476e0032b079d2a25fbf922615d3",
+    "mime": "audio/mpeg",
+    "duration": "2886.264833",
+    "bit_rate": "48024"
+  },
+  {
+    "id": "mp3quran-1-hafs-012",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/012.mp3",
+    "bytes": 16412257,
+    "sha256": "baf8b6fb962499e26439424937463c3975abf46c02da322b238b5eee072a2abf",
+    "mime": "audio/mpeg",
+    "duration": "2733.892333",
+    "bit_rate": "48026"
+  },
+  {
+    "id": "mp3quran-1-hafs-013",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/013.mp3",
+    "bytes": 7812229,
+    "sha256": "feb68f82b0ec8af8c4f97c395736ea026daf49265a22902329c563770af23275",
+    "mime": "audio/mpeg",
+    "duration": "1300.553667",
+    "bit_rate": "48054"
+  },
+  {
+    "id": "mp3quran-1-hafs-014",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/014.mp3",
+    "bytes": 7812855,
+    "sha256": "706a801e5a97606f7d94d6c111b3f3f11535b7fad53a3031e664adbba41bd0c1",
+    "mime": "audio/mpeg",
+    "duration": "1300.658000",
+    "bit_rate": "48054"
+  },
+  {
+    "id": "mp3quran-1-hafs-015",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/015.mp3",
+    "bytes": 6873388,
+    "sha256": "04afbd4dcf72ee44093c440980aed04269dbb5d86730545e58d1a6fdaa7ea6d3",
+    "mime": "audio/mpeg",
+    "duration": "1144.080167",
+    "bit_rate": "48062"
+  },
+  {
+    "id": "mp3quran-1-hafs-016",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/016.mp3",
+    "bytes": 16863815,
+    "sha256": "2fe0b7613b913484793368acb9199b921609b4560e94006ec39919acf7ab6bd6",
+    "mime": "audio/mpeg",
+    "duration": "2809.151333",
+    "bit_rate": "48025"
+  },
+  {
+    "id": "mp3quran-1-hafs-017",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/017.mp3",
+    "bytes": 12882908,
+    "sha256": "ca08449ca0fe3cee37f77ff87f1b179f2575a0c309299f23e79c2c11aa452264",
+    "mime": "audio/mpeg",
+    "duration": "2145.666833",
+    "bit_rate": "48033"
+  },
+  {
+    "id": "mp3quran-1-hafs-018",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/018.mp3",
+    "bytes": 13581789,
+    "sha256": "85b5e6f5335d90c2671fa8f19b94f29bcc7b0c7221e51e3e754b90bc3f078369",
+    "mime": "audio/mpeg",
+    "duration": "2262.147000",
+    "bit_rate": "48031"
+  },
+  {
+    "id": "mp3quran-1-hafs-019",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/019.mp3",
+    "bytes": 8287760,
+    "sha256": "5bf65af10750ad4bd322a4bc2de7c91cef797290da16afdcf6d454284de2a5a8",
+    "mime": "audio/mpeg",
+    "duration": "1379.809167",
+    "bit_rate": "48051"
+  },
+  {
+    "id": "mp3quran-1-hafs-020",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/020.mp3",
+    "bytes": 11071994,
+    "sha256": "8418b068af8d6e44fe12f0abef0425db00cf2b2480fc70aa66ee4d5e312c9ef9",
+    "mime": "audio/mpeg",
+    "duration": "1843.848500",
+    "bit_rate": "48038"
+  },
+  {
+    "id": "mp3quran-1-hafs-021",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/021.mp3",
+    "bytes": 11727310,
+    "sha256": "0ad4f9c35bae7066cde8c739fd1aec7ec691e879b898f380a910a759c56bd498",
+    "mime": "audio/mpeg",
+    "duration": "1953.066167",
+    "bit_rate": "48036"
+  },
+  {
+    "id": "mp3quran-1-hafs-022",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/022.mp3",
+    "bytes": 11591103,
+    "sha256": "44d854836977c824ae5fc2aae95e9fe3221a194088fea2ae1a5d58f282e1d2ed",
+    "mime": "audio/mpeg",
+    "duration": "1930.366000",
+    "bit_rate": "48036"
+  },
+  {
+    "id": "mp3quran-1-hafs-023",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/023.mp3",
+    "bytes": 10794897,
+    "sha256": "be56e40534ac57efca25d757288bb1bc77426026caa848c3aa00b10773fcc7ca",
+    "mime": "audio/mpeg",
+    "duration": "1797.663667",
+    "bit_rate": "48039"
+  },
+  {
+    "id": "mp3quran-1-hafs-024",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/024.mp3",
+    "bytes": 12731188,
+    "sha256": "f8deab9315d6cd235005ef3861789369ab2867252a35b9c3db3c1aaa624daef5",
+    "mime": "audio/mpeg",
+    "duration": "2120.380500",
+    "bit_rate": "48033"
+  },
+  {
+    "id": "mp3quran-1-hafs-025",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/025.mp3",
+    "bytes": 7705026,
+    "sha256": "abe210753bd9d54dc169877f41daf1ca8d6d06054e27bf270bbee69323acaa50",
+    "mime": "audio/mpeg",
+    "duration": "1282.685833",
+    "bit_rate": "48055"
+  },
+  {
+    "id": "mp3quran-1-hafs-026",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/026.mp3",
+    "bytes": 14352620,
+    "sha256": "d75ea4bebd6c84851c41470abd149451d1555a0453618a488ccc6d1516604ca0",
+    "mime": "audio/mpeg",
+    "duration": "2390.617167",
+    "bit_rate": "48029"
+  },
+  {
+    "id": "mp3quran-1-hafs-027",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/027.mp3",
+    "bytes": 11304277,
+    "sha256": "a2ffd35fd4f8b7259d07dff3003dde5e8ffc3ddda72465a5f896e82cc3dc3578",
+    "mime": "audio/mpeg",
+    "duration": "1882.561667",
+    "bit_rate": "48037"
+  },
+  {
+    "id": "mp3quran-1-hafs-028",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/028.mp3",
+    "bytes": 13316753,
+    "sha256": "9fade086b4f471db524d0efe7fa87f007980f239f802b1f3783741962fa0cc30",
+    "mime": "audio/mpeg",
+    "duration": "2217.974000",
+    "bit_rate": "48032"
+  },
+  {
+    "id": "mp3quran-1-hafs-029",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/029.mp3",
+    "bytes": 9283819,
+    "sha256": "3bc078a52168e1cba5e675c69154e152170e496a1dd875b9f30ae506d62c8501",
+    "mime": "audio/mpeg",
+    "duration": "1545.817333",
+    "bit_rate": "48046"
+  },
+  {
+    "id": "mp3quran-1-hafs-030",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/030.mp3",
+    "bytes": 7890909,
+    "sha256": "8c93d88141926935eb0eb3f435c0e3bbd2ea839eb7c0e7ff09cf0717a61d67b9",
+    "mime": "audio/mpeg",
+    "duration": "1313.667000",
+    "bit_rate": "48054"
+  },
+  {
+    "id": "mp3quran-1-hafs-031",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/031.mp3",
+    "bytes": 4950095,
+    "sha256": "c1f878ec245387821397e6e7b9af86b9ee726622c52e1c5b59ac8731cb7ea62b",
+    "mime": "audio/mpeg",
+    "duration": "823.531667",
+    "bit_rate": "48086"
+  },
+  {
+    "id": "mp3quran-1-hafs-032",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/032.mp3",
+    "bytes": 3619423,
+    "sha256": "89e47c2704e3b13531b16c3fcb1fe298f368450d309a5f4565ad247e973332ab",
+    "mime": "audio/mpeg",
+    "duration": "601.752000",
+    "bit_rate": "48118"
+  },
+  {
+    "id": "mp3quran-1-hafs-033",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/033.mp3",
+    "bytes": 11842976,
+    "sha256": "2733488911a35a3e390b1efbb5c4d27cf5de971f0be60e1508df32e6db871cc6",
+    "mime": "audio/mpeg",
+    "duration": "1972.344500",
+    "bit_rate": "48036"
+  },
+  {
+    "id": "mp3quran-1-hafs-034",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/034.mp3",
+    "bytes": 7920998,
+    "sha256": "6ebc0910efe53dac0b92153c30195cea5166ae30bcd0524754250297cd5cc4b1",
+    "mime": "audio/mpeg",
+    "duration": "1318.682500",
+    "bit_rate": "48054"
+  },
+  {
+    "id": "mp3quran-1-hafs-035",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/035.mp3",
+    "bytes": 7378226,
+    "sha256": "029f45ff115204b2bf55116f3821192ffc8191ba1ed51fae1bf39e7129619cd0",
+    "mime": "audio/mpeg",
+    "duration": "1228.220500",
+    "bit_rate": "48057"
+  },
+  {
+    "id": "mp3quran-1-hafs-036",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/036.mp3",
+    "bytes": 7456439,
+    "sha256": "bb7ff2cb53ebade1b90548779810bcf1e2d2de644e8d06a5a804b01a26f85628",
+    "mime": "audio/mpeg",
+    "duration": "1241.255667",
+    "bit_rate": "48057"
+  },
+  {
+    "id": "mp3quran-1-hafs-037",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/037.mp3",
+    "bytes": 10049150,
+    "sha256": "d90cd83beddc19c2acd7d832fa8ea33dba6b643a2636e60190c65abeffb64c1c",
+    "mime": "audio/mpeg",
+    "duration": "1673.373167",
+    "bit_rate": "48042"
+  },
+  {
+    "id": "mp3quran-1-hafs-038",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/038.mp3",
+    "bytes": 7654702,
+    "sha256": "c1f7e8ebfd486413916eea8d4b0ad7e69e91a956eebe888ae7a8198b452329b0",
+    "mime": "audio/mpeg",
+    "duration": "1274.300500",
+    "bit_rate": "48055"
+  },
+  {
+    "id": "mp3quran-1-hafs-039",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/039.mp3",
+    "bytes": 10958209,
+    "sha256": "8ac78592c07e990eb96b2eee092881db02741b46960128fb6b6dc4d4e2b7b74c",
+    "mime": "audio/mpeg",
+    "duration": "1824.883333",
+    "bit_rate": "48039"
+  },
+  {
+    "id": "mp3quran-1-hafs-040",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/040.mp3",
+    "bytes": 11247693,
+    "sha256": "c44aee13d546e1847b04ff4523735d6e81240643b590faab5839a728da2cbf97",
+    "mime": "audio/mpeg",
+    "duration": "1873.131333",
+    "bit_rate": "48038"
+  },
+  {
+    "id": "mp3quran-1-hafs-041",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/041.mp3",
+    "bytes": 7556597,
+    "sha256": "cb6717394bf4c9a8f789e1b4d255a1874eb476c657603ee432e2b6bce996f7a6",
+    "mime": "audio/mpeg",
+    "duration": "1257.948000",
+    "bit_rate": "48056"
+  },
+  {
+    "id": "mp3quran-1-hafs-042",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/042.mp3",
+    "bytes": 7927118,
+    "sha256": "e34873ab7857f44e3a588f74901a8e04b06e1a4adb79110a27df44182cb9eec1",
+    "mime": "audio/mpeg",
+    "duration": "1319.701167",
+    "bit_rate": "48054"
+  },
+  {
+    "id": "mp3quran-1-hafs-043",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/043.mp3",
+    "bytes": 8352656,
+    "sha256": "75a5ef871538afd2c037785847b0b33a3751183d8f12e0cfb9313ad8424d947d",
+    "mime": "audio/mpeg",
+    "duration": "1390.623833",
+    "bit_rate": "48051"
+  },
+  {
+    "id": "mp3quran-1-hafs-044",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/044.mp3",
+    "bytes": 3868318,
+    "sha256": "8626822f01496459b7a86843a753f8c2160d9f0b21eaaf76878d744399312a92",
+    "mime": "audio/mpeg",
+    "duration": "643.234500",
+    "bit_rate": "48110"
+  },
+  {
+    "id": "mp3quran-1-hafs-045",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/045.mp3",
+    "bytes": 4356861,
+    "sha256": "39866c2abe5aa183700548537beae4a4e958bba96fab42358e32364a51f6950b",
+    "mime": "audio/mpeg",
+    "duration": "724.658000",
+    "bit_rate": "48098"
+  },
+  {
+    "id": "mp3quran-1-hafs-046",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/046.mp3",
+    "bytes": 5711672,
+    "sha256": "69d4bb3838a6f42df5ba1b6ed98506ed19869e99bb9b81c5c2e6e861048d4a9d",
+    "mime": "audio/mpeg",
+    "duration": "950.460500",
+    "bit_rate": "48074"
+  },
+  {
+    "id": "mp3quran-1-hafs-047",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/047.mp3",
+    "bytes": 4827375,
+    "sha256": "2b240c6f13ab91a6a10a0a2183472f9f24507b57317b1f12731fe4cbe81fe9d0",
+    "mime": "audio/mpeg",
+    "duration": "803.077667",
+    "bit_rate": "48088"
+  },
+  {
+    "id": "mp3quran-1-hafs-048",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/048.mp3",
+    "bytes": 4676281,
+    "sha256": "ed375e54e719002a167fd15f7297aaa16aeb342f30789bfc9609d15a041fb28b",
+    "mime": "audio/mpeg",
+    "duration": "777.895667",
+    "bit_rate": "48091"
+  },
+  {
+    "id": "mp3quran-1-hafs-049",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/049.mp3",
+    "bytes": 3311598,
+    "sha256": "d1addb004c15561e8770d8c81981cdcf51f097352956c466447d00169d590bdd",
+    "mime": "audio/mpeg",
+    "duration": "550.447500",
+    "bit_rate": "48129"
+  },
+  {
+    "id": "mp3quran-1-hafs-050",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/050.mp3",
+    "bytes": 3404997,
+    "sha256": "7e9be96bd25fa5311b0150916bafc91cca56dd7bcc33fffd97a1f7bb32f50221",
+    "mime": "audio/mpeg",
+    "duration": "566.016333",
+    "bit_rate": "48125"
+  },
+  {
+    "id": "mp3quran-1-hafs-051",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/051.mp3",
+    "bytes": 3514569,
+    "sha256": "dac94846a2efbf26ffa6976db5a487c38c2ecf30715f8de380061350a4406984",
+    "mime": "audio/mpeg",
+    "duration": "584.276000",
+    "bit_rate": "48122"
+  },
+  {
+    "id": "mp3quran-1-hafs-052",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/052.mp3",
+    "bytes": 3178365,
+    "sha256": "a1305b77473f01ea33f9b8722b718048f9431a92a5a3610a2eff97615e297a28",
+    "mime": "audio/mpeg",
+    "duration": "528.243333",
+    "bit_rate": "48134"
+  },
+  {
+    "id": "mp3quran-1-hafs-053",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/053.mp3",
+    "bytes": 3082916,
+    "sha256": "13cf7f3c6cee58d99c0bcf0f0ec9ba31fb1ae038846c8b489df4074c7bf4a0d2",
+    "mime": "audio/mpeg",
+    "duration": "512.334833",
+    "bit_rate": "48139"
+  },
+  {
+    "id": "mp3quran-1-hafs-054",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/054.mp3",
+    "bytes": 3195140,
+    "sha256": "a8306bd5354645a334c3c855a1f3809f0ed865855c3e85965beb84a4d0fc8d0e",
+    "mime": "audio/mpeg",
+    "duration": "531.038500",
+    "bit_rate": "48134"
+  },
+  {
+    "id": "mp3quran-1-hafs-055",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/055.mp3",
+    "bytes": 4481777,
+    "sha256": "0b46d4fa51f689c60671b31dca27c150d61ff4a714a6ca541750b7d704f3e612",
+    "mime": "audio/mpeg",
+    "duration": "745.477667",
+    "bit_rate": "48095"
+  },
+  {
+    "id": "mp3quran-1-hafs-056",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/056.mp3",
+    "bytes": 4595255,
+    "sha256": "0ad3a4068afe669b22add2ad4372fbd537a52ee1708f0a0351558627a7e1cafc",
+    "mime": "audio/mpeg",
+    "duration": "764.390333",
+    "bit_rate": "48093"
+  },
+  {
+    "id": "mp3quran-1-hafs-057",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/057.mp3",
+    "bytes": 5125798,
+    "sha256": "6c1cf69dcb3c6ae260f7b4bd529e1ca99a7d25acb64251f0aa4b94a774063749",
+    "mime": "audio/mpeg",
+    "duration": "852.814833",
+    "bit_rate": "48083"
+  },
+  {
+    "id": "mp3quran-1-hafs-058",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/058.mp3",
+    "bytes": 4432098,
+    "sha256": "04e53d7f593cf83e013998497a9bfbbf07efd8a4a9aeea730ffd43e488219514",
+    "mime": "audio/mpeg",
+    "duration": "737.196833",
+    "bit_rate": "48096"
+  },
+  {
+    "id": "mp3quran-1-hafs-059",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/059.mp3",
+    "bytes": 4036648,
+    "sha256": "e0d87550f447fb4b26a09e4faeb364f1405376beba33dd845c67475b488a2cf2",
+    "mime": "audio/mpeg",
+    "duration": "671.289833",
+    "bit_rate": "48106"
+  },
+  {
+    "id": "mp3quran-1-hafs-060",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/060.mp3",
+    "bytes": 3377119,
+    "sha256": "83b208adec3571c7a8aea87da73020dd33b79ea01ca9ff6ae21c816cf637db7e",
+    "mime": "audio/mpeg",
+    "duration": "561.366667",
+    "bit_rate": "48127"
+  },
+  {
+    "id": "mp3quran-1-hafs-061",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/061.mp3",
+    "bytes": 2070410,
+    "sha256": "8461d8a2ad1cf43c79062cf0d1d220af4775ecb8cd08f2afec15f9a6246ad906",
+    "mime": "audio/mpeg",
+    "duration": "343.583833",
+    "bit_rate": "48207"
+  },
+  {
+    "id": "mp3quran-1-hafs-062",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/062.mp3",
+    "bytes": 1581717,
+    "sha256": "126333e7a63ce7fb2d03778c647b01d28289330985239924ed6c953816b2021a",
+    "mime": "audio/mpeg",
+    "duration": "262.134000",
+    "bit_rate": "48272"
+  },
+  {
+    "id": "mp3quran-1-hafs-063",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/063.mp3",
+    "bytes": 1762906,
+    "sha256": "51f71ca69e25231a99f0fde915519b014bd62374c0eaeb42861311be0b7e47b9",
+    "mime": "audio/mpeg",
+    "duration": "292.331500",
+    "bit_rate": "48244"
+  },
+  {
+    "id": "mp3quran-1-hafs-064",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/064.mp3",
+    "bytes": 2265082,
+    "sha256": "db0851ec28e93749acd1fed5125f8db4073e3b9efa973337a17ea23b15330764",
+    "mime": "audio/mpeg",
+    "duration": "376.027833",
+    "bit_rate": "48189"
+  },
+  {
+    "id": "mp3quran-1-hafs-065",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/065.mp3",
+    "bytes": 2564283,
+    "sha256": "5e54255541b98460d9754677f5b82c57b66bc355584f30a30b7a8d5f75c7c8f7",
+    "mime": "audio/mpeg",
+    "duration": "425.895667",
+    "bit_rate": "48167"
+  },
+  {
+    "id": "mp3quran-1-hafs-066",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/066.mp3",
+    "bytes": 2408961,
+    "sha256": "ce0115b7943450ff3c0585a0b5584d7493e93dfde0626291d969afb03d612947",
+    "mime": "audio/mpeg",
+    "duration": "400.008333",
+    "bit_rate": "48178"
+  },
+  {
+    "id": "mp3quran-1-hafs-067",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/067.mp3",
+    "bytes": 3022730,
+    "sha256": "ae504e0db6d53b685c05391d61cb58a4f025ec67b20d54a53eacf93bb43ae093",
+    "mime": "audio/mpeg",
+    "duration": "502.303833",
+    "bit_rate": "48141"
+  },
+  {
+    "id": "mp3quran-1-hafs-068",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/068.mp3",
+    "bytes": 3165674,
+    "sha256": "82679825e4e66fcd58ea7adba7046262c146423688757e4962338ad2f7d0a0e6",
+    "mime": "audio/mpeg",
+    "duration": "526.127500",
+    "bit_rate": "48135"
+  },
+  {
+    "id": "mp3quran-1-hafs-069",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/069.mp3",
+    "bytes": 2738730,
+    "sha256": "e67783e35175adf2815fd5cc9e752cd811497a1b4e9c39ac8ece97810a978e7f",
+    "mime": "audio/mpeg",
+    "duration": "454.969833",
+    "bit_rate": "48156"
+  },
+  {
+    "id": "mp3quran-1-hafs-070",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/070.mp3",
+    "bytes": 2262572,
+    "sha256": "29dd92f7f84ce1a8103f9ab373ee86c48ff19480a531cfe60bf041976e51b531",
+    "mime": "audio/mpeg",
+    "duration": "375.609833",
+    "bit_rate": "48189"
+  },
+  {
+    "id": "mp3quran-1-hafs-071",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/071.mp3",
+    "bytes": 2070090,
+    "sha256": "6de1600551df3bccbf6e0065c0af8f4d5bc62c1e18f06f62b3f90e7e9ce4c1d6",
+    "mime": "audio/mpeg",
+    "duration": "343.531500",
+    "bit_rate": "48207"
+  },
+  {
+    "id": "mp3quran-1-hafs-072",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/072.mp3",
+    "bytes": 2445789,
+    "sha256": "f46d43d4202c0bb620d8a33c11bc36451c73c1c00dcd43269f02fba77c21e641",
+    "mime": "audio/mpeg",
+    "duration": "406.147000",
+    "bit_rate": "48175"
+  },
+  {
+    "id": "mp3quran-1-hafs-073",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/073.mp3",
+    "bytes": 1761652,
+    "sha256": "b330cfb56eef8053cd69dcbda2fd8802236f052e4b94fd8aab6174aa5637ec5e",
+    "mime": "audio/mpeg",
+    "duration": "292.122500",
+    "bit_rate": "48244"
+  },
+  {
+    "id": "mp3quran-1-hafs-074",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/074.mp3",
+    "bytes": 2473545,
+    "sha256": "16d46234411f195a87d9e3ce8831fe46cdaf2f90095f1a52746e122973ed9dee",
+    "mime": "audio/mpeg",
+    "duration": "410.770667",
+    "bit_rate": "48173"
+  },
+  {
+    "id": "mp3quran-1-hafs-075",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/075.mp3",
+    "bytes": 1537361,
+    "sha256": "fd0b96a52eca35aa527308292c3b668fdda2b0644afacb4b78b95bc6b8900291",
+    "mime": "audio/mpeg",
+    "duration": "254.741333",
+    "bit_rate": "48279"
+  },
+  {
+    "id": "mp3quran-1-hafs-076",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/076.mp3",
+    "bytes": 2319777,
+    "sha256": "5d2930b2a37165e2cc9bd9bbafa941f6ac4ba8f6678fe9a3da4f25481a523130",
+    "mime": "audio/mpeg",
+    "duration": "385.144667",
+    "bit_rate": "48185"
+  },
+  {
+    "id": "mp3quran-1-hafs-077",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/077.mp3",
+    "bytes": 2147688,
+    "sha256": "2a7a173d2f67b12d4c307a3e38e0e39841ec06fdda98da02113d4482e1046c4c",
+    "mime": "audio/mpeg",
+    "duration": "356.462167",
+    "bit_rate": "48200"
+  },
+  {
+    "id": "mp3quran-1-hafs-078",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/078.mp3",
+    "bytes": 1735156,
+    "sha256": "498a6758bb142f94a101ea5b8872b9e366ee06919b985a137aef4ad47f4ffeba",
+    "mime": "audio/mpeg",
+    "duration": "287.707833",
+    "bit_rate": "48247"
+  },
+  {
+    "id": "mp3quran-1-hafs-079",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/079.mp3",
+    "bytes": 1669645,
+    "sha256": "b8e580f3f85f94ebf4f3dfb6f35c1b29bf91a1531d1b8d221348d67dfbf6e39c",
+    "mime": "audio/mpeg",
+    "duration": "276.788667",
+    "bit_rate": "48257"
+  },
+  {
+    "id": "mp3quran-1-hafs-080",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/080.mp3",
+    "bytes": 1473405,
+    "sha256": "1008583acd326c44771370d5a7085885e1ff1e3942f4ffce1dcd74b938888c5d",
+    "mime": "audio/mpeg",
+    "duration": "244.083333",
+    "bit_rate": "48291"
+  },
+  {
+    "id": "mp3quran-1-hafs-081",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/081.mp3",
+    "bytes": 1086903,
+    "sha256": "1df0d111b7c6aa2d3e4afdbee22c75da0800a62676b3a568d6dacf24c20838b8",
+    "mime": "audio/mpeg",
+    "duration": "179.665333",
+    "bit_rate": "48396"
+  },
+  {
+    "id": "mp3quran-1-hafs-082",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/082.mp3",
+    "bytes": 885345,
+    "sha256": "8db6e15c08e98b9c216c148c26354aaacfd27f68dd256d3cfe7c9239f3339175",
+    "mime": "audio/mpeg",
+    "duration": "146.072000",
+    "bit_rate": "48488"
+  },
+  {
+    "id": "mp3quran-1-hafs-083",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/083.mp3",
+    "bytes": 2002556,
+    "sha256": "2af08a4a049ec3bdc59c0b318e6a5e6f8860d23646a717583eea6f5e9b75af5c",
+    "mime": "audio/mpeg",
+    "duration": "332.272833",
+    "bit_rate": "48214"
+  },
+  {
+    "id": "mp3quran-1-hafs-084",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/084.mp3",
+    "bytes": 1054777,
+    "sha256": "09e3ccd85bab671f9254d9de7aa43a397e3749361e247f7f22435739f512ea74",
+    "mime": "audio/mpeg",
+    "duration": "174.310333",
+    "bit_rate": "48409"
+  },
+  {
+    "id": "mp3quran-1-hafs-085",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/085.mp3",
+    "bytes": 1140975,
+    "sha256": "9695919b038ac990dcf632d4b824b390194d201bfad603ee51b749ced71c58ca",
+    "mime": "audio/mpeg",
+    "duration": "188.677667",
+    "bit_rate": "48377"
+  },
+  {
+    "id": "mp3quran-1-hafs-086",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/086.mp3",
+    "bytes": 631117,
+    "sha256": "f4e520ce4c89126f04ffebd559eda89c109613499072abf6eb99f55fe5707054",
+    "mime": "audio/mpeg",
+    "duration": "103.701333",
+    "bit_rate": "48687"
+  },
+  {
+    "id": "mp3quran-1-hafs-087",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/087.mp3",
+    "bytes": 667477,
+    "sha256": "8c8f8e8b40c44a6bf84c04f93a5515b52c9f6e821912ef22ef1c0f7287d919ef",
+    "mime": "audio/mpeg",
+    "duration": "109.761667",
+    "bit_rate": "48649"
+  },
+  {
+    "id": "mp3quran-1-hafs-088",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/088.mp3",
+    "bytes": 908702,
+    "sha256": "5b686610915f3047582632b1f32987cbbbe6bb3b475727d1fc5bd65d741ffd33",
+    "mime": "audio/mpeg",
+    "duration": "149.964167",
+    "bit_rate": "48475"
+  },
+  {
+    "id": "mp3quran-1-hafs-089",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/089.mp3",
+    "bytes": 1396294,
+    "sha256": "f0e9770ec1328ec91c7b91f6ee3ed8aeaa39e1225ba437c59533be4d1300d8e0",
+    "mime": "audio/mpeg",
+    "duration": "231.231167",
+    "bit_rate": "48308"
+  },
+  {
+    "id": "mp3quran-1-hafs-090",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/090.mp3",
+    "bytes": 780172,
+    "sha256": "594b1ea476cf63a045811d8e177312fb7294edb3a3f9d7de57ea1dfbf0b708fc",
+    "mime": "audio/mpeg",
+    "duration": "128.543833",
+    "bit_rate": "48554"
+  },
+  {
+    "id": "mp3quran-1-hafs-091",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/091.mp3",
+    "bytes": 542250,
+    "sha256": "9d052bec644ede566c7e5efe0cebddc3aeb5cec45695e02bebd2ef87781c80e6",
+    "mime": "audio/mpeg",
+    "duration": "88.889833",
+    "bit_rate": "48801"
+  },
+  {
+    "id": "mp3quran-1-hafs-092",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/092.mp3",
+    "bytes": 725156,
+    "sha256": "2df942325b49ac9f6e236836f97ad51df939f8f227695cbe284a5890a1e2b711",
+    "mime": "audio/mpeg",
+    "duration": "119.374833",
+    "bit_rate": "48596"
+  },
+  {
+    "id": "mp3quran-1-hafs-093",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/093.mp3",
+    "bytes": 425636,
+    "sha256": "2ac76382347ca04daa0550f823166d1b9030b00792b5b20a202ec32f19d2f7f2",
+    "mime": "audio/mpeg",
+    "duration": "69.454833",
+    "bit_rate": "49025"
+  },
+  {
+    "id": "mp3quran-1-hafs-094",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/094.mp3",
+    "bytes": 280190,
+    "sha256": "eb0474b21e15d9336636539c6fe9c2ca2597bb8dc3b54c9fbe6e4115c8e403fe",
+    "mime": "audio/mpeg",
+    "duration": "45.213167",
+    "bit_rate": "49576"
+  },
+  {
+    "id": "mp3quran-1-hafs-095",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/095.mp3",
+    "bytes": 402594,
+    "sha256": "88e14ae63b012bea238919793c9a42f935e72243012f1bd272ce43114ef0d2a0",
+    "mime": "audio/mpeg",
+    "duration": "65.614833",
+    "bit_rate": "49085"
+  },
+  {
+    "id": "mp3quran-1-hafs-096",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/096.mp3",
+    "bytes": 630020,
+    "sha256": "b98223ceaf371416d2c1135674de99ed52819099a6619840ca76625cc881387c",
+    "mime": "audio/mpeg",
+    "duration": "103.518500",
+    "bit_rate": "48688"
+  },
+  {
+    "id": "mp3quran-1-hafs-097",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/097.mp3",
+    "bytes": 290374,
+    "sha256": "90726bfc69aba46ff05ffd8349ce87f1076a0b3ecf43a230b28ca96b6e4c82dd",
+    "mime": "audio/mpeg",
+    "duration": "46.911167",
+    "bit_rate": "49518"
+  },
+  {
+    "id": "mp3quran-1-hafs-098",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/098.mp3",
+    "bytes": 806823,
+    "sha256": "820e329e11445b0c6f29462b83aefa03911b53b84bb6df5b0643b610a01bab94",
+    "mime": "audio/mpeg",
+    "duration": "132.984667",
+    "bit_rate": "48536"
+  },
+  {
+    "id": "mp3quran-1-hafs-099",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/099.mp3",
+    "bytes": 369063,
+    "sha256": "42a4cf5555818bcbb6051c042026b582ff70ee4cb9052e1c93377eb4d1748bc1",
+    "mime": "audio/mpeg",
+    "duration": "60.024667",
+    "bit_rate": "49188"
+  },
+  {
+    "id": "mp3quran-1-hafs-100",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/100.mp3",
+    "bytes": 427366,
+    "sha256": "40f8ba98d594cd8308812ecbab9a0317bfd8ed8b34740995c18b3ee47704003c",
+    "mime": "audio/mpeg",
+    "duration": "69.742167",
+    "bit_rate": "49022"
+  },
+  {
+    "id": "mp3quran-1-hafs-101",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/101.mp3",
+    "bytes": 405580,
+    "sha256": "5d47dd302fc5016de0706508ac670ee81e065f8ee57ae7b20ce4f2ae70e83a8a",
+    "mime": "audio/mpeg",
+    "duration": "66.111167",
+    "bit_rate": "49078"
+  },
+  {
+    "id": "mp3quran-1-hafs-102",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/102.mp3",
+    "bytes": 358091,
+    "sha256": "dfe12d60e9875d6e3148e562df970489e0b7dedf6b1bc299bff28c58501ec6ab",
+    "mime": "audio/mpeg",
+    "duration": "58.196000",
+    "bit_rate": "49225"
+  },
+  {
+    "id": "mp3quran-1-hafs-103",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/103.mp3",
+    "bytes": 171569,
+    "sha256": "18ce88a7dada572065ed1ae5a9763c47584543cfa40124b903e12bfbad84a511",
+    "mime": "audio/mpeg",
+    "duration": "27.110333",
+    "bit_rate": "50628"
+  },
+  {
+    "id": "mp3quran-1-hafs-104",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/104.mp3",
+    "bytes": 359813,
+    "sha256": "e319746ce8eac23b6f3155eca6bc15ed09c20d7312b6c6ab325e42cfa190fdb3",
+    "mime": "audio/mpeg",
+    "duration": "58.483333",
+    "bit_rate": "49219"
+  },
+  {
+    "id": "mp3quran-1-hafs-105",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/105.mp3",
+    "bytes": 292253,
+    "sha256": "21b3420960f36e61462faf9144f6924ebd5ad59aee687fcea7f78f9e265b15c3",
+    "mime": "audio/mpeg",
+    "duration": "47.224667",
+    "bit_rate": "49508"
+  },
+  {
+    "id": "mp3quran-1-hafs-106",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/106.mp3",
+    "bytes": 270468,
+    "sha256": "4c35840a12f8cc924fa9e64e3b695495f56b47f853e2e2ba9d0b7f308ade6c08",
+    "mime": "audio/mpeg",
+    "duration": "43.593500",
+    "bit_rate": "49634"
+  },
+  {
+    "id": "mp3quran-1-hafs-107",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/107.mp3",
+    "bytes": 343039,
+    "sha256": "c59bbd050c6d122152a281d2bb39198d8545d429fe2b30264848f42599bf9b2c",
+    "mime": "audio/mpeg",
+    "duration": "55.688333",
+    "bit_rate": "49279"
+  },
+  {
+    "id": "mp3quran-1-hafs-108",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/108.mp3",
+    "bytes": 158096,
+    "sha256": "76be516512d297956cc8333fc7b43183839f06810b0d1bc058eb956cc31079a1",
+    "mime": "audio/mpeg",
+    "duration": "24.863833",
+    "bit_rate": "50867"
+  },
+  {
+    "id": "mp3quran-1-hafs-109",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/109.mp3",
+    "bytes": 343043,
+    "sha256": "1d7922b77e48aed0959e1c67947f108cea52d5bc07921ced6d311251768caa9a",
+    "mime": "audio/mpeg",
+    "duration": "55.688333",
+    "bit_rate": "49280"
+  },
+  {
+    "id": "mp3quran-1-hafs-110",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/110.mp3",
+    "bytes": 216552,
+    "sha256": "4ee3131a58972c43c779c7f3825df971190071413464f9cd85c68bdf203c5dec",
+    "mime": "audio/mpeg",
+    "duration": "34.607500",
+    "bit_rate": "50058"
+  },
+  {
+    "id": "mp3quran-1-hafs-111",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/111.mp3",
+    "bytes": 255267,
+    "sha256": "0c4c31a3100e786c7c46b6f9b4029468fce1429af867862d0fb29ae8f43fc327",
+    "mime": "audio/mpeg",
+    "duration": "41.059667",
+    "bit_rate": "49735"
+  },
+  {
+    "id": "mp3quran-1-hafs-112",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/112.mp3",
+    "bytes": 148063,
+    "sha256": "af80807189034a650a12eb2a4cb9ec6e70c0bf654673b1b3e53192f7fe6132da",
+    "mime": "audio/mpeg",
+    "duration": "23.192000",
+    "bit_rate": "51073"
+  },
+  {
+    "id": "mp3quran-1-hafs-113",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/113.mp3",
+    "bytes": 217494,
+    "sha256": "c2c8eebe6ed2fd1fa49ada089af3b0b9a368475b9da886124427589428d3f037",
+    "mime": "audio/mpeg",
+    "duration": "34.764167",
+    "bit_rate": "50050"
+  },
+  {
+    "id": "mp3quran-1-hafs-114",
+    "file": "audio.mp3",
+    "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/114.mp3",
+    "bytes": 304321,
+    "sha256": "8e903164ada76a3f8897c5b85366c77db25b1cf6e1075d58d81c571087ff56a3",
+    "mime": "audio/mpeg",
+    "duration": "49.236000",
+    "bit_rate": "49446"
+  },
+  {
+    "id": "adhan-doha-normal",
+    "file": "audio.mp3",
+    "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_02_Dhuhr_Adhan.mp3",
+    "bytes": 2419879,
+    "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
+    "mime": "audio/mpeg",
+    "duration": "178.831383",
+    "bit_rate": "108252"
+  },
+  {
+    "id": "adhan-doha-fajr",
+    "file": "audio.mp3",
+    "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_01_Fajr_Adhan.mp3",
+    "bytes": 2901706,
+    "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
+    "mime": "audio/mpeg",
+    "duration": "217.167528",
+    "bit_rate": "106892"
+  }
+]

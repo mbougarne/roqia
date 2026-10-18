@@ -4,13 +4,18 @@ Updated 18 October 2026. This is the authoritative execution order for all 62 ti
 
 The RQ numbers remain stable identifiers; the step numbers below define the work order. RQ-001 is the single baseline prerequisite, then the new-feature work starts with RQ-016 as requested. Earlier foundation tickets are included at the point where they are needed. Do not assume RQ-001–RQ-015 are complete: the current backlog records partial Android feasibility work and open gates. If work is already implemented, verify its acceptance evidence and mark it complete instead of doing it twice.
 
-## Current pickup — Phase 7 visual implementation
+## Current pickup — Phase 8 functionality first
 
-**User-authorized correction, 18 October 2026:** functional screens from phases 3–6 do not yet match the approved designs. Implement **RQ-051 → RQ-052 → RQ-053 → RQ-054 → RQ-055 → RQ-056 → RQ-057 → RQ-058 → RQ-059 → RQ-060 → RQ-061 → RQ-062**, in this order. **RQ-051/RQ-052 (Prayer dashboard, shared framing and Qibla) are implemented and Android-tested:** [reference comparisons and evidence](../../../docs/implementation/phase-7/README.md). **Next ticket: RQ-053 — calibration and city selection.** Continue RQ-054 through RQ-062 afterward. These are implementation tickets, not a final cosmetic audit. The [coverage index](VISUAL-COVERAGE.md) assigns every one of the 48 screens to exactly one owner and tracks light/dark evidence separately.
+**User-authorized order, 18 October 2026:** finish the functional application before returning to screenshot parity. Phase 7 is merged, but the user has **not accepted Prayer or Qibla as matching the designs**. Their implementation evidence remains useful; their visual acceptance is open.
 
-After this visual sequence, close the still-open **RQ-040 → RQ-042 → RQ-044** full-adhan/audio/lifecycle work, then finish **RQ-045 → RQ-046 → RQ-047 → RQ-048 → RQ-049 → RQ-050**. Earlier unchecked acceptance obligations remain attached to those final gates; this sequence does not waive them. Keep unavailable capabilities honest while their UI is implemented. The user's previously deferred exhaustive manual Quran reading review is not reinstated by visual acceptance; exact corpus/font integrity checks still apply.
+Follow this remaining-work queue from top to bottom. The historical numbered checklist below records original dependencies and completed implementation batches; it does not override this pickup queue.
 
-Both themes are required per ticket. Compare composition, assets, typography, spacing, hierarchy, interaction controls and navigation—not just colors. Real content and platform/accessibility needs take precedence over mockup sample values; record intentional differences. RQ-046 remains open until the complete 96-capture audit and accessibility work pass. No claim of whole-app visual completion from this first batch.
+1. **Phase 8 — implemented, Android tested, awaiting PR review. Next functional pickup: RQ-026.** Quran audio and adhan delivery: RQ-031 → RQ-034 → RQ-035 → RQ-042 → RQ-040 → RQ-041 → RQ-044. Publish verified downloadable Warsh/Hafs recordings, exercise selective/offline playback, provide normal/Fajr adhan downloads and selection, native Android playback with Stop/focus/permission fallback, and document the scheduling horizon. Branch: `phase_8/audio-delivery`. Evidence: [phase 8](../../../docs/implementation/phase-8/README.md).
+2. **Remaining functional completion:** RQ-026 (actual English/French Hafs translation delivery), RQ-020 → RQ-021 (download recovery/network policy), RQ-032 → RQ-035 (native sleep timer and playback lifecycle), RQ-024 → RQ-025 (reader support on older supported Android versions), RQ-037 → RQ-044 (prayer coverage renewal, reboot/time changes, physical-device reliability). Close each ticket's remaining functional obligations before moving to the visual batch. A finite 3-day alarm window is not unattended long-term renewal. Keep source-expiry and unsupported-platform states explicit.
+3. **Whole-app visual implementation:** revisit RQ-051 → RQ-052 against the original designs, then RQ-053 → RQ-054 → RQ-055 → RQ-056 → RQ-057 → RQ-058 → RQ-059 → RQ-060 → RQ-061 → RQ-062. Check every screen in light and dark mode, compact typography and Western digits. The [coverage index](VISUAL-COVERAGE.md) assigns all 48 screens; the existing four captures are not user visual approval.
+4. **Final acceptance/release:** RQ-045 → RQ-046 → RQ-047 → RQ-048 → RQ-049 → RQ-050. Include offline/error/permission flows, 96-screen visual/accessibility review, content integrity, upgrade/native/device matrix, performance/storage and signed Android release. Then the separately deferred iOS build/native/device pass.
+
+This sequence preserves all original ticket IDs and acceptance obligations. Do not mark a whole ticket done because one Android emulator path passes. The user's deferred exhaustive manual Quran reading review stays deferred; no additional approval is required to use the already selected sources. Exact corpus/font checks continue. Phase 8 audio source fallback does not change the written Quran or its matching font.
 
 ## Working rule
 
@@ -24,7 +29,7 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
 
-Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; phase 5 uses `phase_5/quran-download-delivery`. Phase 6 uses `phase_6/prayer-qibla-adhan`. Phase 7 uses `phase_7/design-parity`. Subsequent phase branches retain the same numbered convention.
+Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; phase 5 uses `phase_5/quran-download-delivery`. Phase 6 uses `phase_6/prayer-qibla-adhan`. Phase 7 uses `phase_7/design-parity`. Phase 8 uses `phase_8/audio-delivery`. Subsequent phase branches retain the same numbered convention.
 
 ## Ordered checklist
 
@@ -338,13 +343,13 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 ### Steps 45–56 · Explicit design implementation (both themes)
 
-45. [x] **[RQ-051 — Restore shared screen framing and Prayer dashboard](tickets/RQ-051.md)**
+45. [ ] **[RQ-051 — Restore shared screen framing and Prayer dashboard](tickets/RQ-051.md)**
 
    **Screens:** 39. **Deliver:** Centered compact headers, theme-specific tab selection, illustrated location and next-prayer cards, one compact six-row timetable, next-prayer highlight, effective notification icons, method row and paired Qibla/adhan shortcuts. Keep live source dates, expiry/refresh and unavailable-location recovery.
 
    **Finish when:** Both-theme reference comparisons, Android interaction/regression checks, narrow/large-text captures and recorded differences pass. See the linked ticket for acceptance; do not substitute functional screenshots for visual completion.
 
-46. [x] **[RQ-052 — Restore the Qibla compass design](tickets/RQ-052.md)**
+46. [ ] **[RQ-052 — Restore the Qibla compass design](tickets/RQ-052.md)**
 
    **Screens:** 40. **Deliver:** Full-width themed compass with gold rim, tick marks, cardinal points, geometric center and Kaaba pointer; city card, prominent Western bearing, accuracy state, calibration action and guidance. Rotate the compass rose and pointer consistently with true heading; preserve static north-up fallback and stop sensors off-screen.
 
