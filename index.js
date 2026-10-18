@@ -3,7 +3,7 @@
  */
 
 import 'react-native-gesture-handler';
-import {AppRegistry} from 'react-native';
+import {AppRegistry, Platform} from 'react-native';
 import notifee from '@notifee/react-native';
 import TrackPlayer from 'react-native-track-player';
 import App from './src';
@@ -14,3 +14,8 @@ notifee.onBackgroundEvent(onBackgroundNotificationPress);
 TrackPlayer.registerPlaybackService(() => require('./src/services/audioPlaybackService'));
 
 AppRegistry.registerComponent(appName, () => App);
+
+// Opt-in Android debug activity; the production component remains unchanged.
+if (__DEV__ && Platform.OS === 'android') {
+  AppRegistry.registerComponent('RoqiaFeasibility', () => require('./tools/feasibility/ProbeApp').default);
+}

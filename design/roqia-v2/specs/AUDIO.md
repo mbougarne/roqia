@@ -2,6 +2,10 @@
 
 Screens 03, 08–14 and 33–38; tickets RQ-031–RQ-035 and relevant devotional tickets. The current home uses Track Player while other reading screens mount react-native-video. Replace these paths with one app-level audio controller after a compatibility spike; do not allow simultaneous players.
 
+## Provider selection
+
+The user confirmed King Fahd text and its matching font as the Warsh written edition. Audio is selected independently: evaluate King Fahd recordings first; where suitable recordings are unavailable, investigate Al-Mushaf Al-Mohammadi. These are provider preferences, not claims of available downloads or redistribution permission. RQ-031 must verify the exact recording set, narration/tariq, completeness, terms and offline-download support. Existing MP3Quran sample checks remain reusable feasibility evidence; do not silently treat that adapter as the final catalog or automatically fall back to another recording at runtime.
+
 ## Track and queue identity
 
 A Quran track key includes provider recording-set ID, reciter ID, riwaya/tariq, surah number, quality and recording version. Human names are display data, not keys. MP3Quran's public catalog exposes reciters with moshaf entries and available surah lists; use those records to establish available combinations, then validate the chosen file URLs. Do not infer a Warsh recording from a reciter's name or assume every recording set has all chapters. [MP3Quran developer documentation](https://www.mp3quran.net/ar/api).

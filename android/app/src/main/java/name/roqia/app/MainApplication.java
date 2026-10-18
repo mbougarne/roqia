@@ -26,6 +26,13 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+          if (BuildConfig.DEBUG) {
+            try {
+              packages.add((ReactPackage) Class.forName("name.roqia.app.feasibility.ProbePackage").getDeclaredConstructor().newInstance());
+            } catch (ReflectiveOperationException error) {
+              throw new IllegalStateException("Missing debug feasibility package", error);
+            }
+          }
           return packages;
         }
 

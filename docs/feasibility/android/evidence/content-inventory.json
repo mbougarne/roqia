@@ -1,0 +1,3236 @@
+{
+  "schemaVersion": 1,
+  "source": "src/data/index.ts",
+  "sourceSha256": "54094d688b45eef612be4825afd70160811b7da6c1a682b3791cd24fd3006770",
+  "groups": {
+    "data": 38,
+    "adkarData": 56,
+    "tasbihatData": 17,
+    "duaaData": 96
+  },
+  "audioFiles": 188,
+  "audioBytes": 77253742,
+  "missingAudioReferences": [],
+  "records": [
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 0,
+      "canonicalFieldsSha256": "6a293549c5c73905ec6827074a9a36f9d0aac1c1f802e3aa2ebb4f5bc0bba93d",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "roqia-01.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 1,
+      "canonicalFieldsSha256": "26b0f79dabf1a4ac0da4701c2c830b3afd0f64c0665221b1255c221fb583a284",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "roqia-02.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 2,
+      "canonicalFieldsSha256": "5a6063376b3487f110076a7af75990fc36be984d260706b7e9598b14f291d1dd",
+      "category": null,
+      "repeat": 7,
+      "audio": [
+        "roqia-03.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 3,
+      "canonicalFieldsSha256": "64717378b556ce24f4875ad0554a37b17ef29e04b80c0b61faae17a07b64c039",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "roqia-04.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 4,
+      "canonicalFieldsSha256": "81c00bf270350a34c5617c25cae1f33b8f33cd3d576a0924db1fddbc5a820d57",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "roqia-05.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 5,
+      "canonicalFieldsSha256": "dfb3615fe700164978535f1c0ecb703cce68e0c4bafd3b871404885cfb72f5c4",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "roqia-06.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 6,
+      "canonicalFieldsSha256": "cfd8c804aa9faa8a4165fb61c0abc835bd77d33702303dda0fa2441dacdf3f4c",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "adan.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 7,
+      "canonicalFieldsSha256": "a4f2f15a06ba25c98a4a2554e76175d988eb80c91bd6a6e62fbf0a1fecc89254",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "fatiha.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 8,
+      "canonicalFieldsSha256": "c9ff78a454c5a2acbdb69e176cccb4cd803dd8c5108b96a7c3d7a48f5ab34f84",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "bakara-1-5.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 9,
+      "canonicalFieldsSha256": "9dd284a538c6213346bfc711534836a6e039d9f1f68c0336ad0e23ea3bfc4500",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "bakara-255.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 10,
+      "canonicalFieldsSha256": "e656ec881b85e5a07d2b902c2eba6c4e265717c018f46b622c112136a833b543",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "bakara-102.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 11,
+      "canonicalFieldsSha256": "ac97dcef6953d678bc83063e20002d5345e1b6f0f1c29e4cbe5464efdc246bed",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "bakara-285-286.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 12,
+      "canonicalFieldsSha256": "d569b19cca734f8e02b368c17b88ccb8be528072290b90a01eb28c18174099a1",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alimran-1-5.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 13,
+      "canonicalFieldsSha256": "81f2a1c5c7c5264380b71918bd517bcd1accf04a47f8beabeeeb88ec8615d80e",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alimran-26-27.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 14,
+      "canonicalFieldsSha256": "bec029e4184e9217ae84847a003b32bd0883921b0d0b5ac750aa050d20e8a48d",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "alaraf-117-122.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 15,
+      "canonicalFieldsSha256": "9030fa0a74546f632665fdd0a703acc3a6f519c8442c1e967c1e52941629dd5d",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "taha-69.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 16,
+      "canonicalFieldsSha256": "53cce092a18d3f32abc9569fffb11cb25afa49c7ade03eefe89c093be86d0d06",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "youness-79-82.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 17,
+      "canonicalFieldsSha256": "82de0385f3b82b033e9ff3e5cd3ce18f72f7dfa5b418c641b00e8107f1ab4744",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "almominon-97-98.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 18,
+      "canonicalFieldsSha256": "220ea4b7c11837d5f2cd4e988749002f035857a2081c30eea4e7530f976fba28",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alanbiaa-87.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 19,
+      "canonicalFieldsSha256": "4e673e4933ade7957b6e6c12ed8de5d00e5a268b7750d0183aa91dd2dfc12759",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alanbia-83-84.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 20,
+      "canonicalFieldsSha256": "770bc42390335c7318d3a754ea9ba78007eb64fa5556d240dafed1055513f075",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "maryam-68-72.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 21,
+      "canonicalFieldsSha256": "2f1a662913b8ec7fba57ff62c8643fd67673032d5ee0457fbb5e70e59d051740",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "ibrahim-15-17.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 22,
+      "canonicalFieldsSha256": "aa4c747cb239969e1f713a535fab445cb8e5c7f141a9b98fc62e3a62f1da368e",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "ghafir-44-45.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 23,
+      "canonicalFieldsSha256": "fc8371683af0843894a9b7dd8dce09ee6d02a222c8df532dbf6aaee56a238a09",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alisraa-80-82.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 24,
+      "canonicalFieldsSha256": "75d4def1fe5204882256d61cacacaf28a3fa882c4a0b55970d8958bd611c7d11",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "nour-35.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 25,
+      "canonicalFieldsSha256": "a4948dac733e88be88615caf641ac06c552111b468f65f914f0a4ff1a3262c61",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "yassin-1-9.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 26,
+      "canonicalFieldsSha256": "7147284b9f573bb78508675b9d90397de8e34e454f6af541c2d4e6d9b52eb147",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "safat-1-18.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 27,
+      "canonicalFieldsSha256": "db88ab9cbd5ca11b19d540f10dd4df88ddaee2f7b675297f194e15006c6c0575",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "safat-177-182.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 28,
+      "canonicalFieldsSha256": "47efae45749fc813e8df152f696fec228f45ab8c683650f50b2ff2e64dbeb936",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "aljin-1-9.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 29,
+      "canonicalFieldsSha256": "ba883694d5ffceb175d7e86c2b9a966b71206499def2573a627bf3730d317972",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "atarik.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 30,
+      "canonicalFieldsSha256": "237d08759f419931b938cde7c94314bae8f827443b30a5106b73ae3f35ee02b8",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alhashr-21-24.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 31,
+      "canonicalFieldsSha256": "34323fcfb1df90de6165604b2f3de7326cc71f599f9e8672cd56a9425c70967f",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "094.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 32,
+      "canonicalFieldsSha256": "57178b1408426ffe13fbd1671253bde3d1f818d61438e2a0d7a048f6d677c4a5",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alnissa-56.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 33,
+      "canonicalFieldsSha256": "01ed1f4a1dee7c05311254bb0e2ee98a06c7c30bcebed35da7529941f3dde4c2",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "alanfal-50.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 34,
+      "canonicalFieldsSha256": "692804c976fa4955f8bc55df1f452080c8b8fa1981f39d67c3155b2b93d48c34",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "38.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 35,
+      "canonicalFieldsSha256": "14d7f97f77894cdeb095f5d4f7bb95d69e9dc6b6b5effe1b0b1e15ac23630e03",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "2.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 36,
+      "canonicalFieldsSha256": "e122344b60ebb93d21dad19fb47aec2247dcee8048a6b4b47cda05196a2eb321",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "3.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "data",
+      "legacyIndex": 37,
+      "canonicalFieldsSha256": "77fe9fcc87b70ca0dff13f846a589b8f939869e818206aa8a28d046b87957857",
+      "category": null,
+      "repeat": 3,
+      "audio": [
+        "4.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 0,
+      "canonicalFieldsSha256": "30648075d7e061456cbe650e2ff62511e79d4c49b24d1a7c6a9c03b9899ec8a6",
+      "category": "Morning",
+      "repeat": 1,
+      "audio": [
+        "1.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 1,
+      "canonicalFieldsSha256": "aad106dadea231a3e9a9d6f81ece103d45f62206e590eb042774fda85d8bb18a",
+      "category": "Morning",
+      "repeat": 3,
+      "audio": [
+        "2.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 2,
+      "canonicalFieldsSha256": "7152219e34beb91f1a911c1b3776b5de01db9fc4bb3f812885b20d969ff9e313",
+      "category": "Morning",
+      "repeat": 3,
+      "audio": [
+        "3.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 3,
+      "canonicalFieldsSha256": "68570b11372dfb085abaf78a197d4d0e11f90f5d6509db9df15a83fea8ec1d73",
+      "category": "Morning",
+      "repeat": 3,
+      "audio": [
+        "4.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 4,
+      "canonicalFieldsSha256": "1430cb47c9c6e781db5a4eed6ad0ce0aa3a361d16166e24722c19b1c67c7f85f",
+      "category": "Morning",
+      "repeat": 1,
+      "audio": [
+        "sabah-01.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 5,
+      "canonicalFieldsSha256": "86b755aeac0957de791afe4f994d2121515a154159f93699e10fe5848c6963eb",
+      "category": "Morning",
+      "repeat": 1,
+      "audio": [
+        "sabah-02.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 6,
+      "canonicalFieldsSha256": "f653e1ab140b3fbdab77129e25d3a8f08be18096e0716971ab16c9cd9abefaf3",
+      "category": "Morning",
+      "repeat": 4,
+      "audio": [
+        "sabah-03.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 7,
+      "canonicalFieldsSha256": "223d8639b7704335fd43fecdc44d0e87a93a81a3b34af2875588a2612174e775",
+      "category": "Morning",
+      "repeat": 1,
+      "audio": [
+        "sabah-04.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 8,
+      "canonicalFieldsSha256": "58688f9c4b4cc5cea16a0f37ddb20804f6ac579a4ddd5479bc47435e35958ec7",
+      "category": "Morning",
+      "repeat": 7,
+      "audio": [
+        "sabah-05.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 9,
+      "canonicalFieldsSha256": "8bc49a9827751e91743716e885032c15aed08ea7a839bc6951db3dac075d626e",
+      "category": "Morning",
+      "repeat": 3,
+      "audio": [
+        "sabah-06.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 10,
+      "canonicalFieldsSha256": "af37a6acef7ab3d2ce050a294ec33a4142342cbe325796da250d10b899f95dcb",
+      "category": "Morning",
+      "repeat": 1,
+      "audio": [
+        "sabah-07.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 11,
+      "canonicalFieldsSha256": "ecf62cfe9cdba760160c9d4566c1c773786adddb69300c36820fc0eb91a54b58",
+      "category": "Morning",
+      "repeat": 1,
+      "audio": [
+        "sabah-08.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 12,
+      "canonicalFieldsSha256": "a40ca444c638080b499b908e4db372a39d1170eff9e4b20eba96358736c59308",
+      "category": "Morning",
+      "repeat": 3,
+      "audio": [
+        "sabah-09.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 13,
+      "canonicalFieldsSha256": "6aa4ca534395d5a1d158e3748564506fc1823601c64fed8b073ae41b787f5dd6",
+      "category": "Morning",
+      "repeat": 1,
+      "audio": [
+        "sabah-10.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 14,
+      "canonicalFieldsSha256": "0ddce6d9301499099c7d62f021121e926db27d623ea3db6720f32bbbcec0ebb5",
+      "category": "Morning",
+      "repeat": 3,
+      "audio": [
+        "sabah-11.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 15,
+      "canonicalFieldsSha256": "1b2e3595b77826419256d2d7b2ab4d3f8d0c0fcef98ff894232df08df3b2a826",
+      "category": "Morning",
+      "repeat": 3,
+      "audio": [
+        "sabah-12.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 16,
+      "canonicalFieldsSha256": "90e95e36b6519b36f9de9b20535d2a17e6d2d9da633291cbe9e401b4e36cc9b0",
+      "category": "Morning",
+      "repeat": 100,
+      "audio": [
+        "sabah-13.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 17,
+      "canonicalFieldsSha256": "78d62c19dcd61b4d4fd70b3f19903e7da9af77931a972ee48c8d9a8d969381f2",
+      "category": "Morning",
+      "repeat": 100,
+      "audio": [
+        "sabah-14.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 18,
+      "canonicalFieldsSha256": "5809eb624016df879caef7915ba27165a50aab5fbeba6431c04310835c19a308",
+      "category": "Morning",
+      "repeat": 100,
+      "audio": [
+        "sabah-15.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 19,
+      "canonicalFieldsSha256": "a75f3c6e31af1943e9c5166723b6da0f184669c94ca638d28dc13e0614c61be5",
+      "category": "Morning",
+      "repeat": 10,
+      "audio": [
+        "sabah-16.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 20,
+      "canonicalFieldsSha256": "154af109f77c56bd21ffa8a69680a5435193dda30494f7f155cddd776bfcc7e9",
+      "category": "Night",
+      "repeat": 1,
+      "audio": [
+        "1.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 21,
+      "canonicalFieldsSha256": "e4d4a3b8b0f7eac60bf9166940c50b7e3be2708de4210cfcb9eb347200df2c78",
+      "category": "Night",
+      "repeat": 3,
+      "audio": [
+        "2.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 22,
+      "canonicalFieldsSha256": "c1068f0e4882581f8f006667d589c678377f9e9c2ac01db3e77c736a6c81f5f9",
+      "category": "Night",
+      "repeat": 3,
+      "audio": [
+        "3.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 23,
+      "canonicalFieldsSha256": "8d8321a6a9330b0fbbd3fba4d0a8ad3c1dbd5eacda5741ee6a07abeed81293d3",
+      "category": "Night",
+      "repeat": 3,
+      "audio": [
+        "4.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 24,
+      "canonicalFieldsSha256": "0b9c0251e17b565d542c14149b363445fc77ae591fb201dfbb9748a76fc573b3",
+      "category": "Night",
+      "repeat": 1,
+      "audio": [
+        "masaa-01.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 25,
+      "canonicalFieldsSha256": "1ea803ffbe36ef2bf13d215f0960ccfe6f01e41a2029b0b5833597cb8c626572",
+      "category": "Night",
+      "repeat": 1,
+      "audio": [
+        "sabah-02.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 26,
+      "canonicalFieldsSha256": "d4bf1ce01cd12e6e966805e9cbf748f38d07f60b7d4233febd23f5fb48e315cc",
+      "category": "Night",
+      "repeat": 4,
+      "audio": [
+        "masaa-02.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 27,
+      "canonicalFieldsSha256": "0e5e3c02495fff551f726c114694f149f4acb58f00d02fdcd23f57c7492608bf",
+      "category": "Night",
+      "repeat": 1,
+      "audio": [
+        "masaa-03.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 28,
+      "canonicalFieldsSha256": "8c38fa82e6859d7a683b23b5c74af5e6f11b2db9f37890d273d9ba063d4846e3",
+      "category": "Night",
+      "repeat": 7,
+      "audio": [
+        "sabah-05.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 29,
+      "canonicalFieldsSha256": "b878e8549b988ccfc60f054bb549710ab745166d310acf04623fb55afae1490c",
+      "category": "Night",
+      "repeat": 3,
+      "audio": [
+        "sabah-06.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 30,
+      "canonicalFieldsSha256": "e238d0301d9eea822d182b1ddb4b8a002959752c9df28d008ae07597f81bfc8e",
+      "category": "Night",
+      "repeat": 1,
+      "audio": [
+        "masaa-04.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 31,
+      "canonicalFieldsSha256": "3a52eacbd94855e3551d33d73d9e9f51886ff42294cc76f7a5ad1208b9396626",
+      "category": "Night",
+      "repeat": 3,
+      "audio": [
+        "masaa-05.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 32,
+      "canonicalFieldsSha256": "b8ec916517160d0e68f8728fc98c537f1e93f76e41684775d71892a76b860490",
+      "category": "Night",
+      "repeat": 1,
+      "audio": [
+        "masaa-06.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 33,
+      "canonicalFieldsSha256": "6b1d9d75772ec3d86f4a0ed882d96caf13d652b54e850aec7c61bbdff57227bc",
+      "category": "Night",
+      "repeat": 1,
+      "audio": [
+        "sabah-10.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 34,
+      "canonicalFieldsSha256": "b6a61cb53094b0afab8350f8c0cf5df9fd7c5f17b87c8f469df034d0da5f6d60",
+      "category": "Night",
+      "repeat": 3,
+      "audio": [
+        "sabah-11.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 35,
+      "canonicalFieldsSha256": "c8170c346ee0be7711e72ac3686c8505911329d7b460e40a380975d8eb44f200",
+      "category": "Night",
+      "repeat": 3,
+      "audio": [
+        "sabah-12.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 36,
+      "canonicalFieldsSha256": "1765d13e3dcd97c1c4880c1ce596a771e4bbb0f50b03b3ea3abbe2a8613def68",
+      "category": "Night",
+      "repeat": 100,
+      "audio": [
+        "masaa-07.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 37,
+      "canonicalFieldsSha256": "622ef31f2566055525710970f27984de24696a53485b30964afe81c7c1c3c310",
+      "category": "Night",
+      "repeat": 100,
+      "audio": [
+        "sabah-14.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 38,
+      "canonicalFieldsSha256": "c84417e88202f88f98844ca7b00af733ebde0bcee685a3bc9f30ba629d9937ae",
+      "category": "Night",
+      "repeat": 100,
+      "audio": [
+        "sabah-15.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 39,
+      "canonicalFieldsSha256": "51059b366476544491495823faaf7e8be4fc0e30cf52ff26a5a451e9a579be50",
+      "category": "Night",
+      "repeat": 10,
+      "audio": [
+        "sabah-16.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 40,
+      "canonicalFieldsSha256": "20caa01dfb955bb9ac2ca5cd1baf0b900c1c32120c100b85d2054da108697e71",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "1.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 41,
+      "canonicalFieldsSha256": "f2012f9b9a5aaeeb249bc74f892db3179302b16acddf51d0c555959d1a96d87d",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "37.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 42,
+      "canonicalFieldsSha256": "b294acc0dccda2b39b886bbf313a82440fddd101b7b84beb6d29639acbc1cc34",
+      "category": "BeforeSleep",
+      "repeat": null,
+      "audio": [
+        "before-sleep-note.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 43,
+      "canonicalFieldsSha256": "bdaf0103d6c4679270467041f63dcde5b266654eaf140af9b9b7079b1fd1a9cf",
+      "category": "BeforeSleep",
+      "repeat": 3,
+      "audio": [
+        "2.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 44,
+      "canonicalFieldsSha256": "ba1ab3cc049bce67d25f9b4d406fd5922cacaf15a9186646840296721746299e",
+      "category": "BeforeSleep",
+      "repeat": 3,
+      "audio": [
+        "3.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 45,
+      "canonicalFieldsSha256": "baa53148aa2ca0f24403a9d835795107b1ad38dcfa19f927f7d4d28b9dd7bad2",
+      "category": "BeforeSleep",
+      "repeat": 3,
+      "audio": [
+        "4.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 46,
+      "canonicalFieldsSha256": "55ca7c4e34853bcadaf2f88093a80d1af5afb2e6430a2c4e87b353c94c80060e",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-01.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 47,
+      "canonicalFieldsSha256": "02ba1f0f2e951b6c834449099fe771b2994740ee101b6ab98ff7ddfd0bc616ea",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-02.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 48,
+      "canonicalFieldsSha256": "6b5580c58b488a28fdec9780f6105eba5aad36802929a7e8d285b84e13eb856d",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-03.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 49,
+      "canonicalFieldsSha256": "2f24fcccba7a0fdb544384cc58d07250658c0465abe66dc40174336a5d074d57",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-04.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 50,
+      "canonicalFieldsSha256": "58d94bff855d6eefbe2c6313a47480c8bae9b3e9574bd45bf1fe6a5ac1a62075",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-05.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 51,
+      "canonicalFieldsSha256": "feef074b91522fd44abd5f64c32b2bcfc75278b53423f6f278f78f117facc108",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-06.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 52,
+      "canonicalFieldsSha256": "eb9f7186e3d6101a89be51307c0ace97e9186175b5a61670f7b5d4eb3cbd7ddc",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-07.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 53,
+      "canonicalFieldsSha256": "5bdd94c7e909dfffb4ff9a9e986f22d415cf8d4aece12cb908127f9c2feec38c",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "sajda.mp3",
+        "almulk.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 54,
+      "canonicalFieldsSha256": "17d734bb42982978952f561167e3db40083d92d087873bb611cb7bc56fe11164",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-08.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "adkarData",
+      "legacyIndex": 55,
+      "canonicalFieldsSha256": "4d65134160ea2ab9ffe02b82fb161ee12e02458e34ee0dc34df32d7c9fa5c12e",
+      "category": "BeforeSleep",
+      "repeat": 1,
+      "audio": [
+        "before-sleep-09.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 0,
+      "canonicalFieldsSha256": "f130e8a4c8a87c49a7a3b568db59eda5ce228029f29df663fb4f7d090a4a289d",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-01.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 1,
+      "canonicalFieldsSha256": "cdd1da9150e16fb99e298101e19e543180a73be7de1d582076ac5c6d3950e496",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-02.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 2,
+      "canonicalFieldsSha256": "d918a4bb5195824b57c9bc805ef787e36aded0c71bbab92ef9cdade51b9e7b73",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-03.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 3,
+      "canonicalFieldsSha256": "a4267c03fce24210176ef02e5598a83179884363422387c936b07e04d264eb02",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-04.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 4,
+      "canonicalFieldsSha256": "2d808f7062cf4b748f10162a2bc0d092eff90a30d3a0a85b73bc80fe5a53b279",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-05.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 5,
+      "canonicalFieldsSha256": "868bba91b84150c08b6deeb67433de969d12703aa6b5f8a27ab1f9f240f8e50d",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-06.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 6,
+      "canonicalFieldsSha256": "1636541557144bc7ae58982e55fa8dbf78014835d6723d506580018760a5f4e9",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-07.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 7,
+      "canonicalFieldsSha256": "fac4784d96180dbf24042813c5b99c5ba5c76e2a51f7f6a17e1026f01a213227",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-08.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 8,
+      "canonicalFieldsSha256": "00542d7ba3155e7f11700ee88557a958f5875fa74e501c9d41180ca812bbc4ba",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-09.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 9,
+      "canonicalFieldsSha256": "605132414d4f236ec85a11f672cb16859e8e82ef6c43974318d245e8ced46f71",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-10.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 10,
+      "canonicalFieldsSha256": "77ec1ef9cbde5433b393c589f3e1af303fe0cf1c66d4521a96e91dfa5bece338",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-11.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 11,
+      "canonicalFieldsSha256": "a2bb09949dd5f06d01529000aec1d5d9357eba08c03cfe58debe87056b062fe1",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-12.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 12,
+      "canonicalFieldsSha256": "e7dfb8f273994ee7b7986513ec7bdd430ff65b661c579d443c3e90e53971d54f",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-17.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 13,
+      "canonicalFieldsSha256": "402c7c6471fbe751cefeedc02fb09a21235814b38a8c03a79bb96e4ba3922674",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-13.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 14,
+      "canonicalFieldsSha256": "3d7919723f96751398d1aab187c219b4a0776bf966ad15e3cd0ebaea1696ae87",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-14.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 15,
+      "canonicalFieldsSha256": "8cffd2861b92ed614d36422272e35949889fb35d5f24235a6c0c35db74f26732",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-15.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "tasbihatData",
+      "legacyIndex": 16,
+      "canonicalFieldsSha256": "cb04444cb5234046d00e651fe0e85c280cf2286691817acde5b04d604797d50f",
+      "category": null,
+      "repeat": 100,
+      "audio": [
+        "tasbihat-16.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 0,
+      "canonicalFieldsSha256": "4fb524aa569fb95cc653957906aeafe395dedc8613769ba6b9a12c7235006a52",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-01.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 1,
+      "canonicalFieldsSha256": "e1bbaf173637d5ecb5ff7145bc76a3b31a2a5549062a4ec7b80bc27ddda7a314",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-02.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 2,
+      "canonicalFieldsSha256": "8ca25bb0de0f8e294178f7bd449523fba67509563ff8f2fd98a11abd49c55ea8",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-03.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 3,
+      "canonicalFieldsSha256": "a93b8cf196c9cd3203e8d79ae3eb62a85f0fe2a51d8be202e3502a32de3dbb51",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-04.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 4,
+      "canonicalFieldsSha256": "bfd31a6abce1b7c2ff595e50a67109122500e9035269d3be27ba1cee07b83b1b",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-05.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 5,
+      "canonicalFieldsSha256": "bd51c0ef9dd5b888d9a16435bb92aba261e551b606ea97352836e5e583c5f2f6",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-06.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 6,
+      "canonicalFieldsSha256": "bea8a41e52b68c97ffe3c8bb6f084caf4a7d414f288d9167e76fcf74030a3e5c",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-07.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 7,
+      "canonicalFieldsSha256": "cf46e7b415afd04af1e836f2b0ce60f5695903f8d8c03c3492e8d94618335981",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-08.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 8,
+      "canonicalFieldsSha256": "853861ebf2dec3965627d18b66daa44d7176f1e84ded8bd70de2e011832c14d7",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-09.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 9,
+      "canonicalFieldsSha256": "a27d2adb6a731c2f3f46cc98dfc04da1661513088a11f5310d26d89b78c3a813",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-10.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 10,
+      "canonicalFieldsSha256": "5ea7c0cba2fdb5b399b3351e6da757adf3b335554a0d6ff58dd133a8272b9878",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-11.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 11,
+      "canonicalFieldsSha256": "93f9390f440e9882295efc77bd867ff57d4fe8354c15bbc9d4a0580f36d815c5",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-12.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 12,
+      "canonicalFieldsSha256": "6708280f373aada486466d598c4400845a113a0bd6cd9d561c896f12802009b5",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-13.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 13,
+      "canonicalFieldsSha256": "c6a9596d27c035fcf63fd9e5bdf251d8277d926d356219526fe1f0d272ee5956",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-14.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 14,
+      "canonicalFieldsSha256": "2f1a45aa67f72e97ee6480ca09f10d6672b9376a58c1ace06ccca64c216b3447",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-15.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 15,
+      "canonicalFieldsSha256": "832fdb92b487edb2c82f27e9af3ea34f64d6e5924b09f11ca11578c0a9d186c6",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-16.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 16,
+      "canonicalFieldsSha256": "e10fd23d61dee2423670ce1e6af8d81710be29285f8c751d6aa21e25554cda19",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-17.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 17,
+      "canonicalFieldsSha256": "e7a148fbd69b7637749ecfeccf4826b817f1b31586a0e9bb0ba279c1f3178b08",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-18.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 18,
+      "canonicalFieldsSha256": "d6663f0f2d053bb3aa4a021a206e0eea5aba264ff5c959fffcf8031fcf26f89c",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-19.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 19,
+      "canonicalFieldsSha256": "4aba42776ea1bd46d5c6306fa8736467d0e05980d298afb1c06404c4d3261515",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-20.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 20,
+      "canonicalFieldsSha256": "c504237e12c9a5d5655d35082afdc06ec1c302c62d5a3056d10bfe46d0278926",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-21.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 21,
+      "canonicalFieldsSha256": "ce29fcdd9a04cfcc84062052455b80ff4f493fefbbd8b9f37e3f7c772475aac6",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-22.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 22,
+      "canonicalFieldsSha256": "d112766e53b5fc310f7ef8da8631de9b74b81f9c1a80b8a53b8f1ef422f63866",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-23.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 23,
+      "canonicalFieldsSha256": "17c5a787b4e1f31899fa0ad2f2dba107e97aaa312657269ec162e5f7ab5b67d5",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-24.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 24,
+      "canonicalFieldsSha256": "584ea9f789530cab1c536bee0a6d7c7bc8d7683461b5f3cab327294b523818cd",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-25.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 25,
+      "canonicalFieldsSha256": "111bd2088d4ff1f103c0ce9be4bb691545720a894ae88627c80aff955e04d681",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-26.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 26,
+      "canonicalFieldsSha256": "f004372eefa5a9ae47ddee93c97b4a970aeec5ea075542fac1df6c009aff72b0",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-27.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 27,
+      "canonicalFieldsSha256": "0ea694583e817e542b687eeb4f8c43e8562ba745837f9b9787cc39e2fbb09cc8",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-28.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 28,
+      "canonicalFieldsSha256": "a2d13c6552355864107633c931cd28e39e44582727ea29e0b8eec08d9b2c2bca",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-29.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 29,
+      "canonicalFieldsSha256": "93c7a0f8d80f909f5a9b7ccba87cc3053c8cc3420d20ce655538555ad18a92f9",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-30.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 30,
+      "canonicalFieldsSha256": "d83abe34eb6504aeaaa0e5567386f4d8a4b6a04d5b7e7191c4c710d83b4063f0",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-31.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 31,
+      "canonicalFieldsSha256": "1947c21d1874f442e58d00d889846e0769dfa8f03a6fe94648a176f85a83d7d2",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-32.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 32,
+      "canonicalFieldsSha256": "604980c006e8078bcfcb7ea3b68ac5bec107cc85da36692c21ac07a4cb4ab10a",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-33.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 33,
+      "canonicalFieldsSha256": "1688b76f199abaeff73054d6a110282deae8da9f55963976672d7a9739dce888",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-34.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 34,
+      "canonicalFieldsSha256": "20455c326bfb0ef6cab64b432e266d295470ee8d0babeada0ebe7030b4ac9355",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-35.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 35,
+      "canonicalFieldsSha256": "774e54b96c791b7e2ae964bb3c22f2571ec31befaff3dba341fc0780b64b913c",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-36.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 36,
+      "canonicalFieldsSha256": "9d431d5aa177c822cf0ca527b6d3c46b83cbe55cd727d6e2f6280a2d4d971059",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-37.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 37,
+      "canonicalFieldsSha256": "98efa9fc43ec361a519f49e749ae7128060330b038183f0334d0d6d8dcf3ff38",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-38.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 38,
+      "canonicalFieldsSha256": "12386379df002ba45364bc18d4a19b06a2d0df26c9a8db1b66aee148b11dfb60",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-39.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 39,
+      "canonicalFieldsSha256": "3cc1da9e4b7383c75ba7132e07a5b73b265e053c086161c60a60eed0e8d81e9c",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-40.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 40,
+      "canonicalFieldsSha256": "d5f2c32db66cf0a8c74bcb75b7a3641fa187b01124c9d168fec2ae3394250195",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-41.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 41,
+      "canonicalFieldsSha256": "638e716fd9ea905781a54005c37a9ac827e837e49667554e90bcc9d2e3e019cd",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-42.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 42,
+      "canonicalFieldsSha256": "ac9d28b19f2be5bee4b1608b66ff8cf53d42d28de25a70d348a8e1d68e125c24",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-43.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 43,
+      "canonicalFieldsSha256": "78473652dbb40fcb1803ee9840f3bb76357e2e96e5a260aea38bae70871509db",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-44.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 44,
+      "canonicalFieldsSha256": "c306e1b205fa5c493addd4e3851b631a421bfa7334e3a54898e15f7a23eeac60",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-45.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 45,
+      "canonicalFieldsSha256": "e7c45be432fbfce251967d877f802ff1893c77d9e70307f45c663ba61b894144",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-46.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 46,
+      "canonicalFieldsSha256": "6d5a6a24d0646e40d40d681a719b5f5d4514afdc825a1a89f08acae96ccdd8c9",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-47.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 47,
+      "canonicalFieldsSha256": "7339625e66e27f95457b03392586743b10e778fbcad2ebdf0d53d8445bc49f9f",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-48.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 48,
+      "canonicalFieldsSha256": "093a5d411e31a619abf8718f493102a24423e003fcaf8cae9aedcfbd7dfcf66b",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-49.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 49,
+      "canonicalFieldsSha256": "78e28e37393e6b00c3d4782002a4439af5f3e09efb6d95277294f057d43e376d",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-50.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 50,
+      "canonicalFieldsSha256": "03c916e59f33ea7eaca80602bfa9486a1236f0ce9ba834ff2898b8e2492a4bbd",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-51.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 51,
+      "canonicalFieldsSha256": "e7932949ce3916a0265218d6173a270cb83c4f7cca8832ffabd4e304f96cb6a9",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-52.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 52,
+      "canonicalFieldsSha256": "cedecb3c36b92189dc0d8850afd4810e9f9d63f30c2642581527e18a5d29e52d",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-53.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 53,
+      "canonicalFieldsSha256": "f5a8d1d744cecbec42ed02e6507f176b480a9ca23ee7778640c7b3d1ee51311c",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-54.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 54,
+      "canonicalFieldsSha256": "e53b078a14f67d441533d6f0be4190268dee30cd28d641d7fa8c01b2f519de6b",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-55.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 55,
+      "canonicalFieldsSha256": "2f0013f1a5dbbd7a290cdec9546208913984412a15b9ea0f4a31d6a16ce4f084",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-56.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 56,
+      "canonicalFieldsSha256": "47ff75f571e0ac607d4e66932ac8c608c4873fd8c73980c4ff98a10affe29971",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-57.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 57,
+      "canonicalFieldsSha256": "40d66ebf65773db044171f5ab4af616680bd0991ef2aa05c6ec8a7e8cdcb2548",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-58.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 58,
+      "canonicalFieldsSha256": "160bcb336e4e2986c3312844a05742b5c210d0b0e1cc623e5fc806256d6fc672",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-59.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 59,
+      "canonicalFieldsSha256": "48f940366124a3619168b3532dfbd504053e96b56e1d9a4736cfca2bad0d1f9b",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-60.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 60,
+      "canonicalFieldsSha256": "e3cda18da950a638ff1b76a9afa6f9d7fdf16413250742bf0a0af9e856698308",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-61.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 61,
+      "canonicalFieldsSha256": "b78f0647181eee8f22cba9e38191b9a2420dafd95a69f9be8745479c11bd3430",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-62.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 62,
+      "canonicalFieldsSha256": "940f5601e8e8632185a0f62355d13e7017ceb50124b9b69da813b214b664e180",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-63.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 63,
+      "canonicalFieldsSha256": "99c65d8ee8652775d34e125a2819adceddb70fa75112f8729418b5168b07c14c",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-64.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 64,
+      "canonicalFieldsSha256": "0289f6dbcd72258968c020a32b369e2681fd93afece1168a7b3718219fdeba0a",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-65.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 65,
+      "canonicalFieldsSha256": "5cc5d664f2617b918870ddc3a9166d446c00358e996ab35ee8b357bc867eca89",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-66.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 66,
+      "canonicalFieldsSha256": "6aeb978740941e4f4c5f1780eea9d8a6927c26df59a453e83713e33e99358298",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-67.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 67,
+      "canonicalFieldsSha256": "c7082da866113a8b49f9f6b6444cd76620b6bf89bb2da4d87f484f17861987f5",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-68.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 68,
+      "canonicalFieldsSha256": "dad0a7e8412b2034d1ef60b29d4e674d623c29c0b0d8dca0fc383534638db4e0",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-69.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 69,
+      "canonicalFieldsSha256": "3cad72ef1d4b7f4b79a3e8d0b9bdb9862eaa0a10e48e1cbe99b0e6fa56839c11",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-70.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 70,
+      "canonicalFieldsSha256": "d2e048835018cce2b0ae3d3892bd685c62da0f42892dd47956cd5d7fdaf28180",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-71.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 71,
+      "canonicalFieldsSha256": "aa2dd94946cd4d303da61cee865f6ffd78ba4833319490375b41e55d916f8be7",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-72.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 72,
+      "canonicalFieldsSha256": "3f5dee4d2b2468517d71ba87bb8b7c6b37d19e6b4942d48d872096779d6d3e83",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-73.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 73,
+      "canonicalFieldsSha256": "76144e6f2fde3e604af6a0ca7ed0b10074adc55e8a4be16684b8814690b06d5e",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-74.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 74,
+      "canonicalFieldsSha256": "638053016914ff604f874377b10c19d68fe8a47bce856a697bf9246a7b6ad8e0",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-75.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 75,
+      "canonicalFieldsSha256": "f45c542a75760180001d78b161b55c6ecfa3c99e23d8cf0e11981a7642fe9964",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-76.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 76,
+      "canonicalFieldsSha256": "a0781c32c2a2323162a602d27399ee6d267c3e4646ee62d9b6674dc1a0d9440b",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-77.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 77,
+      "canonicalFieldsSha256": "f1711603f113a2d778de6c8e98ab88aac39294ea36bfa97e726628fe47b909da",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-78.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 78,
+      "canonicalFieldsSha256": "6900a91759bc5e4dfed0b516ac6804a7f50595fc950f43f8b9340efa2e0cc092",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-79.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 79,
+      "canonicalFieldsSha256": "0bd03cb0a566ae072dd939b08e28b8dac10f6586f789366a6b3105a1667b6946",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-80.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 80,
+      "canonicalFieldsSha256": "79dd1f740ea1d439685c1a9a307a588a0401199424bf311923f8ebf484947b8a",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-81.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 81,
+      "canonicalFieldsSha256": "d783857f5c0c164ac7a7aba6d3dad26ebd353440847041f9cbd0ac2f668a6cb1",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-82.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 82,
+      "canonicalFieldsSha256": "40d8dc0312af76991eaa012dedda632a8bfc29f0ec6813eea6dc947422624dc0",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-83.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 83,
+      "canonicalFieldsSha256": "b12b75deb4657c62c8e3bc49f7f79ca967e737425b9653ba65bf4fce5bad42ee",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-84.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 84,
+      "canonicalFieldsSha256": "c4a2e1dd0a300c346a4c6f995fb24c72b8fb6cde48882ddc0746e7c2b8ab77e6",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-85.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 85,
+      "canonicalFieldsSha256": "b25a36700d5355b84107a751dd8f62361809dab20cf8c0c7293a76497c15fa62",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-86.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 86,
+      "canonicalFieldsSha256": "f829a2dd96f42a97047f1a7104cbfa63ae0aa8edafc621ea15a16de99c636ed1",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-87.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 87,
+      "canonicalFieldsSha256": "7279576c2b193c8d044fd6f78fcc52ded709aaaf6338c8af7bd5f144fcc0fd77",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-88.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 88,
+      "canonicalFieldsSha256": "afd6ec31331576d8740c889cda48f837dabe7d4542b314f96baae7b4ff0cf6b3",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-89.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 89,
+      "canonicalFieldsSha256": "6321c14ec842cea4092959df6b9f690e289545c727b46e0a8c235245c3aa07cd",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-90.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 90,
+      "canonicalFieldsSha256": "f987cd8f1c1dc88e4250fe2abac1c7582085821c1af5d40e87ccbae8d6be6f54",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-91.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 91,
+      "canonicalFieldsSha256": "cb2c8a04cc55906db2c2dbde2dd6be0dbcb075dd14180bd9a68d996caf5ec73e",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-92.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 92,
+      "canonicalFieldsSha256": "19c96d37600f2972e59f849d097dbfeffb2408de60c97e592a5e18a30de08be4",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-93.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 93,
+      "canonicalFieldsSha256": "295cc7eab3971e8d6dd4edafb916d53615e1000d694831e9b652535a469115b2",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-94.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 94,
+      "canonicalFieldsSha256": "bc87c9444c45b73441a219e45717224ef6f074cea8b4441db63c3e922dcfa478",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-95.mp3"
+      ],
+      "provenanceReview": "pending"
+    },
+    {
+      "legacyGroup": "duaaData",
+      "legacyIndex": 95,
+      "canonicalFieldsSha256": "b3a657bb2a0d99bb02e96ffc85464b5a067d59acbd3bb835ebc462b5c1178d3f",
+      "category": null,
+      "repeat": 1,
+      "audio": [
+        "duaa-96.mp3"
+      ],
+      "provenanceReview": "pending"
+    }
+  ],
+  "audio": [
+    {
+      "file": "094.mp3",
+      "bytes": 559527,
+      "sha256": "9d6d07d40cc839183c94668706dbe5d12cae2c1043a5a596f1a6f20f4ebd59f9"
+    },
+    {
+      "file": "1.mp3",
+      "bytes": 444892,
+      "sha256": "461ebb6ebfe5e813a46116ebbcd766baf903373ccb0a4a56d247995bcbec680b"
+    },
+    {
+      "file": "2.mp3",
+      "bytes": 235083,
+      "sha256": "44d4f3e051e3dfca939690082d9f6cf653eb64423ffaacb7038c94b93975b4a8"
+    },
+    {
+      "file": "3.mp3",
+      "bytes": 408012,
+      "sha256": "c84af9bae3ede2f04f0f0fc7bb7c7c35010a08e6e2aec5af82bf744f7694ba79"
+    },
+    {
+      "file": "37.mp3",
+      "bytes": 381639,
+      "sha256": "ad82310636615e963baf31d7d8221ae89bb1e75247faf2a3605a6000305fe5b8"
+    },
+    {
+      "file": "38.mp3",
+      "bytes": 685961,
+      "sha256": "0be9f0c8f4d7be52c5786be7177798b15e5004cc7f6f3a7105f21e53250c6a43"
+    },
+    {
+      "file": "4.mp3",
+      "bytes": 468612,
+      "sha256": "ef3824366a45306ad4954908142e6835b19b9912c50d92fb76624640a35d01ab"
+    },
+    {
+      "file": "adan.mp3",
+      "bytes": 472589,
+      "sha256": "36801fa91f55edf641c86fc5db8154c79177b043ba4efc290f78ff91ea94999e"
+    },
+    {
+      "file": "alanbia-83-84.mp3",
+      "bytes": 691709,
+      "sha256": "ba11bef4aefc4c15e6bc8f94f301ac60c0a88a7b797a296d0becc055d161e89c"
+    },
+    {
+      "file": "alanbiaa-87.mp3",
+      "bytes": 487231,
+      "sha256": "ff6b0c41dc5a6fff465426454b77df79b20b8bfb804d5c6eafe4aaec77b4fc9c"
+    },
+    {
+      "file": "alanfal-50.mp3",
+      "bytes": 280906,
+      "sha256": "d532a986c6b8c73cdc56213a82920f82430af039822723348781c795906d7146"
+    },
+    {
+      "file": "alaraf-117-122.mp3",
+      "bytes": 634131,
+      "sha256": "012f4a4da7c29b9d306e68e1d430bc0c152c796c699bc580522db2e631886843"
+    },
+    {
+      "file": "alhashr-21-24.mp3",
+      "bytes": 1738408,
+      "sha256": "ad8e104796a58f001c74b9a62214972b0c32ff4476c363268a8fb572877145f5"
+    },
+    {
+      "file": "alimran-1-5.mp3",
+      "bytes": 1350072,
+      "sha256": "b7cca9322352e3265512e8c633126df69b1a31c288151b08005154cc2114b962"
+    },
+    {
+      "file": "alimran-26-27.mp3",
+      "bytes": 1089320,
+      "sha256": "d347b53d7f9c956bacfeec4a141f51a3039c1b3873cfee67c11a1fdb150f7d3e"
+    },
+    {
+      "file": "alisraa-80-82.mp3",
+      "bytes": 797441,
+      "sha256": "4ec6679f4de306039fb6357f3857d47659009788b3e35665c8801eac9805f20b"
+    },
+    {
+      "file": "aljin-1-9.mp3",
+      "bytes": 2387687,
+      "sha256": "47e0305548f62fe006850e917206e75007734fbbf76e22eafd949d0231191919"
+    },
+    {
+      "file": "almominon-97-98.mp3",
+      "bytes": 203763,
+      "sha256": "079024f236e53538c4d200df0a9df25f9d6e036648b8e4e85f03bde9612d88e7"
+    },
+    {
+      "file": "almulk.mp3",
+      "bytes": 9564449,
+      "sha256": "a7092b3762714ba6aa78c02e9665316af5eb2eb56968d7dbfbf3ba40cc910e6d"
+    },
+    {
+      "file": "alnissa-56.mp3",
+      "bytes": 803502,
+      "sha256": "ec8f018b0e98913f7a731ec2fe875645bc8ef4424544722b2f98078c614ad321"
+    },
+    {
+      "file": "atarik.mp3",
+      "bytes": 1494705,
+      "sha256": "a046e64f2f314a581899bc52253a6c2185564ec9427b8b2e100f4ae52ace7d8f"
+    },
+    {
+      "file": "bakara-1-5.mp3",
+      "bytes": 971654,
+      "sha256": "64d69144e43a7452caedff1facce42dabb020189dc288bdefe0bc806deb537db"
+    },
+    {
+      "file": "bakara-102.mp3",
+      "bytes": 1050578,
+      "sha256": "19a51ce2019787d2d75ac624f1f089862ef73837b020259d05c24abe2c958b18"
+    },
+    {
+      "file": "bakara-255.mp3",
+      "bytes": 701916,
+      "sha256": "f5337d69af0db7ae99e0d4530e89bada81e9635c7316f82287933383616f21c9"
+    },
+    {
+      "file": "bakara-285-286.mp3",
+      "bytes": 1489535,
+      "sha256": "573c0356a3a3928314f3042c6e4f71f650a2a893ec7ed7c9b44159c2fb0d45b9"
+    },
+    {
+      "file": "before-sleep-01.mp3",
+      "bytes": 162736,
+      "sha256": "5f9e3fb58780617054521c7acfaa76d9488950b6aed7599802264470e9b6bd09"
+    },
+    {
+      "file": "before-sleep-02.mp3",
+      "bytes": 176528,
+      "sha256": "3a0e33e782cdd715b9e180ac30bcf4883153d3a8983987b8b1e70141a79e01c2"
+    },
+    {
+      "file": "before-sleep-03.mp3",
+      "bytes": 58350,
+      "sha256": "723525e47086f3685c98836dbbf373156ca4587cb6f4a6f9ab6acbe70b67de2c"
+    },
+    {
+      "file": "before-sleep-04.mp3",
+      "bytes": 42363,
+      "sha256": "26fc1a63b0d6f3dd36200e650afcc836a695456f52eeb4ef756c66d2e8b57a34"
+    },
+    {
+      "file": "before-sleep-05.mp3",
+      "bytes": 108192,
+      "sha256": "2326c012fabdaedd528391c5d7f440793b1eb77804a6b6b4096c9f486f52cff9"
+    },
+    {
+      "file": "before-sleep-06.mp3",
+      "bytes": 447993,
+      "sha256": "4032d92e86f5a67462faf5ccabfbf082d577a59a9f6d1f42291b29a7cef2e322"
+    },
+    {
+      "file": "before-sleep-07.mp3",
+      "bytes": 248626,
+      "sha256": "512f9ede19032069d21671fd952560170725a30f9f6400f756107f2745bb4628"
+    },
+    {
+      "file": "before-sleep-08.mp3",
+      "bytes": 130762,
+      "sha256": "d7f98896413addd93b63dc8c9f3439f8d4276c3dc8addf4370cab48287538edc"
+    },
+    {
+      "file": "before-sleep-09.mp3",
+      "bytes": 966188,
+      "sha256": "4a61cc6899ce7d8bf1bd30133baedd6afe797d57a3380f9484d747c0dc099d48"
+    },
+    {
+      "file": "before-sleep-note.mp3",
+      "bytes": 294706,
+      "sha256": "739f0e8bad416523013cf37c92f562a6102767caf32088de118aeaaea2ecedf1"
+    },
+    {
+      "file": "duaa-01.mp3",
+      "bytes": 490311,
+      "sha256": "01851783893a9d1afd06e340d22950c34cf96603ef4e2426a91ae156b6e0f9c3"
+    },
+    {
+      "file": "duaa-02.mp3",
+      "bytes": 232953,
+      "sha256": "90754d6857650a99bdfb8da65117361e21f4c9336601939a0d73273ce5065a73"
+    },
+    {
+      "file": "duaa-03.mp3",
+      "bytes": 89697,
+      "sha256": "bf2b2ebd84501ca1c215ded8d0a142707a9d7fac996d2ee7bfb932fb80ea22c0"
+    },
+    {
+      "file": "duaa-04.mp3",
+      "bytes": 216025,
+      "sha256": "240acd70621b5c6b25cf34eb521e7a3cac568acef9e13f323dbcd61596a583b4"
+    },
+    {
+      "file": "duaa-05.mp3",
+      "bytes": 142047,
+      "sha256": "8293a315916a8943051b8d535c6e91edbf4502bc180fc7c1500b3068398bd3ef"
+    },
+    {
+      "file": "duaa-06.mp3",
+      "bytes": 125433,
+      "sha256": "e5366b0e59478372ec30f643b58948d3a3814a8fb042ae969fe84764661b2830"
+    },
+    {
+      "file": "duaa-07.mp3",
+      "bytes": 112581,
+      "sha256": "119b0a3bb586d1061e04cffa8bf97ad2566efb7a7efddc481f41260419b7d1fb"
+    },
+    {
+      "file": "duaa-08.mp3",
+      "bytes": 48946,
+      "sha256": "991cc8c5856993e4c26703d3ff652f5f05a348b8bc0acbf06c5806dc60134614"
+    },
+    {
+      "file": "duaa-09.mp3",
+      "bytes": 58350,
+      "sha256": "0458cdcb3aa27ac0c9af8ac35c60212c9a796c5d2538a2e284fa3a752b33c765"
+    },
+    {
+      "file": "duaa-10.mp3",
+      "bytes": 40169,
+      "sha256": "82ecf6a13e8fa81c0ddb772e1174bb9fcc88a90a1b548e689b5cc958f2fae37a"
+    },
+    {
+      "file": "duaa-11.mp3",
+      "bytes": 42363,
+      "sha256": "cea1e51392d5ddadc8a05105d3755b30268092a501f0dc151fdbcfd8a51419eb"
+    },
+    {
+      "file": "duaa-12.mp3",
+      "bytes": 334203,
+      "sha256": "f74f7fd4383b74b8d411a4024ebe1aa5d5f766de78786a8b0803da274194bf9c"
+    },
+    {
+      "file": "duaa-13.mp3",
+      "bytes": 48319,
+      "sha256": "8b5f36eb0bad9e264fd6f6b15c1aaf4cfabb546b671747acde1a08d02896854c"
+    },
+    {
+      "file": "duaa-14.mp3",
+      "bytes": 51141,
+      "sha256": "454668f9424ea9728534b0d22280e2bc6160d1b4860934b19e33ab1cdb68c823"
+    },
+    {
+      "file": "duaa-15.mp3",
+      "bytes": 150824,
+      "sha256": "e7414b35af025488a247a30404af5066c66d0685c8a3106a372e94b5ba8b9cb5"
+    },
+    {
+      "file": "duaa-16.mp3",
+      "bytes": 61798,
+      "sha256": "e0800cb7c480f8a585d4e6f9db93b823fc1bd9a6994d328a63266f2a823edea2"
+    },
+    {
+      "file": "duaa-17.mp3",
+      "bytes": 100355,
+      "sha256": "8c2570eb899eaa8fad22be17750ddff8fa61d945fd0eb77388ccaba6fc333735"
+    },
+    {
+      "file": "duaa-18.mp3",
+      "bytes": 97534,
+      "sha256": "abd008716e8b79519d94dbfead6220bb2e50505f114599b2915102745192c899"
+    },
+    {
+      "file": "duaa-19.mp3",
+      "bytes": 100355,
+      "sha256": "1665bab00452d810335852905726f3bde4927ef20e5e94b07c52ebfba365f2a7"
+    },
+    {
+      "file": "duaa-20.mp3",
+      "bytes": 175588,
+      "sha256": "d8a0d499ea6f74c3875b6cccb7159e0f5ae8617becab7a53fb1a9a7a3227a39f"
+    },
+    {
+      "file": "duaa-21.mp3",
+      "bytes": 144868,
+      "sha256": "063a822f902fa8abac15b4241886bd074a2a430ac07aa24eef1b2da2668ccbd1"
+    },
+    {
+      "file": "duaa-22.mp3",
+      "bytes": 65247,
+      "sha256": "ad1daf521cc1447e8320ba000b85feae82710f865f93571d2cdaf09393ca6ed3"
+    },
+    {
+      "file": "duaa-23.mp3",
+      "bytes": 35467,
+      "sha256": "edc9fd01e2400adde1f10d01c5acdca67141881500ad8599e31ea6dc5b98d997"
+    },
+    {
+      "file": "duaa-24.mp3",
+      "bytes": 102550,
+      "sha256": "fd6606d86d3afe3fb3ac272fbf37d2b6fbd9005c63f9b79e162dbe5fbfcbc867"
+    },
+    {
+      "file": "duaa-25.mp3",
+      "bytes": 893746,
+      "sha256": "77c4c5f756fb1c71bd3137001bf2379562d26d23133f8ea156cbe0b7c6ea78fb"
+    },
+    {
+      "file": "duaa-26.mp3",
+      "bytes": 372760,
+      "sha256": "3a95e0c641c85334add615050cb4e6b2f450ce7dbd550b006da55b4d3afd0eba"
+    },
+    {
+      "file": "duaa-27.mp3",
+      "bytes": 459278,
+      "sha256": "f053eac8058b1c6af76dafcfba7cfc1c2af803bc4a1a0e698cba23554a69e897"
+    },
+    {
+      "file": "duaa-28.mp3",
+      "bytes": 70262,
+      "sha256": "e45b2bc3bfc69719d24043f9e1bd0d55798e5fd7f8c0841426a8dd93e2d73f20"
+    },
+    {
+      "file": "duaa-29.mp3",
+      "bytes": 53335,
+      "sha256": "ffb555cf3c5cbed028a9816194819099d86241230e1df04596dfd219bad69966"
+    },
+    {
+      "file": "duaa-30.mp3",
+      "bytes": 114148,
+      "sha256": "2feae3da9d1f68634a735097d52493c70ca783de948758c5f7b1f2654e1d4f7e"
+    },
+    {
+      "file": "duaa-31.mp3",
+      "bytes": 105684,
+      "sha256": "5bdbc8a2141f31c07833a1ea9cbf85b7a33435c9663e849d5a0f38c0cdab6cf7"
+    },
+    {
+      "file": "duaa-32.mp3",
+      "bytes": 175901,
+      "sha256": "4adac76654f7c53f67f57b2f4039688f88956001f6b30b08f0b2656663542819"
+    },
+    {
+      "file": "duaa-33.mp3",
+      "bytes": 195650,
+      "sha256": "03c7e89ca0594e1c13dcf952daaa97c6d28712b736094d0669d171fca9aee6e7"
+    },
+    {
+      "file": "duaa-34.mp3",
+      "bytes": 921018,
+      "sha256": "13656932feabdfc46d768af381c1b7e66b4e869cb64d497393ecfbb372e43380"
+    },
+    {
+      "file": "duaa-35.mp3",
+      "bytes": 546109,
+      "sha256": "2dbea606c98e61851f14b780490973b6e6ddb52226df7831b9ce4ca38a78726f"
+    },
+    {
+      "file": "duaa-36.mp3",
+      "bytes": 72456,
+      "sha256": "a3fb9aa01caab87d2dc8806372d67c5fdba21a9d32827f0e1019c2190f807bba"
+    },
+    {
+      "file": "duaa-37.mp3",
+      "bytes": 121985,
+      "sha256": "ad518e15fd2c9294f209099dbf5fab2da100223bdf9d75409333f31cc3bc33c6"
+    },
+    {
+      "file": "duaa-38.mp3",
+      "bytes": 208816,
+      "sha256": "60d30bbc28f5feb75fa75d5fc40e64126b5c13238a551a01602a90a334040a3a"
+    },
+    {
+      "file": "duaa-39.mp3",
+      "bytes": 241730,
+      "sha256": "e84541985c0b59b3034f08d32d7da7fd2c3e47e757fd55ec0303b370a9c3e2f2"
+    },
+    {
+      "file": "duaa-40.mp3",
+      "bytes": 203487,
+      "sha256": "a735cf1ef2ba0366662c77a6c583182161beed292db0219170b88878ced53460"
+    },
+    {
+      "file": "duaa-41.mp3",
+      "bytes": 94713,
+      "sha256": "8377487633dce83b988991f9f219bd8a76716d92c4bc6f94ceaf9983d569b17f"
+    },
+    {
+      "file": "duaa-42.mp3",
+      "bytes": 73397,
+      "sha256": "4e1fb4bddd2b677f74e0dce5df557a514388c3c65c2f4a54ade7d18aa176fd4f"
+    },
+    {
+      "file": "duaa-43.mp3",
+      "bytes": 77472,
+      "sha256": "808f324e98fde62379533832e2e17727b2e5947e7cc31097a4745fde87f47451"
+    },
+    {
+      "file": "duaa-44.mp3",
+      "bytes": 30138,
+      "sha256": "c236ba0e5089f0349b291c1572b8e86ce8b75ae0e156319367ff2d4d4ad37ebb"
+    },
+    {
+      "file": "duaa-45.mp3",
+      "bytes": 53962,
+      "sha256": "4d0296c63aec0b982251c93516b1a4e3d106fdf6c9684f11bdc9fb6e0d8fbc76"
+    },
+    {
+      "file": "duaa-46.mp3",
+      "bytes": 132016,
+      "sha256": "6e854be45b0731a8687cb0aba5c133a4d57b8d685172c43e674f1f57015afcc9"
+    },
+    {
+      "file": "duaa-47.mp3",
+      "bytes": 137031,
+      "sha256": "a4644a929ae41914b97a612f1367e27f783c1facdb5c5a335c9082672d8d39e5"
+    },
+    {
+      "file": "duaa-48.mp3",
+      "bytes": 244551,
+      "sha256": "bb0be2fe43e7b4cda271dcb2346291279b40ff03f11cd80ed62090538c4adaab"
+    },
+    {
+      "file": "duaa-49.mp3",
+      "bytes": 95653,
+      "sha256": "b3772a615e7209324f2a7f2428783a82114b664d1f636c1c6532450a0d63d34d"
+    },
+    {
+      "file": "duaa-50.mp3",
+      "bytes": 121985,
+      "sha256": "83f82182878d59a430beea54b19eb969761f56bea30bfecec037f18818ef8ca2"
+    },
+    {
+      "file": "duaa-51.mp3",
+      "bytes": 295333,
+      "sha256": "5b501290f05d30c5d4c5f8a19c9355a251f6f6bc3686d138d47d310d45788932"
+    },
+    {
+      "file": "duaa-52.mp3",
+      "bytes": 114775,
+      "sha256": "1110c1467a8ca027b697274027c7a5c8891e9dd4680d5ce2c67432fa34ef0d41"
+    },
+    {
+      "file": "duaa-53.mp3",
+      "bytes": 222295,
+      "sha256": "d7c1d2f4c86d9b2d950a2622187705344a291caa304c55e25d9fd6ff15dcbd06"
+    },
+    {
+      "file": "duaa-54.mp3",
+      "bytes": 89697,
+      "sha256": "13f784de8e48c22e82e3a5a1dae15e1eadeb0cf56dfc6331b7af45960d015258"
+    },
+    {
+      "file": "duaa-55.mp3",
+      "bytes": 83428,
+      "sha256": "ad96cd1e058c8a9e091a272e7fc521f558a21da344b4a1a60892f220d5731dbb"
+    },
+    {
+      "file": "duaa-56.mp3",
+      "bytes": 43304,
+      "sha256": "5db0fdb56f25eb99fd2f7b8d39990333b96e7fbff5b968ca32700c6678f1cb74"
+    },
+    {
+      "file": "duaa-57.mp3",
+      "bytes": 162109,
+      "sha256": "29ff53750459ca54a52aab29d5f8236a272742e3e8fd43d64323fff4f607ad5f"
+    },
+    {
+      "file": "duaa-58.mp3",
+      "bytes": 258657,
+      "sha256": "ef965b3935339e127e5de7323d11ceb4e57d86b8961e21078a293aedaf402456"
+    },
+    {
+      "file": "duaa-59.mp3",
+      "bytes": 169318,
+      "sha256": "3e292baa0dc62ae461ea495c21fc43afd742aaaf9aa089f3c32df14fa2321439"
+    },
+    {
+      "file": "duaa-60.mp3",
+      "bytes": 176528,
+      "sha256": "a97073a947fa395544b920f7b9d1ff87e97f2266cf2515388b4b236c2bb08e31"
+    },
+    {
+      "file": "duaa-61.mp3",
+      "bytes": 195023,
+      "sha256": "cc4525aa0e074981547a3c0b3aa50acbac707956e6289b545825a4561093ead6"
+    },
+    {
+      "file": "duaa-62.mp3",
+      "bytes": 438589,
+      "sha256": "3c2b822eaa97cd5254eab030dd916d83bde4a0ad9089f82602eaf3b6d2a724b0"
+    },
+    {
+      "file": "duaa-63.mp3",
+      "bytes": 229505,
+      "sha256": "bdeba51d19de59c014ff831f566e48ca8795750c9e34a5c73aa03cbf06c33a32"
+    },
+    {
+      "file": "duaa-64.mp3",
+      "bytes": 374014,
+      "sha256": "20a9a7ff9bd70e39e0cc10baf23b1f5b7bca794715c907fbc193f5a6883a3daa"
+    },
+    {
+      "file": "duaa-65.mp3",
+      "bytes": 231072,
+      "sha256": "a6a754a2d53ac69c70b089d528c67bc35ef0c223f4686be3823e27bb482111b7"
+    },
+    {
+      "file": "duaa-66.mp3",
+      "bytes": 65247,
+      "sha256": "9171ca73aba3031d081622c8f2878309a28bcb9fb16495e78db0552313dd1eea"
+    },
+    {
+      "file": "duaa-67.mp3",
+      "bytes": 84682,
+      "sha256": "e48b88121d31ad36262f021e4d8a12bdd5e3189edc9990661060bec4bfc449d2"
+    },
+    {
+      "file": "duaa-68.mp3",
+      "bytes": 79039,
+      "sha256": "915317791ce8a53b98ac6ac0013e3cf3c0ec4f580318831f47c2787f655f93c2"
+    },
+    {
+      "file": "duaa-69.mp3",
+      "bytes": 148316,
+      "sha256": "083a9645114c509c20a19abf26a0e6c99c7ab9f07478d7ec2873bd5e2021f598"
+    },
+    {
+      "file": "duaa-70.mp3",
+      "bytes": 263046,
+      "sha256": "eea1e928856f6da2dc02cf8d0009a4ec614ccaf71d79eb0164f658dc6467a118"
+    },
+    {
+      "file": "duaa-71.mp3",
+      "bytes": 470249,
+      "sha256": "494caa05dffb90cdfe71445bca29942bdaa157c19c5b4e8122c678781f58fd2e"
+    },
+    {
+      "file": "duaa-72.mp3",
+      "bytes": 102550,
+      "sha256": "80d8e66266832a9429845f6656620e35b27dfd49a6c7968a2bf9d4d1dd028c49"
+    },
+    {
+      "file": "duaa-73.mp3",
+      "bytes": 69008,
+      "sha256": "ff3e4cd6282f3b4eeed8e7a7da3aa3a50c454fcd1f12e6012a28e8f02a5c98be"
+    },
+    {
+      "file": "duaa-74.mp3",
+      "bytes": 53335,
+      "sha256": "8360ba886d4576fd3c92df89f7e7225823bddc4f649567f562b483f8497b434e"
+    },
+    {
+      "file": "duaa-75.mp3",
+      "bytes": 55216,
+      "sha256": "1536d4ff079439e38c1acb6db96742a2673d95a0470621b42c7918a702a7feab"
+    },
+    {
+      "file": "duaa-76.mp3",
+      "bytes": 366491,
+      "sha256": "36590301d7ecf72ff5f3197e6c8732adb473c53480e7229766c9095db6e311b2"
+    },
+    {
+      "file": "duaa-77.mp3",
+      "bytes": 65560,
+      "sha256": "571a7ea4d257060fb80929d44b3aa481347e00413042ffd2386cb314fcbd5f78"
+    },
+    {
+      "file": "duaa-78.mp3",
+      "bytes": 106938,
+      "sha256": "e01312deefeaef8a3a1be57b990641410252769f09bab87fd8dd27a9dcd8cc8d"
+    },
+    {
+      "file": "duaa-79.mp3",
+      "bytes": 178723,
+      "sha256": "a7062d0c78e5484d0980ed72b48a42c59484f5a1530969671915a68ac4bc0296"
+    },
+    {
+      "file": "duaa-80.mp3",
+      "bytes": 71830,
+      "sha256": "ad56c99291ffeb566d36fdefb497707a2f07895b36996ee40f497ed58384d4e9"
+    },
+    {
+      "file": "duaa-81.mp3",
+      "bytes": 74024,
+      "sha256": "bbbe93f17ae4a427df6c6b8b69edeb30640ce3294bea5a36b0b9ef868aa526d6"
+    },
+    {
+      "file": "duaa-82.mp3",
+      "bytes": 73083,
+      "sha256": "707f989972446c6238113bb24d7bb0133dec6161091d8a3bf1afd90dffaffe4e"
+    },
+    {
+      "file": "duaa-83.mp3",
+      "bytes": 125433,
+      "sha256": "cf8a9d18390be128574bad8b06a286c770300d3c9e8789f5023d0bb0d1703fba"
+    },
+    {
+      "file": "duaa-84.mp3",
+      "bytes": 81861,
+      "sha256": "9e9df57a1f9b374d36f090d2e5cc12d6463d94b76c0a2c64ec02838d55bb604e"
+    },
+    {
+      "file": "duaa-85.mp3",
+      "bytes": 294706,
+      "sha256": "7e433a20812ca77e69e75eb1d28fe51a9ddae8bd05f2a884963831a9dc4f55ef"
+    },
+    {
+      "file": "duaa-86.mp3",
+      "bytes": 83428,
+      "sha256": "0db948cd8dd742468d93deaf36741baaa2e262a080d1b83a984a86807a96d43d"
+    },
+    {
+      "file": "duaa-87.mp3",
+      "bytes": 201606,
+      "sha256": "7a91bdf243377767fe49ac6791d0ebda49b18121ffe49e48aa2cc39daab3801b"
+    },
+    {
+      "file": "duaa-88.mp3",
+      "bytes": 119163,
+      "sha256": "eeddf44e51c6bba3423c68ae20f89621225812ae3b69bbf212502a4e82342d23"
+    },
+    {
+      "file": "duaa-89.mp3",
+      "bytes": 155839,
+      "sha256": "bfd5bb45b7584a0732838773895d05d8ca327c0f1efc82ead8de53fb5bc81d1c"
+    },
+    {
+      "file": "duaa-90.mp3",
+      "bytes": 451754,
+      "sha256": "78562a599d589b7386c22e3c9bf8023b552379bc3d7ed2eca76508ff7dd2a15b"
+    },
+    {
+      "file": "duaa-91.mp3",
+      "bytes": 74651,
+      "sha256": "9665db8193c3d7ac4bbfb3b6df2d23a004b103c601f684fcb7c125ea286f5f9a"
+    },
+    {
+      "file": "duaa-92.mp3",
+      "bytes": 53021,
+      "sha256": "1fb2ef8ce02a00c8f0c3402885044344c95a43c5a8d01d04d7953692207acbc0"
+    },
+    {
+      "file": "duaa-93.mp3",
+      "bytes": 121985,
+      "sha256": "e461d08b9fdc98271efd372033d06d45b227535dcbc64b037385943a40a7288c"
+    },
+    {
+      "file": "duaa-94.mp3",
+      "bytes": 73397,
+      "sha256": "8dd3f66eb41c69d55ca71e9e3527273eb95ac771df47a4665780577e5613de21"
+    },
+    {
+      "file": "duaa-95.mp3",
+      "bytes": 68381,
+      "sha256": "0e9874ef4b691c9b3b848a016f2f7d11b4a656c221627a8172e777d798b297ec"
+    },
+    {
+      "file": "duaa-96.mp3",
+      "bytes": 100355,
+      "sha256": "3df1133406596774a373088a5fad2e4b58c0f90874d7a7e81c1fc451ecf5ee26"
+    },
+    {
+      "file": "fatiha.mp3",
+      "bytes": 880306,
+      "sha256": "88afa87fdfae38f74fb0338b62ced34be1c6d9dc3fbfa2315243589315996871"
+    },
+    {
+      "file": "ghafir-44-45.mp3",
+      "bytes": 571707,
+      "sha256": "7295bba499fbff56bf86669e29f6d05ce2fdf7fee707d249b86764053200b24f"
+    },
+    {
+      "file": "ibrahim-15-17.mp3",
+      "bytes": 727635,
+      "sha256": "7b47a471646e8fe9e2daa8727b51743ae17b9be5da3f06619fa854012ab94965"
+    },
+    {
+      "file": "maryam-68-72.mp3",
+      "bytes": 1080331,
+      "sha256": "db60964ada0f007354d4b89b912d1b386d5af13f5cc1af344be14def2a073859"
+    },
+    {
+      "file": "masaa-01.mp3",
+      "bytes": 537958,
+      "sha256": "58df1a3c05e3eb6d1c0bd30f34536fc95cc49bab77ef008653e088a5150ceee0"
+    },
+    {
+      "file": "masaa-02.mp3",
+      "bytes": 274644,
+      "sha256": "eda159e7f6a78b1ef9c6af99538e541deefb220401f4bd2a9076953b4f85ec29"
+    },
+    {
+      "file": "masaa-03.mp3",
+      "bytes": 143405,
+      "sha256": "8c40350b6ce1a79e72c881518b9b629aab5977f53cbb42c954e92c68e244b3ef"
+    },
+    {
+      "file": "masaa-04.mp3",
+      "bytes": 160541,
+      "sha256": "fa36d500cdce4a83557e637e032419fad507c7ece819e5c168ad0657a8935365"
+    },
+    {
+      "file": "masaa-05.mp3",
+      "bytes": 73605,
+      "sha256": "808bfd943671761131c97c6ba9dd5c3c451aee0261cd3316f4bcf7c75bcb9338"
+    },
+    {
+      "file": "masaa-06.mp3",
+      "bytes": 283003,
+      "sha256": "5c1543150097c94a2240431bfd4768fc1d602eddd8412fb3ec974ffc5ae50986"
+    },
+    {
+      "file": "masaa-07.mp3",
+      "bytes": 147584,
+      "sha256": "fe36a177243b8581ce36ddfa3141fcf1c30b6dee28ba24523900ce9f6557aff5"
+    },
+    {
+      "file": "nour-35.mp3",
+      "bytes": 1106313,
+      "sha256": "7fe0f5dd6fa09f1602a73bcf402afc2683e95388374e8c829bfd5abd4d3ad201"
+    },
+    {
+      "file": "roqia-01.mp3",
+      "bytes": 90742,
+      "sha256": "7174e5809c1a81660919578243c92caf5641fd2456d6336a142455dee9f19489"
+    },
+    {
+      "file": "roqia-02.mp3",
+      "bytes": 337338,
+      "sha256": "e68a8da4b194f70a89e254cd7cbde2ae0bea9a21003fd4dabab05a0f4126ea25"
+    },
+    {
+      "file": "roqia-03.mp3",
+      "bytes": 83956,
+      "sha256": "e16e14be691902e596ca54dff37c4e22a9f1a8b6d5eede277a31391f771cb035"
+    },
+    {
+      "file": "roqia-04.mp3",
+      "bytes": 109968,
+      "sha256": "47c7bffbedf08f7288c61314782105c156e188939f0aee87cd164b8f65b829d7"
+    },
+    {
+      "file": "roqia-05.mp3",
+      "bytes": 162631,
+      "sha256": "7f88da1a3639a97c9ca9bf502aca0a5b86cbb40fa029d4a788c4f6f69d6851b6"
+    },
+    {
+      "file": "roqia-06.mp3",
+      "bytes": 187708,
+      "sha256": "592c1430424039f14be262ba26633230a263458385fc7217b9b659a6a9a8a222"
+    },
+    {
+      "file": "sabah-01.mp3",
+      "bytes": 558020,
+      "sha256": "5635b36fbeafacbb24c246b41a852579b54a09ea46a6bfdf4fd923065fceb154"
+    },
+    {
+      "file": "sabah-02.mp3",
+      "bytes": 323963,
+      "sha256": "5b2ae16664e20a319631fae9004e48944a269ddfb441c8170677abd2a84d1eb5"
+    },
+    {
+      "file": "sabah-03.mp3",
+      "bytes": 308080,
+      "sha256": "575853f0dde8fa1313f161e7e1456b634507b75a8c8793780f1c1ad6db4f15f8"
+    },
+    {
+      "file": "sabah-04.mp3",
+      "bytes": 191470,
+      "sha256": "a64c636d95e450fb0b7507940afd9e313f1f64aa7ae29a0693c2f3c3e8082a8a"
+    },
+    {
+      "file": "sabah-05.mp3",
+      "bytes": 129194,
+      "sha256": "7576fc1672c25fcc37351e8e38c2990c204368ad746280bf0f95fb39756b401d"
+    },
+    {
+      "file": "sabah-06.mp3",
+      "bytes": 112058,
+      "sha256": "ab0cab4af39b051325c9dc2e3500057764aaf4d16eb9eb2dffe9804ec56836ed"
+    },
+    {
+      "file": "sabah-07.mp3",
+      "bytes": 131284,
+      "sha256": "870bcea8a80effca758ec1754c6285c0187baea87d6625a8a598bd758799e97c"
+    },
+    {
+      "file": "sabah-08.mp3",
+      "bytes": 276316,
+      "sha256": "01f2d627671e8c87e1a44ba436f580fadf2f25493474b859024131753e31db84"
+    },
+    {
+      "file": "sabah-09.mp3",
+      "bytes": 147166,
+      "sha256": "5abfe39f5b8a4d78db7036bf13fc4d36d5ed25cb5b68d8e55f3950180a73790a"
+    },
+    {
+      "file": "sabah-10.mp3",
+      "bytes": 169318,
+      "sha256": "3bb3f0aacf7d03004b32b82ab03b5feed020fefbb4cea2a057547a5c4f1de37b"
+    },
+    {
+      "file": "sabah-11.mp3",
+      "bytes": 178931,
+      "sha256": "e70e8ceb15d9ab8210b162a44080ecacbda1031d3f9bf4a5cd485cea5dcc89e0"
+    },
+    {
+      "file": "sabah-12.mp3",
+      "bytes": 148420,
+      "sha256": "d9832ac1499866c0bdf07e40eb496341aad3a4efc1151d02ebb4d44f3dae139f"
+    },
+    {
+      "file": "sabah-13.mp3",
+      "bytes": 153018,
+      "sha256": "94e63ec0aa1ddd42174f23a1395c4e88396ad7bc79354b06af6ce6e3ae6358d2"
+    },
+    {
+      "file": "sabah-14.mp3",
+      "bytes": 42258,
+      "sha256": "c9f7fc3caf86e1f330eb6c8838c8f498910bd8dac2db792f8d89ade89679436b"
+    },
+    {
+      "file": "sabah-15.mp3",
+      "bytes": 51036,
+      "sha256": "ea0cc752a53364d828e4db2aa99c5a5b01b0973074b8078bf932fd86c300988e"
+    },
+    {
+      "file": "sabah-16.mp3",
+      "bytes": 71934,
+      "sha256": "0d0441e64e8b83278e678a29794d82f8459dc6de9b84fb73bf210961d1efd724"
+    },
+    {
+      "file": "safat-1-18.mp3",
+      "bytes": 2237434,
+      "sha256": "56ab735b9618de486f68b43e0358ea155c8c7805370b3e430402a11be27b5a61"
+    },
+    {
+      "file": "safat-177-182.mp3",
+      "bytes": 676763,
+      "sha256": "3c41526b8fbfe75708eb446a433321f576849d9fd409d3fdd8e877a72e2a3224"
+    },
+    {
+      "file": "sajda.mp3",
+      "bytes": 9933823,
+      "sha256": "a753156718cc2e3c91899ba2c1a8b5528c390bd18bc829595a403cb0d1bdb999"
+    },
+    {
+      "file": "taha-69.mp3",
+      "bytes": 215078,
+      "sha256": "d522fa064e2a3e207e0781b49302b9f52c3a983ebe08f630fa832c0d551384d1"
+    },
+    {
+      "file": "tasbihat-01.mp3",
+      "bytes": 113729,
+      "sha256": "c204a5be73bcd3bb644ba3106dced123d396acda4b0bec381d48f19247a2ccf7"
+    },
+    {
+      "file": "tasbihat-02.mp3",
+      "bytes": 271718,
+      "sha256": "586289152bf159369f32179f7c18f3475b4de48c0b9f7bb83484910f392222e6"
+    },
+    {
+      "file": "tasbihat-03.mp3",
+      "bytes": 115819,
+      "sha256": "21ede15b94ffb5509557a71aa90627da486e75e3a131361b46c0c15549ad3229"
+    },
+    {
+      "file": "tasbihat-04.mp3",
+      "bytes": 124178,
+      "sha256": "19ee10b3ade4c464283ec35f22b90e94bce1f7f83eebeb9be220d4de70354212"
+    },
+    {
+      "file": "tasbihat-05.mp3",
+      "bytes": 155107,
+      "sha256": "ae7cb982f831732898112156c323a695e33d0fab9e3d508a175aa888777dc976"
+    },
+    {
+      "file": "tasbihat-06.mp3",
+      "bytes": 354474,
+      "sha256": "a8dd7ea539e48b99e6250023ec8d54092cce5083e70c36348640f33b819e8968"
+    },
+    {
+      "file": "tasbihat-07.mp3",
+      "bytes": 93667,
+      "sha256": "d3ac079e4c9491db1008779d0fe65732cbd1d52730bd5fca0194c7c075fb06ea"
+    },
+    {
+      "file": "tasbihat-08.mp3",
+      "bytes": 91996,
+      "sha256": "76b165cc92998fc9fbb400528425825db25f4b7f34a48684374efc51da35bb7b"
+    },
+    {
+      "file": "tasbihat-09.mp3",
+      "bytes": 177677,
+      "sha256": "e494bc2e60116799165e5f6077bc40b2f22d7fd42924abd000e9fd9f283a7ba2"
+    },
+    {
+      "file": "tasbihat-10.mp3",
+      "bytes": 73605,
+      "sha256": "10ae6a9c2ae8a1ce8eab95172c9e40cf6aeda30d09c034ff403e4ffcb00f1787"
+    },
+    {
+      "file": "tasbihat-11.mp3",
+      "bytes": 410062,
+      "sha256": "e22e3e1493a857f9a9fbcbb9752ca1e3a19c4dd3bdbc0d8ea32594e3ce745fe4"
+    },
+    {
+      "file": "tasbihat-12.mp3",
+      "bytes": 100773,
+      "sha256": "9001b377120582f0cfe44f3e868bd035589b33c098c775c2ed3984baa522f7a6"
+    },
+    {
+      "file": "tasbihat-13.mp3",
+      "bytes": 256254,
+      "sha256": "5a00ef31181b5cbff820ee34b6d8eb3942d347300fa71eacc98014c76a597e06"
+    },
+    {
+      "file": "tasbihat-14.mp3",
+      "bytes": 228668,
+      "sha256": "3d769e660bcedc364ea2b7b2f84ac393d17f44e48eb8b144f6a862f91e9fdf2a"
+    },
+    {
+      "file": "tasbihat-15.mp3",
+      "bytes": 227832,
+      "sha256": "f4c6f174c742a97d0e6b2449f7174cb4811dc02e5ed632ed95a3d4d6ff2d43cd"
+    },
+    {
+      "file": "tasbihat-16.mp3",
+      "bytes": 476936,
+      "sha256": "877adad920295b6dded0c67b4211f74aa000a1e99d14402cd8d93b6dac273a4d"
+    },
+    {
+      "file": "tasbihat-17.mp3",
+      "bytes": 493100,
+      "sha256": "fabbe25c86fc19974d53aa8f0724db5e6bbbb3d7fdd6fb7b6fee66b35b4502e8"
+    },
+    {
+      "file": "yassin-1-9.mp3",
+      "bytes": 1151350,
+      "sha256": "ede9df529916706320bf424f89d4c5b83639814b9cac10ba1dda72467ab8c838"
+    },
+    {
+      "file": "youness-79-82.mp3",
+      "bytes": 991121,
+      "sha256": "2b80a5a9cd0ad766397102951306bd25d1ab13ba0c49f08725cd2274119ed9d3"
+    }
+  ]
+}

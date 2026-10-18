@@ -64,7 +64,9 @@
             "image/webp",
             "audio/mpeg",
             "application/zip",
-            "application/pdf"
+            "application/pdf",
+            "text/plain",
+            "application/xml"
           ]
         }
       }

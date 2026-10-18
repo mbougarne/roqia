@@ -1,0 +1,85 @@
+{
+  "wifiOff": "Wifi is disabled",
+  "eventsBeforeRestore": [
+    {
+      "at": 1792322566897,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "stable"
+      }
+    }
+  ],
+  "eventsAfterRestore": [
+    {
+      "at": 1792322566897,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "stable"
+      }
+    },
+    {
+      "at": 1792322579137,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "stable",
+        "expectedBytes": 8388608,
+        "headers": {
+          "X-Android-Response-Source": "NETWORK 200",
+          "Keep-Alive": "timeout=5",
+          "X-Android-Received-Millis": "1792322579137",
+          "Connection": "keep-alive",
+          "Date": "Sun, 18 Oct 2026 11:22:59 GMT",
+          "ETag": "\"fixture-a\"",
+          "Content-Length": "8388608",
+          "X-Android-Selected-Protocol": "http/1.1",
+          "X-Android-Sent-Millis": "1792322579114",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322579443,
+      "event": "download-paused",
+      "detail": {
+        "scenario": "stable",
+        "bytes": 458752
+      }
+    },
+    {
+      "at": 1792322579980,
+      "event": "download-resumed",
+      "detail": {
+        "scenario": "stable"
+      }
+    },
+    {
+      "at": 1792322585043,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "stable",
+        "bytesTotal": 8388608,
+        "bytesDownloaded": 8388608,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/stable.part"
+      }
+    },
+    {
+      "at": 1792322585069,
+      "event": "download-verified",
+      "detail": {
+        "scenario": "stable",
+        "path": "/data/user/0/name.roqia.app/files/feasibility/stable.ready",
+        "sha256": "f6216dd797b457e937675c591378ac06c1eb45658d0bb7c4c3a5143db74f4f84",
+        "bytes": 8388608
+      }
+    },
+    {
+      "at": 1792322585133,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "stable"
+      }
+    }
+  ],
+  "runnerExit": 0
+}

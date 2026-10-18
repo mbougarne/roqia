@@ -1,0 +1,503 @@
+{
+  "stable": [
+    {
+      "at": 1792322200114,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "stable"
+      }
+    },
+    {
+      "at": 1792322201115,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "stable",
+        "expectedBytes": 8388608,
+        "headers": {
+          "ETag": "\"fixture-a\"",
+          "Content-Length": "8388608",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322201387,
+      "event": "download-paused",
+      "detail": {
+        "scenario": "stable",
+        "bytes": 393216
+      }
+    },
+    {
+      "at": 1792322201955,
+      "event": "download-resumed",
+      "detail": {
+        "scenario": "stable"
+      }
+    },
+    {
+      "at": 1792322207299,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "stable",
+        "bytesTotal": 8388608,
+        "bytesDownloaded": 8388608,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/stable.part"
+      }
+    },
+    {
+      "at": 1792322207358,
+      "event": "download-verified",
+      "detail": {
+        "scenario": "stable",
+        "path": "/data/user/0/name.roqia.app/files/feasibility/stable.ready",
+        "sha256": "f6216dd797b457e937675c591378ac06c1eb45658d0bb7c4c3a5143db74f4f84",
+        "bytes": 8388608
+      }
+    },
+    {
+      "at": 1792322207428,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "stable"
+      }
+    }
+  ],
+  "range200": [
+    {
+      "at": 1792322223837,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "range200"
+      }
+    },
+    {
+      "at": 1792322224323,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "range200",
+        "expectedBytes": 8388608,
+        "headers": {
+          "ETag": "\"fixture-a\"",
+          "Content-Length": "8388608",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322224607,
+      "event": "download-paused",
+      "detail": {
+        "scenario": "range200",
+        "bytes": 393216
+      }
+    },
+    {
+      "at": 1792322225129,
+      "event": "download-resumed",
+      "detail": {
+        "scenario": "range200"
+      }
+    },
+    {
+      "at": 1792322230637,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "range200",
+        "bytesTotal": 8388608,
+        "bytesDownloaded": 8388608,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/range200.part"
+      }
+    },
+    {
+      "at": 1792322230661,
+      "event": "download-verified",
+      "detail": {
+        "scenario": "range200",
+        "path": "/data/user/0/name.roqia.app/files/feasibility/range200.ready",
+        "sha256": "f6216dd797b457e937675c591378ac06c1eb45658d0bb7c4c3a5143db74f4f84",
+        "bytes": 8388608
+      }
+    },
+    {
+      "at": 1792322230663,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "range200"
+      }
+    }
+  ],
+  "changed": [
+    {
+      "at": 1792322231303,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "changed"
+      }
+    },
+    {
+      "at": 1792322231687,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "changed",
+        "expectedBytes": 8388608,
+        "headers": {
+          "ETag": "\"fixture-a\"",
+          "Content-Length": "8388608",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322231972,
+      "event": "download-paused",
+      "detail": {
+        "scenario": "changed",
+        "bytes": 393216
+      }
+    },
+    {
+      "at": 1792322232488,
+      "event": "download-resumed",
+      "detail": {
+        "scenario": "changed"
+      }
+    },
+    {
+      "at": 1792322237857,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "changed",
+        "bytesTotal": 8388608,
+        "bytesDownloaded": 8388608,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/changed.part"
+      }
+    },
+    {
+      "at": 1792322237887,
+      "event": "download-quarantined",
+      "detail": {
+        "scenario": "changed",
+        "error": "SHA-256 mismatch; partial file remains quarantined"
+      }
+    },
+    {
+      "at": 1792322237890,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "changed"
+      }
+    }
+  ],
+  "wrong206": [
+    {
+      "at": 1792322238839,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "wrong206"
+      }
+    },
+    {
+      "at": 1792322239208,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "wrong206",
+        "expectedBytes": 8388608,
+        "headers": {
+          "ETag": "\"fixture-a\"",
+          "Content-Length": "8388608",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322239503,
+      "event": "download-paused",
+      "detail": {
+        "scenario": "wrong206",
+        "bytes": 458752
+      }
+    },
+    {
+      "at": 1792322240024,
+      "event": "download-resumed",
+      "detail": {
+        "scenario": "wrong206"
+      }
+    },
+    {
+      "at": 1792322245381,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "wrong206",
+        "bytesTotal": 8388608,
+        "bytesDownloaded": 8880128,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/wrong206.part"
+      }
+    },
+    {
+      "at": 1792322245397,
+      "event": "download-quarantined",
+      "detail": {
+        "scenario": "wrong206",
+        "error": "SHA-256 mismatch; partial file remains quarantined"
+      }
+    },
+    {
+      "at": 1792322245398,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "wrong206"
+      }
+    }
+  ],
+  "range416": [
+    {
+      "at": 1792322246370,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "range416"
+      }
+    },
+    {
+      "at": 1792322246748,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "range416",
+        "expectedBytes": 8388608,
+        "headers": {
+          "ETag": "\"fixture-a\"",
+          "Content-Length": "8388608",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322247037,
+      "event": "download-paused",
+      "detail": {
+        "scenario": "range416",
+        "bytes": 458752
+      }
+    },
+    {
+      "at": 1792322247558,
+      "event": "download-resumed",
+      "detail": {
+        "scenario": "range416"
+      }
+    },
+    {
+      "at": 1792322247571,
+      "event": "download-error",
+      "detail": {
+        "scenario": "range416",
+        "error": "Range not satisfiable",
+        "errorCode": 416
+      }
+    },
+    {
+      "at": 1792322247574,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "range416"
+      }
+    }
+  ],
+  "unknown": [
+    {
+      "at": 1792322248625,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "unknown"
+      }
+    },
+    {
+      "at": 1792322249013,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "unknown",
+        "expectedBytes": -1,
+        "headers": {
+          "ETag": "\"fixture-a\"",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322254328,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "unknown",
+        "bytesTotal": -1,
+        "bytesDownloaded": 8388608,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/unknown.part"
+      }
+    },
+    {
+      "at": 1792322254353,
+      "event": "download-verified",
+      "detail": {
+        "scenario": "unknown",
+        "path": "/data/user/0/name.roqia.app/files/feasibility/unknown.ready",
+        "sha256": "f6216dd797b457e937675c591378ac06c1eb45658d0bb7c4c3a5143db74f4f84",
+        "bytes": 8388608
+      }
+    },
+    {
+      "at": 1792322254356,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "unknown"
+      }
+    }
+  ],
+  "recovery": [
+    {
+      "at": 1792322255145,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "recovery"
+      }
+    },
+    {
+      "at": 1792322255497,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "recovery",
+        "expectedBytes": 8388608,
+        "headers": {
+          "ETag": "\"fixture-a\"",
+          "Content-Length": "8388608",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream"
+        }
+      }
+    },
+    {
+      "at": 1792322255783,
+      "event": "download-paused",
+      "detail": {
+        "scenario": "recovery",
+        "bytes": 458752
+      }
+    },
+    {
+      "at": 1792322255785,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "recovery"
+      }
+    }
+  ],
+  "reattach": [
+    {
+      "at": 1792322268346,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "reattach"
+      }
+    },
+    {
+      "at": 1792322268645,
+      "event": "download-reattached",
+      "detail": {
+        "id": "roqia-probe-recovery",
+        "state": "PAUSED",
+        "metadata": {
+          "probe": true,
+          "scenario": "recovery",
+          "sha256": "f6216dd797b457e937675c591378ac06c1eb45658d0bb7c4c3a5143db74f4f84"
+        }
+      }
+    },
+    {
+      "at": 1792322273816,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "reattach",
+        "bytesTotal": 8388608,
+        "bytesDownloaded": 8388608,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/recovery.part"
+      }
+    },
+    {
+      "at": 1792322273837,
+      "event": "download-verified",
+      "detail": {
+        "scenario": "reattach",
+        "path": "/data/user/0/name.roqia.app/files/feasibility/recovery.ready",
+        "sha256": "f6216dd797b457e937675c591378ac06c1eb45658d0bb7c4c3a5143db74f4f84",
+        "bytes": 8388608
+      }
+    },
+    {
+      "at": 1792322273843,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "reattach"
+      }
+    }
+  ],
+  "provider": [
+    {
+      "at": 1792322383805,
+      "event": "boot-no-live-event",
+      "detail": {}
+    },
+    {
+      "at": 1792322385998,
+      "event": "scenario-start",
+      "detail": {
+        "scenario": "provider"
+      }
+    },
+    {
+      "at": 1792322387014,
+      "event": "download-begin",
+      "detail": {
+        "scenario": "provider",
+        "expectedBytes": 473723,
+        "headers": {
+          "ETag": "\"c5943ca409f50d50beceb5bda6c58b09\"",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "473723",
+          "Content-Type": "audio/mpeg"
+        }
+      }
+    },
+    {
+      "at": 1792322387115,
+      "event": "download-transport-complete",
+      "detail": {
+        "scenario": "provider",
+        "bytesTotal": 473723,
+        "bytesDownloaded": 473723,
+        "location": "/data/user/0/name.roqia.app/files/feasibility/provider.part"
+      }
+    },
+    {
+      "at": 1792322387123,
+      "event": "download-verified",
+      "detail": {
+        "scenario": "provider",
+        "path": "/data/user/0/name.roqia.app/files/feasibility/provider.ready",
+        "sha256": "182bd7ad3599923bf74d050e200c8805f9f56cdd1384d822752ee8924b6c7258",
+        "bytes": 473723
+      }
+    },
+    {
+      "at": 1792322387125,
+      "event": "scenario-finished",
+      "detail": {
+        "scenario": "provider"
+      }
+    }
+  ]
+}

@@ -419,7 +419,7 @@
         "light": "reference/light/22-quran-library.png",
         "dark": "reference/dark/22-quran-library.png"
       },
-      "designBrief": "Root Quran tab active \"القرآن\". Header \"القرآن الكريم\", search icon and bookmark icon. Small selector pill \"ورش عن نافع\" and download icon. Continue card \"متابعة القراءة\" / \"سورة الإخلاص\" / \"الآية 1\", small book symbol. Tabs \"السور\" selected / \"الأجزاء\". Search \"ابحث عن سورة\". List six rows with Western index medallions: \"1 الفاتحة\" / \"2 البقرة\" / \"3 آل عمران\" / \"4 النساء\" / \"5 المائدة\" / \"6 الأنعام\". Each muted subtitle just \"ورش عن نافع\", NO verse counts to avoid mixing traditions. Downloaded check icons. Compact footer \"المصحف المحمدي • متاح دون اتصال\".",
+      "designBrief": "Root Quran tab active \"القرآن\". Header \"القرآن الكريم\", search icon and bookmark icon. Small selector pill \"ورش عن نافع\" and download icon. Continue card \"متابعة القراءة\" / \"سورة الإخلاص\" / \"الآية 1\", small book symbol. Tabs \"السور\" selected / \"الأجزاء\". Search \"ابحث عن سورة\". List six rows with Western index medallions: \"1 الفاتحة\" / \"2 البقرة\" / \"3 آل عمران\" / \"4 النساء\" / \"5 المائدة\" / \"6 الأنعام\". Each muted subtitle just \"ورش عن نافع\", NO verse counts to avoid mixing traditions. Downloaded check icons. Compact footer \"مجمع الملك فهد • متاح دون اتصال\".",
       "status": "reference approved; implementation planned"
     },
     {
@@ -439,7 +439,7 @@
         "light": "reference/light/23-mushaf-selection.png",
         "dark": "reference/dark/23-mushaf-selection.png"
       },
-      "designBrief": "Detail header \"اختر المصحف\". Subtitle \"اختر الرواية التي تقرأ بها\". Two large but compact selection cards: selected \"ورش عن نافع\" with \"من طريق الأزرق\" and source \"المصحف المحمدي\"; unselected \"حفص عن عاصم\" with source \"Tanzil\". A small note \"يمكنك إضافة المصحف الآخر لاحقاً\". Small open-book download line illustration, caption \"حمّل اختيارك واقرأ دون اتصال\". Bottom primary \"متابعة\" and text \"تخطي الآن\". Only one mushaf selected. No translations promised on this choice screen.",
+      "designBrief": "Detail header \"اختر المصحف\". Subtitle \"اختر الرواية التي تقرأ بها\". Two large but compact selection cards: selected \"ورش عن نافع\" with \"نسخة ورش\" and source \"مجمع الملك فهد\"; unselected \"حفص عن عاصم\" with source \"Tanzil\". A small note \"يمكنك إضافة المصحف الآخر لاحقاً\". Small open-book download line illustration, caption \"حمّل اختيارك واقرأ دون اتصال\". Bottom primary \"متابعة\" and text \"تخطي الآن\". Only one mushaf selected. No translations promised on this choice screen.",
       "status": "reference approved; implementation planned"
     },
     {
@@ -462,7 +462,7 @@
         "light": "reference/light/24-mushaf-download.png",
         "dark": "reference/dark/24-mushaf-download.png"
       },
-      "designBrief": "Detail header \"تحميل المصحف\". Selected summary card \"ورش عن نافع\" / \"المصحف المحمدي\" / \"114 سورة\". Content row \"المصحف والخط\" / \"8 MB\". Section \"ترجمة المعاني\" with chips \"بدون ترجمة\" selected, \"Français\", \"English\". Small text \"يمكن تنزيل الترجمات لاحقاً\". Toggle \"التنزيل عبر Wi-Fi فقط\" on. Total \"حجم التنزيل 8 MB\". Bottom primary \"تحميل • 8 MB\", text \"اختيار رواية أخرى\". Sizes illustrative. No counterfeit publisher badges.",
+      "designBrief": "Detail header \"تحميل المصحف\". Selected summary card \"ورش عن نافع\" / \"مجمع الملك فهد\" / \"114 سورة\". Content row \"المصحف والخط\" / \"8 MB\". Section \"ترجمة المعاني\" with chips \"بدون ترجمة\" selected, \"Français\", \"English\". Small text \"يمكن تنزيل الترجمات لاحقاً\". Toggle \"التنزيل عبر Wi-Fi فقط\" on. Total \"حجم التنزيل 8 MB\". Bottom primary \"تحميل • 8 MB\", text \"اختيار رواية أخرى\". Sizes illustrative. No counterfeit publisher badges.",
       "status": "reference approved; implementation planned"
     },
     {
@@ -485,7 +485,7 @@
         "light": "reference/light/25-warsh-reader.png",
         "dark": "reference/dark/25-warsh-reader.png"
       },
-      "designBrief": "Focused Arabic Quran reader. Back arrow, compact title \"الإخلاص\", below \"ورش عن نافع • المصحف المحمدي\", bookmark and menu icons. Understated geometric chapter header \"سورة الإخلاص\". Render only the first THREE verses as an intentional excerpt with ample line spacing and NO invented continuation: separate basmala \"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ\", then \"قُلْ هُوَ اللَّهُ أَحَدٌ\" with Western medallion \"1\", \"اللَّهُ الصَّمَدُ\" medallion \"2\", \"لَمْ يَلِدْ وَلَمْ يُولَدْ\" medallion \"3\". Bottom reading position \"الآيات 1–3 من 4\", next pill \"متابعة القراءة\". Toolbar \"استماع\" / \"ترجمة المعاني\" / \"حجم النص\". Small audio strip \"عمر القزابري\" play with reading label \"ورش\". No root navigation. Sacred text larger than compact chrome but not oversized. This is a concept excerpt, not a reproduction of an official printed page.",
+      "designBrief": "Focused Warsh reader using the exact installed King Fahd v2.1/update 6 source strings and matching font. Header \"الإخلاص\", subtitle \"ورش عن نافع • مجمع الملك فهد\". Load verses, basmala policy, ornaments and counts from the reviewed pack; never transcribe them from this design brief or the old PNG. Western verse locators are separate UI controls; preserve embedded source ornaments. Bookmark/menu, text size and playback controls follow the original layout. Translation and reciter options depend on verified catalog capabilities. Fail visibly if the matching font is unavailable. The old image is a layout reference with superseded publisher/text examples.",
       "status": "reference approved; implementation planned"
     },
     {
@@ -634,7 +634,7 @@
         "light": "reference/light/32-content-sources.png",
         "dark": "reference/dark/32-content-sources.png"
       },
-      "designBrief": "Detail header \"المصادر\". Intro \"تعرف على مصدر كل محتوى\". Separate rounded cards: \"ورش عن نافع\" / \"المصحف المحمدي\" / \"almoshaf-almohammadi.ma\"; \"حفص عن عاصم\" / \"Tanzil\" / \"tanzil.net\"; \"ترجمة المعاني\" / \"Français • English\" / \"تفاصيل المترجم والمصدر\"; \"التلاوات\" / \"MP3Quran\" / \"mp3quran.net\". Small links \"تفاصيل النسخة\" and \"الإبلاغ عن ملاحظة\". No badges claiming verification, permission or endorsements. No legal judgment in UI.",
+      "designBrief": "Detail header \"المصادر\". Intro \"تعرف على مصدر كل محتوى\". Separate rounded cards: \"ورش عن نافع\" / \"مجمع الملك فهد\" / \"qurancomplex.gov.sa\"; \"حفص عن عاصم\" / \"Tanzil\" / \"tanzil.net\"; \"ترجمة المعاني\" / \"Français • English\" / \"تفاصيل المترجم والمصدر\"; \"التلاوات\" / \"MP3Quran\" / \"mp3quran.net\". Small links \"تفاصيل النسخة\" and \"الإبلاغ عن ملاحظة\". No badges claiming verification, permission or endorsements. No legal judgment in UI.",
       "status": "reference approved; implementation planned"
     },
     {
@@ -733,7 +733,7 @@
         "light": "reference/light/37-storage.png",
         "dark": "reference/dark/37-storage.png"
       },
-      "designBrief": "Detail header \"إدارة التخزين\". Summary \"المساحة المستخدمة\" / \"35 MB\" with modest bar. Two category rows \"المصحف والخط\" \"8 MB\" and \"التلاوات\" \"27 MB\". Selected mushaf card \"ورش عن نافع\" / \"المصحف المحمدي • 8 MB\" small manage icon. Audio group \"عمر القزابري\" then selectable rows \"الفاتحة 1 MB\", \"الكهف 18 MB\" checked, \"يس 8 MB\". Bottom muted terracotta action \"حذف المحدد • 18 MB\". Note \"يمكنك تنزيل الملفات مجدداً\". No OS disk capacity guesses.",
+      "designBrief": "Detail header \"إدارة التخزين\". Summary \"المساحة المستخدمة\" / \"35 MB\" with modest bar. Two category rows \"المصحف والخط\" \"8 MB\" and \"التلاوات\" \"27 MB\". Selected mushaf card \"ورش عن نافع\" / \"مجمع الملك فهد • 8 MB\" small manage icon. Audio group \"عمر القزابري\" then selectable rows \"الفاتحة 1 MB\", \"الكهف 18 MB\" checked, \"يس 8 MB\". Bottom muted terracotta action \"حذف المحدد • 18 MB\". Note \"يمكنك تنزيل الملفات مجدداً\". No OS disk capacity guesses.",
       "status": "reference approved; implementation planned"
     },
     {

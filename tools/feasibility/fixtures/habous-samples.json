@@ -1,0 +1,218 @@
+[
+  {
+    "city": "Rabat",
+    "latitude": 34.0209,
+    "longitude": -6.8416,
+    "date": "2026-10-13",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=1",
+    "sourceSha256": "ff79e891fd3e451265aa2e21a1255a9cb7c26bab8e902381bcd23ff3516611bf",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:02",
+      "sunrise": "06:28",
+      "dhuhr": "12:19",
+      "asr": "15:28",
+      "maghrib": "18:00",
+      "isha": "19:14"
+    }
+  },
+  {
+    "city": "Rabat",
+    "latitude": 34.0209,
+    "longitude": -6.8416,
+    "date": "2026-10-18",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=1",
+    "sourceSha256": "ff79e891fd3e451265aa2e21a1255a9cb7c26bab8e902381bcd23ff3516611bf",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:06",
+      "sunrise": "06:32",
+      "dhuhr": "12:18",
+      "asr": "15:23",
+      "maghrib": "17:54",
+      "isha": "19:08"
+    }
+  },
+  {
+    "city": "Rabat",
+    "latitude": 34.0209,
+    "longitude": -6.8416,
+    "date": "2026-10-28",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=1",
+    "sourceSha256": "ff79e891fd3e451265aa2e21a1255a9cb7c26bab8e902381bcd23ff3516611bf",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:14",
+      "sunrise": "06:40",
+      "dhuhr": "12:16",
+      "asr": "15:15",
+      "maghrib": "17:43",
+      "isha": "18:58"
+    }
+  },
+  {
+    "city": "Rabat",
+    "latitude": 34.0209,
+    "longitude": -6.8416,
+    "date": "2026-11-10",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=1",
+    "sourceSha256": "ff79e891fd3e451265aa2e21a1255a9cb7c26bab8e902381bcd23ff3516611bf",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:24",
+      "sunrise": "06:52",
+      "dhuhr": "12:16",
+      "asr": "15:06",
+      "maghrib": "17:31",
+      "isha": "18:48"
+    }
+  },
+  {
+    "city": "Casablanca",
+    "latitude": 33.5731,
+    "longitude": -7.5898,
+    "date": "2026-10-13",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=58",
+    "sourceSha256": "3c5afbb47b59727622a13c26f1e5ce9d31f6d1ebddbeee15c79d9322aa438f30",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:06",
+      "sunrise": "06:30",
+      "dhuhr": "12:22",
+      "asr": "15:32",
+      "maghrib": "18:04",
+      "isha": "19:17"
+    }
+  },
+  {
+    "city": "Casablanca",
+    "latitude": 33.5731,
+    "longitude": -7.5898,
+    "date": "2026-10-18",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=58",
+    "sourceSha256": "3c5afbb47b59727622a13c26f1e5ce9d31f6d1ebddbeee15c79d9322aa438f30",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:09",
+      "sunrise": "06:34",
+      "dhuhr": "12:21",
+      "asr": "15:27",
+      "maghrib": "17:58",
+      "isha": "19:12"
+    }
+  },
+  {
+    "city": "Casablanca",
+    "latitude": 33.5731,
+    "longitude": -7.5898,
+    "date": "2026-10-28",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=58",
+    "sourceSha256": "3c5afbb47b59727622a13c26f1e5ce9d31f6d1ebddbeee15c79d9322aa438f30",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:17",
+      "sunrise": "06:42",
+      "dhuhr": "12:19",
+      "asr": "15:19",
+      "maghrib": "17:47",
+      "isha": "19:01"
+    }
+  },
+  {
+    "city": "Casablanca",
+    "latitude": 33.5731,
+    "longitude": -7.5898,
+    "date": "2026-11-10",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=58",
+    "sourceSha256": "3c5afbb47b59727622a13c26f1e5ce9d31f6d1ebddbeee15c79d9322aa438f30",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:27",
+      "sunrise": "06:54",
+      "dhuhr": "12:20",
+      "asr": "15:10",
+      "maghrib": "17:36",
+      "isha": "18:52"
+    }
+  },
+  {
+    "city": "Marrakech",
+    "latitude": 31.6295,
+    "longitude": -7.9811,
+    "date": "2026-10-13",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=104",
+    "sourceSha256": "56d80b38ef702cd971f3660df40fefed5b315c251bea044a9b35d398b2b88883",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:08",
+      "sunrise": "06:29",
+      "dhuhr": "12:23",
+      "asr": "15:35",
+      "maghrib": "18:08",
+      "isha": "19:19"
+    }
+  },
+  {
+    "city": "Marrakech",
+    "latitude": 31.6295,
+    "longitude": -7.9811,
+    "date": "2026-10-18",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=104",
+    "sourceSha256": "56d80b38ef702cd971f3660df40fefed5b315c251bea044a9b35d398b2b88883",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:11",
+      "sunrise": "06:32",
+      "dhuhr": "12:22",
+      "asr": "15:30",
+      "maghrib": "18:02",
+      "isha": "19:13"
+    }
+  },
+  {
+    "city": "Marrakech",
+    "latitude": 31.6295,
+    "longitude": -7.9811,
+    "date": "2026-10-28",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=104",
+    "sourceSha256": "56d80b38ef702cd971f3660df40fefed5b315c251bea044a9b35d398b2b88883",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:18",
+      "sunrise": "06:40",
+      "dhuhr": "12:21",
+      "asr": "15:23",
+      "maghrib": "17:52",
+      "isha": "19:04"
+    }
+  },
+  {
+    "city": "Marrakech",
+    "latitude": 31.6295,
+    "longitude": -7.9811,
+    "date": "2026-11-10",
+    "sourceUrl": "https://www.habous.gov.ma/prieres/index.php?ville=104",
+    "sourceSha256": "56d80b38ef702cd971f3660df40fefed5b315c251bea044a9b35d398b2b88883",
+    "retrievedAt": "2026-10-18",
+    "sourceClockBasis": "unconfirmed",
+    "printedTimes": {
+      "fajr": "05:27",
+      "sunrise": "06:51",
+      "dhuhr": "12:21",
+      "asr": "15:15",
+      "maghrib": "17:42",
+      "isha": "18:55"
+    }
+  }
+]

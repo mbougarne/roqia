@@ -1,6 +1,8 @@
 # Implementation backlog
 
-50 local implementation tickets. None has been created in an external issue tracker. All are planned. Dependencies are start dependencies; integration completion requirements are explicit inside each ticket.
+**For day-to-day work, follow [IMPLEMENTATION-ORDER.md](IMPLEMENTATION-ORDER.md) from top to bottom.** This file remains the ticket catalog, sorted by stable ID; its numerical order is not the execution sequence.
+
+50 local implementation tickets. None has been created in an external issue tracker. The first 10 execution steps have Android feasibility evidence; their ticket statuses distinguish work in progress from blocked source/review gates. No feature is marked complete solely from a spike. Dependencies are start dependencies; integration completion requirements are explicit inside each ticket.
 
 Early feasibility tickets RQ-016, RQ-020, RQ-032, RQ-037 and RQ-040 should be resolved before dependent feature work is committed to a release. Existing-feature UI can proceed independently.
 

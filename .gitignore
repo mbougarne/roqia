@@ -65,3 +65,8 @@ yarn-error.log
 
 .bundle
 .vscode
+
+# Maintainer feasibility downloads, packs, device backups and local evidence
+.roqia-feasibility/
+tools/feasibility/__pycache__/
+android/.kotlin/
