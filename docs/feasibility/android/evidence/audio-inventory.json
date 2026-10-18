@@ -1,0 +1,1581 @@
+{
+  "status": "draft",
+  "sources": [
+    {
+      "url": "https://www.mp3quran.net/api/v3/reciters?language=eng&rewaya=2",
+      "retrievedAt": "2026-10-18",
+      "snapshotSha256": "e42d2155cfa53e3cd203a257df58d4742a9dfbcc84b8b48658dded56324c8c9c"
+    },
+    {
+      "url": "https://www.mp3quran.net/api/v3/reciters?language=eng&rewaya=1",
+      "retrievedAt": "2026-10-18",
+      "snapshotSha256": "0ec7d4987aacfa4ce7dded71e193e08a284578788d867fcf51b4fd82ac893678"
+    }
+  ],
+  "recordings": [
+    {
+      "id": "mp3quran.118.120",
+      "reciterId": 118,
+      "recordingSetId": 120,
+      "reciterName": "Mahmoud Khalil Al-Hussary",
+      "sourceLabel": "Rewayat Warsh A'n Nafi' - Murattal",
+      "providerRiwayaId": 2,
+      "riwaya": "warsh",
+      "tariq": null,
+      "status": "draft",
+      "qualityVariants": [],
+      "timingData": null,
+      "providerDeclaredSurahs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114
+      ],
+      "files": [
+        {
+          "surah": 1,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/001.mp3",
+          "verification": "transport-and-signature-only",
+          "bytes": 473723,
+          "sha256": "182bd7ad3599923bf74d050e200c8805f9f56cdd1384d822752ee8924b6c7258",
+          "responseHeaders": [
+            "HTTP/2 200",
+            "content-type: audio/mpeg",
+            "content-length: 473723",
+            "accept-ranges: bytes",
+            "etag: \"c5943ca409f50d50beceb5bda6c58b09\""
+          ],
+          "listeningReview": "pending",
+          "decoderMetadata": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_rate": "11025",
+                "channels": 1
+              },
+              {
+                "codec_name": "png"
+              }
+            ],
+            "format": {
+              "duration": "58.357500"
+            }
+          }
+        },
+        {
+          "surah": 2,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/002.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 3,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/003.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 4,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/004.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 5,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/005.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 6,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/006.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 7,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/007.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 8,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/008.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 9,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/009.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 10,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/010.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 11,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/011.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 12,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/012.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 13,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/013.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 14,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/014.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 15,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/015.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 16,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/016.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 17,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/017.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 18,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/018.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 19,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/019.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 20,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/020.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 21,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/021.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 22,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/022.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 23,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/023.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 24,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/024.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 25,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/025.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 26,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/026.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 27,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/027.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 28,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/028.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 29,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/029.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 30,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/030.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 31,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/031.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 32,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/032.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 33,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/033.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 34,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/034.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 35,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/035.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 36,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/036.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 37,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/037.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 38,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/038.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 39,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/039.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 40,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/040.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 41,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/041.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 42,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/042.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 43,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/043.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 44,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/044.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 45,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/045.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 46,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/046.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 47,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/047.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 48,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/048.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 49,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/049.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 50,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/050.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 51,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/051.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 52,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/052.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 53,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/053.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 54,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/054.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 55,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/055.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 56,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/056.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 57,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/057.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 58,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/058.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 59,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/059.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 60,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/060.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 61,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/061.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 62,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/062.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 63,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/063.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 64,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/064.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 65,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/065.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 66,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/066.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 67,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/067.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 68,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/068.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 69,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/069.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 70,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/070.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 71,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/071.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 72,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/072.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 73,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/073.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 74,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/074.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 75,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/075.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 76,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/076.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 77,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/077.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 78,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/078.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 79,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/079.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 80,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/080.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 81,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/081.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 82,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/082.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 83,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/083.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 84,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/084.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 85,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/085.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 86,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/086.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 87,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/087.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 88,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/088.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 89,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/089.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 90,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/090.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 91,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/091.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 92,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/092.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 93,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/093.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 94,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/094.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 95,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/095.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 96,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/096.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 97,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/097.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 98,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/098.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 99,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/099.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 100,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/100.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 101,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/101.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 102,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/102.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 103,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/103.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 104,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/104.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 105,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/105.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 106,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/106.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 107,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/107.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 108,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/108.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 109,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/109.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 110,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/110.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 111,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/111.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 112,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/112.mp3",
+          "verification": "transport-and-signature-only",
+          "bytes": 243008,
+          "sha256": "54d14cd7120f423dc83fe9e1b3d382065e636be36a85789aab9ce19bb68e6bae",
+          "responseHeaders": [
+            "HTTP/2 200",
+            "content-type: audio/mpeg",
+            "content-length: 243008",
+            "accept-ranges: bytes",
+            "etag: \"357a5d07b36672b7ec9eaaaa23398890\""
+          ],
+          "listeningReview": "pending",
+          "decoderMetadata": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_rate": "11025",
+                "channels": 1
+              },
+              {
+                "codec_name": "png"
+              }
+            ],
+            "format": {
+              "duration": "29.518256"
+            }
+          }
+        },
+        {
+          "surah": 113,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/113.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 114,
+          "url": "https://cdn.mp3quran.net/audio/mahmoud-husary/r3/114.mp3",
+          "verification": "transport-and-signature-only",
+          "bytes": 438192,
+          "sha256": "e4ab4d30e8cf3097861caae6d796267a4aed48db446a54b12f519d1b6c0d98c4",
+          "responseHeaders": [
+            "HTTP/2 200",
+            "content-type: audio/mpeg",
+            "content-length: 438192",
+            "accept-ranges: bytes",
+            "etag: \"0f9a5d07fae4923a0935e58bba4c5cfc\""
+          ],
+          "listeningReview": "pending",
+          "decoderMetadata": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_rate": "11025",
+                "channels": 1
+              },
+              {
+                "codec_name": "png"
+              }
+            ],
+            "format": {
+              "duration": "53.916625"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mp3quran.1.1",
+      "reciterId": 1,
+      "recordingSetId": 1,
+      "reciterName": "Ibrahim Al-Akdar",
+      "sourceLabel": "Rewayat Hafs A'n Assem - Murattal",
+      "providerRiwayaId": 1,
+      "riwaya": "hafs",
+      "tariq": null,
+      "status": "draft",
+      "qualityVariants": [],
+      "timingData": null,
+      "providerDeclaredSurahs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114
+      ],
+      "files": [
+        {
+          "surah": 1,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/001.mp3",
+          "verification": "transport-and-signature-only",
+          "bytes": 375643,
+          "sha256": "f1ddcda825cca9dcae06b8267ccdb91db6ae7946322115da0a8144e749d6b7bc",
+          "responseHeaders": [
+            "HTTP/2 200",
+            "content-type: audio/mpeg",
+            "content-length: 375643",
+            "accept-ranges: bytes",
+            "etag: \"e2f6e9bf94d44c96c9fbac069189dbf6\""
+          ],
+          "listeningReview": "pending",
+          "decoderMetadata": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_rate": "22050",
+                "channels": 2
+              },
+              {
+                "codec_name": "png"
+              }
+            ],
+            "format": {
+              "duration": "61.121667"
+            }
+          }
+        },
+        {
+          "surah": 2,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/002.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 3,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/003.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 4,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/004.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 5,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/005.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 6,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/006.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 7,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/007.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 8,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/008.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 9,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/009.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 10,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/010.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 11,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/011.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 12,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/012.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 13,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/013.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 14,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/014.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 15,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/015.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 16,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/016.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 17,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/017.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 18,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/018.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 19,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/019.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 20,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/020.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 21,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/021.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 22,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/022.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 23,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/023.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 24,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/024.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 25,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/025.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 26,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/026.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 27,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/027.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 28,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/028.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 29,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/029.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 30,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/030.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 31,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/031.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 32,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/032.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 33,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/033.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 34,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/034.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 35,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/035.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 36,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/036.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 37,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/037.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 38,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/038.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 39,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/039.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 40,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/040.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 41,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/041.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 42,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/042.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 43,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/043.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 44,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/044.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 45,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/045.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 46,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/046.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 47,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/047.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 48,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/048.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 49,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/049.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 50,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/050.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 51,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/051.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 52,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/052.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 53,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/053.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 54,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/054.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 55,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/055.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 56,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/056.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 57,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/057.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 58,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/058.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 59,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/059.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 60,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/060.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 61,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/061.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 62,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/062.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 63,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/063.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 64,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/064.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 65,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/065.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 66,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/066.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 67,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/067.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 68,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/068.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 69,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/069.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 70,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/070.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 71,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/071.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 72,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/072.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 73,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/073.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 74,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/074.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 75,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/075.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 76,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/076.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 77,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/077.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 78,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/078.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 79,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/079.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 80,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/080.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 81,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/081.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 82,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/082.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 83,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/083.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 84,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/084.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 85,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/085.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 86,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/086.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 87,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/087.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 88,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/088.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 89,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/089.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 90,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/090.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 91,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/091.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 92,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/092.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 93,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/093.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 94,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/094.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 95,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/095.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 96,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/096.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 97,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/097.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 98,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/098.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 99,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/099.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 100,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/100.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 101,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/101.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 102,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/102.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 103,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/103.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 104,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/104.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 105,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/105.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 106,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/106.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 107,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/107.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 108,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/108.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 109,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/109.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 110,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/110.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 111,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/111.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 112,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/112.mp3",
+          "verification": "transport-and-signature-only",
+          "bytes": 148063,
+          "sha256": "af80807189034a650a12eb2a4cb9ec6e70c0bf654673b1b3e53192f7fe6132da",
+          "responseHeaders": [
+            "HTTP/2 200",
+            "content-type: audio/mpeg",
+            "content-length: 148063",
+            "accept-ranges: bytes",
+            "etag: \"1b2f2616e79aac971e2f33083caf9854\""
+          ],
+          "listeningReview": "pending",
+          "decoderMetadata": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_rate": "22050",
+                "channels": 2
+              },
+              {
+                "codec_name": "png"
+              }
+            ],
+            "format": {
+              "duration": "23.192000"
+            }
+          }
+        },
+        {
+          "surah": 113,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/113.mp3",
+          "verification": "pending"
+        },
+        {
+          "surah": 114,
+          "url": "https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/114.mp3",
+          "verification": "transport-and-signature-only",
+          "bytes": 304321,
+          "sha256": "8e903164ada76a3f8897c5b85366c77db25b1cf6e1075d58d81c571087ff56a3",
+          "responseHeaders": [
+            "HTTP/2 200",
+            "content-type: audio/mpeg",
+            "content-length: 304321",
+            "accept-ranges: bytes",
+            "etag: \"e8a025abcd2e158188c0c33e3b7e9d0b\""
+          ],
+          "listeningReview": "pending",
+          "decoderMetadata": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_rate": "22050",
+                "channels": 2
+              },
+              {
+                "codec_name": "png"
+              }
+            ],
+            "format": {
+              "duration": "49.236000"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

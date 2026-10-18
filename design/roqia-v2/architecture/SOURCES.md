@@ -23,3 +23,7 @@ Checked 17 October 2026. External documentation can change; pin and verify the a
 Current repository evidence: package.json and yarn.lock; src/App.tsx; src/store/index.ts; src/services/{persistence,notifications,audioPlaybackService}.ts; src/hooks/useHomeAudioPlayback.ts; src/screens/{HomeScreen,AdkarScreen,DevotionalListScreen}.tsx; src/components/{StyledText,Header,Section}.tsx; src/data/index.ts; Android build and manifest files. The old technical README is useful context but the current source takes precedence, particularly for audio playback.
 
 Source-choice approval in the conversation is retained. This kit does not assert a new grant, certification or endorsement. Acquisition tickets record actual metadata and capabilities so implementation can use the selected sources correctly.
+
+## Google Play update guidance — checked 18 October 2026
+
+The [v2 release note](../implementation/RELEASE.md#google-play-v2-update) records the distinction between initial production-access testing and updates, based on [Google's testing requirements](https://support.google.com/googleplay/android-developer/answer/14151465?hl=en) and [update instructions](https://support.google.com/googleplay/android-developer/answer/9859350?hl=en). Account-specific production access remains unverified until checked in Play Console.

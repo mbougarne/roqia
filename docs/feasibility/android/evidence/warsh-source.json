@@ -1,0 +1,21 @@
+{
+  "provider": "Al Mushaf Al Mohammadi",
+  "pageUrl": "https://almoshaf-almohammadi.ma/",
+  "retrievedAt": "2026-10-18",
+  "probeUrl": "https://api.almoshaf-almohammadi.ma/api/v1/manager/tafsir/masahif?page=0",
+  "httpStatus": 403,
+  "response": {
+    "message": "The used authentication method is not allowed on this route."
+  },
+  "status": "blocked",
+  "offlineArtifact": null,
+  "fontAsset": null,
+  "numberingScheme": null,
+  "canonicalTextReviewed": false,
+  "capabilities": {
+    "reflow": "unproved",
+    "verseSearch": "unproved",
+    "pageView": "unproved"
+  },
+  "nextAction": "Obtain publisher-supported versioned offline artifact and matching font/pages plus redistribution terms."
+}

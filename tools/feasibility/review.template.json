@@ -1,0 +1,15 @@
+{
+  "manifestSha256": "11f4ff0fa9ea0c61f72f6cd84dc9585548595dbadca88ad5488ff5bb607703b9",
+  "reviewer": null,
+  "reviewedAt": null,
+  "sourceApproved": false,
+  "religiousTextReviewed": false,
+  "fontRenderingReviewed": false,
+  "offlineRenderVerified": false,
+  "evidence": {
+    "sourcePermission": null,
+    "reviewedSurahsAndPages": null,
+    "fontNameVersionLicenseSha256": null,
+    "deviceAndScreenshots": null
+  }
+}

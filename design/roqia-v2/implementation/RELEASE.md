@@ -22,3 +22,13 @@ All items are pending. This document is a release plan, not permission to publis
 Rollout stops for lost user progress, wrong Quran/translation/riwaya association, corrupted completed downloads, duplicate/unexpected adhan, persistent crashes or unreadable Arabic. Keep the previous valid content catalog/pack available for recovery. App binary rollback follows Play versioning constraints; do not promise an in-place downgrade.
 
 No production publishing, store metadata edits, commits, pushes or external messages are part of this planning task.
+
+## Google Play v2 update
+
+Checked 18 October 2026. Assuming Roqia retains production access on its existing listing, our reading of Google's guidance is that a normal v2 update does not restart the mandatory 14-day closed test. That test gates initial production access for qualifying new personal accounts; Google still recommends testing later updates. [Production-access requirements](https://support.google.com/googleplay/android-developer/answer/14151465?hl=en).
+
+Publish v2 as an update with the same package identity/signing setup and a higher version code. Updates still undergo review. [Google's update instructions](https://support.google.com/googleplay/android-developer/answer/9859350?hl=en).
+
+- [ ] Confirm production access and any app-specific requirements in Play Console; this planning task did not inspect the account.
+- [ ] Complete the internal-track/upgrade checks above and a user beta appropriate to the redesign. Its duration is our quality decision, not a newly assumed 14-day waiting period.
+- [ ] Keep the existing listing; do not create a new app entry for the v2 redesign.

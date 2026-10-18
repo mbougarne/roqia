@@ -4,10 +4,19 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+
     <application
         android:usesCleartextTraffic="true"
         tools:targetApi="28"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false" />
+        <activity android:name=".feasibility.ProbeActivity" android:exported="true" android:theme="@style/AppTheme" />
+        <receiver android:name=".feasibility.ProbeAlarmReceiver" android:exported="false">
+            <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter>
+        </receiver>
+        <service android:name=".feasibility.ProbeAlarmService" android:exported="false" android:foregroundServiceType="mediaPlayback" />
     </application>
 </manifest>

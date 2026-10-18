@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "hafs-tanzil-uthmani-1.1",
+  "status": "draft",
+  "riwaya": "hafs",
+  "numberingScheme": "tanzil-madina-hafs",
+  "version": "1.1",
+  "source": {
+    "id": "tanzil-uthmani-1.1",
+    "file": "tanzil-uthmani.txt",
+    "url": "https://tanzil.net/pub/download/index.php?quranType=uthmani&outType=txt-2&marks=true&sajdah=true&tatweel=true&agree=true",
+    "retrievedAt": "2026-10-18",
+    "bytes": 1396087,
+    "sha256": "6933e133dd56db778c801bf738848454e43648105a151e8d84d86a7cae39ec5f"
+  },
+  "metadataSource": {
+    "id": "tanzil-metadata-1.0",
+    "file": "quran-data.xml",
+    "url": "https://tanzil.net/res/text/metadata/quran-data.xml",
+    "retrievedAt": "2026-10-18",
+    "bytes": 77234,
+    "sha256": "8867c1d88191472adec9db694b3cd9f135b1a2ef580574d32cf888dcb22c5c7a"
+  },
+  "surahs": 114,
+  "verses": 6236,
+  "mechanicalValidation": {
+    "sourceHashes": true,
+    "structure": true,
+    "canonicalRoundTrip": true
+  },
+  "editorialReview": "pending",
+  "fontRenderingReview": "pending",
+  "assetCount": 117,
+  "manifestSha256": "11f4ff0fa9ea0c61f72f6cd84dc9585548595dbadca88ad5488ff5bb607703b9"
+}

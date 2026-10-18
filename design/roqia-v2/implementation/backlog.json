@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "status": "planning baseline; no feature implementation completed by this task",
+  "status": "Android feasibility implementation in progress; source, editorial, timezone and device gates remain open",
   "tickets": [
     {
       "id": "RQ-001",
       "title": "Capture current release and compatibility baseline",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M0",
       "dependsOn": [],
       "screens": [],
@@ -18,7 +18,13 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 1,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Baseline Android build and in-place emulator upgrade passed. All 93 existing counter values/theme survived. Content/audio/route inventory and pre-existing test failures are recorded.",
+      "remaining": "Complete existing notification delivery and full current-screen journey evidence; verify the actual Play production artifact separately from the debuggable emulator installation."
     },
     {
       "id": "RQ-002",
@@ -38,7 +44,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 11
     },
     {
       "id": "RQ-003",
@@ -64,7 +71,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 14
     },
     {
       "id": "RQ-004",
@@ -84,7 +92,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 12
     },
     {
       "id": "RQ-005",
@@ -108,7 +117,8 @@
         "specs/EXISTING-FEATURES.md",
         "architecture/MIGRATION.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 13
     },
     {
       "id": "RQ-006",
@@ -138,7 +148,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 19
     },
     {
       "id": "RQ-007",
@@ -167,7 +178,8 @@
       ],
       "completionIntegrationRequires": [
         "RQ-033"
-      ]
+      ],
+      "executionOrder": 20
     },
     {
       "id": "RQ-008",
@@ -198,7 +210,8 @@
       ],
       "completionIntegrationRequires": [
         "RQ-033"
-      ]
+      ],
+      "executionOrder": 21
     },
     {
       "id": "RQ-009",
@@ -226,7 +239,8 @@
       ],
       "completionIntegrationRequires": [
         "RQ-033"
-      ]
+      ],
+      "executionOrder": 22
     },
     {
       "id": "RQ-010",
@@ -254,7 +268,8 @@
       ],
       "completionIntegrationRequires": [
         "RQ-033"
-      ]
+      ],
+      "executionOrder": 23
     },
     {
       "id": "RQ-011",
@@ -280,7 +295,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 24
     },
     {
       "id": "RQ-012",
@@ -306,7 +322,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 25
     },
     {
       "id": "RQ-013",
@@ -332,7 +349,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 26
     },
     {
       "id": "RQ-014",
@@ -355,7 +373,8 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 27
     },
     {
       "id": "RQ-015",
@@ -384,12 +403,13 @@
       "specifications": [
         "specs/EXISTING-FEATURES.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 15
     },
     {
       "id": "RQ-016",
       "title": "Acquire and prove the Warsh source format",
-      "status": "planned",
+      "status": "blocked",
       "milestone": "M0",
       "dependsOn": [
         "RQ-001"
@@ -410,12 +430,18 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 2,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Publisher website inspected; its unauthenticated content API returned HTTP 403. No canonical Warsh data, OCR output or Hafs substitution was imported.",
+      "remaining": "Obtain the publisher-supported versioned offline export, matching font/pages, numbering/tariq metadata and redistribution terms; then perform import/render and religious review."
     },
     {
       "id": "RQ-017",
       "title": "Acquire and package Tanzil Hafs",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M3",
       "dependsOn": [
         "RQ-001"
@@ -435,12 +461,18 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 3,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Acquired and locked Tanzil Uthmani 1.1 plus metadata 1.0. Imported 114 surahs / 6,236 verses with exact canonical round-trip and original notice; generated 117 hashed assets in a draft pack.",
+      "remaining": "Representative Arabic/font rendering and qualified content review remain pending. Do not publish the pack as ready."
     },
     {
       "id": "RQ-018",
       "title": "Build content validation and editorial records",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M3",
       "dependsOn": [
         "RQ-016",
@@ -462,12 +494,18 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 4,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Implemented corruption/order/duplicate/hash/path tests, canonical pack revalidation against the independent source lock, a review template bound to the manifest hash and devotional provenance inventory.",
+      "remaining": "Complete Warsh source validation and actual religious/font reviews for both editions; resolve existing devotional provenance."
     },
     {
       "id": "RQ-019",
       "title": "Publish a versioned static content catalog",
-      "status": "planned",
+      "status": "blocked",
       "milestone": "M3",
       "dependsOn": [
         "RQ-018"
@@ -489,12 +527,18 @@
         "specs/QURAN.md",
         "specs/DOWNLOADS.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 5,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Implemented a guarded catalog exporter and asset MIME support. Pending or stale review cannot produce a ready catalog. No content was uploaded.",
+      "remaining": "Reviewed source packs, an immutable static host, all-file host probes and mobile last-good seed behavior are still required."
     },
     {
       "id": "RQ-020",
       "title": "Prove native downloads and file operations",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M0",
       "dependsOn": [
         "RQ-001"
@@ -512,7 +556,13 @@
       "specifications": [
         "specs/DOWNLOADS.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 7,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Pinned downloader 4.6.3/MMKV 1.3.16 and proved API 36 private storage, pause/resume, 200/206/416 handling with hash quarantine, paused-job recovery after app-only SIGKILL, network gating, atomic rename and a real provider HTTPS transfer.",
+      "remaining": "Resolve strict Wi-Fi versus unmetered semantics, explicit range-start validation and durable write/fsync adapter behavior before production coordinator integration; broaden active-process-loss/storage/OEM coverage."
     },
     {
       "id": "RQ-021",
@@ -539,7 +589,8 @@
       "specifications": [
         "specs/DOWNLOADS.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 16
     },
     {
       "id": "RQ-022",
@@ -561,7 +612,8 @@
       "specifications": [
         "specs/DOWNLOADS.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 18
     },
     {
       "id": "RQ-023",
@@ -588,7 +640,8 @@
         "specs/QURAN.md",
         "specs/DOWNLOADS.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 28
     },
     {
       "id": "RQ-024",
@@ -612,7 +665,8 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 29
     },
     {
       "id": "RQ-025",
@@ -637,7 +691,8 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 30
     },
     {
       "id": "RQ-026",
@@ -664,7 +719,8 @@
         "specs/QURAN.md",
         "specs/DOWNLOADS.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 31
     },
     {
       "id": "RQ-027",
@@ -688,7 +744,8 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 32
     },
     {
       "id": "RQ-028",
@@ -711,7 +768,8 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 33
     },
     {
       "id": "RQ-029",
@@ -735,7 +793,8 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 34
     },
     {
       "id": "RQ-030",
@@ -760,12 +819,13 @@
       "specifications": [
         "specs/QURAN.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 35
     },
     {
       "id": "RQ-031",
       "title": "Acquire reciter and recording catalog",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M5",
       "dependsOn": [
         "RQ-018",
@@ -783,12 +843,18 @@
       "specifications": [
         "specs/AUDIO.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 6,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Curated two recording sets using explicit provider riwaya/recording IDs. Verified six real MP3 samples with hashes and decoder metadata; other chapters, tariq and unsupported qualities remain explicit pending/unknown values.",
+      "remaining": "Review sample recitation/identity, verify every offered chapter and redistribution terms, then publish only validated files through the reviewed catalog."
     },
     {
       "id": "RQ-032",
       "title": "Prove a single native player API",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M0",
       "dependsOn": [
         "RQ-001"
@@ -805,7 +871,13 @@
       "specifications": [
         "specs/AUDIO.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 8,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Track Player 5.0.0-alpha0 passed local queue, repeat, 1.25 speed, seek, background/locked playback and remote play/pause on API 36. Unsupported sleep/remote-seek behavior is recorded.",
+      "remaining": "Prove persisted native sleep deadline, focus/call/Bluetooth, restart and physical-device cases before unifying controllers."
     },
     {
       "id": "RQ-033",
@@ -834,7 +906,8 @@
       "specifications": [
         "specs/AUDIO.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 17
     },
     {
       "id": "RQ-034",
@@ -861,7 +934,8 @@
         "specs/DOWNLOADS.md",
         "specs/AUDIO.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 36
     },
     {
       "id": "RQ-035",
@@ -888,7 +962,8 @@
         "specs/DOWNLOADS.md",
         "specs/AUDIO.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 37
     },
     {
       "id": "RQ-036",
@@ -911,12 +986,13 @@
       "specifications": [
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 38
     },
     {
       "id": "RQ-037",
       "title": "Validate local prayer engine and Morocco profile",
-      "status": "planned",
+      "status": "blocked",
       "milestone": "M0",
       "dependsOn": [
         "RQ-001"
@@ -934,7 +1010,13 @@
       "specifications": [
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 9,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Pinned Adhan 4.4.6; added civil-date/UTC/offset/polar tests and 12 Habous comparisons across three cities. Research-only 19/17 profile remains unapproved. Detected stale Android Intl after Morocco September 2026 transition.",
+      "remaining": "Validate authoritative method parameters and seasonal residuals, choose reviewed offline tzdata for stale Android ICU, and verify it in Hermes. Do not ship a fixed UTC+1 assumption."
     },
     {
       "id": "RQ-038",
@@ -958,7 +1040,8 @@
       "specifications": [
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 39
     },
     {
       "id": "RQ-039",
@@ -981,12 +1064,13 @@
       "specifications": [
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 40
     },
     {
       "id": "RQ-040",
       "title": "Prove Android full-adhan scheduling",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M0",
       "dependsOn": [
         "RQ-001",
@@ -1006,7 +1090,13 @@
         "specs/AUDIO.md",
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 10,
+      "evidence": "../../../docs/feasibility/android/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "android",
+      "progress": "Debug-only exact alarm to native foreground playback passed with denied-access handling and locked forced-idle API 36 delivery/playback/completion. Boot reconciliation and notification Stop paths are implemented but not fully exercised.",
+      "remaining": "Test actual Stop action, notification/channel denial, calls, reboot, force-stop/reopen, multi-minute audio and physical Android 12–16 devices."
     },
     {
       "id": "RQ-041",
@@ -1029,7 +1119,8 @@
       "specifications": [
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 41
     },
     {
       "id": "RQ-042",
@@ -1054,7 +1145,8 @@
         "specs/AUDIO.md",
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 42
     },
     {
       "id": "RQ-043",
@@ -1078,7 +1170,8 @@
       "specifications": [
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 43
     },
     {
       "id": "RQ-044",
@@ -1105,7 +1198,8 @@
       "specifications": [
         "specs/PRAYER.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 44
     },
     {
       "id": "RQ-045",
@@ -1147,7 +1241,8 @@
         "specs/DOWNLOADS.md",
         "qa/ACCEPTANCE.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 45
     },
     {
       "id": "RQ-046",
@@ -1217,7 +1312,8 @@
       "specifications": [
         "qa/ACCEPTANCE.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 46
     },
     {
       "id": "RQ-047",
@@ -1254,7 +1350,8 @@
         "specs/AUDIO.md",
         "qa/ACCEPTANCE.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 47
     },
     {
       "id": "RQ-048",
@@ -1290,7 +1387,8 @@
         "specs/PRAYER.md",
         "qa/ACCEPTANCE.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 48
     },
     {
       "id": "RQ-049",
@@ -1321,7 +1419,8 @@
         "specs/AUDIO.md",
         "qa/ACCEPTANCE.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 49
     },
     {
       "id": "RQ-050",
@@ -1344,7 +1443,9 @@
       "specifications": [
         "qa/ACCEPTANCE.md"
       ],
-      "completionIntegrationRequires": []
+      "completionIntegrationRequires": [],
+      "executionOrder": 50
     }
-  ]
+  ],
+  "executionPlan": "implementation/IMPLEMENTATION-ORDER.md"
 }

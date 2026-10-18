@@ -1,0 +1,151 @@
+[
+  {
+    "at": 1792322293322,
+    "event": "scenario-start",
+    "detail": {
+      "scenario": "audio"
+    }
+  },
+  {
+    "at": 1792322295218,
+    "event": "audio-controls",
+    "detail": {
+      "rate": 1.25,
+      "repeat": 1,
+      "queueSize": 2,
+      "progress": {
+        "position": 2,
+        "buffered": 8,
+        "duration": 8
+      }
+    }
+  },
+  {
+    "at": 1792322295235,
+    "event": "audio-background-window",
+    "detail": {
+      "seconds": 24
+    }
+  },
+  {
+    "at": 1792322295263,
+    "event": "audio-state",
+    "detail": {
+      "state": "ready"
+    }
+  },
+  {
+    "at": 1792322295266,
+    "event": "audio-state",
+    "detail": {
+      "state": "playing"
+    }
+  },
+  {
+    "at": 1792322300163,
+    "event": "audio-state",
+    "detail": {
+      "state": "loading"
+    }
+  },
+  {
+    "at": 1792322300167,
+    "event": "audio-state",
+    "detail": {
+      "state": "ready"
+    }
+  },
+  {
+    "at": 1792322300170,
+    "event": "audio-state",
+    "detail": {
+      "state": "playing"
+    }
+  },
+  {
+    "at": 1792322303390,
+    "event": "audio-state",
+    "detail": {
+      "state": "paused"
+    }
+  },
+  {
+    "at": 1792322303430,
+    "event": "audio-state",
+    "detail": {
+      "state": "playing"
+    }
+  },
+  {
+    "at": 1792322306597,
+    "event": "audio-state",
+    "detail": {
+      "state": "loading"
+    }
+  },
+  {
+    "at": 1792322306599,
+    "event": "audio-state",
+    "detail": {
+      "state": "ready"
+    }
+  },
+  {
+    "at": 1792322306602,
+    "event": "audio-state",
+    "detail": {
+      "state": "playing"
+    }
+  },
+  {
+    "at": 1792322312997,
+    "event": "audio-state",
+    "detail": {
+      "state": "loading"
+    }
+  },
+  {
+    "at": 1792322313001,
+    "event": "audio-state",
+    "detail": {
+      "state": "ready"
+    }
+  },
+  {
+    "at": 1792322313004,
+    "event": "audio-state",
+    "detail": {
+      "state": "playing"
+    }
+  },
+  {
+    "at": 1792322319244,
+    "event": "audio-after-background",
+    "detail": {
+      "state": {
+        "state": "playing"
+      },
+      "progress": {
+        "position": 7.813,
+        "buffered": 8,
+        "duration": 8
+      }
+    }
+  },
+  {
+    "at": 1792322319260,
+    "event": "audio-paused",
+    "detail": {
+      "state": {
+        "state": "paused"
+      }
+    }
+  },
+  {
+    "at": 1792322319263,
+    "event": "scenario-finished",
+    "detail": {
+      "scenario": "audio"
+    }
+  }
+]

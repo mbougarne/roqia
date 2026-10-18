@@ -1,5 +1,7 @@
 # Start implementing here
 
+**Use the [ordered implementation checklist](implementation/IMPLEMENTATION-ORDER.md) to choose and finish tickets one by one.** It supersedes the sequencing suggestions below; this page remains background on milestones and working principles.
+
 The first useful deliverable is a stable app shell with the new typography, colors, navigation and preserved counters. Do not begin by replacing every screen at once.
 
 ## First implementation session
@@ -28,7 +30,7 @@ Milestones describe outcomes, not calendar estimates. Tickets have dependencies;
 
 ## How to work a ticket
 
-Use one branch/PR per coherent ticket or small closely related pair. Move status from planned → in_progress → review → done in the backlog data and ticket together. Record changed paths, actual test commands, device/OS/build, screenshots and unresolved limitations. A screenshot, mocked test or dependency README is not proof of native execution.
+Use one branch/PR per coherent ticket or small closely related pair. For the initial Android feasibility section, the user explicitly requested all 10 steps in one PR; its evidence and unresolved gates are recorded together. Move status from planned → in_progress → review → done in the backlog data and ticket together. Record changed paths, actual test commands, device/OS/build, screenshots and unresolved limitations. A screenshot, mocked test or dependency README is not proof of native execution.
 
 Keep the existing app releasable after each merge. Never clear user storage as a shortcut to migration. Never remove bundled devotional audio before a replacement pack and upgrade behavior are verified. Do not ship placeholder download URLs or pretend that generated Quran text is canonical data.
 

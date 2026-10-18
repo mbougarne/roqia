@@ -9,9 +9,14 @@
     "start": "react-native start",
     "test": "jest",
     "gen:keystore": "keytool -genkey -v -keystore roqia.keystore -alias roqia-key -keyalg RSA -keysize 2048 -validity 10000",
-    "build:release": "cd android && ./gradlew assembleRelease"
+    "build:release": "cd android && ./gradlew assembleRelease",
+    "feasibility:test": "python3 -m unittest discover -s tools/feasibility -p \"test_*.py\" && node --test tools/feasibility/*.test.cjs",
+    "feasibility:serve": "node tools/feasibility/fixture-server.cjs",
+    "feasibility:inventory": "node tools/feasibility/inventory.cjs",
+    "feasibility:prayer": "node tools/feasibility/compare-prayer.cjs"
   },
   "dependencies": {
+    "@kesha-antonov/react-native-background-downloader": "4.6.3",
     "@notifee/react-native": "^9.1.8",
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-clipboard/clipboard": "^1.16.3",
@@ -19,6 +24,7 @@
     "@react-navigation/drawer": "^7.9.9",
     "@react-navigation/native": "^7.2.2",
     "@react-navigation/native-stack": "^7.3.25",
+    "adhan": "4.4.6",
     "playwright": "^1.59.1",
     "react": "19.2.3",
     "react-native": "^0.84.1",

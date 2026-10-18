@@ -1,6 +1,6 @@
 # Application architecture
 
-Status: proposed implementation baseline, grounded in the current checkout. Android is the release target; iOS remains a future validation target. No runtime code has been changed by this kit.
+Status: proposed implementation baseline, grounded in the current checkout. Android is the release target; iOS remains a future validation target. The original kit was design-only. The 2026-10-18 [Android feasibility pass](../../../docs/feasibility/android/README.md) adds opt-in probes and pinned candidate dependencies; the product architecture below remains proposed until its ticket evidence is complete.
 
 ## Boundaries
 

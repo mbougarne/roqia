@@ -1757,6 +1757,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@kesha-antonov/react-native-background-downloader@4.6.3":
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/@kesha-antonov/react-native-background-downloader/-/react-native-background-downloader-4.6.3.tgz#25f9bb09ddfb5730057f76032749cd22d9c1b03d"
+  integrity sha512-0ZJp9m23ym7RwbFMhuPVYu3oo7eCs6q5XaGcgpx5nCV8BRvCsSY35FwtIyb2Q9j2H2Ugqqq8yxLFdofelHEuSg==
+
 "@napi-rs/wasm-runtime@^0.2.11":
   version "0.2.12"
   resolved "https://registry.yarnpkg.com/@napi-rs/wasm-runtime/-/wasm-runtime-0.2.12.tgz#3e78a8b96e6c33a6c517e1894efbd5385a7cb6f2"
@@ -2712,6 +2717,11 @@ acorn@^8.5.0:
   version "8.8.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.2.tgz#1b2f25db02af965399b9776b0c2c391276d37c4a"
   integrity sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==
+
+adhan@4.4.6:
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/adhan/-/adhan-4.4.6.tgz#2367ebc37efe849f9385b9f29ebf805d4b62b791"
+  integrity sha512-cpLLcr6qxx+mLc6jgSXJwAAHxDFrhXhVLuzRbZPrpQKIEpJw+0LcfG6u9WEjq66kcTX/2sCkI3VztgRoUXBnFg==
 
 agent-base@^7.1.2:
   version "7.1.4"
