@@ -1,3 +1,4 @@
+import {PanelArtwork} from '../design/PanelArtwork';
 import React, {useContext, useState} from 'react';
 import {FlatList, I18nManager, Pressable, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -44,7 +45,31 @@ export function DevotionalListScreen({
   const completed = items.filter(
     i => (i.repeat ?? 0) > 0 && repeatCounts[i.id] === 0,
   ).length;
+  const adhkar = !root && !dua && items.length > 1;
   const total = items.filter(i => (i.repeat ?? 0) > 0).length;
+  const controls = (
+    <View style={{backgroundColor: p.background, paddingVertical: 8, gap: 8}}>
+      <View style={{...rtlRow, gap: 12}}>
+        <View style={{flex: 1}}>
+          <Button
+            icon={
+              audio.isPlaylistActive && !audio.isAudioPaused ? 'pause' : 'play'
+            }
+            label={
+              audio.isPlaylistActive && !audio.isAudioPaused
+                ? 'إيقاف مؤقت'
+                : 'استماع للكل'
+            }
+            onPress={() => void audio.onPlayAllPress()}
+          />
+        </View>
+        <View style={{flex: 1, gap: 6}}>
+          <AppText role="caption">{`${ltr(`${number(completed)} / ${number(total)}`)} مكتمل`}</AppText>
+          <Progress value={total ? completed / total : 0} />
+        </View>
+      </View>
+    </View>
+  );
   return (
     <View style={{flex: 1, backgroundColor: p.background}}>
       <View
@@ -59,6 +84,14 @@ export function DevotionalListScreen({
           label="البحث في المحتوى"
           onPress={() => navigation.navigate('Search')}
         />
+        {dua && <AppIcon name="hands" color={p.accent} size={30} />}
+        {adhkar && (
+          <AppIcon
+            name={title === 'أذكار الصباح' ? 'sun' : 'moon'}
+            color={p.accent}
+            size={28}
+          />
+        )}
         <AppText
           role="screenTitle"
           accessibilityRole="header"
@@ -89,9 +122,12 @@ export function DevotionalListScreen({
                       b => b.kind === 'devotional' && b.contentId === i.id,
                     )),
               )
-            : items
+            : adhkar
+              ? [null, ...items]
+              : items
         }
-        keyExtractor={item => item.id}
+        keyExtractor={item => item?.id ?? 'sticky-progress'}
+        stickyHeaderIndices={adhkar ? [1] : undefined}
         initialNumToRender={3}
         windowSize={5}
         contentContainerStyle={{
@@ -106,6 +142,11 @@ export function DevotionalListScreen({
           <View style={{gap: 12}}>
             {dua && (
               <>
+                <AppText
+                  role="caption"
+                  style={{textAlign: 'center', color: p.textSecondary}}>
+                  أدعية من القرآن والسنة
+                </AppText>
                 <SearchField
                   label="ابحث في الأدعية"
                   value={query}
@@ -142,9 +183,11 @@ export function DevotionalListScreen({
                   minHeight: 88,
                   padding: 16,
                   borderRadius: 14,
+                  overflow: 'hidden',
                   backgroundColor: p.actionPrimary,
                   opacity: pressed ? 0.8 : 1,
                 })}>
+                <PanelArtwork color={p.textOnAction} />
                 <View
                   style={{
                     width: 50,
@@ -171,25 +214,10 @@ export function DevotionalListScreen({
                 </AppText>
                 <AppIcon name="headphones" size={44} color={p.textOnAction} />
               </Pressable>
-            ) : (
-              <>
-                <AppText role="caption">{`${ltr(`${number(completed)} / ${number(total)}`)} مكتمل · يبقى تقدمك محفوظا`}</AppText>
-                <Button
-                  icon={
-                    audio.isPlaylistActive && !audio.isAudioPaused
-                      ? 'pause'
-                      : 'play'
-                  }
-                  label={
-                    audio.isPlaylistActive && !audio.isAudioPaused
-                      ? 'إيقاف مؤقت'
-                      : 'استماع للكل'
-                  }
-                  onPress={() => void audio.onPlayAllPress()}
-                />
-                <Progress value={total ? completed / total : 0} />
-              </>
-            )}
+            ) : !adhkar ? (
+              controls
+            ) : null}
+
             {audio.error && (
               <AppText accessibilityRole="alert">
                 تعذر تشغيل الصوت. أعد المحاولة من زر الاستماع.
@@ -228,20 +256,25 @@ export function DevotionalListScreen({
             />
           </View>
         }
-        renderItem={({item, index}) => (
-          <ReadingCard
-            item={item}
-            index={index}
-            count={repeatCounts[item.id] ?? item.repeat ?? 0}
-            bookmarkReady={saved.loaded && !saved.error}
-            saved={saved.items.some(
-              b => b.kind === 'devotional' && b.contentId === item.id,
-            )}
-            audio={audio}
-            onCount={() => decrementRepeat(item.id)}
-            onReset={() => resetRepeats({[item.id]: item.repeat ?? 0})}
-          />
-        )}
+        renderItem={({item, index}) =>
+          item === null ? (
+            controls
+          ) : (
+            <ReadingCard
+              item={item}
+              dua={dua}
+              index={adhkar ? index - 1 : index}
+              count={repeatCounts[item.id] ?? item.repeat ?? 0}
+              bookmarkReady={saved.loaded && !saved.error}
+              saved={saved.items.some(
+                b => b.kind === 'devotional' && b.contentId === item.id,
+              )}
+              audio={audio}
+              onCount={() => decrementRepeat(item.id)}
+              onReset={() => resetRepeats({[item.id]: item.repeat ?? 0})}
+            />
+          )
+        }
       />
     </View>
   );

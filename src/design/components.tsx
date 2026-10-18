@@ -548,7 +548,9 @@ export function FeatureCard({
   onPress,
   emphasized = false,
   roomy = false,
+  tint,
 }: {
+  tint?: string;
   emphasized?: boolean;
   roomy?: boolean;
   title: string;
@@ -609,10 +611,10 @@ export function FeatureCard({
   const style = {
     ...rtlRow,
     padding: 12,
-    minHeight: roomy ? 136 : 112,
+    minHeight: roomy ? 148 : 112,
     overflow: 'hidden' as const,
     borderRadius: 14,
-    backgroundColor: emphasized ? p.actionPrimary : p.surfaceMuted,
+    backgroundColor: emphasized ? p.actionPrimary : (tint ?? p.surfaceMuted),
     borderWidth: 1,
     borderColor: p.borderSubtle,
   };

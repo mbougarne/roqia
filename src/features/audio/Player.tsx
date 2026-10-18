@@ -1,3 +1,4 @@
+import {PanelArtwork} from '../../design/PanelArtwork';
 import React, {
   useContext,
   useEffect,
@@ -69,12 +70,14 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
         backgroundColor: light ? p.actionPrimary : p.surface,
         marginHorizontal: 12,
         marginBottom: 6,
+        overflow: 'hidden',
         borderRadius: 14,
         paddingHorizontal: 12,
         paddingVertical: 8,
         borderWidth: 1,
         borderColor: p.borderSubtle,
       }}>
+      <PanelArtwork color={control} />
       {error && (
         <AppText accessibilityRole="alert" role="caption" style={{color: ink}}>
           {error}

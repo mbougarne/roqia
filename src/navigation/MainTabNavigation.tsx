@@ -109,9 +109,9 @@ function TabBar({state, navigation: tabs}: BottomTabBarProps) {
               }}>
               <View
                 style={{
-                  width: 40,
-                  height: 36,
-                  borderRadius: 20,
+                  width: 48,
+                  height: 32,
+                  borderRadius: 12,
                   overflow: 'hidden',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -120,6 +120,8 @@ function TabBar({state, navigation: tabs}: BottomTabBarProps) {
                 }}>
                 <AppIcon
                   name={meta.icon}
+                  size={23}
+                  strokeWidth={1.15}
                   color={
                     selected
                       ? mode === 'dark'
