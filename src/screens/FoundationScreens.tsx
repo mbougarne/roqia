@@ -26,6 +26,7 @@ import {number, ltr} from '../design/format';
 import {type ThemePreference} from '../repositories/models';
 import {getSettings, updateSettings} from '../services/persistence';
 export function MoreScreen({navigation}: any) {
+  const p = usePalette();
   const rows = [
     ['Duaa', 'الأدعية', 'hands'],
     ['Tasbihat', 'التسبيح', 'tasbih'],
@@ -44,12 +45,20 @@ export function MoreScreen({navigation}: any) {
   ] as const;
   return (
     <Page title="المزيد">
-      <Card>
-        <SettingRow
-          title="الرقية"
-          detail="مجاني · بلا إعلانات"
-          icon="medallion"
-        />
+      <Card
+        style={{
+          flexDirection: 'row-reverse',
+          alignItems: 'center',
+          paddingVertical: 14,
+          gap: 16,
+        }}>
+        <AppIcon name="medallion" size={48} color={p.accent} />
+        <View style={{flex: 1}}>
+          <AppText role="sectionTitle">الرقية</AppText>
+          <AppText role="caption" style={{color: p.textSecondary}}>
+            مجاني · بلا إعلانات
+          </AppText>
+        </View>
       </Card>
       {[
         rows.slice(0, 3),

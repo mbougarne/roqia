@@ -140,13 +140,11 @@ export function DownloadsScreen({navigation}: any) {
                   job.expectedBytes ? job.bytesReceived / job.expectedBytes : 0
                 }
               />
-              <AppText role="caption">
-                {job.assetId === 'source-font'
-                  ? 'الخط'
-                  : job.assetId === 'original'
-                    ? 'ملف المصحف الأصلي'
-                    : ''}
-              </AppText>
+              {['source-font', 'original'].includes(job.assetId) && (
+                <AppText role="caption">
+                  {job.assetId === 'source-font' ? 'الخط' : 'ملف المصحف الأصلي'}
+                </AppText>
+              )}
               {runtime.catalog.texts
                 .filter(
                   t => t.pack.id === job.packId && runtime.installed(t.pack),
@@ -306,11 +304,15 @@ export function StorageScreen({navigation}: any) {
       ) : (
         <>
           <Card>
-            <SettingRow
-              title="المساحة المستخدمة"
-              detail={displayBytes(usage.installed)}
-              icon="storage"
-            />
+            <View style={{...rtlRow, justifyContent: 'space-between'}}>
+              <View style={{flex: 1}}>
+                <AppText role="label">المساحة المستخدمة</AppText>
+                <AppText role="screenTitle" style={{writingDirection: 'ltr'}}>
+                  {displayBytes(usage.installed)}
+                </AppText>
+              </View>
+              <AppIcon name="storage" size={42} />
+            </View>
             <Progress
               value={usage.installed / (usage.installed + usage.free || 1)}
             />

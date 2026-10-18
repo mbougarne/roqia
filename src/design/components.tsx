@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Pressable, View, type ViewProps} from 'react-native';
 import {
   AppIcon,
+  IconBadge,
   AppText,
   Card,
   IconButton,
@@ -65,7 +66,7 @@ export function SettingRow({
   const content = (
     <>
       <View style={{...rtlRow, flex: 1}}>
-        {icon && <AppIcon name={icon} color={p.accent} />}
+        {icon && <IconBadge name={icon} />}
         <View style={{flex: 1}}>
           <AppText role="label">{title}</AppText>
           {detail && (
@@ -84,7 +85,7 @@ export function SettingRow({
   const style = {
     ...rtlRow,
     minHeight: 56,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     paddingVertical: 6,
     borderBottomWidth: 0.5,
     borderColor: p.borderSubtle,
@@ -237,8 +238,8 @@ export function RadioRow({
       onPress={onPress}
       style={{
         ...rtlRow,
-        minHeight: 64,
-        padding: 12,
+        minHeight: detail ? 84 : 64,
+        padding: 14,
         borderRadius: 12,
         borderWidth: 1,
         borderColor: selected ? p.actionPrimary : p.borderSubtle,
@@ -298,7 +299,20 @@ export function NumberBadge({value}: {value: number}) {
         justifyContent: 'center',
       }}>
       <View style={{position: 'absolute'}}>
-        <AppIcon name="medallion" size={42} color={p.accent} />
+        <Svg width={42} height={46} viewBox="0 0 42 46">
+          <Path
+            d="M21 2L27 6L34 7L36 14L40 23L36 31L34 39L27 40L21 44L14 40L7 39L5 31L2 23L5 14L7 7L14 6Z"
+            fill="none"
+            stroke={p.accent}
+            strokeWidth={0.8}
+          />
+          <Path
+            d="M21 5L27 9L32 10L34 16L37 23L34 30L32 36L27 37L21 41L15 37L10 36L8 30L5 23L8 16L10 10L15 9Z"
+            fill="none"
+            stroke={p.accent}
+            strokeWidth={0.35}
+          />
+        </Svg>
       </View>
       <View
         pointerEvents="none"

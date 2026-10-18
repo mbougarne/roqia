@@ -39,7 +39,7 @@ import {number, ltr} from '../../design/format';
 import {audioErrors, playback, restoreDownloadedSession} from './controller';
 import {readRecord} from '../../repositories/database';
 import {Waveform} from '../../design/Waveform';
-import {Illustration} from '../../design/Illustration';
+import {ListeningArtwork} from '../../design/ListeningArtwork';
 import {
   Disclosure,
   Group,
@@ -154,7 +154,8 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
 export function PlayerScreen({navigation}: any) {
   const p = usePalette();
   const {width, fontScale} = useWindowDimensions();
-  const stackOptions = width < 360 || fontScale > 1.2;
+  const {uiScale} = useContext(themeContext);
+  const stackOptions = width < 360 || fontScale * uiScale > 1.2;
   const track = useActiveTrack(),
     {position, duration} = useProgress(),
     state = usePlaybackState().state;
@@ -207,19 +208,32 @@ export function PlayerScreen({navigation}: any) {
       sub.remove();
     };
   }, []);
+  // Downloaded Quran titles contain both reciter and chapter; preserve both
+  // while giving the chapter the reference's title hierarchy.
+  const parts = track?.downloadEntry ? track.title?.split(' · ') : undefined;
+  const displayTitle =
+    parts && parts.length > 1 ? parts[parts.length - 1] : track?.title;
+  const displayArtist =
+    parts && parts.length > 1 ? parts.slice(0, -1).join(' · ') : track?.artist;
   const clock = (s: number) =>
     ltr(
       `${number(Math.floor(s / 60))}:${String(Math.floor(s % 60)).padStart(2, '0')}`,
     );
   return (
     <Page title="الاستماع" onBack={() => navigation.goBack()}>
-      <Illustration name="quran-book" height={150} />
-      <AppText role="screenTitle" style={{textAlign: 'center'}}>
-        {track?.title ?? 'اختر مقطعا للاستماع'}
+      <ListeningArtwork size={stackOptions ? 140 : 160} />
+      <AppText
+        role="screenTitle"
+        style={{
+          textAlign: 'center',
+          fontSize: 24 * uiScale,
+          lineHeight: 36 * uiScale,
+        }}>
+        {displayTitle ?? 'اختر مقطعا للاستماع'}
       </AppText>
-      {track?.artist && (
+      {displayArtist && (
         <AppText role="caption" style={{textAlign: 'center'}}>
-          {track.artist}
+          {displayArtist}
         </AppText>
       )}
       {error && <AppText accessibilityLiveRegion="polite">{error}</AppText>}
@@ -231,68 +245,73 @@ export function PlayerScreen({navigation}: any) {
           }
         />
       )}
-      {track && duration > 0 ? (
-        <Range
-          label="موضع الاستماع"
-          min={0}
-          max={duration}
-          value={Math.min(position, duration)}
-          onChange={v => void playback.seek(v)}
-        />
-      ) : (
-        <Progress value={0} />
-      )}
-      <View style={{...rtlRow, justifyContent: 'space-between'}}>
-        <AppText role="caption">{clock(duration)}</AppText>
-        <AppText role="caption">{clock(position)}</AppText>
-      </View>
-      <View
-        style={{
-          ...rtlRow,
-          justifyContent: 'center',
-          gap: 24,
-          paddingVertical: 8,
-        }}>
-        <IconButton
-          name="next"
-          label="المقطع التالي"
-          disabled={!track || queue.length < 2}
-          onPress={() => void playback.next()}
-        />
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={state === State.Playing ? 'إيقاف مؤقت' : 'تشغيل'}
-          accessibilityState={{disabled: !track}}
-          disabled={!track}
-          onPress={() => void playback.toggle()}
-          style={({pressed}) => ({
-            width: 72,
-            height: 72,
-            borderRadius: 36,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: p.actionPrimary,
-            opacity: !track || pressed ? 0.5 : 1,
-          })}>
-          <AppIcon
-            name={state === State.Playing ? 'pause' : 'play'}
-            size={32}
-            color={p.textOnAction}
+      <Card style={{gap: 12, paddingVertical: 20}}>
+        {track && duration > 0 ? (
+          <Range
+            hideLabel
+            label="موضع الاستماع"
+            min={0}
+            max={duration}
+            value={Math.min(position, duration)}
+            onChange={v => void playback.seek(v)}
           />
-        </Pressable>
-        <IconButton
-          name="previous"
-          label="المقطع السابق"
-          disabled={!track || queue.length < 2}
-          onPress={() => void playback.previous()}
-        />
-      </View>
-      <Ornament />
+        ) : (
+          <Progress value={0} />
+        )}
+        <View style={{...rtlRow, justifyContent: 'space-between'}}>
+          <AppText role="caption">{clock(duration)}</AppText>
+          <AppText role="caption">{clock(position)}</AppText>
+        </View>
+        <View
+          style={{
+            ...rtlRow,
+            justifyContent: 'center',
+            gap: 24,
+            paddingVertical: 8,
+          }}>
+          <IconButton
+            name="next"
+            label="المقطع التالي"
+            disabled={!track || queue.length < 2}
+            onPress={() => void playback.next()}
+          />
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={
+              state === State.Playing ? 'إيقاف مؤقت' : 'تشغيل'
+            }
+            accessibilityState={{disabled: !track}}
+            disabled={!track}
+            onPress={() => void playback.toggle()}
+            style={({pressed}) => ({
+              width: 88,
+              height: 88,
+              borderRadius: 44,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: p.actionPrimary,
+              opacity: !track || pressed ? 0.5 : 1,
+            })}>
+            <AppIcon
+              name={state === State.Playing ? 'pause' : 'play'}
+              size={32}
+              color={p.textOnAction}
+            />
+          </Pressable>
+          <IconButton
+            name="previous"
+            label="المقطع السابق"
+            disabled={!track || queue.length < 2}
+            onPress={() => void playback.previous()}
+          />
+        </View>
+      </Card>
       <View
         style={{
           ...rtlRow,
           flexDirection: stackOptions ? 'column' : 'row-reverse',
           alignItems: 'stretch',
+          gap: 10,
         }}>
         {(
           [
@@ -322,15 +341,31 @@ export function PlayerScreen({navigation}: any) {
             },
           ] as const
         ).map(c => (
-          <View key={c.key} style={{flex: stackOptions ? undefined : 1}}>
-            <Button
-              secondary
-              icon={c.icon}
-              label={c.label}
-              disabled={!track}
-              onPress={() => setPanel(c.key)}
-            />
-          </View>
+          <Pressable
+            key={c.key}
+            accessibilityRole="button"
+            accessibilityLabel={c.label}
+            accessibilityState={{disabled: !track}}
+            disabled={!track}
+            onPress={() => setPanel(c.key)}
+            style={{
+              flex: stackOptions ? undefined : 1,
+              minHeight: 90,
+              borderRadius: 12,
+              borderWidth: 0.5,
+              borderColor: p.borderSubtle,
+              backgroundColor: p.surface,
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 10,
+              gap: 6,
+              opacity: track ? 1 : 0.5,
+            }}>
+            <AppIcon name={c.icon} color={p.accent} />
+            <AppText role="caption" style={{textAlign: 'center'}}>
+              {c.label}
+            </AppText>
+          </Pressable>
         ))}
       </View>
       <Group>

@@ -1,3 +1,4 @@
+import {View} from 'react-native';
 import React, {createContext, useCallback, useContext, useState} from 'react';
 import {AppIcon, AppText, Button, Sheet, usePalette} from '../../design/ui';
 type Request = {title: string; action: () => void};
@@ -25,9 +26,15 @@ export function ResetConfirmationProvider({
   return (
     <context.Provider value={confirm}>
       {children}
-      <Sheet title={request?.title ?? ''} visible={!!request} onClose={close}>
-        <AppIcon name="reset" size={40} color={p.danger} />
-        <AppText>
+      <Sheet
+        centered={request?.title.includes('جميع العدادات')}
+        title={request?.title ?? ''}
+        visible={!!request}
+        onClose={close}>
+        <View style={{alignItems: 'center'}}>
+          <AppIcon name="reset" size={40} color={p.danger} />
+        </View>
+        <AppText style={{textAlign: 'center'}}>
           ستعود العدادات المحددة إلى القيم الأصلية. لن تتغير المحفوظات أو
           التنزيلات.
         </AppText>

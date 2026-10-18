@@ -11,6 +11,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {
   AppText,
+  AppIcon,
   Button,
   Card,
   IconButton,
@@ -280,7 +281,7 @@ function Reader({route, navigation}: any) {
           maxWidth: 560,
           width: '100%',
           alignSelf: 'center',
-          gap: prefs.view === 'verses' ? 8 : 0,
+          gap: prefs.view === 'verses' ? 12 : 0,
         }}
         onMomentumScrollEnd={() => {
           act(runtime.remember(locator(position.current)));
@@ -312,9 +313,25 @@ function Reader({route, navigation}: any) {
               style={{textAlign: 'center', color: p.textSecondary}}>
               {edition.title} · {edition.publisher}
             </AppText>
-            <Ornament
-              title={translated ? 'ترجمة المعاني' : chapters[surah - 1].name}
-            />
+            <View
+              style={{
+                ...rtlRow,
+                justifyContent: 'center',
+                backgroundColor: p.surfaceMuted,
+                borderRadius: 10,
+                paddingVertical: 12,
+                paddingHorizontal: 16,
+                borderWidth: 0.5,
+                borderColor: p.accent,
+              }}>
+              <AppIcon name="medallion" size={30} color={p.accent} />
+              <AppText
+                role="sectionTitle"
+                style={{flex: 1, textAlign: 'center'}}>
+                {translated ? 'ترجمة المعاني' : chapters[surah - 1].name}
+              </AppText>
+              <AppIcon name="medallion" size={30} color={p.accent} />
+            </View>
             {translationError && (
               <StateView
                 title="الترجمة المختارة غير متاحة"
@@ -350,11 +367,29 @@ function Reader({route, navigation}: any) {
           <Card
             style={
               prefs.view === 'continuous'
-                ? {borderWidth: 0, borderRadius: 0}
+                ? {borderWidth: 0, borderRadius: 0, paddingVertical: 20}
                 : undefined
             }>
             <View style={rtlRow}>
               <NumberBadge value={item.number} />
+              <View style={{flex: 1}} />
+              <IconButton
+                name="bookmark"
+                selected={saved.includes(locatorKey(locator(item.number)))}
+                label={
+                  saved.includes(locatorKey(locator(item.number)))
+                    ? 'إزالة علامة القراءة'
+                    : 'حفظ علامة القراءة'
+                }
+                onPress={() =>
+                  act(
+                    runtime
+                      .toggleBookmark(locator(item.number))
+                      .then(() => runtime.bookmarks())
+                      .then(rows => setSaved(rows.map(b => b.bookmarkId))),
+                  )
+                }
+              />
             </View>
             <Text
               selectable
@@ -404,23 +439,6 @@ function Reader({route, navigation}: any) {
                 borderColor: p.borderSubtle,
                 justifyContent: 'center',
               }}>
-              <IconButton
-                name="bookmark"
-                selected={saved.includes(locatorKey(locator(item.number)))}
-                label={
-                  saved.includes(locatorKey(locator(item.number)))
-                    ? 'إزالة علامة القراءة'
-                    : 'حفظ علامة القراءة'
-                }
-                onPress={() =>
-                  act(
-                    runtime
-                      .toggleBookmark(locator(item.number))
-                      .then(() => runtime.bookmarks())
-                      .then(rows => setSaved(rows.map(b => b.bookmarkId))),
-                  )
-                }
-              />
               <IconButton
                 name="copy"
                 label="نسخ الآية"

@@ -25,7 +25,7 @@ export function AppIcon({
   name,
   size = 24,
   color,
-  strokeWidth,
+  strokeWidth = 1.35,
 }: {
   name: IconName;
   size?: number;
@@ -58,6 +58,22 @@ export function AppIcon({
       color={color ?? p.iconPrimary}
       accessible={false}
     />
+  );
+}
+export function IconBadge({name, size = 36}: {name: IconName; size?: number}) {
+  const p = usePalette();
+  return (
+    <View
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: p.surfaceMuted,
+      }}>
+      <AppIcon name={name} size={size * 0.6} color={p.iconPrimary} />
+    </View>
   );
 }
 export function AppText({
@@ -227,7 +243,7 @@ export function Row({
           borderColor: p.borderSubtle,
         },
       ]}>
-      {icon && <AppIcon name={icon} />}
+      {icon && <IconBadge name={icon} />}
       <View style={{flex: 1}}>
         <AppText role="bodyStrong">{title}</AppText>
         {detail && (
@@ -323,11 +339,13 @@ export function StateView({
   );
 }
 export function Sheet({
+  centered = false,
   visible,
   title,
   onClose,
   children,
 }: {
+  centered?: boolean;
   visible: boolean;
   title: string;
   onClose: () => void;
@@ -340,13 +358,33 @@ export function Sheet({
       transparent
       animationType="none"
       onRequestClose={onClose}>
-      <View style={[styles.scrim, {backgroundColor: p.scrim}]}>
+      <View
+        style={[
+          styles.scrim,
+          {backgroundColor: p.scrim},
+          centered && {justifyContent: 'center', padding: 24},
+        ]}>
         <View
           accessibilityViewIsModal
-          style={[styles.sheet, {backgroundColor: p.surface}]}>
+          style={[
+            styles.sheet,
+            {backgroundColor: p.surface},
+            centered && {borderRadius: 16},
+          ]}>
+          {!centered && (
+            <View
+              style={{
+                width: 36,
+                height: 4,
+                borderRadius: 2,
+                alignSelf: 'center',
+                backgroundColor: p.borderControl,
+              }}
+            />
+          )}
           <View style={styles.header}>
             <IconButton label="إغلاق" name="close" onPress={onClose} />
-            <AppText role="sectionTitle" style={{flex: 1}}>
+            <AppText role="sectionTitle" style={{flex: 1, textAlign: 'center'}}>
               {title}
             </AppText>
           </View>
@@ -380,7 +418,7 @@ const styles = StyleSheet.create({
   button: {
     minHeight: 48,
     padding: 12,
-    borderRadius: 12,
+    borderRadius: 8,
     flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
@@ -392,11 +430,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  card: {padding: 16, gap: 12, borderRadius: 16, borderWidth: 1},
+  card: {padding: 16, gap: 12, borderRadius: 12, borderWidth: 0.5},
   row: {
-    minHeight: 56,
-    borderWidth: 1,
-    borderRadius: 16,
+    minHeight: 68,
+    borderWidth: 0.5,
+    borderRadius: 12,
     padding: 16,
     gap: 12,
     flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',

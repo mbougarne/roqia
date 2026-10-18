@@ -1,5 +1,7 @@
 # Phase 12 — whole-app visual review
 
+**Combined owner review:** [All 48 references and remaining-screen refinements](review-03/README.md), extending open PR #17 as one review batch.
+
 **Latest owner follow-up:** [Ruqya and screens 09–14 refinements](review-02/README.md), after merged PR #16.
 
 **Owner review follow-up:** PR #15 is merged. See [screens 01–08 corrections and fresh comparisons](review-01/README.md) for the first feedback batch.

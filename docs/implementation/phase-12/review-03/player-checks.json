@@ -1,0 +1,11 @@
+{
+  "realDownloadedTrack": true,
+  "playPause": true,
+  "seekForwardObservedSeconds": 16,
+  "seekBackwardObservedSeconds": 1,
+  "seekDeltaSeconds": 15,
+  "rateSheet": true,
+  "repeatSheet": true,
+  "sleepSheet": true,
+  "stoppedAfterCheck": true
+}

@@ -23,15 +23,16 @@ import {Illustration} from '../design/Illustration';
 import {noteData} from '../data';
 import legal from '../features/settings/legal-copy.json';
 export function AboutScreen({navigation}: any) {
+  const p = usePalette();
   const external = (title: string, url: string) =>
     navigation.navigate('ExternalLink', {title, url});
   return (
     <Page title="حول التطبيق" onBack={() => navigation.goBack()}>
-      <View style={{alignItems: 'center', gap: 8, paddingVertical: 16}}>
-        <AppIcon name="medallion" size={64} />
+      <Card style={{alignItems: 'center', gap: 8, paddingVertical: 24}}>
+        <AppIcon name="medallion" size={64} color={p.accent} />
         <AppText role="screenTitle">الرقية</AppText>
         <AppText role="caption">رفيقك للرقية والأذكار والقرآن</AppText>
-      </View>
+      </Card>
       <Group>
         <SettingRow
           title="مجاني بالكامل"
@@ -126,7 +127,7 @@ export function LegalScreen({navigation, route}: any) {
             ['التواصل', 'أبلغنا عن أي خطأ أو ملاحظة.', 'mail'],
           ]
       ).map(([title, detail, icon]) => (
-        <Card key={title}>
+        <Card key={title} style={{paddingVertical: 20, paddingHorizontal: 4}}>
           <SettingRow title={title} detail={detail} icon={icon as any} />
         </Card>
       ))}
@@ -157,7 +158,6 @@ export function SourcesScreen({navigation}: any) {
       <AppText role="caption" style={{textAlign: 'center'}}>
         تعرف على مصدر كل محتوى
       </AppText>
-      \n{' '}
       {editions.map(e => (
         <Group key={e.id}>
           <SettingRow

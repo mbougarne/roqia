@@ -1,0 +1,20 @@
+[
+  {
+    "theme": "light",
+    "video": "light-launch.mp4",
+    "videoSha256": "8e289c1b200bc383f6c30d451403b868e1673729414378c6ecc685813dd7a8c8",
+    "extractionFilter": "fps=5,select=eq(n,11)",
+    "frameTimeSeconds": 2.2,
+    "normalColdLaunch": true,
+    "noArtificialDelay": true
+  },
+  {
+    "theme": "dark",
+    "video": "dark-launch.mp4",
+    "videoSha256": "2cbd290e828d0508026b38cf0742193b6726daea6715051446bf2c895d0f1b61",
+    "extractionFilter": "fps=5,select=eq(n,13)",
+    "frameTimeSeconds": 2.6,
+    "normalColdLaunch": true,
+    "noArtificialDelay": true
+  }
+]
