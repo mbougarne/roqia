@@ -1,0 +1,18 @@
+{
+  "fr.hamidullah": {
+    "bytes": 948096,
+    "sha256": "9834cfcd14b506a6c0223d86ac259e896f2bfb44c0823d83d827c27ffea57f03",
+    "url": "https://tanzil.net/trans/?transID=fr.hamidullah&type=txt-2",
+    "retrievedAt": "2026-10-18",
+    "review": "pending",
+    "termsUrl": "https://tanzil.net/trans/"
+  },
+  "en.pickthall": {
+    "bytes": 864918,
+    "sha256": "4aabbfa9d96796f5a6b0217d2c39dce1a3084f772bf6f2650e37082a774e3cc7",
+    "url": "https://tanzil.net/trans/?transID=en.pickthall&type=txt-2",
+    "retrievedAt": "2026-10-18",
+    "review": "pending",
+    "termsUrl": "https://tanzil.net/trans/"
+  }
+}

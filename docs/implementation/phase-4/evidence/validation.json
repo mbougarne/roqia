@@ -1,0 +1,29 @@
+{
+  "base": "50f8497",
+  "branch": "phase_4/quran-reading-listening",
+  "android": {
+    "target": "emulator-5554",
+    "api": 36,
+    "abi": "arm64-v8a",
+    "installedInPlace": true,
+    "debugBuild": "passed",
+    "productionJavaScriptBundle": "passed",
+    "signedReleaseTested": false
+  },
+  "typescript": "passed",
+  "focusedTests": {
+    "node": 48,
+    "feasibilityPython": 14,
+    "feasibilityNode": 7,
+    "total": 69
+  },
+  "privateProbeStringsAbsentFromProductionBundle": [
+    "phase4-catalog.json",
+    "http://127.0.0.1:8083",
+    "phase4-install",
+    "phase4-integrity"
+  ],
+  "productionCatalog": "empty",
+  "canonicalDevotionalSourceFiles": "unchanged",
+  "ios": "deferred"
+}

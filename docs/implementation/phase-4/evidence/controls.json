@@ -1,0 +1,10 @@
+[
+  {
+    "journey": "native keep-awake flag enabled only in reader; cleared on Home/background, other screen and preference off",
+    "pass": true
+  },
+  {
+    "journey": "verified local audio queue, pause/seek/rate/repeat and process restart restoration without autoplay",
+    "pass": true
+  }
+]

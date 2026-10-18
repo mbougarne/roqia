@@ -2,7 +2,8 @@ import React, {useEffect, useState, useSyncExternalStore} from 'react';
 import {Alert} from 'react-native';
 import {AppText, Button, Card, Page, StateView} from '../../design/ui';
 import {bytes, ltr, number} from '../../design/format';
-import {downloads, nativeDownloadPorts, startDownloadServices} from './native';
+import {nativeDownloadPorts} from './native';
+import {useQuran} from '../quran/context';
 import {type DownloadState, type InstalledPack} from './types';
 const displayBytes = (value: number) => ltr(bytes(value));
 const labels: Record<DownloadState, string> = {
@@ -19,6 +20,8 @@ const labels: Record<DownloadState, string> = {
   removed: 'محذوف',
 };
 function useDownloads() {
+  const runtime = useQuran(),
+    downloads = runtime.downloads;
   const revision = useSyncExternalStore(
       downloads.subscribe,
       downloads.snapshot,
@@ -27,7 +30,8 @@ function useDownloads() {
     [ready, setReady] = useState(false);
   const retry = () => {
     setError(false);
-    void startDownloadServices()
+    void runtime
+      .initialize()
       .then(() => setReady(true))
       .catch(() => setError(true));
   };
@@ -48,6 +52,7 @@ const handle = (action: Promise<unknown>) => {
   );
 };
 export function DownloadsScreen({navigation}: any) {
+  const downloads = useQuran().downloads;
   const {error, ready, retry} = useDownloads(),
     jobs = downloads
       .listJobs()
@@ -112,6 +117,7 @@ export function DownloadsScreen({navigation}: any) {
   );
 }
 export function StorageScreen({navigation}: any) {
+  const downloads = useQuran().downloads;
   const {revision, error, ready, retry} = useDownloads(),
     [usage, setUsage] = useState({installed: 0, partial: 0, free: 0}),
     [selected, setSelected] = useState<string[]>([]),

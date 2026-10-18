@@ -3,6 +3,7 @@ import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
   State,
+  RepeatMode,
   type AddTrack,
 } from 'react-native-track-player';
 import {audioAssets} from '../../assets/audio';
@@ -70,6 +71,7 @@ async function toggle() {
   if ([State.Playing, State.Buffering, State.Loading].includes(state))
     await TrackPlayer.pause();
   else await TrackPlayer.play();
+  await persistPlayback();
 }
 const tracksFor = (
   items: DataProps[],
@@ -95,6 +97,7 @@ export const playback = {
       assetId: string;
       title: string;
     }[],
+    options: {paused?: boolean; position?: number; index?: number} = {},
   ) =>
     command(async () => {
       const queue: AddTrack[] = [];
@@ -130,12 +133,18 @@ export const playback = {
           assetVersion: entry.version,
           scope: entry.packId,
           queueMode: 'all',
+          downloadEntry: entry,
         });
       }
       if (!queue.length) return;
       await TrackPlayer.reset();
       await TrackPlayer.add(queue);
-      await TrackPlayer.play();
+      if (options.index !== undefined) await TrackPlayer.skip(options.index);
+      if (options.position !== undefined)
+        await TrackPlayer.seekTo(Math.max(0, options.position));
+      if (options.paused) await TrackPlayer.pause();
+      else await TrackPlayer.play();
+      return true;
     }),
   single: (items: DataProps[], scope: string, file: string) =>
     command(async () => {
@@ -163,9 +172,26 @@ export const playback = {
       await TrackPlayer.add(queue);
       await TrackPlayer.play();
     }),
+  rate: (value: number) =>
+    command(async () => {
+      if (![0.75, 1, 1.25, 1.5].includes(value)) throw Error('invalid_rate');
+      await TrackPlayer.setRate(value);
+      await persistPlayback();
+    }),
+  repeat: (value: RepeatMode) =>
+    command(async () => {
+      if (![RepeatMode.Off, RepeatMode.Track, RepeatMode.Queue].includes(value))
+        throw Error('invalid_repeat');
+      await TrackPlayer.setRepeatMode(value);
+      await persistPlayback();
+    }),
   toggle: () => command(toggle),
   play: () => command(() => TrackPlayer.play()),
-  pause: () => command(() => TrackPlayer.pause()),
+  pause: () =>
+    command(async () => {
+      await TrackPlayer.pause();
+      await persistPlayback();
+    }),
   stop: () =>
     command(async () => {
       await TrackPlayer.reset();
@@ -175,8 +201,10 @@ export const playback = {
   previous: () => command(() => TrackPlayer.skipToPrevious()),
   seek: (seconds: number) =>
     command(async () => {
-      if (Number.isFinite(seconds) && seconds >= 0)
+      if (Number.isFinite(seconds) && seconds >= 0) {
         await TrackPlayer.seekTo(seconds);
+        await persistPlayback();
+      }
     }),
   // Deletion and queue changes use the same lock. Paused tracks and queued tracks count as users of a file.
   releaseFiles: async (paths: string[], remove: () => Promise<void>) => {
@@ -210,6 +238,10 @@ export async function persistPlayback() {
     trackKey: track.id,
     assetVersion: track.assetVersion,
     queueTrackKeys: queue.map(t => t.id),
+    downloadEntries: queue.every(t => t.downloadEntry)
+      ? queue.map(t => t.downloadEntry)
+      : null,
+    activeIndex: queue.findIndex(t => t.id === track.id),
     positionMs: Math.round(progress.position * 1000),
     repeatMode: await TrackPlayer.getRepeatMode(),
     speed: await TrackPlayer.getRate(),
@@ -219,4 +251,39 @@ export async function persistPlayback() {
 }
 export function playbackFailed() {
   report('تعذر تشغيل الصوت. أعد المحاولة أو اختر مقطعاً آخر.');
+}
+
+export async function restoreDownloadedSession() {
+  const saved = await readRecord<{
+    downloadEntries: Parameters<typeof playback.downloaded>[0] | null;
+    activeIndex: number;
+    positionMs: number;
+    speed: number;
+    repeatMode: RepeatMode;
+  }>('playback', 'session');
+  if (
+    !saved?.downloadEntries?.length ||
+    !Number.isInteger(saved.activeIndex) ||
+    saved.activeIndex < 0 ||
+    saved.activeIndex >= saved.downloadEntries.length ||
+    !Number.isFinite(saved.positionMs)
+  )
+    throw Error('no_download_session');
+  const restored = await playback.downloaded(saved.downloadEntries, {
+    paused: true,
+    index: saved.activeIndex,
+    position: saved.positionMs / 1000,
+  });
+  // A failed integrity check must not change settings or overwrite the saved session.
+  if (!restored) throw Error('audio_restore_failed');
+  await playback.rate(
+    [0.75, 1, 1.25, 1.5].includes(saved.speed) ? saved.speed : 1,
+  );
+  await playback.repeat(
+    [RepeatMode.Off, RepeatMode.Track, RepeatMode.Queue].includes(
+      saved.repeatMode,
+    )
+      ? saved.repeatMode
+      : RepeatMode.Off,
+  );
 }

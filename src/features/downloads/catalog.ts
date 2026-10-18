@@ -1,3 +1,8 @@
 import {type Pack} from './types';
-// Publication remains gated by RQ-019/RQ-047. Never substitute draft source packs here.
-export const catalog: Pack[] = [];
+import {quranCatalog} from '../quran/catalog';
+// Approved runtime descriptors only. The source gate currently keeps these lists empty.
+export const catalog: Pack[] = [
+  ...quranCatalog.texts.map(t => t.pack),
+  ...quranCatalog.translations.map(t => t.pack),
+  ...quranCatalog.recordings.flatMap(r => r.chapters.map(c => c.pack)),
+];

@@ -15,7 +15,7 @@ import {MainTabNavigation} from './navigation/MainTabNavigation';
 import {StateView} from './design/ui';
 import {ResetConfirmationProvider} from './features/devotional/ResetConfirmation';
 import {reconcileReminders} from './features/settings/reminders/service';
-import {startDownloadServices} from './features/downloads/native';
+import {useQuran} from './features/quran/context';
 import {contentGroups, defaultCounts} from './repositories/content';
 import {decrementCounter, resetCounters} from './repositories/counters';
 import {type ThemePreference} from './repositories/models';
@@ -55,6 +55,7 @@ const splitCountsByScope = (flat: RepeatCounts, scope: string): RepeatCounts =>
   );
 
 export default function App() {
+  const quranRuntime = useQuran();
   const deviceColorScheme = useColorScheme();
   const defaultMode: Mode = deviceColorScheme === 'dark' ? 'dark' : 'light';
   const [uiScale, setScale] = useState(1);
@@ -112,12 +113,12 @@ export default function App() {
       setShowWalkthrough(!walkthroughSeen);
       setShowIntroNote(walkthroughSeen && !loadedIntroNoteSeen);
       setIsStateHydrated(true);
-      void startDownloadServices().catch(() => undefined);
+      void quranRuntime.initialize().catch(() => undefined);
     };
 
     setStorageError(false);
     void hydrateState().catch(() => setStorageError(true));
-  }, [hydrationAttempt]);
+  }, [hydrationAttempt, quranRuntime]);
 
   useEffect(() => {
     if (!isStateHydrated) return;

@@ -36,16 +36,6 @@ export function MoreScreen({navigation}: any) {
     </Page>
   );
 }
-export function QuranScreen() {
-  return (
-    <Page title="القرآن الكريم">
-      <StateView
-        title="المصاحف غير متاحة للتنزيل بعد"
-        description="يجري التحقق من النص والخط وحقوق التوزيع لكل مصحف. ستتوفر روايتا ورش وحفص بعد إتمام المراجعة."
-      />
-    </Page>
-  );
-}
 export function PrayerScreen() {
   return (
     <Page title="الصلاة">
@@ -123,9 +113,9 @@ export function SettingsScreen({navigation}: any) {
       <AppText>{`الأرقام المستخدمة دائما: ${ltr('0123456789')}`}</AppText>
       <Row
         title="المصحف المفضل والترجمة"
-        detail="متاح بعد اعتماد حزم المصاحف"
+        detail="اختيار الرواية وإعدادات القراءة"
         icon="book"
-        onPress={() => navigation.navigate('MainTabs', {screen: 'Quran'})}
+        onPress={() => navigation.navigate('QuranEditions')}
       />
       <Row
         title="التنزيل عبر Wi-Fi فقط"

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 3 existing-app implementation and Android validation recorded; TalkBack/legal review, source, signed-release, lifecycle and iOS acceptance gates remain explicit",
+  "status": "Phase 4 Quran runtime implemented with source-gated private Android validation; publication, qualified review, older Android/iOS reader adapter, native sleep timer and release gates remain explicit",
   "tickets": [
     {
       "id": "RQ-001",
@@ -698,7 +698,7 @@
     {
       "id": "RQ-023",
       "title": "Build Quran library and edition selection",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-003",
@@ -721,12 +721,18 @@
         "specs/DOWNLOADS.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 28
+      "executionOrder": 28,
+      "progress": "Library, offline surah metadata, explicit Warsh/Hafs preference, install state and separate download action implemented. Preference changes never enqueue or delete.",
+      "remaining": "Production ready-pack acceptance remains gated by source/catalog approval; Android private-fixture evidence is separate.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-024",
       "title": "Implement the Warsh reader",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-016",
@@ -746,12 +752,18 @@
         "specs/QURAN.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 29
+      "executionOrder": 29,
+      "progress": "Canonical King Fahd adapter, exact matching-font registration, native fallback rejection, Western UI locators and missing/corrupt recovery implemented.",
+      "remaining": "Qualified Warsh/basmala/render review and redistribution remain open. Current native fallback diagnostic needs Android API 31+; older Android and iOS reader support remain unavailable.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-025",
       "title": "Implement the Hafs reader",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-017",
@@ -772,12 +784,18 @@
         "specs/QURAN.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 30
+      "executionOrder": 30,
+      "progress": "Canonical Tanzil chapter adapter and virtualized reader implemented, preserving source boundaries and strings.",
+      "remaining": "Qualified font/render review, older Android/iOS coverage and approved production pack remain open.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-026",
       "title": "Acquire and integrate French/English translations",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-018",
@@ -800,12 +818,18 @@
         "specs/DOWNLOADS.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 31
+      "executionOrder": 31,
+      "progress": "Locked French Hamidullah and English Pickthall files acquired from Tanzil; exact structural import, Hafs/version-bound mapping, LTR display and separate download/selection implemented. Warsh mapping is rejected.",
+      "remaining": "Qualified translation sample review and publication remain open; no Warsh correspondence or Clear Quran licensing is implied.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-027",
       "title": "Implement reader preferences",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-024",
@@ -825,12 +849,18 @@
         "specs/QURAN.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 32
+      "executionOrder": 32,
+      "progress": "Edition-scoped scripture size, line spacing, verses/continuous presentation, translation preference and focus/background-scoped Android keep-awake implemented.",
+      "remaining": "Final visual/TalkBack acceptance and iOS native adapter verification remain open.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-028",
       "title": "Implement local Quran search",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-024",
@@ -849,12 +879,18 @@
         "specs/QURAN.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 33
+      "executionOrder": 33,
+      "progress": "Local metadata search, installed-text search with unchanged canonical results and verified font, bounded memory/results, cancellation and recent/clear implemented.",
+      "remaining": "Qualified content/search review, TalkBack and full-device performance acceptance remain open.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-029",
       "title": "Add edition-aware bookmarks and resume",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-011",
@@ -874,12 +910,18 @@
         "specs/QURAN.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 34
+      "executionOrder": 34,
+      "progress": "Transactional edition/numbering/version-aware verse bookmarks and independent reading positions implemented. Missing content retains personal records; no version/edition remapping occurs silently.",
+      "remaining": "Full production-pack upgrade/mapping and qualified source acceptance remain open. Page-only editions are not offered by this text-only runtime.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-030",
       "title": "Build source/edition information and reporting",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M4",
       "dependsOn": [
         "RQ-013",
@@ -900,7 +942,13 @@
         "specs/QURAN.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 35
+      "executionOrder": 35,
+      "progress": "Offline edition/source details, actual notices and explicit user-controlled content-report link carry locator/version context.",
+      "remaining": "Approved public pack metadata and final editorial review remain open; no source certification or endorsement claim.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-031",
@@ -997,7 +1045,7 @@
     {
       "id": "RQ-034",
       "title": "Build reciter selection and audio download UI",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M5",
       "dependsOn": [
         "RQ-021",
@@ -1020,12 +1068,18 @@
         "specs/AUDIO.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 36
+      "executionOrder": 36,
+      "progress": "Riwaya-filtered recording sets, actual quality/partial coverage, selected/all-available chapters, exact totals and deduplicated downloads implemented. Local verified files provide preview.",
+      "remaining": "RQ-031 recording/listening/redistribution approval remains open. No unreviewed public recording catalog or automatic streaming is introduced.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-035",
       "title": "Build offline library and full player",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M5",
       "dependsOn": [
         "RQ-022",
@@ -1048,7 +1102,13 @@
         "specs/AUDIO.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 37
+      "executionOrder": 37,
+      "progress": "Installed audio library, shared full player, seek/repeat/rate/queue controls and explicit paused downloaded-session restoration implemented. Files are checked again before playback.",
+      "remaining": "Native sleep-deadline API remains unproved and the UI explicitly reports the sleep timer unavailable. Physical-device focus/remote controls, process lifecycle and iOS validation remain open.",
+      "evidence": [
+        "docs/implementation/phase-4/README.md",
+        "docs/implementation/phase-4/SOURCES.md"
+      ]
     },
     {
       "id": "RQ-036",

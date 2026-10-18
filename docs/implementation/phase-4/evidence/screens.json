@@ -1,0 +1,12 @@
+[
+  {
+    "journey": "library, edition selection, readers, preferences, translations, search, bookmarks, recording and offline libraries",
+    "theme": "light",
+    "pass": true
+  },
+  {
+    "journey": "library, edition selection, readers, preferences, translations, search, bookmarks, recording and offline libraries",
+    "theme": "dark",
+    "pass": true
+  }
+]
