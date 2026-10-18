@@ -1,0 +1,344 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Roqia content catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "catalogVersion",
+    "packs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "catalogVersion": {
+      "type": "string"
+    },
+    "packs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/pack"
+      }
+    }
+  },
+  "definitions": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "relativePath",
+        "url",
+        "bytes",
+        "sha256",
+        "mediaType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relativePath": {
+          "type": "string",
+          "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))[a-zA-Z0-9][a-zA-Z0-9_.-]*(?:/[a-zA-Z0-9][a-zA-Z0-9_.-]*)*$"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "mediaType": {
+          "enum": [
+            "application/json",
+            "font/ttf",
+            "font/otf",
+            "image/png",
+            "image/webp",
+            "audio/mpeg",
+            "application/zip",
+            "application/pdf"
+          ]
+        }
+      }
+    },
+    "pack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "status",
+        "version",
+        "source",
+        "riwaya",
+        "tariq",
+        "numberingScheme",
+        "language",
+        "compatibleEditionIds",
+        "capabilities",
+        "assets",
+        "validationReport"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*$"
+        },
+        "kind": {
+          "enum": [
+            "quran",
+            "translation",
+            "audio",
+            "adhan",
+            "city-data",
+            "timetable"
+          ]
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "ready",
+            "withdrawn"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "pageUrl",
+            "artifactUrl",
+            "attribution",
+            "retrievedAt"
+          ],
+          "properties": {
+            "provider": {
+              "type": "string"
+            },
+            "pageUrl": {
+              "type": "string",
+              "pattern": "^https://"
+            },
+            "artifactUrl": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "attribution": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "retrievedAt": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "riwaya": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tariq": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "numberingScheme": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "language": {
+          "type": "string"
+        },
+        "compatibleEditionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "reflow",
+            "verseSearch",
+            "verseBookmarks",
+            "pageView",
+            "translations",
+            "timedAudio"
+          ],
+          "properties": {
+            "reflow": {
+              "type": "boolean"
+            },
+            "verseSearch": {
+              "type": "boolean"
+            },
+            "verseBookmarks": {
+              "type": "boolean"
+            },
+            "pageView": {
+              "type": "boolean"
+            },
+            "translations": {
+              "type": "boolean"
+            },
+            "timedAudio": {
+              "type": "boolean"
+            }
+          }
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/asset"
+          }
+        },
+        "validationReport": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ready"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "assets": {
+                "minItems": 1
+              },
+              "validationReport": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "properties": {
+                  "artifactUrl": {
+                    "type": "string",
+                    "pattern": "^https://"
+                  },
+                  "attribution": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "retrievedAt": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ready"
+              },
+              "kind": {
+                "const": "quran"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "numberingScheme": {
+                "type": "string",
+                "minLength": 1
+              },
+              "riwaya": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ready"
+              },
+              "kind": {
+                "const": "translation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "numberingScheme": {
+                "type": "string",
+                "minLength": 1
+              },
+              "compatibleEditionIds": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ready"
+              },
+              "kind": {
+                "const": "audio"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "numberingScheme": {
+                "type": "string",
+                "minLength": 1
+              },
+              "riwaya": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

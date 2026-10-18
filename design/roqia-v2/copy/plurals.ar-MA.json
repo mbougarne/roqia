@@ -1,0 +1,26 @@
+{
+  "surahCount": {
+    "zero": "لا توجد سور",
+    "one": "سورة واحدة",
+    "two": "سورتان",
+    "few": "{count} سور",
+    "many": "{count} سورة",
+    "other": "{count} سورة"
+  },
+  "minuteCount": {
+    "zero": "0 دقيقة",
+    "one": "دقيقة واحدة",
+    "two": "دقيقتان",
+    "few": "{count} دقائق",
+    "many": "{count} دقيقة",
+    "other": "{count} دقيقة"
+  },
+  "resultCount": {
+    "zero": "لا توجد نتائج",
+    "one": "نتيجة واحدة",
+    "two": "نتيجتان",
+    "few": "{count} نتائج",
+    "many": "{count} نتيجة",
+    "other": "{count} نتيجة"
+  }
+}

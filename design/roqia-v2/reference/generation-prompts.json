@@ -1,0 +1,298 @@
+{
+  "tool": "built-in image_gen",
+  "scope": "48 screens, separate light and dark PNG per screen. Design only; no app code changes.",
+  "global": "Use case: ui-mockup. Create ONE standalone high-fidelity Android mobile app SCREENSHOT for ROQIA, never a collage. Full-bleed flat rectangular portrait canvas about 1024 x 2304 (phone ratio 9:20). App UI fills whole canvas edge to edge. No outer background, device frame, hardware, mockup shadow, board title, caption outside UI, or other screens. Input reference is a STYLE REFERENCE ONLY showing old multi-screen boards; do NOT copy its multi-screen layout. Follow the approved warm Moroccan editorial style: quiet thin gold geometric accents, rounded cards radius16 logical px, very subtle borders, elegant thin outline icons. Arabic-first RTL with natural accurate Arabic joining, right-aligned labels; French/English and numbers LTR. ONLY Western numerals 0 1 2 3 4 5 6 7 8 9, never Eastern Arabic glyphs even in verse medallions, clocks or status bar. Compact typography: logical viewport 393 x 852, header 18px semibold (never giant), UI body14px, helper12px, sacred reading text21px, comfortable line height. 20px side padding, touch controls minimum44px. Keep content dense enough to look like a real mobile app, with purposeful whitespace. Status bar tiny 9:41 top left, Android signal/Wi-Fi/battery top right; bottom Android gesture line. For ROOT screens ONLY include exactly five bottom tabs in RTL order from right to left: الرقية, القرآن, الأذكار, الصلاة, المزيد, with small consistent icons and sage rounded active pill. Details/onboarding/overlays have no root tabs unless specified. No ads, subscriptions, payment, login, ratings, fake endorsements, or invented verification seals. All text and layout must be legible. No extra decorative headline or English presentation labels.\nStrict text rule: Render only the explicitly supplied screen text; do not invent extra paragraphs, hadith references, quotations, landscape photos, motivational banners, or features. Back arrow on top RIGHT points RIGHT for RTL. Keep headings and decoration modest.",
+  "screens": [
+    {
+      "id": "01-splash",
+      "title": "Launch",
+      "group": "Opening",
+      "prompt": "Minimal launch screen. Center a small thin gold geometric rosette and compact wordmark \"الرقية\" with Latin \"ROQIA\" beneath. Small subtitle \"رفيقك للذكر والقرآن\". Quiet generous space, faint Moroccan geometric corner detail. Bottom caption \"مجاني • بلا إعلانات\". No navigation or buttons."
+    },
+    {
+      "id": "02-welcome",
+      "title": "Welcome",
+      "group": "Opening",
+      "prompt": "Onboarding step \"1 / 5\". Header skip \"تخطي\". Center refined small open-book illustration in a sage circle. Title \"مرحباً بك في الرقية\". Body \"الرقية والأذكار والقرآن في مكان واحد\". Three brief icon rows \"مجاني بالكامل\" / \"بلا إعلانات\" / \"اقرأ دون اتصال\". Bottom progress five dots first active, primary \"التالي\". No bottom tabs."
+    },
+    {
+      "id": "03-guide-audio",
+      "title": "Onboarding: audio",
+      "group": "Opening",
+      "prompt": "Onboarding \"2 / 5\", skip \"تخطي\". Small headphone line illustration. Title \"اقرأ واستمع\". Body \"استمع للنص وأكمل من حيث توقفت\". Demonstration card with label \"الرقية الشرعية\", waveform, play button, elapsed \"00:12\" total \"01:20\". Caption \"حمّل التلاوات التي تختارها للاستماع دون اتصال\". Five progress dots second active, primary \"التالي\", secondary \"رجوع\". No tabs."
+    },
+    {
+      "id": "04-guide-navigation",
+      "title": "Onboarding: navigation",
+      "group": "Opening",
+      "prompt": "Onboarding \"3 / 5\", skip \"تخطي\". Title \"كل ما تحتاجه قريب\". Five elegant small menu rows with icons and labels \"الرقية\" / \"القرآن\" / \"الأذكار\" / \"الصلاة\" / \"المزيد\". Supporting line \"الأدعية والتسبيحات والإعدادات في المزيد\". Five progress dots third active. Bottom \"التالي\" and \"رجوع\". These are feature rows, not five separate screens. No bottom navigation."
+    },
+    {
+      "id": "05-guide-adhkar",
+      "title": "Onboarding: daily reading",
+      "group": "Opening",
+      "prompt": "Onboarding \"4 / 5\", skip \"تخطي\". Title \"أذكارك على مهل\". Body \"اضغط بعد القراءة لتتبع التكرار\". One demonstration card \"سبحان الله وبحمده\" with large but modest counter \"2 / 3\" and button \"تمت القراءة\", small copy and speaker icons. Below small sunrise moon bed icon row \"الصباح • المساء • قبل النوم\". Five dots fourth active, \"التالي\", \"رجوع\". No tabs."
+    },
+    {
+      "id": "06-guide-personalize",
+      "title": "Onboarding: preferences",
+      "group": "Opening",
+      "prompt": "Onboarding \"5 / 5\". Title \"اجعله مناسباً لك\". Subtitle \"يمكنك تعديل اختياراتك لاحقاً\". Settings card \"المظهر\" with three text-only radio chips \"فاتح\" / \"داكن\" / \"حسب الجهاز\", choose \"حسب الجهاز\". A row \"حجم النص\" slider at middle and small sample \"سبحان الله وبحمده\". A row \"الأرقام\" value \"0123456789\". Small reset icon note \"يمكنك إعادة العدادات وقتما شئت\". Five dots fifth active. Primary \"ابدأ الآن\", secondary \"رجوع\". No embedded mini screenshots."
+    },
+    {
+      "id": "07-guidance",
+      "title": "Ruqya guidance",
+      "group": "Opening",
+      "prompt": "Full-screen guidance sheet, top close icon. Title \"ضوابط الرقية الشرعية\". Small outlined book icon. Three spacious text sections: \"التوكل على الله\" / \"الشفاء من الله، والرقية سبب.\" ; \"الدعاء لله وحده\" / \"يكون الدعاء لله وبأسمائه الحسنى.\" ; \"الطمأنينة والتدبر\" / \"اقرأ بهدوء وتدبر معاني ما تقرأ.\" Bottom fixed primary \"فهمت، متابعة\". This is editorial design copy, no fabricated hadith sources. No tabs."
+    },
+    {
+      "id": "08-ruqya",
+      "title": "Ruqya home",
+      "group": "Daily worship",
+      "prompt": "Root tab screen active \"الرقية\". Header \"الرقية الشرعية\" small rosette, overflow icon. Subtitle \"قراءة واستماع\". Top green audio card \"استمع للرقية\" with play circle. Two text cards, first index \"1\", label \"ذكر\", text \"بِسْمِ اللهِ، تَوَكَّلْتُ عَلَى اللهِ، وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللهِ\", footer copy/audio icons and sage counter action \"المتبقي 3\" with smaller \"اضغط بعد القراءة\". Second index \"2\", text \"حَسْبِيَ اللّهُ لا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ\", counter \"المتبقي 7\". Above bottom tabs compact mini player \"الرقية الشرعية\" pause and waveform."
+    },
+    {
+      "id": "09-adhkar",
+      "title": "Adhkar categories",
+      "group": "Daily worship",
+      "prompt": "Root screen active \"الأذكار\". Header \"أذكار اليوم\", small sunrise icon. Subtitle \"لحظات من الذكر خلال يومك\". Three rounded wide horizontal category cards with understated gold line art and RTL title: sunrise \"أذكار الصباح\" / \"بداية اليوم\"; crescent \"أذكار المساء\" / \"ختام النهار\"; moon and stars \"أذكار قبل النوم\" / \"قبل النوم\". Below smaller two shortcuts \"الأدعية\" and \"التسبيحات\". Avoid oversized illustrations."
+    },
+    {
+      "id": "10-morning",
+      "title": "Morning adhkar",
+      "group": "Daily worship",
+      "prompt": "Reading detail, RTL back arrow, title \"أذكار الصباح\", top overflow. Compact progress \"3 من 12\" with thin bar. Small \"تشغيل الكل\" pill. Two devotional cards: text \"رَضِيتُ بِاللهِ رَبًّا، وَبِالإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ نَبِيًّا\" counter \"المتبقي 3\"; second \"سُبْحَانَ اللهِ وَبِحَمْدِهِ\" counter \"المتبقي 100\". Each copy, bookmark, speaker icons and caption \"اضغط بعد القراءة\". Bottom subtle \"إعادة عدادات الصفحة\". No root tabs on reading detail."
+    },
+    {
+      "id": "11-evening",
+      "title": "Evening adhkar",
+      "group": "Daily worship",
+      "prompt": "Reading detail title \"أذكار المساء\", back arrow, overflow. Progress \"2 من 12\". Small \"تشغيل الكل\" pill. First card \"أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ\" counter \"المتبقي 3\". Second card \"رَضِيتُ بِاللهِ رَبًّا، وَبِالإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ نَبِيًّا\" counter \"المتبقي 3\". Copy, bookmark, speaker icons, caption \"اضغط بعد القراءة\". Small crescent motif, no root tabs."
+    },
+    {
+      "id": "12-before-sleep",
+      "title": "Before-sleep adhkar",
+      "group": "Daily worship",
+      "prompt": "Reading detail title \"أذكار قبل النوم\", back arrow, overflow. Progress \"1 من 8\". \"تشغيل الكل\" pill. First card \"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا\" counter \"المتبقي 1\"; second card \"سُبْحَانَ اللهِ\" counter \"المتبقي 33\"; third card \"الْحَمْدُ لِلَّهِ\" counter \"المتبقي 33\". Copy and speaker icons each, touch target counter. Understated moon, no root tabs."
+    },
+    {
+      "id": "13-dua",
+      "title": "Dua",
+      "group": "Daily worship",
+      "prompt": "Detail title \"الأدعية\" RTL back, search icon. Search bar \"ابحث في الأدعية\". Small filters \"الكل\" selected / \"المفضلة\". Two cards. First text \"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ\" and attribution \"البخاري، 6369\". Second \"اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ\". Both listen button, copy and bookmark icons, remaining \"1\". No root tabs."
+    },
+    {
+      "id": "14-tasbih",
+      "title": "Tasbih counter",
+      "group": "Daily worship",
+      "prompt": "Detail title \"التسبيحات\", back, overflow. Three text chips \"سبحان الله\" selected / \"الحمد لله\" / \"الله أكبر\". Main centered small text \"سُبْحَانَ اللهِ\", elegant circular progress ring about 210 logical px wide, center \"12\" then \"من 33\". Large comfortable circular tap region rather than giant headline. Below \"اضغط للتسبيح\". Two small controls \"اهتزاز\" switch on and \"الهدف 33\". Bottom \"إعادة العداد\" outlined button and \"عرض جميع التسبيحات\" text link. No root tabs."
+    },
+    {
+      "id": "15-more",
+      "title": "More menu",
+      "group": "Navigation",
+      "prompt": "Root tab active \"المزيد\". Header \"المزيد\". Small Roqia rosette with \"الرقية\" and \"مجاني • بلا إعلانات\". Clean grouped menu rows with icon and RTL chevron: \"الأدعية\", \"التسبيحات\", \"العلامات المحفوظة\"; next group \"التنزيلات\", \"التذكيرات\", \"الإعدادات\"; final group \"نبذة عن التطبيق\", \"المصادر\", \"الخصوصية وشروط الاستخدام\". No accounts, login, ads or payment options."
+    },
+    {
+      "id": "16-about",
+      "title": "About",
+      "group": "Information",
+      "prompt": "Detail header \"نبذة عن التطبيق\". Small rosette and compact \"الرقية\". Text \"رفيقك للرقية والأذكار والقرآن\". Card \"مجاني بالكامل\" / \"بلا إعلانات أو اشتراكات\". Card heading \"من القلب\" body \"تطبيق يساعدك على القراءة والذكر والاستماع في أي وقت.\" Contact row \"تواصل معنا\" and exact \"mouradbougarne@gmail.com\" with copy icon. Links \"المشروع على GitHub\" / \"المصادر\" / \"سياسة الخصوصية\" / \"شروط الاستخدام\". Footer \"Mourad Bougarne\". No fabricated version or certification."
+    },
+    {
+      "id": "17-privacy",
+      "title": "Privacy page",
+      "group": "Information",
+      "prompt": "Detail header \"سياسة الخصوصية\", back arrow. Compact opening \"خصوصيتك أولاً\". Elegant document layout with short section headings and body: \"على جهازك\" / \"تُحفظ اختياراتك وتنزيلاتك على جهازك.\"; \"الموقع\" / \"يُستخدم لتحديد القبلة ومواقيت الصلاة، ويمكن اختيار المدينة يدوياً.\"; \"التنزيلات\" / \"يتطلب تنزيل المصاحف والتلاوات اتصالاً بالإنترنت.\"; \"بدون حساب\" / \"لا تحتاج إلى إنشاء حساب لاستخدام التطبيق.\" Bottom link row \"عرض السياسة الكاملة\" with external icon. This is a proposed privacy summary UI, not a claim that legal review is complete. No root tabs."
+    },
+    {
+      "id": "18-terms",
+      "title": "Terms page",
+      "group": "Information",
+      "prompt": "Detail header \"شروط الاستخدام\", back. Compact document with headings \"استخدام التطبيق\" / short body \"التطبيق مجاني ومتاح للقراءة والذكر والاستماع.\"; \"المحتوى والمصادر\" / \"تظهر مصادر النصوص والترجمات والتلاوات داخل التطبيق.\"; \"النسخ والتحديثات\" / \"يمكن الاطلاع على معلومات كل مصدر من صفحة المصادر.\"; \"التواصل\" / \"أبلغنا عن أي خطأ أو ملاحظة.\" Card link \"المصادر وحقوق المحتوى\", bottom link \"عرض الشروط الكاملة\". No invented legal license, consent checkbox or commercial claim."
+    },
+    {
+      "id": "19-link-error",
+      "title": "Link unavailable state",
+      "group": "Information",
+      "prompt": "Single full screen with About page subtly dimmed behind a centered rounded modal. Modal small broken-link outline, title \"تعذر فتح الرابط\", body \"تحقق من الاتصال أو حاول مرة أخرى لاحقاً\". Primary \"إعادة المحاولة\", secondary \"نسخ الرابط\", text \"إغلاق\". This is one screen with an overlay, no board. Background content only dimmed menu rows, no legible extra paragraphs."
+    },
+    {
+      "id": "20-reset-page",
+      "title": "Reset this page confirmation",
+      "group": "Daily worship",
+      "prompt": "Single screen with softly dimmed morning-adhkar page and a bottom sheet. Sheet handle, reset line icon, compact title \"إعادة عدادات هذه الصفحة؟\". Body \"ستعود عدادات أذكار الصباح إلى قيمها الأصلية.\" Muted note \"لن تتغير عدادات الأقسام الأخرى\". Primary muted terracotta \"إعادة العدادات\", secondary \"إلغاء\". One screen, no root tabs visible, Western digits in dimmed background."
+    },
+    {
+      "id": "21-reset-all",
+      "title": "Reset all counters confirmation",
+      "group": "Daily worship",
+      "prompt": "Single screen with softly dimmed settings page, centered modal compact title \"إعادة جميع العدادات؟\". Body \"ستعود عدادات الرقية والأذكار والأدعية والتسبيحات إلى قيمها الأصلية.\" Small reassuring note \"تبقى التنزيلات والعلامات المحفوظة كما هي\". Primary muted terracotta \"إعادة الكل\", secondary \"إلغاء\". One screen, no extra screenshot panels."
+    },
+    {
+      "id": "22-quran-library",
+      "title": "Quran library",
+      "group": "Quran",
+      "prompt": "Root Quran tab active \"القرآن\". Header \"القرآن الكريم\", search icon and bookmark icon. Small selector pill \"ورش عن نافع\" and download icon. Continue card \"متابعة القراءة\" / \"سورة الإخلاص\" / \"الآية 1\", small book symbol. Tabs \"السور\" selected / \"الأجزاء\". Search \"ابحث عن سورة\". List six rows with Western index medallions: \"1 الفاتحة\" / \"2 البقرة\" / \"3 آل عمران\" / \"4 النساء\" / \"5 المائدة\" / \"6 الأنعام\". Each muted subtitle just \"ورش عن نافع\", NO verse counts to avoid mixing traditions. Downloaded check icons. Compact footer \"المصحف المحمدي • متاح دون اتصال\"."
+    },
+    {
+      "id": "23-mushaf-selection",
+      "title": "Choose Warsh or Hafs",
+      "group": "Quran setup",
+      "prompt": "Detail header \"اختر المصحف\". Subtitle \"اختر الرواية التي تقرأ بها\". Two large but compact selection cards: selected \"ورش عن نافع\" with \"من طريق الأزرق\" and source \"المصحف المحمدي\"; unselected \"حفص عن عاصم\" with source \"Tanzil\". A small note \"يمكنك إضافة المصحف الآخر لاحقاً\". Small open-book download line illustration, caption \"حمّل اختيارك واقرأ دون اتصال\". Bottom primary \"متابعة\" and text \"تخطي الآن\". Only one mushaf selected. No translations promised on this choice screen."
+    },
+    {
+      "id": "24-mushaf-download",
+      "title": "Download selected mushaf",
+      "group": "Quran setup",
+      "prompt": "Detail header \"تحميل المصحف\". Selected summary card \"ورش عن نافع\" / \"المصحف المحمدي\" / \"114 سورة\". Content row \"المصحف والخط\" / \"8 MB\". Section \"ترجمة المعاني\" with chips \"بدون ترجمة\" selected, \"Français\", \"English\". Small text \"يمكن تنزيل الترجمات لاحقاً\". Toggle \"التنزيل عبر Wi-Fi فقط\" on. Total \"حجم التنزيل 8 MB\". Bottom primary \"تحميل • 8 MB\", text \"اختيار رواية أخرى\". Sizes illustrative. No counterfeit publisher badges."
+    },
+    {
+      "id": "25-warsh-reader",
+      "title": "Warsh reader",
+      "group": "Quran reading",
+      "prompt": "Focused Arabic Quran reader. Back arrow, compact title \"الإخلاص\", below \"ورش عن نافع • المصحف المحمدي\", bookmark and menu icons. Understated geometric chapter header \"سورة الإخلاص\". Render only the first THREE verses as an intentional excerpt with ample line spacing and NO invented continuation: separate basmala \"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ\", then \"قُلْ هُوَ اللَّهُ أَحَدٌ\" with Western medallion \"1\", \"اللَّهُ الصَّمَدُ\" medallion \"2\", \"لَمْ يَلِدْ وَلَمْ يُولَدْ\" medallion \"3\". Bottom reading position \"الآيات 1–3 من 4\", next pill \"متابعة القراءة\". Toolbar \"استماع\" / \"ترجمة المعاني\" / \"حجم النص\". Small audio strip \"عمر القزابري\" play with reading label \"ورش\". No root navigation. Sacred text larger than compact chrome but not oversized. This is a concept excerpt, not a reproduction of an official printed page."
+    },
+    {
+      "id": "26-hafs-reader-french",
+      "title": "Hafs reader: French",
+      "group": "Quran reading",
+      "prompt": "Focused translation reading screen. Header \"الإخلاص\", subtitle \"حفص عن عاصم • Tanzil\", bookmark/menu icons. Language chip \"Français\". Small heading \"ترجمة المعاني\". Single prominent verse card Western \"1\", Arabic exact \"قُلْ هُوَ ٱللَّهُ أَحَدٌ\". Under divider left-aligned French exact: 'Dis : « Il est Allah, Unique. »' and small translator attribution \"Muhammad Hamidullah\". Below next verse preview \"ٱللَّهُ ٱلصَّمَدُ\" medallion \"2\", translation collapsed with \"إظهار الترجمة\". Bottom toolbar play / bookmark / font settings; position \"1 / 4\". No additional French verse or invented translation. No root tabs."
+    },
+    {
+      "id": "27-hafs-reader-english",
+      "title": "Hafs reader: English",
+      "group": "Quran reading",
+      "prompt": "Focused translation reading screen. Header \"الإخلاص\", subtitle \"حفص عن عاصم • Tanzil\", bookmark/menu icons. Language chip \"English\". Small heading \"ترجمة المعاني\". Single prominent verse card Western \"1\", Arabic exact \"قُلْ هُوَ ٱللَّهُ أَحَدٌ\". Under divider left-aligned English exact: 'Say, “He is Allah, the One.”' and translator attribution \"The Clear Quran • Mustafa Khattab\". Below next verse preview \"ٱللَّهُ ٱلصَّمَدُ\" medallion \"2\", translation collapsed with \"إظهار الترجمة\". Bottom toolbar play / bookmark / font settings; position \"1 / 4\". No additional English translation. No root tabs."
+    },
+    {
+      "id": "28-translations",
+      "title": "Translation downloads",
+      "group": "Quran preferences",
+      "prompt": "Detail header \"ترجمة المعاني\". Active mushaf chip \"حفص عن عاصم\". Subtitle \"اختر لغة لعرض المعاني بجانب النص\". List radio rows: \"بدون ترجمة\"; \"Français\" subtitle \"Muhammad Hamidullah\" status \"تم التنزيل • 2 MB\" selected; \"English\" subtitle \"The Clear Quran\" download icon \"2 MB\". Info card \"الترجمة بيان للمعاني، والنص القرآني يبقى بالعربية\". Links \"معلومات المصدر\" and \"إدارة التنزيلات\". Bottom primary \"حفظ الاختيار\". Values conceptual; no license assertions."
+    },
+    {
+      "id": "29-reading-preferences",
+      "title": "Reading preferences",
+      "group": "Quran preferences",
+      "prompt": "Detail header \"إعدادات القراءة\". Sample card \"قُلْ هُوَ اللَّهُ أَحَدٌ\" with Western marker \"1\". Slider \"حجم النص\" value \"22\". Slider \"تباعد الأسطر\" value \"1.8\". View toggle \"آيات\" selected / \"قراءة متصلة\". Switch \"إظهار ترجمة المعاني\" on. Number format row \"شكل الأرقام\" / \"0123456789\". Toggle \"إبقاء الشاشة مضاءة\" on. Primary \"حفظ\", secondary \"استعادة الافتراضي\". No embedded miniature screens."
+    },
+    {
+      "id": "30-quran-search",
+      "title": "Quran search",
+      "group": "Quran preferences",
+      "prompt": "Detail header \"البحث في القرآن\". Search field entered \"الإخلاص\" with clear X. Active mushaf chip \"ورش عن نافع\". Filter chips \"السور\" selected / \"الآيات\". Result count \"نتيجة واحدة\". Single result book icon \"112\" / \"سورة الإخلاص\" / \"فتح السورة\". Below light recent searches section \"عمليات البحث الأخيرة\" with rows \"الفاتحة\", \"الكهف\" and small clock icons, \"مسح السجل\" link. No keyboard to avoid clutter, no fabricated scripture text. No tabs."
+    },
+    {
+      "id": "31-bookmarks",
+      "title": "Saved bookmarks",
+      "group": "Quran preferences",
+      "prompt": "Detail header \"العلامات المحفوظة\". Segmented filters \"القرآن\" selected / \"الأذكار\" / \"الأدعية\". Two elegant bookmark rows: \"سورة الإخلاص\" / \"ورش عن نافع • الآية 1\"; \"سورة الكهف\" / \"حفص عن عاصم • الآية 10\". Each has small colored bookmark icon and overflow. Reading resume card \"آخر موضع للقراءة\" / \"الإخلاص • ورش عن نافع\" / button \"متابعة\". Modest empty space, no dates fabricated, no streaks or scores."
+    },
+    {
+      "id": "32-content-sources",
+      "title": "Sources and editions",
+      "group": "Information",
+      "prompt": "Detail header \"المصادر\". Intro \"تعرف على مصدر كل محتوى\". Separate rounded cards: \"ورش عن نافع\" / \"المصحف المحمدي\" / \"almoshaf-almohammadi.ma\"; \"حفص عن عاصم\" / \"Tanzil\" / \"tanzil.net\"; \"ترجمة المعاني\" / \"Français • English\" / \"تفاصيل المترجم والمصدر\"; \"التلاوات\" / \"MP3Quran\" / \"mp3quran.net\". Small links \"تفاصيل النسخة\" and \"الإبلاغ عن ملاحظة\". No badges claiming verification, permission or endorsements. No legal judgment in UI."
+    },
+    {
+      "id": "33-reciter-selection",
+      "title": "Choose reciter",
+      "group": "Audio",
+      "prompt": "Detail header \"اختر القارئ\". Top selector \"ورش عن نافع\", search \"ابحث عن قارئ\". Three radio cards with preview play and headphones: \"عمر القزابري\" selected / \"ياسين الجزائري\" / \"عبد الباسط عبد الصمد\"; every subtitle \"ورش عن نافع\". Small note \"تظهر التلاوات الموافقة للرواية المختارة\". Quality chips \"اقتصادية\" selected / \"عالية\". Primary \"اختيار السور\". Secondary \"لاحقاً\". No download occurs automatically."
+    },
+    {
+      "id": "34-audio-surah-selection",
+      "title": "Select audio downloads",
+      "group": "Audio",
+      "prompt": "Detail header \"تحميل التلاوات\". Subtitle \"عمر القزابري • ورش عن نافع\". \"تحديد الكل\" checkbox unchecked and search \"ابحث عن سورة\". Five checkbox rows: \"الفاتحة\" \"1 MB\" checked; \"الكهف\" \"18 MB\" checked; \"يس\" \"8 MB\" checked; \"الرحمن\" \"6 MB\" unchecked; \"الملك\" \"4 MB\" unchecked. Bottom selection \"3 سور • 27 MB\", toggle \"Wi-Fi فقط\" on, primary \"تحميل المحدد\", text link \"تحميل المصحف كاملاً\". Western numbers. Do not mix audio recitations."
+    },
+    {
+      "id": "35-download-queue",
+      "title": "Download progress",
+      "group": "Audio",
+      "prompt": "Detail header \"التنزيلات\". Tabs \"قيد التنزيل\" selected / \"المكتملة\". Summary \"عن طريق Wi-Fi\". Download row \"سورة الكهف\" / \"عمر القزابري • ورش\" progress half \"50%\" / \"9 MB / 18 MB\" pause and X. Second \"سورة يس\" / \"في الانتظار • 8 MB\" cancel. Third \"سورة الفاتحة\" / \"مكتمل • 1 MB\" checkmark. Bottom outlined \"إيقاف مؤقت للكل\", text \"إدارة التخزين\". No invented overall percent."
+    },
+    {
+      "id": "36-offline-audio",
+      "title": "Downloaded audio library",
+      "group": "Audio",
+      "prompt": "Detail header \"مكتبتي الصوتية\". Small offline badge \"متاح دون اتصال\". Summary \"3 سور • 27 MB\". Filter \"ورش عن نافع\" and reciter \"عمر القزابري\". Three play rows \"الفاتحة\" \"1 MB\"; \"الكهف\" \"18 MB\"; \"يس\" \"8 MB\"; each downloaded check and overflow. Button \"إضافة تلاوات\". At bottom mini player \"سورة الكهف\" pause icon progress \"03:20 / 24:10\". Bottom small link \"إدارة التخزين\". No root navigation."
+    },
+    {
+      "id": "37-storage",
+      "title": "Manage offline storage",
+      "group": "Audio",
+      "prompt": "Detail header \"إدارة التخزين\". Summary \"المساحة المستخدمة\" / \"35 MB\" with modest bar. Two category rows \"المصحف والخط\" \"8 MB\" and \"التلاوات\" \"27 MB\". Selected mushaf card \"ورش عن نافع\" / \"المصحف المحمدي • 8 MB\" small manage icon. Audio group \"عمر القزابري\" then selectable rows \"الفاتحة 1 MB\", \"الكهف 18 MB\" checked, \"يس 8 MB\". Bottom muted terracotta action \"حذف المحدد • 18 MB\". Note \"يمكنك تنزيل الملفات مجدداً\". No OS disk capacity guesses."
+    },
+    {
+      "id": "38-audio-player",
+      "title": "Full audio player",
+      "group": "Audio",
+      "prompt": "Full-screen player with small down chevron. Compact top title \"الاستماع\". Center elegant open-book line symbol in understated geometric circular motif, not huge artwork. Title \"سورة الكهف\", subtitle \"عمر القزابري\", chip \"ورش عن نافع\" and small \"تم التنزيل\". Seek bar elapsed \"03:20\" total \"24:10\". Center large pause circle with previous/next track buttons. Small controls \"1×\" speed, \"تكرار\", \"مؤقت النوم\". Bottom upcoming card \"التالي\" / \"سورة يس\". No scripture synchronized verse since timing unverified. No root tabs."
+    },
+    {
+      "id": "39-prayer-times",
+      "title": "Prayer times",
+      "group": "Prayer",
+      "prompt": "Root prayer tab active \"الصلاة\". Header \"مواقيت الصلاة\". City \"الدار البيضاء\" with edit location icon. Date \"السبت، 17 أكتوبر\". Primary next-prayer card \"الصلاة القادمة\" / \"الظهر 13:20\" / \"بعد 3 ساعات و39 دقيقة\". Prayer list rows \"الفجر 06:10\" bell on, \"الشروق 07:30\" NO bell, \"الظهر 13:20\" highlighted bell, \"العصر 16:30\", \"المغرب 18:55\", \"العشاء 20:10\". Footer \"طريقة الحساب: المغرب\" with small settings icon. Two shortcuts \"القبلة\" and \"إعدادات الأذان\". These are illustrative times, don't mark verified live."
+    },
+    {
+      "id": "40-qibla",
+      "title": "Qibla direction",
+      "group": "Prayer",
+      "prompt": "Detail header \"القبلة\". City \"الدار البيضاء\", small location icon. Large precise compass centered, N at top, E at right, S bottom, W left. Numeric small bearing \"93.7°\" with caption \"من الشمال الحقيقي\". Gold/green needle points RIGHT and slightly DOWN, exactly 93.7 degrees clockwise from North, Kaaba icon at arrow tip on the right. Do NOT point needle upward and do NOT say phone aligned. Caption \"وجّه الهاتف نحو السهم\". Accuracy card \"دقة البوصلة جيدة\". Secondary \"معايرة البوصلة\". Footer small \"ابتعد عن المعادن والأجهزة المغناطيسية\". No root tabs."
+    },
+    {
+      "id": "41-qibla-calibration",
+      "title": "Qibla calibration",
+      "group": "Prayer",
+      "prompt": "Detail header \"معايرة البوصلة\". Small phone with figure-eight curved gold path, tasteful line illustration. Compact title \"حرّك الهاتف على شكل 8\". Body \"أبعد الهاتف عن المعادن، ثم حرّكه بهدوء لتحسين دقة الاتجاه.\" Status card \"جاري تحسين الدقة\" with small progress indicator. Secondary option \"عرض الاتجاه على الخريطة\". Bottom primary \"إعادة القياس\", text \"اختيار المدينة يدوياً\". No claim calibration guarantees accuracy, no system dialog, no maps with incorrect geography."
+    },
+    {
+      "id": "42-city-location",
+      "title": "City and location",
+      "group": "Prayer",
+      "prompt": "Detail header \"الموقع والمدينة\". Primary outlined button location icon \"استخدام موقعي الحالي\". Subtle explanation \"لتحديد مواقيت الصلاة واتجاه القبلة\". Divider \"أو اختر المدينة\". Search \"ابحث عن مدينة\". List selected \"الدار البيضاء\" / \"المغرب\", others \"الرباط\", \"فاس\", \"مراكش\", \"طنجة\". All radio list. Small privacy note \"يمكنك اختيار المدينة دون السماح بالموقع\". Bottom primary \"حفظ المدينة\". No fabricated OS permission popup."
+    },
+    {
+      "id": "43-adhan-settings",
+      "title": "Adhan settings",
+      "group": "Prayer",
+      "prompt": "Detail header \"إعدادات الأذان\". Top voice row \"صوت الأذان\" / \"الأذان المغربي\" chevron and preview play. Five prayer settings rows: \"الفجر\" on \"أذان كامل\"; \"الظهر\" on \"أذان كامل\"; \"العصر\" on \"تنبيه فقط\"; \"المغرب\" on \"أذان كامل\"; \"العشاء\" off \"صامت\". No sunrise adhan. Reminder row \"تنبيه قبل الصلاة\" value \"5 دقائق\" switch on. Small permission card bell outline \"فعّل الإشعارات لسماع التنبيهات\" with link \"فتح الإعدادات\". Bottom primary \"حفظ الإعدادات\". All toggles match stated states."
+    },
+    {
+      "id": "44-adhan-sound",
+      "title": "Choose adhan sound",
+      "group": "Prayer",
+      "prompt": "Detail header \"صوت الأذان\". Three radio cards with play/pause preview: selected \"الأذان المغربي\" / \"متاح دون اتصال\"; \"أذان مكة\" / small download icon; \"تنبيه قصير\" / \"متاح دون اتصال\". Small currently previewing row waveform and pause \"معاينة الأذان المغربي\", elapsed \"00:12\". Separate Fajr option switch on \"صيغة الفجر\". Volume slider label \"مستوى الصوت\" value \"70%\". Bottom primary \"استخدام هذا الصوت\". No invented reciter attribution. No payments."
+    },
+    {
+      "id": "45-prayer-adjustments",
+      "title": "Prayer calculation settings",
+      "group": "Prayer",
+      "prompt": "Detail header \"إعدادات المواقيت\". Method row \"طريقة الحساب\" / \"المغرب\", location \"الدار البيضاء\". Section \"تعديل الدقائق\" with five compact rows and minus/value/plus steppers: \"الفجر 0\", \"الظهر 0\", \"العصر 0\", \"المغرب 0\", \"العشاء 0\". Clearly separate signs from digits. Small note \"قارن المواقيت المعروضة بالتوقيت المحلي المعتمد\". Time format row \"تنسيق الوقت\" / \"24 ساعة\". Bottom primary \"حفظ\", text \"استعادة الافتراضي\". No claim official synced data or unsupported offline guarantees for city search."
+    },
+    {
+      "id": "46-reminders",
+      "title": "Daily reminders",
+      "group": "Settings",
+      "prompt": "Detail header \"التذكيرات\". Intro \"تذكير لطيف في الوقت الذي تختاره\". Rows with switches and Western times: \"أذكار الصباح\" on \"07:00\"; \"أذكار المساء\" on \"18:00\"; \"أذكار قبل النوم\" on \"22:00\"; \"قراءة القرآن\" off \"20:30\". Section weekdays \"كل يوم\" selected with compact seven day initials or words, avoid dates. \"صوت التذكير\" row \"تنبيه قصير\". Footer note \"يمكنك تعديل الوقت أو إيقاف التذكير\". Primary \"حفظ\". No user accounts or cloud."
+    },
+    {
+      "id": "47-app-settings",
+      "title": "App settings",
+      "group": "Settings",
+      "prompt": "Detail header \"الإعدادات\". Group \"المظهر والقراءة\": text-only segmented \"فاتح\" / \"داكن\" / \"حسب الجهاز\" with \"حسب الجهاز\" selected; \"حجم النص\" slider \"16\"; number row \"الأرقام\" / \"0123456789\". Group \"القرآن والتنزيلات\": \"المصحف المفضل\" / \"ورش عن نافع\"; \"ترجمة المعاني\" / \"بدون ترجمة\"; \"التنزيل عبر Wi-Fi فقط\" on; \"إدارة التخزين\" / \"35 MB\". Group \"التذكيرات\" chevron. Bottom outlined \"إعادة جميع العدادات\". No automatic app-language chooser outside requested scope."
+    },
+    {
+      "id": "48-download-error",
+      "title": "Paused download recovery",
+      "group": "Audio",
+      "prompt": "Detail header \"التنزيلات\". Subtle offline banner \"لا يوجد اتصال بالإنترنت\". Main progress card \"سورة الكهف\" / \"عمر القزابري • ورش عن نافع\", progress \"50%\" / \"9 MB / 18 MB\", amber badge \"متوقف مؤقتاً\". Clear copy \"سيُستأنف التنزيل عند عودة الاتصال\". Primary \"إعادة المحاولة\", secondary \"إلغاء التنزيل\". Below completed row \"سورة الفاتحة\" / \"متاح دون اتصال\" with play and check. Note \"يمكنك الاستماع إلى الملفات المكتملة الآن\". No tabs, no aggressive red error."
+    }
+  ],
+  "detailGlobal": "Use case: ui-mockup. Create ONE standalone high-fidelity Android mobile app SCREENSHOT for ROQIA, never a collage. Full-bleed flat rectangular portrait canvas about 1024 x 2304 (phone ratio 9:20). App UI fills whole canvas edge to edge. No outer background, device frame, hardware, mockup shadow, board title, caption outside UI, or other screens. Input image is STYLE REFERENCE ONLY for palette, rounded cards and compact typography. Create the new screen content given below, not the reference content. Follow the approved warm Moroccan editorial style: quiet thin gold geometric accents, rounded cards radius16 logical px, very subtle borders, elegant thin outline icons. Arabic-first RTL with natural accurate Arabic joining, right-aligned labels; French/English and numbers LTR. ONLY Western numerals 0 1 2 3 4 5 6 7 8 9, never Eastern Arabic glyphs even in verse medallions, clocks or status bar. Compact typography: logical viewport 393 x 852, header 18px semibold (never giant), UI body14px, helper12px, sacred reading text21px, comfortable line height. 20px side padding, touch controls minimum44px. Keep content dense enough to look like a real mobile app, with purposeful whitespace. Status bar tiny 9:41 top left, Android signal/Wi-Fi/battery top right; bottom Android gesture line. NO bottom navigation on this detail screen. Only the Android gesture line at the bottom. No ads, subscriptions, payment, login, ratings, fake endorsements, or invented verification seals. All text and layout must be legible. No extra decorative headline or English presentation labels.\nStrict text rule: Render only the explicitly supplied screen text; do not invent extra paragraphs, hadith references, quotations, landscape photos, motivational banners, or features. Back arrow on top RIGHT points RIGHT for RTL. Keep headings and decoration modest.",
+  "rootNavigation": "Exactly five bottom navigation tabs in right-to-left order: headphones icon الرقية, open book icon القرآن, sun icon الأذكار, mosque icon الصلاة, three dots المزيد. Active tab as specified. Icons same in light/dark.",
+  "mode": "Built-in image generation; localized image edits for corrections"
+}

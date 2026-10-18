@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "status": "logical contract; implement migrations in RQ-004/RQ-005",
+  "records": {
+    "Settings": {
+      "key": "singleton",
+      "fields": [
+        "schemaVersion",
+        "themePreference: light|dark|system",
+        "uiScale",
+        "readerSizeSp",
+        "readerLineHeightRatio",
+        "wifiOnly",
+        "preferredEditionId|null",
+        "translationId|null",
+        "onboardingVersion",
+        "guidanceSeen",
+        "updatedAt"
+      ],
+      "constraints": [
+        "Western UI digits fixed to latn in this release",
+        "Effective OS permissions are queried, not stored as permanent truth"
+      ]
+    },
+    "Counter": {
+      "key": "contentId",
+      "fields": [
+        "remaining",
+        "defaultRepeatRevision",
+        "updatedAt"
+      ],
+      "constraints": [
+        "remaining finite integer in 0..currentDefault",
+        "Source repeat defaults are immutable content metadata"
+      ]
+    },
+    "Bookmark": {
+      "key": "bookmarkId",
+      "fields": [
+        "kind: devotional|quran-verse|quran-page",
+        "contentId|null",
+        "editionId|null",
+        "numberingScheme|null",
+        "surah|null",
+        "verse|null",
+        "pageId|null",
+        "packVersion|null",
+        "createdAt"
+      ],
+      "constraints": [
+        "Typed locator fields required for selected kind",
+        "Retain when pack deleted",
+        "No cross-edition ordinal substitution"
+      ]
+    },
+    "ReadingPosition": {
+      "key": "editionId",
+      "fields": [
+        "locator",
+        "packVersion",
+        "viewportOffset",
+        "updatedAt"
+      ],
+      "constraints": [
+        "Locator validity checked before resume",
+        "Separate per edition"
+      ]
+    },
+    "InstalledPack": {
+      "key": "packId+version",
+      "fields": [
+        "relativeDirectory",
+        "manifestHash",
+        "capabilities",
+        "state: installing|ready|deleting|missing|corrupt",
+        "activatedAt",
+        "sourceMetadata"
+      ],
+      "constraints": [
+        "ready requires validation and existing files",
+        "Only one active version per pack"
+      ]
+    },
+    "DownloadJob": {
+      "key": "assetId+version",
+      "fields": [
+        "jobId",
+        "nativeTaskId|null",
+        "generation",
+        "state",
+        "pauseReason|null",
+        "relativeTempPath",
+        "relativeFinalPath",
+        "bytesReceived",
+        "expectedBytes|null",
+        "expectedHash",
+        "etag|null",
+        "lastModified|null",
+        "attempt",
+        "errorCode|null",
+        "consentNetworkPolicy",
+        "updatedAt"
+      ],
+      "constraints": [
+        "State enum from DOWNLOADS.md",
+        "No raw URLs as filesystem paths",
+        "Ignore callback with stale generation",
+        "Ready requires installed artifact validation"
+      ]
+    },
+    "PrayerPreferences": {
+      "key": "singleton",
+      "fields": [
+        "cityId|null",
+        "latitude",
+        "longitude",
+        "ianaZone",
+        "locationSource",
+        "locationAcquiredAt",
+        "methodProfileId",
+        "methodProfileVersion",
+        "asrConvention",
+        "highLatitudeRule",
+        "offsetMinutesByPrayer",
+        "modeByPrayer",
+        "soundPackId",
+        "fajrSoundId|null",
+        "preReminderMinutes",
+        "settingsGeneration"
+      ],
+      "constraints": [
+        "No sunrise adhan",
+        "Coordinate and offset bounds checked",
+        "Method adjustments and user offsets applied exactly once"
+      ]
+    },
+    "Reminder": {
+      "key": "reminderId",
+      "fields": [
+        "category",
+        "enabled",
+        "localTimeHHmm",
+        "weekdays",
+        "soundId",
+        "zonePolicy",
+        "updatedAt"
+      ],
+      "constraints": [
+        "Fresh install opt-in",
+        "Preserve old times on upgrade"
+      ]
+    },
+    "ScheduledEvent": {
+      "key": "eventId",
+      "fields": [
+        "kind",
+        "instantUtc",
+        "localDate",
+        "ianaZone",
+        "settingsGeneration",
+        "desiredMode",
+        "effectiveMode",
+        "osIdentifier",
+        "state",
+        "lastReconciledAt"
+      ],
+      "constraints": [
+        "Deduplicate",
+        "Cancel stale generation",
+        "No replay of expired adhan",
+        "Track coveredUntil separately"
+      ]
+    },
+    "PlaybackResume": {
+      "key": "session",
+      "fields": [
+        "trackKey",
+        "assetVersion",
+        "queueTrackKeys",
+        "positionMs",
+        "repeatMode",
+        "speed",
+        "sleepDeadlineUtc|null",
+        "updatedAt"
+      ],
+      "constraints": [
+        "Never auto-play on process launch",
+        "Missing/version-changed asset reconciled"
+      ]
+    },
+    "MigrationReceipt": {
+      "key": "migrationId",
+      "fields": [
+        "fromVersion",
+        "toVersion",
+        "inputHash",
+        "legacyBackupPath",
+        "committedAt"
+      ],
+      "constraints": [
+        "Receipt and migrated data committed together",
+        "Idempotent re-entry"
+      ]
+    }
+  }
+}

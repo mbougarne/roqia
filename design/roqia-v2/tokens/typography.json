@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "uiFont": {
+    "family": "Noto Sans Arabic",
+    "asset": "assets/fonts/NotoSansArabic.ttf",
+    "postScriptName": "NotoSansArabic-Regular",
+    "variableAxes": {
+      "wght": [
+        100,
+        900
+      ],
+      "wdth": [
+        62.5,
+        100
+      ]
+    },
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "note": "Map native family/weight names in foundation ticket; verify genuine weight on Android. Do not assume file basename equals registered family."
+  },
+  "latinFont": "Platform sans-serif fallback for Latin; isolate French/English and numeric runs LTR. No extra Latin font download required.",
+  "quranFont": "Provided by the approved edition pack after glyph/rendering verification. Never substitute a UI font to manufacture Warsh.",
+  "roles": {
+    "screenTitle": {
+      "size": 18,
+      "lineHeight": 28,
+      "weight": 600
+    },
+    "sectionTitle": {
+      "size": 16,
+      "lineHeight": 26,
+      "weight": 600
+    },
+    "body": {
+      "size": 14,
+      "lineHeight": 24,
+      "weight": 400
+    },
+    "bodyStrong": {
+      "size": 14,
+      "lineHeight": 24,
+      "weight": 600
+    },
+    "label": {
+      "size": 13,
+      "lineHeight": 22,
+      "weight": 500
+    },
+    "caption": {
+      "size": 12,
+      "lineHeight": 20,
+      "weight": 400
+    },
+    "tabLabel": {
+      "size": 11,
+      "lineHeight": 18,
+      "weight": 500
+    },
+    "button": {
+      "size": 14,
+      "lineHeight": 24,
+      "weight": 600
+    },
+    "devotional": {
+      "size": 21,
+      "lineHeight": 38,
+      "weight": 400
+    },
+    "quran": {
+      "size": 22,
+      "lineHeight": 40,
+      "weight": 400
+    },
+    "translation": {
+      "size": 15,
+      "lineHeight": 25,
+      "weight": 400
+    },
+    "counter": {
+      "size": 28,
+      "lineHeight": 38,
+      "weight": 600
+    },
+    "prayerTime": {
+      "size": 32,
+      "lineHeight": 44,
+      "weight": 600
+    }
+  },
+  "adjustments": {
+    "uiScale": [
+      1,
+      1.5
+    ],
+    "readingSizeSp": [
+      20,
+      36
+    ],
+    "readingLineHeightRatio": [
+      1.6,
+      2.2
+    ],
+    "defaultReadingLineHeightRatio": 1.8
+  },
+  "rules": [
+    "No letter spacing on Arabic.",
+    "Keep OS font scaling enabled; reflow at 200%.",
+    "Use compact UI headings but never reduce scripture just to fit an image.",
+    "Test upper/lower harakat clipping with the selected font.",
+    "Western 0–9 for all generated UI numbers; never rewrite the canonical Quran text string."
+  ]
+}

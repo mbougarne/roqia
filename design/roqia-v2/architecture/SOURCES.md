@@ -1,0 +1,25 @@
+# Evidence and source register
+
+Checked 17 October 2026. External documentation can change; pin and verify the actual dependency/source version during its ticket. This research establishes planning inputs, not device or content acceptance.
+
+| Source | Established here | Still required |
+| --- | --- | --- |
+| [Al Mushaf Al Mohammadi](https://almoshaf-almohammadi.ma/) | User-selected Warsh source; website reachable | RQ-016: exact offline artifact, format, verse scheme, font, version and capabilities; no documented bulk API was established here |
+| [Tanzil downloads](https://tanzil.net/download/) | Official downloadable Quran text entry point | RQ-017: acquire exact export, retain original hash/notice, validate importer |
+| [Tanzil text conditions](https://tanzil.net/docs/Text_License) | Verbatim preservation, attribution/link and notice requirements are stated | Record the actual edition's notice in its pack |
+| [Tanzil translations](https://tanzil.net/trans/) | French Hamidullah and multiple English translations listed | RQ-026: exact French/English file, edition and source terms; mockup Clear Quran is not a confirmed catalog file |
+| [MP3Quran API](https://www.mp3quran.net/ar/api) | Public v3 reciter/riwaya/moshaf/surah catalog documentation | RQ-031: actual IDs, compatible recording sets, files, completeness, sizes and attribution |
+| [Adhan JS](https://github.com/batoulapps/adhan-js) | Local prayer calculation library; MIT project | RQ-037: pinned version, Morocco custom profile and local timetable comparisons |
+| [Adhan methods](https://github.com/batoulapps/adhan-js/blob/develop/METHODS.md) | Documented method profiles/custom parameters; no Morocco preset seen | Do not invent a Morocco API; record the validated custom profile |
+| [Android alarms](https://developer.android.com/develop/background-work/services/alarms) | Exact-alarm and background scheduling requirements | RQ-040/RQ-044: target-device capability/permission matrix |
+| [Android foreground service types](https://developer.android.com/develop/background-work/services/fgs/service-types) | Media playback service requirements and boot restrictions | Manifest/service proof; no playback from reboot receiver |
+| [Notifee triggers](https://notifee.app/react-native/docs/triggers/) | Trigger API, permission considerations and bounded trigger capacity | RQ-014/RQ-044: real scheduled events and reconciliation |
+| [Android position sensors](https://developer.android.com/develop/sensors-and-location/sensors/sensors_position) and [GeomagneticField](https://developer.android.com/reference/android/hardware/GeomagneticField) | Heading/reference frame and declination APIs | RQ-039: real sensors, orientation and known bearings |
+| [Background downloader](https://github.com/kesha-antonov/react-native-background-downloader) and [API](https://github.com/kesha-antonov/react-native-background-downloader/blob/main/docs/API.md) | Candidate documents native transfers, resume and reattachment | RQ-020: RN 0.84 compatibility, target Android behavior, Range/entity validation, force-stop limits |
+| [OP-SQLite](https://op-engineering.github.io/op-sqlite/) | Candidate local metadata database | RQ-004: pin compatible release, transactions and migration recovery |
+| [React Native Text](https://reactnative.dev/docs/text) | Native text props/scaling reference | RQ-002/RQ-015: correct prop forwarding and actual Arabic font rendering |
+| [Noto font OFL](https://raw.githubusercontent.com/google/fonts/main/ofl/notosansarabic/OFL.txt) | License copied; existing font name table identifies OFL, v2.004 and variable axes | Verify registered native names/weights; no Quran-font inference |
+
+Current repository evidence: package.json and yarn.lock; src/App.tsx; src/store/index.ts; src/services/{persistence,notifications,audioPlaybackService}.ts; src/hooks/useHomeAudioPlayback.ts; src/screens/{HomeScreen,AdkarScreen,DevotionalListScreen}.tsx; src/components/{StyledText,Header,Section}.tsx; src/data/index.ts; Android build and manifest files. The old technical README is useful context but the current source takes precedence, particularly for audio playback.
+
+Source-choice approval in the conversation is retained. This kit does not assert a new grant, certification or endorsement. Acquisition tickets record actual metadata and capabilities so implementation can use the selected sources correctly.

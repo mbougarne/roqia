@@ -1,0 +1,15 @@
+{
+  "ui": {
+    "file": "assets/fonts/NotoSansArabic.ttf",
+    "license": "assets/fonts/OFL-NotoSansArabic.txt",
+    "source": "Existing repository src/assets/fonts/NotoSansArabic.ttf; name table version 2.004",
+    "upstream": "https://github.com/notofonts/arabic",
+    "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "postScriptName": "NotoSansArabic-Regular",
+    "variable": true
+  },
+  "quran": {
+    "status": "source-pack-specific; not bundled in this design kit",
+    "reason": "Exact edition glyph coverage and Warsh orthography require approved source resources."
+  }
+}

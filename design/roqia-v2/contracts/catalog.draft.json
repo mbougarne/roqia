@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "planning-only-2026-10-17",
+  "packs": [
+    {
+      "id": "warsh-almohammadi",
+      "kind": "quran",
+      "status": "draft",
+      "version": null,
+      "source": {
+        "provider": "Al Mushaf Al Mohammadi",
+        "pageUrl": "https://almoshaf-almohammadi.ma/",
+        "artifactUrl": null,
+        "attribution": null,
+        "retrievedAt": null
+      },
+      "riwaya": "warsh",
+      "tariq": null,
+      "numberingScheme": null,
+      "language": "ar",
+      "compatibleEditionIds": [],
+      "capabilities": {
+        "reflow": false,
+        "verseSearch": false,
+        "verseBookmarks": false,
+        "pageView": false,
+        "translations": false,
+        "timedAudio": false
+      },
+      "assets": [],
+      "validationReport": null
+    },
+    {
+      "id": "hafs-tanzil",
+      "kind": "quran",
+      "status": "draft",
+      "version": null,
+      "source": {
+        "provider": "Tanzil",
+        "pageUrl": "https://tanzil.net/download/",
+        "artifactUrl": null,
+        "attribution": null,
+        "retrievedAt": null
+      },
+      "riwaya": "hafs",
+      "tariq": null,
+      "numberingScheme": null,
+      "language": "ar",
+      "compatibleEditionIds": [],
+      "capabilities": {
+        "reflow": false,
+        "verseSearch": false,
+        "verseBookmarks": false,
+        "pageView": false,
+        "translations": false,
+        "timedAudio": false
+      },
+      "assets": [],
+      "validationReport": null
+    },
+    {
+      "id": "fr-hamidullah-candidate",
+      "kind": "translation",
+      "status": "draft",
+      "version": null,
+      "source": {
+        "provider": "Tanzil translation catalog",
+        "pageUrl": "https://tanzil.net/trans/",
+        "artifactUrl": null,
+        "attribution": null,
+        "retrievedAt": null
+      },
+      "riwaya": null,
+      "tariq": null,
+      "numberingScheme": null,
+      "language": "fr",
+      "compatibleEditionIds": [],
+      "capabilities": {
+        "reflow": false,
+        "verseSearch": false,
+        "verseBookmarks": false,
+        "pageView": false,
+        "translations": false,
+        "timedAudio": false
+      },
+      "assets": [],
+      "validationReport": null
+    },
+    {
+      "id": "en-edition-to-select",
+      "kind": "translation",
+      "status": "draft",
+      "version": null,
+      "source": {
+        "provider": "Translation acquisition pending",
+        "pageUrl": "https://tanzil.net/trans/",
+        "artifactUrl": null,
+        "attribution": null,
+        "retrievedAt": null
+      },
+      "riwaya": null,
+      "tariq": null,
+      "numberingScheme": null,
+      "language": "en",
+      "compatibleEditionIds": [],
+      "capabilities": {
+        "reflow": false,
+        "verseSearch": false,
+        "verseBookmarks": false,
+        "pageView": false,
+        "translations": false,
+        "timedAudio": false
+      },
+      "assets": [],
+      "validationReport": null
+    },
+    {
+      "id": "quran-audio-catalog",
+      "kind": "audio",
+      "status": "draft",
+      "version": null,
+      "source": {
+        "provider": "MP3Quran",
+        "pageUrl": "https://www.mp3quran.net/ar/api",
+        "artifactUrl": null,
+        "attribution": null,
+        "retrievedAt": null
+      },
+      "riwaya": null,
+      "tariq": null,
+      "numberingScheme": null,
+      "language": "ar",
+      "compatibleEditionIds": [],
+      "capabilities": {
+        "reflow": false,
+        "verseSearch": false,
+        "verseBookmarks": false,
+        "pageView": false,
+        "translations": false,
+        "timedAudio": false
+      },
+      "assets": [],
+      "validationReport": null
+    }
+  ]
+}

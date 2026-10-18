@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "units": {
+    "layout": "dp",
+    "type": "sp; retain OS font scaling"
+  },
+  "spacing": {
+    "none": 0,
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 20,
+    "2xl": 24,
+    "3xl": 32,
+    "4xl": 40,
+    "5xl": 48
+  },
+  "radius": {
+    "small": 8,
+    "control": 12,
+    "card": 16,
+    "sheet": 24,
+    "pill": 999
+  },
+  "borderWidth": {
+    "default": 1,
+    "selected": 2,
+    "focus": 2
+  },
+  "size": {
+    "screenInset": 20,
+    "compactInset": 16,
+    "contentMaxWidth": 560,
+    "headerMinHeight": 56,
+    "tabBarMinHeight": 64,
+    "tapTargetMin": 48,
+    "buttonMinHeight": 48,
+    "rowMinHeight": 56,
+    "iconSmall": 20,
+    "iconDefault": 24,
+    "iconLarge": 28,
+    "counterMinHeight": 64,
+    "miniPlayerMinHeight": 72,
+    "progressHeight": 4
+  },
+  "motion": {
+    "pressMs": 120,
+    "transitionMs": 200,
+    "sheetMs": 240,
+    "pressScale": 0.98,
+    "reducedMotion": "opacity only; no scale or looping decoration"
+  },
+  "elevation": {
+    "lightCard": {
+      "opacity": 0.04,
+      "blur": 12,
+      "offsetY": 3
+    },
+    "darkCard": {
+      "opacity": 0,
+      "border": "borderSubtle"
+    }
+  },
+  "safeArea": "Insets are additional to component minimum heights. Do not hard-code status or gesture bar pixels.",
+  "responsive": "Reference 393 x 852 dp; verify 320, 360, 393, 430 and 600+ dp. No fixed card text heights."
+}

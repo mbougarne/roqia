@@ -1,0 +1,426 @@
+[
+  {
+    "key": "icon.headphones",
+    "file": "assets/icons/headphones.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.book",
+    "file": "assets/icons/book.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.sun",
+    "file": "assets/icons/sun.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.moon",
+    "file": "assets/icons/moon.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.bed",
+    "file": "assets/icons/bed.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.mosque",
+    "file": "assets/icons/mosque.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.more",
+    "file": "assets/icons/more.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.overflow",
+    "file": "assets/icons/overflow.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.play",
+    "file": "assets/icons/play.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.pause",
+    "file": "assets/icons/pause.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.stop",
+    "file": "assets/icons/stop.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.previous",
+    "file": "assets/icons/previous.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": "Use explicit direction asset for navigation; do not mirror media or compass icons."
+  },
+  {
+    "key": "icon.next",
+    "file": "assets/icons/next.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": "Use explicit direction asset for navigation; do not mirror media or compass icons."
+  },
+  {
+    "key": "icon.repeat",
+    "file": "assets/icons/repeat.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.timer",
+    "file": "assets/icons/timer.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.plus",
+    "file": "assets/icons/plus.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.minus",
+    "file": "assets/icons/minus.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.reset",
+    "file": "assets/icons/reset.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.search",
+    "file": "assets/icons/search.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.bookmark",
+    "file": "assets/icons/bookmark.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.copy",
+    "file": "assets/icons/copy.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.download",
+    "file": "assets/icons/download.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.trash",
+    "file": "assets/icons/trash.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.check",
+    "file": "assets/icons/check.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.close",
+    "file": "assets/icons/close.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.chevron-right",
+    "file": "assets/icons/chevron-right.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": "Use explicit direction asset for navigation; do not mirror media or compass icons."
+  },
+  {
+    "key": "icon.chevron-left",
+    "file": "assets/icons/chevron-left.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": "Use explicit direction asset for navigation; do not mirror media or compass icons."
+  },
+  {
+    "key": "icon.chevron-down",
+    "file": "assets/icons/chevron-down.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.compass",
+    "file": "assets/icons/compass.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": "Use explicit direction asset for navigation; do not mirror media or compass icons."
+  },
+  {
+    "key": "icon.location",
+    "file": "assets/icons/location.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.settings",
+    "file": "assets/icons/settings.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.bell",
+    "file": "assets/icons/bell.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.bell-off",
+    "file": "assets/icons/bell-off.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.volume",
+    "file": "assets/icons/volume.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.info",
+    "file": "assets/icons/info.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.warning",
+    "file": "assets/icons/warning.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.offline",
+    "file": "assets/icons/offline.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.translate",
+    "file": "assets/icons/translate.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.calendar",
+    "file": "assets/icons/calendar.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.wifi",
+    "file": "assets/icons/wifi.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.mail",
+    "file": "assets/icons/mail.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.external",
+    "file": "assets/icons/external.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.shield",
+    "file": "assets/icons/shield.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.text-size",
+    "file": "assets/icons/text-size.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.folder",
+    "file": "assets/icons/folder.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.sliders",
+    "file": "assets/icons/sliders.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.clock",
+    "file": "assets/icons/clock.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.storage",
+    "file": "assets/icons/storage.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.tasbih",
+    "file": "assets/icons/tasbih.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.hands",
+    "file": "assets/icons/hands.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.medallion",
+    "file": "assets/icons/medallion.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.kaaba",
+    "file": "assets/icons/kaaba.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  },
+  {
+    "key": "icon.edit",
+    "file": "assets/icons/edit.svg",
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.75,
+    "mirrorInRTL": false,
+    "note": ""
+  }
+]
