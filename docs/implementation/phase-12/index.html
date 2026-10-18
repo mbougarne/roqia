@@ -1,0 +1,2435 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1" /><title>
+    Roqia · Phase 12 review</title
+  ><style>
+    body {
+      margin: 0;
+      background: #f7f5ef;
+      color: #123b32;
+      font: 16px system-ui;
+    }
+    header {
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      background: #f7f5eff2;
+      border-bottom: 1px solid #bcc5bd;
+      z-index: 2;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+    select,
+    input {
+      font: inherit;
+      padding: 8px;
+      border: 1px solid #8b641f;
+      border-radius: 6px;
+      background: white;
+      margin: 4px;
+    }
+    main {
+      max-width: 1500px;
+      margin: auto;
+      padding: 16px;
+    }
+    section {
+      margin: 28px 0;
+      border-bottom: 1px solid #aaa;
+      padding-bottom: 24px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      line-height: 1.5;
+    }
+    .pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 900px;
+      margin: 16px auto;
+    }
+    figure {
+      margin: 0;
+    }
+    figcaption {
+      padding: 10px;
+      font-weight: 600;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #d7dccf;
+    }
+    body[data-theme='light'] .dark,
+    body[data-theme='dark'] .light {
+      display: none;
+    }
+    a {
+      color: inherit;
+    }
+    button {
+      font: inherit;
+    }
+  </style>
+  <body data-theme="light">
+    <header>
+      <h1>Roqia · Phase 12 visual review</h1>
+      <div>
+        48 screens · light and dark · original design beside the running Android
+        app
+      </div>
+      <label
+        >Theme
+        <select id="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="both">Both</option>
+        </select></label
+      ><label
+        >Screen
+        <input
+          id="search"
+          type="search"
+          placeholder="Number or screen name" /></label
+      ><a href="README.md">Validation notes</a>
+    </header>
+    <main>
+      <section id="s1">
+        <h2>01-splash · Launch</h2>
+        <p>
+          Native Android launch uses the theme palette and vector brand; OS
+          controls placement and transition. No artificial delay.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/01-splash.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/01-splash.png"
+                alt="01-splash light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/01-splash-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/01-splash-light.png"
+                alt="01-splash light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/01-splash.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/01-splash.png"
+                alt="01-splash dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/01-splash-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/01-splash-dark.png"
+                alt="01-splash dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s2">
+        <h2>02-welcome · Welcome</h2>
+        <p>
+          Book-on-stand illustration, centered introduction, grouped benefits
+          and next action. Artwork is original vector linework.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/02-welcome.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/02-welcome.png"
+                alt="02-welcome light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/02-welcome-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/02-welcome-light.png"
+                alt="02-welcome light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/02-welcome.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/02-welcome.png"
+                alt="02-welcome dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/02-welcome-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/02-welcome-dark.png"
+                alt="02-welcome dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s3">
+        <h2>03-guide-audio · Onboarding: audio</h2>
+        <p>
+          Audio introduction uses real capability descriptions; sample
+          waveform/playback progress is not presented as live audio.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/03-guide-audio.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/03-guide-audio.png"
+                alt="03-guide-audio light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/03-guide-audio-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/03-guide-audio-light.png"
+                alt="03-guide-audio light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/03-guide-audio.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/03-guide-audio.png"
+                alt="03-guide-audio dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/03-guide-audio-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/03-guide-audio-dark.png"
+                alt="03-guide-audio dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s4">
+        <h2>04-guide-navigation · Onboarding: navigation</h2>
+        <p>
+          Navigation introduction reflects the actual five app tabs and current
+          features.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/04-guide-navigation.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/04-guide-navigation.png"
+                alt="04-guide-navigation light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/04-guide-navigation-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/04-guide-navigation-light.png"
+                alt="04-guide-navigation light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/04-guide-navigation.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/04-guide-navigation.png"
+                alt="04-guide-navigation dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/04-guide-navigation-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/04-guide-navigation-dark.png"
+                alt="04-guide-navigation dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s5">
+        <h2>05-guide-adhkar · Onboarding: daily reading</h2>
+        <p>
+          Onboarding counter is an isolated demonstration; it does not modify
+          saved devotional counters.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/05-guide-adhkar.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/05-guide-adhkar.png"
+                alt="05-guide-adhkar light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/05-guide-adhkar-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/05-guide-adhkar-light.png"
+                alt="05-guide-adhkar light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/05-guide-adhkar.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/05-guide-adhkar.png"
+                alt="05-guide-adhkar dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/05-guide-adhkar-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/05-guide-adhkar-dark.png"
+                alt="05-guide-adhkar dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s6">
+        <h2>06-guide-personalize · Onboarding: preferences</h2>
+        <p>
+          Theme and interface-size controls persist; Western digits and the
+          sample text remain readable.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/06-guide-personalize.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/06-guide-personalize.png"
+                alt="06-guide-personalize light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/06-guide-personalize-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/06-guide-personalize-light.png"
+                alt="06-guide-personalize light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/06-guide-personalize.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/06-guide-personalize.png"
+                alt="06-guide-personalize dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/06-guide-personalize-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/06-guide-personalize-dark.png"
+                alt="06-guide-personalize dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s7">
+        <h2>07-guidance · Ruqya guidance</h2>
+        <p>
+          Reference summary hierarchy plus the full original guidance text;
+          content remains scrollable.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/07-guidance.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/07-guidance.png"
+                alt="07-guidance light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/07-guidance-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/07-guidance-light.png"
+                alt="07-guidance light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/07-guidance.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/07-guidance.png"
+                alt="07-guidance dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/07-guidance-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/07-guidance-dark.png"
+                alt="07-guidance dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s8">
+        <h2>08-ruqya · Ruqya home</h2>
+        <p>
+          Reading/action hierarchy and saved counters preserved. The complete
+          corpus text and progress determine card height.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/08-ruqya.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/08-ruqya.png"
+                alt="08-ruqya light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/08-ruqya-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/08-ruqya-light.png"
+                alt="08-ruqya light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/08-ruqya.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/08-ruqya.png"
+                alt="08-ruqya dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/08-ruqya-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/08-ruqya-dark.png"
+                alt="08-ruqya dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s9">
+        <h2>09-adhkar · Adhkar categories</h2>
+        <p>
+          Three illustrated category cards, emphasized sleep card and paired
+          dua/tasbih actions. Counts reflect the actual corpus.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/09-adhkar.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/09-adhkar.png"
+                alt="09-adhkar light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/09-adhkar-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/09-adhkar-light.png"
+                alt="09-adhkar light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/09-adhkar.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/09-adhkar.png"
+                alt="09-adhkar dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/09-adhkar-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/09-adhkar-dark.png"
+                alt="09-adhkar dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s10">
+        <h2>10-morning · Morning adhkar</h2>
+        <p>
+          Morning hero, play-all/progress and complete original reading cards;
+          longer source text changes visible card count.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/10-morning.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/10-morning.png"
+                alt="10-morning light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/10-morning-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/10-morning-light.png"
+                alt="10-morning light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/10-morning.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/10-morning.png"
+                alt="10-morning dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/10-morning-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/10-morning-dark.png"
+                alt="10-morning dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s11">
+        <h2>11-evening · Evening adhkar</h2>
+        <p>
+          Evening hero and the same retained reading/counter/audio actions;
+          actual source order is preserved.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/11-evening.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/11-evening.png"
+                alt="11-evening light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/11-evening-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/11-evening-light.png"
+                alt="11-evening light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/11-evening.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/11-evening.png"
+                alt="11-evening dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/11-evening-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/11-evening-dark.png"
+                alt="11-evening dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s12">
+        <h2>12-before-sleep · Before-sleep adhkar</h2>
+        <p>
+          Sleep hero and progress retain the complete source collection and
+          saved counters.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/12-before-sleep.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/12-before-sleep.png"
+                alt="12-before-sleep light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/12-before-sleep-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/12-before-sleep-light.png"
+                alt="12-before-sleep light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/12-before-sleep.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/12-before-sleep.png"
+                alt="12-before-sleep dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/12-before-sleep-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/12-before-sleep-dark.png"
+                alt="12-before-sleep dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s13">
+        <h2>13-dua · Dua</h2>
+        <p>
+          Search and saved/all filters precede complete dua cards. The original
+          long first dua is not shortened.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/13-dua.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/13-dua.png"
+                alt="13-dua light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/13-dua-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/13-dua-light.png"
+                alt="13-dua light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/13-dua.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/13-dua.png"
+                alt="13-dua dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/13-dua-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/13-dua-dark.png"
+                alt="13-dua dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s14">
+        <h2>14-tasbih · Tasbih counter</h2>
+        <p>
+          Circular counter and tap target, real corpus choices, source target,
+          audio, bookmarks/copy disclosure and scoped reset.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/14-tasbih.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/14-tasbih.png"
+                alt="14-tasbih light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/14-tasbih-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/14-tasbih-light.png"
+                alt="14-tasbih light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/14-tasbih.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/14-tasbih.png"
+                alt="14-tasbih dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/14-tasbih-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/14-tasbih-dark.png"
+                alt="14-tasbih dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s15">
+        <h2>15-more · More menu</h2>
+        <p>
+          Grouped navigation follows the reference hierarchy; additional working
+          features remain in a disclosure.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/15-more.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/15-more.png"
+                alt="15-more light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/15-more-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/15-more-light.png"
+                alt="15-more light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/15-more.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/15-more.png"
+                alt="15-more dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/15-more-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/15-more-dark.png"
+                alt="15-more dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s16">
+        <h2>16-about · About</h2>
+        <p>
+          Brand, free/no-ads information, contact and project/legal/source links
+          retain the real destinations.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/16-about.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/16-about.png"
+                alt="16-about light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/16-about-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/16-about-light.png"
+                alt="16-about light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/16-about.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/16-about.png"
+                alt="16-about dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/16-about-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/16-about-dark.png"
+                alt="16-about dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s17">
+        <h2>17-privacy · Privacy page</h2>
+        <p>
+          Privacy summaries and complete original offline policy. The full
+          policy is expandable rather than replaced.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/17-privacy.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/17-privacy.png"
+                alt="17-privacy light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/17-privacy-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/17-privacy-light.png"
+                alt="17-privacy light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/17-privacy.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/17-privacy.png"
+                alt="17-privacy dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/17-privacy-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/17-privacy-dark.png"
+                alt="17-privacy dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s18">
+        <h2>18-terms · Terms page</h2>
+        <p>
+          Usage/source/version/contact summaries and complete original offline
+          terms.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/18-terms.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/18-terms.png"
+                alt="18-terms light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/18-terms-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/18-terms-light.png"
+                alt="18-terms light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/18-terms.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/18-terms.png"
+                alt="18-terms dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/18-terms-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/18-terms-dark.png"
+                alt="18-terms dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s19">
+        <h2>19-link-error · Link unavailable state</h2>
+        <p>
+          Real OS missing-mail-handler failure; the emulator handler is
+          temporarily disabled and restored. Retry/copy/close remain actionable.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/19-link-error.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/19-link-error.png"
+                alt="19-link-error light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/19-link-error-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/19-link-error-light.png"
+                alt="19-link-error light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/19-link-error.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/19-link-error.png"
+                alt="19-link-error dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/19-link-error-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/19-link-error-dark.png"
+                alt="19-link-error dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s20">
+        <h2>20-reset-page · Reset this page confirmation</h2>
+        <p>
+          Shared themed page-reset sheet, captured from Tasbih. Cancel
+          exercised; no counters reset.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/20-reset-page.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/20-reset-page.png"
+                alt="20-reset-page light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/20-reset-page-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/20-reset-page-light.png"
+                alt="20-reset-page light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/20-reset-page.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/20-reset-page.png"
+                alt="20-reset-page dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/20-reset-page-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/20-reset-page-dark.png"
+                alt="20-reset-page dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s21">
+        <h2>21-reset-all · Reset all counters confirmation</h2>
+        <p>
+          Shared themed all-counter reset sheet. Cancel exercised; original
+          counters preserved.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/21-reset-all.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/21-reset-all.png"
+                alt="21-reset-all light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/21-reset-all-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/21-reset-all-light.png"
+                alt="21-reset-all light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/21-reset-all.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/21-reset-all.png"
+                alt="21-reset-all dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/21-reset-all-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/21-reset-all-dark.png"
+                alt="21-reset-all dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s22">
+        <h2>22-quran-library · Quran library</h2>
+        <p>
+          Actual preferred edition, last reading position, search and compact
+          chapter list; source catalog differs from sample publishers.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/22-quran-library.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/22-quran-library.png"
+                alt="22-quran-library light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/22-quran-library-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/22-quran-library-light.png"
+                alt="22-quran-library light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/22-quran-library.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/22-quran-library.png"
+                alt="22-quran-library dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/22-quran-library-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/22-quran-library-dark.png"
+                alt="22-quran-library dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s23">
+        <h2>23-mushaf-selection · Choose Warsh or Hafs</h2>
+        <p>
+          Real approved editions, selection state, illustration and
+          continuation; selection alone does not download.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/23-mushaf-selection.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/23-mushaf-selection.png"
+                alt="23-mushaf-selection light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/23-mushaf-selection-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/23-mushaf-selection-light.png"
+                alt="23-mushaf-selection light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/23-mushaf-selection.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/23-mushaf-selection.png"
+                alt="23-mushaf-selection dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/23-mushaf-selection-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/23-mushaf-selection-dark.png"
+                alt="23-mushaf-selection dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s24">
+        <h2>24-mushaf-download · Download selected mushaf</h2>
+        <p>
+          Real installed edition and byte totals. Open replaces Download because
+          the baseline pack is already installed.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/24-mushaf-download.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/24-mushaf-download.png"
+                alt="24-mushaf-download light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/24-mushaf-download-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/24-mushaf-download-light.png"
+                alt="24-mushaf-download light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/24-mushaf-download.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/24-mushaf-download.png"
+                alt="24-mushaf-download dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/24-mushaf-download-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/24-mushaf-download-dark.png"
+                alt="24-mushaf-download dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s25">
+        <h2>25-warsh-reader · Warsh reader</h2>
+        <p>
+          Original King Fahd Warsh text and font at comparison size 34; source
+          verse markers remain intact alongside Western UI badges.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/25-warsh-reader.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/25-warsh-reader.png"
+                alt="25-warsh-reader light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/25-warsh-reader-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/25-warsh-reader-light.png"
+                alt="25-warsh-reader light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/25-warsh-reader.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/25-warsh-reader.png"
+                alt="25-warsh-reader dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/25-warsh-reader-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/25-warsh-reader-dark.png"
+                alt="25-warsh-reader dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s26">
+        <h2>26-hafs-reader-french · Hafs reader: French</h2>
+        <p>
+          Verified Tanzil Hafs and Hamidullah French, LTR translation block and
+          compact actions; original text remains complete.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/26-hafs-reader-french.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/26-hafs-reader-french.png"
+                alt="26-hafs-reader-french light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/26-hafs-reader-french-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/26-hafs-reader-french-light.png"
+                alt="26-hafs-reader-french light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/26-hafs-reader-french.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/26-hafs-reader-french.png"
+                alt="26-hafs-reader-french dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/26-hafs-reader-french-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/26-hafs-reader-french-dark.png"
+                alt="26-hafs-reader-french dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s27">
+        <h2>27-hafs-reader-english · Hafs reader: English</h2>
+        <p>
+          Verified Tanzil Hafs and Pickthall English. Reference
+          translator/wording is not substituted into the catalog.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/27-hafs-reader-english.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/27-hafs-reader-english.png"
+                alt="27-hafs-reader-english light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/27-hafs-reader-english-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/27-hafs-reader-english-light.png"
+                alt="27-hafs-reader-english light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/27-hafs-reader-english.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/27-hafs-reader-english.png"
+                alt="27-hafs-reader-english dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/27-hafs-reader-english-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/27-hafs-reader-english-dark.png"
+                alt="27-hafs-reader-english dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s28">
+        <h2>28-translations · Translation downloads</h2>
+        <p>
+          Real installed French/English choices and source notices; no
+          unverified Warsh translation join.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/28-translations.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/28-translations.png"
+                alt="28-translations light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/28-translations-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/28-translations-light.png"
+                alt="28-translations light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/28-translations.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/28-translations.png"
+                alt="28-translations dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/28-translations-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/28-translations-dark.png"
+                alt="28-translations dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s29">
+        <h2>29-reading-preferences · Reading preferences</h2>
+        <p>
+          Live preview from the selected source/font, fractional sliders, layout
+          choice and saved reader settings.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/29-reading-preferences.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/29-reading-preferences.png"
+                alt="29-reading-preferences light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/29-reading-preferences-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/29-reading-preferences-light.png"
+                alt="29-reading-preferences light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/29-reading-preferences.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/29-reading-preferences.png"
+                alt="29-reading-preferences dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/29-reading-preferences-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/29-reading-preferences-dark.png"
+                alt="29-reading-preferences dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s30">
+        <h2>30-quran-search · Quran search</h2>
+        <p>
+          Actual search for chapter 112. No synthetic recent queries or matching
+          results are added.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/30-quran-search.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/30-quran-search.png"
+                alt="30-quran-search light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/30-quran-search-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/30-quran-search-light.png"
+                alt="30-quran-search light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/30-quran-search.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/30-quran-search.png"
+                alt="30-quran-search dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/30-quran-search-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/30-quran-search-dark.png"
+                alt="30-quran-search dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s31">
+        <h2>31-bookmarks · Saved bookmarks</h2>
+        <p>
+          Actual saved Quran bookmarks. The temporary comparison bookmark is
+          removed afterward; the baseline mark is preserved.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/31-bookmarks.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/31-bookmarks.png"
+                alt="31-bookmarks light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/31-bookmarks-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/31-bookmarks-light.png"
+                alt="31-bookmarks light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/31-bookmarks.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/31-bookmarks.png"
+                alt="31-bookmarks dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/31-bookmarks-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/31-bookmarks-dark.png"
+                alt="31-bookmarks dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s32">
+        <h2>32-content-sources · Sources and editions</h2>
+        <p>
+          Actual approved publisher/translation/audio and devotional sources.
+          References link to the true catalog.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/32-content-sources.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/32-content-sources.png"
+                alt="32-content-sources light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/32-content-sources-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/32-content-sources-light.png"
+                alt="32-content-sources light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/32-content-sources.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/32-content-sources.png"
+                alt="32-content-sources dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/32-content-sources-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/32-content-sources-dark.png"
+                alt="32-content-sources dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s33">
+        <h2>33-reciter-selection · Choose reciter</h2>
+        <p>
+          Only catalog-backed reciters are shown; no sample
+          reciter/portrait/quality option is invented.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/33-reciter-selection.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/33-reciter-selection.png"
+                alt="33-reciter-selection light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/33-reciter-selection-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/33-reciter-selection-light.png"
+                alt="33-reciter-selection light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/33-reciter-selection.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/33-reciter-selection.png"
+                alt="33-reciter-selection dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/33-reciter-selection-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/33-reciter-selection-dark.png"
+                alt="33-reciter-selection dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s34">
+        <h2>34-audio-surah-selection · Select audio downloads</h2>
+        <p>
+          Actual chapter sizes and selection, with a persistent download action
+          while scrolling all available chapters.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/34-audio-surah-selection.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/34-audio-surah-selection.png"
+                alt="34-audio-surah-selection light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/34-audio-surah-selection-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/34-audio-surah-selection-light.png"
+                alt="34-audio-surah-selection light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/34-audio-surah-selection.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/34-audio-surah-selection.png"
+                alt="34-audio-surah-selection dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/34-audio-surah-selection-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/34-audio-surah-selection-dark.png"
+                alt="34-audio-surah-selection dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s35">
+        <h2>35-download-queue · Download progress</h2>
+        <p>
+          Completed jobs from the populated install are shown; no fabricated
+          in-flight percentage. Offline pending/paused states are captured
+          separately.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/35-download-queue.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/35-download-queue.png"
+                alt="35-download-queue light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/35-download-queue-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/35-download-queue-light.png"
+                alt="35-download-queue light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/35-download-queue.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/35-download-queue.png"
+                alt="35-download-queue dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/35-download-queue-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/35-download-queue-dark.png"
+                alt="35-download-queue dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s36">
+        <h2>36-offline-audio · Downloaded audio library</h2>
+        <p>
+          Two actually installed recording/chapter combinations, offline
+          playback and add/storage actions.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/36-offline-audio.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/36-offline-audio.png"
+                alt="36-offline-audio light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/36-offline-audio-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/36-offline-audio-light.png"
+                alt="36-offline-audio light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/36-offline-audio.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/36-offline-audio.png"
+                alt="36-offline-audio dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/36-offline-audio-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/36-offline-audio-dark.png"
+                alt="36-offline-audio dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s37">
+        <h2>37-storage · Manage offline storage</h2>
+        <p>
+          Actual installed/partial/free bytes and selectable packs. No baseline
+          content is deleted during visual testing.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/37-storage.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/37-storage.png"
+                alt="37-storage light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/37-storage-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/37-storage-light.png"
+                alt="37-storage light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/37-storage.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/37-storage.png"
+                alt="37-storage dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/37-storage-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/37-storage-dark.png"
+                alt="37-storage dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s38">
+        <h2>38-audio-player · Full audio player</h2>
+        <p>
+          Real downloaded recording, paused transport, seek, queue,
+          rate/repeat/sleep controls; no fabricated waveform or duration.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/38-audio-player.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/38-audio-player.png"
+                alt="38-audio-player light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/38-audio-player-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/38-audio-player-light.png"
+                alt="38-audio-player light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/38-audio-player.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/38-audio-player.png"
+                alt="38-audio-player dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/38-audio-player-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/38-audio-player-dark.png"
+                alt="38-audio-player dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s39">
+        <h2>39-prayer-times · Prayer times</h2>
+        <p>
+          Actual source-backed city/date/timetable and next prayer. Native
+          status bar and current prayer/time differ from sample values.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/39-prayer-times.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/39-prayer-times.png"
+                alt="39-prayer-times light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/39-prayer-times-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/39-prayer-times-light.png"
+                alt="39-prayer-times light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/39-prayer-times.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/39-prayer-times.png"
+                alt="39-prayer-times dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/39-prayer-times-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/39-prayer-times-dark.png"
+                alt="39-prayer-times dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s40">
+        <h2>40-qibla · Qibla direction</h2>
+        <p>
+          True bearing and truthful sensor/accuracy status; no synthetic
+          good-accuracy indication.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/40-qibla.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/40-qibla.png"
+                alt="40-qibla light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/40-qibla-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/40-qibla-light.png"
+                alt="40-qibla light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/40-qibla.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/40-qibla.png"
+                alt="40-qibla dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/40-qibla-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/40-qibla-dark.png"
+                alt="40-qibla dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s41">
+        <h2>41-qibla-calibration · Qibla calibration</h2>
+        <p>
+          Phone/figure-eight illustration, calibration instructions and real
+          recheck/navigation; no fake calibration percentage.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/41-qibla-calibration.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/41-qibla-calibration.png"
+                alt="41-qibla-calibration light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/41-qibla-calibration-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/41-qibla-calibration-light.png"
+                alt="41-qibla-calibration light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/41-qibla-calibration.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/41-qibla-calibration.png"
+                alt="41-qibla-calibration dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/41-qibla-calibration-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/41-qibla-calibration-dark.png"
+                alt="41-qibla-calibration dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s42">
+        <h2>42-city-location · City and location</h2>
+        <p>
+          Supported city list, one-time GPS, manual coordinates/timezone and
+          explicit save. More supported cities require scrolling.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/42-city-location.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/42-city-location.png"
+                alt="42-city-location light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/42-city-location-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/42-city-location-light.png"
+                alt="42-city-location light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/42-city-location.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/42-city-location.png"
+                alt="42-city-location dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/42-city-location-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/42-city-location-dark.png"
+                alt="42-city-location dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s43">
+        <h2>43-adhan-settings · Adhan settings</h2>
+        <p>
+          Actual desired modes, switches, mode selection, pre-alert minutes and
+          save; permission/coverage remain available.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/43-adhan-settings.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/43-adhan-settings.png"
+                alt="43-adhan-settings light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/43-adhan-settings-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/43-adhan-settings-light.png"
+                alt="43-adhan-settings light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/43-adhan-settings.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/43-adhan-settings.png"
+                alt="43-adhan-settings dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/43-adhan-settings-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/43-adhan-settings-dark.png"
+                alt="43-adhan-settings dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s44">
+        <h2>44-adhan-sound · Choose adhan sound</h2>
+        <p>
+          Verified original Doha normal/Fajr recordings, preview/stop and source
+          information; sample Morocco/Makkah recordings are not invented.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/44-adhan-sound.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/44-adhan-sound.png"
+                alt="44-adhan-sound light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/44-adhan-sound-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/44-adhan-sound-light.png"
+                alt="44-adhan-sound light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/44-adhan-sound.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/44-adhan-sound.png"
+                alt="44-adhan-sound dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/44-adhan-sound-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/44-adhan-sound-dark.png"
+                alt="44-adhan-sound dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s45">
+        <h2>45-prayer-adjustments · Prayer calculation settings</h2>
+        <p>
+          Real method/location, six supported event offsets, format and
+          restore/save controls. Sunrise remains supported by the current model.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/45-prayer-adjustments.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/45-prayer-adjustments.png"
+                alt="45-prayer-adjustments light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/45-prayer-adjustments-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/45-prayer-adjustments-light.png"
+                alt="45-prayer-adjustments light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/45-prayer-adjustments.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/45-prayer-adjustments.png"
+                alt="45-prayer-adjustments dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/45-prayer-adjustments-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/45-prayer-adjustments-dark.png"
+                alt="45-prayer-adjustments dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s46">
+        <h2>46-reminders · Daily reminders</h2>
+        <p>
+          Three real reminders with independent days/times; no extra sample
+          Quran reminder. Editor and permission/test controls remain available.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/light/46-reminders.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/46-reminders.png"
+                alt="46-reminders light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/46-reminders-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/46-reminders-light.png"
+                alt="46-reminders light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a href="../../../design/roqia-v2/reference/dark/46-reminders.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/46-reminders.png"
+                alt="46-reminders dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/46-reminders-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/46-reminders-dark.png"
+                alt="46-reminders dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s47">
+        <h2>47-app-settings · App settings</h2>
+        <p>
+          Theme, interface scaling, Western digits, preferred Quran/translation,
+          Wi-Fi, storage, reminders and reset.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/47-app-settings.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/47-app-settings.png"
+                alt="47-app-settings light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/47-app-settings-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/47-app-settings-light.png"
+                alt="47-app-settings light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/47-app-settings.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/47-app-settings.png"
+                alt="47-app-settings dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/47-app-settings-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/47-app-settings-dark.png"
+                alt="47-app-settings dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <section id="s48">
+        <h2>48-download-error · Paused download recovery</h2>
+        <p>
+          Real offline job with zero received bytes, then user
+          pause/resume/cancel. Network interruption replaces the sample 50% job
+          without fabricating progress.
+        </p>
+        <div class="pair light">
+          <figure>
+            <figcaption>Light · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/light/48-download-error.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/light/48-download-error.png"
+                alt="48-download-error light reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Light · Android app</figcaption>
+            <a href="screenshots/48-download-error-light.png"
+              ><img
+                loading="lazy"
+                src="screenshots/48-download-error-light.png"
+                alt="48-download-error light Android capture"
+            /></a>
+          </figure>
+        </div>
+        <div class="pair dark">
+          <figure>
+            <figcaption>Dark · original design</figcaption>
+            <a
+              href="../../../design/roqia-v2/reference/dark/48-download-error.png"
+              ><img
+                loading="lazy"
+                src="../../../design/roqia-v2/reference/dark/48-download-error.png"
+                alt="48-download-error dark reference"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption>Dark · Android app</figcaption>
+            <a href="screenshots/48-download-error-dark.png"
+              ><img
+                loading="lazy"
+                src="screenshots/48-download-error-dark.png"
+                alt="48-download-error dark Android capture"
+            /></a>
+          </figure>
+        </div>
+      </section>
+    </main>
+    <script>
+      document.querySelector('#theme').onchange = e =>
+        (document.body.dataset.theme = e.target.value);
+      document.querySelector('#search').oninput = e => {
+        const q = e.target.value.toLowerCase();
+        document
+          .querySelectorAll('section')
+          .forEach(
+            s =>
+              (s.hidden = !s
+                .querySelector('h2')
+                .textContent.toLowerCase()
+                .includes(q)),
+          );
+      };
+    </script>
+  </body>
+</html>

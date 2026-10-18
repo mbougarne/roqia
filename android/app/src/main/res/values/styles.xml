@@ -1,9 +1,10 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppThemeBase" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+        <item name="android:windowBackground">@drawable/roqia_launch_background</item>
+        <item name="android:statusBarColor">@color/roqia_launch_background</item>
+        <item name="android:navigationBarColor">@color/roqia_launch_background</item>
+        <item name="android:windowLightStatusBar">@bool/roqia_launch_light</item>
     </style>
-
+    <style name="AppTheme" parent="AppThemeBase" />
 </resources>

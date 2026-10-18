@@ -1,6 +1,25 @@
+import {useQuran} from '../features/quran/context';
 import React, {useContext} from 'react';
-import {Alert} from 'react-native';
-import {AppText, Button, Page, Row, StateView} from '../design/ui';
+import {Alert, View} from 'react-native';
+import {
+  Group,
+  Ornament,
+  Segments,
+  Range,
+  SettingRow,
+  Toggle,
+  Disclosure,
+} from '../design/components';
+import {
+  AppIcon,
+  AppText,
+  Button,
+  Card,
+  Page,
+  Row,
+  StateView,
+  usePalette,
+} from '../design/ui';
 import {themeContext, homeRepeatContext} from '../store';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
 import {number, ltr} from '../design/format';
@@ -25,17 +44,55 @@ export function MoreScreen({navigation}: any) {
   ] as const;
   return (
     <Page title="المزيد">
-      {rows.map(([screen, title, icon]) => (
-        <Row
-          key={screen}
-          title={title}
-          icon={icon}
-          onPress={() => navigation.navigate(screen)}
+      <Card>
+        <SettingRow
+          title="الرقية"
+          detail="مجاني · بلا إعلانات"
+          icon="medallion"
         />
+      </Card>
+      {[
+        rows.slice(0, 3),
+        [rows[6], rows[4], rows[5]],
+        [rows[11], rows[8], rows[12], rows[13]],
+      ].map((group, i) => (
+        <Group key={i}>
+          {group.map(([screen, title, icon]) => (
+            <SettingRow
+              key={screen}
+              title={title}
+              icon={icon}
+              onPress={() => navigation.navigate(screen)}
+            />
+          ))}
+        </Group>
       ))}
+      <Disclosure title="الدليل والمزيد">
+        <Row
+          title="البحث في المحتوى"
+          icon="search"
+          onPress={() => navigation.navigate('Search')}
+        />
+        <Row
+          title="إدارة التخزين"
+          icon="storage"
+          onPress={() => navigation.navigate('Storage')}
+        />
+        <Row
+          title="دليل الاستخدام"
+          icon="info"
+          onPress={() => navigation.navigate('Guide')}
+        />
+        <Row
+          title="ضوابط الرقية الشرعية"
+          icon="shield"
+          onPress={() => navigation.navigate('Guidance')}
+        />
+      </Disclosure>
     </Page>
   );
 }
+
 export function RecoveryScreen({route, navigation}: any) {
   return (
     <Page title="تعذر فتح الصفحة" onBack={() => navigation.goBack()}>
@@ -55,6 +112,7 @@ export function RecoveryScreen({route, navigation}: any) {
   );
 }
 export function SettingsScreen({navigation}: any) {
+  const quran = useQuran();
   const confirmReset = useConfirmReset();
   const {preference, setPreference, uiScale, setUiScale} =
     useContext(themeContext);
@@ -65,90 +123,99 @@ export function SettingsScreen({navigation}: any) {
       .then(s => setWifi(s.wifiOnly))
       .catch(() => Alert.alert('تعذر استرجاع الإعدادات'));
   }, []);
+  const toggleWifi = () => {
+    const apply = () =>
+      void updateSettings({wifiOnly: !wifi})
+        .then(() => setWifi(!wifi))
+        .catch(() => Alert.alert('تعذر حفظ الإعداد'));
+    if (wifi)
+      Alert.alert(
+        'السماح ببيانات الهاتف؟',
+        'قد تحتسب شركة الاتصال تكلفة البيانات للتنزيلات الجديدة.',
+        [
+          {text: 'إلغاء', style: 'cancel'},
+          {text: 'السماح', onPress: apply},
+        ],
+      );
+    else apply();
+  };
   return (
     <Page title="الإعدادات" onBack={() => navigation.goBack()}>
-      <AppText role="sectionTitle">المظهر</AppText>
-      {(
-        [
-          ['system', 'حسب الجهاز'],
-          ['light', 'نهاري'],
-          ['dark', 'ليلي'],
-        ] as [ThemePreference, string][]
-      ).map(([key, label]) => (
-        <Button
-          key={key}
-          label={`${preference === key ? '✓ ' : ''}${label}`}
-          selected={preference === key}
-          secondary={preference !== key}
-          onPress={() => setPreference(key)}
+      <Ornament title="المظهر والقراءة" />
+      <Card>
+        <AppText role="label">المظهر</AppText>
+        <Segments
+          value={preference}
+          options={[
+            {value: 'light', label: 'نهاري'},
+            {value: 'dark', label: 'ليلي'},
+            {value: 'system', label: 'حسب الجهاز'},
+          ]}
+          onChange={setPreference}
         />
-      ))}
-      <AppText role="sectionTitle">حجم نص الواجهة</AppText>
-      {[1, 1.25, 1.5].map(scale => (
-        <Button
-          key={scale}
-          label={`${number(scale * 100)}%`}
-          selected={uiScale === scale}
-          secondary={uiScale !== scale}
+        <Range
+          label="حجم نص الواجهة"
+          min={1}
+          max={1.5}
+          step={0.25}
+          value={uiScale}
+          onChange={v =>
+            void setUiScale(v).catch(() => Alert.alert('تعذر حفظ حجم النص'))
+          }
+        />
+        <SettingRow title="الأرقام" detail="0123456789" icon="text-size" />
+      </Card>
+      <Ornament title="القرآن والتنزيلات" />
+      <Group>
+        <SettingRow
+          title="المصحف المفضل"
+          detail="اختيار الرواية وإعدادات القراءة"
+          icon="book"
+          onPress={() => navigation.navigate('QuranEditions')}
+        />
+        <SettingRow
+          title="ترجمة المعاني"
+          icon="translate"
           onPress={() => {
-            void setUiScale(scale).catch(() =>
-              Alert.alert('تعذر حفظ حجم النص'),
-            );
+            void quran
+              .preferred()
+              .then(edition =>
+                navigation.navigate('QuranTranslations', {
+                  editionId: edition.id,
+                }),
+              )
+              .catch(() => Alert.alert('تعذر استرجاع المصحف المفضل'));
           }}
         />
-      ))}
-      <AppText role="caption">
-        حجم الواجهة مستقل عن نص القراءة. يحترم التطبيق أيضا حجم النص في جهازك.
-      </AppText>
-      <AppText>{`الأرقام المستخدمة دائما: ${ltr('0123456789')}`}</AppText>
-      <Row
-        title="المصحف المفضل والترجمة"
-        detail="اختيار الرواية وإعدادات القراءة"
-        icon="book"
-        onPress={() => navigation.navigate('QuranEditions')}
-      />
-      <Row
-        title="التنزيل عبر Wi-Fi فقط"
-        detail={wifi ? 'مفعل' : 'غير مفعل'}
-        icon="wifi"
-        onPress={() => {
-          const apply = () => {
-            void updateSettings({wifiOnly: !wifi})
-              .then(() => setWifi(!wifi))
-              .catch(() => Alert.alert('تعذر حفظ الإعداد'));
-          };
-          if (wifi)
-            Alert.alert(
-              'السماح ببيانات الهاتف؟',
-              'قد تحتسب شركة الاتصال تكلفة البيانات للتنزيلات الجديدة.',
-              [
-                {text: 'إلغاء', style: 'cancel'},
-                {text: 'السماح', onPress: apply},
-              ],
-            );
-          else apply();
-        }}
-      />
-      <AppText role="caption">
-        تطبق سياسة الشبكة على التنزيلات الجديدة. التنزيلات الموجودة تحتفظ
-        بالاختيار الذي بدأت به.
-      </AppText>
-      <Row
-        title="التذكيرات اليومية"
-        icon="bell"
-        onPress={() => navigation.navigate('Reminders')}
-      />
+        <SettingRow title="التنزيل عبر Wi-Fi فقط" icon="wifi">
+          <Toggle
+            label="التنزيل عبر Wi-Fi فقط"
+            value={wifi}
+            onChange={toggleWifi}
+          />
+        </SettingRow>
+        <SettingRow
+          title="إدارة التخزين"
+          icon="storage"
+          onPress={() => navigation.navigate('Storage')}
+        />
+      </Group>
+      <Group>
+        <SettingRow
+          title="التذكيرات اليومية"
+          icon="bell"
+          onPress={() => navigation.navigate('Reminders')}
+        />
+      </Group>
       <Button
         secondary
         icon="reset"
         label="إعادة جميع العدادات"
         onPress={() => confirmReset('إعادة جميع العدادات؟', resetAllRepeats)}
       />
-      <Row
-        title="إدارة التنزيلات والتخزين"
-        icon="storage"
-        onPress={() => navigation.navigate('Storage')}
-      />
+      <AppText role="caption">
+        حجم الواجهة مستقل عن القراءة. تطبق سياسة الشبكة على التنزيلات الجديدة.
+      </AppText>
     </Page>
   );
 }

@@ -1,0 +1,7 @@
+# Capture provenance
+
+The normal light matrix and cold-launch recordings were captured on the first successful matrix APK (`matrix-apk.sha256`). The dark-matrix APK (`dark-matrix-apk.sha256`) includes the subsequent dark Adhkar surface correction, explicit LTR source identifiers, clearing a stale city selection after GPS, and nonuniform accessibility slider stops. Those changes do not alter the light matrix default states; the dark matrix and initial size/text checks use that APK. The delivered APK (`final-apk.sha256`) additionally stacks audio option buttons below 360 dp or above 120% text; targeted narrow/large player captures are repeated on that delivered build. Normal-size theme rendering is unchanged by this responsive-only correction.
+
+The native launch mark is unchanged between the builds. `01-splash-light.png` is the 1.0-second frame of the light recording; `01-splash-dark.png` is the 1.3-second frame of the dark recording. Native Android launch follows OS appearance before saved app appearance hydrates; Android controls timing and positioning. No launch delay is inserted.
+
+All three review builds retain application ID name.roqia.app, version code 6 and version name 1.0.5. Installation used an in-place review upgrade on emulator-5554. Build logs include upstream dependency warnings; the final assembleReview completed successfully. No dependency or source-catalog versions changed.

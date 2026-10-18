@@ -1,5 +1,5 @@
 import React, {createContext, useCallback, useContext, useState} from 'react';
-import {AppText, Button, Sheet} from '../../design/ui';
+import {AppIcon, AppText, Button, Sheet, usePalette} from '../../design/ui';
 type Request = {title: string; action: () => void};
 type Confirm = (title: string, action: () => void) => void;
 const context = createContext<Confirm | null>(null);
@@ -13,6 +13,7 @@ export function ResetConfirmationProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const p = usePalette();
   const [request, setRequest] = useState<Request | null>(null);
   const confirm = useCallback<Confirm>(
     (title, action) => setRequest(current => current ?? {title, action}),
@@ -25,12 +26,14 @@ export function ResetConfirmationProvider({
     <context.Provider value={confirm}>
       {children}
       <Sheet title={request?.title ?? ''} visible={!!request} onClose={close}>
+        <AppIcon name="reset" size={40} color={p.danger} />
         <AppText>
           ستعود العدادات المحددة إلى القيم الأصلية. لن تتغير المحفوظات أو
           التنزيلات.
         </AppText>
         <Button
-          label="إعادة"
+          danger
+          label="إعادة العدادات"
           onPress={() => {
             const action = request?.action;
             close();

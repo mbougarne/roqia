@@ -1,0 +1,962 @@
+[
+  {
+    "screen": "01-splash",
+    "theme": "light",
+    "file": "01-splash-light.png",
+    "sha256": "84ff47fb47a3744ada50f72b4ab8f118f66b596d822aac3b2c6b4fc1beb60c51",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "02-welcome",
+    "theme": "light",
+    "file": "02-welcome-light.png",
+    "sha256": "d1eaddeda7c3f1f7fb395dcc5a6a95f4781968c5ed690342b6518dc7da383bc0",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "03-guide-audio",
+    "theme": "light",
+    "file": "03-guide-audio-light.png",
+    "sha256": "f98c0fd52f75c102b32bb8c9653a766342019a017ffbd1ed4ad30e0278b0ee32",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "04-guide-navigation",
+    "theme": "light",
+    "file": "04-guide-navigation-light.png",
+    "sha256": "e49d6b16a39334d35fd52671d4a1e190c2c183a2c37c8f023e4cd45a207c95c7",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "05-guide-adhkar",
+    "theme": "light",
+    "file": "05-guide-adhkar-light.png",
+    "sha256": "168f5593afe35bdc575107b7de4baafea434e5bd8c8bd9dcf6742462de550a5d",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "06-guide-personalize",
+    "theme": "light",
+    "file": "06-guide-personalize-light.png",
+    "sha256": "3bbcbbc01f063449c70298da11b23f4ddd4e3bd48012909e50f1d44e18dace05",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "07-guidance",
+    "theme": "light",
+    "file": "07-guidance-light.png",
+    "sha256": "72dd3ca1c6c36da247f18333a60ce41fb4378e901837f68acb2f2b81bb56b9c4",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "08-ruqya",
+    "theme": "light",
+    "file": "08-ruqya-light.png",
+    "sha256": "a6f9c0573d280a055e928734e7728232832d72cc2805f924ea8a695ef628f109",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "09-adhkar",
+    "theme": "light",
+    "file": "09-adhkar-light.png",
+    "sha256": "fd7543dccf4348ff0b83db47c8132df146973a5e248f68420278df9b54c70911",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "10-morning",
+    "theme": "light",
+    "file": "10-morning-light.png",
+    "sha256": "c5498ae17f045c64be170e884c97b43adc7aaf7e500eb52098d98ad87dda03ed",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "11-evening",
+    "theme": "light",
+    "file": "11-evening-light.png",
+    "sha256": "4757a1af2c4f504941048f7101e971b27ddce16e0171c64ef5a985ed4e97c66b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "12-before-sleep",
+    "theme": "light",
+    "file": "12-before-sleep-light.png",
+    "sha256": "4020a197d19722bad617ef718ae1114bf24198e4c99b5623dde1fb25a7dfe2c8",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "13-dua",
+    "theme": "light",
+    "file": "13-dua-light.png",
+    "sha256": "25a242f7b554056cd908bf4043b143eb0ffc0c53daf889a4d6c65b9ff43225bc",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "14-tasbih",
+    "theme": "light",
+    "file": "14-tasbih-light.png",
+    "sha256": "f5dc8fd995e918aeade18b23432f2e62f9e50fd721a21de8dfb0d95ea9970b31",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "15-more",
+    "theme": "light",
+    "file": "15-more-light.png",
+    "sha256": "90f6407b9ee255a51c6bd176fb8a028d3afbcd4917d65817c9a08edb2ecf8b3b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "16-about",
+    "theme": "light",
+    "file": "16-about-light.png",
+    "sha256": "ee1cf1f27b826b0594042ed880db0e6ffd78ae4952ae1d2a0b7e2d1171ac947b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "17-privacy",
+    "theme": "light",
+    "file": "17-privacy-light.png",
+    "sha256": "808889afb2563ad156037d8d5dff56834da7f4d9afcb748c5b1659e9f8e5e61e",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "18-terms",
+    "theme": "light",
+    "file": "18-terms-light.png",
+    "sha256": "f9405efe7d662355cfbaa1e2ee16d8f3d48b7f505889020007b4ddf9d27eae21",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "19-link-error",
+    "theme": "light",
+    "file": "19-link-error-light.png",
+    "sha256": "eb9aa8d7d2a9383eb904efacafe4c6df8aa46e402a1be50e81f8b9f6b90be27c",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "20-reset-page",
+    "theme": "light",
+    "file": "20-reset-page-light.png",
+    "sha256": "94bcaea5b256dc6ff48277ea7c47a1c6d9d08614d06779cdd1f55cce74ec09e5",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "21-reset-all",
+    "theme": "light",
+    "file": "21-reset-all-light.png",
+    "sha256": "4fa8696e4177816999a17a9e21286be2909b13be842941c644049d2b96869de5",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "22-quran-library",
+    "theme": "light",
+    "file": "22-quran-library-light.png",
+    "sha256": "977ab18743ef8d9739f0c9634bebe85d3799f32b4c7165f45fe4f57a41100bd9",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "23-mushaf-selection",
+    "theme": "light",
+    "file": "23-mushaf-selection-light.png",
+    "sha256": "a2b18cf5b231408d448243b29acc7e14a00a949e2eff50f254379c01d9f96a99",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "24-mushaf-download",
+    "theme": "light",
+    "file": "24-mushaf-download-light.png",
+    "sha256": "ea216a727d8e1f3062560b019745ec3fd7600ac3296a202ff9cf512419d966c9",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "25-warsh-reader",
+    "theme": "light",
+    "file": "25-warsh-reader-light.png",
+    "sha256": "eca3f1b5edb3ed3c6004d816f10a7e0e3861b82fa7bc6d12c294cbd289f3e72f",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "26-hafs-reader-french",
+    "theme": "light",
+    "file": "26-hafs-reader-french-light.png",
+    "sha256": "40a7a4cd0b98e48353d920b0dd8afbce52cd9feb8b2b06b3161359c2a18f4885",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "27-hafs-reader-english",
+    "theme": "light",
+    "file": "27-hafs-reader-english-light.png",
+    "sha256": "c57aabff75cb1c7023dfbac725091df1396049a1f2b4e1957a515abb14be9ab0",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "28-translations",
+    "theme": "light",
+    "file": "28-translations-light.png",
+    "sha256": "2a2b7eab8322cf77671b7b5adc0b94728ef3df0321e06cab57de544f7265edf4",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "29-reading-preferences",
+    "theme": "light",
+    "file": "29-reading-preferences-light.png",
+    "sha256": "28c3aa9f60eb781dde1d40a9f3ab3792e8e2241c1a14839994b66e92c2cfd61e",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "30-quran-search",
+    "theme": "light",
+    "file": "30-quran-search-light.png",
+    "sha256": "ffd53dbd4117d38acf66533a835a40307ab4c82153a23165573233514e17407a",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "31-bookmarks",
+    "theme": "light",
+    "file": "31-bookmarks-light.png",
+    "sha256": "d8457057c4b28c8af1d9075b8b45b9a9d046ee4f1e927002db175edc3fd681db",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "32-content-sources",
+    "theme": "light",
+    "file": "32-content-sources-light.png",
+    "sha256": "5eb5a2b714d9dcc2fd6920790d42d322a809f9710cade1ac85038e382365c5a0",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "33-reciter-selection",
+    "theme": "light",
+    "file": "33-reciter-selection-light.png",
+    "sha256": "1bf6a44f3908d4e8ff05b6cbc5145b847c6dc7923882825438da307a9bbb03ea",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "34-audio-surah-selection",
+    "theme": "light",
+    "file": "34-audio-surah-selection-light.png",
+    "sha256": "8da2c456d1382302d6fb20ca428cf0bc92dde74f23ddbb61165e2001d0275d72",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "35-download-queue",
+    "theme": "light",
+    "file": "35-download-queue-light.png",
+    "sha256": "616206297a1846cdacccd871d8a028c7fbdbdfef786a4c8be96480a78118a902",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "36-offline-audio",
+    "theme": "light",
+    "file": "36-offline-audio-light.png",
+    "sha256": "69c1cd0f0c5c29e7eea832754c5257d4a04db3cfac5a65e187f300598cfb5b71",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "37-storage",
+    "theme": "light",
+    "file": "37-storage-light.png",
+    "sha256": "9e7b48b16acec4cbb683daf703021a638bb725f0d65ce28ae3d0345c9ea2e543",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "38-audio-player",
+    "theme": "light",
+    "file": "38-audio-player-light.png",
+    "sha256": "5db7e94829c5baada4e911221a634c46072234dc74b493cb6ae54bc36fb40049",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "39-prayer-times",
+    "theme": "light",
+    "file": "39-prayer-times-light.png",
+    "sha256": "97750b35f42596a1f639b216fca28d30a2e08a1d973dc2eeda82c81bcbedb1b1",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "40-qibla",
+    "theme": "light",
+    "file": "40-qibla-light.png",
+    "sha256": "e2f82c74abcbac896cbbad9fcae348d2186b8a22ab0bbd4b28b01206ddf75642",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "41-qibla-calibration",
+    "theme": "light",
+    "file": "41-qibla-calibration-light.png",
+    "sha256": "c4e7781ffd43e5ef611510dac9d557e52dd85853a0b75272dec64117fecfa71b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "42-city-location",
+    "theme": "light",
+    "file": "42-city-location-light.png",
+    "sha256": "d3ec81cba113912c42b0e7914b870623ff9ab8fc24e48b84bc5407783b96a45b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "43-adhan-settings",
+    "theme": "light",
+    "file": "43-adhan-settings-light.png",
+    "sha256": "c5c8690534ba257b84104bd56f93f254e4775a6d024c1f6a8557c8f82bf745f6",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "44-adhan-sound",
+    "theme": "light",
+    "file": "44-adhan-sound-light.png",
+    "sha256": "2c271ef38372887666b2363ba7722bed0db436ca8836e41ce8614f76aeaf706f",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "45-prayer-adjustments",
+    "theme": "light",
+    "file": "45-prayer-adjustments-light.png",
+    "sha256": "be9e036924fdbe2ff41508f2b22eeddf6e7b4893f703a2905b3084fd2377f6dd",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "46-reminders",
+    "theme": "light",
+    "file": "46-reminders-light.png",
+    "sha256": "eb71b0cc1b339997affdb7ffa44775de64f39bf7fcfe2bdbcd817474758c1b1c",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "47-app-settings",
+    "theme": "light",
+    "file": "47-app-settings-light.png",
+    "sha256": "7240be96289f64c3a735e386eb252069d584160ab8e6e0dded7930ccde340d27",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "48-download-error",
+    "theme": "light",
+    "file": "48-download-error-light.png",
+    "sha256": "020af982da0304411f8c7b3250e15b8073ad4ce28729253b567a0b1f08c096cb",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "01-splash",
+    "theme": "dark",
+    "file": "01-splash-dark.png",
+    "sha256": "d817b244cdc6cab62c5ac197b17d357c31eaf684c3a9096405cc41c8d30d8a79",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "02-welcome",
+    "theme": "dark",
+    "file": "02-welcome-dark.png",
+    "sha256": "41b4849d4d18d124d48757467f6edc29db9fbb8ab247fc5b090729e5f5ec58b9",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "03-guide-audio",
+    "theme": "dark",
+    "file": "03-guide-audio-dark.png",
+    "sha256": "3f792e4de7cee953bf6d989c4c114e8145ac2eb6f142e2c75f7d32d6adcffaa5",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "04-guide-navigation",
+    "theme": "dark",
+    "file": "04-guide-navigation-dark.png",
+    "sha256": "ef0ee63e9307c5fd96c24e7cc32f9dad17149be15dcf7d3456d214ffa509b545",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "05-guide-adhkar",
+    "theme": "dark",
+    "file": "05-guide-adhkar-dark.png",
+    "sha256": "12ab4f227f738acb23c6ec2abc57160d92b0a8258eb37184a58bb8376381fa00",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "06-guide-personalize",
+    "theme": "dark",
+    "file": "06-guide-personalize-dark.png",
+    "sha256": "eece769962b77515c738499c7fe42c8862edc08fe6bb4d1fa166db7f90cce774",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "07-guidance",
+    "theme": "dark",
+    "file": "07-guidance-dark.png",
+    "sha256": "b2799b053e265facdc8623f34549d69460c0c8c6a5ed8126aaae94d2791fa5d8",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "08-ruqya",
+    "theme": "dark",
+    "file": "08-ruqya-dark.png",
+    "sha256": "241e562d88e02bc35fc665124566a3eddbfe09ae3f1153458d8bcecc3dbfdf01",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "09-adhkar",
+    "theme": "dark",
+    "file": "09-adhkar-dark.png",
+    "sha256": "3cf099533abeae6131aedf02e562c2d3855b894eb969277019a05b9ef7e820a3",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "10-morning",
+    "theme": "dark",
+    "file": "10-morning-dark.png",
+    "sha256": "2b9778a8bed018cb2046dbd2a9c61a5c68dd927a3cf195779c133878f47fceb4",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "11-evening",
+    "theme": "dark",
+    "file": "11-evening-dark.png",
+    "sha256": "b36a651c4394666f3d430afa1fe9b60f0db4acb48bb03c4122273cd407a5e2c2",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "12-before-sleep",
+    "theme": "dark",
+    "file": "12-before-sleep-dark.png",
+    "sha256": "bc98af0792acf105f7c552730ba275d21d16374ce9fee9b59f05094c4a18862f",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "13-dua",
+    "theme": "dark",
+    "file": "13-dua-dark.png",
+    "sha256": "444f2e8ade937a935ca23a26b927eb24738d8796c199319d7077354a917bba0e",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "14-tasbih",
+    "theme": "dark",
+    "file": "14-tasbih-dark.png",
+    "sha256": "67d800b4d439701de36a2ee3f911fd1a1121dddf3e670d44f23cfb779495abed",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "15-more",
+    "theme": "dark",
+    "file": "15-more-dark.png",
+    "sha256": "76a6d1cd2f144f8a584a8c24cbd749436dab5e761342ea8649054e208eda2efb",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "16-about",
+    "theme": "dark",
+    "file": "16-about-dark.png",
+    "sha256": "5f6eb26f88c3b9068676ff4803768a4c423a26fc8a0f393599584a4745a935f9",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "17-privacy",
+    "theme": "dark",
+    "file": "17-privacy-dark.png",
+    "sha256": "3ac72a116b662268c92694998c452c98988211230d06cdbe3dba2b03113a235a",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "18-terms",
+    "theme": "dark",
+    "file": "18-terms-dark.png",
+    "sha256": "aaaa14fa5228057f51a195588923aa010bda4a6cf26c0bf06c14cc5c0945fcc4",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "19-link-error",
+    "theme": "dark",
+    "file": "19-link-error-dark.png",
+    "sha256": "c313faf6fc95c67521d3e506d9f02b90923929632e65d566bf3bf503fc458b38",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "20-reset-page",
+    "theme": "dark",
+    "file": "20-reset-page-dark.png",
+    "sha256": "d0c3bae8581f7e19eebe4bd473fcb99d1ad19b05d64ab9eb47cb2225b291acf9",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "21-reset-all",
+    "theme": "dark",
+    "file": "21-reset-all-dark.png",
+    "sha256": "a20cbf87f179e35757371b06d58051f043515fdd833b378d9a5e13629f1f54f0",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "22-quran-library",
+    "theme": "dark",
+    "file": "22-quran-library-dark.png",
+    "sha256": "0b22e3239586abb14805561e84d981f3f2eb7ac8141c166a2e3a4c21eac2bd43",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "23-mushaf-selection",
+    "theme": "dark",
+    "file": "23-mushaf-selection-dark.png",
+    "sha256": "6468f7eed797ac6124dd47e061c72f3c6f9615d16554c07b50b2710f5de66fff",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "24-mushaf-download",
+    "theme": "dark",
+    "file": "24-mushaf-download-dark.png",
+    "sha256": "80b54e66c3878b41d71588bb38e899fa19521fa2c9d72e0ea5f404b2206efdb6",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "25-warsh-reader",
+    "theme": "dark",
+    "file": "25-warsh-reader-dark.png",
+    "sha256": "efb24f3f11b8a7c4f951c1142a07dc25da2412dda494df288382cbf28fd11583",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "26-hafs-reader-french",
+    "theme": "dark",
+    "file": "26-hafs-reader-french-dark.png",
+    "sha256": "336f350c40f6234a8246c2a0ac034c3e699c55f8359547184c5635a469775a65",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "27-hafs-reader-english",
+    "theme": "dark",
+    "file": "27-hafs-reader-english-dark.png",
+    "sha256": "ef5b98cef487083540900476cb96c4db6bd97e224d4715010053db115d4f9e23",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "28-translations",
+    "theme": "dark",
+    "file": "28-translations-dark.png",
+    "sha256": "797e87058c5cc3b3335a1f70b5affd20309ca01e5bd0472d06fa1f8730ed1c17",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "29-reading-preferences",
+    "theme": "dark",
+    "file": "29-reading-preferences-dark.png",
+    "sha256": "d09be926f08d6cb7f55b9c0d306ab4e71091c460317aedb7ee448035e1de8c1b",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "30-quran-search",
+    "theme": "dark",
+    "file": "30-quran-search-dark.png",
+    "sha256": "757c853d4d6ae7f4a0dc0b0c22d103abae6d94b8762911edcb43a3d2f1b43ee5",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "31-bookmarks",
+    "theme": "dark",
+    "file": "31-bookmarks-dark.png",
+    "sha256": "6542ecf07b421a54704c140313752ed1d098b18adf6a90a7fadf42371acdb870",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "32-content-sources",
+    "theme": "dark",
+    "file": "32-content-sources-dark.png",
+    "sha256": "b7d6f053dcd931867cf65ec984ed6b2aa454f0d45bda6b4e1762d90884808392",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "33-reciter-selection",
+    "theme": "dark",
+    "file": "33-reciter-selection-dark.png",
+    "sha256": "e3ad33414fe630e71d2996dbe924ca23d9d363ca6081f4c22da4bb91a1288df6",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "34-audio-surah-selection",
+    "theme": "dark",
+    "file": "34-audio-surah-selection-dark.png",
+    "sha256": "ee6038e32dcfa82fbd48e653321734eb0705a197fbabc3782e1522f9873f8c77",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "35-download-queue",
+    "theme": "dark",
+    "file": "35-download-queue-dark.png",
+    "sha256": "d5023058bf71cc2d55e3b6e9dae459612ab595cb2ac8da3ca6abef831603249a",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "36-offline-audio",
+    "theme": "dark",
+    "file": "36-offline-audio-dark.png",
+    "sha256": "10f9490dbf17e5247b12d133aa33614406d19f4da5736e0c77372f3be9dd1c2d",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "37-storage",
+    "theme": "dark",
+    "file": "37-storage-dark.png",
+    "sha256": "696b4a40b4e5d41619338e9f45f88862667232bf1b1cb7ca5d5eafe172cb8bf6",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "38-audio-player",
+    "theme": "dark",
+    "file": "38-audio-player-dark.png",
+    "sha256": "851d2cbc80fa96aab3d958971d8f5d7eb42aeb9db723798e595d4e452a4d4b7a",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "39-prayer-times",
+    "theme": "dark",
+    "file": "39-prayer-times-dark.png",
+    "sha256": "8b18f52efb0fc994193cec7ce9388635547061d9f26d79c044e873f38fefcc54",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "40-qibla",
+    "theme": "dark",
+    "file": "40-qibla-dark.png",
+    "sha256": "c02cfa180324187969397281a4d68ecf50586c7076125cee14b2e6c7127e43e0",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "41-qibla-calibration",
+    "theme": "dark",
+    "file": "41-qibla-calibration-dark.png",
+    "sha256": "daab4e0aef78d9e9c305df165a4be68453125dc989eafb0300e777bae189234f",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "42-city-location",
+    "theme": "dark",
+    "file": "42-city-location-dark.png",
+    "sha256": "abbf23d6f393686fc42a675f1eb58971bf32892160618b9e6591b26c6f5abfde",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "43-adhan-settings",
+    "theme": "dark",
+    "file": "43-adhan-settings-dark.png",
+    "sha256": "b7689f8cf2fe2c10f31a6e1db9c2aacde4cc9bfa0e0155b5579b8c0de8c69b68",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "44-adhan-sound",
+    "theme": "dark",
+    "file": "44-adhan-sound-dark.png",
+    "sha256": "8a61bf530d142389c512b0f9e0ce43c1484b4bcf72503ae6e2987b46fbe1c3dd",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "45-prayer-adjustments",
+    "theme": "dark",
+    "file": "45-prayer-adjustments-dark.png",
+    "sha256": "d27aedcb144f6b301972420f0cf03bce44c9581f119db7c9b21f8b4db9e1aaca",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "46-reminders",
+    "theme": "dark",
+    "file": "46-reminders-dark.png",
+    "sha256": "a869a507e54007e620692b26ab29373ddb4a3b93c965cfce6a99b9c2ccd0fcf0",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "47-app-settings",
+    "theme": "dark",
+    "file": "47-app-settings-dark.png",
+    "sha256": "f4177e8616811cdd80662dbaf0108e3c7bc7627bf861bd28d14dced5125f0578",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "48-download-error",
+    "theme": "dark",
+    "file": "48-download-error-dark.png",
+    "sha256": "12efd1c5b1949bb3b1e3f574e3d15cae4f902d807b8de6079d1621d82088edec",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  }
+]

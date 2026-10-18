@@ -1,0 +1,6 @@
+<resources>
+    <color name="roqia_launch_background">#062B23</color>
+    <color name="roqia_launch_text">#F7F5EF</color>
+    <color name="roqia_launch_accent">#D9BA73</color>
+    <bool name="roqia_launch_light">false</bool>
+</resources>

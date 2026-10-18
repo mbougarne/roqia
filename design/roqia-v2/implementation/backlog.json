@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 10 merged in PR #13. Phase 11 12-ticket functional batch implemented with Android/API 36 and automated evidence; broader device/source and deferred iOS acceptance remain tracked per ticket. Phase 12: 12 visual tickets. Phase 13: 6 Android release-readiness tickets plus earlier acceptance gates.",
+  "status": "Phase 11 merged in PR #14. Phase 12 implements all 12 visual tickets together with 96 normal Android light/dark captures, regression and saved-data evidence. Owner visual review and corrections are pending. Phase 13 has not started; earlier device/source acceptance gates remain open.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -1701,9 +1701,9 @@
       "touchpoints": "src/design/ui.tsx; src/navigation/MainTabNavigation.tsx; src/features/prayer/Screens.tsx",
       "executionOrder": 45,
       "verifiedOn": "2026-10-18",
-      "evidence": "../../../docs/implementation/phase-7/README.md",
-      "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
-      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open.",
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open.",
       "deliveryPhase": 12
     },
     {
@@ -1733,15 +1733,15 @@
       "touchpoints": "src/features/prayer/Screens.tsx; src/features/prayer/visuals.tsx",
       "executionOrder": 46,
       "verifiedOn": "2026-10-18",
-      "evidence": "../../../docs/implementation/phase-7/README.md",
-      "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
-      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open.",
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open.",
       "deliveryPhase": 12
     },
     {
       "id": "RQ-053",
       "title": "Match calibration and city selection",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-052"
@@ -1765,12 +1765,16 @@
       "scope": "Rebuild illustrated calibration steps, city search/selection list, selected-state indicators and contextual location action. Keep manual coordinate/timezone fallback, denial, stale reading and timeout states accessible.",
       "touchpoints": "src/features/prayer/Screens.tsx",
       "executionOrder": 47,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-054",
       "title": "Match adhan and calculation preferences",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-053"
@@ -1795,12 +1799,16 @@
       "scope": "Replace stacked generic buttons with reference-grouped per-prayer controls, recording rows/previews and compact adjustment controls. Match layout in both themes; show actual unavailable-recording/full-adhan states until RQ-040/RQ-042 are implemented. Never turn a screenshot sample into a selectable recording.",
       "touchpoints": "src/features/prayer/Screens.tsx",
       "executionOrder": 48,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-055",
       "title": "Match launch, onboarding and guidance",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-054"
@@ -1829,12 +1837,16 @@
       "scope": "Restore hero artwork, step indicators, compact typography, content grouping and bottom actions. Preserve first-run/revisit flow, skip/back, saved preferences and pending deep links.",
       "touchpoints": "src/screens/EducationScreens.tsx; src/App.tsx",
       "executionOrder": 49,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-056",
       "title": "Match devotional home, readers and counters",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-055"
@@ -1864,12 +1876,16 @@
       "scope": "Match home hero/action layout, illustrated category cards, reading surfaces, progress/counter controls, tasbih and page-reset sheet. Preserve exact devotional text, stable IDs, counts, playback and scoped reset; include bookmarks/search detail routes using the same visual language.",
       "touchpoints": "src/screens; src/features/devotional; src/features/audio",
       "executionOrder": 50,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-057",
       "title": "Match More, settings, reminders and information",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-056"
@@ -1899,12 +1915,16 @@
       "scope": "Restore grouped menu rows, icons, theme/text controls, reminder time controls, About/legal typography, unavailable-link recovery and global-reset sheet. Preserve settings, reminder schedules and reset scope.",
       "touchpoints": "src/screens/FoundationScreens.tsx; src/screens/AboutScreen; src/features/settings",
       "executionOrder": 51,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-058",
       "title": "Match Quran library and mushaf downloads",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-057"
@@ -1929,12 +1949,16 @@
       "scope": "Match library header/continue-reading card, surah rows, Warsh/Hafs choice cards and selected-pack download composition. Use real edition metadata, file sizes and progress; preserve installed content and bookmarks when switching edition.",
       "touchpoints": "src/features/quran/LibraryScreens.tsx",
       "executionOrder": 52,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-059",
       "title": "Match Quran readers, translations and preferences",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-058"
@@ -1961,12 +1985,16 @@
       "scope": "Match reader chrome, verse surfaces/actions, bilingual translation blocks, translation download rows and reading controls. Keep exact King Fahd Warsh text with matching font, Hafs source text, separate Western badges and LTR French/English. Preserve independent edition positions; unavailable translation states remain explicit.",
       "touchpoints": "src/features/quran/ReaderScreen.tsx; src/features/quran/DetailScreens.tsx",
       "executionOrder": 53,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-060",
       "title": "Match Quran search, bookmarks and sources",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-059"
@@ -1991,12 +2019,16 @@
       "scope": "Match search field/filter/result hierarchy, bookmark groups and source/edition cards. Include empty/no-match/missing-pack recovery and user-controlled reporting; retain canonical locators and truthful provenance.",
       "touchpoints": "src/features/quran/DetailScreens.tsx",
       "executionOrder": 54,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-061",
       "title": "Match reciters, audio selection and player",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-060"
@@ -2022,12 +2054,16 @@
       "scope": "Match reciter cards, surah checkboxes, selected-size summary, offline library, mini-player and full-player composition. Retain actual supported controls, recording identity, download selection, seek/repeat/speed/timer and media-session ownership. No fake duration or recording.",
       "touchpoints": "src/features/quran/AudioScreens.tsx; src/features/audio/Player.tsx",
       "executionOrder": 55,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     },
     {
       "id": "RQ-062",
       "title": "Match queue, storage and download recovery",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M7-UI",
       "dependsOn": [
         "RQ-061"
@@ -2052,7 +2088,11 @@
       "scope": "Match grouped progress rows, storage summary/categories, deletion confirmation and paused/failed-download recovery. Preserve durable job state, real sizes, resume/retry/cancel and active-file safety.",
       "touchpoints": "src/features/downloads/Screens.tsx",
       "executionOrder": 56,
-      "deliveryPhase": 12
+      "deliveryPhase": 12,
+      "evidence": "../../../docs/implementation/phase-12/README.md",
+      "verifiedOn": "2026-10-18",
+      "progress": "Implemented in the integrated Phase 12 batch. All owned screens have light/dark Android comparisons within the 96-capture gallery. Automated regression and saved-data checks pass; intentional visual/data/platform differences are recorded.",
+      "remaining": "Owner visual review and corrections; broader accessibility, physical-device and deferred iOS acceptance remain open."
     }
   ],
   "executionPlan": "implementation/IMPLEMENTATION-ORDER.md",
@@ -2135,7 +2175,7 @@
     {
       "phase": 12,
       "title": "Whole-app visual polish",
-      "status": "planned",
+      "status": "in_progress",
       "tickets": [
         "RQ-051",
         "RQ-052",

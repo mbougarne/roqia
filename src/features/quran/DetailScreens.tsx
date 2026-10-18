@@ -1,6 +1,22 @@
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
+import {
+  Banner,
+  Disclosure,
+  Group,
+  Ornament,
+  RadioRow,
+  Range,
+  SearchField,
+  Segments,
+  SettingRow,
+  Toggle,
+  NumberBadge,
+  rtlRow,
+} from '../../design/components';
+import {Illustration} from '../../design/Illustration';
 import React, {useEffect, useRef, useState} from 'react';
 import {
+  IconButton,
   AppText,
   Button,
   Card,
@@ -30,6 +46,10 @@ import {type Bookmark} from '../../repositories/models';
 import {removeBookmark} from '../devotional/bookmarks';
 import {noteData} from '../../data';
 export function QuranPreferencesScreen({route, navigation}: any) {
+  const p = usePalette();
+  const [preview, setPreview] = useState<{text: string; font: string} | null>(
+    null,
+  );
   const runtime = useQuran(),
     id: EditionId = route.params.editionId,
     [prefs, setPrefs] = useState<ReaderPreferences>(readerDefaults),
@@ -46,12 +66,37 @@ export function QuranPreferencesScreen({route, navigation}: any) {
       .catch(() => setFailed(true));
   };
   useEffect(load, [runtime, id]);
+  // Translation selection is saved on its own screen; retain draft typography
+  // while refreshing that independently persisted field on return.
+  useOnFocus(() => {
+    void runtime
+      .preferences(id)
+      .then(saved =>
+        setPrefs(draft => ({...draft, translationId: saved.translationId})),
+      )
+      .catch(() => setFailed(true));
+  }, [runtime, id]);
+  useEffect(() => {
+    let active = true;
+    setPreview(null);
+    const pack = runtime.text(id);
+    if (pack)
+      void runtime
+        .chapter(pack, 1)
+        .then(async chapter => ({
+          text: chapter.verses[0].text,
+          font: await runtime.font(pack, chapter),
+        }))
+        .then(value => {
+          if (active) setPreview(value);
+        })
+        .catch(() => undefined);
+    return () => {
+      active = false;
+    };
+  }, [runtime, id]);
   const change = (patch: Partial<ReaderPreferences>) =>
-    act(
-      runtime
-        .savePreferences(id, {...prefs, ...patch})
-        .then(() => setPrefs({...prefs, ...patch})),
-    );
+    setPrefs(p => ({...p, ...patch}));
   return (
     <Page title="إعدادات القراءة" onBack={() => navigation.goBack()}>
       <AppText>{editionById(id).title} · إعدادات مستقلة عن حجم الواجهة</AppText>
@@ -64,58 +109,89 @@ export function QuranPreferencesScreen({route, navigation}: any) {
         <StateView busy title="جارٍ الاسترجاع" />
       ) : (
         <>
-          <AppText role="sectionTitle">حجم نص القرآن</AppText>
-          {[22, 26, 30, 34].map(size => (
-            <Button
-              key={size}
-              label={number(size)}
-              selected={prefs.size === size}
-              secondary={prefs.size !== size}
-              onPress={() => change({size})}
+          {preview && (
+            <Card>
+              <AppText role="caption">معاينة النص من المصحف المختار</AppText>
+              <Text
+                selectable
+                style={{
+                  fontFamily: preview.font,
+                  fontSize: prefs.size,
+                  lineHeight: prefs.size * prefs.lineHeight,
+                  color: p.textPrimary,
+                  textAlign: 'center',
+                  writingDirection: 'rtl',
+                }}>
+                {preview.text}
+              </Text>
+            </Card>
+          )}
+          <Card>
+            <Range
+              label="حجم نص القرآن"
+              min={22}
+              max={34}
+              step={4}
+              value={prefs.size}
+              onChange={size => change({size})}
             />
-          ))}
-          <AppText role="sectionTitle">تباعد الأسطر</AppText>
-          {[1.7, 1.9, 2.2].map(lineHeight => (
-            <Button
-              key={lineHeight}
-              label={ltr(String(lineHeight))}
-              selected={prefs.lineHeight === lineHeight}
-              secondary={prefs.lineHeight !== lineHeight}
-              onPress={() => change({lineHeight})}
+            <Range
+              label="تباعد الأسطر"
+              min={1.7}
+              max={2.2}
+              step={0.1}
+              stops={[1.7, 1.9, 2.2]}
+              value={prefs.lineHeight}
+              onChange={lineHeight => change({lineHeight})}
             />
-          ))}
+          </Card>
+          <Card>
+            <Ornament title="طريقة العرض" />
+            <Segments
+              value={prefs.view}
+              options={[
+                {value: 'verses', label: 'آيات'},
+                {value: 'continuous', label: 'قراءة متصلة'},
+              ]}
+              onChange={view => change({view})}
+            />
+          </Card>
+          <Group>
+            <SettingRow
+              title="ترجمة المعاني"
+              icon="translate"
+              onPress={() =>
+                navigation.navigate('QuranTranslations', {editionId: id})
+              }
+            />
+            <SettingRow
+              title="شكل الأرقام"
+              detail="0123456789"
+              icon="text-size"
+            />
+            <SettingRow title="إبقاء الشاشة مضاءة" icon="sun">
+              <Toggle
+                label="إبقاء الشاشة مضاءة"
+                value={prefs.keepAwake}
+                disabled={!supportsKeepAwake()}
+                onChange={keepAwake => change({keepAwake})}
+              />
+            </SettingRow>
+          </Group>
           <Button
-            label="آيات منفصلة"
-            selected={prefs.view === 'verses'}
-            secondary={prefs.view !== 'verses'}
-            onPress={() => change({view: 'verses'})}
-          />
-          <Button
-            label="قراءة متصلة"
-            selected={prefs.view === 'continuous'}
-            secondary={prefs.view !== 'continuous'}
-            onPress={() => change({view: 'continuous'})}
-          />
-          <Button
-            label={
-              prefs.keepAwake
-                ? 'إبقاء الشاشة مضاءة: مفعل'
-                : 'إبقاء الشاشة مضاءة: متوقف'
+            label="حفظ"
+            onPress={() =>
+              act(
+                runtime
+                  .savePreferences(id, prefs)
+                  .then(() => navigation.goBack()),
+              )
             }
-            selected={prefs.keepAwake}
-            disabled={!supportsKeepAwake()}
-            onPress={() => change({keepAwake: !prefs.keepAwake})}
           />
-          <AppText role="caption">
-            يعمل إبقاء الشاشة مضاءة فقط أثناء ظهور القارئ.{' '}
-            {supportsKeepAwake() ? '' : 'غير متاح على هذا النظام بعد.'}
-          </AppText>
           <Button
             secondary
-            label="اختيار الترجمة"
-            onPress={() =>
-              navigation.navigate('QuranTranslations', {editionId: id})
-            }
+            label="استعادة الافتراضي"
+            onPress={() => setPrefs({...readerDefaults})}
           />
         </>
       )}
@@ -140,12 +216,15 @@ export function TranslationScreen({route, navigation}: any) {
     );
   const choices = runtime.catalog.translations.filter(t => t.editionId === id);
   return (
-    <Page title="ترجمات المعاني" onBack={() => navigation.goBack()}>
-      <AppText>الترجمة شرح للمعاني، وليست بديلا للنص العربي.</AppText>
-      <Button
-        label="دون ترجمة"
+    <Page title="ترجمة المعاني" onBack={() => navigation.goBack()}>
+      <Group>
+        <SettingRow title={e.title} icon="book" />
+      </Group>
+      <AppText role="caption">اختر لغة لعرض المعاني بجانب النص</AppText>
+      <RadioRow
+        title="دون ترجمة"
+        icon="translate"
         selected={!selected}
-        secondary={!!selected}
         onPress={() => select(null)}
       />
       {error && (
@@ -166,26 +245,18 @@ export function TranslationScreen({route, navigation}: any) {
         />
       ) : (
         choices.map(t => (
-          <Card key={t.id}>
-            <AppText
-              role="sectionTitle"
-              style={{writingDirection: 'ltr', textAlign: 'left'}}>
-              {t.language === 'fr' ? 'Français' : 'English'}
-            </AppText>
-            <AppText style={{writingDirection: 'ltr', textAlign: 'left'}}>
-              {t.title}
-            </AppText>
-            <AppText role="caption">Tanzil · حفص عن عاصم</AppText>
-            <AppText>
-              {runtime.installed(t.pack)
-                ? 'محفوظة دون اتصال'
-                : ltr(bytes(t.pack.assets.reduce((n, a) => n + a.bytes, 0)))}
-            </AppText>
-            <Button
-              label={`${runtime.installed(t.pack) ? 'اختيار' : 'تنزيل'} ${t.language === 'fr' ? 'الفرنسية' : 'الإنجليزية'}`}
-              disabled={!ready || error}
+          <Group key={t.id}>
+            <RadioRow
+              title={t.language === 'fr' ? 'Français' : 'English'}
+              detail={
+                t.title +
+                ' · ' +
+                (runtime.installed(t.pack)
+                  ? 'محفوظة دون اتصال'
+                  : bytes(t.pack.assets.reduce((n, a) => n + a.bytes, 0)))
+              }
+              icon="translate"
               selected={selected === t.id}
-              secondary={selected !== t.id}
               onPress={() =>
                 runtime.installed(t.pack)
                   ? select(t.id)
@@ -196,14 +267,15 @@ export function TranslationScreen({route, navigation}: any) {
                     )
               }
             />
-            <Button
-              secondary
-              label="معلومات الترجمة"
+            <SettingRow
+              title="معلومات الترجمة"
+              icon="info"
               onPress={() => setNotice(t.notice)}
             />
-          </Card>
+          </Group>
         ))
       )}
+      <Banner text="الترجمة بيان للمعاني، والنص القرآني يبقى بالعربية." />
       {choices.length > 0 && (
         <Button
           secondary
@@ -275,11 +347,18 @@ export function QuranSearchScreen({navigation}: any) {
   };
   return (
     <Page title="البحث في القرآن" onBack={() => navigation.goBack()}>
-      <Input
+      <SearchField
         label="اسم السورة أو نص الآية"
         value={query}
-        onChangeText={setQuery}
+        onChange={setQuery}
       />
+      <Group>
+        <SettingRow
+          title={editionById(id).title}
+          icon="book"
+          onPress={() => navigation.navigate('QuranEditions')}
+        />
+      </Group>
       {!query &&
         recent.map(q => (
           <Button key={q} secondary label={q} onPress={() => setQuery(q)} />
@@ -310,7 +389,7 @@ export function QuranSearchScreen({navigation}: any) {
         />
       )}
       {!!query && <AppText role="sectionTitle">السور</AppText>}
-      {searchChapters(query).map(c => (
+      {(query ? searchChapters(query) : []).map(c => (
         <Row
           key={c.number}
           title={`${number(c.number)} · ${c.name}`}
@@ -372,7 +451,17 @@ export function QuranBookmarksScreen({navigation}: any) {
   };
   useOnFocus(refresh, [runtime]);
   return (
-    <Page title="علامات القراءة" onBack={() => navigation.goBack()}>
+    <Page title="العلامات المحفوظة" onBack={() => navigation.goBack()}>
+      <Segments
+        value="quran"
+        options={[
+          {value: 'quran', label: 'القرآن'},
+          {value: 'devotional', label: 'الأذكار والأدعية'},
+        ]}
+        onChange={v => {
+          if (v === 'devotional') navigation.navigate('Bookmarks');
+        }}
+      />
       {failed ? (
         <StateView
           title="تعذر قراءة العلامات"
@@ -387,25 +476,23 @@ export function QuranBookmarksScreen({navigation}: any) {
         rows.map(
           b =>
             b.kind === 'quran-verse' && (
-              <Card key={b.bookmarkId}>
-                <AppText>{editionsTitle(b.editionId)}</AppText>
-                <AppText>
-                  {ltr(
-                    `${number(b.surah)}:${number(b.verse)} · ${b.packVersion}`,
-                  )}
-                </AppText>
-                <Button
-                  label="فتح موضع القراءة"
+              <Group key={b.bookmarkId}>
+                <SettingRow
+                  title={chapters[b.surah - 1].name}
+                  detail={
+                    editionsTitle(b.editionId) + ' · الآية ' + number(b.verse)
+                  }
+                  icon="bookmark"
                   onPress={() => navigation.navigate('QuranReader', b)}
                 />
-                <Button
-                  secondary
+                <IconButton
+                  name="trash"
                   label="إزالة العلامة"
                   onPress={() =>
                     act(removeBookmark(b.bookmarkId).then(refresh))
                   }
                 />
-              </Card>
+              </Group>
             ),
         )
       )}
@@ -427,9 +514,10 @@ export function QuranSourceScreen({route, navigation}: any) {
   const email = noteData.email;
   return (
     <Page title="معلومات المصحف" onBack={() => navigation.goBack()}>
-      <Card>
-        <AppText role="sectionTitle">{e.title}</AppText>
-        <AppText>{e.publisher}</AppText>
+      <Group>
+        <SettingRow title={e.title} detail={e.publisher} icon="book" />
+      </Group>
+      <Disclosure title="تفاصيل النسخة">
         <AppText
           selectable
           style={{writingDirection: 'ltr', textAlign: 'left'}}>
@@ -441,12 +529,10 @@ export function QuranSourceScreen({route, navigation}: any) {
           {e.numbering}
         </AppText>
         <AppText>
-          {t ? `الإصدار ${ltr(t.pack.version)}` : 'الحزمة غير منشورة بعد'}
+          {t ? 'الإصدار ' + t.pack.version : 'الحزمة غير منشورة بعد'}
         </AppText>
-        <AppText>
-          لا تعني إتاحة المصدر اعتماد التطبيق أو مراجعته من الناشر.
-        </AppText>
-      </Card>
+      </Disclosure>
+      <Banner text="لا تعني إتاحة المصدر اعتماد التطبيق أو مراجعته من الناشر." />
       <Button
         secondary
         label="موقع المصدر"

@@ -1,6 +1,21 @@
 import React, {useState} from 'react';
-import {Alert} from 'react-native';
+import {Alert, Pressable, View} from 'react-native';
 import {
+  Banner,
+  FeatureCard,
+  NumberBadge,
+  RadioRow,
+  SearchField,
+  Group,
+  SettingRow,
+  Ornament,
+  rtlRow,
+} from '../../design/components';
+import {Illustration} from '../../design/Illustration';
+import {
+  AppIcon,
+  IconButton,
+  usePalette,
   AppText,
   Button,
   Card,
@@ -12,6 +27,7 @@ import {
 import {number, bytes, ltr} from '../../design/format';
 import {
   editions,
+  chapters,
   editionById,
   searchChapters,
   type EditionId,
@@ -28,6 +44,7 @@ export const act = (promise: Promise<unknown>) => {
 };
 export function QuranLibraryScreen({navigation}: any) {
   const {runtime, ready, error, retry} = useLibrary();
+  const p = usePalette();
   const [id, setId] = useState<EditionId>(editions[0].id),
     [resume, setResume] = useState<Locator | null>(null),
     [query, setQuery] = useState('');
@@ -50,13 +67,29 @@ export function QuranLibraryScreen({navigation}: any) {
     text = runtime.text(id),
     installed = text && runtime.installed(text.pack);
   return (
-    <Page title="القرآن الكريم">
-      <Row
-        title={edition.title}
-        detail="تغيير المصحف"
-        icon="book"
-        onPress={() => navigation.navigate('QuranEditions')}
-      />
+    <Page
+      title="القرآن الكريم"
+      actions={
+        <View style={rtlRow}>
+          <IconButton
+            name="search"
+            label="البحث في القرآن"
+            onPress={() => navigation.navigate('QuranSearch')}
+          />
+          <IconButton
+            name="bookmark"
+            label="علامات القراءة"
+            onPress={() => navigation.navigate('QuranBookmarks')}
+          />
+        </View>
+      }>
+      <Group>
+        <SettingRow
+          title={edition.title}
+          icon="book"
+          onPress={() => navigation.navigate('QuranEditions')}
+        />
+      </Group>
       {error ? (
         <StateView
           title="تعذر فتح المكتبة"
@@ -81,36 +114,30 @@ export function QuranLibraryScreen({navigation}: any) {
         <AppText>المصحف محفوظ على جهازك</AppText>
       )}
       {resume && (
-        <Button
-          label={`متابعة القراءة · ${number(resume.surah)}:${number(resume.verse)}`}
+        <FeatureCard
+          title="متابعة القراءة"
+          detail={
+            chapters[resume.surah - 1].name + ' · الآية ' + number(resume.verse)
+          }
+          art="quran-book"
           onPress={() => navigation.navigate('QuranReader', resume)}
         />
       )}
-      <Button
-        secondary
-        label="البحث في القرآن"
-        icon="search"
-        onPress={() => navigation.navigate('QuranSearch')}
-      />
-      <Button
-        secondary
-        label="علامات القراءة"
-        icon="bookmark"
-        onPress={() => navigation.navigate('QuranBookmarks')}
-      />
-      <Button
-        secondary
-        label="القراء والتنزيلات الصوتية"
-        icon="download"
-        onPress={() => navigation.navigate('QuranAudio')}
-      />
-      <Input label="البحث عن سورة" value={query} onChangeText={setQuery} />
+      <Ornament title="السور" />
+      <SearchField label="البحث عن سورة" value={query} onChange={setQuery} />
       {searchChapters(query).map(c => (
-        <Row
+        <Pressable
           key={c.number}
-          title={`${number(c.number)} · ${c.name}`}
-          detail={`${number(edition.riwaya === 'warsh' ? c.warshVerses : c.hafsVerses)} آيات`}
-          icon="book"
+          accessibilityRole="button"
+          accessibilityLabel={number(c.number) + ' · ' + c.name}
+          style={{
+            ...rtlRow,
+            minHeight: 60,
+            paddingHorizontal: 10,
+            paddingVertical: 4,
+            borderBottomWidth: 0.5,
+            borderColor: p.borderSubtle,
+          }}
           onPress={() =>
             !installed
               ? navigation.navigate('QuranDownload', {editionId: id})
@@ -125,9 +152,26 @@ export function QuranLibraryScreen({navigation}: any) {
                       }
                     : {}),
                 })
-          }
-        />
+          }>
+          <NumberBadge value={c.number} />
+          <View style={{flex: 1}}>
+            <AppText role="bodyStrong">{c.name}</AppText>
+            <AppText role="caption" style={{color: p.textSecondary}}>
+              {edition.title} ·{' '}
+              {number(
+                edition.riwaya === 'warsh' ? c.warshVerses : c.hafsVerses,
+              )}{' '}
+              آيات
+            </AppText>
+          </View>
+          <AppIcon name={installed ? 'check' : 'download'} size={22} />
+        </Pressable>
       ))}
+      <Row
+        title="القراء والتنزيلات الصوتية"
+        icon="headphones"
+        onPress={() => navigation.navigate('QuranAudio')}
+      />
       {!searchChapters(query).length && (
         <StateView title="لا توجد سورة مطابقة" />
       )}
@@ -152,47 +196,26 @@ export function EditionScreen({navigation}: any) {
           action={{label: 'إعادة المحاولة', onPress: retry}}
         />
       )}
-      {editions.map(e => {
-        const t = runtime.text(e.id),
-          installed = t && runtime.installed(t.pack);
-        return (
-          <Card key={e.id}>
-            <AppText role="sectionTitle">{e.title}</AppText>
-            <AppText role="caption">
-              {e.recommended ? 'الخيار المقترح · ' : ''}
-              {e.publisher}
-            </AppText>
-            <AppText>
-              {installed
-                ? 'جاهز دون اتصال'
-                : t
-                  ? 'متاح للتنزيل'
-                  : 'غير متاح للتنزيل بعد'}
-            </AppText>
-            <AppText role="caption">
-              {t
-                ? 'نص قابل للقراءة والبحث مع الخط المطابق'
-                : 'تتوفر القراءة بعد إتمام مراجعة المصدر والخط.'}
-            </AppText>
-            <Button
-              label={selected === e.id ? 'المصحف المفضل' : 'اختيار هذه الرواية'}
-              selected={selected === e.id}
-              secondary={selected !== e.id}
-              onPress={() =>
-                act(runtime.select(e.id).then(() => setSelected(e.id)))
-              }
-            />
-            <Button
-              secondary
-              label="تفاصيل المصحف والتنزيل"
-              disabled={!ready || error}
-              onPress={() =>
-                navigation.navigate('QuranDownload', {editionId: e.id})
-              }
-            />
-          </Card>
-        );
-      })}
+      {editions.map(e => (
+        <RadioRow
+          key={e.id}
+          title={e.title}
+          detail={e.publisher}
+          selected={selected === e.id}
+          onPress={() =>
+            act(runtime.select(e.id).then(() => setSelected(e.id)))
+          }
+        />
+      ))}
+      <Banner text="يمكنك إضافة المصحف الآخر لاحقا؛ لكل رواية موضع قراءة مستقل." />
+      <Illustration name="download" height={180} />
+      <Button
+        label="متابعة"
+        disabled={!ready || error || !selected}
+        onPress={() =>
+          navigation.navigate('QuranDownload', {editionId: selected})
+        }
+      />
       <Button
         secondary
         label="العودة دون تنزيل"
@@ -206,33 +229,60 @@ export function MushafDownloadScreen({route, navigation}: any) {
     e = editionById(route.params.editionId),
     t = runtime.text(e.id),
     installed = t && runtime.installed(t.pack);
+  const size = t
+    ? bytes(t.pack.assets.reduce((sum, a) => sum + a.bytes, 0))
+    : '—';
   return (
-    <Page title="تنزيل المصحف" onBack={() => navigation.goBack()}>
-      <AppText role="sectionTitle">{e.title}</AppText>
-      <AppText>{e.publisher}</AppText>
+    <Page title="تحميل المصحف" onBack={() => navigation.goBack()}>
+      <FeatureCard
+        title={e.title}
+        detail={e.publisher + ' · 114 سورة'}
+        art="quran-book"
+      />
       {error ? (
         <StateView
           title="تعذر فتح التنزيل"
           action={{label: 'إعادة المحاولة', onPress: retry}}
         />
       ) : !t ? (
-        <StateView
-          title="المصحف غير متاح للتنزيل بعد"
-          description="لا يوجد ملف تنزيل متاح لهذا الإصدار حاليا."
-        />
+        <StateView title="المصحف غير متاح للتنزيل بعد" />
       ) : (
-        <Card>
-          <AppText>
-            {installed
-              ? 'جاهز دون اتصال'
-              : `حجم الحزمة: ${ltr(bytes(t.pack.assets.reduce((s, a) => s + a.bytes, 0)))}`}
-          </AppText>
-          <AppText role="caption">
-            النص والخط المطابق محفوظان معا. تنطبق سياسة الشبكة المختارة في
-            الإعدادات.
-          </AppText>
+        <>
+          <Group>
+            <SettingRow
+              title="المصحف والخط"
+              detail={size}
+              icon="book"
+              onPress={() =>
+                navigation.navigate('QuranSource', {editionId: e.id})
+              }
+            />
+          </Group>
+          <Ornament title="ترجمة المعاني" />
+          {e.riwaya === 'hafs' ? (
+            <Row
+              title="اختيار الترجمة"
+              detail="Français · English · دون ترجمة"
+              icon="translate"
+              onPress={() =>
+                navigation.navigate('QuranTranslations', {editionId: e.id})
+              }
+            />
+          ) : (
+            <Banner text="الترجمات متاحة مع حفص؛ لا نربطها بآيات ورش دون مطابقة." />
+          )}
+          <Group>
+            <SettingRow
+              title="سياسة التنزيل"
+              detail="حسب اختيار Wi-Fi في الإعدادات"
+              icon="wifi"
+              onPress={() => navigation.navigate('Settings')}
+            />
+            <SettingRow title="حجم التنزيل" detail={size} icon="storage" />
+          </Group>
           <Button
-            label={installed ? 'فتح المصحف' : 'تنزيل هذا المصحف'}
+            icon={installed ? 'book' : 'download'}
+            label={installed ? 'فتح المصحف' : 'تحميل · ' + size}
             disabled={!ready || error}
             onPress={() =>
               installed
@@ -250,16 +300,16 @@ export function MushafDownloadScreen({route, navigation}: any) {
                   )
             }
           />
-        </Card>
+        </>
       )}
       <Button
         secondary
-        label="معلومات المصدر"
-        onPress={() => navigation.navigate('QuranSource', {editionId: e.id})}
+        label="اختيار رواية أخرى"
+        onPress={() => navigation.navigate('QuranEditions')}
       />
-      <Button
-        secondary
-        label="إدارة التنزيلات"
+      <Row
+        title="إدارة التنزيلات"
+        icon="download"
         onPress={() => navigation.navigate('Downloads')}
       />
     </Page>

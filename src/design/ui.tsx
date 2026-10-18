@@ -33,7 +33,19 @@ export function AppIcon({
   const p = usePalette();
   return (
     <SvgXml
-      xml={icons[name]}
+      xml={
+        name === 'medallion'
+          ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.3">' +
+            Array.from(
+              {length: 8},
+              (_, i) =>
+                '<path d="M24 3L30 10L27 19L21 19L18 10Z" transform="rotate(' +
+                i * 45 +
+                ' 24 24)"/>',
+            ).join('') +
+            '<path d="M24 18L30 24L24 30L18 24Z"/></g></svg>'
+          : icons[name]
+      }
       width={size}
       height={size}
       color={color ?? p.iconPrimary}
@@ -79,6 +91,7 @@ export function Button({
   secondary = false,
   selected,
   compact = false,
+  danger = false,
 }: {
   label: string;
   onPress: () => void;
@@ -87,6 +100,7 @@ export function Button({
   secondary?: boolean;
   selected?: boolean;
   compact?: boolean;
+  danger?: boolean;
 }) {
   const p = usePalette();
   return (
@@ -98,14 +112,17 @@ export function Button({
       onPress={onPress}
       style={({pressed}) => [
         styles.button,
+        {borderWidth: secondary ? 1 : 0, borderColor: p.borderControl},
         {
           backgroundColor: disabled
             ? p.disabledSurface
-            : secondary
-              ? p.surfaceMuted
-              : pressed
-                ? p.actionPressed
-                : p.actionPrimary,
+            : danger
+              ? p.danger
+              : secondary
+                ? 'transparent'
+                : pressed
+                  ? p.actionPressed
+                  : p.actionPrimary,
         },
       ]}>
       {icon && (
@@ -221,11 +238,17 @@ export function Page({
   children,
   onBack,
   contentStyle,
+  actions,
+  subtitle,
+  footer,
 }: {
   title: string;
   children: React.ReactNode;
   onBack?: () => void;
   contentStyle?: StyleProp<ViewStyle>;
+  actions?: React.ReactNode;
+  subtitle?: string;
+  footer?: React.ReactNode;
 }) {
   const p = usePalette();
   return (
@@ -234,17 +257,40 @@ export function Page({
         {onBack && (
           <IconButton label="رجوع" name="chevron-right" onPress={onBack} />
         )}
-        <AppText
-          accessibilityRole="header"
-          role="screenTitle"
-          style={{flex: 1, textAlign: 'center'}}>
-          {title}
-        </AppText>
-        {onBack && <View style={{width: 48}} />}
+        <View style={{flex: 1}}>
+          <AppText
+            accessibilityRole="header"
+            role="screenTitle"
+            style={{textAlign: 'center'}}>
+            {title}
+          </AppText>
+          {subtitle && (
+            <AppText
+              role="caption"
+              style={{textAlign: 'center', color: p.textSecondary}}>
+              {subtitle}
+            </AppText>
+          )}
+        </View>
+        {actions ?? (onBack && <View style={{width: 48}} />)}
       </View>
-      <ScrollView contentContainerStyle={[styles.page, contentStyle]}>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={[styles.page, contentStyle]}>
         {children}
       </ScrollView>
+      {footer && (
+        <View
+          style={{
+            padding: 12,
+            gap: 6,
+            borderTopWidth: 1,
+            borderColor: p.borderSubtle,
+            backgroundColor: p.surface,
+          }}>
+          {footer}
+        </View>
+      )}
     </View>
   );
 }
@@ -297,7 +343,11 @@ export function Sheet({
               {title}
             </AppText>
           </View>
-          <ScrollView contentContainerStyle={{gap: 16}}>{children}</ScrollView>
+          <ScrollView
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{gap: 16}}>
+            {children}
+          </ScrollView>
         </View>
       </View>
     </Modal>
@@ -305,8 +355,9 @@ export function Sheet({
 }
 const styles = StyleSheet.create({
   page: {
-    padding: layout.spacing.xl,
-    gap: 16,
+    padding: 16,
+    paddingTop: 8,
+    gap: 12,
     maxWidth: 560,
     width: '100%',
     alignSelf: 'center',
@@ -353,12 +404,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export function Input({label, ...props}: TextInputProps & {label: string}) {
+export function Input({
+  label,
+  hideLabel = false,
+  ...props
+}: TextInputProps & {label: string; hideLabel?: boolean}) {
   const p = usePalette(),
     {uiScale} = useContext(themeContext);
   return (
     <View style={{gap: 8}}>
-      <AppText role="label">{label}</AppText>
+      {!hideLabel && <AppText role="label">{label}</AppText>}
       <TextInput
         {...props}
         accessibilityLabel={label}

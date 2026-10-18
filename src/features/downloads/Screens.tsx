@@ -1,6 +1,26 @@
 import React, {useEffect, useState, useSyncExternalStore} from 'react';
-import {Alert} from 'react-native';
-import {AppText, Button, Card, Page, StateView} from '../../design/ui';
+import {Alert, View} from 'react-native';
+import {
+  Banner,
+  Disclosure,
+  Group,
+  Ornament,
+  Progress,
+  RadioRow,
+  Segments,
+  SettingRow,
+  rtlRow,
+} from '../../design/components';
+import {
+  AppIcon,
+  AppText,
+  Button,
+  Card,
+  IconButton,
+  Page,
+  Row,
+  StateView,
+} from '../../design/ui';
 import {bytes, ltr, number} from '../../design/format';
 import {nativeDownloadPorts} from './native';
 import {catalog} from './catalog';
@@ -56,12 +76,42 @@ const handle = (action: Promise<unknown>) => {
 export function DownloadsScreen({navigation}: any) {
   const runtime = useQuran(),
     downloads = runtime.downloads;
+  const [tab, setTab] = useState<'active' | 'done'>('active');
   const {error, ready, retry} = useDownloads(),
     jobs = downloads
       .listJobs()
       .filter(j => !['removed', 'cancelled'].includes(j.state));
   return (
     <Page title="التنزيلات" onBack={() => navigation.goBack()}>
+      <Segments
+        value={tab}
+        options={[
+          {value: 'active', label: 'قيد التنزيل'},
+          {value: 'done', label: 'المكتملة'},
+        ]}
+        onChange={setTab}
+      />
+      {jobs.some(j => j.state === 'waiting_network') && (
+        <Banner warning icon="wifi" text="بانتظار الاتصال بالشبكة المسموحة" />
+      )}
+      {ready &&
+        !error &&
+        !jobs.some(j =>
+          tab === 'done' ? j.state === 'ready' : j.state !== 'ready',
+        ) && (
+          <StateView
+            title={
+              tab === 'done'
+                ? 'لا توجد تنزيلات مكتملة'
+                : 'لا توجد تنزيلات قيد التنفيذ'
+            }
+            action={
+              tab === 'active'
+                ? {label: 'عرض الملفات المكتملة', onPress: () => setTab('done')}
+                : undefined
+            }
+          />
+        )}
       {error ? (
         <StateView
           title="تعذر فتح التنزيلات"
@@ -75,120 +125,136 @@ export function DownloadsScreen({navigation}: any) {
           description="اختر مصحفك من مكتبة القرآن لتنزيله وقراءته دون اتصال."
         />
       ) : (
-        jobs.map(job => (
-          <Card key={job.jobId}>
-            <AppText role="bodyStrong">{packTitle(job.packId)}</AppText>
-            <AppText role="caption">
-              {job.assetId === 'source-font'
-                ? 'الخط'
-                : job.assetId === 'original'
-                  ? 'ملف المصحف الأصلي'
-                  : ''}
-            </AppText>
-            {runtime.catalog.texts
-              .filter(
-                t => t.pack.id === job.packId && runtime.installed(t.pack),
-              )
-              .map(t => (
-                <Button
-                  key={t.editionId}
-                  label="فتح المصحف"
-                  onPress={() =>
-                    navigation.navigate('QuranReader', {
-                      editionId: t.editionId,
-                      surah: 1,
-                      verse: 1,
-                      packVersion: t.pack.version,
-                    })
-                  }
-                />
-              ))}
-            <AppText accessibilityLiveRegion="polite">
-              {labels[job.state]}
-            </AppText>
-            <AppText style={{writingDirection: 'ltr'}}>
-              {displayBytes(job.bytesReceived)} /{' '}
-              {displayBytes(job.expectedBytes)}
-            </AppText>
-            {job.state === 'paused_user' && (
-              <AppText role="caption">
-                يبقى التنزيل متوقفاً حتى تختار المتابعة. يُستأنف من الجزء
-                المحفوظ عندما يسمح المصدر بذلك.
-              </AppText>
-            )}
-            {[
-              'server_restarted',
-              'range_invalid',
-              'entity_changed',
-              'range_not_satisfiable',
-            ].includes(job.errorCode ?? '') && (
-              <AppText role="caption">
-                أُعيد التنزيل من البداية لأن المصدر لم يؤكد سلامة الجزء المحفوظ.
-              </AppText>
-            )}
-            {job.state === 'failed' && (
-              <AppText>
-                {job.errorCode === 'insufficient_space'
-                  ? 'لا توجد مساحة كافية. حرّر مساحة ثم أعد المحاولة.'
-                  : 'لم يتم اعتماد هذا الملف. يمكنك إعادة المحاولة.'}
-              </AppText>
-            )}
-            {job.state === 'failed' &&
-              job.errorCode === 'insufficient_space' && (
-                <Button
-                  secondary
-                  label="إدارة التخزين"
-                  onPress={() => navigation.navigate('Storage')}
-                />
-              )}
-            {job.state === 'waiting_network' &&
-              job.consentNetworkPolicy === 'wifi' && (
-                <Button
-                  secondary
-                  label="السماح بأي شبكة لهذا الملف"
-                  onPress={() =>
-                    Alert.alert(
-                      'التنزيل عبر بيانات الهاتف؟',
-                      'قد يستهلك بيانات الهاتف. يبدأ هذا الملف من البداية، وتبقى التنزيلات الأخرى على Wi-Fi.',
-                      [
-                        {text: 'إلغاء', style: 'cancel'},
-                        {
-                          text: 'السماح',
-                          onPress: () =>
-                            handle(downloads.allowAnyNetwork(job.jobId)),
-                        },
-                      ],
-                    )
-                  }
-                />
-              )}
-            {['paused_user', 'failed'].includes(job.state) ? (
-              <Button
-                label={
-                  job.state === 'paused_user'
-                    ? 'متابعة التنزيل'
-                    : 'إعادة المحاولة'
+        jobs
+          .filter(j =>
+            tab === 'done' ? j.state === 'ready' : j.state !== 'ready',
+          )
+          .map(job => (
+            <Card key={job.jobId}>
+              <SettingRow
+                title={packTitle(job.packId)}
+                icon={job.assetId === 'source-font' ? 'text-size' : 'download'}
+              />
+              <Progress
+                value={
+                  job.expectedBytes ? job.bytesReceived / job.expectedBytes : 0
                 }
-                onPress={() => handle(downloads.resume(job.jobId))}
               />
-            ) : ['queued', 'waiting_network', 'downloading'].includes(
-                job.state,
-              ) ? (
-              <Button
-                label="إيقاف مؤقت"
-                onPress={() => handle(downloads.pause(job.jobId))}
-              />
-            ) : null}
-            {!['ready', 'deleting'].includes(job.state) && (
-              <Button
-                label="إلغاء التنزيل"
-                secondary
-                onPress={() => handle(downloads.cancel(job.jobId))}
-              />
-            )}
-          </Card>
-        ))
+              <AppText role="caption">
+                {job.assetId === 'source-font'
+                  ? 'الخط'
+                  : job.assetId === 'original'
+                    ? 'ملف المصحف الأصلي'
+                    : ''}
+              </AppText>
+              {runtime.catalog.texts
+                .filter(
+                  t => t.pack.id === job.packId && runtime.installed(t.pack),
+                )
+                .map(t => (
+                  <Button
+                    key={t.editionId}
+                    label="فتح المصحف"
+                    onPress={() =>
+                      navigation.navigate('QuranReader', {
+                        editionId: t.editionId,
+                        surah: 1,
+                        verse: 1,
+                        packVersion: t.pack.version,
+                      })
+                    }
+                  />
+                ))}
+              <AppText role="caption">{labels[job.state]}</AppText>
+              <AppText style={{writingDirection: 'ltr'}}>
+                {displayBytes(job.bytesReceived)} /{' '}
+                {displayBytes(job.expectedBytes)}
+              </AppText>
+              {job.state === 'paused_user' && (
+                <AppText role="caption">
+                  يبقى التنزيل متوقفاً حتى تختار المتابعة. يُستأنف من الجزء
+                  المحفوظ عندما يسمح المصدر بذلك.
+                </AppText>
+              )}
+              {[
+                'server_restarted',
+                'range_invalid',
+                'entity_changed',
+                'range_not_satisfiable',
+              ].includes(job.errorCode ?? '') && (
+                <AppText role="caption">
+                  أُعيد التنزيل من البداية لأن المصدر لم يؤكد سلامة الجزء
+                  المحفوظ.
+                </AppText>
+              )}
+              {job.state === 'failed' && (
+                <AppText>
+                  {job.errorCode === 'insufficient_space'
+                    ? 'لا توجد مساحة كافية. حرّر مساحة ثم أعد المحاولة.'
+                    : 'لم يتم اعتماد هذا الملف. يمكنك إعادة المحاولة.'}
+                </AppText>
+              )}
+              {job.state === 'failed' &&
+                job.errorCode === 'insufficient_space' && (
+                  <Button
+                    secondary
+                    label="إدارة التخزين"
+                    onPress={() => navigation.navigate('Storage')}
+                  />
+                )}
+              {job.state === 'waiting_network' &&
+                job.consentNetworkPolicy === 'wifi' && (
+                  <Button
+                    secondary
+                    label="السماح بأي شبكة لهذا الملف"
+                    onPress={() =>
+                      Alert.alert(
+                        'التنزيل عبر بيانات الهاتف؟',
+                        'قد يستهلك بيانات الهاتف. يبدأ هذا الملف من البداية، وتبقى التنزيلات الأخرى على Wi-Fi.',
+                        [
+                          {text: 'إلغاء', style: 'cancel'},
+                          {
+                            text: 'السماح',
+                            onPress: () =>
+                              handle(downloads.allowAnyNetwork(job.jobId)),
+                          },
+                        ],
+                      )
+                    }
+                  />
+                )}
+              {['paused_user', 'failed'].includes(job.state) ? (
+                <Button
+                  label={
+                    job.state === 'paused_user'
+                      ? 'متابعة التنزيل'
+                      : 'إعادة المحاولة'
+                  }
+                  onPress={() => handle(downloads.resume(job.jobId))}
+                />
+              ) : ['queued', 'waiting_network', 'downloading'].includes(
+                  job.state,
+                ) ? (
+                <Button
+                  label="إيقاف مؤقت"
+                  onPress={() => handle(downloads.pause(job.jobId))}
+                />
+              ) : null}
+              {!['ready', 'deleting'].includes(job.state) && (
+                <Button
+                  label="إلغاء التنزيل"
+                  secondary
+                  onPress={() => handle(downloads.cancel(job.jobId))}
+                />
+              )}
+            </Card>
+          ))
       )}
+      <Row
+        title="إدارة التخزين"
+        icon="storage"
+        onPress={() => navigation.navigate('Storage')}
+      />
     </Page>
   );
 }
@@ -240,7 +306,14 @@ export function StorageScreen({navigation}: any) {
       ) : (
         <>
           <Card>
-            <AppText>الملفات المثبتة: {displayBytes(usage.installed)}</AppText>
+            <SettingRow
+              title="المساحة المستخدمة"
+              detail={displayBytes(usage.installed)}
+              icon="storage"
+            />
+            <Progress
+              value={usage.installed / (usage.installed + usage.free || 1)}
+            />
             <AppText>الملفات المؤقتة: {displayBytes(usage.partial)}</AppText>
             <AppText>المساحة المتاحة: {displayBytes(usage.free)}</AppText>
           </Card>
@@ -250,11 +323,15 @@ export function StorageScreen({navigation}: any) {
               description="المقاطع المرفقة بالتطبيق محفوظة للاستخدام دون اتصال، ولا تحذف من هذه الصفحة."
             />
           )}
+          <Ornament title="المحتوى المحفوظ" />
           {packs.map(pack => (
-            <Button
+            <RadioRow
+              multiple
               key={key(pack)}
-              secondary={!selected.includes(key(pack))}
-              label={`${selected.includes(key(pack)) ? '✓ ' : ''}${packTitle(pack.packId)} · ${displayBytes(sizes[key(pack)] ?? 0)}`}
+              title={packTitle(pack.packId)}
+              detail={displayBytes(sizes[key(pack)] ?? 0)}
+              icon={pack.capabilities.includes('audio') ? 'headphones' : 'book'}
+              selected={selected.includes(key(pack))}
               onPress={() =>
                 setSelected(s =>
                   s.includes(key(pack))
@@ -266,6 +343,7 @@ export function StorageScreen({navigation}: any) {
           ))}
           {!!chosen.length && (
             <Button
+              danger
               label={`حذف ${number(chosen.length)} · ${displayBytes(total)}`}
               icon="trash"
               onPress={() =>

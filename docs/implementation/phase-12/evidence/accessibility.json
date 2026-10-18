@@ -1,0 +1,34 @@
+[
+  {
+    "condition": "narrow",
+    "theme": "light",
+    "screens": 15,
+    "widthDp": 320,
+    "fontScale": 1
+  },
+  {
+    "condition": "large",
+    "theme": "dark",
+    "screens": 15,
+    "widthDp": 411.42857142857144,
+    "fontScale": 2,
+    "additionalModalScreens": [
+      "19",
+      "20",
+      "21"
+    ],
+    "additionalModalLog": "large-modal.log"
+  },
+  {
+    "targetedCorrection": "Player options stack at narrow width or enlarged text",
+    "screens": [
+      "38"
+    ],
+    "conditions": [
+      "320 dp light",
+      "200% text dark"
+    ],
+    "build": "final-apk.sha256",
+    "result": "Both captures visually inspected; Arabic words no longer split between lines in option buttons."
+  }
+]

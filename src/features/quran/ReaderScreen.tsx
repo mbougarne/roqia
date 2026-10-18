@@ -18,6 +18,7 @@ import {
   StateView,
   usePalette,
 } from '../../design/ui';
+import {NumberBadge, Ornament, rtlRow} from '../../design/components';
 import {number, ltr} from '../../design/format';
 import {
   type Chapter,
@@ -209,9 +210,7 @@ function Reader({route, navigation}: any) {
           description={
             Platform.OS !== 'android'
               ? 'قارىء المصحف غير متاح على هذا النظام بعد اكتمال اختبارات Android.'
-              : Number(Platform.Version) < 31
-                ? 'يتطلب التحقق من الخط حاليا Android 12 أو أحدث. تبقى الرقية والأذكار متاحة.'
-                : 'قد تكون الحزمة أو الخط المطابق غير متاحين، أو موضع القراءة غير متوافق مع الإصدار. لم نستبدل النص أو الخط.'
+              : 'قد تكون الحزمة أو الخط المطابق غير متاحين، أو موضع القراءة غير متوافق مع الإصدار. لم نستبدل النص أو الخط.'
           }
           action={{
             label: 'إعادة المحاولة',
@@ -245,7 +244,8 @@ function Reader({route, navigation}: any) {
         style={{
           flexDirection: 'row-reverse',
           alignItems: 'center',
-          padding: 12,
+          paddingHorizontal: 12,
+          minHeight: 64,
           gap: 8,
         }}>
         <IconButton
@@ -256,7 +256,7 @@ function Reader({route, navigation}: any) {
         <AppText
           role="screenTitle"
           accessibilityRole="header"
-          style={{flex: 1}}>
+          style={{flex: 1, textAlign: 'center'}}>
           {chapters[surah - 1].name}
         </AppText>
         <IconButton
@@ -275,8 +275,12 @@ function Reader({route, navigation}: any) {
         maxToRenderPerBatch={8}
         windowSize={7}
         contentContainerStyle={{
-          padding: 20,
-          gap: prefs.view === 'verses' ? 16 : 0,
+          padding: 16,
+          paddingTop: 4,
+          maxWidth: 560,
+          width: '100%',
+          alignSelf: 'center',
+          gap: prefs.view === 'verses' ? 8 : 0,
         }}
         onMomentumScrollEnd={() => {
           act(runtime.remember(locator(position.current)));
@@ -287,7 +291,7 @@ function Reader({route, navigation}: any) {
         onViewableItemsChanged={viewable}
         viewabilityConfig={{viewAreaCoveragePercentThreshold: 20}}
         ListHeaderComponent={
-          <View style={{gap: 12, marginBottom: 20}}>
+          <View style={{gap: 8, marginBottom: 8}}>
             {anchor > 1 && (
               <Button
                 secondary
@@ -303,27 +307,13 @@ function Reader({route, navigation}: any) {
               />
             )}
 
-            <AppText>
-              {edition.title} · {ltr(text!.pack.version)}
+            <AppText
+              role="caption"
+              style={{textAlign: 'center', color: p.textSecondary}}>
+              {edition.title} · {edition.publisher}
             </AppText>
-            <Button
-              secondary
-              label="الاستماع لهذه الرواية"
-              onPress={() =>
-                navigation.navigate('QuranAudio', {
-                  editionId: edition.id,
-                  surah,
-                })
-              }
-            />
-            <Button
-              secondary
-              label="الترجمات"
-              onPress={() =>
-                navigation.navigate('QuranTranslations', {
-                  editionId: edition.id,
-                })
-              }
+            <Ornament
+              title={translated ? 'ترجمة المعاني' : chapters[surah - 1].name}
             />
             {translationError && (
               <StateView
@@ -363,9 +353,9 @@ function Reader({route, navigation}: any) {
                 ? {borderWidth: 0, borderRadius: 0}
                 : undefined
             }>
-            <AppText role="caption">
-              {ltr(`${number(surah)}:${number(item.number)}`)}
-            </AppText>
+            <View style={rtlRow}>
+              <NumberBadge value={item.number} />
+            </View>
             <Text
               selectable
               style={{
@@ -374,15 +364,16 @@ function Reader({route, navigation}: any) {
                 lineHeight: prefs.size * prefs.lineHeight,
                 fontWeight: 'normal',
                 includeFontPadding: true,
-                textAlign: 'right',
+                textAlign: 'center',
                 writingDirection: 'rtl',
                 color: p.textPrimary,
               }}>
               {item.text}
             </Text>
             {translated && (
-              <View>
-                <AppText role="caption">
+              <View style={{gap: 8}}>
+                <Ornament />
+                <AppText role="caption" style={{color: p.textSecondary}}>
                   ترجمة المعاني ·{' '}
                   {
                     runtime.catalog.translations.find(
@@ -397,12 +388,22 @@ function Reader({route, navigation}: any) {
                       t => t.id === prefs.translationId,
                     )?.language
                   }
-                  style={{writingDirection: 'ltr', textAlign: 'left'}}>
+                  style={{
+                    writingDirection: 'ltr',
+                    textAlign: 'left',
+                    fontFamily: 'sans-serif',
+                  }}>
                   {translated[item.number - 1].text}
                 </AppText>
               </View>
             )}
-            <View style={{flexDirection: 'row-reverse', gap: 12}}>
+            <View
+              style={{
+                ...rtlRow,
+                borderTopWidth: 0.5,
+                borderColor: p.borderSubtle,
+                justifyContent: 'center',
+              }}>
               <IconButton
                 name="bookmark"
                 selected={saved.includes(locatorKey(locator(item.number)))}
@@ -463,6 +464,37 @@ function Reader({route, navigation}: any) {
           </View>
         }
       />
+      <View
+        style={{
+          ...rtlRow,
+          borderTopWidth: 1,
+          borderColor: p.borderSubtle,
+          backgroundColor: p.surface,
+          justifyContent: 'space-around',
+          paddingHorizontal: 12,
+        }}>
+        <IconButton
+          name="volume"
+          label="الاستماع لهذه الرواية"
+          onPress={() =>
+            navigation.navigate('QuranAudio', {editionId: edition.id, surah})
+          }
+        />
+        <IconButton
+          name="translate"
+          label="الترجمات"
+          onPress={() =>
+            navigation.navigate('QuranTranslations', {editionId: edition.id})
+          }
+        />
+        <IconButton
+          name="text-size"
+          label="إعدادات القراءة"
+          onPress={() =>
+            navigation.navigate('QuranPreferences', {editionId: edition.id})
+          }
+        />
+      </View>
     </View>
   );
 }
