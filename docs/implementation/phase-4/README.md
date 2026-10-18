@@ -1,5 +1,7 @@
 # Phase 4 — Quran reading and listening
 
+> Subsequent delivery: [phase 5](../phase-5/README.md) replaces the empty normal catalog with downloads of pinned original sources and on-device preparation. Earlier derived-corpus hosting restrictions remain specific to that hosting approach; further manual Arabic review is owner-deferred.
+
 Branch `phase_4/quran-reading-listening`, based on merged phase 3 (`50f8497`). Implements the source-gated runtime for ordered steps 28–37: RQ-023–RQ-030, RQ-034 and RQ-035. Shared React Native screens; Android device validation now, iOS native adapter/build validation deferred.
 
 ## What changes

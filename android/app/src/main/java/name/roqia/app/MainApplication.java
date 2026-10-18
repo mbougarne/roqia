@@ -17,7 +17,7 @@ public class MainApplication extends Application implements ReactApplication {
       new DefaultReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
+          return "debug".equals(BuildConfig.BUILD_TYPE);
         }
 
         @Override
@@ -27,7 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           packages.add(new name.roqia.app.reader.ReaderPackage());
-          if (BuildConfig.DEBUG) {
+          if ("debug".equals(BuildConfig.BUILD_TYPE)) {
             try {
               packages.add((ReactPackage) Class.forName("name.roqia.app.feasibility.ProbePackage").getDeclaredConstructor().newInstance());
             } catch (ReflectiveOperationException error) {

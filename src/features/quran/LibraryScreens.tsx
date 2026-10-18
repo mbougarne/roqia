@@ -71,8 +71,10 @@ export function QuranLibraryScreen({navigation}: any) {
             يمكنك البحث في أسماء السور الآن. اختيار الرواية لا يبدأ التنزيل.
           </AppText>
           <Button
-            label="اختيار المصحف"
-            onPress={() => navigation.navigate('QuranEditions')}
+            label="تنزيل المصحف"
+            onPress={() =>
+              navigation.navigate('QuranDownload', {editionId: id})
+            }
           />
         </Card>
       ) : (
@@ -110,17 +112,19 @@ export function QuranLibraryScreen({navigation}: any) {
           detail={`${number(edition.riwaya === 'warsh' ? c.warshVerses : c.hafsVerses)} آيات`}
           icon="book"
           onPress={() =>
-            navigation.navigate('QuranReader', {
-              editionId: id,
-              surah: c.number,
-              verse: 1,
-              ...(text
-                ? {
-                    packVersion: text.pack.version,
-                    numberingScheme: edition.numbering,
-                  }
-                : {}),
-            })
+            !installed
+              ? navigation.navigate('QuranDownload', {editionId: id})
+              : navigation.navigate('QuranReader', {
+                  editionId: id,
+                  surah: c.number,
+                  verse: 1,
+                  ...(text
+                    ? {
+                        packVersion: text.pack.version,
+                        numberingScheme: edition.numbering,
+                      }
+                    : {}),
+                })
           }
         />
       ))}
@@ -214,7 +218,7 @@ export function MushafDownloadScreen({route, navigation}: any) {
       ) : !t ? (
         <StateView
           title="المصحف غير متاح للتنزيل بعد"
-          description="لن يبدأ أي تنزيل حتى تكتمل مراجعة النص والخط والمصدر."
+          description="لا يوجد ملف تنزيل متاح لهذا الإصدار حاليا."
         />
       ) : (
         <Card>

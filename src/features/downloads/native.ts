@@ -11,6 +11,7 @@ import {
   type InstalledPack,
   type InstallJournal,
   type Asset,
+  type LocalAsset,
 } from './types';
 import {
   ensureDirectory,
@@ -32,7 +33,7 @@ function attach(task: Task, events: Events) {
     .done(() => events.done())
     .error(e => events.error(String(e.errorCode)));
 }
-async function verify(relative: string, asset: Asset) {
+async function verify(relative: string, asset: LocalAsset) {
   const path = privatePath(relative),
     stat = await FileSystem.stat(path);
   if (
@@ -54,6 +55,8 @@ async function verify(relative: string, asset: Asset) {
     throw Error('font_signature_failed');
   if (asset.mime === 'font/otf' && !header.startsWith('T1RUTw'))
     throw Error('font_signature_failed');
+  if (asset.mime === 'application/zip' && !header.startsWith('UEsDB'))
+    throw Error('zip_signature_failed');
   if (asset.mime === 'application/json') {
     if (asset.bytes > 32 * 1024 * 1024) throw Error('json_too_large');
     const value = JSON.parse(await FileSystem.readFile(path, 'utf8'));
@@ -132,6 +135,8 @@ export const nativeDownloadPorts: DownloadPorts = {
       ? (await FileSystem.stat(privatePath(path))).size
       : 0,
   verify,
+  prepare: (pack, directory) =>
+    require('../quran/importSource').prepareSource(pack, directory),
   move: async (from, to) => {
     await ensureDirectory(privatePath(to.slice(0, to.lastIndexOf('/'))));
     await FileSystem.mv(privatePath(from), privatePath(to));

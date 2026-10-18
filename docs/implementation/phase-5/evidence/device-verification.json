@@ -1,0 +1,24 @@
+{
+  "device": "emulator-5554",
+  "androidApi": 36,
+  "countersPreserved": 207,
+  "existingRecordsPreserved": 9,
+  "preferencesRestored": true,
+  "packs": [
+    {
+      "pack": "quran-warsh",
+      "version": "source-1",
+      "files": 119,
+      "allDeviceBytesMatchCatalog": true,
+      "bytes": 15642707
+    },
+    {
+      "pack": "quran-hafs",
+      "version": "source-1",
+      "files": 116,
+      "allDeviceBytesMatchCatalog": true,
+      "bytes": 4326438
+    }
+  ],
+  "readyJobs": 3
+}

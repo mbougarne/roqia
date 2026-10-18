@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 4 Quran runtime implemented; owner defers further manual Arabic reading review. Production package/catalog/download delivery remains unfinished; automated integrity, redistribution, platform and release requirements remain explicit.",
+  "status": "Phase 5 delivers downloadable original-source Warsh/Hafs Quran in the normal Android app. Manual Arabic review remains owner-deferred; older Android, iOS, translation/audio and final release acceptance remain explicit. Next implementation pickup: phase 6, step 38 / RQ-036.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -502,11 +502,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 2,
-      "evidence": "../../../docs/feasibility/android/WARSH.md",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "android",
-      "progress": "Acquired the locked KFGQPC Warsh v2.1/update 6 archive; hashes match the indexed publisher page. JSON/CSV agree on 114 surahs and 6,214 ordered records. Android API 36 shapes all records with zero fallback using the matching font; AL Maghribi fails the same dataset. Font distribution EULA recorded; light/dark captures retained.",
-      "remaining": "Finish primary evidence for derived text-pack redistribution, exact numbering/tariq documentation and qualified source/render review. Production Warsh packaging and catalog integration remain RQ-018/RQ-019 work; do not publish a ready pack.",
+      "progress": "Pinned original King Fahd archive now downloads and imports on Android with its exact original font, 6214 source verses and 113 source-document openings.",
+      "remaining": "Original-source delivery needs no new derived-corpus host. Evidence for hosting a separate derived corpus remains unresolved; exact tariq documentation and older Android/iOS acceptance remain separate. Further manual Arabic review is deferred by the owner.",
       "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
@@ -534,11 +534,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 3,
-      "evidence": "../../../docs/feasibility/android/README.md",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "android",
-      "progress": "Acquired and locked Tanzil Uthmani 1.1 plus metadata 1.0. Imported 114 surahs / 6,236 verses with exact canonical round-trip and original notice; generated 117 hashed assets in a draft pack.",
-      "remaining": "Representative Arabic/font rendering and qualified content review remain pending. Do not publish the pack as ready.",
+      "progress": "Original Tanzil Uthmani 1.1 text now downloads directly and imports all 6236 verses, with retained notice and separately pinned Noto Sans Arabic application font.",
+      "remaining": "Older Android/iOS and release acceptance remain open. Further manual Arabic review is deferred by the owner.",
       "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
@@ -568,17 +568,17 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 4,
-      "evidence": "../../../docs/feasibility/android/README.md",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "android",
-      "progress": "Implemented corruption/order/duplicate/hash/path tests, canonical pack revalidation against the independent source lock, a review template bound to the manifest hash and devotional provenance inventory.",
-      "remaining": "Finish production Warsh pack revalidation and data redistribution evidence; obtain qualified source/font reviews for both editions and resolve devotional provenance.",
+      "progress": "Production import compares every chapter against independently generated hashes from locked originals. Warsh source openings come verbatim from the original DOCX, excluding At-Tawbah. Import failure cannot activate an incomplete pack.",
+      "remaining": "Devotional provenance, translation mapping and recording review remain separate. Manual Arabic reading review is deferred, not recorded as passed; any future derived-corpus hosting needs its own redistribution basis.",
       "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
       "id": "RQ-019",
       "title": "Publish a versioned static content catalog",
-      "status": "blocked",
+      "status": "done",
       "milestone": "M3",
       "dependsOn": [
         "RQ-018"
@@ -602,11 +602,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 5,
-      "evidence": "../../../docs/feasibility/android/README.md",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "android",
-      "progress": "Implemented a guarded catalog exporter and asset MIME support. Pending or stale review cannot produce a ready catalog. No content was uploaded.",
-      "remaining": "Add the source-aware Warsh pack/export path with the original matching font and notices; close data redistribution and qualified-review gates, then publish and verify the real immutable host/catalog and bundled seed.",
+      "progress": "Bundled normal catalog now offers two original-source packs over HTTPS; no application backend or newly hosted Quran corpus. All original and derived files have pinned sizes/hashes and source notices. Actual Android downloads and offline cold-start reading passed; all 235 original/derived device files match the catalog.",
+      "remaining": "Physical-device, signed Play upgrade, older Android and iOS acceptance remain open. Translations/audio have no ready entries. New derived-corpus hosting is out of this delivery scope.",
       "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
     },
     {
@@ -665,11 +665,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 16,
-      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "shared implementation; Android tested; iOS verification deferred",
-      "progress": "Durable coordinator implements deduplication, two transfers, bounded retries, network/user-pause separation, exact size/hash/signature verification, journaled whole-pack activation and recovery. Android native pause/process-restart/install/delete probe passes.",
-      "remaining": "Approved production catalog remains gated by RQ-019/RQ-047. Physical-device/background/network acceptance remains RQ-020/RQ-048. Resume restarts affected partial files from zero; verified range append is not claimed."
+      "progress": "Coordinator now owns derived chapter/source files, verifies them before activation, preserves an older ready version on failed import, and supports explicit retry after removal or failure.",
+      "remaining": "Physical-device/background/network acceptance remains RQ-020/RQ-048; partial transport resumes still restart affected files from zero."
     },
     {
       "id": "RQ-022",
@@ -693,11 +693,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 18,
-      "evidence": "../../../docs/implementation/phase-2/README.md",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "shared implementation; Android tested; iOS verification deferred",
-      "progress": "Storage UI shows actual installed/partial/free bytes and selected-pack totals, confirms deletion and releases active/paused/queued audio before file removal. Native paused-file deletion and domain checks for unrelated packs, missing files and interrupted deletion pass.",
-      "remaining": "Physical-device release matrix remains RQ-048 and source-specific production packs remain gated. iOS verification is deferred."
+      "progress": "Storage/deletion owns original and derived Quran files, including interrupted native import temporary files. Tests cover remove and explicit re-download.",
+      "remaining": "Physical-device and signed-release upgrade acceptance remain separate."
     },
     {
       "id": "RQ-023",
@@ -726,12 +726,10 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 28,
-      "progress": "Library, offline surah metadata, explicit Warsh/Hafs preference, install state and separate download action implemented. Preference changes never enqueue or delete.",
-      "remaining": "Production ready-pack acceptance remains gated by source/catalog approval; Android private-fixture evidence is separate.",
-      "evidence": [
-        "docs/implementation/phase-4/README.md",
-        "docs/implementation/phase-4/SOURCES.md"
-      ]
+      "progress": "Normal library now exposes an explicit download action and routes unavailable chapters to that edition download. Selection alone does not download; installed editions remain independent.",
+      "remaining": "Final accessibility and cross-platform/release acceptance remain open.",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
+      "verifiedOn": "2026-10-18"
     },
     {
       "id": "RQ-024",
@@ -757,13 +755,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 29,
-      "progress": "Canonical King Fahd adapter, exact matching-font registration, native fallback rejection, Western UI locators and missing/corrupt recovery implemented.",
-      "remaining": "Qualified Warsh/basmala/render review and redistribution remain open. Current native fallback diagnostic needs Android API 31+; older Android and iOS reader support remain unavailable.",
-      "evidence": [
-        "docs/implementation/phase-4/README.md",
-        "docs/implementation/phase-4/SOURCES.md"
-      ],
-      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
+      "progress": "Normal King Fahd Warsh pack now downloads and opens with the original matching font. Its 113 basmala paragraphs display separately from verse numbering; At-Tawbah has no added opening.",
+      "remaining": "Current native fallback diagnostic requires Android API 31+; older Android and iOS support remain unavailable. Further manual Arabic reading review is deferred by the owner.",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required.",
+      "verifiedOn": "2026-10-18"
     },
     {
       "id": "RQ-025",
@@ -790,13 +786,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 30,
-      "progress": "Canonical Tanzil chapter adapter and virtualized reader implemented, preserving source boundaries and strings.",
-      "remaining": "Qualified font/render review, older Android/iOS coverage and approved production pack remain open.",
-      "evidence": [
-        "docs/implementation/phase-4/README.md",
-        "docs/implementation/phase-4/SOURCES.md"
-      ],
-      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
+      "progress": "Normal Tanzil Hafs original-source pack and pinned application font now download and import on Android. Exact source verse strings and numbering are retained.",
+      "remaining": "Older Android/iOS coverage and final accessibility/release acceptance remain open. Further manual Arabic reading review is deferred by the owner.",
+      "evidence": "../../../docs/implementation/phase-5/README.md",
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required.",
+      "verifiedOn": "2026-10-18"
     },
     {
       "id": "RQ-026",

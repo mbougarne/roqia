@@ -104,7 +104,9 @@ export class QuranRuntime {
       );
   }
   async asset(pack: Pack, id: string) {
-    const a = pack.assets.find(a => a.id === id),
+    const a = [...pack.assets, ...(pack.derivedAssets ?? [])].find(
+        a => a.id === id,
+      ),
       p = this.installed(pack);
     if (!a || !p) throw Error('missing_pack');
     const relative = `${p.relativeDirectory}/${a.file}`;
@@ -122,17 +124,18 @@ export class QuranRuntime {
   }
   async font(t: TextPack, chapter: Chapter) {
     const path = await this.asset(t.pack, t.fontAssetId),
-      a = t.pack.assets.find(a => a.id === t.fontAssetId)!;
+      a = [...t.pack.assets, ...(t.pack.derivedAssets ?? [])].find(
+        a => a.id === t.fontAssetId,
+      )!;
     const expected = editionById(t.editionId).requiredFontSha256;
     if (expected && a.sha256 !== expected) throw Error('edition_font_mismatch');
     if (!NativeModules.RoqiaReader?.loadFont)
       throw Error('font_platform_unavailable');
     // The native adapter verifies the hash again and rejects fallback glyphs.
-    return NativeModules.RoqiaReader.loadFont(
-      path,
-      a.sha256,
-      chapter.verses.map(v => v.text),
-    ) as Promise<string>;
+    return NativeModules.RoqiaReader.loadFont(path, a.sha256, [
+      ...(chapter.opening ? [chapter.opening] : []),
+      ...chapter.verses.map(v => v.text),
+    ]) as Promise<string>;
   }
   async translation(t: TranslationPack, chapter: Chapter, text: TextPack) {
     if (

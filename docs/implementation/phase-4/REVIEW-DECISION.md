@@ -11,3 +11,7 @@ Keep King Fahd Warsh v2.1/update 6 with its exact original matching font, and Ta
 Complete the production package, source notices, applicable redistribution evidence, stable download location and installable catalog. These are concrete delivery tasks, not another request for source-choice or manual-reading approval. The catalog is still empty following this documentation-only update; downloads have not yet been enabled.
 
 The deferral concerns Arabic reading review. It does not assert that French/English translations, Warsh translation correspondence, audio identities or redistribution terms have been reviewed. Record any future observed issue against its exact edition, surah/verse, font and pack version.
+
+## Delivery follow-up
+
+[Phase 5](../phase-5/README.md) implements the concrete download gap with a bundled catalog of pinned original sources and on-device preparation. Its normal Android app now offers both Arabic editions. The empty-catalog description above records the state of this earlier documentation-only decision.

@@ -118,6 +118,15 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+        // Installable review build: embeds production JS, uses the development signing key,
+        // and remains inspectable with adb without depending on Metro or a local server.
+        review {
+            initWith release
+            signingConfig signingConfigs.debug
+            debuggable true
+            minifyEnabled false
+            matchingFallbacks = ['debug']
+        }
     }
 }
 

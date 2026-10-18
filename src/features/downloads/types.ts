@@ -16,7 +16,23 @@ export type Asset = {
   url: string;
   bytes: number;
   sha256: string;
-  mime: 'audio/mpeg' | 'application/json' | 'font/ttf' | 'font/otf';
+  mime:
+    | 'audio/mpeg'
+    | 'application/json'
+    | 'font/ttf'
+    | 'font/otf'
+    | 'application/zip'
+    | 'text/plain';
+};
+export type LocalAsset = Omit<Asset, 'url'>;
+export type SourcePreparation = {
+  kind: 'quran-source-v1';
+  editionId: string;
+  sourceAssetId: string;
+  notice: string;
+  dataAssetId?: string;
+  documentAssetId?: string;
+  archiveMembers?: {entry: string; assetId: string}[];
 };
 export type Pack = {
   id: string;
@@ -27,6 +43,8 @@ export type Pack = {
   capabilities: string[];
   sourceMetadata: Record<string, string>;
   assets: Asset[];
+  derivedAssets?: LocalAsset[];
+  preparation?: SourcePreparation;
 };
 export type DownloadJob = {
   jobId: string;
@@ -80,6 +98,7 @@ export function validateCatalog(packs: Pack[], allowLocalFixtures = false) {
       !safe(pack.version) ||
       pack.review !== 'approved' ||
       !pack.assets.length ||
+      pack.assets.some(a => typeof a.url !== 'string') ||
       !/^[a-f0-9]{64}$/.test(pack.manifestHash) ||
       !Object.keys(pack.sourceMetadata).length
     )
@@ -87,9 +106,16 @@ export function validateCatalog(packs: Pack[], allowLocalFixtures = false) {
     const key = packKey(pack);
     if (keys.has(key)) throw Error('duplicate_pack');
     keys.add(key);
+    if (
+      pack.preparation &&
+      (pack.preparation.kind !== 'quran-source-v1' ||
+        !pack.derivedAssets?.length ||
+        !pack.assets.some(a => a.id === pack.preparation!.sourceAssetId))
+    )
+      throw Error('invalid_preparation');
     const files = new Set<string>(),
       ids = new Set<string>();
-    for (const asset of pack.assets) {
+    for (const asset of [...pack.assets, ...(pack.derivedAssets ?? [])]) {
       if (
         !safe(asset.id) ||
         !safe(asset.file) ||
@@ -98,15 +124,24 @@ export function validateCatalog(packs: Pack[], allowLocalFixtures = false) {
         !Number.isSafeInteger(asset.bytes) ||
         asset.bytes <= 0 ||
         !/^[a-f0-9]{64}$/.test(asset.sha256) ||
-        !['audio/mpeg', 'application/json', 'font/ttf', 'font/otf'].includes(
-          asset.mime,
-        ) ||
-        (!/^https:\/\/[^/\s]+\//.test(asset.url) &&
+        ![
+          'audio/mpeg',
+          'application/json',
+          'font/ttf',
+          'font/otf',
+          'application/zip',
+          'text/plain',
+        ].includes(asset.mime) ||
+        ('url' in asset &&
+          typeof asset.url === 'string' &&
+          !/^https:\/\/[^/\s]+\//.test(asset.url) &&
           !(
             allowLocalFixtures && /^http:\/\/127\.0\.0\.1:\d+\//.test(asset.url)
           ))
       )
         throw Error('invalid_asset');
+      if (!('url' in asset) && !pack.preparation)
+        throw Error('missing_preparation');
       files.add(asset.file);
       ids.add(asset.id);
     }

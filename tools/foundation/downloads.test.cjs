@@ -299,3 +299,32 @@ test('catalog changes retain verified installed versions and removed job history
   assert.equal(reopened.listJobs()[0].state, 'removed');
   assert.equal(reopened.listInstalled().length, 0);
 });
+
+test('source import activates only after derived files verify; removal and explicit re-download cover every file', async () => {
+  const p=pack('source');p.preparation={kind:'quran-source-v1',sourceAssetId:'asset0'};
+  p.derivedAssets=[{id:'chapter',file:'001.json',bytes:100,sha256:hash,mime:'application/json'}];
+  const f=fixture([p]);let prepared=0;
+  f.ports.prepare=async (_p,dir)=>{prepared++;assert.equal(f.disk.installed[0].state,'installing');f.files.set(`${dir}/001.json`,{size:100,hash});};
+  const c=f.coordinator();await c.initialize();await c.enqueue(p.id,p.version);await f.done(c,[...f.tasks.values()][0]);
+  assert.equal(prepared,1);assert.equal(c.listInstalled()[0].state,'ready');assert.equal(c.listInstalled()[0].files.length,2);
+  await c.deletePack(p.id,p.version);assert.equal(f.files.size,0);
+  await c.enqueue(p.id,p.version);assert.equal(f.tasks.size,1);await f.done(c,[...f.tasks.values()][0]);assert.equal(prepared,2);assert.equal(c.listInstalled()[0].state,'ready');
+});
+test('failed source import is not readable; restart and retry rebuild derived files', async () => {
+  const p=pack('source-failed');p.preparation={kind:'quran-source-v1',sourceAssetId:'asset0'};
+  p.derivedAssets=[{id:'chapter',file:'001.json',bytes:100,sha256:hash,mime:'application/json'}];
+  const f=fixture([p]);f.ports.prepare=async(_p,dir)=>{f.files.set(`${dir}/001.json`,{size:100,hash:'bad'});};
+  let c=f.coordinator();await c.initialize();await c.enqueue(p.id,p.version);await f.done(c,[...f.tasks.values()][0]);
+  assert.equal(c.listJobs()[0].state,'failed');assert.equal(c.listInstalled()[0].state,'installing');
+  c=f.coordinator();await c.initialize();f.ports.prepare=async(_p,dir)=>{f.files.set(`${dir}/001.json`,{size:100,hash});};
+  await c.enqueue(p.id,p.version);await f.done(c,[...f.tasks.values()][0]);assert.equal(c.listInstalled()[0].state,'ready');
+});
+test('a failed source update preserves the active old version and cancellation removes partial outputs', async () => {
+ const old=pack('source-update',1,'1'),next=pack('source-update',1,'2');
+ next.preparation={kind:'quran-source-v1',sourceAssetId:'asset0'};next.derivedAssets=[{id:'chapter',file:'001.json',bytes:100,sha256:hash,mime:'application/json'}];
+ const f=fixture([old,next]);const c=f.coordinator();await c.initialize();await c.enqueue(old.id,old.version);await f.done(c,[...f.tasks.values()][0]);
+ f.ports.prepare=async(_p,dir)=>{f.files.set(`${dir}/001.json.import`,{size:100,hash});throw Error('interrupted_import');};
+ await c.enqueue(next.id,next.version);await f.done(c,[...f.tasks.values()][0]);
+ assert.equal(c.listInstalled().find(p=>p.version==='1').active,true);assert.equal(c.listInstalled().find(p=>p.version==='2').state,'installing');
+ await c.cancel(c.listJobs().find(j=>j.version==='2').jobId);assert.equal(c.listInstalled().length,1);assert.ok([...f.files.keys()].every(p=>!p.includes('/2/')));
+});

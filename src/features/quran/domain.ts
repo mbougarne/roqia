@@ -72,6 +72,7 @@ export type Chapter = {
   surah: number;
   verses: Verse[];
   sourceNotice: string;
+  opening?: string;
 };
 export function validateChapter(
   value: Chapter,
@@ -133,25 +134,25 @@ export function validateQuranCatalog(catalog: QuranCatalog) {
   const identities = new Set<string>();
   for (const t of catalog.texts) {
     const e = editionById(t.editionId),
-      key = `${e.id}@${t.pack.version}`;
+      key = `${e.id}@${t.pack.version}`,
+      assets = [...t.pack.assets, ...(t.pack.derivedAssets ?? [])];
     if (
       identities.has(key) ||
       t.basmalaPolicy !== 'source-verbatim' ||
       !t.notice ||
       !t.pack.capabilities.includes('quran-text') ||
-      !t.pack.assets.some(a => a.id === t.fontAssetId && a.mime === 'font/ttf')
+      !assets.some(a => a.id === t.fontAssetId && a.mime === 'font/ttf')
     )
       throw Error('invalid_text_pack');
     if (
       e.requiredFontSha256 &&
-      t.pack.assets.find(a => a.id === t.fontAssetId)?.sha256 !==
-        e.requiredFontSha256
+      assets.find(a => a.id === t.fontAssetId)?.sha256 !== e.requiredFontSha256
     )
       throw Error('edition_font_mismatch');
     identities.add(key);
     for (const c of chapters)
       if (
-        !t.pack.assets.some(
+        !assets.some(
           a =>
             a.id === t.chapterAssets[c.number] && a.mime === 'application/json',
         )
@@ -173,9 +174,10 @@ export function validateQuranCatalog(catalog: QuranCatalog) {
       )
     )
       throw Error('unreviewed_translation_mapping');
+    const assets = [...t.pack.assets, ...(t.pack.derivedAssets ?? [])];
     for (const c of chapters)
       if (
-        !t.pack.assets.some(
+        !assets.some(
           a =>
             a.id === t.chapterAssets[c.number] && a.mime === 'application/json',
         )

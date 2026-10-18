@@ -16,13 +16,13 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
 
-Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; the next group should use `phase_5/<short-description>`.
+Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. Phase 4 uses `phase_4/quran-reading-listening`; phase 5 uses `phase_5/quran-download-delivery`. The next group uses `phase_6/<short-description>`.
 
 ## Ordered checklist
 
 ### Steps 01 onward · Baseline and source/native feasibility
 
-**2026-10-18 Android progress:** the first 10 steps have an executable feasibility pass and [evidence report](../../../docs/feasibility/android/README.md). RQ-019 and RQ-037 remain blocked; RQ-016 is now in progress after King Fahd acquisition and font testing. All ten still require the remaining checks listed in their tickets. No checkbox below implies an unperformed content or physical-device review. Independent probes were exercised across this section; dependent product integration remains gated.
+**2026-10-18 Android progress:** the first 10 steps have an executable feasibility pass and [evidence report](../../../docs/feasibility/android/README.md). RQ-019 was initially blocked (superseded by the phase 5 checkpoint below); RQ-037 remains blocked; RQ-016 is now in progress after King Fahd acquisition and font testing. Remaining checks are listed per ticket; RQ-019 Android catalog acceptance is completed in phase 5. No checkbox below implies an unperformed content or physical-device review. Independent probes were exercised across this section; dependent product integration remains gated.
 
 1. [ ] **[RQ-001 — Capture current release and compatibility baseline](tickets/RQ-001.md)**
 
@@ -50,7 +50,7 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
    **Finish when:** No missing/duplicate source records; Hash and structural failures block publication; Religious rendering/source review is recorded separately from mechanical checks.
 
-5. [ ] **[RQ-019 — Publish a versioned static content catalog](tickets/RQ-019.md)**
+5. [x] **[RQ-019 — Publish a versioned static content catalog](tickets/RQ-019.md)**
 
    **Deliver:** Create immutable ready pack metadata using the schema. Choose approved direct files or static host, record sizes/hashes/attribution and bundle a small seed catalog. Exclude drafts from installable UI.
 
@@ -206,7 +206,9 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 **Owner decision — 18 October 2026:** further manual Arabic reading review is deferred, not a prerequisite for download delivery. See the [recorded decision](../../../docs/implementation/phase-4/REVIEW-DECISION.md). Preserve automated source/font checks; do not record unperformed review as passed. Finish the concrete phase 4 package/catalog/download gap before moving on.
 
-**After that delivery and phase 4 review, the next independent implementation pickup is step 38 / RQ-036.** Recheck RQ-037 before enabling prayer times and RQ-040 before promising full adhan. Do not silently skip those gates or treat independent UI/runtime work as approval of unverified content or native behavior.
+**Phase 5 delivery checkpoint — 18 October 2026:** [original-source Quran downloads](../../../docs/implementation/phase-5/README.md) now replace the empty normal catalog. Warsh uses the unchanged King Fahd archive and matching font; Hafs uses original Tanzil text. On-device preparation verifies every chapter. This closes the concrete download/import implementation gap; it does not claim completed manual Arabic review, translation/audio delivery or full platform/release acceptance.
+
+**After phase 5 review, start phase 6 at step 38 / RQ-036.** Recheck RQ-037 before enabling prayer times and RQ-040 before promising full adhan. Do not silently skip those gates or treat independent UI/runtime work as approval of unverified content or native behavior.
 
 28. [ ] **[RQ-023 — Build Quran library and edition selection](tickets/RQ-023.md)**
 
