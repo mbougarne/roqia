@@ -1,0 +1,22 @@
+{
+  "reports": [
+    {
+      "translation": "fr.hamidullah",
+      "chapters": 114,
+      "verses": 6236,
+      "originalBytes": 948096,
+      "sourceSha256": "9834cfcd14b506a6c0223d86ac259e896f2bfb44c0823d83d827c27ffea57f03",
+      "allSourceStringsExact": true,
+      "allChapterHashesMatch": true
+    },
+    {
+      "translation": "en.pickthall",
+      "chapters": 114,
+      "verses": 6236,
+      "originalBytes": 864918,
+      "sourceSha256": "4aabbfa9d96796f5a6b0217d2c39dce1a3084f772bf6f2650e37082a774e3cc7",
+      "allSourceStringsExact": true,
+      "allChapterHashesMatch": true
+    }
+  ]
+}

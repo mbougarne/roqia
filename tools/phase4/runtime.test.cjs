@@ -53,3 +53,14 @@ test('search cancels before reading content and never returns derived text',asyn
  assert.deepEqual(await runtime.search(text,'cafe',()=>true),[]);assert.equal(reads,0);
  const results=await runtime.search(text,'cafe',()=>false);assert.equal(results.length,50);assert.equal(reads,50);assert.equal(results[0].text,'TEST ONLY Café');
 });
+test('translation reader checks saved file identity, chapter, version and complete verse order',async()=>{
+ const e=d.editions[1],chapter={editionId:e.id,numberingScheme:e.numbering,surah:1,verses:Array.from({length:7},(_,i)=>({number:i+1,text:'ARABIC TEST ONLY'}))};
+ const value={translationId:'test-fr',editionId:e.id,numberingScheme:e.numbering,textVersion:'v1',surah:1,verses:chapter.verses.map(v=>({number:v.number,text:'TEST ONLY Café'}))};
+ const dir='packs/test-fr/v1',file=dir+'/001.json';fs.mkdirSync(path.join(root,'roqia',dir),{recursive:true});
+ const t={id:'test-fr',editionId:e.id,numberingScheme:e.numbering,textVersion:'v1',chapterAssets:{1:'chapter'},pack:{id:'test-fr',version:'v1',manifestHash:'b'.repeat(64),assets:[]}},text={pack:{version:'v1'}};
+ const install=v=>{const bytes=Buffer.from(JSON.stringify(v));fs.writeFileSync(path.join(root,'roqia',file),bytes);t.pack.assets=[{id:'chapter',file:'001.json',bytes:bytes.length,sha256:sha(bytes)}];installed=[{packId:t.pack.id,version:'v1',manifestHash:t.pack.manifestHash,state:'ready',files:[file],relativeDirectory:dir}];};
+ install(value);assert.deepEqual(await runtime.translation(t,chapter,text),value.verses);
+ for(const patch of [v=>v.translationId='different',v=>v.editionId=d.editions[0].id,v=>v.textVersion='v2',v=>v.surah=2,v=>v.verses.pop(),v=>v.verses[1].number=1,v=>v.verses[0].text='  ']){const v=structuredClone(value);patch(v);install(v);await assert.rejects(runtime.translation(t,chapter,text),/translation_mismatch/);}
+ install(value);fs.writeFileSync(path.join(root,'roqia',file),'{}');await assert.rejects(runtime.translation(t,chapter,text),/integrity_failed/);
+ install(value);installed=[];await assert.rejects(runtime.translation(t,chapter,text),/missing_pack/);
+});

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 8 audio delivery implemented; Android validation and PR review. Functionality remains first: next RQ-026, then the remaining functional queue, whole-app visual parity including Prayer/Qibla re-review, final acceptance/release and deferred iOS testing.",
+  "status": "Phase 8 merged; phase 9 RQ-026 French/English Hafs delivery implemented with Android validation and PR review. Next functional pickup RQ-020 then RQ-021; remaining functionality precedes whole-app visual parity, final acceptance/release and deferred iOS testing.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -819,12 +819,15 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 31,
-      "progress": "Locked French Hamidullah and English Pickthall files acquired from Tanzil; exact structural import, Hafs/version-bound mapping, LTR display and separate download/selection implemented. Warsh mapping is rejected.",
-      "remaining": "Qualified translation sample review and publication remain open; no Warsh correspondence or Clear Quran licensing is implied.",
+      "progress": "Normal catalog delivers French Hamidullah and English Pickthall directly from Tanzil. Exact 114-chapter/6236-verse import per language, separate downloads, persisted offline selection, LTR reading and missing-pack recovery. Warsh joins rejected.",
+      "remaining": "Qualified editorial sample review is not claimed; full TalkBack listening and older/physical Android coverage remain. Visual parity follows functionality. iOS verification deferred; no extra owner publication gate.",
       "evidence": [
         "docs/implementation/phase-4/README.md",
-        "docs/implementation/phase-4/SOURCES.md"
-      ]
+        "docs/implementation/phase-4/SOURCES.md",
+        "docs/implementation/phase-9/README.md"
+      ],
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android testing"
     },
     {
       "id": "RQ-027",

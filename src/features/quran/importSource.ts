@@ -3,10 +3,11 @@ import {FileSystem} from 'react-native-file-access';
 import {type Pack} from '../downloads/types';
 import {privatePath} from '../../platform/files';
 import {parseOriginalSource} from './sourceParser';
+import {parseTranslationSource} from './translationParser';
 
 export async function prepareSource(pack: Pack, directory: string) {
   const p = pack.preparation;
-  if (!p || p.kind !== 'quran-source-v1') throw Error('unknown_preparation');
+  if (!p) throw Error('unknown_preparation');
   const local = pack.derivedAssets ?? [];
   const asset = (id: string) => {
     const value = [...pack.assets, ...local].find(a => a.id === id);
@@ -25,7 +26,7 @@ export async function prepareSource(pack: Pack, directory: string) {
   };
   await verify(p.sourceAssetId);
   let openings: Record<string, string> = {};
-  if (p.archiveMembers) {
+  if (p.kind === 'quran-source-v1' && p.archiveMembers) {
     if (
       !NativeModules.RoqiaReader?.extractSource ||
       !p.documentAssetId ||
@@ -52,11 +53,18 @@ export async function prepareSource(pack: Pack, directory: string) {
       document.sha256,
     );
   }
-  const chapters = parseOriginalSource(
-    p,
-    await FileSystem.readFile(path(p.dataAssetId ?? p.sourceAssetId), 'utf8'),
-    openings,
+  const raw = await FileSystem.readFile(
+    path(
+      p.kind === 'quran-source-v1'
+        ? (p.dataAssetId ?? p.sourceAssetId)
+        : p.sourceAssetId,
+    ),
+    'utf8',
   );
+  const chapters =
+    p.kind === 'translation-source-v1'
+      ? parseTranslationSource(p, raw)
+      : parseOriginalSource(p, raw, openings);
   for (const chapter of chapters) {
     const id = `chapter-${chapter.surah}`,
       a = asset(id);

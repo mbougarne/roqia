@@ -155,13 +155,14 @@ export class QuranRuntime {
       value.translationId !== t.id ||
       value.editionId !== t.editionId ||
       value.numberingScheme !== t.numberingScheme ||
+      value.textVersion !== t.textVersion ||
       value.surah !== chapter.surah ||
       !Array.isArray(value.verses) ||
       value.verses.length !== chapter.verses.length
     )
       throw Error('translation_mismatch');
     value.verses.forEach((v: any, i: number) => {
-      if (v.number !== i + 1 || typeof v.text !== 'string' || !v.text)
+      if (v.number !== i + 1 || typeof v.text !== 'string' || !v.text.trim())
         throw Error('translation_mismatch');
     });
     return value.verses as {number: number; text: string}[];

@@ -167,9 +167,15 @@ export function TranslationScreen({route, navigation}: any) {
       ) : (
         choices.map(t => (
           <Card key={t.id}>
-            <AppText role="sectionTitle">
-              {t.language === 'fr' ? 'Français' : 'English'} · {t.title}
+            <AppText
+              role="sectionTitle"
+              style={{writingDirection: 'ltr', textAlign: 'left'}}>
+              {t.language === 'fr' ? 'Français' : 'English'}
             </AppText>
+            <AppText style={{writingDirection: 'ltr', textAlign: 'left'}}>
+              {t.title}
+            </AppText>
+            <AppText role="caption">Tanzil · حفص عن عاصم</AppText>
             <AppText>
               {runtime.installed(t.pack)
                 ? 'محفوظة دون اتصال'
@@ -197,6 +203,13 @@ export function TranslationScreen({route, navigation}: any) {
             />
           </Card>
         ))
+      )}
+      {choices.length > 0 && (
+        <Button
+          secondary
+          label="إدارة التنزيلات والتخزين"
+          onPress={() => navigation.navigate('Storage')}
+        />
       )}
       <Sheet
         title="معلومات الترجمة"

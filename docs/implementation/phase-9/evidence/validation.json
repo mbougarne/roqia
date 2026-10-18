@@ -1,0 +1,34 @@
+{
+  "device": "emulator-5554",
+  "android": "16 / API 36",
+  "architecture": "arm64-v8a",
+  "variant": "review; production JS bundle; debug signed; no Metro or fixture catalog",
+  "apkSha256": "7c31270a85e52f27902afc8e57fd03f0039c0a75a80e01b80fb0586a5cd5aae5",
+  "build": "assembleReview passed",
+  "typescript": "tsc --noEmit passed",
+  "automatedTests": {
+    "passed": 71,
+    "failed": 0
+  },
+  "journeys": {
+    "actualFrenchAndEnglishSourceDownloads": true,
+    "offlineColdRestartEachLanguage": true,
+    "noTranslationOption": true,
+    "lightAndDarkMode": true,
+    "westernUiDigits": true,
+    "warshTranslationUnavailable": true,
+    "deleteFrenchPreservesSavedChoiceAndArabicReader": true,
+    "redownloadRestoresFrenchWithoutReselecting": true,
+    "sameSizeCorruptFrenchFileRejectedArabicStillReadable": true,
+    "corruptTestFileRestoredExactBytes": true
+  },
+  "capturedScreens": 11,
+  "finalState": "Both translation packs installed; French selected; original dark theme and network restored. Reading positions may reflect test navigation.",
+  "deferred": [
+    "qualified editorial sample review",
+    "full TalkBack listening",
+    "older Android and physical device matrix",
+    "iOS",
+    "whole-app screenshot parity"
+  ]
+}
