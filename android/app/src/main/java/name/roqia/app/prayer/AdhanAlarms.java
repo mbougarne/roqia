@@ -80,7 +80,7 @@ final class AdhanAlarms {
   }
   static synchronized void restore(Context c)throws Exception{
     JSONArray future=new JSONArray(),all=stored(c);long now=System.currentTimeMillis();
-    if(exact(c)&&allowed(c))for(int i=0;i<all.length();i++){JSONObject e=all.getJSONObject(i);if(e.getLong("at")>now)future.put(e);}
+    if(exact(c)&&allowed(c))for(int i=0;i<all.length();i++){JSONObject e=all.getJSONObject(i);if(e.getLong("at")>now && e.getLong("at")<=now+4L*86400000)future.put(e);}
     replace(c,future); // Never starts a foreground service from BOOT_COMPLETED.
   }
   static synchronized void release(Context c,String paths)throws Exception{

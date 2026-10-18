@@ -1,5 +1,7 @@
 # Start implementing here
 
+**Current delivery plan:** follow [IMPLEMENTATION-ORDER.md](implementation/IMPLEMENTATION-ORDER.md). The approved remaining batches are Phase 11 functional completion (12 tickets), Phase 12 whole-app visual polish (12), and Phase 13 Android release readiness (6 plus earlier acceptance gates). The sequence below is historical dependency guidance.
+
 **Use the [ordered implementation checklist](implementation/IMPLEMENTATION-ORDER.md) to choose and finish tickets one by one.** It supersedes the sequencing suggestions below; this page remains background on milestones and working principles.
 
 The first useful deliverable is a stable app shell with the new typography, colors, navigation and preserved counters. Do not begin by replacing every screen at once.

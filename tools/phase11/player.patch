@@ -1,0 +1,134 @@
+--- a/android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt
++++ b/android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt
+@@ -206,9 +206,10 @@
+             handleAudioFocus = playerOptions?.getBoolean(AUTO_HANDLE_INTERRUPTIONS) ?: true,
+             interceptPlayerActionsTriggeredExternally = true,
+             skipSilence = playerOptions?.getBoolean(SKIP_SILENCE) ?: false,
+-            wakeMode = playerOptions?.getInt(WAKE_MODE, 0) ?: 0
++            wakeMode = playerOptions?.getInt(WAKE_MODE, 1) ?: 1
+         )
+         player = QueuedAudioPlayer(this@MusicService, options)
++        RoqiaSleepTimer.attach(this) { player.pause() }
+         fakePlayer.release()
+         mediaSession.player = player.forwardingPlayer
+         observeEvents()
+@@ -792,6 +793,7 @@
+ 
+     @MainThread
+     override fun onDestroy() {
++        RoqiaSleepTimer.detach()
+         if (::player.isInitialized) {
+             Timber.d("Releasing media session and destroying player")
+             mediaSession.release()
+--- a/android/src/main/java/com/doublesymmetry/kotlinaudio/players/BaseAudioPlayer.kt
++++ b/android/src/main/java/com/doublesymmetry/kotlinaudio/players/BaseAudioPlayer.kt
+@@ -219,6 +219,7 @@
+         }
+ 
+     fun play() {
++        if (!options.handleAudioFocus && !focusManager.requestAudioFocus()) return
+         exoPlayer.play()
+         if (currentItem != null) {
+             exoPlayer.prepare()
+@@ -531,8 +532,8 @@
+         private var hasAudioFocus = false
+         private var focus: AudioFocusRequestCompat? = null
+ 
+-        fun requestAudioFocus() {
+-            if (hasAudioFocus) return
++        fun requestAudioFocus(): Boolean {
++            if (hasAudioFocus) return true
+ 
+             val manager = ContextCompat.getSystemService(context, AudioManager::class.java)
+ 
+@@ -559,6 +560,11 @@
+                                 wasDucking = false
+                             }
+                         }
++                        // Pause in native code even when the JS runtime is suspended.
++                        if (isPaused) {
++                            focusManager.abandonAudioFocusIfHeld()
++                            exoPlayer.pause()
++                        }
+                         playerEventHolder.updateOnAudioFocusChanged(isPaused, isPermanent)
+                     }
+                 )
+@@ -578,6 +584,8 @@
+             }
+ 
+             hasAudioFocus = (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
++            if (!hasAudioFocus) exoPlayer.pause()
++            return hasAudioFocus
+         }
+ 
+         fun abandonAudioFocusIfHeld() {
+--- /dev/null
++++ b/android/src/main/java/com/doublesymmetry/trackplayer/service/RoqiaSleepTimer.java
+@@ -0,0 +1,67 @@
++package com.doublesymmetry.trackplayer.service;
++
++import android.content.Context;
++import android.content.SharedPreferences;
++import android.os.Handler;
++import android.os.Looper;
++import android.os.SystemClock;
++import android.provider.Settings;
++
++/** Owned by the native playback service, independent of React and JS timers. */
++public final class RoqiaSleepTimer {
++  private static final Handler handler = new Handler(Looper.getMainLooper());
++  private static Context context;
++  private static Runnable pause;
++  private static long elapsedDeadline;
++  private static final Runnable tick = () -> check();
++  private static SharedPreferences prefs(Context c) { return c.getSharedPreferences("roqia-sleep", 0); }
++  private static int boot(Context c) { return Settings.Global.getInt(c.getContentResolver(), Settings.Global.BOOT_COUNT, -1); }
++  private static void mainThread() {
++    if (Looper.myLooper() != Looper.getMainLooper()) throw new IllegalStateException("sleep_requires_main_thread");
++  }
++  private static long remaining(Context c) {
++    SharedPreferences p = prefs(c);
++    if (p.getLong("wall", 0) == 0) return 0;
++    return p.getInt("boot", -2) == boot(c)
++      ? p.getLong("elapsed", 0) - SystemClock.elapsedRealtime()
++      : Math.min(4L * 3600000, p.getLong("wall", 0) - System.currentTimeMillis());
++  }
++  public static void attach(Context c, Runnable stop) {
++    mainThread(); context = c.getApplicationContext(); pause = stop;
++    long left = remaining(c);
++    elapsedDeadline = prefs(c).getLong("wall", 0) == 0 ? 0 : SystemClock.elapsedRealtime() + Math.max(0, left);
++    check();
++  }
++  public static void detach() {
++    mainThread(); handler.removeCallbacks(tick); pause = null; context = null; elapsedDeadline = 0;
++  }
++  public static long set(Context c, long durationMs) {
++    mainThread();
++    if (durationMs < 0 || durationMs > 4L * 3600000) throw new IllegalArgumentException("invalid_sleep_duration");
++    if (durationMs > 0 && pause == null) throw new IllegalStateException("player_not_initialized");
++    long wall = durationMs == 0 ? 0 : System.currentTimeMillis() + durationMs;
++    long elapsed = durationMs == 0 ? 0 : SystemClock.elapsedRealtime() + durationMs;
++    if (!prefs(c).edit().putLong("wall", wall).putLong("elapsed", elapsed).putInt("boot", boot(c)).commit())
++      throw new IllegalStateException("sleep_save_failed");
++    elapsedDeadline = elapsed;
++    check();
++    return wall;
++  }
++  public static long get(Context c) {
++    mainThread(); if (context != null) check();
++    long left = remaining(c);
++    return left > 0 ? System.currentTimeMillis() + left : 0;
++  }
++  private static void check() {
++    handler.removeCallbacks(tick);
++    if (context == null || pause == null || elapsedDeadline == 0) return;
++    long left = elapsedDeadline - SystemClock.elapsedRealtime();
++    if (left <= 0) {
++      // Pause first even if storage fails. No automatic playback restart on expiry.
++      pause.run();
++      prefs(context).edit().remove("wall").remove("elapsed").remove("boot").commit();
++      elapsedDeadline = 0;
++      android.util.Log.i("RoqiaSleep", "expired_native_pause");
++    } else handler.postDelayed(tick, Math.min(left, 1000));
++  }
++}

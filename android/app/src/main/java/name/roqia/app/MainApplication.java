@@ -11,7 +11,12 @@ import com.facebook.react.defaults.DefaultReactHost;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application implements ReactApplication, androidx.work.Configuration.Provider {
+
+  @Override public androidx.work.Configuration getWorkManagerConfiguration() {
+    // Up to 48 notification jobs plus periodic and immediate prayer renewal.
+    return new androidx.work.Configuration.Builder().setMaxSchedulerLimit(50).build();
+  }
 
   private final ReactNativeHost mReactNativeHost =
       new DefaultReactNativeHost(this) {
@@ -27,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           packages.add(new name.roqia.app.reader.ReaderPackage());
+          packages.add(new name.roqia.app.audio.AudioPackage());
           packages.add(new name.roqia.app.prayer.PrayerPackage());
           packages.add(new name.roqia.app.downloads.DownloadFilesPackage());
           if ("debug".equals(BuildConfig.BUILD_TYPE)) {
@@ -64,5 +70,9 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     ReactNativeApplicationEntryPoint.loadReactNative(this);
+    // Boot broadcasts can be lost if Android kills an early startup. A subsequent
+    // worker/service/Activity process must also replenish the saved prayer window.
+    try { name.roqia.app.prayer.PrayerRenewal.request(this); }
+    catch (RuntimeException error) { android.util.Log.w("RoqiaRenewal", "startup_request_failed", error); }
   }
 }

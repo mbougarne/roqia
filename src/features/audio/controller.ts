@@ -1,3 +1,4 @@
+import {sleepDeadline, setSleepTimer, clearSleepTimer} from './sleep';
 import {Image} from 'react-native';
 import TrackPlayer, {
   AppKilledPlaybackBehavior,
@@ -62,7 +63,9 @@ function command<T>(fn: () => Promise<T>): Promise<T | undefined> {
   const result = tail.then(async () => {
     await ensurePlayer();
     report(null);
-    return fn();
+    const value = await fn();
+    await persistSnapshot();
+    return value;
   });
   tail = result.catch(() => report('تعذر تشغيل الصوت. حاول مرة أخرى.'));
   return result.catch(() => undefined);
@@ -72,7 +75,6 @@ async function toggle() {
   if ([State.Playing, State.Buffering, State.Loading].includes(state))
     await TrackPlayer.pause();
   else await TrackPlayer.play();
-  await persistPlayback();
 }
 const tracksFor = (
   items: DataProps[],
@@ -177,25 +179,29 @@ export const playback = {
     command(async () => {
       if (![0.75, 1, 1.25, 1.5].includes(value)) throw Error('invalid_rate');
       await TrackPlayer.setRate(value);
-      await persistPlayback();
     }),
   repeat: (value: RepeatMode) =>
     command(async () => {
       if (![RepeatMode.Off, RepeatMode.Track, RepeatMode.Queue].includes(value))
         throw Error('invalid_repeat');
       await TrackPlayer.setRepeatMode(value);
-      await persistPlayback();
+    }),
+  sleep: (minutes: number) =>
+    command(async () => {
+      if (minutes && !(await TrackPlayer.getActiveTrack()))
+        throw Error('no_active_track');
+      await setSleepTimer(minutes);
     }),
   toggle: () => command(toggle),
   play: () => command(() => TrackPlayer.play()),
   pause: () =>
     command(async () => {
       await TrackPlayer.pause();
-      await persistPlayback();
     }),
   stop: () =>
     command(async () => {
       await TrackPlayer.reset();
+      await clearSleepTimer();
       await saveRecord('playback', 'session', null);
     }),
   next: () => command(() => TrackPlayer.skipToNext()),
@@ -204,7 +210,6 @@ export const playback = {
     command(async () => {
       if (Number.isFinite(seconds) && seconds >= 0) {
         await TrackPlayer.seekTo(seconds);
-        await persistPlayback();
       }
     }),
   // Deletion and queue changes use the same lock. Paused tracks and queued tracks count as users of a file.
@@ -218,8 +223,11 @@ export const playback = {
               path => String(track.url).replace('file://', '') === path,
             ),
           )
-        )
+        ) {
           await TrackPlayer.reset();
+          await clearSleepTimer();
+          await saveRecord('playback', 'session', null);
+        }
       } catch (error) {
         if ((error as {code?: string}).code !== 'player_not_initialized')
           throw error;
@@ -230,7 +238,7 @@ export const playback = {
     return result;
   },
 };
-export async function persistPlayback() {
+async function persistSnapshot() {
   const track = await TrackPlayer.getActiveTrack();
   if (!track) return;
   const queue = await TrackPlayer.getQueue(),
@@ -246,9 +254,14 @@ export async function persistPlayback() {
     positionMs: Math.round(progress.position * 1000),
     repeatMode: await TrackPlayer.getRepeatMode(),
     speed: await TrackPlayer.getRate(),
-    sleepDeadlineUtc: null,
+    sleepDeadlineUtc: await sleepDeadline(),
     updatedAt: Date.now(),
   });
+}
+export function persistPlayback() {
+  const result = tail.then(persistSnapshot);
+  tail = result.catch(() => undefined);
+  return result;
 }
 export function playbackFailed() {
   report('تعذر تشغيل الصوت. أعد المحاولة أو اختر مقطعاً آخر.');

@@ -21,8 +21,9 @@
     "phase6:test": "node --test tools/phase6/*.test.cjs",
     "phase8:test": "node --test tools/phase8/*.test.cjs",
     "phase9:test": "node --test tools/phase9/*.test.cjs",
-    "postinstall": "python3 tools/phase10/patch-downloader.py",
-    "phase10:test": "python3 -m unittest discover -s tools/phase10 -p \"test_*.py\" && node --test tools/phase10/*.test.cjs"
+    "postinstall": "python3 tools/phase10/patch-downloader.py && python3 tools/phase11/patch-player.py",
+    "phase10:test": "python3 -m unittest discover -s tools/phase10 -p \"test_*.py\" && node --test tools/phase10/*.test.cjs",
+    "phase11:test": "python3 -m unittest discover -s tools/phase11 -p \"test_*.py\" && node --test tools/phase11/*.test.cjs"
   },
   "dependencies": {
     "@kesha-antonov/react-native-background-downloader": "4.6.3",

@@ -24,7 +24,7 @@ export const loadPreferences = async () =>
   validatePreferences(
     (await readRecord<Preferences>('prayer', 'preferences')) ?? defaults(),
   );
-export async function loadTables() {
+export async function loadTables(): Promise<Timetable[]> {
   const cached = await listRecords<Timetable>('prayer-timetables');
   return bundled.map(t => cached.find(c => c.cityId === t.cityId) ?? t);
 }
@@ -54,6 +54,7 @@ export type Coverage = {
   fullAdhan?: number;
   exact?: boolean;
   fullFallback?: number;
+  backgroundRenewal?: boolean;
 };
 async function reconcile(): Promise<Coverage> {
   const p = await loadPreferences(),
@@ -67,6 +68,12 @@ async function reconcile(): Promise<Coverage> {
     await loadTables(),
     others.length,
   );
+  const native = adhanNative();
+  const backgroundRenewal = !!native?.configureRenewal;
+  if (backgroundRenewal)
+    await native.configureRenewal(
+      !!p.location && Object.values(p.modes).some(mode => mode !== 'off'),
+    );
   const capability = await adhanCapability();
   const effective = status.authorized && !status.blocked ? plan : [];
   const full = effective.flatMap(e => {
@@ -96,6 +103,7 @@ async function reconcile(): Promise<Coverage> {
     existing = ids.filter(owned);
   const unchanged =
     previous?.signature === signature &&
+    previous?.backgroundRenewal === backgroundRenewal &&
     existing.length === notifications.length &&
     notifications.every(e => existing.includes(e.id)) &&
     capability.events.length === full.length &&
@@ -148,6 +156,7 @@ async function reconcile(): Promise<Coverage> {
   }
   const result = {
     coveredUntil: effective.length ? coveredUntil : now,
+    backgroundRenewal,
     scheduled: effective.length,
     fullAdhan: deliveredFull.length,
     exact: capability.exact,

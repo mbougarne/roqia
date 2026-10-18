@@ -2,8 +2,6 @@ package name.roqia.app.reader;
 import android.app.Activity;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.graphics.text.PositionedGlyphs;
-import android.graphics.text.TextRunShaper;
 import android.os.Build;
 import android.view.WindowManager;
 import com.facebook.react.bridge.*;
@@ -18,7 +16,6 @@ public final class ReaderModule extends ReactContextBaseJavaModule implements Li
   @Override public String getName() { return "RoqiaReader"; }
   @ReactMethod public void loadFont(String path, String expectedHash, ReadableArray verses, Promise promise) {
     try {
-      if (Build.VERSION.SDK_INT < 31) throw new IllegalStateException("font_validation_requires_api31");
       File file = new File(path).getCanonicalFile();
       File root = new File(getReactApplicationContext().getFilesDir(), "roqia").getCanonicalFile();
       if (!file.getPath().startsWith(root.getPath() + File.separator) || !file.isFile() || file.length()>16*1024*1024 || !expectedHash.matches("[a-f0-9]{64}")) throw new IllegalArgumentException("invalid_font_path");
@@ -28,13 +25,11 @@ public final class ReaderModule extends ReactContextBaseJavaModule implements Li
       if(!hash.toString().equals(expectedHash))throw new IllegalStateException("font_hash_mismatch");
       Typeface face=Typeface.createFromFile(file);Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);paint.setTypeface(face);paint.setTextSize(32);
       if(verses.size()<1 || verses.size()>300)throw new IllegalArgumentException("invalid_chapter");
+      FontCoverage coverage = new FontCoverage(file);
       for(int v=0;v<verses.size();v++) {
         String text=verses.getString(v);if(text==null || text.length()>20000)throw new IllegalArgumentException("invalid_verse");
-        PositionedGlyphs glyphs=TextRunShaper.shapeTextRun(text,0,text.length(),0,text.length(),0f,0f,true,paint);
-        for(int g=0;g<glyphs.glyphCount();g++) {
-          File used=glyphs.getFont(g).getFile();
-          if(glyphs.getGlyphId(g)==0 || used==null || !used.getCanonicalPath().equals(file.getCanonicalPath()))throw new IllegalStateException("font_fallback_rejected");
-        }
+        coverage.require(text);
+        if (Build.VERSION.SDK_INT >= 31) FontShaping31.require(text, paint, file);
       }
       String family="RoqiaQuran_"+expectedHash;
       ReactFontManager.getInstance().addCustomFont(family,face);promise.resolve(family);

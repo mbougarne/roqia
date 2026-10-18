@@ -199,7 +199,9 @@ async function audio() {
 
 async function run(scenario: string) {
   log('scenario-start', {scenario});
-  if (scenario.startsWith('phase10-'))
+  if (scenario.startsWith('phase11-'))
+    await require('../phase11/androidProbe').phase11Probe(scenario);
+  else if (scenario.startsWith('phase10-'))
     await require('../phase10/androidProbe').phase10Probe(scenario);
   else if (scenario.startsWith('phase3-'))
     await require('../phase3/androidProbe').phase3Probe(scenario);
