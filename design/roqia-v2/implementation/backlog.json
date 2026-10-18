@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 9 merged in PR #12. Phase 10 RQ-020/RQ-021 Android functional download recovery and strict native Wi-Fi implemented and validated; broader native acceptance remains open. Next functional pickup RQ-032 through RQ-035, before whole-app visual parity, final release acceptance and deferred iOS testing.",
+  "status": "Phase 10 merged in PR #13. Phase 11 12-ticket functional batch implemented with Android/API 36 and automated evidence; broader device/source and deferred iOS acceptance remain tracked per ticket. Phase 12: 12 visual tickets. Phase 13: 6 Android release-readiness tickets plus earlier acceptance gates.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -755,11 +755,13 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 29,
-      "progress": "Normal King Fahd Warsh pack now downloads and opens with the original matching font. Its 113 basmala paragraphs display separately from verse numbering; At-Tawbah has no added opening.",
-      "remaining": "Current native fallback diagnostic requires Android API 31+; older Android and iOS support remain unavailable. Further manual Arabic reading review is deferred by the owner.",
+      "progress": "Normal King Fahd Warsh pack now downloads and opens with the original matching font. Its 113 basmala paragraphs display separately from verse numbering; At-Tawbah has no added opening. Phase 11: Original-source cmap validation removes the API 31-only admission gate; API 31+ retains shaped-glyph font inspection. All 737012 original Warsh codepoints pass the matching font; API 36 offline reader passes.",
+      "remaining": "Actual API 24-30 reader/rendering validation, final accessibility and deferred iOS support remain open. The owner-deferred manual Arabic reading review remains deferred.",
       "evidence": "../../../docs/implementation/phase-5/README.md",
       "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required.",
-      "verifiedOn": "2026-10-18"
+      "verifiedOn": "2026-10-18",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-025",
@@ -786,11 +788,13 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 30,
-      "progress": "Normal Tanzil Hafs original-source pack and pinned application font now download and import on Android. Exact source verse strings and numbering are retained.",
-      "remaining": "Older Android/iOS coverage and final accessibility/release acceptance remain open. Further manual Arabic reading review is deferred by the owner.",
+      "progress": "Normal Tanzil Hafs original-source pack and pinned application font now download and import on Android. Exact source verse strings and numbering are retained. Phase 11: The same verified-font admission path supports older Android APIs without changing Tanzil text. All 714313 Hafs codepoints pass; API 36 offline Hafs/French reader passes.",
+      "remaining": "Actual API 24-30 reader/rendering validation, final accessibility and deferred iOS support remain open.",
       "evidence": "../../../docs/implementation/phase-5/README.md",
       "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required.",
-      "verifiedOn": "2026-10-18"
+      "verifiedOn": "2026-10-18",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-026",
@@ -1010,8 +1014,10 @@
       "evidence": "../../../docs/feasibility/android/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "android",
-      "progress": "Track Player 5.0.0-alpha0 passed local queue, repeat, 1.25 speed, seek, background/locked playback and remote play/pause on API 36. Unsupported sleep/remote-seek behavior is recorded.",
-      "remaining": "Prove persisted native sleep deadline, focus/call/Bluetooth, restart and physical-device cases before unifying controllers."
+      "progress": "Track Player 5.0.0-alpha0 passed local queue, repeat, 1.25 speed, seek, background/locked playback and remote play/pause on API 36. Unsupported sleep/remote-seek behavior is recorded. Phase 11: Pinned Track Player native patch owns persisted monotonic sleep deadlines, pauses directly on focus loss and refuses playback when audio focus is denied. Locked-screen expiry, replacement, cancellation, process restart and adhan focus-loss probes pass.",
+      "remaining": "Physical-device call/Bluetooth/remote-control and older-Android playback acceptance remain; iOS native sleep timer and verification are deferred.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-033",
@@ -1108,11 +1114,13 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 37,
-      "progress": "Real downloaded Warsh/Hafs playback works offline; adhan takes focus and Quran pauses.",
-      "remaining": "Native sleep timer and full background/remote/physical/iOS matrix remain open.",
+      "progress": "Real downloaded Warsh/Hafs playback works offline; adhan takes focus and Quran pauses. Phase 11: Normal player exposes 15/30/60-minute native sleep controls and cancellation. Playback commands persist sessions serially; deleting queued files and Stop clear both sleep and saved restore state. Both-theme normal player controls are exercised.",
+      "remaining": "Broader physical/background/remote matrix and deferred iOS sleep adapter/acceptance remain. Whole-app visual approval is Phase 12.",
       "evidence": "../../../docs/implementation/phase-8/README.md",
       "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
-      "verifiedOn": "2026-10-18"
+      "verifiedOn": "2026-10-18",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-036",
@@ -1169,8 +1177,10 @@
       "evidence": "../../../docs/implementation/phase-6/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "android",
-      "progress": "The default Moroccan path now uses 330 exact Habous city/date schedules with provenance, expiry and explicit refresh. IANA 2026c transitions remove dependence on stale ICU. Named Adhan methods are explicit alternatives.",
-      "remaining": "The research-only custom Morocco 19/17 profile remains unapproved. Seasonal formula validation is still required before offering it; it is not a fallback for expired tables."
+      "progress": "The default Moroccan path now uses 330 exact Habous city/date schedules with provenance, expiry and explicit refresh. IANA 2026c transitions remove dependence on stale ICU. Named Adhan methods are explicit alternatives. Phase 11: Background renewal refreshes the selected official timetable before expiry and retains honest unavailable behavior on source failure. Current official-source and seasonal/date/offset fixtures pass; no custom Morocco formula is enabled.",
+      "remaining": "The research-only custom Morocco 19/17 formula still requires seasonal authoritative validation before it can be offered. The existing official-table path never falls back to it; future source availability remains externally dependent.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-038",
@@ -1199,8 +1209,10 @@
       "scope": "android",
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-6/README.md",
-      "progress": "Prayer tab displays source-backed times, next prayer/countdown, tomorrow rollover, informational sunrise, source expiry/refresh and effective notification state. Missing location/table has a recovery action.",
-      "remaining": "Final visual/accessibility parity, broader dates/devices and iOS acceptance remain."
+      "progress": "Prayer tab displays source-backed times, next prayer/countdown, tomorrow rollover, informational sunrise, source expiry/refresh and effective notification state. Missing location/table has a recovery action. Phase 11: Dashboard/next-prayer behavior is retained and tested through midnight, last official-source day and expiry. Adhan settings expose background renewal plus the actual saved coverage horizon.",
+      "remaining": "Whole-app visual/accessibility parity (Phase 12), broader physical/device date acceptance and deferred iOS acceptance remain.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-039",
@@ -1228,8 +1240,10 @@
       "scope": "android",
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-6/README.md",
-      "progress": "Great-circle bearing and Android rotation-vector heading include display remapping and east-positive declination once. Circular smoothing, live/stale/low-accuracy states, fixed north-up fallback, calibration guidance and external map are implemented.",
-      "remaining": "Physical compass/rotation/accuracy matrix and iOS heading adapter remain; emulator sensor output does not establish real compass accuracy."
+      "progress": "Great-circle bearing and Android rotation-vector heading include display remapping and east-positive declination once. Circular smoothing, live/stale/low-accuracy states, fixed north-up fallback, calibration guidance and external map are implemented. Phase 11: Native heading ignores stale/future sensor timestamps and invalid orientation; UI rejects future timestamps after wall-clock changes. Existing true-north/remapping/calibration paths and offline screen are retained.",
+      "remaining": "Physical compass/rotation/accuracy matrix and deferred iOS heading adapter remain; emulator output does not establish real compass accuracy.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-040",
@@ -1259,8 +1273,10 @@
       "evidence": "../../../docs/implementation/phase-8/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
-      "progress": "Real full adhan foreground service, exact alarms, Stop, private-file verification, focus, bounded persisted schedules and notification fallback implemented; API 36 emulator locked/Doze path tested.",
-      "remaining": "Physical Android/API/OEM/call/volume/DND/reboot matrix and longer unattended renewal remain open."
+      "progress": "Real full adhan foreground service, exact alarms, Stop, private-file verification, focus, bounded persisted schedules and notification fallback implemented; API 36 emulator locked/Doze path tested. Phase 11: Native adhan restoration runs off the broadcast main thread; out-of-window alarms after clock changes are dropped before shared replanning. Headless renewal is available without opening an Activity. Preview/focus/Stop checks pass.",
+      "remaining": "Physical Android/API/OEM/call/volume/DND and multi-day unattended acceptance remain. Background jobs are best-effort and force-stop still requires reopening.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-041",
@@ -1288,8 +1304,10 @@
       "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-8/README.md",
-      "progress": "Desired full modes now resolve to native alarms when capabilities/files allow, with visible fallback counts and no duplicate Notifee event. Normal/Fajr choices are separate.",
-      "remaining": "Physical lifecycle/permission matrix and final UI/accessibility acceptance remain open."
+      "progress": "Desired full modes now resolve to native alarms when capabilities/files allow, with visible fallback counts and no duplicate Notifee event. Normal/Fajr choices are separate. Phase 11: Persisted desired modes continue to drive native/full versus notification fallback; renewal reads current preferences through the same serialized planner. Existing permission, file and generation recovery tests continue to pass.",
+      "remaining": "Physical lifecycle/permission delivery matrix, Phase 12 visual/accessibility approval and deferred iOS acceptance remain.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-042",
@@ -1319,8 +1337,10 @@
       "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-8/README.md",
-      "progress": "Two original downloadable Doha recordings (normal/Fajr), attributed to the source with unknown muezzin explicitly stated, offline preview and Stop delivered.",
-      "remaining": "Moroccan/Makkah/short recordings are not offered without a verified source. Human listening/volume/device acceptance remains open; do not present Doha as another location."
+      "progress": "Two original downloadable Doha recordings (normal/Fajr), attributed to the source with unknown muezzin explicitly stated, offline preview and Stop delivered. Phase 11: Native previews replace an already-playing recording and reject stale callbacks from the previous generation. Normal-to-Fajr replacement, Stop, and Quran pause without auto-resume pass on the emulator. Original Doha files and labels are retained.",
+      "remaining": "Human listening/volume/device acceptance and any future Moroccan/Makkah/short-source acquisition remain open; no unverified recording or attribution is offered.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-043",
@@ -1349,8 +1369,10 @@
       "scope": "android",
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-6/README.md",
-      "progress": "Explicit Habous/named-method selection, Asr/high-latitude settings, bounded offsets applied once, Western 12/24-hour output and confirmed reset invalidate the scheduler generation.",
-      "remaining": "Physical timezone/travel matrix and iOS acceptance remain. No unapproved custom Morocco formula is exposed."
+      "progress": "Explicit Habous/named-method selection, Asr/high-latitude settings, bounded offsets applied once, Western 12/24-hour output and confirmed reset invalidate the scheduler generation. Phase 11: Seasonal date, selected-location timezone, bounded offsets applied once and schedule-generation invalidation tests pass. Boot/time-change events request the shared planner; preferences remain unchanged by renewal.",
+      "remaining": "Physical timezone/travel matrix, Phase 12 visual/accessibility acceptance and deferred iOS verification remain.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-044",
@@ -1382,8 +1404,10 @@
       "scope": "Shared downloads/preferences; Android native playback implemented and tested; iOS verification deferred",
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-8/README.md",
-      "progress": "Native future alarms persist and restore after boot/package/time events; expired events are not replayed. The 3-day horizon is disclosed.",
-      "remaining": "Automatic rolling renewal without opening the app, authoritative timetable expiry and physical reboot/time-change matrix remain open."
+      "progress": "Native future alarms persist and restore after boot/package/time events; expired events are not replayed. The 3-day horizon is disclosed. Phase 11: A six-hour WorkManager task runs the shared planner headlessly, refreshes nearing-expiry official tables and replenishes valid coverage offline. Boot/package/time/permission broadcasts request immediate renewal; scheduler capacity reserves room beyond notification jobs.",
+      "remaining": "Physical/OEM multi-day unattended renewal and deferred iOS acceptance remain. WorkManager timing is best-effort; source expiry never fabricates coverage. See Phase 11 evidence for exact tested triggers.",
+      "deliveryPhase": 11,
+      "phase11Evidence": "../../../docs/implementation/phase-11/README.md"
     },
     {
       "id": "RQ-045",
@@ -1426,7 +1450,8 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 57
+      "executionOrder": 57,
+      "deliveryPhase": 13
     },
     {
       "id": "RQ-046",
@@ -1509,7 +1534,8 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 58
+      "executionOrder": 58,
+      "deliveryPhase": 13
     },
     {
       "id": "RQ-047",
@@ -1548,7 +1574,8 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 59,
-      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required."
+      "ownerReviewDecision": "2026-10-18: Further manual Arabic reading review deferred by Mourad; not a prerequisite for download delivery and not recorded as completed. Supersedes earlier Arabic qualified-review prerequisites. See docs/implementation/phase-4/REVIEW-DECISION.md. Automated integrity/font checks remain required.",
+      "deliveryPhase": 13
     },
     {
       "id": "RQ-048",
@@ -1585,7 +1612,8 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 60
+      "executionOrder": 60,
+      "deliveryPhase": 13
     },
     {
       "id": "RQ-049",
@@ -1617,7 +1645,8 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 61
+      "executionOrder": 61,
+      "deliveryPhase": 13
     },
     {
       "id": "RQ-050",
@@ -1641,7 +1670,8 @@
         "qa/ACCEPTANCE.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 62
+      "executionOrder": 62,
+      "deliveryPhase": 13
     },
     {
       "id": "RQ-051",
@@ -1673,7 +1703,8 @@
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-7/README.md",
       "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
-      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open."
+      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open.",
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-052",
@@ -1704,7 +1735,8 @@
       "verifiedOn": "2026-10-18",
       "evidence": "../../../docs/implementation/phase-7/README.md",
       "progress": "Android UI implementation and reference comparison complete for this batch in both themes, with 320 dp and 200% text captures, navigation/offline checks and preserved user state.",
-      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open."
+      "remaining": "User reports screenshot mismatch. Revisit original reference composition after functional completion; both-theme acceptance and RQ-046 remain open.",
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-053",
@@ -1732,7 +1764,8 @@
       "completionIntegrationRequires": [],
       "scope": "Rebuild illustrated calibration steps, city search/selection list, selected-state indicators and contextual location action. Keep manual coordinate/timezone fallback, denial, stale reading and timeout states accessible.",
       "touchpoints": "src/features/prayer/Screens.tsx",
-      "executionOrder": 47
+      "executionOrder": 47,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-054",
@@ -1761,7 +1794,8 @@
       "completionIntegrationRequires": [],
       "scope": "Replace stacked generic buttons with reference-grouped per-prayer controls, recording rows/previews and compact adjustment controls. Match layout in both themes; show actual unavailable-recording/full-adhan states until RQ-040/RQ-042 are implemented. Never turn a screenshot sample into a selectable recording.",
       "touchpoints": "src/features/prayer/Screens.tsx",
-      "executionOrder": 48
+      "executionOrder": 48,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-055",
@@ -1794,7 +1828,8 @@
       "completionIntegrationRequires": [],
       "scope": "Restore hero artwork, step indicators, compact typography, content grouping and bottom actions. Preserve first-run/revisit flow, skip/back, saved preferences and pending deep links.",
       "touchpoints": "src/screens/EducationScreens.tsx; src/App.tsx",
-      "executionOrder": 49
+      "executionOrder": 49,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-056",
@@ -1828,7 +1863,8 @@
       "completionIntegrationRequires": [],
       "scope": "Match home hero/action layout, illustrated category cards, reading surfaces, progress/counter controls, tasbih and page-reset sheet. Preserve exact devotional text, stable IDs, counts, playback and scoped reset; include bookmarks/search detail routes using the same visual language.",
       "touchpoints": "src/screens; src/features/devotional; src/features/audio",
-      "executionOrder": 50
+      "executionOrder": 50,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-057",
@@ -1862,7 +1898,8 @@
       "completionIntegrationRequires": [],
       "scope": "Restore grouped menu rows, icons, theme/text controls, reminder time controls, About/legal typography, unavailable-link recovery and global-reset sheet. Preserve settings, reminder schedules and reset scope.",
       "touchpoints": "src/screens/FoundationScreens.tsx; src/screens/AboutScreen; src/features/settings",
-      "executionOrder": 51
+      "executionOrder": 51,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-058",
@@ -1891,7 +1928,8 @@
       "completionIntegrationRequires": [],
       "scope": "Match library header/continue-reading card, surah rows, Warsh/Hafs choice cards and selected-pack download composition. Use real edition metadata, file sizes and progress; preserve installed content and bookmarks when switching edition.",
       "touchpoints": "src/features/quran/LibraryScreens.tsx",
-      "executionOrder": 52
+      "executionOrder": 52,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-059",
@@ -1922,7 +1960,8 @@
       "completionIntegrationRequires": [],
       "scope": "Match reader chrome, verse surfaces/actions, bilingual translation blocks, translation download rows and reading controls. Keep exact King Fahd Warsh text with matching font, Hafs source text, separate Western badges and LTR French/English. Preserve independent edition positions; unavailable translation states remain explicit.",
       "touchpoints": "src/features/quran/ReaderScreen.tsx; src/features/quran/DetailScreens.tsx",
-      "executionOrder": 53
+      "executionOrder": 53,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-060",
@@ -1951,7 +1990,8 @@
       "completionIntegrationRequires": [],
       "scope": "Match search field/filter/result hierarchy, bookmark groups and source/edition cards. Include empty/no-match/missing-pack recovery and user-controlled reporting; retain canonical locators and truthful provenance.",
       "touchpoints": "src/features/quran/DetailScreens.tsx",
-      "executionOrder": 54
+      "executionOrder": 54,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-061",
@@ -1981,7 +2021,8 @@
       "completionIntegrationRequires": [],
       "scope": "Match reciter cards, surah checkboxes, selected-size summary, offline library, mini-player and full-player composition. Retain actual supported controls, recording identity, download selection, seek/repeat/speed/timer and media-session ownership. No fake duration or recording.",
       "touchpoints": "src/features/quran/AudioScreens.tsx; src/features/audio/Player.tsx",
-      "executionOrder": 55
+      "executionOrder": 55,
+      "deliveryPhase": 12
     },
     {
       "id": "RQ-062",
@@ -2010,7 +2051,8 @@
       "completionIntegrationRequires": [],
       "scope": "Match grouped progress rows, storage summary/categories, deletion confirmation and paused/failed-download recovery. Preserve durable job state, real sizes, resume/retry/cancel and active-file safety.",
       "touchpoints": "src/features/downloads/Screens.tsx",
-      "executionOrder": 56
+      "executionOrder": 56,
+      "deliveryPhase": 12
     }
   ],
   "executionPlan": "implementation/IMPLEMENTATION-ORDER.md",
@@ -2060,6 +2102,59 @@
     },
     {
       "stage": "final_acceptance",
+      "tickets": [
+        "RQ-045",
+        "RQ-046",
+        "RQ-047",
+        "RQ-048",
+        "RQ-049",
+        "RQ-050"
+      ]
+    }
+  ],
+  "deliveryPhases": [
+    {
+      "phase": 11,
+      "title": "Complete remaining functionality",
+      "status": "in_progress",
+      "tickets": [
+        "RQ-032",
+        "RQ-035",
+        "RQ-024",
+        "RQ-025",
+        "RQ-037",
+        "RQ-038",
+        "RQ-039",
+        "RQ-040",
+        "RQ-041",
+        "RQ-042",
+        "RQ-043",
+        "RQ-044"
+      ]
+    },
+    {
+      "phase": 12,
+      "title": "Whole-app visual polish",
+      "status": "planned",
+      "tickets": [
+        "RQ-051",
+        "RQ-052",
+        "RQ-053",
+        "RQ-054",
+        "RQ-055",
+        "RQ-056",
+        "RQ-057",
+        "RQ-058",
+        "RQ-059",
+        "RQ-060",
+        "RQ-061",
+        "RQ-062"
+      ]
+    },
+    {
+      "phase": 13,
+      "title": "Android release readiness",
+      "status": "planned",
       "tickets": [
         "RQ-045",
         "RQ-046",

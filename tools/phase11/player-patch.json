@@ -1,0 +1,14 @@
+{
+  "android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt": {
+    "before": "8010e4434ab9e869a7fbd4824904e67ed97bbb3ed4de7a1091b796147ee303d6",
+    "after": "a94bd01994bc9d7f15a1bd709930120d13378fbabd245eea6df30b7fbfd39945"
+  },
+  "android/src/main/java/com/doublesymmetry/kotlinaudio/players/BaseAudioPlayer.kt": {
+    "before": "4bd022730995c383e77582b69401ea7155c04594af5bd5b70ef3a6a7a6a7ba42",
+    "after": "858c07f257e898b277c563495eab90781b073d5f9be9f9af7fc1be0113a49248"
+  },
+  "android/src/main/java/com/doublesymmetry/trackplayer/service/RoqiaSleepTimer.java": {
+    "before": null,
+    "after": "41208f9bce378d70d0f2a08ab932dbfedc0c51a2ce81538eb3d092a5de1e8ea2"
+  }
+}

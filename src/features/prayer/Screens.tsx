@@ -619,7 +619,11 @@ export function QiblaScreen({navigation}: any) {
   try {
     if (l) target = bearing(l);
   } catch {}
-  const live = !!heading && now - heading.at < 2500 && heading.accuracy >= 2;
+  const live =
+    !!heading &&
+    now - heading.at >= 0 &&
+    now - heading.at < 2500 &&
+    heading.accuracy >= 2;
   return (
     <Page
       title="القبلة"
@@ -897,8 +901,9 @@ export function AdhanScreen({navigation}: any) {
           اختيارك.
         </AppText>
         <AppText>
-          قد يؤخر توفير الطاقة الإشعار. افتح التطبيق لتجديد المواعيد؛ لا نضمن
-          تجديدها أثناء إغلاقه طويلا.
+          {coverage?.backgroundRenewal
+            ? 'تتجدد المواعيد في الخلفية عندما يسمح النظام. قد يؤخر توفير الطاقة التجديد والإشعارات. تظهر أدناه التغطية المحفوظة فعليا؛ بعد إيقاف التطبيق إجباريا افتحه لتجديدها.'
+            : 'قد يؤخر توفير الطاقة الإشعار. افتح التطبيق لتجديد المواعيد؛ التجديد في الخلفية غير متاح على هذا الجهاز.'}
         </AppText>
       </Card>
       <AppText>

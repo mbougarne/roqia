@@ -16,6 +16,11 @@ providers.exec {
     commandLine("python3", "tools/phase10/patch-downloader.py")
 }.result.get().assertNormalExitValue()
 
+providers.exec {
+    workingDir(settingsDir.parentFile)
+    commandLine("python3", "tools/phase11/patch-player.py")
+}.result.get().assertNormalExitValue()
+
 rootProject.name = 'app'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')

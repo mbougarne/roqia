@@ -4,7 +4,7 @@ import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
-import {I18nManager, View} from 'react-native';
+import {AppState, I18nManager, View} from 'react-native';
 import {
   useActiveTrack,
   usePlaybackState,
@@ -23,6 +23,7 @@ import {
 import {number, ltr} from '../../design/format';
 import {audioErrors, playback, restoreDownloadedSession} from './controller';
 import {readRecord} from '../../repositories/database';
+import {sleepDeadline, sleepSupported} from './sleep';
 export function MiniPlayer({onOpen}: {onOpen: () => void}) {
   const track = useActiveTrack(),
     state = usePlaybackState().state,
@@ -82,7 +83,9 @@ export function PlayerScreen({navigation}: any) {
     [repeat, setRepeat] = useState(RepeatMode.Off),
     [queue, setQueue] = useState<string[]>([]),
     [seek, setSeek] = useState(''),
-    [resume, setResume] = useState(false);
+    [resume, setResume] = useState(false),
+    [deadline, setDeadline] = useState<number | null>(null),
+    [now, setNow] = useState(Date.now());
   const error = useSyncExternalStore(
     audioErrors.subscribe,
     audioErrors.getSnapshot,
@@ -107,6 +110,23 @@ export function PlayerScreen({navigation}: any) {
       .catch(() => undefined);
   }, [track?.id]);
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], refresh);
+  useEffect(() => {
+    const update = () => {
+      setNow(Date.now());
+      void sleepDeadline()
+        .then(setDeadline)
+        .catch(() => undefined);
+    };
+    update();
+    const timer = setInterval(update, 1000);
+    const sub = AppState.addEventListener('change', state => {
+      if (state === 'active') update();
+    });
+    return () => {
+      clearInterval(timer);
+      sub.remove();
+    };
+  }, []);
   const clock = (s: number) =>
     ltr(
       `${number(Math.floor(s / 60))}:${String(Math.floor(s % 60)).padStart(2, '0')}`,
@@ -225,9 +245,46 @@ export function PlayerScreen({navigation}: any) {
         />
       ))}
       <AppText role="sectionTitle">مؤقت النوم</AppText>
-      <AppText>
-        غير متاح بعد. لا يعتمد التطبيق على مؤقت قد يتوقف عند إغلاق الشاشة.
-      </AppText>
+      {sleepSupported() ? (
+        <>
+          <AppText accessibilityLiveRegion="polite">
+            {deadline
+              ? `يتوقف الصوت خلال ${number(Math.max(0, Math.ceil((deadline - now) / 60000)))} دقيقة`
+              : 'المؤقت متوقف'}
+          </AppText>
+          <AppText role="caption">
+            يتوقف الصوت مؤقتا عند انتهاء المدة، حتى مع إغلاق الشاشة. لا يستأنف
+            تلقائيا.
+          </AppText>
+          {[15, 30, 60].map(minutes => (
+            <Button
+              key={minutes}
+              secondary
+              disabled={!track}
+              label={`${number(minutes)} دقيقة`}
+              onPress={() => {
+                void playback
+                  .sleep(minutes)
+                  .then(() => sleepDeadline())
+                  .then(setDeadline);
+              }}
+            />
+          ))}
+          <Button
+            secondary
+            disabled={!deadline}
+            label="إلغاء مؤقت النوم"
+            onPress={() => {
+              void playback
+                .sleep(0)
+                .then(() => sleepDeadline())
+                .then(setDeadline);
+            }}
+          />
+        </>
+      ) : (
+        <AppText>مؤقت النوم غير متاح على هذا الجهاز بعد.</AppText>
+      )}
       <AppText role="sectionTitle">
         قائمة الاستماع · {number(queue.length)}
       </AppText>

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "offline Hafs/French",
+    "offline original Warsh",
+    "offline prayer and Qibla",
+    "renewal coverage disclosure",
+    "normal native sleep selection/cancel in both themes",
+    "background media-key pause/resume",
+    "stop playback"
+  ],
+  "visualAcceptance": false
+}

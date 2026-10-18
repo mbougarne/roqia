@@ -17,6 +17,10 @@ TrackPlayer.registerPlaybackService(
   () => require('./src/services/audioPlaybackService').default,
 );
 
+AppRegistry.registerHeadlessTask(
+  'RoqiaPrayerRenewal',
+  () => require('./src/features/prayer/renewal').default,
+);
 AppRegistry.registerComponent(appName, () => App);
 
 // Opt-in Android debug activity; the production component remains unchanged.

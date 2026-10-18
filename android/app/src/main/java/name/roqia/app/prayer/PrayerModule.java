@@ -35,6 +35,15 @@ public final class PrayerModule extends ReactContextBaseJavaModule implements Li
     ContextCompat.registerReceiver(context,timeChanges,filter,ContextCompat.RECEIVER_NOT_EXPORTED);
   }
   @Override public String getName(){ return "RoqiaPrayer"; }
+  @ReactMethod public void configureRenewal(boolean enabled, Promise promise) {
+    try { PrayerRenewal.configure(getReactApplicationContext(), enabled); promise.resolve(true); }
+    catch (Exception error) { promise.reject("renewal_schedule", error); }
+  }
+  @ReactMethod public void completeRenewal(String token, boolean success) { PrayerRenewalWorker.complete(token, success); }
+  @ReactMethod public void requestRenewal(Promise promise) {
+    try { PrayerRenewal.request(getReactApplicationContext()); promise.resolve(true); }
+    catch (Exception error) { promise.reject("renewal_request", error); }
+  }
   @ReactMethod public void fetchTimetable(String city, Promise promise) {
     new Thread(() -> {
       try(java.io.InputStream issuer=getReactApplicationContext().getResources().openRawResource(name.roqia.app.R.raw.habous_intermediate)) {
@@ -43,7 +52,7 @@ public final class PrayerModule extends ReactContextBaseJavaModule implements Li
     },"prayer-timetable").start();
   }
   @ReactMethod public void adhanStatus(Promise promise){
-    try{WritableMap r=Arguments.createMap();r.putBoolean("exact",AdhanAlarms.exact(getReactApplicationContext()));r.putBoolean("notifications",AdhanAlarms.allowed(getReactApplicationContext()));r.putString("events",AdhanAlarms.stored(getReactApplicationContext()).toString());r.putString("lastEvent",AdhanAlarms.prefs(getReactApplicationContext()).getString("lastEvent",""));promise.resolve(r);}catch(Exception e){promise.reject("adhan_status",e);}
+    try{WritableMap r=Arguments.createMap();r.putBoolean("exact",AdhanAlarms.exact(getReactApplicationContext()));r.putBoolean("notifications",AdhanAlarms.allowed(getReactApplicationContext()));r.putString("events",AdhanAlarms.stored(getReactApplicationContext()).toString());r.putString("activePath",AdhanService.activePath);r.putString("lastEvent",AdhanAlarms.prefs(getReactApplicationContext()).getString("lastEvent",""));promise.resolve(r);}catch(Exception e){promise.reject("adhan_status",e);}
   }
   @ReactMethod public void scheduleAdhan(String json,Promise promise){new Thread(()->{try{AdhanAlarms.replacePrayers(getReactApplicationContext(),new org.json.JSONArray(json));promise.resolve(true);}catch(Exception e){promise.reject("adhan_schedule",e);}},"adhan-schedule").start();}
   @ReactMethod public void testAdhan(String json,Promise promise){new Thread(()->{try{AdhanAlarms.test(getReactApplicationContext(),new org.json.JSONObject(json));promise.resolve(true);}catch(Exception e){promise.reject("adhan_test",e);}},"adhan-test").start();}
@@ -115,6 +124,8 @@ public final class PrayerModule extends ReactContextBaseJavaModule implements Li
   @ReactMethod public void stopHeading(){handler.post(this::stop);}
   @Override public void onSensorChanged(SensorEvent event){
     if(!headingActive || SystemClock.elapsedRealtime()-lastHeading<100)return;
+    long age = SystemClock.elapsedRealtimeNanos() - event.timestamp;
+    if(age < 0 || age > 2500000000L)return;
     lastHeading=SystemClock.elapsedRealtime();
     float[] matrix=new float[9],adjusted=new float[9],orientation=new float[3];SensorManager.getRotationMatrixFromVector(matrix,event.values);
     Activity activity=getReactApplicationContext().getCurrentActivity();if(activity==null)return;
@@ -122,7 +133,8 @@ public final class PrayerModule extends ReactContextBaseJavaModule implements Li
     if(rotation==Surface.ROTATION_90){x=SensorManager.AXIS_Y;y=SensorManager.AXIS_MINUS_X;}
     else if(rotation==Surface.ROTATION_180){x=SensorManager.AXIS_MINUS_X;y=SensorManager.AXIS_MINUS_Y;}
     else if(rotation==Surface.ROTATION_270){x=SensorManager.AXIS_MINUS_Y;y=SensorManager.AXIS_X;}
-    SensorManager.remapCoordinateSystem(matrix,x,y,adjusted);SensorManager.getOrientation(adjusted,orientation);
+    if(!SensorManager.remapCoordinateSystem(matrix,x,y,adjusted))return;SensorManager.getOrientation(adjusted,orientation);
+    if(!Float.isFinite(orientation[0]))return;
     double magnetic=Math.toDegrees(orientation[0]);WritableMap value=Arguments.createMap();value.putDouble("heading",(magnetic+declination+720)%360);value.putInt("accuracy",event.accuracy);value.putDouble("at",System.currentTimeMillis());
     getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("RoqiaHeading",value);
   }

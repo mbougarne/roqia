@@ -1,0 +1,12 @@
+{
+  "review": {
+    "sha256": "f9f780570a7f2606ebea17721a4aa2133c200db34881b2f79db35ed264bf5745",
+    "package": "package: name='name.roqia.app' versionCode='6' versionName='1.0.5' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'"
+  },
+  "debug": {
+    "sha256": "e1067709c2cea3adec20df4deda08adab5b6e86fd2b12bf941682b5222e53039",
+    "package": "package: name='name.roqia.app' versionCode='6' versionName='1.0.5' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'"
+  },
+  "reviewHasNoMaintainerTools": true,
+  "device": "emulator-5554, Android 16 / API 36, arm64-v8a"
+}

@@ -1,0 +1,278 @@
+[
+  {
+    "mode": "sleep",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356073496,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-sleep"
+        }
+      },
+      {
+        "at": 1792356075658,
+        "event": "phase11-sleep-armed",
+        "detail": {
+          "mode": "sleep",
+          "deadline": 1792356085653
+        }
+      },
+      {
+        "at": 1792356089669,
+        "event": "phase11-sleep-pass",
+        "detail": {
+          "mode": "sleep",
+          "state": "paused",
+          "deadline": 0
+        }
+      },
+      {
+        "at": 1792356090002,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-sleep"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "sleep-replace",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356091064,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-sleep-replace"
+        }
+      },
+      {
+        "at": 1792356093340,
+        "event": "phase11-sleep-armed",
+        "detail": {
+          "mode": "sleep-replace",
+          "deadline": 1792356096330
+        }
+      },
+      {
+        "at": 1792356098358,
+        "event": "phase11-sleep-pass",
+        "detail": {
+          "mode": "sleep-replace",
+          "state": "paused",
+          "deadline": 0
+        }
+      },
+      {
+        "at": 1792356098690,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-sleep-replace"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "sleep-cancel",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356099280,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-sleep-cancel"
+        }
+      },
+      {
+        "at": 1792356101257,
+        "event": "phase11-sleep-armed",
+        "detail": {
+          "mode": "sleep-cancel",
+          "deadline": 0
+        }
+      },
+      {
+        "at": 1792356115274,
+        "event": "phase11-sleep-pass",
+        "detail": {
+          "mode": "sleep-cancel",
+          "state": "playing",
+          "deadline": 0
+        }
+      },
+      {
+        "at": 1792356115595,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-sleep-cancel"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "sleep-restart-arm",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356115925,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-sleep-restart-arm"
+        }
+      },
+      {
+        "at": 1792356117952,
+        "event": "phase11-sleep-armed",
+        "detail": {
+          "mode": "sleep-restart-arm",
+          "deadline": 1792356147935
+        }
+      },
+      {
+        "at": 1792356117955,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-sleep-restart-arm"
+        }
+      },
+      {
+        "at": 1792356122014,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-sleep-restart-check"
+        }
+      },
+      {
+        "at": 1792356122233,
+        "event": "phase11-restart-pass",
+        "detail": {
+          "deadline": 1792356147935,
+          "state": {
+            "state": "none"
+          }
+        }
+      },
+      {
+        "at": 1792356122588,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-sleep-restart-check"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "focus",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356123001,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-focus"
+        }
+      },
+      {
+        "at": 1792356129041,
+        "event": "phase11-focus-pass",
+        "detail": {}
+      },
+      {
+        "at": 1792356129372,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-focus"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "preview-replace",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356130068,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-preview-replace"
+        }
+      },
+      {
+        "at": 1792356134836,
+        "event": "phase11-preview-replace-pass",
+        "detail": {}
+      },
+      {
+        "at": 1792356134839,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-preview-replace"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "renewal-arm",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356135418,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-renewal-arm"
+        }
+      },
+      {
+        "at": 1792356135589,
+        "event": "phase11-renewal-armed",
+        "detail": {
+          "coverage": {
+            "coveredUntil": 1792540800000,
+            "backgroundRenewal": true,
+            "scheduled": 4,
+            "fullAdhan": 4,
+            "exact": true,
+            "fullFallback": 0,
+            "authorized": true,
+            "blocked": false,
+            "signature": "[16,{\"authorized\":true,\"blocked\":false},[true,true,{\"path\":\"/data/user/0/name.roqia.app/files/roqia/content/adhan-doha-normal/2026.10.18/audio.mp3\",\"bytes\":2419879,\"sha256\":\"106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b\",\"title\":\"\u0623\u0630\u0627\u0646 \u0627\u0644\u062f\u0648\u062d\u0629\"},{\"path\":\"/data/user/0/name.roqia.app/files/roqia/content/adhan-doha-fajr/2026.10.18/audio.mp3\",\"bytes\":2901706,\"sha256\":\"a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0\",\"title\":\"\u0623\u0630\u0627\u0646 \u0627\u0644\u0641\u062c\u0631 \u00b7 \u0627\u0644\u062f\u0648\u062d\u0629\"}],[{\"id\":\"roqia-prayer:16:2026-10-19:fajr:at\",\"at\":1792386600000,\"name\":\"fajr\",\"pre\":false,\"path\":\"/data/user/0/name.roqia.app/files/roqia/content/adhan-doha-fajr/2026.10.18/audio.mp3\",\"bytes\":2901706,\"sha256\":\"a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0\",\"title\":\"\u062d\u0627\u0646 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u00b7 \u0623\u0630\u0627\u0646 \u0627\u0644\u0641\u062c\u0631 \u00b7 \u0627\u0644\u062f\u0648\u062d\u0629\"},{\"id\":\"roqia-prayer:16:2026-10-19:isha:at\",\"at\":1792437000000,\"name\":\"isha\",\"pre\":false,\"path\":\"/data/user/0/name.roqia.app/files/roqia/content/adhan-doha-normal/2026.10.18/audio.mp3\",\"bytes\":2419879,\"sha256\":\"106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b\",\"title\":\"\u062d\u0627\u0646 \u0648\u0642\u062a \u0627\u0644\u0639\u0634\u0627\u0621 \u00b7 \u0623\u0630\u0627\u0646 \u0627\u0644\u062f\u0648\u062d\u0629\"},{\"id\":\"roqia-prayer:16:2026-10-20:fajr:at\",\"at\":1792473060000,\"name\":\"fajr\",\"pre\":false,\"path\":\"/data/user/0/name.roqia.app/files/roqia/content/adhan-doha-fajr/2026.10.18/audio.mp3\",\"bytes\":2901706,\"sha256\":\"a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0\",\"title\":\"\u062d\u0627\u0646 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u00b7 \u0623\u0630\u0627\u0646 \u0627\u0644\u0641\u062c\u0631 \u00b7 \u0627\u0644\u062f\u0648\u062d\u0629\"},{\"id\":\"roqia-prayer:16:2026-10-20:isha:at\",\"at\":1792523340000,\"name\":\"isha\",\"pre\":false,\"path\":\"/data/user/0/name.roqia.app/files/roqia/content/adhan-doha-normal/2026.10.18/audio.mp3\",\"bytes\":2419879,\"sha256\":\"106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b\",\"title\":\"\u062d\u0627\u0646 \u0648\u0642\u062a \u0627\u0644\u0639\u0634\u0627\u0621 \u00b7 \u0623\u0630\u0627\u0646 \u0627\u0644\u062f\u0648\u062d\u0629\"}],[[\"roqia-prayer:16:2026-10-19:fajr:at\",1792386600000],[\"roqia-prayer:16:2026-10-19:isha:at\",1792437000000],[\"roqia-prayer:16:2026-10-20:fajr:at\",1792473060000],[\"roqia-prayer:16:2026-10-20:isha:at\",1792523340000]]]",
+            "refreshedAt": 1792356135451
+          }
+        }
+      },
+      {
+        "at": 1792356135624,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-renewal-arm"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "cleanup",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792356136319,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase11-cleanup"
+        }
+      },
+      {
+        "at": 1792356137114,
+        "event": "phase11-cleaned",
+        "detail": {}
+      },
+      {
+        "at": 1792356137115,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase11-cleanup"
+        }
+      }
+    ]
+  }
+]
