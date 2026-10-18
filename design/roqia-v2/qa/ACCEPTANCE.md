@@ -2,6 +2,10 @@
 
 Use the approved 48-screen registry as the visual coverage matrix. Each ticket supplies evidence for its own change; these cross-feature checks close the release. Unit tests establish logic, screenshots establish appearance, and real devices establish native behavior. None substitutes for the others.
 
+## Platform sequence
+
+Current execution tests on Android while implementing shared React Native features for both platforms. Defer iOS build/device testing until all tickets have completed their Android implementation/acceptance work. Record iOS as unverified, not failed or implicitly passed. The later iOS pass must cover its own build, native adapters, permissions, background behavior, rendering, accessibility and upgrade journeys before an iOS release; this deferred pass does not block the current Android ticket sequence.
+
 ## Automated checks to implement
 
 | Area | Meaningful cases |

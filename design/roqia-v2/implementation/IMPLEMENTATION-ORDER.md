@@ -12,11 +12,17 @@ All start dependencies and completion-integration dependencies occur earlier in 
 
 If an acquisition or feasibility ticket is blocked, record the missing evidence and resolve the issue or explicitly revise the scope/order. Do not mark it complete or silently skip it to build an unsupported feature. A documented page-only Warsh capability or native-platform limitation is an output to resolve against the intended feature; it is not permission to substitute content or promise unavailable behavior.
 
+## Platform sequence and branches
+
+Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
+
+Starting with the next phase, name branches `phase_<number>/<short-description>`, for example `phase_2/design-system`. Leave the existing PR branch unchanged.
+
 ## Ordered checklist
 
 ### Steps 01 onward · Baseline and source/native feasibility
 
-**2026-10-18 Android progress:** the first 10 steps have an executable feasibility pass and [evidence report](../../../docs/feasibility/android/README.md). RQ-016, RQ-019 and RQ-037 remain blocked; the other seven require the remaining checks listed in their tickets. No checkbox below implies an unperformed content or physical-device review. Independent probes were exercised across this section; dependent product integration remains gated.
+**2026-10-18 Android progress:** the first 10 steps have an executable feasibility pass and [evidence report](../../../docs/feasibility/android/README.md). RQ-019 and RQ-037 remain blocked; RQ-016 is now in progress after King Fahd acquisition and font testing. All ten still require the remaining checks listed in their tickets. No checkbox below implies an unperformed content or physical-device review. Independent probes were exercised across this section; dependent product integration remains gated.
 
 1. [ ] **[RQ-001 — Capture current release and compatibility baseline](tickets/RQ-001.md)**
 
@@ -52,7 +58,7 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 6. [ ] **[RQ-031 — Acquire reciter and recording catalog](tickets/RQ-031.md)**
 
-   **Deliver:** Use MP3Quran v3 recording sets and riwaya metadata; verify actual chapter availability, URLs, sizes, hashes and supported quality variants. Curate a small initial catalog.
+   **Deliver:** Evaluate King Fahd recordings first, then Al-Mushaf Al-Mohammadi where suitable recordings are unavailable. Retain the existing MP3Quran adapter as feasibility evidence. Verify selected recording identities, riwaya/tariq, actual chapter files, hashes, redistribution and offline download support before curating the production catalog.
 
    **Finish when:** Reciter + recording-set identity is stable; Warsh and Hafs recordings cannot be mixed silently; Partial recordings and unavailable qualities are represented honestly.
 

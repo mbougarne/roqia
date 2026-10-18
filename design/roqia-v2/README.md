@@ -1,6 +1,6 @@
 # Roqia v2 — design and implementation kit
 
-Prepared on 17 October 2026 for the next Android release. This folder adds design resources and planning documents only. It does not implement the redesign, change the running app, install dependencies, or publish content.
+Prepared on 17 October 2026 for the shared React Native redesign, with Android testing/release first and iOS verification deferred until the Android ticket sequence is complete. This folder adds design resources and planning documents only. It does not implement the redesign, change the running app, install dependencies, or publish content.
 
 Start with the [ordered implementation checklist](implementation/IMPLEMENTATION-ORDER.md): one explicit sequence covering all 50 tickets, with direct next-ticket links. The [backlog](implementation/BACKLOG.md) remains the ID-sorted catalog; [START-HERE.md](START-HERE.md) explains the milestones. The first 10 steps now have [Android feasibility evidence](../../docs/feasibility/android/README.md); source, review and device gates remain open.
 
