@@ -23,6 +23,7 @@ export function ReadingCard({
   onReset,
   audio,
   hideCounter = false,
+  dua = false,
 }: {
   item: DataProps;
   index: number;
@@ -37,6 +38,7 @@ export function ReadingCard({
     onAudioPress: (file: string) => unknown;
   };
   hideCounter?: boolean;
+  dua?: boolean;
 }) {
   const confirmReset = useConfirmReset();
   const p = usePalette();
@@ -119,8 +121,23 @@ export function ReadingCard({
           {item.repeatDescription}
         </AppText>
       )}
+      {dua && files.length > 0 && (
+        <Button
+          icon={
+            audio.activeAudioFile === files[0].fileName && !audio.isAudioPaused
+              ? 'pause'
+              : 'play'
+          }
+          label={
+            audio.activeAudioFile === files[0].fileName && !audio.isAudioPaused
+              ? 'إيقاف مؤقت'
+              : 'استماع'
+          }
+          onPress={() => void audio.onAudioPress(files[0].fileName)}
+        />
+      )}
       <View style={{...rtlRow, alignItems: 'stretch', gap: 6}}>
-        {files.length > 0 && (
+        {!dua && files.length > 0 && (
           <IconButton
             name={
               audio.activeAudioFile === files[0].fileName &&

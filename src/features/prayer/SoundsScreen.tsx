@@ -89,16 +89,6 @@ export function SoundsScreen({navigation}: any) {
         />
       )}
       {!!message && <AppText>{message}</AppText>}
-      <Button
-        label="إيقاف الأذان"
-        onPress={() => {
-          adhanNative()?.stopAdhan();
-          void act(async () => {
-            await reconcilePrayer();
-            setMessage('تم إيقاف التشغيل وإلغاء التجربة.');
-          });
-        }}
-      />
       {sounds.map(sound => {
         const installed = !!runtime.installed(sound.pack),
           chosen = selected[sound.variant] === sound.id;
@@ -174,6 +164,17 @@ export function SoundsScreen({navigation}: any) {
           </Group>
         );
       })}
+      <Button
+        secondary
+        label="إيقاف الأذان"
+        onPress={() => {
+          adhanNative()?.stopAdhan();
+          void act(async () => {
+            await reconcilePrayer();
+            setMessage('تم إيقاف التشغيل وإلغاء التجربة.');
+          });
+        }}
+      />
       <Button
         secondary
         label="إذن المنبهات والتذكيرات"

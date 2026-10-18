@@ -1,0 +1,24 @@
+{
+  "narrow": {
+    "widthDp": 320,
+    "fontScale": 1,
+    "theme": "light"
+  },
+  "large": {
+    "widthDp": 411.4,
+    "fontScale": 2,
+    "theme": "dark"
+  },
+  "screens": [
+    14,
+    15,
+    20,
+    21,
+    22,
+    25,
+    38,
+    39,
+    47
+  ],
+  "restored": true
+}

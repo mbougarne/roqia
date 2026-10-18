@@ -1,5 +1,7 @@
 # Visual implementation coverage
 
+Latest combined owner pass: [review 03](../../../docs/implementation/phase-12/review-03/README.md) and [light/dark gallery](../../../docs/implementation/phase-12/review-03/index.html). It supersedes the original captures below for current appearance. The historical ticket mapping remains unchanged.
+
 All 48 supplied screens are implemented in the Phase 12 batch (RQ-051–RQ-062). The [comparison report](../../../docs/implementation/phase-12/SCREENSHOTS.md) records original references, Android captures, and data/platform differences. Owner visual acceptance remains pending; Phase 13 has not started. Earlier Phase 7 evidence is superseded for this visual review.
 
 Compare hierarchy, layout, artwork/icons, typography, spacing, controls and navigation. Capture unavailable/loading/offline/error states additionally, without inventing source content or supported capabilities. Document data/platform differences explicitly. Preserve Western UI digits and verified scripture fonts.

@@ -1,0 +1,142 @@
+[
+  {
+    "screen": "08-ruqya",
+    "theme": "light",
+    "file": "08-ruqya-light.png",
+    "sha256": "6fc2626c9bcd83c3adb533f8d082f8373c004789344268bece3e1a17b7661043",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "09-adhkar",
+    "theme": "light",
+    "file": "09-adhkar-light.png",
+    "sha256": "5534cd6b1513749d9a17bd1abf87cc4fcdf03b7227a2d2a725ebbef320f7edbc",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "10-morning",
+    "theme": "light",
+    "file": "10-morning-light.png",
+    "sha256": "d49966edd77a498d5cd49ca290e57907f6be8d334d7897acf01a1bfad1756a89",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "11-evening",
+    "theme": "light",
+    "file": "11-evening-light.png",
+    "sha256": "0cb979ce3de0062eba64b303dc2f46644330469c0b97f1445611aed33b0f83b8",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "12-before-sleep",
+    "theme": "light",
+    "file": "12-before-sleep-light.png",
+    "sha256": "19501a294de823a912280639a7f169a8ed7b39fd06b0f6f987b840c2de0dd780",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "13-dua",
+    "theme": "light",
+    "file": "13-dua-light.png",
+    "sha256": "05c3607205ca23205a9427c80e056024bd71987d3f5603d837892ca07c5ac3a7",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "14-tasbih",
+    "theme": "light",
+    "file": "14-tasbih-light.png",
+    "sha256": "18b28e3fc248caf05e3b17dad86a3598c34cb31aa3fcab8c61e7d5ba636d9773",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "08-ruqya",
+    "theme": "dark",
+    "file": "08-ruqya-dark.png",
+    "sha256": "74d20298e9acb7553bff809f1fb87d29158a250e1d52225d31bb3f462d577b6d",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "09-adhkar",
+    "theme": "dark",
+    "file": "09-adhkar-dark.png",
+    "sha256": "31e9662317673d22b6bdb22dcb1025c5590be98a032790cd40bc04ed3ba7d62e",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "10-morning",
+    "theme": "dark",
+    "file": "10-morning-dark.png",
+    "sha256": "d0059400804b6290bce012764730ff2e3b4e2d6c02f086bba589ea6e2092b6c3",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "11-evening",
+    "theme": "dark",
+    "file": "11-evening-dark.png",
+    "sha256": "409b4682ffd13b3e0d383b5b2c6e842ef2e1130644745d6add8dc24b3c5f4d7a",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "12-before-sleep",
+    "theme": "dark",
+    "file": "12-before-sleep-dark.png",
+    "sha256": "cace12ca567532c88d2e6288e83c301af3170fe09cd4055e8a1c7b607d7014de",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "13-dua",
+    "theme": "dark",
+    "file": "13-dua-dark.png",
+    "sha256": "b0e6c22e96e803683f631440ab0c6c9ba6c16c4b29032f393208644b10f286f9",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  },
+  {
+    "screen": "14-tasbih",
+    "theme": "dark",
+    "file": "14-tasbih-dark.png",
+    "sha256": "647aa1ae40423427dab18ba3fc04ffff8f9b0edb4dca7639fb7bf490ba092c8c",
+    "dimensions": [
+      1080,
+      2400
+    ]
+  }
+]

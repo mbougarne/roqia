@@ -1,5 +1,9 @@
 # Phase 12 — whole-app visual review
 
+**Combined owner review:** [All 48 references and remaining-screen refinements](review-03/README.md), extending open PR #17 as one review batch.
+
+**Latest owner follow-up:** [Ruqya and screens 09–14 refinements](review-02/README.md), after merged PR #16.
+
 **Owner review follow-up:** PR #15 is merged. See [screens 01–08 corrections and fresh comparisons](review-01/README.md) for the first feedback batch.
 
 This is the complete RQ-051–RQ-062 visual implementation batch, based on the 48 light and dark reference screens in `design/roqia-v2`. It is prepared for the owner's screen-by-screen review; it does not record owner acceptance or start Phase 13. Branch: `phase_12/visual-polish`, based on merged Phase 11 PR #14.

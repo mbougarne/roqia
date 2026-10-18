@@ -32,6 +32,14 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 PR #15 is merged. The first owner review is addressed on `phase_12/splash-onboarding-ruqya-review`, from updated main (`407ca03`). Scope: saved-theme splash/corner ornaments, welcome and walkthrough artwork/layout, guidance cards, Ruqya listen hero/mini-player and the bundled-audio playback defect. [Review evidence and light/dark comparisons](../../../docs/implementation/phase-12/review-01/README.md). Content wording and screens 09–48 await subsequent owner feedback; this does not start Phase 13 or mark visual acceptance complete.
 
+### Owner review follow-up: screens 08–14
+
+PR #16 is merged. The next owner feedback batch is addressed on `phase_12/adhkar-visual-review`: Ruqya background artwork, navigation icons, Adhkar overview and sticky progress/play controls, Dua and visual-only Tasbih refinements. [Review evidence](../../../docs/implementation/phase-12/review-02/README.md). This remains Phase 12 owner review.
+
+### Combined owner review: all remaining designs
+
+The owner requested a single remaining-screen pass before Phase 13. PR #17 remains open and now combines the screens 08–14 feedback with the full 48-screen reference audit on `phase_12/adhkar-visual-review`. The [combined review report](../../../docs/implementation/phase-12/review-03/README.md) records the player, shared controls, Quran, prayer, settings, downloads and dialog refinements. Final owner visual acceptance remains pending; this does not start Phase 13.
+
 ## Platform sequence and branches
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.

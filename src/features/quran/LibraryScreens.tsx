@@ -111,7 +111,7 @@ export function QuranLibraryScreen({navigation}: any) {
           />
         </Card>
       ) : (
-        <AppText>المصحف محفوظ على جهازك</AppText>
+        <Banner icon="offline" text="المصحف محفوظ على جهازك" />
       )}
       {resume && (
         <FeatureCard
@@ -135,7 +135,9 @@ export function QuranLibraryScreen({navigation}: any) {
             minHeight: 60,
             paddingHorizontal: 10,
             paddingVertical: 4,
-            borderBottomWidth: 0.5,
+            borderWidth: 0.5,
+            borderRadius: 10,
+            backgroundColor: p.surface,
             borderColor: p.borderSubtle,
           }}
           onPress={() =>

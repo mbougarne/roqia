@@ -216,9 +216,23 @@ export function QuranAudioScreen({route, navigation}: any) {
                       {runtime.installed(c.pack) ? ' · محفوظة' : ''}
                     </AppText>
                   </View>
-                  <AppIcon
-                    name={selected.includes(c.surah) ? 'check' : 'plus'}
-                  />
+                  <View
+                    style={{
+                      width: 22,
+                      height: 22,
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: p.borderControl,
+                      backgroundColor: selected.includes(c.surah)
+                        ? p.actionPrimary
+                        : p.surface,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    {selected.includes(c.surah) && (
+                      <AppIcon name="check" size={16} color={p.textOnAction} />
+                    )}
+                  </View>
                 </Pressable>
               ))}
             <Group>
@@ -316,11 +330,20 @@ export function OfflineAudioScreen({navigation}: any) {
                 {chapters[c.surah - 1].name}
               </AppText>
               <AppIcon name="check" size={18} />
-              <IconButton
-                name="play"
-                label={'استماع إلى ' + chapters[c.surah - 1].name}
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={'استماع إلى ' + chapters[c.surah - 1].name}
                 onPress={() => play(r, [c])}
-              />
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: 24,
+                  backgroundColor: p.actionPrimary,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <AppIcon name="play" color={p.textOnAction} />
+              </Pressable>
             </View>
           ))}
           <Button

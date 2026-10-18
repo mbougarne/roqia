@@ -6,12 +6,11 @@ import {
   Ornament,
   Group,
   SettingRow,
-  rtlRow,
 } from '../design/components';
-import Svg, {Circle} from 'react-native-svg';
+import Svg, {Circle, Path} from 'react-native-svg';
 import {tasbihatData} from '../data';
 import {tasbihatRepeatContext} from '../store';
-import {AppText, Button, Page, Sheet, usePalette} from '../design/ui';
+import {AppText, AppIcon, Button, Page, Sheet, usePalette} from '../design/ui';
 import {number} from '../design/format';
 import {ReadingCard} from '../features/devotional/ReadingCard';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
@@ -40,79 +39,105 @@ export function TasbihatScreen({navigation}: any) {
           .map(i => ({value: i.id, label: itemTitle(i)}))}
         onChange={setId}
       />
-      {fontScale > 1.2 && (
-        <AppText role="devotional" style={{textAlign: 'center'}}>
-          {item.content}
-        </AppText>
-      )}
-      <View style={{alignItems: 'center', gap: 12}}>
-        <View
-          style={{
-            width: 240,
-            height: 240,
+      <View
+        style={{
+          backgroundColor: p.surface,
+          borderRadius: 16,
+          paddingVertical: 24,
+          gap: 18,
+          borderWidth: 1,
+          borderColor: p.borderSubtle,
+        }}>
+        {fontScale > 1.2 && (
+          <AppText role="devotional" style={{textAlign: 'center'}}>
+            {item.content}
+          </AppText>
+        )}
+        <View style={{alignItems: 'center', gap: 12}}>
+          <View
+            style={{
+              width: 280,
+              height: 280,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Svg
+              width={280}
+              height={280}
+              viewBox="0 0 200 200"
+              style={{position: 'absolute'}}
+              accessible={false}>
+              <Path
+                d="M6 140V62Q6 44 24 44V32Q65 30 100 4Q135 30 176 32V44Q194 44 194 62V140"
+                fill="none"
+                stroke={p.borderSubtle}
+                strokeWidth={0.7}
+              />
+              <Circle
+                cx={100}
+                cy={100}
+                r={72}
+                stroke={p.borderSubtle}
+                strokeWidth={8}
+                fill="none"
+              />
+              <Circle
+                cx={100}
+                cy={100}
+                r={72}
+                stroke={p.actionPrimary}
+                strokeWidth={8}
+                fill="none"
+                strokeDasharray={`${452 * (max ? (max - count) / max : 0)} 452`}
+                rotation={-90}
+                origin="100,100"
+              />
+            </Svg>
+            <View pointerEvents="none" style={{position: 'absolute', top: 20}}>
+              <AppIcon name="medallion" color={p.accent} size={24} />
+            </View>
+            <View
+              pointerEvents="none"
+              style={{position: 'absolute', bottom: 20}}>
+              <AppIcon name="medallion" color={p.accent} size={24} />
+            </View>
+            {fontScale <= 1.2 && (
+              <AppText role="devotional" style={{textAlign: 'center'}}>
+                {item.content}
+              </AppText>
+            )}
+            <AppText role="counter" style={{textAlign: 'center'}}>
+              {number(count)}
+            </AppText>
+            <AppText role="caption">المتبقي</AppText>
+          </View>
+          <AppText role="caption">{`العدد الأصلي ${number(max)}`}</AppText>
+        </View>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="اضغط بعد التسبيح"
+          accessibilityState={{disabled: count === 0}}
+          disabled={count === 0}
+          onPress={() => state.decrementRepeat(id)}
+          style={({pressed}) => ({
+            alignSelf: 'center',
+            width: 88,
+            height: 88,
+            borderRadius: 44,
+            borderWidth: 7,
+            borderColor: p.surfaceMuted,
             alignItems: 'center',
             justifyContent: 'center',
-          }}>
-          <Svg
-            width={240}
-            height={240}
-            viewBox="0 0 200 200"
-            style={{position: 'absolute'}}
-            accessible={false}>
-            <Circle
-              cx={100}
-              cy={100}
-              r={90}
-              stroke={p.borderSubtle}
-              strokeWidth={8}
-              fill="none"
-            />
-            <Circle
-              cx={100}
-              cy={100}
-              r={90}
-              stroke={p.actionPrimary}
-              strokeWidth={8}
-              fill="none"
-              strokeDasharray={`${565 * (max ? (max - count) / max : 0)} 565`}
-              rotation={-90}
-              origin="100,100"
-            />
-          </Svg>
-          {fontScale <= 1.2 && (
-            <AppText role="devotional" style={{textAlign: 'center'}}>
-              {item.content}
-            </AppText>
-          )}
-          <AppText role="counter" style={{textAlign: 'center'}}>
-            {number(count)}
+            backgroundColor: p.actionPrimary,
+            opacity: pressed || count === 0 ? 0.6 : 1,
+          })}>
+          <AppText
+            role="label"
+            style={{color: p.textOnAction, textAlign: 'center'}}>
+            {count === 0 ? 'اكتمل' : 'سبّح'}
           </AppText>
-          <AppText role="caption">المتبقي</AppText>
-        </View>
-        <AppText role="caption">{`العدد الأصلي ${number(max)}`}</AppText>
+        </Pressable>
       </View>
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel="اضغط بعد التسبيح"
-        accessibilityState={{disabled: count === 0}}
-        disabled={count === 0}
-        onPress={() => state.decrementRepeat(id)}
-        style={({pressed}) => ({
-          alignSelf: 'center',
-          width: 104,
-          height: 104,
-          borderRadius: 52,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: p.actionPrimary,
-          opacity: pressed || count === 0 ? 0.6 : 1,
-        })}>
-        <AppText
-          role="label"
-          style={{color: p.textOnAction, textAlign: 'center'}}>
-          {count === 0 ? 'اكتمل' : 'سبّح'}
-        </AppText>
-      </Pressable>
       {saved.error && (
         <Button
           secondary

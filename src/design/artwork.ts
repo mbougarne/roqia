@@ -111,6 +111,21 @@ export function artwork(
       '" stroke-width="1.3" fill="none"><path d="M124 30A59 59 0 1 0 171 119A65 65 0 0 1 124 30Z"/><path d="M48 51v12m-6-6h12M182 58v14m-7-7h14M186 131v10m-5-5h10M93 120v8m-4-4h8"/><circle cx="165" cy="36" r="2"/><circle cx="49" cy="109" r="2"/><path d="M49 154h146" opacity=".4"/></g>' +
       end
     );
+  if (name === 'download')
+    return (
+      start +
+      `<circle cx="120" cy="88" r="70" fill="${p.surfaceMuted}" opacity=".5"/>
+      <g fill="${p.background}" stroke="${gold}" stroke-width="1">
+      <path d="M29 75L84 52L109 126L54 148Z M35 79L80 60L101 122L58 140Z"/>
+      <path d="M211 75L156 52L131 126L186 148Z M205 79L160 60L139 122L182 140Z"/>
+      <path d="M46 88L77 75L90 117L62 130ZM194 88L163 75L150 117L178 130Z"/>
+      </g><rect x="84" y="21" width="72" height="136" rx="12" fill="${p.background}" stroke="${green}" stroke-width="1.4"/>
+      <rect x="90" y="28" width="60" height="120" rx="7" fill="none" stroke="${gold}" stroke-width=".7"/>
+      <path d="M110 33h20M120 67v43m-15-16 15 16 15-16M103 119h34" fill="none" stroke="${green}" stroke-width="2"/>
+      <circle cx="151" cy="144" r="15" fill="${p.surfaceMuted}" stroke="${gold}" stroke-width=".5"/>
+      <path d="M151 136v14m-5-5 5 5 5-5" fill="none" stroke="${green}" stroke-width="1.5"/>` +
+      end
+    );
   if (name === 'qibla')
     return (
       start +

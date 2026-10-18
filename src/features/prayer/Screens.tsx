@@ -35,6 +35,7 @@ import {
   rtlRow,
 } from '../../design/components';
 import {Illustration} from '../../design/Illustration';
+import {PanelArtwork} from '../../design/PanelArtwork';
 import {ltr, number} from '../../design/format';
 import {
   defaults,
@@ -228,6 +229,7 @@ export function PrayerScreen({navigation}: any) {
             visual.next,
             {backgroundColor: p.surfaceMuted, borderColor: p.borderSubtle},
           ]}>
+          <PanelArtwork color={p.accent} />
           <View style={{flex: 1, gap: 2}}>
             <AppText role="caption">الصلاة القادمة</AppText>
             <AppText role="bodyStrong">{labels[next.name]}</AppText>
@@ -498,7 +500,11 @@ export function LocationScreen({navigation}: any) {
   return (
     <Page title="المدينة والموقع" onBack={() => navigation.goBack()}>
       <Status error={error} retry={load} />
+      <View style={{alignItems: 'center', paddingVertical: 14}}>
+        <AppIcon name="location" size={44} />
+      </View>
       <Button
+        secondary
         label={busy ? 'جار تحديد الموقع' : 'استخدام موقعي مرة واحدة'}
         disabled={busy || !prefs}
         onPress={() =>
@@ -1247,6 +1253,8 @@ const visual = StyleSheet.create({
     justifyContent: 'center',
   },
   next: {
+    overflow: 'hidden',
+    minHeight: 136,
     flexDirection: 'row-reverse',
     direction: 'ltr',
     alignItems: 'center',
@@ -1270,9 +1278,9 @@ const visual = StyleSheet.create({
     flexDirection: 'row-reverse',
     direction: 'ltr',
     alignItems: 'center',
-    minHeight: 48,
-    borderRadius: 12,
-    paddingHorizontal: 8,
+    minHeight: 56,
+    borderRadius: 10,
+    paddingHorizontal: 10,
     gap: 8,
   },
   prayerName: {

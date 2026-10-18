@@ -51,7 +51,7 @@ if want('30'):
 if want('31'):
     link('quran/warsh-kfgqpc-v2.1-update6/112/1','الإخلاص',True);tap('حفظ علامة القراءة');link('quran/bookmarks','العلامات المحفوظة');shot('31-bookmarks');link('quran/warsh-kfgqpc-v2.1-update6/112/1','الإخلاص',True);tap('إزالة علامة القراءة')
 if want('34'):
-    link('quran/audio','اختر القارئ',True);tap('محمود خليل الحصري');tap('اختيار السور');tap('1 · الفاتحة');shot('34-audio-surah-selection')
+    link('quran/audio','اختر القارئ',True);tap('ورش عن نافع');tap('محمود خليل الحصري');tap('اختيار السور');tap('1 · الفاتحة');shot('34-audio-surah-selection')
 if want('35'):
     link('downloads','التنزيلات',True);tap('المكتملة');shot('35-download-queue')
 if want('38'):
@@ -62,7 +62,7 @@ print('Journeys complete',flush=True)
 if want('48'):
     shell('svc','wifi','disable');shell('svc','data','disable')
     try:
-        link('quran/audio','اختر القارئ',True);tap('محمود خليل الحصري');tap('اختيار السور');tap('2 · البقرة');tap('تحميل المحدد');wait('بانتظار');shot('48-download-error')
+        link('quran/audio','اختر القارئ',True);tap('ورش عن نافع');tap('محمود خليل الحصري');tap('اختيار السور');tap('2 · البقرة');tap('تحميل المحدد');wait('بانتظار');shot('48-download-error')
         tap('إيقاف مؤقت');wait('متابعة التنزيل');capture('48-download-paused-'+args.theme)
         tap('متابعة التنزيل');wait('بانتظار');tap('إلغاء التنزيل');wait('لا توجد تنزيلات قيد التنفيذ')
     finally:
