@@ -22,6 +22,9 @@ export type Events = {
   error: (code: string) => void;
 };
 export type DownloadPorts = {
+  // Only a transport that validates entity/range responses before append may retain partials.
+  resumable?: boolean;
+  sync?: (paths: string[]) => Promise<void>;
   load: () => Promise<{
     jobs: DownloadJob[];
     installed: InstalledPack[];
@@ -56,7 +59,7 @@ export class DownloadCoordinator {
   private revision = 0;
   private ready = false;
   private failure: string | null = null;
-  private network = {connected: true, unmetered: true};
+  private network = {connected: true, wifi: true};
   private retryTimer: ReturnType<typeof setTimeout> | undefined;
   constructor(
     private catalog: Pack[],
@@ -147,6 +150,8 @@ export class DownloadCoordinator {
           current.pauseReason = null;
           current.etag = headers.etag ?? headers.ETag ?? null;
           current.lastModified = headers['last-modified'] ?? null;
+          current.errorCode =
+            headers['x-roqia-restart-reason'] ?? current.errorCode;
           await this.save();
         }),
       progress: received =>
@@ -237,13 +242,13 @@ export class DownloadCoordinator {
     for (const job of members as DownloadJob[])
       await this.ports.verify(job.relativeFinalPath, this.asset(job));
     const record: InstalledPack = {
-      active: !pack.preparation,
+      active: false,
       packId: pack.id,
       version: pack.version,
       relativeDirectory: `content/${pack.id}/${pack.version}`,
       manifestHash: pack.manifestHash,
       capabilities: pack.capabilities,
-      state: pack.preparation ? 'installing' : 'ready',
+      state: 'installing',
       activatedAt: this.ports.now(),
       sourceMetadata: pack.sourceMetadata,
       files: [
@@ -268,8 +273,9 @@ export class DownloadCoordinator {
           `${record.relativeDirectory}/${asset.file}`,
           asset,
         );
-      record.state = 'ready';
     }
+    await this.ports.sync?.(record.files);
+    record.state = 'ready';
     record.active = true;
     this.installed = this.installed.map(p =>
       p.packId === pack.id && p !== record ? {...p, active: false} : p,
@@ -285,30 +291,31 @@ export class DownloadCoordinator {
     );
     await this.save();
   }
-  networkChanged = (network: {connected: boolean; unmetered: boolean}) =>
+  networkChanged = (network: {connected: boolean; wifi: boolean}) =>
     this.run(() => this.updateNetwork(network));
-  private async updateNetwork(network: {
-    connected: boolean;
-    unmetered: boolean;
-  }) {
+  private async updateNetwork(network: {connected: boolean; wifi: boolean}) {
     this.network = network;
     if (!this.ready) return;
     for (const job of this.jobs) {
       const allowed =
         network.connected &&
-        (job.consentNetworkPolicy === 'any' || network.unmetered);
+        (job.consentNetworkPolicy === 'any' || network.wifi);
       if (!allowed && activeStates.has(job.state)) {
         job.state = 'waiting_network';
         job.pauseReason = 'network';
         job.generation++;
         await this.save();
-        // Stop rather than append unverifiable partial responses; retain intent and consent.
-        await this.stopTask(job);
+        const task = job.nativeTaskId
+          ? this.tasks.get(job.nativeTaskId)
+          : undefined;
+        if (task && this.ports.resumable) await task.pause();
+        else await this.stopTask(job);
         await this.save();
       } else if (
         allowed &&
         job.state === 'waiting_network' &&
-        !job.nativeTaskId
+        (!job.nativeTaskId ||
+          this.tasks.get(job.nativeTaskId)?.state === 'PAUSED')
       ) {
         job.state = 'queued';
         job.pauseReason = null;
@@ -330,7 +337,7 @@ export class DownloadCoordinator {
       if (job.state !== 'queued' || job.retryAt > this.ports.now()) continue;
       if (
         !this.network.connected ||
-        (job.consentNetworkPolicy === 'wifi' && !this.network.unmetered)
+        (job.consentNetworkPolicy === 'wifi' && !this.network.wifi)
       ) {
         job.state = 'waiting_network';
         job.pauseReason = 'network';
@@ -338,8 +345,23 @@ export class DownloadCoordinator {
         continue;
       }
       try {
+        // Native completion can race an explicit pause before its JS callback arrives.
+        // A complete private file needs verification/install, not a resume of a vanished task.
+        if (
+          this.ports.resumable &&
+          (await this.ports.size(job.relativeTempPath)) === job.expectedBytes
+        ) {
+          await this.finishAsset(job);
+          continue;
+        }
         const needed =
-          job.expectedBytes +
+          Math.max(
+            0,
+            job.expectedBytes -
+              (this.ports.resumable
+                ? await this.ports.size(job.relativeTempPath)
+                : 0),
+          ) +
           (this.pack(job).derivedAssets ?? []).reduce(
             (n, a) => n + a.bytes,
             0,
@@ -347,11 +369,24 @@ export class DownloadCoordinator {
           Math.max(job.expectedBytes * 0.1, 20 * 1024 * 1024);
         if ((await this.ports.free()) < needed)
           throw Error('insufficient_space');
-        await this.ports.remove(job.relativeTempPath);
+        if (!this.ports.resumable)
+          await this.ports.remove(job.relativeTempPath);
         job.generation++;
         job.attempt++;
-        job.bytesReceived = 0;
+        job.bytesReceived = await this.ports.size(job.relativeTempPath);
         job.errorCode = null;
+        const paused =
+          this.ports.resumable && job.nativeTaskId
+            ? this.tasks.get(job.nativeTaskId)
+            : undefined;
+        if (paused?.state === 'PAUSED') {
+          job.state = 'waiting_network';
+          job.pauseReason = 'network';
+          await this.save();
+          this.ports.attach(paused, this.events(job));
+          await paused.resume();
+          continue;
+        }
         job.nativeTaskId = `roqia.${job.jobId}.${job.generation}`;
         job.state = 'waiting_network';
         job.pauseReason = 'network';
@@ -436,11 +471,28 @@ export class DownloadCoordinator {
         }
         if (activeStates.has(job.state)) {
           if (
+            !task &&
+            ((await this.ports.size(job.relativeTempPath)) ===
+              job.expectedBytes ||
+              (await this.ports.size(job.relativeFinalPath)) ===
+                job.expectedBytes)
+          ) {
+            try {
+              await this.finishAsset(job);
+            } catch {
+              await this.fail(job, 'integrity_recovery_failed', false);
+            }
+            continue;
+          }
+          if (
             task &&
             ['PENDING', 'DOWNLOADING', 'PAUSED'].includes(task.state)
           ) {
             this.ports.attach(task, this.events(job));
-            if (task.state === 'PAUSED') await task.resume();
+            if (task.state === 'PAUSED') {
+              if (!this.ports.resumable) await this.stopTask(job);
+              job.state = 'queued';
+            }
           } else {
             job.state = 'queued';
             job.generation++;
@@ -548,14 +600,38 @@ export class DownloadCoordinator {
         !['paused_user', 'failed', 'cancelled', 'removed'].includes(job.state)
       )
         return;
-      // Restart safely. Candidate transport does not expose enough range validators for verified append.
-      await this.stopTask(job);
+      const paused = job.state === 'paused_user';
+      if (!this.ports.resumable || !paused) await this.stopTask(job);
       job.state = 'queued';
       job.pauseReason = null;
       job.retryAt = 0;
       job.attempt = 0;
-      job.errorCode = 'restart_for_integrity';
+      job.errorCode = null;
       job.generation++;
+      await this.save();
+      await this.pump();
+    });
+  allowAnyNetwork = (id: string) =>
+    this.run(async () => {
+      const job = this.jobs.find(j => j.jobId === id);
+      if (
+        !job ||
+        job.state !== 'waiting_network' ||
+        job.consentNetworkPolicy !== 'wifi'
+      )
+        return;
+      // Native network constraints belong to the task. Explicit consent replaces that task;
+      // this file restarts, while other jobs retain their original Wi-Fi consent.
+      await this.stopTask(job);
+      await this.ports.remove(job.relativeTempPath);
+      job.generation++;
+      job.consentNetworkPolicy = 'any';
+      job.state = 'queued';
+      job.pauseReason = null;
+      job.bytesReceived = 0;
+      job.attempt = 0;
+      job.retryAt = 0;
+      job.errorCode = null;
       await this.save();
       await this.pump();
     });

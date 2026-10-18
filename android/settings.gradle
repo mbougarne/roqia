@@ -10,6 +10,12 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
 	ex.autolinkLibrariesFromCommand()
 }
 
+// Apply before any downloader compilation, including builds after --ignore-scripts installs.
+providers.exec {
+    workingDir(settingsDir.parentFile)
+    commandLine("python3", "tools/phase10/patch-downloader.py")
+}.result.get().assertNormalExitValue()
+
 rootProject.name = 'app'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')

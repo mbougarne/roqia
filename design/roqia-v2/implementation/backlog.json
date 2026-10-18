@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 8 merged; phase 9 RQ-026 French/English Hafs delivery implemented with Android validation and PR review. Next functional pickup RQ-020 then RQ-021; remaining functionality precedes whole-app visual parity, final acceptance/release and deferred iOS testing.",
+  "status": "Phase 9 merged in PR #12. Phase 10 RQ-020/RQ-021 Android functional download recovery and strict native Wi-Fi implemented and validated; broader native acceptance remains open. Next functional pickup RQ-032 through RQ-035, before whole-app visual parity, final release acceptance and deferred iOS testing.",
   "tickets": [
     {
       "id": "RQ-001",
@@ -632,11 +632,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 7,
-      "evidence": "../../../docs/feasibility/android/README.md",
+      "evidence": "../../../docs/implementation/phase-10/README.md",
       "verifiedOn": "2026-10-18",
-      "scope": "android",
-      "progress": "Pinned downloader 4.6.3/MMKV 1.3.16 and proved API 36 private storage, pause/resume, 200/206/416 handling with hash quarantine, paused-job recovery after app-only SIGKILL, network gating, atomic rename and a real provider HTTPS transfer.",
-      "remaining": "Resolve strict Wi-Fi versus unmetered semantics, explicit range-start validation and durable write/fsync adapter behavior before production coordinator integration; broaden active-process-loss/storage/OEM coverage."
+      "scope": "shared coordinator implementation; Android API 36 native validation; iOS deferred",
+      "progress": "Phase 10 completes Android functional recovery: native Wi-Fi transport enforcement, entity/range validation before append, persisted partial resume and user/network-pause separation, fsync/atomic rename/directory sync, FULL SQLite journal commits and generation-safe recovery across active-process/rename/activation interruptions. Controlled fixtures and normal review-build provider downloads are documented separately.",
+      "remaining": "Broader RQ-048 physical/OEM/older-supported-Android acceptance, actual power-loss/disk-exhaustion coverage and deferred iOS native/build/device verification. Whole-app visual parity remains unaccepted."
     },
     {
       "id": "RQ-021",
@@ -665,11 +665,11 @@
       ],
       "completionIntegrationRequires": [],
       "executionOrder": 16,
-      "evidence": "../../../docs/implementation/phase-5/README.md",
+      "evidence": "../../../docs/implementation/phase-10/README.md",
       "verifiedOn": "2026-10-18",
-      "scope": "shared implementation; Android tested; iOS verification deferred",
-      "progress": "Coordinator now owns derived chapter/source files, verifies them before activation, preserves an older ready version on failed import, and supports explicit retry after removal or failure.",
-      "remaining": "Physical-device/background/network acceptance remains RQ-020/RQ-048; partial transport resumes still restart affected files from zero."
+      "scope": "shared coordinator implementation; Android API 36 native validation; iOS deferred",
+      "progress": "Phase 10 completes Android functional recovery: native Wi-Fi transport enforcement, entity/range validation before append, persisted partial resume and user/network-pause separation, fsync/atomic rename/directory sync, FULL SQLite journal commits and generation-safe recovery across active-process/rename/activation interruptions. Controlled fixtures and normal review-build provider downloads are documented separately.",
+      "remaining": "Broader RQ-048 physical/OEM/older-supported-Android acceptance, actual power-loss/disk-exhaustion coverage and deferred iOS native/build/device verification. Whole-app visual parity remains unaccepted."
     },
     {
       "id": "RQ-022",

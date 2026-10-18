@@ -1,0 +1,354 @@
+--- a/android/src/main/java/com/eko/RNBackgroundDownloaderModuleImpl.kt
++++ b/android/src/main/java/com/eko/RNBackgroundDownloaderModuleImpl.kt
+@@ -779,8 +779,8 @@
+ 
+     // On Android 16+ (API 36), DownloadManager has strict path restrictions and throws
+     // SecurityException for app-specific external storage paths. Use ResumableDownloader instead.
+-    if (Build.VERSION.SDK_INT >= 36) {
+-      logD(NAME, "Android 16+ detected: Using ResumableDownloader to avoid DownloadManager path restrictions")
++    if (id.startsWith("roqia.") || Build.VERSION.SDK_INT >= 36) { // Roqia jobs always use verified private-file transport.
++      logD(NAME, "Using validated private-file ResumableDownloader")
+       startWithResumableDownloader()
+       return
+     }
+--- a/android/src/main/java/com/eko/ResumableDownloader.kt
++++ b/android/src/main/java/com/eko/ResumableDownloader.kt
+@@ -51,6 +51,7 @@
+     @Volatile var connection: HttpURLConnection? = null,
+     @Volatile var inputStream: InputStream? = null,
+     var hasReportedBegin: Boolean = false,
++    var restartReason: String? = null,
+     // Session counter to detect stale threads after pause/resume
+     val sessionId: AtomicLong = AtomicLong(0),
+     // Whether this download may transfer over metered networks
+@@ -222,7 +223,7 @@
+     if (existingState != null) {
+       RNBackgroundDownloaderModuleImpl.logD(TAG, "Cancelling existing download before starting new one: $id")
+       existingState.isCancelled.set(true)
+-      existingState.sessionId.incrementAndGet()
++      synchronized(RoqiaResume.lock(destination)) { existingState.sessionId.incrementAndGet() }
+       try {
+         existingState.inputStream?.close()
+         existingState.connection?.disconnect()
+@@ -240,7 +241,7 @@
+     val destFile = File(destination)
+ 
+     // Clean up any existing destination file if starting fresh (startByte == 0)
+-    if (startByte == 0L && destFile.exists()) {
++    if (startByte == 0L && destFile.exists() && RoqiaResume(destination, url).offset() == 0L) {
+       if (!destFile.delete()) {
+         RNBackgroundDownloaderModuleImpl.logW(TAG, "Failed to delete existing destination file: $destination")
+       } else {
+@@ -280,7 +281,7 @@
+     val state = activeDownloads[id] ?: return false
+ 
+     // Increment session ID FIRST to invalidate current thread
+-    val newSessionId = state.sessionId.incrementAndGet()
++    val newSessionId = synchronized(RoqiaResume.lock(state.destination)) { state.sessionId.incrementAndGet() }
+     state.isPaused.set(true)
+ 
+     // A download still waiting for a concurrency slot has no thread to stop, and
+@@ -331,7 +332,7 @@
+     RNBackgroundDownloaderModuleImpl.logD(TAG, "Cancelling download: $id")
+ 
+     // Increment session ID to invalidate any running threads immediately
+-    state.sessionId.incrementAndGet()
++    synchronized(RoqiaResume.lock(state.destination)) { state.sessionId.incrementAndGet() }
+ 
+     // Set cancelled flag
+     state.isCancelled.set(true)
+@@ -459,101 +460,63 @@
+ 
+       // Add custom headers
+       for ((key, value) in state.headers) {
+-        connection.setRequestProperty(key, value)
++        if (key != "X-Roqia-Expected-Bytes") connection.setRequestProperty(key, value)
+       }
+ 
+       // Add Range header for resuming
+-      val startByte = state.bytesDownloaded.get()
++      val resume = RoqiaResume(state.destination, state.url)
++      val startByte = synchronized(RoqiaResume.lock(state.destination)) { resume.offset() }
++      state.bytesDownloaded.set(startByte)
++      connection.setRequestProperty("Accept-Encoding", "identity")
+       if (startByte > 0) {
+         connection.setRequestProperty("Range", "bytes=$startByte-")
++        connection.setRequestProperty("If-Range", resume.validator())
+         RNBackgroundDownloaderModuleImpl.logD(TAG, "Resuming from byte: $startByte")
+       }
+ 
+       val responseCode = connection.responseCode
+-
+-      // Handle response
+-      when (responseCode) {
+-        HttpURLConnection.HTTP_OK -> {
+-          // Full content - server doesn't support Range or this is a fresh download
+-          state.bytesTotal = connection.contentLengthLong
+-
+-          // If we were trying to resume but server sent full content, reset
+-          if (startByte > 0) {
+-            RNBackgroundDownloaderModuleImpl.logW(TAG, "Server doesn't support Range headers, starting from beginning")
+-            state.bytesDownloaded.set(0)
+-          }
+-
+-          // Collect headers
+-          val responseHeaders = HeaderUtils.extractResponseHeaders(connection)
+-
+-          if (!state.hasReportedBegin) {
+-            state.hasReportedBegin = true
+-            listener.onBegin(state.id, state.bytesTotal, responseHeaders)
+-          }
+-        }
+-        HttpURLConnection.HTTP_PARTIAL -> {
+-          // Partial content - resuming supported
+-          val contentRange = connection.getHeaderField("Content-Range")
+-          if (contentRange != null) {
+-            // Format: bytes start-end/total
+-            val total = contentRange.substringAfter("/").toLongOrNull()
+-            if (total != null) {
+-              state.bytesTotal = total
+-            }
+-          }
+-
+-          if (state.bytesTotal <= 0) {
+-            state.bytesTotal = startByte + connection.contentLengthLong
+-          }
+-
+-          // Only call onBegin if this is a fresh start (not resume)
+-          if (!state.hasReportedBegin) {
+-            val responseHeaders = HeaderUtils.extractResponseHeaders(connection)
+-            state.hasReportedBegin = true
+-            listener.onBegin(state.id, state.bytesTotal, responseHeaders)
+-          }
+-
+-          RNBackgroundDownloaderModuleImpl.logD(TAG, "Server supports Range, continuing from $startByte")
+-        }
+-        HttpURLConnection.HTTP_MOVED_PERM,
+-        HttpURLConnection.HTTP_MOVED_TEMP,
+-        HttpURLConnection.HTTP_SEE_OTHER,
+-        307, 308 -> {
+-          // Handle redirect
+-          val newUrl = connection.getHeaderField("Location")
+-          if (newUrl != null) {
+-            connection.disconnect()
+-            // Create new state with updated URL
+-            // Note: We preserve bytesDownloaded since the redirect should point to the same resource.
+-            // If the new server doesn't support Range headers, the HTTP_OK case above will reset it.
+-            val newState = state.copyWithUrl(newUrl)
+-            activeDownloads[state.id] = newState
+-            return executeDownload(newState, listener, expectedSessionId)
+-          }
+-        }
+-        416 -> {
+-          // Range Not Satisfiable - file might be complete or server doesn't support ranges
+-          RNBackgroundDownloaderModuleImpl.logW(TAG, "Range not satisfiable for ${state.id}, checking if complete")
+-
+-          // The download might already be complete
+-          val destFile = File(state.destination)
+-          if (destFile.exists() && state.bytesTotal > 0 && destFile.length() >= state.bytesTotal) {
+-            // File is complete
+-            activeDownloads.remove(state.id)
+-            listener.onComplete(state.id, state.destination, state.bytesTotal, state.bytesTotal)
+-            return DownloadResult.Success(state.id, state.destination, state.bytesTotal, state.bytesTotal)
+-          }
+-
+-          val error = DownloadResult.httpError(state.id, responseCode, "Range not satisfiable")
+-          listener.onError(state.id, error.message, error.errorCode)
+-          return error
+-        }
+-        else -> {
+-          val error = DownloadResult.httpError(state.id, responseCode)
+-          listener.onError(state.id, error.message, error.errorCode)
+-          return error
+-        }
+-      }
++      val expectedBytes = state.headers["X-Roqia-Expected-Bytes"]?.toLongOrNull()
++
++      // Validate before opening the append stream. Persist entity identity before any bytes.
++      val restartReason = synchronized(RoqiaResume.lock(state.destination)) {
++        if (state.sessionId.get() != expectedSessionId) return DownloadResult.SessionInvalidated(state.id)
++        resume.response(connection, startByte)
++      }
++      if (restartReason != null && responseCode != HttpURLConnection.HTTP_OK) {
++        connection.disconnect()
++        synchronized(RoqiaResume.lock(state.destination)) {
++          if (state.sessionId.get() != expectedSessionId) return DownloadResult.SessionInvalidated(state.id)
++          resume.reset()
++        }
++        state.bytesDownloaded.set(0)
++        state.hasReportedBegin = false
++        // A second invalid response at offset zero is an HTTP failure, never a recursion loop.
++        if (startByte == 0L) throw java.io.IOException("invalid_range_response")
++        state.restartReason = restartReason
++        return executeDownload(state, listener, expectedSessionId)
++      }
++      if (responseCode == 416) {
++        synchronized(RoqiaResume.lock(state.destination)) {
++          if (state.sessionId.get() != expectedSessionId) return DownloadResult.SessionInvalidated(state.id)
++          FileOutputStream(File(state.destination), true).use { it.fd.sync() }
++        }
++        activeDownloads.remove(state.id)
++        listener.onComplete(state.id, state.destination, startByte, startByte)
++        return DownloadResult.Success(state.id, state.destination, startByte, startByte)
++      }
++      if (responseCode != HttpURLConnection.HTTP_OK && responseCode != HttpURLConnection.HTTP_PARTIAL) {
++        val error = DownloadResult.httpError(state.id, responseCode)
++        listener.onError(state.id, error.message, error.errorCode)
++        return error
++      }
++      if (responseCode == HttpURLConnection.HTTP_OK) state.bytesDownloaded.set(0)
++      state.bytesTotal = resume.total
++      val responseHeaders = HeaderUtils.extractResponseHeaders(connection).toMutableMap()
++      val reason = restartReason ?: state.restartReason
++      if (reason != null) responseHeaders["x-roqia-restart-reason"] = reason
++      state.restartReason = null
++      state.hasReportedBegin = true
++      listener.onBegin(state.id, state.bytesTotal, responseHeaders)
+ 
+       inputStream = connection.inputStream
+       // Store input stream reference so it can be closed on cancel/pause
+@@ -580,7 +543,10 @@
+ 
+       // Open in append mode if resuming
+       val shouldAppend = startByte > 0 && responseCode == HttpURLConnection.HTTP_PARTIAL
+-      outputStream = FileOutputStream(destFile, shouldAppend)
++      outputStream = synchronized(RoqiaResume.lock(state.destination)) {
++        if (state.sessionId.get() != expectedSessionId) return DownloadResult.SessionInvalidated(state.id)
++        FileOutputStream(destFile, shouldAppend)
++      }
+ 
+       val buffer = ByteArray(DownloadConstants.BUFFER_SIZE)
+       var bytesRead: Int
+@@ -615,8 +581,14 @@
+           return DownloadResult.Cancelled(state.id)
+         }
+ 
+-        outputStream.write(buffer, 0, bytesRead)
+-        val newTotal = state.bytesDownloaded.addAndGet(bytesRead.toLong())
++        if ((state.bytesTotal >= 0 && state.bytesDownloaded.get() + bytesRead > state.bytesTotal) ||
++          (expectedBytes != null && state.bytesDownloaded.get() + bytesRead > expectedBytes))
++          throw java.io.IOException("response_too_large")
++        val newTotal = synchronized(RoqiaResume.lock(state.destination)) {
++          if (state.sessionId.get() != expectedSessionId) return DownloadResult.SessionInvalidated(state.id)
++          outputStream.write(buffer, 0, bytesRead)
++          state.bytesDownloaded.addAndGet(bytesRead.toLong())
++        }
+ 
+         // Only report progress if session is still valid
+         if (state.sessionId.get() == expectedSessionId && !state.isCancelled.get()) {
+@@ -635,6 +607,9 @@
+       }
+ 
+       outputStream.flush()
++      outputStream.fd.sync()
++      if (state.bytesTotal >= 0 && state.bytesDownloaded.get() != state.bytesTotal)
++        throw java.io.IOException("incomplete_response")
+ 
+       // Download complete - file is already at destination
+       val bytesDownloaded = state.bytesDownloaded.get()
+@@ -660,7 +635,11 @@
+         state.sessionId.get() != expectedSessionId -> DownloadResult.SessionInvalidated(state.id)
+         state.isCancelled.get() -> DownloadResult.Cancelled(state.id)
+         state.isPaused.get() -> DownloadResult.Paused(state.id, state.bytesDownloaded.get(), state.bytesTotal)
+-        else -> DownloadResult.SessionInvalidated(state.id)
++        else -> {
++          val error = DownloadResult.fromException(state.id, e)
++          listener.onError(state.id, error.message, error.errorCode)
++          error
++        }
+       }
+     } catch (e: Exception) {
+       // Determine result based on state - expected exceptions vs real errors
+--- /dev/null
++++ b/android/src/main/java/com/eko/RoqiaResume.kt
+@@ -0,0 +1,71 @@
++package com.eko
++
++import java.io.File
++import java.io.FileOutputStream
++import java.net.HttpURLConnection
++import java.util.Properties
++
++/** Roqia 4.6.3 extension: on-disk length + synced entity metadata, never a stale progress offset. */
++internal class RoqiaResume(private val destination: String, private val url: String) {
++  companion object {
++    private val locks = java.util.concurrent.ConcurrentHashMap<String, Any>()
++    fun lock(path: String): Any = locks.getOrPut(path) { Any() }
++  }
++  private val file = File(destination)
++  private val sidecar = File(destination + ".resume")
++  private val saved = Properties().apply {
++    try { sidecar.inputStream().use { load(it) } } catch (_: Exception) { clear() }
++  }
++  var total: Long = saved.getProperty("total")?.toLongOrNull() ?: -1
++  fun validator(): String = saved.getProperty("validator", "")
++  fun offset(): Long = if (saved.getProperty("url") == url && validator().isNotEmpty() &&
++    file.isFile && (total < 0 || file.length() <= total)) file.length() else 0
++  fun reset() {
++    file.parentFile?.mkdirs()
++    FileOutputStream(file).use { it.fd.sync() }
++    sidecar.delete()
++    saved.clear()
++    total = -1
++  }
++  private fun entity(c: HttpURLConnection): String {
++    val etag = c.getHeaderField("ETag")
++    return if (!etag.isNullOrBlank() && !etag.startsWith("W/")) etag
++      else c.getHeaderField("Last-Modified") ?: ""
++  }
++  // null means safe to consume. A reason means replace bytes or retry from zero.
++  fun response(c: HttpURLConnection, offset: Long): String? {
++    val code = c.responseCode
++    if (code == 416) {
++      val length = Regex("bytes \\*/([0-9]+)").matchEntire(c.getHeaderField("Content-Range") ?: "")
++        ?.groupValues?.get(1)?.toLongOrNull()
++      return if (offset > 0 && length == offset && total == offset &&
++        (entity(c).isEmpty() || entity(c) == validator())) null else "range_not_satisfiable"
++    }
++    if (code != 200 && code != 206) return null
++    val encoding = c.getHeaderField("Content-Encoding")
++    if (!encoding.isNullOrBlank() && encoding != "identity") throw java.io.IOException("encoded_response")
++    var length = c.contentLengthLong
++    if (code == 206) {
++      val range = Regex("bytes ([0-9]+)-([0-9]+)/([0-9]+)")
++        .matchEntire(c.getHeaderField("Content-Range") ?: "") ?: return "range_invalid"
++      val start = range.groupValues[1].toLongOrNull() ?: return "range_invalid"
++      val end = range.groupValues[2].toLongOrNull() ?: return "range_invalid"
++      val full = range.groupValues[3].toLongOrNull() ?: return "range_invalid"
++      if (start != offset || end < start || full <= end ||
++        (length >= 0 && length != end - start + 1)) return "range_invalid"
++      if (offset > 0 && (entity(c) != validator() || (total >= 0 && total != full))) return "entity_changed"
++      length = full
++    }
++    total = length
++    saved.setProperty("url", url)
++    saved.setProperty("validator", entity(c))
++    saved.setProperty("total", length.toString())
++    file.parentFile?.mkdirs()
++    val temporary = File(destination + ".resume.tmp")
++    FileOutputStream(temporary).use { saved.store(it, "Roqia resume entity"); it.fd.sync() }
++    android.system.Os.rename(temporary.path, sidecar.path)
++    val fd = android.system.Os.open(sidecar.parent, android.system.OsConstants.O_RDONLY, 0)
++    try { android.system.Os.fsync(fd) } finally { android.system.Os.close(fd) }
++    return if (offset > 0 && code == 200) "server_restarted" else null
++  }
++}
+--- a/android/src/main/java/com/eko/utils/NetworkRequestUtils.kt
++++ b/android/src/main/java/com/eko/utils/NetworkRequestUtils.kt
+@@ -26,7 +26,7 @@
+             .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+             .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
+         if (requireUnmetered) {
+-            builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
++            builder.addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+         }
+         return builder.build()
+     }
+@@ -38,6 +38,6 @@
+     fun isUnmetered(capabilities: NetworkCapabilities?): Boolean {
+         return capabilities != null &&
+             capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+-            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
++            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+     }
+ }

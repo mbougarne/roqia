@@ -1,0 +1,9 @@
+patching file 'android/src/main/java/com/eko/RNBackgroundDownloaderModuleImpl.kt'
+patching file 'android/src/main/java/com/eko/ResumableDownloader.kt'
+patching file 'android/src/main/java/com/eko/RoqiaResume.kt'
+patching file 'android/src/main/java/com/eko/utils/NetworkRequestUtils.kt'
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.027s
+
+OK
