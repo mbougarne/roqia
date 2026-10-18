@@ -16,7 +16,7 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 Implement shared React Native features for both platforms; the current Android focus is the testing sequence, not an Android-only product architecture. Test each ticket on Android now and record iOS verification as deferred. After all tickets have completed their Android implementation/acceptance work, perform iOS build, native integration and device acceptance as a separate pass before claiming iOS readiness. Do not require iOS testing to advance the current Android sequence or count Android evidence as iOS proof.
 
-Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; the next implementation group should use `phase_3/<short-description>`.
+Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/foundation-shared-services`; phase 3 uses `phase_3/existing-app-redesign`. The next group should use `phase_4/<short-description>`.
 
 ## Ordered checklist
 
@@ -90,7 +90,7 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 **2026-10-18 phase 2 checkpoint:** shared foundations are implemented with [Android evidence](../../../docs/implementation/phase-2/README.md). RQ-002/RQ-004/RQ-033/RQ-022 are complete for this foundation scope. RQ-003/RQ-005/RQ-015/RQ-021 retain the specific notification, signed-upgrade, accessibility, source or physical-device acceptance work in their tickets. The user authorized proceeding after phase 1; the explicit scope adjustment is to build/test generic download and playback infrastructure with isolated fixtures while keeping the production catalog empty. No source or release gate is waived.
 
-**Next implementation pickup after phase 2 review: step 19 / RQ-006.** Continue steps 19 onward in order. Revisit the named open acceptance checks at their integration/release tickets; do not rebuild completed foundation work or present unchecked items as accepted.
+**Phase 2 pickup was step 19 / RQ-006; phase 3 has now implemented steps 19–27.** Follow the phase 3 checkpoint below. Revisit named open acceptance checks at their integration/release tickets; do not rebuild completed work or present unchecked items as accepted.
 
 11. [x] **[RQ-002 — Implement tokens and shared UI primitives](tickets/RQ-002.md)**
 
@@ -142,25 +142,29 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
 ### Steps 19 onward · Existing application screens
 
-19. [ ] **[RQ-006 — Redesign launch, onboarding and guidance](tickets/RQ-006.md)**
+**2026-10-18 phase 3 checkpoint:** RQ-006–RQ-014 are implemented with [Android evidence](../../../docs/implementation/phase-3/README.md). RQ-010 retains TalkBack acceptance; RQ-013 retains owner/editorial approval of legal copy. Full device/lifecycle and iOS acceptance remain explicitly open at the integration/release gates.
+
+**Next implementation pickup after phase 3 review: step 28 / RQ-023.** Recheck its source dependencies before creating a production pack. King Fahd Warsh must use its matching font; no unreviewed Quran text, translation or audio may enter the catalog. This checkpoint does not waive RQ-016–RQ-019 or other source gates.
+
+19. [x] **[RQ-006 — Redesign launch, onboarding and guidance](tickets/RQ-006.md)**
 
    **Deliver:** Implement compact skippable guide and reviewed guidance, hydration barrier, replay entry and pending-link handling. Remove startup permission request from bootstrap.
 
    **Finish when:** Existing seen flags remain honored; No theme/counter flash or duplicate modal sequence; Skip/replay and pending deep links work without startup permission prompt.
 
-20. [ ] **[RQ-007 — Redesign Ruqya and counter interactions](tickets/RQ-007.md)**
+20. [x] **[RQ-007 — Redesign Ruqya and counter interactions](tickets/RQ-007.md)**
 
    **Deliver:** Use shared reading cards and stable IDs. Preserve reviewed text/default repeats, copy/reset behavior and progress. Integrate the audio controller when RQ-033 is ready.
 
    **Finish when:** No content entry or audio association is lost; Copy/bookmark/audio controls never decrement parent counter; Counter completion and reset work in both themes.
 
-21. [ ] **[RQ-008 — Redesign adhkar categories and readers](tickets/RQ-008.md)**
+21. [x] **[RQ-008 — Redesign adhkar categories and readers](tickets/RQ-008.md)**
 
    **Deliver:** Build category cards and shared morning/evening/sleep readers. Keep original identity through filtering and canonical content. Add progress, copy, bookmark hooks and error states.
 
    **Finish when:** Every existing category/item remains reachable; Reset affects only selected category; RTL text/diacritics and large text remain readable.
 
-22. [ ] **[RQ-009 — Redesign dua reader](tickets/RQ-009.md)**
+22. [x] **[RQ-009 — Redesign dua reader](tickets/RQ-009.md)**
 
    **Deliver:** Compose the shared devotional reader for dua with stable counters, copy/bookmarks, audio arrays and reset. Make navigation from More and Adhkar clear.
 
@@ -172,13 +176,13 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
    **Finish when:** Counts clamp to zero and persist; Reset restores reviewed defaults; Tap and accessible increment/decrement behavior are unambiguous.
 
-24. [ ] **[RQ-011 — Add devotional bookmarks and local discovery](tickets/RQ-011.md)**
+24. [x] **[RQ-011 — Add devotional bookmarks and local discovery](tickets/RQ-011.md)**
 
    **Deliver:** Store typed devotional bookmarks using permanent IDs. Provide category filters and empty/missing-content states; share infrastructure with later Quran bookmarks.
 
    **Finish when:** Bookmarks survive text revisions with unchanged IDs; Removing a bookmark does not alter counter progress; No Quran/devotional ID collision.
 
-25. [ ] **[RQ-012 — Build More and app preferences](tickets/RQ-012.md)**
+25. [x] **[RQ-012 — Build More and app preferences](tickets/RQ-012.md)**
 
    **Deliver:** Expose all secondary destinations and settings. Implement light/dark/system, UI scale, fixed Western digits, download policy and preferred edition links. Separate reset from storage deletion.
 
@@ -190,7 +194,7 @@ Name branches `phase_<number>/<short-description>`. Phase 2 uses `phase_2/founda
 
    **Finish when:** About/legal text works offline; External link failure is recoverable; No unsupported privacy claim or automatic email send.
 
-27. [ ] **[RQ-014 — Add user-controlled daily reminders](tickets/RQ-014.md)**
+27. [x] **[RQ-014 — Add user-controlled daily reminders](tickets/RQ-014.md)**
 
    **Deliver:** Save opt-in times/weekdays and desired state. Request permission only in context; display effective permission/channel status and test action. Migrate legacy notification IDs/times.
 

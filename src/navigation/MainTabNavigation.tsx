@@ -19,6 +19,17 @@ import {
   SettingsScreen,
   RecoveryScreen,
 } from '../screens/FoundationScreens';
+import {
+  DiscoveryScreen,
+  ContentScreen,
+} from '../features/devotional/DiscoveryScreens';
+import {GuideScreen, GuidanceScreen} from '../screens/EducationScreens';
+import {
+  LegalScreen,
+  SourcesScreen,
+  ExternalLinkScreen,
+} from '../screens/AboutScreen';
+import {RemindersScreen} from '../features/settings/reminders/Screen';
 import {StorageScreen, DownloadsScreen} from '../features/downloads/Screens';
 import {MiniPlayer, PlayerScreen} from '../features/audio/Player';
 import {AppIcon, AppText, usePalette, type IconName} from '../design/ui';
@@ -78,6 +89,7 @@ function TabBar({state, navigation: tabs}: BottomTabBarProps) {
                 role="tabLabel"
                 style={{
                   textAlign: 'center',
+                  width: '100%',
                   color: selected ? p.textPrimary : p.textSecondary,
                 }}>
                 {meta.title}
@@ -118,6 +130,16 @@ function withPlayer(Component: React.ComponentType<any>) {
   };
 }
 const details = {
+  Bookmarks: withPlayer(DiscoveryScreen),
+  Search: withPlayer(DiscoveryScreen),
+  Content: withPlayer(ContentScreen),
+  Guide: withPlayer(GuideScreen),
+  Guidance: withPlayer(GuidanceScreen),
+  Privacy: withPlayer(LegalScreen),
+  Terms: withPlayer(LegalScreen),
+  Sources: withPlayer(SourcesScreen),
+  ExternalLink: withPlayer(ExternalLinkScreen),
+  Reminders: withPlayer(RemindersScreen),
   Morning: withPlayer(AdkarCategoryScreen),
   Night: withPlayer(AdkarCategoryScreen),
   BeforeSleep: withPlayer(AdkarCategoryScreen),
@@ -169,6 +191,16 @@ export function MainTabNavigation() {
           animation: 'none',
         }}>
         <Stack.Screen name="MainTabs" component={MainTabs} />
+        <Stack.Screen name="Bookmarks" component={details.Bookmarks} />
+        <Stack.Screen name="Search" component={details.Search} />
+        <Stack.Screen name="Content" component={details.Content} />
+        <Stack.Screen name="Guide" component={details.Guide} />
+        <Stack.Screen name="Guidance" component={details.Guidance} />
+        <Stack.Screen name="Privacy" component={details.Privacy} />
+        <Stack.Screen name="Terms" component={details.Terms} />
+        <Stack.Screen name="Sources" component={details.Sources} />
+        <Stack.Screen name="ExternalLink" component={details.ExternalLink} />
+        <Stack.Screen name="Reminders" component={details.Reminders} />
         <Stack.Screen name="Morning" component={details.Morning} />
         <Stack.Screen name="Night" component={details.Night} />
         <Stack.Screen name="BeforeSleep" component={details.BeforeSleep} />

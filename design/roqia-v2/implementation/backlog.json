@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Phase 2 shared foundations implemented and tested on Android; signed-release, source, editorial, accessibility and device acceptance remain explicitly open",
+  "status": "Phase 3 existing-app implementation and Android validation recorded; TalkBack/legal review, source, signed-release, lifecycle and iOS acceptance gates remain explicit",
   "tickets": [
     {
       "id": "RQ-001",
@@ -81,8 +81,8 @@
       "evidence": "../../../docs/implementation/phase-2/README.md",
       "verifiedOn": "2026-10-18",
       "scope": "shared implementation; Android tested; iOS verification deferred",
-      "progress": "Five RTL-ordered tabs and shared detail stack replace the drawer. Legacy URL aliases, cold/warm link buffering and invalid/missing-pack recovery are implemented. Android URL/back journeys and tab-free detail screens pass.",
-      "remaining": "Complete real notification-tap and TalkBack traversal acceptance with RQ-014/RQ-046. iOS native/build/device verification is deferred."
+      "progress": "Five RTL-ordered tabs and shared detail stack replace the drawer. Legacy URL aliases, cold/warm link buffering and invalid/missing-pack recovery are implemented. Android URL/back journeys and tab-free detail screens pass. Phase 3 verifies real warm/process-death notification entry and first-run pending-link handoff.",
+      "remaining": "Full TalkBack traversal with RQ-046 and iOS native/build/device verification remain open. Phase 3 notification entry evidence is in docs/implementation/phase-3/README.md."
     },
     {
       "id": "RQ-004",
@@ -143,7 +143,7 @@
     {
       "id": "RQ-006",
       "title": "Redesign launch, onboarding and guidance",
-      "status": "planned",
+      "status": "done",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -169,12 +169,17 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 19
+      "executionOrder": 19,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Hydration-driven launch, skippable guide, unchanged guidance, replay and pending-link handoff implemented. Android first-run flags, cold link, restart and replay pass without startup permission prompts.",
+      "remaining": "Full per-screen visual/accessibility and physical-device release acceptance remains RQ-046/RQ-048; iOS build/native/device verification is deferred."
     },
     {
       "id": "RQ-007",
       "title": "Redesign Ruqya and counter interactions",
-      "status": "planned",
+      "status": "done",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -199,12 +204,17 @@
       "completionIntegrationRequires": [
         "RQ-033"
       ],
-      "executionOrder": 20
+      "executionOrder": 20,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Shared reading cards retain canonical IDs/text/repeats/audio. Separate actions cannot decrement the counter. SQLite counter commands commit before UI acknowledgement; Android copy/bookmark/audio isolation, persistence, completion and confirmed/cancelled reset are exercised.",
+      "remaining": "Full per-screen visual/accessibility and physical-device release acceptance remains RQ-046/RQ-048; iOS build/native/device verification is deferred."
     },
     {
       "id": "RQ-008",
       "title": "Redesign adhkar categories and readers",
-      "status": "planned",
+      "status": "done",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -231,12 +241,17 @@
       "completionIntegrationRequires": [
         "RQ-033"
       ],
-      "executionOrder": 21
+      "executionOrder": 21,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "All three categories use stable-ID shared readers, completed-entry progress and scoped reset. All entries and the multi-audio mapping remain in the unchanged dataset; Android category routes and light/dark/large-text samples are captured.",
+      "remaining": "Full per-screen visual/accessibility and physical-device release acceptance remains RQ-046/RQ-048; iOS build/native/device verification is deferred."
     },
     {
       "id": "RQ-009",
       "title": "Redesign dua reader",
-      "status": "planned",
+      "status": "done",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -260,12 +275,17 @@
       "completionIntegrationRequires": [
         "RQ-033"
       ],
-      "executionOrder": 22
+      "executionOrder": 22,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "All dua entries use the shared offline reader and audio controller. More and Adhkar expose the route; back/reset use the active screen. Canonical dataset and audio inventory checks pass.",
+      "remaining": "Full per-screen visual/accessibility and physical-device release acceptance remains RQ-046/RQ-048; iOS build/native/device verification is deferred."
     },
     {
       "id": "RQ-010",
       "title": "Redesign tasbih",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -289,12 +309,17 @@
       "completionIntegrationRequires": [
         "RQ-033"
       ],
-      "executionOrder": 23
+      "executionOrder": 23,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Tasbih ring, explicit count action, all-entry selector and original repeat targets implemented. Atomic count commands clamp at zero; Android rapid taps, restart and reset cancel/confirm pass.",
+      "remaining": "Complete TalkBack traversal/announcement acceptance with RQ-046; iOS verification is deferred. No claim that the screen-reader journey has been executed."
     },
     {
       "id": "RQ-011",
       "title": "Add devotional bookmarks and local discovery",
-      "status": "planned",
+      "status": "done",
       "milestone": "M2",
       "dependsOn": [
         "RQ-004",
@@ -316,12 +341,17 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 24
+      "executionOrder": 24,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Typed SQLite bookmarks, category filters and local diacritic-insensitive discovery implemented. Item routes use permanent IDs. Android save/restart/open/remove preserves progress; empty and missing-content states are explicit.",
+      "remaining": "Full per-screen visual/accessibility and physical-device release acceptance remains RQ-046/RQ-048; iOS build/native/device verification is deferred."
     },
     {
       "id": "RQ-012",
       "title": "Build More and app preferences",
-      "status": "planned",
+      "status": "done",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -343,12 +373,17 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 25
+      "executionOrder": 25,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "More exposes secondary destinations, source information and guide replay. Light/dark/system and persisted UI scale use semantic tokens; Western digits and Wi-Fi policy remain explicit. Preferred Quran edition/translation routes honestly show unavailable catalog state. Global reset remains separate from storage deletion.",
+      "remaining": "Full per-screen visual/accessibility and physical-device release acceptance remains RQ-046/RQ-048; iOS build/native/device verification is deferred."
     },
     {
       "id": "RQ-013",
       "title": "Redesign About, legal pages and link recovery",
-      "status": "planned",
+      "status": "in_progress",
       "milestone": "M2",
       "dependsOn": [
         "RQ-002",
@@ -370,12 +405,17 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 26
+      "executionOrder": 26,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "About retains source/contact identity. Local privacy/terms and explicit external-open/retry/copy/back are implemented. Airplane-mode reading and a missing mail handler are exercised on Android; owner review of the new privacy clarification remains open.",
+      "remaining": "Owner/editorial review of bundled legal copy and the version-specific network/location clarification before release; reconcile the public website policy when publishing v2. iOS verification is deferred."
     },
     {
       "id": "RQ-014",
       "title": "Add user-controlled daily reminders",
-      "status": "planned",
+      "status": "done",
       "milestone": "M2",
       "dependsOn": [
         "RQ-005",
@@ -394,7 +434,12 @@
         "specs/EXISTING-FEATURES.md"
       ],
       "completionIntegrationRequires": [],
-      "executionOrder": 27
+      "executionOrder": 27,
+      "evidence": "../../../docs/implementation/phase-3/README.md",
+      "verifiedOn": "2026-10-18",
+      "scope": "shared implementation; Android tested; iOS verification deferred",
+      "progress": "Desired reminders persist separately from permission/channel availability. Native Android tests verify weekday replacement, duplicate prevention, disable/cancel and restored original choices. Real permission denial/channel blocking and notification entry are exercised. Fresh defaults are off; migrated times are preserved.",
+      "remaining": "Week-long closed-app delivery through DST/zone changes, reboot, Doze and OEM restrictions remains RQ-044/RQ-048. Ordinary reminders are not exact alarms or full adhan. iOS verification is deferred."
     },
     {
       "id": "RQ-015",

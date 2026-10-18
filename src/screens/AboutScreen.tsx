@@ -1,265 +1,152 @@
-import React, {useContext} from 'react';
-import {useNavigation} from '@react-navigation/native';
-import {
-  Alert,
-  Linking,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, {useState} from 'react';
+import {AccessibilityInfo, Linking} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
-import InAppBrowser from 'react-native-inappbrowser-reborn';
-
+import {AppText, Button, Card, Page, Row, StateView} from '../design/ui';
+import {Illustration} from '../design/Illustration';
 import {noteData} from '../data';
-import {Header, StyledText} from '../components';
-import {themeContext, themes} from '../store';
-
-export const AboutScreen = () => {
-  const navigation = useNavigation<any>();
-  const {mode} = useContext(themeContext);
-  const theme = themes[mode];
-  const onMenuPress = () => {
-    navigation.navigate('MainTabs', {screen: 'More'});
-  };
-  const onBackToHomePress = () => {
-    navigation.goBack();
-  };
-
-  const onCopy = () => {
-    Clipboard.setString(noteData.email!);
-  };
-
-  const openLink = async (url: string) => {
+import legal from '../features/settings/legal-copy.json';
+export function AboutScreen({navigation}: any) {
+  const external = (title: string, url: string) =>
+    navigation.navigate('ExternalLink', {title, url});
+  return (
+    <Page title="حول التطبيق" onBack={() => navigation.goBack()}>
+      <Illustration name="quran-book" height={140} />
+      <AppText role="screenTitle">رقية</AppText>
+      <AppText selectable>{noteData.contact}</AppText>
+      <AppText>Mourad Bougarne</AppText>
+      <Row
+        title="التواصل عبر البريد"
+        detail={noteData.email}
+        icon="mail"
+        onPress={() =>
+          external('التواصل عبر البريد', `mailto:${noteData.email}`)
+        }
+      />
+      <Row
+        title="المشروع مفتوح المصدر"
+        icon="external"
+        onPress={() => external('المشروع مفتوح المصدر', noteData.githubRepoUrl)}
+      />
+      <Row
+        title="صفحة المطور"
+        icon="external"
+        onPress={() => external('صفحة المطور', noteData.authorGithubUrl)}
+      />
+      <Row
+        title="المصادر"
+        icon="book"
+        onPress={() => navigation.navigate('Sources')}
+      />
+      <Row
+        title="سياسة الخصوصية"
+        onPress={() => navigation.navigate('Privacy')}
+      />
+      <Row
+        title="شروط الاستخدام"
+        onPress={() => navigation.navigate('Terms')}
+      />
+    </Page>
+  );
+}
+export function LegalScreen({navigation, route}: any) {
+  const privacy = route.name === 'Privacy';
+  return (
+    <Page
+      title={privacy ? 'سياسة الخصوصية' : 'شروط الاستخدام'}
+      onBack={() => navigation.goBack()}>
+      <AppText role="caption">
+        نسخة محلية للقراءة دون اتصال · 2026-10-18
+      </AppText>
+      <AppText selectable>{legal[privacy ? 'Privacy' : 'Terms']}</AppText>
+      <Button
+        secondary
+        label="فتح الصفحة المنشورة"
+        onPress={() =>
+          navigation.navigate('ExternalLink', {
+            title: privacy ? 'سياسة الخصوصية' : 'شروط الاستخدام',
+            url: privacy ? noteData.policyUrl : noteData.termsUrl,
+          })
+        }
+      />
+    </Page>
+  );
+}
+export function SourcesScreen({navigation}: any) {
+  return (
+    <Page title="المصادر" onBack={() => navigation.goBack()}>
+      <AppText>مصادر المحتوى والصوت الحالي</AppText>
+      {[
+        ['الأذكار', noteData.audioSourceOneUrl],
+        ['القرآن الصوتي', noteData.audioSourceTwoUrl],
+        ['لهجاتي', noteData.audioSourceThreeUrl],
+        ['الأدعية', noteData.duaaSourceUrl],
+        ['التسبيحات', noteData.tasbihatSourceUrl],
+      ].map(([title, url]) => (
+        <Row
+          key={url}
+          title={title}
+          detail={url}
+          icon="external"
+          onPress={() => navigation.navigate('ExternalLink', {title, url})}
+        />
+      ))}
+      <Card>
+        <AppText>حزم القرآن الجديدة</AppText>
+        <AppText>
+          ورش: حزمة مجمع الملك فهد مع خطها المطابق. لن تتاح الحزم قبل إتمام
+          التحقق من النص والخط وحقوق التوزيع. لا يستخدم التطبيق خط المغرب مع نص
+          المجمع.
+        </AppText>
+      </Card>
+    </Page>
+  );
+}
+export function ExternalLinkScreen({route, navigation}: any) {
+  const {url, title} = route.params,
+    [failed, setFailed] = useState(false),
+    [busy, setBusy] = useState(false);
+  async function open() {
+    setBusy(true);
+    setFailed(false);
     try {
-      if (await InAppBrowser.isAvailable()) {
-        await InAppBrowser.open(url, {
-          showTitle: true,
-          enableUrlBarHiding: true,
-          enableDefaultShare: true,
-          dismissButtonStyle: 'close',
-        });
-        return;
-      }
-
+      if (!/^(https:\/\/|mailto:)/.test(url)) throw new Error('invalid_link');
       await Linking.openURL(url);
     } catch {
-      Alert.alert('تعذر فتح الرابط', 'يرجى المحاولة لاحقًا.');
+      setFailed(true);
+    } finally {
+      setBusy(false);
     }
-  };
-
+  }
   return (
-    <View style={[styles.container, {backgroundColor: theme.bg}]}>
-      <Header
-        onBackPress={onBackToHomePress}
-        onMenuPress={onMenuPress}
-        showBackButton
-        showMenuButton
-        title="نبذة عنا"
+    <Page title={title} onBack={() => navigation.goBack()}>
+      <AppText selectable style={{writingDirection: 'ltr', textAlign: 'left'}}>
+        {url}
+      </AppText>
+      <AppText>
+        يفتح الرابط في تطبيق خارجي. قد يحتاج إلى الإنترنت أو تطبيق بريد مثبت.
+      </AppText>
+      {failed && (
+        <StateView
+          title="تعذر فتح الرابط"
+          description="تحقق من الاتصال والتطبيق المناسب، أو انسخ الرابط وافتحه لاحقا."
+        />
+      )}
+      <Button
+        label={failed ? 'إعادة المحاولة' : 'فتح الرابط'}
+        disabled={busy}
+        onPress={() => {
+          void open();
+        }}
       />
-      <ScrollView
-        contentContainerStyle={styles.innerContainer}
-        showsVerticalScrollIndicator={false}>
-        <StyledText customStyle={[styles.title, {color: theme.tertiaryColor}]}>
-          {noteData.title}
-        </StyledText>
-        <StyledText customStyle={[styles.content, {color: theme.color}]}>
-          {noteData.content}
-        </StyledText>
-        <StyledText customStyle={[styles.contact, {color: theme.color}]}>
-          {noteData.contact}
-        </StyledText>
-        <TouchableOpacity
-          accessibilityHint="ينسخ البريد الإلكتروني إلى الحافظة"
-          accessibilityLabel="نسخ البريد الإلكتروني"
-          accessibilityRole="button"
-          onPress={onCopy}
-          style={styles.emailButton}>
-          <Icon name="content-copy" color={theme.tertiaryColor} size={16} />
-          <StyledText customStyle={[styles.email, {color: theme.color}]}>
-            {noteData.email}
-          </StyledText>
-        </TouchableOpacity>
-
-        <View style={styles.linksContainer}>
-          <StyledText
-            customStyle={[styles.sectionTitle, {color: theme.tertiaryColor}]}>
-            الروابط القانونية
-          </StyledText>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح صفحة سياسة الخصوصية داخل المتصفح"
-            accessibilityLabel="سياسة الخصوصية"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.policyUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              سياسة الخصوصية / Privacy Policy
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح صفحة شروط الاستخدام داخل المتصفح"
-            accessibilityLabel="شروط الاستخدام"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.termsUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              شروط الاستخدام / Terms of Use
-            </StyledText>
-          </TouchableOpacity>
-
-          <StyledText
-            customStyle={[styles.sectionTitle, {color: theme.tertiaryColor}]}>
-            المصادر والمشروع
-          </StyledText>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح مستودع المشروع على GitHub"
-            accessibilityLabel="مستودع المشروع"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.githubRepoUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              GitHub Repository
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح حساب المطور على GitHub"
-            accessibilityLabel="حساب المطور"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.authorGithubUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              المبرمج: مراج بوگرن Mourad Bougarne
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح المصدر الصوتي الأول داخل المتصفح"
-            accessibilityLabel="المصدر الصوتي الأول"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.audioSourceOneUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              الصوتيات: alazkar.today
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح المصدر الصوتي الثاني داخل المتصفح"
-            accessibilityLabel="المصدر الصوتي الثاني"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.audioSourceTwoUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              الصوتيات: mp3quran.net
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح المصدر الصوتي الثالث داخل المتصفح"
-            accessibilityLabel="المصدر الصوتي الثالث"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.audioSourceThreeUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              الصوتيات: lahajati.ai
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح الأدعية داخل المتصفح"
-            accessibilityLabel="الأدعية"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.duaaSourceUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              الأدعية: kalemtayeb.com
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            accessibilityHint="يفتح التسبيحات داخل المتصفح"
-            accessibilityLabel="التسبيحات"
-            accessibilityRole="button"
-            onPress={() => openLink(noteData.tasbihatSourceUrl)}
-            style={styles.linkButton}>
-            <Icon name="open-in-new" color={theme.tertiaryColor} size={16} />
-            <StyledText customStyle={[styles.linkText, {color: theme.color}]}>
-              التسبيحات: islambook.com
-            </StyledText>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
+      <Button
+        secondary
+        label="نسخ الرابط"
+        icon="copy"
+        onPress={() => {
+          Clipboard.setString(url);
+          AccessibilityInfo.announceForAccessibility('تم نسخ الرابط');
+        }}
+      />
+    </Page>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: 50,
-  },
-  innerContainer: {
-    paddingHorizontal: 40,
-    paddingBottom: 24,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  content: {
-    fontSize: 15,
-    fontWeight: '700',
-    textAlign: 'right',
-    marginTop: 15,
-  },
-  contact: {
-    textAlign: 'right',
-    marginTop: 15,
-    fontSize: 14,
-  },
-  email: {
-    fontSize: 14,
-    fontWeight: '700',
-    textAlign: 'right',
-  },
-  emailButton: {
-    marginTop: 10,
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    gap: 8,
-  },
-  linksContainer: {
-    marginTop: 22,
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    marginTop: 8,
-    marginBottom: 8,
-    textAlign: 'right',
-    fontSize: 15,
-    fontWeight: '700',
-  },
-  linkButton: {
-    marginTop: 8,
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    gap: 8,
-  },
-  linkText: {
-    fontSize: 14,
-    textAlign: 'right',
-  },
-});
+}

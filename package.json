@@ -14,7 +14,8 @@
     "feasibility:serve": "node tools/feasibility/fixture-server.cjs",
     "feasibility:inventory": "node tools/feasibility/inventory.cjs",
     "feasibility:prayer": "node tools/feasibility/compare-prayer.cjs",
-    "foundation:test": "node --test tools/foundation/*.test.cjs"
+    "foundation:test": "node --test tools/foundation/*.test.cjs",
+    "phase3:test": "node --test tools/phase3/*.test.cjs"
   },
   "dependencies": {
     "@kesha-antonov/react-native-background-downloader": "4.6.3",

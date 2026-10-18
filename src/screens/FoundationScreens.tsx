@@ -1,42 +1,38 @@
 import React, {useContext} from 'react';
 import {Alert} from 'react-native';
 import {AppText, Button, Page, Row, StateView} from '../design/ui';
-import {themeContext} from '../store';
+import {themeContext, homeRepeatContext} from '../store';
+import {useConfirmReset} from '../features/devotional/ResetConfirmation';
+import {number, ltr} from '../design/format';
 import {type ThemePreference} from '../repositories/models';
 import {getSettings, updateSettings} from '../services/persistence';
 export function MoreScreen({navigation}: any) {
+  const rows = [
+    ['Duaa', 'الأدعية', 'hands'],
+    ['Tasbihat', 'التسبيح', 'tasbih'],
+    ['Bookmarks', 'المحفوظات', 'bookmark'],
+    ['Search', 'البحث في المحتوى', 'search'],
+    ['Reminders', 'التذكيرات اليومية', 'bell'],
+    ['Settings', 'الإعدادات', 'settings'],
+    ['Downloads', 'التنزيلات', 'download'],
+    ['Storage', 'إدارة التخزين', 'storage'],
+    ['Sources', 'المصادر', 'book'],
+    ['Guide', 'دليل الاستخدام', 'info'],
+    ['Guidance', 'ضوابط الرقية الشرعية', 'shield'],
+    ['About', 'حول التطبيق', 'info'],
+    ['Privacy', 'سياسة الخصوصية', 'shield'],
+    ['Terms', 'شروط الاستخدام', 'info'],
+  ] as const;
   return (
     <Page title="المزيد">
-      <Row
-        title="الأدعية"
-        icon="hands"
-        onPress={() => navigation.navigate('Duaa')}
-      />
-      <Row
-        title="التسبيح"
-        icon="tasbih"
-        onPress={() => navigation.navigate('Tasbihat')}
-      />
-      <Row
-        title="الإعدادات"
-        icon="settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
-      <Row
-        title="التنزيلات"
-        icon="download"
-        onPress={() => navigation.navigate('Downloads')}
-      />
-      <Row
-        title="إدارة التخزين"
-        icon="storage"
-        onPress={() => navigation.navigate('Storage')}
-      />
-      <Row
-        title="حول التطبيق"
-        icon="info"
-        onPress={() => navigation.navigate('About')}
-      />
+      {rows.map(([screen, title, icon]) => (
+        <Row
+          key={screen}
+          title={title}
+          icon={icon}
+          onPress={() => navigation.navigate(screen)}
+        />
+      ))}
     </Page>
   );
 }
@@ -79,10 +75,15 @@ export function RecoveryScreen({route, navigation}: any) {
   );
 }
 export function SettingsScreen({navigation}: any) {
-  const {preference, setPreference} = useContext(themeContext);
+  const confirmReset = useConfirmReset();
+  const {preference, setPreference, uiScale, setUiScale} =
+    useContext(themeContext);
+  const {resetAllRepeats} = useContext(homeRepeatContext);
   const [wifi, setWifi] = React.useState(true);
   React.useEffect(() => {
-    void getSettings().then(s => setWifi(s.wifiOnly));
+    void getSettings()
+      .then(s => setWifi(s.wifiOnly))
+      .catch(() => Alert.alert('تعذر استرجاع الإعدادات'));
   }, []);
   return (
     <Page title="الإعدادات" onBack={() => navigation.goBack()}>
@@ -97,10 +98,35 @@ export function SettingsScreen({navigation}: any) {
         <Button
           key={key}
           label={`${preference === key ? '✓ ' : ''}${label}`}
+          selected={preference === key}
           secondary={preference !== key}
           onPress={() => setPreference(key)}
         />
       ))}
+      <AppText role="sectionTitle">حجم نص الواجهة</AppText>
+      {[1, 1.25, 1.5].map(scale => (
+        <Button
+          key={scale}
+          label={`${number(scale * 100)}%`}
+          selected={uiScale === scale}
+          secondary={uiScale !== scale}
+          onPress={() => {
+            void setUiScale(scale).catch(() =>
+              Alert.alert('تعذر حفظ حجم النص'),
+            );
+          }}
+        />
+      ))}
+      <AppText role="caption">
+        حجم الواجهة مستقل عن نص القراءة. يحترم التطبيق أيضا حجم النص في جهازك.
+      </AppText>
+      <AppText>{`الأرقام المستخدمة دائما: ${ltr('0123456789')}`}</AppText>
+      <Row
+        title="المصحف المفضل والترجمة"
+        detail="متاح بعد اعتماد حزم المصاحف"
+        icon="book"
+        onPress={() => navigation.navigate('MainTabs', {screen: 'Quran'})}
+      />
       <Row
         title="التنزيل عبر Wi-Fi فقط"
         detail={wifi ? 'مفعل' : 'غير مفعل'}
@@ -127,6 +153,22 @@ export function SettingsScreen({navigation}: any) {
         تطبق سياسة الشبكة على التنزيلات الجديدة. التنزيلات الموجودة تحتفظ
         بالاختيار الذي بدأت به.
       </AppText>
+      <Row
+        title="التذكيرات اليومية"
+        icon="bell"
+        onPress={() => navigation.navigate('Reminders')}
+      />
+      <Button
+        secondary
+        icon="reset"
+        label="إعادة جميع العدادات"
+        onPress={() => confirmReset('إعادة جميع العدادات؟', resetAllRepeats)}
+      />
+      <Row
+        title="إدارة التنزيلات والتخزين"
+        icon="storage"
+        onPress={() => navigation.navigate('Storage')}
+      />
     </Page>
   );
 }

@@ -28,3 +28,9 @@ Edition pack updates install beside the old version. Validate the new pack, swit
 ## Required proof
 
 Test a real in-place update from the released package using the same application ID/signing identity; fresh install alone does not qualify. Seed nondefault counts across all categories, different theme, seen/unseen education flags and active reminders. Cover filtered-index collisions, changed text/order, corrupt JSON, Infinity-like parsed values, missing keys, repeated migration, disk failure and interruption before/after commit. Confirm reset-page and reset-all scopes remain correct after migration.
+
+## Phase 3 counter commands
+
+`src/repositories/counters.ts` owns atomic decrement/reset transactions. The UI acknowledges a new remaining value only after the transaction commits; completion announcements follow that acknowledged transition. A failed command leaves the displayed value intact and offers retry. Theme/UI settings are persisted independently. Do not reintroduce a whole-counter React persistence effect: an older asynchronous UI snapshot can otherwise overwrite newer command results.
+
+The legacy full-snapshot persistence helper remains available for compatibility and repository checks. It compares values inside its serialized transaction and leaves unchanged counters alone. It is not the live reader/tasbih write path.

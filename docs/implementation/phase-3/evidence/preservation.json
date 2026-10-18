@@ -1,0 +1,15 @@
+{
+  "counterRows": 207,
+  "allCounterColumnsUnchanged": true,
+  "settingsBookmarksReminderChoicesUnchanged": true,
+  "recordComparisonExcludes": [
+    "updatedAt"
+  ],
+  "expectedRuntimeOnlyChanges": [
+    [
+      "reminder-runtime",
+      "signature"
+    ]
+  ],
+  "originalDatabaseRestoredAfterMutationTests": true
+}

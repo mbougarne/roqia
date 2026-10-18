@@ -1,0 +1,8 @@
+Android debug assembly: PASS
+BUILD SUCCESSFUL in 21s
+448 actionable tasks: 25 executed, 423 up-to-date
+
+Production-mode JavaScript bundle: PASS
+LOG:Done writing bundle output
+This is not a signed release APK.
+TypeScript: npx tsc --noEmit passed.

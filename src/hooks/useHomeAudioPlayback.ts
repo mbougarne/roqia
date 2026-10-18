@@ -6,8 +6,11 @@ import {
 } from 'react-native-track-player';
 import {type DataProps} from '../data';
 import {audioErrors, playback} from '../features/audio/controller';
-export function useHomeAudioPlayback(tracks: DataProps[]) {
-  const scope = tracks[0]?.id ?? 'empty',
+export function useHomeAudioPlayback(
+  tracks: DataProps[],
+  scopeOverride?: string,
+) {
+  const scope = scopeOverride ?? tracks[0]?.id ?? 'empty',
     active = useActiveTrack(),
     state = usePlaybackState().state;
   const belongs = active?.scope === scope;
