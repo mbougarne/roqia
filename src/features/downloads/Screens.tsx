@@ -112,15 +112,63 @@ export function DownloadsScreen({navigation}: any) {
             </AppText>
             {job.state === 'paused_user' && (
               <AppText role="caption">
-                تستأنف المحاولة من البداية لضمان سلامة الملف.
+                يبقى التنزيل متوقفاً حتى تختار المتابعة. يُستأنف من الجزء
+                المحفوظ عندما يسمح المصدر بذلك.
+              </AppText>
+            )}
+            {[
+              'server_restarted',
+              'range_invalid',
+              'entity_changed',
+              'range_not_satisfiable',
+            ].includes(job.errorCode ?? '') && (
+              <AppText role="caption">
+                أُعيد التنزيل من البداية لأن المصدر لم يؤكد سلامة الجزء المحفوظ.
               </AppText>
             )}
             {job.state === 'failed' && (
-              <AppText>لم يتم اعتماد هذا الملف. يمكنك إعادة المحاولة.</AppText>
+              <AppText>
+                {job.errorCode === 'insufficient_space'
+                  ? 'لا توجد مساحة كافية. حرّر مساحة ثم أعد المحاولة.'
+                  : 'لم يتم اعتماد هذا الملف. يمكنك إعادة المحاولة.'}
+              </AppText>
             )}
+            {job.state === 'failed' &&
+              job.errorCode === 'insufficient_space' && (
+                <Button
+                  secondary
+                  label="إدارة التخزين"
+                  onPress={() => navigation.navigate('Storage')}
+                />
+              )}
+            {job.state === 'waiting_network' &&
+              job.consentNetworkPolicy === 'wifi' && (
+                <Button
+                  secondary
+                  label="السماح بأي شبكة لهذا الملف"
+                  onPress={() =>
+                    Alert.alert(
+                      'التنزيل عبر بيانات الهاتف؟',
+                      'قد يستهلك بيانات الهاتف. يبدأ هذا الملف من البداية، وتبقى التنزيلات الأخرى على Wi-Fi.',
+                      [
+                        {text: 'إلغاء', style: 'cancel'},
+                        {
+                          text: 'السماح',
+                          onPress: () =>
+                            handle(downloads.allowAnyNetwork(job.jobId)),
+                        },
+                      ],
+                    )
+                  }
+                />
+              )}
             {['paused_user', 'failed'].includes(job.state) ? (
               <Button
-                label="إعادة المحاولة"
+                label={
+                  job.state === 'paused_user'
+                    ? 'متابعة التنزيل'
+                    : 'إعادة المحاولة'
+                }
                 onPress={() => handle(downloads.resume(job.jobId))}
               />
             ) : ['queued', 'waiting_network', 'downloading'].includes(

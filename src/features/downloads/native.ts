@@ -1,4 +1,4 @@
-import {NativeModules} from 'react-native';
+import {AppState, NativeModules, Platform} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
 import {type DownloadTask} from '@kesha-antonov/react-native-background-downloader';
 import {
@@ -66,6 +66,12 @@ async function verify(relative: string, asset: LocalAsset) {
   }
 }
 export const nativeDownloadPorts: DownloadPorts = {
+  resumable: Platform.OS === 'android',
+  sync:
+    Platform.OS === 'android'
+      ? paths =>
+          NativeModules.RoqiaDownloadFiles.syncFiles(paths.map(privatePath))
+      : undefined,
   load: async () => ({
     jobs: await listRecords<DownloadJob>('downloads'),
     installed: await listRecords<InstalledPack>('installed'),
@@ -122,6 +128,10 @@ export const nativeDownloadPorts: DownloadPorts = {
       id: job.nativeTaskId!,
       url: asset.url,
       destination: privatePath(job.relativeTempPath),
+      headers:
+        Platform.OS === 'android'
+          ? {'X-Roqia-Expected-Bytes': String(asset.bytes)}
+          : undefined,
       isAllowedOverMetered: job.consentNetworkPolicy === 'any',
       isAllowedOverRoaming: false,
       metadata: {jobId: job.jobId, generation: job.generation},
@@ -140,9 +150,20 @@ export const nativeDownloadPorts: DownloadPorts = {
     require('../quran/importSource').prepareSource(pack, directory),
   move: async (from, to) => {
     await ensureDirectory(privatePath(to.slice(0, to.lastIndexOf('/'))));
-    await FileSystem.mv(privatePath(from), privatePath(to));
+    if (Platform.OS === 'android')
+      await NativeModules.RoqiaDownloadFiles.move(
+        privatePath(from),
+        privatePath(to),
+      );
+    else await FileSystem.mv(privatePath(from), privatePath(to));
+    await removeIfPresent(privatePath(from + '.resume'));
+    await removeIfPresent(privatePath(from + '.resume.tmp'));
   },
-  remove: path => removeIfPresent(privatePath(path)),
+  remove: async path => {
+    await removeIfPresent(privatePath(path));
+    await removeIfPresent(privatePath(path + '.resume'));
+    await removeIfPresent(privatePath(path + '.resume.tmp'));
+  },
   free: async () => (await FileSystem.df()).internal_free,
   release: async (paths, remove) => {
     if (NativeModules?.RoqiaPrayer?.releaseAdhan)
@@ -169,11 +190,17 @@ export async function startDownloadServices() {
     ) =>
       downloads.networkChanged({
         connected: state.isConnected === true,
-        unmetered: state.details?.isConnectionExpensive === false,
+        wifi: state.type === 'wifi',
       });
     await update(await NetInfo.fetch());
     NetInfo.addEventListener(state => {
       void update(state).catch(() => undefined);
+    });
+    AppState.addEventListener('change', state => {
+      if (state === 'active')
+        void NetInfo.fetch()
+          .then(update)
+          .catch(() => undefined);
     });
     networkStarted = true;
   }

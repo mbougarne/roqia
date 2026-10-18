@@ -28,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           packages.add(new name.roqia.app.reader.ReaderPackage());
           packages.add(new name.roqia.app.prayer.PrayerPackage());
+          packages.add(new name.roqia.app.downloads.DownloadFilesPackage());
           if ("debug".equals(BuildConfig.BUILD_TYPE)) {
             try {
               packages.add((ReactPackage) Class.forName("name.roqia.app.feasibility.ProbePackage").getDeclaredConstructor().newInstance());

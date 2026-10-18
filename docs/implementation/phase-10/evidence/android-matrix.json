@@ -1,0 +1,2062 @@
+[
+  {
+    "mode": "stable",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352442158,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-stable"
+        }
+      },
+      {
+        "at": 1792352443654,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "stable",
+          "job": {
+            "jobId": "phase10-stable.data@1",
+            "assetId": "data",
+            "packId": "phase10-stable",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-stable.data@1.19",
+            "generation": 20,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-stable.data@1.part",
+            "relativeFinalPath": "content/phase10-stable/1/data.json",
+            "bytesReceived": 1720320,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352443450,
+            "retryAt": 0
+          },
+          "size": 2293760
+        }
+      },
+      {
+        "at": 1792352446879,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "stable",
+          "jobs": [
+            {
+              "jobId": "phase10-stable.data@1",
+              "assetId": "data",
+              "packId": "phase10-stable",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 22,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-stable.data@1.part",
+              "relativeFinalPath": "content/phase10-stable/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352446473,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-stable",
+            "version": "1",
+            "relativeDirectory": "content/phase10-stable/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352446734,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-stable/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352446894,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-stable"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "range200",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352447315,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-range200"
+        }
+      },
+      {
+        "at": 1792352449275,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "range200",
+          "job": {
+            "jobId": "phase10-range200.data@1",
+            "assetId": "data",
+            "packId": "phase10-range200",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-range200.data@1.13",
+            "generation": 14,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-range200.data@1.part",
+            "relativeFinalPath": "content/phase10-range200/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352449034,
+            "retryAt": 0
+          },
+          "size": 3276800
+        }
+      },
+      {
+        "at": 1792352453387,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "range200",
+          "jobs": [
+            {
+              "jobId": "phase10-range200.data@1",
+              "assetId": "data",
+              "packId": "phase10-range200",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 16,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-range200.data@1.part",
+              "relativeFinalPath": "content/phase10-range200/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": "server_restarted",
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352452088,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-range200",
+            "version": "1",
+            "relativeDirectory": "content/phase10-range200/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352453205,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-range200/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352453406,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-range200"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "wrong206",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352453695,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-wrong206"
+        }
+      },
+      {
+        "at": 1792352455603,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "wrong206",
+          "job": {
+            "jobId": "phase10-wrong206.data@1",
+            "assetId": "data",
+            "packId": "phase10-wrong206",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-wrong206.data@1.13",
+            "generation": 14,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-wrong206.data@1.part",
+            "relativeFinalPath": "content/phase10-wrong206/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352455348,
+            "retryAt": 0
+          },
+          "size": 3219456
+        }
+      },
+      {
+        "at": 1792352459723,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "wrong206",
+          "jobs": [
+            {
+              "jobId": "phase10-wrong206.data@1",
+              "assetId": "data",
+              "packId": "phase10-wrong206",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 16,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-wrong206.data@1.part",
+              "relativeFinalPath": "content/phase10-wrong206/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": "range_invalid",
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352458391,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-wrong206",
+            "version": "1",
+            "relativeDirectory": "content/phase10-wrong206/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352459553,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-wrong206/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352459734,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-wrong206"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "changed",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352460242,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-changed"
+        }
+      },
+      {
+        "at": 1792352462290,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "changed",
+          "job": {
+            "jobId": "phase10-changed.data@1",
+            "assetId": "data",
+            "packId": "phase10-changed",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-changed.data@1.13",
+            "generation": 14,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-changed.data@1.part",
+            "relativeFinalPath": "content/phase10-changed/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352462018,
+            "retryAt": 0
+          },
+          "size": 3407872
+        }
+      },
+      {
+        "at": 1792352466400,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "changed",
+          "jobs": [
+            {
+              "jobId": "phase10-changed.data@1",
+              "assetId": "data",
+              "packId": "phase10-changed",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 16,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-changed.data@1.part",
+              "relativeFinalPath": "content/phase10-changed/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": "entity_changed",
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352465138,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-changed",
+            "version": "1",
+            "relativeDirectory": "content/phase10-changed/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352466129,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-changed/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352466411,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-changed"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "range416",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352466685,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-range416"
+        }
+      },
+      {
+        "at": 1792352468460,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "range416",
+          "job": {
+            "jobId": "phase10-range416.data@1",
+            "assetId": "data",
+            "packId": "phase10-range416",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-range416.data@1.13",
+            "generation": 14,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-range416.data@1.part",
+            "relativeFinalPath": "content/phase10-range416/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352468379,
+            "retryAt": 0
+          },
+          "size": 2818048
+        }
+      },
+      {
+        "at": 1792352472576,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "range416",
+          "jobs": [
+            {
+              "jobId": "phase10-range416.data@1",
+              "assetId": "data",
+              "packId": "phase10-range416",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 16,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-range416.data@1.part",
+              "relativeFinalPath": "content/phase10-range416/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": "range_not_satisfiable",
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352471411,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-range416",
+            "version": "1",
+            "relativeDirectory": "content/phase10-range416/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352472315,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-range416/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352472587,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-range416"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "complete416",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352472953,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-complete416"
+        }
+      },
+      {
+        "at": 1792352474974,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "complete416",
+          "job": {
+            "jobId": "phase10-complete416.data@1",
+            "assetId": "data",
+            "packId": "phase10-complete416",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-complete416.data@1.7",
+            "generation": 8,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-complete416.data@1.part",
+            "relativeFinalPath": "content/phase10-complete416/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352474707,
+            "retryAt": 0
+          },
+          "size": 3342336
+        }
+      },
+      {
+        "at": 1792352478832,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "complete416",
+          "jobs": [
+            {
+              "jobId": "phase10-complete416.data@1",
+              "assetId": "data",
+              "packId": "phase10-complete416",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 9,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-complete416.data@1.part",
+              "relativeFinalPath": "content/phase10-complete416/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 0,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352474707,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-complete416",
+            "version": "1",
+            "relativeDirectory": "content/phase10-complete416/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352478767,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-complete416/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352478844,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-complete416"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "last-modified",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352479431,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-last-modified"
+        }
+      },
+      {
+        "at": 1792352481559,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "last-modified",
+          "job": {
+            "jobId": "phase10-last-modified.data@1",
+            "assetId": "data",
+            "packId": "phase10-last-modified",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-last-modified.data@1.7",
+            "generation": 8,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-last-modified.data@1.part",
+            "relativeFinalPath": "content/phase10-last-modified/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": null,
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352481230,
+            "retryAt": 0
+          },
+          "size": 3473408
+        }
+      },
+      {
+        "at": 1792352484658,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "last-modified",
+          "jobs": [
+            {
+              "jobId": "phase10-last-modified.data@1",
+              "assetId": "data",
+              "packId": "phase10-last-modified",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 10,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-last-modified.data@1.part",
+              "relativeFinalPath": "content/phase10-last-modified/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": null,
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352483245,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-last-modified",
+            "version": "1",
+            "relativeDirectory": "content/phase10-last-modified/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352484167,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-last-modified/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352484671,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-last-modified"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "no-validator",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352485298,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-no-validator"
+        }
+      },
+      {
+        "at": 1792352487637,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "no-validator",
+          "job": {
+            "jobId": "phase10-no-validator.data@1",
+            "assetId": "data",
+            "packId": "phase10-no-validator",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-no-validator.data@1.7",
+            "generation": 8,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-no-validator.data@1.part",
+            "relativeFinalPath": "content/phase10-no-validator/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": null,
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352487294,
+            "retryAt": 0
+          },
+          "size": 3604480
+        }
+      },
+      {
+        "at": 1792352491753,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "no-validator",
+          "jobs": [
+            {
+              "jobId": "phase10-no-validator.data@1",
+              "assetId": "data",
+              "packId": "phase10-no-validator",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 10,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-no-validator.data@1.part",
+              "relativeFinalPath": "content/phase10-no-validator/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": null,
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352490568,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-no-validator",
+            "version": "1",
+            "relativeDirectory": "content/phase10-no-validator/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352491552,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-no-validator/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352491764,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-no-validator"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "unknown",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352492365,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-unknown"
+        }
+      },
+      {
+        "at": 1792352496808,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "unknown",
+          "jobs": [
+            {
+              "jobId": "phase10-unknown.data@1",
+              "assetId": "data",
+              "packId": "phase10-unknown",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-unknown.data@1.part",
+              "relativeFinalPath": "content/phase10-unknown/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352495964,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-unknown",
+            "version": "1",
+            "relativeDirectory": "content/phase10-unknown/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352496306,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-unknown/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352496820,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-unknown"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "forbidden",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352497108,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-forbidden"
+        }
+      },
+      {
+        "at": 1792352498369,
+        "event": "phase10-rejected",
+        "detail": {
+          "mode": "forbidden",
+          "jobs": [
+            {
+              "jobId": "phase10-forbidden.data@1",
+              "assetId": "data",
+              "packId": "phase10-forbidden",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 10,
+              "state": "failed",
+              "pauseReason": "network",
+              "relativeTempPath": "staging/phase10-forbidden.data@1.part",
+              "relativeFinalPath": "content/phase10-forbidden/1/data.json",
+              "bytesReceived": 0,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": null,
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": "403",
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352497860,
+              "retryAt": 0
+            }
+          ]
+        }
+      },
+      {
+        "at": 1792352498386,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-forbidden"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "corrupt",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352499165,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-corrupt"
+        }
+      },
+      {
+        "at": 1792352503167,
+        "event": "phase10-rejected",
+        "detail": {
+          "mode": "corrupt",
+          "jobs": [
+            {
+              "jobId": "phase10-corrupt.data@1",
+              "assetId": "data",
+              "packId": "phase10-corrupt",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 10,
+              "state": "failed",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-corrupt.data@1.part",
+              "relativeFinalPath": "content/phase10-corrupt/1/data.json",
+              "bytesReceived": 7782400,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": "integrity_failed",
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352503005,
+              "retryAt": 0
+            }
+          ]
+        }
+      },
+      {
+        "at": 1792352503191,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-corrupt"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "no-space",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352503645,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-no-space"
+        }
+      },
+      {
+        "at": 1792352504017,
+        "event": "phase10-rejected",
+        "detail": {
+          "mode": "no-space",
+          "jobs": [
+            {
+              "jobId": "phase10-no-space.data@1",
+              "assetId": "data",
+              "packId": "phase10-no-space",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "failed",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-no-space.data@1.part",
+              "relativeFinalPath": "content/phase10-no-space/1/data.json",
+              "bytesReceived": 0,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": null,
+              "lastModified": null,
+              "attempt": 0,
+              "errorCode": "insufficient_space",
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352504008,
+              "retryAt": 0
+            }
+          ]
+        }
+      },
+      {
+        "at": 1792352504105,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-no-space"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "cancel",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352504612,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-cancel"
+        }
+      },
+      {
+        "at": 1792352506443,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "cancel",
+          "job": {
+            "jobId": "phase10-cancel.data@1",
+            "assetId": "data",
+            "packId": "phase10-cancel",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-cancel.data@1.9",
+            "generation": 10,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-cancel.data@1.part",
+            "relativeFinalPath": "content/phase10-cancel/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352506195,
+            "retryAt": 0
+          },
+          "size": 3342336
+        }
+      },
+      {
+        "at": 1792352507502,
+        "event": "phase10-cancelled",
+        "detail": {
+          "jobs": [
+            {
+              "jobId": "phase10-cancel.data@1",
+              "assetId": "data",
+              "packId": "phase10-cancel",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 11,
+              "state": "cancelled",
+              "pauseReason": "user",
+              "relativeTempPath": "staging/phase10-cancel.data@1.part",
+              "relativeFinalPath": "content/phase10-cancel/1/data.json",
+              "bytesReceived": 2621440,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352506195,
+              "retryAt": 0
+            }
+          ]
+        }
+      },
+      {
+        "at": 1792352507510,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-cancel"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "user-pause",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352508179,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-user-pause"
+        }
+      },
+      {
+        "at": 1792352510144,
+        "event": "phase10-paused",
+        "detail": {
+          "mode": "user-pause",
+          "job": {
+            "jobId": "phase10-user-pause.data@1",
+            "assetId": "data",
+            "packId": "phase10-user-pause",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-user-pause.data@1.13",
+            "generation": 14,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-user-pause.data@1.part",
+            "relativeFinalPath": "content/phase10-user-pause/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352509999,
+            "retryAt": 0
+          },
+          "size": 3014656
+        }
+      },
+      {
+        "at": 1792352514114,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-recover-user-pause"
+        }
+      },
+      {
+        "at": 1792352514487,
+        "event": "phase10-user-pause-retained",
+        "detail": {
+          "job": {
+            "jobId": "phase10-user-pause.data@1",
+            "assetId": "data",
+            "packId": "phase10-user-pause",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-user-pause.data@1.13",
+            "generation": 14,
+            "state": "paused_user",
+            "pauseReason": "user",
+            "relativeTempPath": "staging/phase10-user-pause.data@1.part",
+            "relativeFinalPath": "content/phase10-user-pause/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352509999,
+            "retryAt": 0
+          }
+        }
+      },
+      {
+        "at": 1792352517199,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "user-pause",
+          "jobs": [
+            {
+              "jobId": "phase10-user-pause.data@1",
+              "assetId": "data",
+              "packId": "phase10-user-pause",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 16,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-user-pause.data@1.part",
+              "relativeFinalPath": "content/phase10-user-pause/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352516400,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-user-pause",
+            "version": "1",
+            "relativeDirectory": "content/phase10-user-pause/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352516859,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-user-pause/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352517217,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-recover-user-pause"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "active-loss",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352517920,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-active-loss"
+        }
+      },
+      {
+        "at": 1792352519769,
+        "event": "phase10-active-loss",
+        "detail": {
+          "job": {
+            "jobId": "phase10-active-loss.data@1",
+            "assetId": "data",
+            "packId": "phase10-active-loss",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-active-loss.data@1.9",
+            "generation": 9,
+            "state": "downloading",
+            "pauseReason": null,
+            "relativeTempPath": "staging/phase10-active-loss.data@1.part",
+            "relativeFinalPath": "content/phase10-active-loss/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352519466,
+            "retryAt": 0
+          }
+        }
+      },
+      {
+        "at": 1792352523991,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-recover-active-loss"
+        }
+      },
+      {
+        "at": 1792352524632,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "active-loss",
+          "jobs": [
+            {
+              "jobId": "phase10-active-loss.data@1",
+              "assetId": "data",
+              "packId": "phase10-active-loss",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 9,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-active-loss.data@1.part",
+              "relativeFinalPath": "content/phase10-active-loss/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352519466,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-active-loss",
+            "version": "1",
+            "relativeDirectory": "content/phase10-active-loss/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352524517,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-active-loss/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352524695,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-recover-active-loss"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "before-rename",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352525097,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-before-rename"
+        }
+      },
+      {
+        "at": 1792352530075,
+        "event": "phase10-crash-window",
+        "detail": {
+          "mode": "before-rename",
+          "from": "staging/phase10-before-rename.data@1.part",
+          "to": "content/phase10-before-rename/1/data.json"
+        }
+      },
+      {
+        "at": 1792352534154,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-recover-before-rename"
+        }
+      },
+      {
+        "at": 1792352536669,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "before-rename",
+          "jobs": [
+            {
+              "jobId": "phase10-before-rename.data@1",
+              "assetId": "data",
+              "packId": "phase10-before-rename",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-before-rename.data@1.part",
+              "relativeFinalPath": "content/phase10-before-rename/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352529904,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-before-rename",
+            "version": "1",
+            "relativeDirectory": "content/phase10-before-rename/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352535858,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-before-rename/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352537062,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-recover-before-rename"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "after-rename",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352537363,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-after-rename"
+        }
+      },
+      {
+        "at": 1792352541949,
+        "event": "phase10-crash-window",
+        "detail": {
+          "mode": "after-rename",
+          "from": "staging/phase10-after-rename.data@1.part",
+          "to": "content/phase10-after-rename/1/data.json"
+        }
+      },
+      {
+        "at": 1792352546820,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-recover-after-rename"
+        }
+      },
+      {
+        "at": 1792352547524,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "after-rename",
+          "jobs": [
+            {
+              "jobId": "phase10-after-rename.data@1",
+              "assetId": "data",
+              "packId": "phase10-after-rename",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-after-rename.data@1.part",
+              "relativeFinalPath": "content/phase10-after-rename/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352540741,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-after-rename",
+            "version": "1",
+            "relativeDirectory": "content/phase10-after-rename/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352547389,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-after-rename/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352547563,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-recover-after-rename"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "commit",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352548001,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-commit"
+        }
+      },
+      {
+        "at": 1792352552184,
+        "event": "phase10-crash-window",
+        "detail": {
+          "mode": "commit",
+          "jobs": [
+            {
+              "jobId": "phase10-commit.data@1",
+              "assetId": "data",
+              "packId": "phase10-commit",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-commit.data@1.part",
+              "relativeFinalPath": "content/phase10-commit/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352551880,
+              "retryAt": 0
+            }
+          ],
+          "installed": [
+            {
+              "active": true,
+              "packId": "phase10-commit",
+              "version": "1",
+              "relativeDirectory": "content/phase10-commit/1",
+              "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "capabilities": [
+                "fixture"
+              ],
+              "state": "ready",
+              "activatedAt": 1792352552168,
+              "sourceMetadata": {
+                "source": "local-controlled-fixture"
+              },
+              "files": [
+                "content/phase10-commit/1/data.json"
+              ]
+            }
+          ],
+          "journals": []
+        }
+      },
+      {
+        "at": 1792352552462,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "commit",
+          "jobs": [
+            {
+              "jobId": "phase10-commit.data@1",
+              "assetId": "data",
+              "packId": "phase10-commit",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-commit.data@1.part",
+              "relativeFinalPath": "content/phase10-commit/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352551880,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-commit",
+            "version": "1",
+            "relativeDirectory": "content/phase10-commit/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352552168,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-commit/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352556080,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-recover-commit"
+        }
+      },
+      {
+        "at": 1792352556765,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "commit",
+          "jobs": [
+            {
+              "jobId": "phase10-commit.data@1",
+              "assetId": "data",
+              "packId": "phase10-commit",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-commit.data@1.part",
+              "relativeFinalPath": "content/phase10-commit/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352551880,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-commit",
+            "version": "1",
+            "relativeDirectory": "content/phase10-commit/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352556639,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-commit/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352556826,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-recover-commit"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "background",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352557192,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-background"
+        }
+      },
+      {
+        "at": 1792352559351,
+        "event": "phase10-background-window",
+        "detail": {
+          "job": {
+            "jobId": "phase10-background.data@1",
+            "assetId": "data",
+            "packId": "phase10-background",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-background.data@1.7",
+            "generation": 7,
+            "state": "downloading",
+            "pauseReason": null,
+            "relativeTempPath": "staging/phase10-background.data@1.part",
+            "relativeFinalPath": "content/phase10-background/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352558997,
+            "retryAt": 0
+          }
+        }
+      },
+      {
+        "at": 1792352562003,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "background",
+          "jobs": [
+            {
+              "jobId": "phase10-background.data@1",
+              "assetId": "data",
+              "packId": "phase10-background",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-background.data@1.part",
+              "relativeFinalPath": "content/phase10-background/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352561017,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-background",
+            "version": "1",
+            "relativeDirectory": "content/phase10-background/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352561569,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-background/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352562016,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-background"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "network",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352562858,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-network"
+        }
+      },
+      {
+        "at": 1792352564817,
+        "event": "phase10-network-window",
+        "detail": {
+          "job": {
+            "jobId": "phase10-network.data@1",
+            "assetId": "data",
+            "packId": "phase10-network",
+            "version": "1",
+            "nativeTaskId": "roqia.phase10-network.data@1.13",
+            "generation": 13,
+            "state": "downloading",
+            "pauseReason": null,
+            "relativeTempPath": "staging/phase10-network.data@1.part",
+            "relativeFinalPath": "content/phase10-network/1/data.json",
+            "bytesReceived": 2621440,
+            "expectedBytes": 8000031,
+            "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "etag": "\"phase10-v1\"",
+            "lastModified": null,
+            "attempt": 1,
+            "errorCode": null,
+            "consentNetworkPolicy": "wifi",
+            "updatedAt": 1792352564427,
+            "retryAt": 0
+          }
+        }
+      },
+      {
+        "at": 1792352576917,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "network",
+          "jobs": [
+            {
+              "jobId": "phase10-network.data@1",
+              "assetId": "data",
+              "packId": "phase10-network",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 16,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-network.data@1.part",
+              "relativeFinalPath": "content/phase10-network/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352575665,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-network",
+            "version": "1",
+            "relativeDirectory": "content/phase10-network/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352575986,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-network/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352576926,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-network"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "native-wifi",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352592886,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-native-wifi"
+        }
+      },
+      {
+        "at": 1792352593091,
+        "event": "phase10-native-wifi-window",
+        "detail": {
+          "jobs": [
+            {
+              "jobId": "phase10-native-wifi.data@1",
+              "assetId": "data",
+              "packId": "phase10-native-wifi",
+              "version": "1",
+              "nativeTaskId": "roqia.phase10-native-wifi.data@1.7",
+              "generation": 7,
+              "state": "waiting_network",
+              "pauseReason": "network",
+              "relativeTempPath": "staging/phase10-native-wifi.data@1.part",
+              "relativeFinalPath": "content/phase10-native-wifi/1/data.json",
+              "bytesReceived": 0,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352587557,
+              "retryAt": 0
+            }
+          ]
+        }
+      },
+      {
+        "at": 1792352606608,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "native-wifi",
+          "jobs": [
+            {
+              "jobId": "phase10-native-wifi.data@1",
+              "assetId": "data",
+              "packId": "phase10-native-wifi",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 7,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-native-wifi.data@1.part",
+              "relativeFinalPath": "content/phase10-native-wifi/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "wifi",
+              "updatedAt": 1792352605812,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-native-wifi",
+            "version": "1",
+            "relativeDirectory": "content/phase10-native-wifi/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352606132,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-native-wifi/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352606621,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-native-wifi"
+        }
+      }
+    ]
+  },
+  {
+    "mode": "any-network",
+    "passed": true,
+    "events": [
+      {
+        "at": 1792352608973,
+        "event": "scenario-start",
+        "detail": {
+          "scenario": "phase10-any-network"
+        }
+      },
+      {
+        "at": 1792352613724,
+        "event": "phase10-verified",
+        "detail": {
+          "mode": "any-network",
+          "jobs": [
+            {
+              "jobId": "phase10-any-network.data@1",
+              "assetId": "data",
+              "packId": "phase10-any-network",
+              "version": "1",
+              "nativeTaskId": null,
+              "generation": 4,
+              "state": "ready",
+              "pauseReason": null,
+              "relativeTempPath": "staging/phase10-any-network.data@1.part",
+              "relativeFinalPath": "content/phase10-any-network/1/data.json",
+              "bytesReceived": 8000031,
+              "expectedBytes": 8000031,
+              "expectedHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+              "etag": "\"phase10-v1\"",
+              "lastModified": null,
+              "attempt": 1,
+              "errorCode": null,
+              "consentNetworkPolicy": "any",
+              "updatedAt": 1792352612785,
+              "retryAt": 0
+            }
+          ],
+          "installed": {
+            "active": true,
+            "packId": "phase10-any-network",
+            "version": "1",
+            "relativeDirectory": "content/phase10-any-network/1",
+            "manifestHash": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f",
+            "capabilities": [
+              "fixture"
+            ],
+            "state": "ready",
+            "activatedAt": 1792352613160,
+            "sourceMetadata": {
+              "source": "local-controlled-fixture"
+            },
+            "files": [
+              "content/phase10-any-network/1/data.json"
+            ]
+          },
+          "sha256": "a2fc44ce3ef8747537b9f594c498ce24b7e1a7965c34842d52b84ff64c31bf5f"
+        }
+      },
+      {
+        "at": 1792352613735,
+        "event": "scenario-finished",
+        "detail": {
+          "scenario": "phase10-any-network"
+        }
+      }
+    ]
+  }
+]

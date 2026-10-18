@@ -241,13 +241,13 @@ test('network return resumes only network-waiting jobs and preserves user pause'
     f = fixture([a, b]),
     c = f.coordinator();
   await c.initialize();
-  await c.networkChanged({connected: false, unmetered: false});
+  await c.networkChanged({connected: false, wifi: false});
   await c.enqueue('network', '1');
   await c.enqueue('manual', '1');
   assert.equal(f.tasks.size, 0);
   assert.ok(c.listJobs().every(j => j.state === 'waiting_network'));
   await c.pause(c.listJobs().find(j => j.packId === 'manual').jobId);
-  await c.networkChanged({connected: true, unmetered: true});
+  await c.networkChanged({connected: true, wifi: true});
   assert.equal(
     c.listJobs().find(j => j.packId === 'manual').state,
     'paused_user',

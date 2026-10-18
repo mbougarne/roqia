@@ -8,6 +8,8 @@ export const database = () =>
       .user_version as number;
     if (version > 2) throw new Error('unsupported_database_version');
     await db.execute('PRAGMA journal_mode = WAL');
+    // Install journals must survive a successful commit before native file renames begin.
+    await db.execute('PRAGMA synchronous = FULL');
     await db.execute('PRAGMA foreign_keys = ON');
     await db.transaction(async tx => {
       await tx.execute(`CREATE TABLE IF NOT EXISTS records (

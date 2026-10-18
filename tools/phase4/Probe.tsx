@@ -36,7 +36,7 @@ export default function Phase4Probe({scenario}: {scenario: string}) {
         true,
       );
       const initialize = async () => {
-        await downloads.networkChanged({connected: true, unmetered: true});
+        await downloads.networkChanged({connected: true, wifi: true});
         await downloads.initialize();
       };
       const quran = new QuranRuntime(
