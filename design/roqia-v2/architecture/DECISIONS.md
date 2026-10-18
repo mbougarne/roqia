@@ -6,7 +6,7 @@ These decisions turn the conversation into implementation rules. “Selected” 
 | --- | --- | --- |
 | ADR-001 | Free, ad-free, no login or monetization | Selected. No payment, ads, subscriptions or account infrastructure. |
 | ADR-002 | Offline after optional downloads | Selected. Bundled devotional core remains usable on a fresh offline install; Quran/audio packs need an initial connection. |
-| ADR-003 | Al Mushaf Al Mohammadi for Warsh; Tanzil for Hafs | Selected. Never relabel Hafs as Warsh or treat a font change as a riwaya change. |
+| ADR-003 | King Fahd Warsh v2.1/update 6; Tanzil for Hafs | Selected. Never relabel Hafs as Warsh or treat a font change as a riwaya change. |
 | ADR-004 | Separate edition, translation and audio packs | Proposed. Download one edition initially; adding the other is optional. Audio is keyed by reciter + riwaya/tariq + recording set + surah + quality. |
 | ADR-005 | Translation tied to verified verse mapping | Proposed. French/English available with Hafs after source acquisition. Warsh translations require explicit alignment; unavailable is preferable to a misleading mapping. |
 | ADR-006 | No application backend | Selected. Bundle a small vetted catalog and fetch static HTTPS files. Optional static mirrors contain no user data or server logic. |
@@ -23,7 +23,7 @@ These decisions turn the conversation into implementation rules. “Selected” 
 
 ## Early evidence gates
 
-RQ-016 must identify the actual Warsh artifact, release/version, orthography, numbering scheme, font or page assets, offline access and supported capabilities. The source choice remains Al Mushaf Al Mohammadi. If the available artifact cannot provide reflow and Western verse badges, document the specific limitation and choose a source-supported presentation before implementation; never manufacture missing data.
+RQ-016 must identify the actual Warsh artifact, release/version, orthography, numbering scheme, font or page assets, offline access and supported capabilities. The user changed the source choice to King Fahd on 2026-10-18. The package and matching font have [acquisition/Android evidence](../../../docs/feasibility/android/WARSH.md); AL Maghribi fails this dataset and must not replace the matching font. Text-pack redistribution and qualified review remain open. If the available artifact cannot provide reflow and Western verse badges, document the specific limitation and choose a source-supported presentation before implementation; never manufacture missing data.
 
 RQ-020 must show native pause/resume, lifecycle recovery, Wi-Fi restriction and file verification on the pinned RN/Android stack. RQ-032 must establish one usable background audio API. RQ-037 must validate Moroccan parameters/time-zone handling against local references. RQ-040 must prove background adhan or record the bounded fallback and corresponding UI wording.
 

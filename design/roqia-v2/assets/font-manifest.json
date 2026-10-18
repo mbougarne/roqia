@@ -10,6 +10,16 @@
   },
   "quran": {
     "status": "source-pack-specific; not bundled in this design kit",
-    "reason": "Exact edition glyph coverage and Warsh orthography require approved source resources."
+    "reason": "Exact edition glyph coverage and Warsh orthography require approved source resources.",
+    "warsh": {
+      "editionId": "warsh-kfgqpc-v2.1-update6",
+      "sourceMember": "UthmanicWarsh_v2-1 font/uthmanic_warsh_v21.ttf",
+      "family": "kfgqpc_warsh_uthmanic_script",
+      "sha256": "b436fb89e1d26f827cd6a3c4d632fb68a49cc954c4ac90699a9502da25555230",
+      "status": "selected baseline; Android API 36 tested; qualified review pending",
+      "license": "Embedded KFGQPC EULA; retain notices; distribute unchanged; not OFL/MIT",
+      "alternative": "AL Maghribi v4.9.6 rejected as a drop-in replacement for this encoding",
+      "report": "../../../docs/feasibility/android/WARSH.md"
+    }
   }
 }

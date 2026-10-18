@@ -23,7 +23,7 @@ Start with the [ordered implementation checklist](implementation/IMPLEMENTATION-
 
 The product remains free, ad-free, Arabic-first and usable offline after optional downloads. There are no accounts, subscriptions, analytics SDKs, backend application services, or server databases in this design. Local device storage and optional static file hosting are separate from a backend.
 
-Warsh uses Al Mushaf Al Mohammadi; Hafs uses Tanzil. The source choices are retained. Exact downloadable editions, fonts, verse maps, translations and reciter catalogs still need the evidence described in their acquisition tickets. A source website is not itself a verified distributable content pack.
+Warsh uses the selected King Fahd v2.1/update 6 package and its matching font; Hafs uses Tanzil. The [source/font report](../../docs/feasibility/android/WARSH.md) records acquisition, Android tests and remaining redistribution/review gates. Existing concept PNGs and their generation prompts retain historical Al-Mohammadi labels; current copy and screen briefs supersede those labels. Exact translation mappings and reciter compatibility still require their ticket evidence.
 
 The screenshots establish visual direction. The tokens, component contracts and feature specifications resolve inconsistencies between generated images. They take precedence over illustrative sizes, times, unverified Quran glyphs, source labels, and unavailable controls shown in a mockup. The 96 PNGs are reference material and must never enter the app bundle.
 

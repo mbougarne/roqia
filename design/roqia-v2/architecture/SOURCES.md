@@ -4,7 +4,8 @@ Checked 17 October 2026. External documentation can change; pin and verify the a
 
 | Source | Established here | Still required |
 | --- | --- | --- |
-| [Al Mushaf Al Mohammadi](https://almoshaf-almohammadi.ma/) | User-selected Warsh source; website reachable | RQ-016: exact offline artifact, format, verse scheme, font, version and capabilities; no documented bulk API was established here |
+| [King Fahd developer package](https://qurancomplex.gov.sa/en/techquran/dev/) | User selected Warsh v2.1/update 6 on 18 October. Mirror archive matches publisher-indexed MD5/SHA-1; 114 surahs / 6,214 records validate. Matching-font EULA and Android full-corpus shaping recorded. | [Detailed evidence and remaining text redistribution/qualified-review gates](../../../docs/feasibility/android/WARSH.md). Direct publisher download timed out; no endorsement/latest-version claim. |
+| [AL Maghribi font](https://almoshaf-almohammadi.ma/fonts/AALMAGHRIBI/AALMAGHRIBI_v4.9.6.otf) | Official-host binary downloaded and tested locally. Incompatible with this KFGQPC dataset: missing mappings and visible incorrect verse markers. | Evaluation only; do not include it in the selected Warsh pack. |
 | [Tanzil downloads](https://tanzil.net/download/) | Official downloadable Quran text entry point | RQ-017: acquire exact export, retain original hash/notice, validate importer |
 | [Tanzil text conditions](https://tanzil.net/docs/Text_License) | Verbatim preservation, attribution/link and notice requirements are stated | Record the actual edition's notice in its pack |
 | [Tanzil translations](https://tanzil.net/trans/) | French Hamidullah and multiple English translations listed | RQ-026: exact French/English file, edition and source terms; mockup Clear Quran is not a confirmed catalog file |

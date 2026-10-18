@@ -1,6 +1,6 @@
 # Quran content and reading solution
 
-Screens 22–32; tickets RQ-016–RQ-019 and RQ-023–RQ-030. The selected sources remain Al Mushaf Al Mohammadi for Warsh and Tanzil for Hafs. [Source register](../architecture/SOURCES.md) separates verified documentation from acquisition work still required.
+Screens 22–32; tickets RQ-016–RQ-019 and RQ-023–RQ-030. The selected sources are King Fahd Warsh v2.1/update 6 (changed by the user on 2026-10-18) and Tanzil Hafs. [Source register](../architecture/SOURCES.md) separates verified documentation from acquisition work still required.
 
 ## Content acquisition happens before runtime
 
@@ -13,7 +13,9 @@ Screens 22–32; tickets RQ-016–RQ-019 and RQ-023–RQ-030. The selected sourc
 
 Tanzil provides downloadable text and specific preservation/attribution conditions; use its download export rather than copying rendered website text. The French Hamidullah entry is listed in Tanzil's translations catalog. Translation terms and exact files are separate acquisition records. The English “The Clear Quran” label in the mockup is a candidate, not a confirmed Tanzil export or guaranteed distributable pack. RQ-026 resolves the English edition and updates its UI label to the actual source. [Tanzil download](https://tanzil.net/download/), [text conditions](https://tanzil.net/docs/Text_License), [translations](https://tanzil.net/trans/).
 
-Al Mushaf Al Mohammadi's website was reachable, but this planning pass did not establish a documented bulk text export, stable download endpoint, font package or verse API. RQ-016 must produce that artifact evidence. If only approved pages are available, keep their contents intact and declare page-only capabilities. Do not promise text search, dynamic Quran font size, word selection or Western embedded page numerals without a source-supported method. The desired reflowable Warsh reader remains a release gate rather than a fabricated dataset.
+The King Fahd package supplies structured canonical text and the matching `uthmanic_warsh_v21.ttf`. All 114 surahs / 6,214 records agree between source JSON and CSV; Android reflow/font tests are recorded in the [source/font report](../../../docs/feasibility/android/WARSH.md). Keep source-specific numbering key `kfgqpc-warsh-v2.1`, with tariq unspecified until verified. The matching font covers and shapes the full corpus without fallback on API 36. AL Maghribi fails this package's encoding and must not be substituted. Production packaging, qualified review and primary text redistribution evidence remain gates.
+
+This source encodes verse ornaments at U+FC00–U+FD1C. Preserve them in canonical text, including embedded numerals; render Western `0–9` separately in UI locators. Western-only inline ornaments need a reviewed presentation mapping and cannot be implemented by rewriting the canonical strings. The font's EULA travels with every pack and the font stays unmodified. Missing/corrupt fonts disable the reader with a repair/download action; never silently use a system font.
 
 ## Identity and edition boundaries
 

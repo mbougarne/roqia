@@ -64,3 +64,33 @@ The journal is in `files/feasibility/events.jsonl`, readable through `adb -s emu
 ## Review boundaries
 
 The debug activity, synthetic tone and native probe classes live in the debug source set. The JS component is registered only for Android development builds. Native downloader dependencies still contribute release services/permissions; inspect the merged release manifest before shipping. The normal screens, existing data IDs, notification schedules and released version number are unchanged.
+
+## Warsh source and font comparison
+
+The selected source is KFGQPC Warsh v2.1/update 6; see [the source, terms and font report](../../docs/feasibility/android/WARSH.md). Acquisition now includes its pinned ZIP and the official-host AL Maghribi font for **local comparison only**. No font/corpus binary is bundled or committed. The shared source lock distinguishes the publisher URL from the mirror transport URL.
+
+```sh
+python3 tools/feasibility/content.py acquire
+python3 tools/feasibility/warsh.py > .roqia-feasibility/warsh-validation.json
+```
+
+This verifies the independent lock, compares every JSON/CSV field, checks source ordering/counts, reads font names/EULA and Unicode cmap coverage, and writes exact source samples plus both original fonts under `.roqia-feasibility/warsh-probe/`. It does not normalize text, replace verse markers, generate religious text, produce a production pack or authorize redistribution. `package-hafs` and `catalog` still only support the Tanzil pack.
+
+After rebuilding/installing the debug APK in place, copy the generated fixtures to the intended emulator (use the absolute adb path if it is not on PATH):
+
+```sh
+adb -s emulator-5554 shell mkdir -p /data/local/tmp/roqia-warsh-font-probe
+adb -s emulator-5554 push .roqia-feasibility/warsh-probe/font-probe.json .roqia-feasibility/warsh-probe/warsh.ttf .roqia-feasibility/warsh-probe/maghribi.otf /data/local/tmp/roqia-warsh-font-probe/
+adb -s emulator-5554 shell run-as name.roqia.app mkdir -p files/feasibility/warsh-fonts
+adb -s emulator-5554 shell run-as name.roqia.app cp /data/local/tmp/roqia-warsh-font-probe/font-probe.json /data/local/tmp/roqia-warsh-font-probe/warsh.ttf /data/local/tmp/roqia-warsh-font-probe/maghribi.otf files/feasibility/warsh-fonts/
+python3 tools/feasibility/run-android-probe.py fonts-light --serial emulator-5554
+```
+
+Also available: `fonts-dark`, `fonts-light-large`, `fonts-dark-large`, `fonts-light-marks`, `fonts-dark-marks`. Inspect and capture the UI after completion. Each run shapes all 6,214 records with both fonts using Android's actual glyph/font identities (API 31+), records fallback/zero-glyph counts and input/font hashes in the scoped journal, then displays exact source samples through React Native. The comparison includes known-difference verses, long text and uncommon Quranic marks. Results below API 31 must be obtained with a different diagnostic/visual device pass, not inferred from this emulator. A failed font load/checksum rejects the probe visibly.
+
+To remove these local fixtures after testing (no user data):
+
+```sh
+adb -s emulator-5554 shell run-as name.roqia.app rm -rf files/feasibility/warsh-fonts
+adb -s emulator-5554 shell rm -rf /data/local/tmp/roqia-warsh-font-probe
+```

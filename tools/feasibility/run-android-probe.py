@@ -7,7 +7,7 @@ import subprocess
 import time
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('scenario', choices=['timezone','provider','stable','range200','changed','wrong206','range416','unknown','recovery','reattach','audio','alarm','cleanup'])
+parser.add_argument('scenario', choices=['timezone','provider','stable','range200','changed','wrong206','range416','unknown','recovery','reattach','audio','alarm','cleanup', 'fonts-light', 'fonts-dark', 'fonts-light-large', 'fonts-dark-large', 'fonts-light-marks', 'fonts-dark-marks'])
 parser.add_argument('--serial', default='emulator-5554')
 parser.add_argument('--adb', default=os.environ.get('ADB', 'adb'))
 parser.add_argument('--background', action='store_true')

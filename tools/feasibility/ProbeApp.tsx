@@ -15,6 +15,8 @@ import {
   type DownloadTask,
 } from '@kesha-antonov/react-native-background-downloader';
 
+import WarshFontProbe from './WarshFontProbe';
+
 const probe = NativeModules.RoqiaProbe;
 const server = 'http://127.0.0.1:8082';
 const wait = (ms: number) =>
@@ -229,6 +231,12 @@ async function run(scenario: string) {
 }
 
 export default function ProbeApp({scenario}: {scenario?: string}) {
+  if (scenario?.startsWith('fonts-'))
+    return <WarshFontProbe scenario={scenario} />;
+  return <ScenarioProbe scenario={scenario} />;
+}
+
+function ScenarioProbe({scenario}: {scenario?: string}) {
   const launched = useRef(false);
   const [status, setStatus] = useState(
     'Choose a probe. Only debug/test files are touched.',

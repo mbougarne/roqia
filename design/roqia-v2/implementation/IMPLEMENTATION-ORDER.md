@@ -26,9 +26,11 @@ If an acquisition or feasibility ticket is blocked, record the missing evidence 
 
 2. [ ] **[RQ-016 — Acquire and prove the Warsh source format](tickets/RQ-016.md)**
 
-   **Deliver:** Identify the exact Al Mushaf Al Mohammadi offline artifact, font/pages, version, riwaya/tariq and numbering scheme. Produce a capability report and deterministic sample import/render proof.
+   **Deliver:** Use the selected King Fahd Warsh v2.1/update 6 package and its matching font. Verify publisher provenance, redistribution scope, source numbering/tariq and exact text preservation; retain Android comparison evidence and qualified review requirements.
 
    **Finish when:** Actual source artifact and provenance exist; Reflow/verse search/Western badges are proved or explicitly unavailable; No OCR, generated text or Hafs-to-Warsh substitution.
+
+   **Current evidence:** King Fahd v2.1/update 6 acquired; exact JSON/CSV checks and Android matching-font comparison completed. AL Maghribi is incompatible with this dataset. Finish the specific redistribution and qualified-review items in [WARSH.md](../../../docs/feasibility/android/WARSH.md); no Al-Mohammadi API/contact dependency.
 
 3. [ ] **[RQ-017 — Acquire and package Tanzil Hafs](tickets/RQ-017.md)**
 

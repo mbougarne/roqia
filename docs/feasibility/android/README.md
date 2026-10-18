@@ -2,7 +2,7 @@
 
 This PR covers steps 01–10 of the ordered implementation plan: RQ-001, RQ-016, RQ-017, RQ-018, RQ-019, RQ-031, RQ-020, RQ-032, RQ-037 and RQ-040. It adds executable source validation and opt-in Android probes. It does not deliver the redesigned product screens or make draft Quran packs available to users.
 
-The Android build, in-place emulator upgrade, resumable downloads, background playback and native alarm path have evidence. Warsh acquisition, religious/font review, a published content catalog, a validated Morocco method and the physical-device matrix remain gates. These are recorded against the individual tickets rather than counted as completed features.
+The Android build, in-place emulator upgrade, resumable downloads, background playback and native alarm path have evidence. Warsh text redistribution evidence, qualified religious/font review, a published content catalog, a validated Morocco method and the physical-device matrix remain gates. These are recorded against the individual tickets rather than counted as completed features.
 
 ## Reproduce
 
@@ -38,11 +38,11 @@ The dedicated feasibility tests exercise source corruption, ordering, hashes, pa
 
 ### Warsh
 
-Al Mushaf Al Mohammadi remains the selected source. Its public website and JavaScript reveal a Quran content API, but an unauthenticated request to `https://api.almoshaf-almohammadi.ma/api/v1/manager/tafsir/masahif?page=0` returned HTTP 403 with “The used authentication method is not allowed on this route.” No credential from the website bundle was reused.
+The user selected **King Fahd Warsh v2.1 / update 6** on 2026-10-18. Its downloaded archive matches the MD5/SHA-1 on the indexed publisher developer page; direct publisher requests timed out, so transport used a documented unofficial mirror. The independent source lock pins SHA-256. JSON and CSV agree on all 114 surahs / 6,214 ordered verse records.
 
-A versioned, authorized offline export and its matching font/page assets have **not** been acquired. Consequently reflow, verse search, verse bookmarks, numbering, tariq-specific compatibility and offline rendering are unproved. No OCR, generated Quran text, or conversion from Hafs was used. Western UI badges can be separate from canonical text; digits baked into publisher pages must remain unchanged.
+The matching font covers all 351 source codepoints and shaped all 6,214 verses on Android API 36 with zero fallback/missing glyphs. AL Maghribi lacks 201 codepoints and visibly renders verse ornaments as unrelated letter-like forms, with fallback in every verse. Use the matching source font; preserve canonical characters and separate Western UI locators.
 
-To close RQ-016, obtain the publisher-supported offline artifact/export, its exact version and permitted redistribution terms, the matching font or page files, and source numbering metadata. Then run a deterministic import and qualified review of known-difference passages. An app being free does not itself establish access to an authenticated export; the open issue here is the actual usable source artifact, not a decision to change providers. [Publisher website](https://almoshaf-almohammadi.ma/).
+[Full source, terms, font decision and screenshots](WARSH.md). The embedded font EULA grants use/copy/distribution subject to its restrictions and is retained. Explicit primary evidence covering redistribution of our derived text pack is still unresolved; qualified review, older/physical Android coverage and production pack/catalog integration also remain. Local fixtures are not a ready distributable pack. This supersedes the earlier Al-Mohammadi acquisition blocker without bypassing publication gates.
 
 ### Hafs
 

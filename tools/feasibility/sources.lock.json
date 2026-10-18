@@ -16,6 +16,31 @@
       "retrievedAt": "2026-10-18",
       "bytes": 77234,
       "sha256": "8867c1d88191472adec9db694b3cd9f135b1a2ef580574d32cf888dcb22c5c7a"
+    },
+    {
+      "id": "kfgqpc-warsh-v2.1-update6",
+      "file": "UthmanicWarsh_v2-1.zip",
+      "url": "https://cdn.quran.ws/KFGQPC/resources/quran-dev/uthmanic-warsh/UthmanicWarsh_v2-1.zip",
+      "retrievedAt": "2026-10-18",
+      "bytes": 9042379,
+      "sha256": "d847a7e7002dfbed5d28db6684fd1d9c3d50b8bb63ad64cb38a46b9dad788b47",
+      "publisherUrl": "https://download.qurancomplex.gov.sa/resources_dev/UthmanicWarsh_v2-1.zip",
+      "publisherPage": "https://qurancomplex.gov.sa/en/techquran/dev/",
+      "publisherMd5": "4701e8bbf053098220cf2cf4cda206a1",
+      "publisherSha1": "44ecea8feb23817fdc01a8ee2162a6a0cf08cae7",
+      "version": "2.1",
+      "update": "6.0",
+      "sourceDate": "2022-09-07",
+      "transport": "unofficial byte-preserving mirror; MD5/SHA-1 corroborated against indexed publisher page"
+    },
+    {
+      "id": "almaghribi-v4.9.6-evaluation",
+      "file": "AALMAGHRIBI_v4.9.6.otf",
+      "url": "https://almoshaf-almohammadi.ma/fonts/AALMAGHRIBI/AALMAGHRIBI_v4.9.6.otf",
+      "retrievedAt": "2026-10-18",
+      "bytes": 413484,
+      "sha256": "e22a1a83602ef28c80f10afa1e798de4b5a299cc3c2ef65873c11fd11e7d9ed3",
+      "purpose": "local compatibility evaluation only; not approved for this source pack"
     }
   ]
 }

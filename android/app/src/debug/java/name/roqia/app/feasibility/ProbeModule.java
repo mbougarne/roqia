@@ -21,6 +21,12 @@ public final class ProbeModule extends ReactContextBaseJavaModule {
     if (!file.getCanonicalFile().getParentFile().equals(dir.getCanonicalFile())) throw new IllegalArgumentException("Invalid probe path");
     return file;
   }
+  @ReactMethod public void prepareWarshFonts(Promise promise) {
+    new Thread(() -> {
+      try { promise.resolve(FontProbe.prepare(getReactApplicationContext()).toString()); }
+      catch (Exception error) { promise.reject("probe.fonts", error); }
+    }, "RoqiaFontProbe").start();
+  }
   @ReactMethod public void prepare(Promise promise) {
     try {
       File dir = file("prepare.part").getParentFile(); File tone = new File(dir, "tone.wav");
