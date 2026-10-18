@@ -1,0 +1,1972 @@
+{
+  "texts": [
+    {
+      "editionId": "warsh-kfgqpc-v2.1-update6",
+      "pack": {
+        "id": "quran-warsh",
+        "version": "source-1",
+        "title": "مصحف ورش عن نافع",
+        "manifestHash": "ad8499c6dd4b6c118a8488b6884735cacd05f74257497d235a01304b7e64d095",
+        "review": "approved",
+        "capabilities": [
+          "quran-text"
+        ],
+        "sourceMetadata": {
+          "publisher": "KFGQPC",
+          "edition": "warsh-kfgqpc-v2.1-update6",
+          "delivery": "original-source-on-device-import",
+          "manualArabicReview": "deferred-owner-2026-10-18",
+          "sourceSha256": "d847a7e7002dfbed5d28db6684fd1d9c3d50b8bb63ad64cb38a46b9dad788b47"
+        },
+        "assets": [
+          {
+            "id": "original",
+            "file": "original.zip",
+            "bytes": 9042379,
+            "sha256": "d847a7e7002dfbed5d28db6684fd1d9c3d50b8bb63ad64cb38a46b9dad788b47",
+            "mime": "application/zip",
+            "url": "https://cdn.quran.ws/KFGQPC/resources/quran-dev/uthmanic-warsh/UthmanicWarsh_v2-1.zip"
+          }
+        ],
+        "derivedAssets": [
+          {
+            "id": "source-data",
+            "file": "original-data.json",
+            "bytes": 2764531,
+            "sha256": "c6017e688cc599d88f6fdb1a19cafc9c51d024b3530955f1a878f17d26b9bcbc",
+            "mime": "application/json"
+          },
+          {
+            "id": "source-font",
+            "file": "source-font.ttf",
+            "bytes": 871636,
+            "sha256": "b436fb89e1d26f827cd6a3c4d632fb68a49cc954c4ac90699a9502da25555230",
+            "mime": "font/ttf"
+          },
+          {
+            "id": "source-document",
+            "file": "original-document.docx",
+            "bytes": 1046628,
+            "sha256": "7302c27a666857c9a3e77a304026c12ca12955003765eaa2e418df5d8bc688ec",
+            "mime": "application/zip"
+          },
+          {
+            "id": "source-readme",
+            "file": "source-readme.txt",
+            "bytes": 2238,
+            "sha256": "fdd2782afccfabdd380cf0706a0601a09f8d1cc048a7ac5f663b3a4bf59ad36a",
+            "mime": "text/plain"
+          },
+          {
+            "id": "chapter-1",
+            "file": "001.json",
+            "bytes": 2977,
+            "sha256": "d16378ee526c992d7a909a7ba3405d1ac9e5c673c5d0e1a7184ef73183c312c7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-2",
+            "file": "002.json",
+            "bytes": 125123,
+            "sha256": "ca4ea186da052f92af140beab32c26cfc1cbe67c058976913c9fc3b9f221c20f",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-3",
+            "file": "003.json",
+            "bytes": 74048,
+            "sha256": "1e0481c33be95407ded617bb55db742a8e84f8570222c4530979ce5d18d79a94",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-4",
+            "file": "004.json",
+            "bytes": 77779,
+            "sha256": "32431b56f013bb295402bfb8b86b061ae268485d10f43ac2d92b26a30b414bdf",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-5",
+            "file": "005.json",
+            "bytes": 58669,
+            "sha256": "846cc0d98f767ea4fcb7ab90443cade674926472ffaeb51d16c5aa3d60e0ea89",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-6",
+            "file": "006.json",
+            "bytes": 63377,
+            "sha256": "4fbda0dd0f85b9c40f1bb1fbf8d87e5144c47da582434208b9d1764fcde04af2",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-7",
+            "file": "007.json",
+            "bytes": 71824,
+            "sha256": "42843caae97854290d3407f8c33734ec3b4ae02cb70e483babacf217a6cd5c64",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-8",
+            "file": "008.json",
+            "bytes": 28357,
+            "sha256": "2b3953cb928ddbe9739f72c27d4a308c071dfa8774d9296ac641ffa16a09db0c",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-9",
+            "file": "009.json",
+            "bytes": 54392,
+            "sha256": "2dd80a4782761fcc479f1504a54f235dc86d43e0fb2c88805d5dafde0880efa3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-10",
+            "file": "010.json",
+            "bytes": 39238,
+            "sha256": "b3de87b4f31f831ab0a8066b116797d4ec4b831ef8b7decfe08f45f481da3dae",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-11",
+            "file": "011.json",
+            "bytes": 40604,
+            "sha256": "4fcf7311bd9d2ce5b0b060aae33efa91e995d42db6d8c60b94dbba7791350896",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-12",
+            "file": "012.json",
+            "bytes": 37942,
+            "sha256": "9818958239ce1edd79d9f49a2189704e3c7a15232eecd62fb4880c002e62a8ad",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-13",
+            "file": "013.json",
+            "bytes": 19241,
+            "sha256": "6bcfccf7e62314476e6a4b36be24aba05b5a3c024ff7635abf711c98b0717d97",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-14",
+            "file": "014.json",
+            "bytes": 19519,
+            "sha256": "a5da375fabf25cb3ffa039ba74c2178424887984c432ff6419568b1079da7da3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-15",
+            "file": "015.json",
+            "bytes": 18713,
+            "sha256": "43251ae3a0e54a0a8d33549f82a94ac58c33bf336937be15196def2fc42e0b62",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-16",
+            "file": "016.json",
+            "bytes": 40720,
+            "sha256": "2a42511a70e3f0b253652be12458b6a3e36c94c5b56e12bb932aa5869882f584",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-17",
+            "file": "017.json",
+            "bytes": 34896,
+            "sha256": "84607f973a85f6605273e6486e1eeddadc1c3f148de285f6732625dee260f537",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-18",
+            "file": "018.json",
+            "bytes": 34370,
+            "sha256": "09c065e922d33c056cffe2e87d1a284f73eabe6c8d3f03a80c7142eae2df737d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-19",
+            "file": "019.json",
+            "bytes": 23330,
+            "sha256": "59bafb39c626d17bfa88ff5e2c8ab24a623730c8506358e62a93076221223df9",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-20",
+            "file": "020.json",
+            "bytes": 31210,
+            "sha256": "8278c8c85fe76aa8f53f8c04ab927af0cc9ebd51d7223468cd3bfd2c31f99821",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-21",
+            "file": "021.json",
+            "bytes": 28362,
+            "sha256": "acd004246e4cc95a2317e714c94272cbb0466949fa4c103900e458b79ba78eaa",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-22",
+            "file": "022.json",
+            "bytes": 28113,
+            "sha256": "9cb7c5417241253d225b1fb576a2910a8f8b7f9a0b99c4ef46e73832e1d2e225",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-23",
+            "file": "023.json",
+            "bytes": 26235,
+            "sha256": "3db5f9043c37f2a19b8ecef1933623f53820b2702810ed4d06af4e1e190778fe",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-24",
+            "file": "024.json",
+            "bytes": 29017,
+            "sha256": "1f139c61e130a162a97946fcdb1bf6d6977e62ed110d3c1de99f1857a6669487",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-25",
+            "file": "025.json",
+            "bytes": 21594,
+            "sha256": "2dea63d0ddaec04fb7472ec58af83125b526573fe366823a9b6fb599061106d6",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-26",
+            "file": "026.json",
+            "bytes": 36052,
+            "sha256": "ad724b8713b211b40d00d13b32593a04185cfa3b9dd9f60265d14c6941f0a0b8",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-27",
+            "file": "027.json",
+            "bytes": 26673,
+            "sha256": "b769af6fa4ec06a4e96b1c1d810e47f0fd10c229a39d54e52da88642808a1fbd",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-28",
+            "file": "028.json",
+            "bytes": 31139,
+            "sha256": "15b05b8fd077d253d48764f25e2538934491f29b1222c0617d75775dea19a3b4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-29",
+            "file": "029.json",
+            "bytes": 23415,
+            "sha256": "38329253b6f56a496bcd1e3458bfa2a856b9b935a2c70d1f3508d554fdb93456",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-30",
+            "file": "030.json",
+            "bytes": 19474,
+            "sha256": "94138945358d46d32fb2489cc90a529328a07af373151b5f778b28f48140d6f4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-31",
+            "file": "031.json",
+            "bytes": 12933,
+            "sha256": "a3a2cc3dbe640a052ebc93d31b90fa1f0485224010da67006c32af20b8c614ac",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-32",
+            "file": "032.json",
+            "bytes": 10039,
+            "sha256": "2be862b1191fd24e037933321b9dc66fdd3a17a3b353fa8271dfc5b2c16e2052",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-33",
+            "file": "033.json",
+            "bytes": 29389,
+            "sha256": "9c735f14b1f958984fd3b427050087676e8eaf75db5ee6910144fca6b900a125",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-34",
+            "file": "034.json",
+            "bytes": 19632,
+            "sha256": "adf4cf61a33ec15a2a4f28d5a447633c3cae5713b1f14ca277cb6e76df4ee2ce",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-35",
+            "file": "035.json",
+            "bytes": 17876,
+            "sha256": "45357d6655e63de828349121f8fff93be54f46ad5bc56f9787ae1dae8bdc6a8c",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-36",
+            "file": "036.json",
+            "bytes": 18685,
+            "sha256": "895ed489c381e37feee3b39c428106ca0686f29e97e1fb04715733689e96500d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-37",
+            "file": "037.json",
+            "bytes": 26827,
+            "sha256": "71b5ed9d23826cf58038463ab7bc130ec94c2d835a8928d617f91966c1791c1d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-38",
+            "file": "038.json",
+            "bytes": 18994,
+            "sha256": "5a0abd4224944c1b5828e0871deda524f2200f43f74768ac864ee036756e314b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-39",
+            "file": "039.json",
+            "bytes": 26013,
+            "sha256": "f36e53ca26f4d90c220caaafb7b8e52e4b8130835a7373d61ac4435d88f19277",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-40",
+            "file": "040.json",
+            "bytes": 27513,
+            "sha256": "b206c7708bcb6a2e5c04a352de62ceef3d8b06503f4881e6943a8dddad4c79b0",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-41",
+            "file": "041.json",
+            "bytes": 18649,
+            "sha256": "aac60af808fba0a691b0de8fff95a999a4fb387cdf4dc9856229f6f9a321d60c",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-42",
+            "file": "042.json",
+            "bytes": 19363,
+            "sha256": "95db1e3bbdf1dc351e8c34a0d7cc1bd126afa959bdb4f76775762ee23df93540",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-43",
+            "file": "043.json",
+            "bytes": 21337,
+            "sha256": "b456aeaaadd739fd6165ae53b5a9cd41c109ad78e99b08145edd0485c0302301",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-44",
+            "file": "044.json",
+            "bytes": 10889,
+            "sha256": "906d73b2464270ff88ef40583ab099a0b5b8f28836a951aac473166934b27a97",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-45",
+            "file": "045.json",
+            "bytes": 12567,
+            "sha256": "69c3cd4cc1461bca98636fc2e9e83d7195ce7e5eaa745206cdf4865ccbbc5f77",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-46",
+            "file": "046.json",
+            "bytes": 14856,
+            "sha256": "bd2f9f38e8b3618f0c4ec30dfcd849829e349e0afe17e7a525d239d63af441f0",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-47",
+            "file": "047.json",
+            "bytes": 14186,
+            "sha256": "961d307bbd459c814cc898747748b1258a0f7a24bee0223ada82d69c84715612",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-48",
+            "file": "048.json",
+            "bytes": 13837,
+            "sha256": "239b5afc38810fed6beaa62f1da8a32663205855b1e5eb257938506fba758dee",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-49",
+            "file": "049.json",
+            "bytes": 9392,
+            "sha256": "1fffb4e7d8e5077b62e893d6183e50703e64b6cb334decb5b707b9ed31e06123",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-50",
+            "file": "050.json",
+            "bytes": 10566,
+            "sha256": "36e4acda884e4b8b9212579d8447be9c1975e2fab552b7ba49c67416229ae023",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-51",
+            "file": "051.json",
+            "bytes": 11303,
+            "sha256": "321704c205ef6cd3606c26507f242c324572ee233a5e6666436d57edc9414a69",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-52",
+            "file": "052.json",
+            "bytes": 9837,
+            "sha256": "6eebe13c50ec3265d527875d526cca8ebe51f598027b6c3e796db23bd05ec6d2",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-53",
+            "file": "053.json",
+            "bytes": 11109,
+            "sha256": "3453ef74c6458ad865f4fa0c40b19055a0360bfe7dd9e0748585052620ac726c",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-54",
+            "file": "054.json",
+            "bytes": 10977,
+            "sha256": "8864f76a13d2d9646e98dd3241756eccf7fcc62ad13983ad38a6872e4d35ac9e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-55",
+            "file": "055.json",
+            "bytes": 12704,
+            "sha256": "5cd9980c9e2bcc65c774e53dee9a22c23f59e89c7a8d35eea327cbca49444087",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-56",
+            "file": "056.json",
+            "bytes": 13968,
+            "sha256": "32781e100fabfe45c9884503896b9e36e6a0ecad7cef9937834a8fb04e9415da",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-57",
+            "file": "057.json",
+            "bytes": 13984,
+            "sha256": "0b75764a20af40fabc284e12b60d9d8470d3a9dfdb9c04c4d89fc45c84240938",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-58",
+            "file": "058.json",
+            "bytes": 11687,
+            "sha256": "453209528cd310959785d2c5d61bf014a979ee93be4bc6c7cf35ffd6d61bcbfb",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-59",
+            "file": "059.json",
+            "bytes": 11506,
+            "sha256": "b7d5fc62f0a891bb4516c1e4f6e62317389e8da0fca69fe44f7c765829d2ed89",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-60",
+            "file": "060.json",
+            "bytes": 9286,
+            "sha256": "618fcc68a0e1843baec87c20fdd3d04bda4202d1c6a6f42c8c7de3e4fa48f9c1",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-61",
+            "file": "061.json",
+            "bytes": 6792,
+            "sha256": "9386a0bbf3d53d614fca08e8b6d99433e14ebe158630048cf0f3a88c928f8dd3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-62",
+            "file": "062.json",
+            "bytes": 5878,
+            "sha256": "048833ad26ffc77e5ed4b41cbc6c55832be3558f41e0a92b3033d42b37889ac9",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-63",
+            "file": "063.json",
+            "bytes": 6057,
+            "sha256": "3fcac83ff0e86bd1b63f08976fbb7809a403cee41fa85279fe11b23fe79f2c88",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-64",
+            "file": "064.json",
+            "bytes": 7514,
+            "sha256": "33cd8196c83e438638d2b13ee2e77d7b7053da5de0347252365cb9b6448fa9d6",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-65",
+            "file": "065.json",
+            "bytes": 7863,
+            "sha256": "1163a3281d76a0b963f42a7acf17cdf19967e398f69a9530866e306876ca0daf",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-66",
+            "file": "066.json",
+            "bytes": 7323,
+            "sha256": "7331968717592cd2f1b2e98b63ceaa0063869d95e8856a1b0093ba12d0435b45",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-67",
+            "file": "067.json",
+            "bytes": 9260,
+            "sha256": "56e8c03281158ddf61c082a93bd2d0699a9639bb930062a19a19e40b8e4def2a",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-68",
+            "file": "068.json",
+            "bytes": 9927,
+            "sha256": "436bd9bc1e2be27fa345fad0b616d09519dabf8e050ea5d133d3f74fa6c358f0",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-69",
+            "file": "069.json",
+            "bytes": 9229,
+            "sha256": "d513e4157f3df3f32671e83e0a9de3098002749427310ae51c8af75cd71f815f",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-70",
+            "file": "070.json",
+            "bytes": 8166,
+            "sha256": "112233c1f6931df9180bc3c187eb02ad8a85dfaa6027eef294258beb09c58e9e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-71",
+            "file": "071.json",
+            "bytes": 7495,
+            "sha256": "562c51bb23447191dcb4381798f766368f46afc1db75c0106841b65231a43347",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-72",
+            "file": "072.json",
+            "bytes": 8149,
+            "sha256": "8757fbfdcfc11fabae6ef6e9c7549b71a0f711887288889eed827f889083806f",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-73",
+            "file": "073.json",
+            "bytes": 6522,
+            "sha256": "6c43e1eeb934cb385d7012d6e05a1fc12f7167c05fe7dc0f155bd65524a605aa",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-74",
+            "file": "074.json",
+            "bytes": 9070,
+            "sha256": "d9e0f6f44906d4b48f79b6afece670f002f2f7c87cc237d009a1fab5266f997c",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-75",
+            "file": "075.json",
+            "bytes": 6893,
+            "sha256": "ae4b783bbd64b2e2bb9b40a99b02b6b3661f0f37c16bdfc122ea3c6a67a22c60",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-76",
+            "file": "076.json",
+            "bytes": 7978,
+            "sha256": "c0e5c4a4b2d526846659ad8901a60f7998cbd7bf773ba373ea2e8f04059625e3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-77",
+            "file": "077.json",
+            "bytes": 7940,
+            "sha256": "0a6c0c6da23ff989e71c8e3f7f7dead92288d28c8f97403c419c2623c06b028d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-78",
+            "file": "078.json",
+            "bytes": 7182,
+            "sha256": "77c1d741c7692f5c932d70b415299bc23ec3cb772af5d31969f3548975a229a3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-79",
+            "file": "079.json",
+            "bytes": 7504,
+            "sha256": "585d0ccea2d2ec64d819a016b73e2779d2dde1c1b6aa1a109c600f280b6f7c4e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-80",
+            "file": "080.json",
+            "bytes": 6496,
+            "sha256": "2f40e0bca93808562c229e992dd3c1b68e8dfdf0154c3ad15b57e3ffcf768c56",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-81",
+            "file": "081.json",
+            "bytes": 5317,
+            "sha256": "3da2381b3f715663ec79f73528db084e3ada7359211fb176edc446fb584b2f17",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-82",
+            "file": "082.json",
+            "bytes": 4417,
+            "sha256": "4c923ec2a32ae67deda829f1cbd046b948c57f5c7fdf558f40b4ac07e9f332b2",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-83",
+            "file": "083.json",
+            "bytes": 6926,
+            "sha256": "84b4b5f3149c73aa3a6c605d6e71a39148d443b786715ed32ba079a1be5296ec",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-84",
+            "file": "084.json",
+            "bytes": 5164,
+            "sha256": "76958c3e1389626733953f5073c146ace030777e2b3fa1ca578bba58b2e084f9",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-85",
+            "file": "085.json",
+            "bytes": 5108,
+            "sha256": "0f33ca8f7cf013321a1e311fd614b083b0fbb9158a24efff598c755dac7f3842",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-86",
+            "file": "086.json",
+            "bytes": 3994,
+            "sha256": "deb699c96b1f920363027e278ec3dfdf8924ddd0c1410063cfd3f6bffa53a522",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-87",
+            "file": "087.json",
+            "bytes": 4303,
+            "sha256": "a1a3008f80ae56476b8ba641fe576d2a8ddc48501cd629fd048eb895bcaad8e4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-88",
+            "file": "088.json",
+            "bytes": 4935,
+            "sha256": "270c8f33e3bc6c12186dcf07388e954e7c27e947b70306a2641b3fd214b41bce",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-89",
+            "file": "089.json",
+            "bytes": 6066,
+            "sha256": "2a5a2b8c294d93abf0ce75cad1b97721954cdad493d5b4934f3692c3c00c7952",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-90",
+            "file": "090.json",
+            "bytes": 4515,
+            "sha256": "8a0d85744335ebed0d6375bb6412f30f5569c99653c1a1b125bf580fd4dd2556",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-91",
+            "file": "091.json",
+            "bytes": 3839,
+            "sha256": "e6501c42927477259130476f58e74fa3b46fd1821343bb2af93bbedda06198c6",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-92",
+            "file": "092.json",
+            "bytes": 4440,
+            "sha256": "2f1dd3f539434739184ea537980723ff8f614d8b3f9b5e3b07617e4060f07ade",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-93",
+            "file": "093.json",
+            "bytes": 3361,
+            "sha256": "28b5d1ea3dbebfffa686184bdf317b4eacf909733084fe64c91adc8438a9a573",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-94",
+            "file": "094.json",
+            "bytes": 2953,
+            "sha256": "8a4eb6da0071ea23bbbedeb0481ed64bbb30eaf17fae95c1099e2750f517e25b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-95",
+            "file": "095.json",
+            "bytes": 3176,
+            "sha256": "bc8e68ad281b8eff09934e30664d086eb1a4a63b2aa287e8d0a49b86a196576d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-96",
+            "file": "096.json",
+            "bytes": 4317,
+            "sha256": "f0eae3fdfb4e92a0334f60c161de123e6d30994d59db45db91eeba5b990eb415",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-97",
+            "file": "097.json",
+            "bytes": 2889,
+            "sha256": "976e2a1b9bb9e81abd2f63af30b23ed481bf8006fabb2d18a8de1a8d967dca22",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-98",
+            "file": "098.json",
+            "bytes": 4244,
+            "sha256": "3c450c2b03bc60e45038975dbbd0035030f8acb5e2c46bc16b833c5cd11d2d13",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-99",
+            "file": "099.json",
+            "bytes": 3225,
+            "sha256": "0be1dd36c86b1b21daa09b3d2a152937ef0bef3961f2bcb1acc08e9a76c1b5e8",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-100",
+            "file": "100.json",
+            "bytes": 3362,
+            "sha256": "0a380b8cb07577cd2f4d2fda15ace913dbd86dfcf069f91f506e6d201fa1c66c",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-101",
+            "file": "101.json",
+            "bytes": 3276,
+            "sha256": "b9e79660ae26e8882269a752dbfe99aefc08a93e8429d02229503316b05132e1",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-102",
+            "file": "102.json",
+            "bytes": 3059,
+            "sha256": "4cdecee421df76b70d619e7adf02cdaeaf08fe05424a0fe7548665bf188ef9b8",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-103",
+            "file": "103.json",
+            "bytes": 2588,
+            "sha256": "4822387ecdc9fffc7254a72a36d2c0e043dab95bf5c3ceb1f9ff09fad6d6c8f6",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-104",
+            "file": "104.json",
+            "bytes": 3161,
+            "sha256": "1a35ad1bfd3eb6b08248cea855e4c975931c4d3c88abdd97ba9bbafcb2c138ed",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-105",
+            "file": "105.json",
+            "bytes": 2785,
+            "sha256": "b68a6edb580bdc4398a1988f6341ea52e10b6ac2fd6bc3e2b3556602e086b112",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-106",
+            "file": "106.json",
+            "bytes": 2711,
+            "sha256": "3030c9b4391ef71ec9b8f114eb5a060133cbdeca9eefd9acdf51d3d14476a617",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-107",
+            "file": "107.json",
+            "bytes": 2898,
+            "sha256": "1b8bc3e88084d561f315ca9d76446e45bd3aa91dca7277913bf495a1d6dc204a",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-108",
+            "file": "108.json",
+            "bytes": 2490,
+            "sha256": "2b1f9f14c6afc1c434cb3ade471543787edad3710595b8581b65493fd25e96c8",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-109",
+            "file": "109.json",
+            "bytes": 2835,
+            "sha256": "193003e78376d552e506e40745250f9926192f58d1b6178ded6772820760a8c7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-110",
+            "file": "110.json",
+            "bytes": 2633,
+            "sha256": "e00af9ffb4ca85301c691747ddfacb07c518bb233a4cd5587cf3f651658379f5",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-111",
+            "file": "111.json",
+            "bytes": 2735,
+            "sha256": "58dc7fda94132f38adae8fb9eff253a3ed80d53c1f97d4fbfdab6c69640e0323",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-112",
+            "file": "112.json",
+            "bytes": 2558,
+            "sha256": "479e4c91ace60f98fee49f8265c06649ac35c7629d1c18bba090c9c5eff2dfce",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-113",
+            "file": "113.json",
+            "bytes": 2697,
+            "sha256": "a00591e44eaa3b853307f76bf21c8a6099473b37d259cd5f95f75a2f1185f75e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-114",
+            "file": "114.json",
+            "bytes": 2773,
+            "sha256": "be0baa110b6a1a4f765f922c69882085567fe61245dfa5f9a9559411abdc4c11",
+            "mime": "application/json"
+          }
+        ],
+        "preparation": {
+          "kind": "quran-source-v1",
+          "editionId": "warsh-kfgqpc-v2.1-update6",
+          "sourceAssetId": "original",
+          "dataAssetId": "source-data",
+          "documentAssetId": "source-document",
+          "archiveMembers": [
+            {
+              "entry": "UthmanicWarsh_v2-1 data/warshData_v2-1.json",
+              "assetId": "source-data"
+            },
+            {
+              "entry": "UthmanicWarsh_v2-1 font/uthmanic_warsh_v21.ttf",
+              "assetId": "source-font"
+            },
+            {
+              "entry": "UthmanicWarsh_v2-1 font/uthmanic_warsh_v21.docx",
+              "assetId": "source-document"
+            },
+            {
+              "entry": "UthmanicWarsh_v2-1 data/read.me",
+              "assetId": "source-readme"
+            }
+          ],
+          "notice": "King Fahd Glorious Quran Printing Complex · Warsh v2.1 / update 6.0\nhttps://qurancomplex.gov.sa/en/techquran/dev/\nOriginal archive, unchanged, delivered by the quran.ws mirror; publisher checksums recorded in the app source.\n\nThe digitally signed machine readable Typeface(Font) licensed to you is copyrighted, (2010), King Fahd Glorious Quran Printing Complex.\r\nISBN: 978-603-8010-07-5, Accession No. 1430/7270\r\nAll rights reserved. This Font is the property of King Fahd Glorious Quran Printing Complex, and may not be reproduced, modified without the express written approval of King Fahd Glorious Quran Printing Complex.\nELECTRONIC END-USER LICENSE AGREEMENT\r\n\r\nBy installing this Font You accept all the terms and conditions of this Agreement.\r\n\r\nCopyright (c) 2008 by King Fahd Glorious Quran Printing Complex (KFGQPC), Al-?Madinah Munawarrah, Kingdom of Saudi Arabia. All Rights Reserved. The Font is ?owned by KFGQPC and its structure, organization and code are the valuable asset of ?KFGQPC. This Agreement does not grant you any intellectual property rights in the Font.\r\n\r\nPermission is hereby granted, Free of Cost, to any person obtaining a copy of this Font ?accompanying this license, the rights to Use, Copy, Distribute, subject to the following conditions:\r\n\r\n1.    The Font Software cannot be Sold, Modified, Altered, Translated, Reverse ?Engineered, Decompiled, Disassembled, Reproduced or Attempted to discover the ?Source Code of this Font in no means.\r\n\r\n2.    The Font Software is provided \"AS IS\", and KFGQPC makes no warranties as to its ?use or performance, fitness for a particular purpose. KFGQPC does not and cannot ?warrant the performance or results you may obtain by using the Font. In no event shall ?KFGQPC be liable for any Claims, Damages or other Liability, including any Damages, ?arising from, out of the use or inability to use the Font or from other dealings in the Font."
+        }
+      },
+      "chapterAssets": {
+        "1": "chapter-1",
+        "2": "chapter-2",
+        "3": "chapter-3",
+        "4": "chapter-4",
+        "5": "chapter-5",
+        "6": "chapter-6",
+        "7": "chapter-7",
+        "8": "chapter-8",
+        "9": "chapter-9",
+        "10": "chapter-10",
+        "11": "chapter-11",
+        "12": "chapter-12",
+        "13": "chapter-13",
+        "14": "chapter-14",
+        "15": "chapter-15",
+        "16": "chapter-16",
+        "17": "chapter-17",
+        "18": "chapter-18",
+        "19": "chapter-19",
+        "20": "chapter-20",
+        "21": "chapter-21",
+        "22": "chapter-22",
+        "23": "chapter-23",
+        "24": "chapter-24",
+        "25": "chapter-25",
+        "26": "chapter-26",
+        "27": "chapter-27",
+        "28": "chapter-28",
+        "29": "chapter-29",
+        "30": "chapter-30",
+        "31": "chapter-31",
+        "32": "chapter-32",
+        "33": "chapter-33",
+        "34": "chapter-34",
+        "35": "chapter-35",
+        "36": "chapter-36",
+        "37": "chapter-37",
+        "38": "chapter-38",
+        "39": "chapter-39",
+        "40": "chapter-40",
+        "41": "chapter-41",
+        "42": "chapter-42",
+        "43": "chapter-43",
+        "44": "chapter-44",
+        "45": "chapter-45",
+        "46": "chapter-46",
+        "47": "chapter-47",
+        "48": "chapter-48",
+        "49": "chapter-49",
+        "50": "chapter-50",
+        "51": "chapter-51",
+        "52": "chapter-52",
+        "53": "chapter-53",
+        "54": "chapter-54",
+        "55": "chapter-55",
+        "56": "chapter-56",
+        "57": "chapter-57",
+        "58": "chapter-58",
+        "59": "chapter-59",
+        "60": "chapter-60",
+        "61": "chapter-61",
+        "62": "chapter-62",
+        "63": "chapter-63",
+        "64": "chapter-64",
+        "65": "chapter-65",
+        "66": "chapter-66",
+        "67": "chapter-67",
+        "68": "chapter-68",
+        "69": "chapter-69",
+        "70": "chapter-70",
+        "71": "chapter-71",
+        "72": "chapter-72",
+        "73": "chapter-73",
+        "74": "chapter-74",
+        "75": "chapter-75",
+        "76": "chapter-76",
+        "77": "chapter-77",
+        "78": "chapter-78",
+        "79": "chapter-79",
+        "80": "chapter-80",
+        "81": "chapter-81",
+        "82": "chapter-82",
+        "83": "chapter-83",
+        "84": "chapter-84",
+        "85": "chapter-85",
+        "86": "chapter-86",
+        "87": "chapter-87",
+        "88": "chapter-88",
+        "89": "chapter-89",
+        "90": "chapter-90",
+        "91": "chapter-91",
+        "92": "chapter-92",
+        "93": "chapter-93",
+        "94": "chapter-94",
+        "95": "chapter-95",
+        "96": "chapter-96",
+        "97": "chapter-97",
+        "98": "chapter-98",
+        "99": "chapter-99",
+        "100": "chapter-100",
+        "101": "chapter-101",
+        "102": "chapter-102",
+        "103": "chapter-103",
+        "104": "chapter-104",
+        "105": "chapter-105",
+        "106": "chapter-106",
+        "107": "chapter-107",
+        "108": "chapter-108",
+        "109": "chapter-109",
+        "110": "chapter-110",
+        "111": "chapter-111",
+        "112": "chapter-112",
+        "113": "chapter-113",
+        "114": "chapter-114"
+      },
+      "fontAssetId": "source-font",
+      "notice": "King Fahd Glorious Quran Printing Complex · Warsh v2.1 / update 6.0\nhttps://qurancomplex.gov.sa/en/techquran/dev/\nOriginal archive, unchanged, delivered by the quran.ws mirror; publisher checksums recorded in the app source.\n\nThe digitally signed machine readable Typeface(Font) licensed to you is copyrighted, (2010), King Fahd Glorious Quran Printing Complex.\r\nISBN: 978-603-8010-07-5, Accession No. 1430/7270\r\nAll rights reserved. This Font is the property of King Fahd Glorious Quran Printing Complex, and may not be reproduced, modified without the express written approval of King Fahd Glorious Quran Printing Complex.\nELECTRONIC END-USER LICENSE AGREEMENT\r\n\r\nBy installing this Font You accept all the terms and conditions of this Agreement.\r\n\r\nCopyright (c) 2008 by King Fahd Glorious Quran Printing Complex (KFGQPC), Al-?Madinah Munawarrah, Kingdom of Saudi Arabia. All Rights Reserved. The Font is ?owned by KFGQPC and its structure, organization and code are the valuable asset of ?KFGQPC. This Agreement does not grant you any intellectual property rights in the Font.\r\n\r\nPermission is hereby granted, Free of Cost, to any person obtaining a copy of this Font ?accompanying this license, the rights to Use, Copy, Distribute, subject to the following conditions:\r\n\r\n1.    The Font Software cannot be Sold, Modified, Altered, Translated, Reverse ?Engineered, Decompiled, Disassembled, Reproduced or Attempted to discover the ?Source Code of this Font in no means.\r\n\r\n2.    The Font Software is provided \"AS IS\", and KFGQPC makes no warranties as to its ?use or performance, fitness for a particular purpose. KFGQPC does not and cannot ?warrant the performance or results you may obtain by using the Font. In no event shall ?KFGQPC be liable for any Claims, Damages or other Liability, including any Damages, ?arising from, out of the use or inability to use the Font or from other dealings in the Font.",
+      "basmalaPolicy": "source-verbatim"
+    },
+    {
+      "editionId": "hafs-tanzil-uthmani-1.1",
+      "pack": {
+        "id": "quran-hafs",
+        "version": "source-1",
+        "title": "مصحف حفص عن عاصم",
+        "manifestHash": "137480ec6bd532562d2af82ddeb97ec67b420f3b1a5913bd7fd446d3baca723b",
+        "review": "approved",
+        "capabilities": [
+          "quran-text"
+        ],
+        "sourceMetadata": {
+          "publisher": "Tanzil",
+          "edition": "hafs-tanzil-uthmani-1.1",
+          "delivery": "original-source-on-device-import",
+          "manualArabicReview": "deferred-owner-2026-10-18",
+          "sourceSha256": "6933e133dd56db778c801bf738848454e43648105a151e8d84d86a7cae39ec5f"
+        },
+        "assets": [
+          {
+            "id": "original",
+            "file": "original.txt",
+            "bytes": 1396087,
+            "sha256": "6933e133dd56db778c801bf738848454e43648105a151e8d84d86a7cae39ec5f",
+            "mime": "text/plain",
+            "url": "https://tanzil.net/pub/download/index.php?quranType=uthmani&outType=txt-2&marks=true&sajdah=true&tatweel=true&agree=true"
+          },
+          {
+            "id": "source-font",
+            "file": "source-font.ttf",
+            "bytes": 765740,
+            "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+            "mime": "font/ttf",
+            "url": "https://raw.githubusercontent.com/mbougarne/roqia/7f9034e5caffc462c3270acbeef8f35ea8aee021/src/assets/fonts/NotoSansArabic.ttf"
+          }
+        ],
+        "derivedAssets": [
+          {
+            "id": "chapter-1",
+            "file": "001.json",
+            "bytes": 6526,
+            "sha256": "cfb05ab7e08e2550350da725a4ae5544ce1d4496104da48fa0230ab5d88c9da7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-2",
+            "file": "002.json",
+            "bytes": 119923,
+            "sha256": "3eb93272e8a45b8e11543f32ff88d29e708d76e3d7b641dd307477c982ef7291",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-3",
+            "file": "003.json",
+            "bytes": 71534,
+            "sha256": "bb86b18550504c5a041be5a9a6af7576950b5a8e66e3c94889184c839f7403e0",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-4",
+            "file": "004.json",
+            "bytes": 76005,
+            "sha256": "e378966d00a2c5be10b39ebe42bde25124b7e391a24babcd32479a1ecf9a7fc0",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-5",
+            "file": "005.json",
+            "bytes": 58327,
+            "sha256": "b6ca00f8eb0d47090c8aadebac733eea0aa4d67d13491ce7bd529d6bf08ff47d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-6",
+            "file": "006.json",
+            "bytes": 62428,
+            "sha256": "ed2854714472d138fac773ad27df463ffeea42563f99409b38ba061e5da43e91",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-7",
+            "file": "007.json",
+            "bytes": 69724,
+            "sha256": "ae9f562355e8a2da852e3fb65bcb64fec47922c785268e9a3d1df3eb2b4822d3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-8",
+            "file": "008.json",
+            "bytes": 29582,
+            "sha256": "f9009229145ba12021bfe9fde98e21f62879fa739fc96f3320c324a6ccf9c69e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-9",
+            "file": "009.json",
+            "bytes": 53780,
+            "sha256": "5673cd6bed55b92d9c5e6de89aa8253df75d924cdff4193e7d7768b79090ec89",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-10",
+            "file": "010.json",
+            "bytes": 39589,
+            "sha256": "6f4beac240cc46ae02918bd61dfe31eba7858ed45caf2e72ad8a7c86c7e93a24",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-11",
+            "file": "011.json",
+            "bytes": 41030,
+            "sha256": "35a6213420b0d5fb16cf65ae888f8b33140c000d52d41c274c2dedfa3ff131e2",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-12",
+            "file": "012.json",
+            "bytes": 38541,
+            "sha256": "e4c12857cbc1ed4c4dc3e4b9bf66312664eab09b320b03c3b0362b389a39246f",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-13",
+            "file": "013.json",
+            "bytes": 21548,
+            "sha256": "9716d8db723d1d55cc76f810268571e1419f49fcd878b9c134ce38d664692ed2",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-14",
+            "file": "014.json",
+            "bytes": 21542,
+            "sha256": "9e1b6d3080812478f428b003adbcad9af8b3179d25282777b5299de0e2af1997",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-15",
+            "file": "015.json",
+            "bytes": 19835,
+            "sha256": "0b049648cf49f633a23f696278a3ec449428e13c389ea0e10fc3da9a46548685",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-16",
+            "file": "016.json",
+            "bytes": 40910,
+            "sha256": "31ace9bda258996632d6b7bfb99dbac9b72e0c31ce65914f512f624dc3d593e4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-17",
+            "file": "017.json",
+            "bytes": 35582,
+            "sha256": "5bf807a6902a35aac8837cdd021767b6938e50ab1839e7f5baf95fd8f8f8bbd7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-18",
+            "file": "018.json",
+            "bytes": 35206,
+            "sha256": "1ceef3b7f40fda8481b0f512d265353a3beb383725d950b11e5604d8352f0610",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-19",
+            "file": "019.json",
+            "bytes": 24383,
+            "sha256": "d07919ae832d635dd918b1ed67a23ef5e5997b88d9ca4d0cf323b6710f378443",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-20",
+            "file": "020.json",
+            "bytes": 31384,
+            "sha256": "b8b1a97d8ced7aeddef0fbb4d0bb80159d2dde39a190361ea58082867e269b57",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-21",
+            "file": "021.json",
+            "bytes": 29194,
+            "sha256": "84683e0cb5233ae103857739864168350326d0fc0d422724adcb4a4817bb6d16",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-22",
+            "file": "022.json",
+            "bytes": 29383,
+            "sha256": "71d2d4a82d7398001b4e09d98440d375df22a88c3fc36b26b3688ae05156048d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-23",
+            "file": "023.json",
+            "bytes": 26861,
+            "sha256": "ec6abe54a43ba0cfac97662992c069f2bf3c824fc0e24270686a939772e7ead7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-24",
+            "file": "024.json",
+            "bytes": 30916,
+            "sha256": "45040edaab1f9c15d7411942ff4f3eafcfeca3efec847d2a349293faefd05d3b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-25",
+            "file": "025.json",
+            "bytes": 23233,
+            "sha256": "839c02924293687fdcce8c79ba8c4a305fef8f78e6bebb441e7bad9648565df4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-26",
+            "file": "026.json",
+            "bytes": 33950,
+            "sha256": "5572dc46a02de690f5a34bc935bcd058231b48b0c13066befb6d0e2a00b5fed3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-27",
+            "file": "027.json",
+            "bytes": 27692,
+            "sha256": "e7ef788d2aea4e6279ee4f0fd185f93fb1b8cb0e08b00dd454d515aeab3ef959",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-28",
+            "file": "028.json",
+            "bytes": 32269,
+            "sha256": "5cd686e39f8ac143e47684668e2c4c20206b480d5685aef524d2486a7657c3f7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-29",
+            "file": "029.json",
+            "bytes": 25040,
+            "sha256": "c21359f952e72f221c201edf65c27292761441f09cd80ce9fa5d0dc9625e7ba1",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-30",
+            "file": "030.json",
+            "bytes": 21533,
+            "sha256": "b8636f3ecb13fdcab33137f9b1291791874b1f25d6a808402b4c6baa77d4d036",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-31",
+            "file": "031.json",
+            "bytes": 15568,
+            "sha256": "98d65d6eef3dd86f2f07b58310ba576327c35c3bf9c28a3e7b731822e20f1152",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-32",
+            "file": "032.json",
+            "bytes": 12930,
+            "sha256": "c2c892f2ef2b8d7a620925f2d193e5b969c72685a0fa0b7e0a7bb33a0e3f6cac",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-33",
+            "file": "033.json",
+            "bytes": 30816,
+            "sha256": "429fa30adbc2ebe6660d9e497d7a04713b0239c0b7c6a94a693f6aca1c54f47a",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-34",
+            "file": "034.json",
+            "bytes": 21841,
+            "sha256": "5d64468272ddf9abb6824152d61aa204de8f5b404eca7eee8e3ad4aab8f87051",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-35",
+            "file": "035.json",
+            "bytes": 20117,
+            "sha256": "da197ce1a0d5cd297418170d085553ccb67927bf13a2fd6cf4c6195fac3cf364",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-36",
+            "file": "036.json",
+            "bytes": 20209,
+            "sha256": "eb2e1a75d3fd6f2259e1ffbf56f5b49805aa31418c97db45120e2d052408648a",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-37",
+            "file": "037.json",
+            "bytes": 25838,
+            "sha256": "d78a40a95e9c5880cda8a6b8a3fa99539542167cebcee849accf8a90af3d9307",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-38",
+            "file": "038.json",
+            "bytes": 20523,
+            "sha256": "700268bbe7371a45efa28913fe8db21984cc137d3b9e2613bf7aa04a320c086e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-39",
+            "file": "039.json",
+            "bytes": 27635,
+            "sha256": "e458460eb95d471e370297b0f1adbeb150c6bc356fc73f587a4db120a6213140",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-40",
+            "file": "040.json",
+            "bytes": 28668,
+            "sha256": "41eafdfe4c45ad6d03b1bc22668552b36f0e3049b308ba563e079340b06fece7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-41",
+            "file": "041.json",
+            "bytes": 20896,
+            "sha256": "d32a14924486548a35c44fa212bc3a209fb8b348b81cc8558f9aeaeddb33c42e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-42",
+            "file": "042.json",
+            "bytes": 21513,
+            "sha256": "23ed5cb3a51f6da7f5b2b6189106e69b096ed00054ea9e8d51f6a08c304a209b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-43",
+            "file": "043.json",
+            "bytes": 22750,
+            "sha256": "6ce5e72f101f68e0cd80d4d5c81e2ef3a1fedd35e8ef0c5a292215d6cc3a2cc4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-44",
+            "file": "044.json",
+            "bytes": 13233,
+            "sha256": "3ffa0ce5110233258c7bb76a109d79eaf5de493f0da6f57b81455b22568b1a2b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-45",
+            "file": "045.json",
+            "bytes": 15273,
+            "sha256": "d71b97524deb81695105635b427fbc8c89e492617df7232e409d0a1eaf9bf594",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-46",
+            "file": "046.json",
+            "bytes": 17611,
+            "sha256": "eeab68442db2adde7c4894da3444272d36c037e2e7269bd098dae5eb38e1ea86",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-47",
+            "file": "047.json",
+            "bytes": 16720,
+            "sha256": "50a5730fbe6f60d87b8dc3c2939c40c92ded0ff7d9f9c8f1e8b12b8aaadf5178",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-48",
+            "file": "048.json",
+            "bytes": 16641,
+            "sha256": "c32f6f26b56aaedb6bb01b1607974e1678e0e3c8858a55c7b3e5f621e8ffa479",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-49",
+            "file": "049.json",
+            "bytes": 12558,
+            "sha256": "594588898477c31a1f0042bd41699f9694c6ae1d4cc07a2666d9a26af2a005b3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-50",
+            "file": "050.json",
+            "bytes": 13082,
+            "sha256": "73f119e748f4a7fa20716d47b41baebb9fa3d2d84551b578b18f64d9968aeed4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-51",
+            "file": "051.json",
+            "bytes": 13491,
+            "sha256": "c2f407636bb485488857646fdab765cd1a4804952b9ec6b4ee6f76e23f404fa4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-52",
+            "file": "052.json",
+            "bytes": 12399,
+            "sha256": "964ae5a42860d9e1f7bd223d9c2bef3cb6dad8870bcfcb7dcbefdfce49e5f595",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-53",
+            "file": "053.json",
+            "bytes": 13240,
+            "sha256": "1102e071a39cb76c38e8485bfdf6e453003c21bc41c698b14da0a0f9115f32e6",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-54",
+            "file": "054.json",
+            "bytes": 13209,
+            "sha256": "2a95239c3a4784379e3c4ed131029053384979fe702b40449d94eb80f95bf988",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-55",
+            "file": "055.json",
+            "bytes": 14469,
+            "sha256": "5e861e7a7749d5d6cd0c62d9ae94e7f028b8db80165307ab4ceff3bbe0223acb",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-56",
+            "file": "056.json",
+            "bytes": 15128,
+            "sha256": "19b651984e03ce5ab612971586d7af6caf7b36d543c78765444b4682dd2da1f3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-57",
+            "file": "057.json",
+            "bytes": 16850,
+            "sha256": "e54fe87da91c85fb64b39821a3efe1abcb32269e6e5fc178b1683e40c7c8efbc",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-58",
+            "file": "058.json",
+            "bytes": 14765,
+            "sha256": "f573b263f2ab9ecb40ee98bbb59cdbcb3726bd0fc010229ae5f99c36004f9418",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-59",
+            "file": "059.json",
+            "bytes": 14396,
+            "sha256": "08069833e49bd5a437ed4a5388f682a63915da14983a51eded27c9bc5257fa5c",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-60",
+            "file": "060.json",
+            "bytes": 12544,
+            "sha256": "3a84fc813caa6ba5e01786287e8d7c2815cac8132ea12b2604961852ae487b3b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-61",
+            "file": "061.json",
+            "bytes": 10098,
+            "sha256": "e6423d7668d88e432d5bc47b9ae09da08725f6987d2b853e66c43e06247626a7",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-62",
+            "file": "062.json",
+            "bytes": 9222,
+            "sha256": "44aa8d8890e5b7fc9898dba1e6f659b638552d2cfe6e263be32b9bbc2bb3af8b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-63",
+            "file": "063.json",
+            "bytes": 9423,
+            "sha256": "5c680ac45888f3dd6bf28bc5a42230b184e53a1d2113d60ebfed502ecba60646",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-64",
+            "file": "064.json",
+            "bytes": 10728,
+            "sha256": "789da17431ee1c4cce302f1ba5302ac3a2b6176f19e9e6751d410ad15a50d086",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-65",
+            "file": "065.json",
+            "bytes": 11200,
+            "sha256": "946fed38241e553889e40b13cfa34016f8d6d2cb4ce15b7dc13042764bcaabb0",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-66",
+            "file": "066.json",
+            "bytes": 10662,
+            "sha256": "042fb13093b2dbad2e6ac7b0923c94dd0fd2ffd8d6f9c44332ea65cd5d6b1338",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-67",
+            "file": "067.json",
+            "bytes": 12059,
+            "sha256": "279c05df5b57e1b32d277d901a8b05ea6afc1b983317c7b3e2307a5bed38db14",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-68",
+            "file": "068.json",
+            "bytes": 12324,
+            "sha256": "d3f04137a1c9d3b5d06ed1a32e5b88d1e4befde2e73a9fd77ed53c3733f66999",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-69",
+            "file": "069.json",
+            "bytes": 11637,
+            "sha256": "a53a53528c8fdba9fc8c6ffd7998a748edfc574eb23a78022fad5572f04dfc40",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-70",
+            "file": "070.json",
+            "bytes": 10822,
+            "sha256": "bf66b18c0e115d61597cf90840e41408c6884e2c942e693e11d8a5d7a2bc1295",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-71",
+            "file": "071.json",
+            "bytes": 10388,
+            "sha256": "ad20aaded45c0b4c139a7088171129bc4dff256eaf7dad7be2e3b101ee431125",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-72",
+            "file": "072.json",
+            "bytes": 11093,
+            "sha256": "375bd9b4002aed594b6a653e4ccc8d19dab4074e7ba71960b963f2afda6b395b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-73",
+            "file": "073.json",
+            "bytes": 9781,
+            "sha256": "b5e8b9d57844101e52b29e787a5a688aae6fdb3f8b95f005f28ce34a920a9a0d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-74",
+            "file": "074.json",
+            "bytes": 11435,
+            "sha256": "6274ece8fa4adbca0959c6c66c77469c3103b24b74710ef7ad7bebae5e68723a",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-75",
+            "file": "075.json",
+            "bytes": 9636,
+            "sha256": "d2246aefde48a4d0ed41fd2f70be09ee8eb7cd53ac99a4769cd7d744b513ba6a",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-76",
+            "file": "076.json",
+            "bytes": 10907,
+            "sha256": "90620b3bf4a8a8569dced8c31bcdbfe550528f02383b802b583c09815ba69a79",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-77",
+            "file": "077.json",
+            "bytes": 10433,
+            "sha256": "3a8fe08aec81b92c3039dbb908c0dfc7edac662bf33182a2fb218e37395cd813",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-78",
+            "file": "078.json",
+            "bytes": 9919,
+            "sha256": "4c23efd95c77937c255ed707a9e617158a86ac0a803459da75e9f46e9dacfbe2",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-79",
+            "file": "079.json",
+            "bytes": 10119,
+            "sha256": "a87551829d92e6df6c558fc5fa27eb9b3a2013e2657ffa23e334967eb60a6e0d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-80",
+            "file": "080.json",
+            "bytes": 9184,
+            "sha256": "d83172d956a2bac5fe747028f0ba6d09e0a5c87e67b2d5bc1262131b1ab5dadf",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-81",
+            "file": "081.json",
+            "bytes": 8278,
+            "sha256": "57c93d66833c61797d32ac1b6a0c7e99a2feb2c2ee9fabd10a242aa12c09abe0",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-82",
+            "file": "082.json",
+            "bytes": 7657,
+            "sha256": "54a3f51bcc4e57e142b21bdb3db69d77eef52def4184573cba3802f9892a4e2e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-83",
+            "file": "083.json",
+            "bytes": 9739,
+            "sha256": "c77cdf950d23c09c7243dd4accf40fcfed42f73678a7cb33ba3a9d7a51d0736e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-84",
+            "file": "084.json",
+            "bytes": 8272,
+            "sha256": "c545f9a34b6d811ccb83aeebe19a6c0f72dd2dd143fa2814adf6c0218e022aef",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-85",
+            "file": "085.json",
+            "bytes": 8242,
+            "sha256": "6eebf4704edb8eef3e54815507b540af7e1a7c2fa9a92c24ef344cc4b7c9c325",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-86",
+            "file": "086.json",
+            "bytes": 7289,
+            "sha256": "0d2ee4b5c49b7dad0626c57380bd1ceadf1c543ef0d1feb6c1661aa7498e1434",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-87",
+            "file": "087.json",
+            "bytes": 7537,
+            "sha256": "d820b20d3df3582153a63f11c45de5dc95bb8b32ff82c779f8a749fca1c95d68",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-88",
+            "file": "088.json",
+            "bytes": 8015,
+            "sha256": "f701cead89391ec18de0fb14e73f53b334167e72d72e6d9e81a0f3decf77ef0d",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-89",
+            "file": "089.json",
+            "bytes": 8950,
+            "sha256": "2726507cb3a7bd9fb31b0c0403396d6dcdcf6d2498328ef0e2fde9b06aad0e01",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-90",
+            "file": "090.json",
+            "bytes": 7739,
+            "sha256": "fe1e79430ae9ce28217531061a629cdc861ea28648501763387c82240b34b618",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-91",
+            "file": "091.json",
+            "bytes": 7210,
+            "sha256": "1ca0eebb9831a6a8ceb0db634921c0b8cd46c5d02b8e6dcd598494a17ace3c85",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-92",
+            "file": "092.json",
+            "bytes": 7665,
+            "sha256": "def828e92f093b5e111e0977131a67c8ddf0aa8f0f5e8e08755a56f64955acb4",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-93",
+            "file": "093.json",
+            "bytes": 6818,
+            "sha256": "a3890640f25713c1c2b5779896c1e95ce9df70dcf992fe5a543f9e924be8f965",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-94",
+            "file": "094.json",
+            "bytes": 6477,
+            "sha256": "1329f91aaf5bdc15f007f222c519e1f1f6dd609cb45150c6a780c09c1a9db63e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-95",
+            "file": "095.json",
+            "bytes": 6702,
+            "sha256": "0fa436a5e487f891bc9cbe42cfce4f108db9c036f819ee88ac718e6798f775a2",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-96",
+            "file": "096.json",
+            "bytes": 7505,
+            "sha256": "876ba1ed7072c809c7ec9d4c1d6a72c1f0f1a8006d55dea799087c61ded4d397",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-97",
+            "file": "097.json",
+            "bytes": 6476,
+            "sha256": "04dafaa6660d44c47baf38e33cb2e2a022162b8afdd127d3b644c58b3e63c7f3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-98",
+            "file": "098.json",
+            "bytes": 7732,
+            "sha256": "bd4c49435b16741790b6a62bd674203c78c0b09e951f4fca9415d58f6b3bac41",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-99",
+            "file": "099.json",
+            "bytes": 6698,
+            "sha256": "8fb7d2fe9acadfcb9f166d9d081434307d5db05bb2fc0cad57c6fc5467d07ca1",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-100",
+            "file": "100.json",
+            "bytes": 6821,
+            "sha256": "95fb8caceab26dcc2f7083db754620784b0e448b5d08ad95a19effa38ecd9dd6",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-101",
+            "file": "101.json",
+            "bytes": 6753,
+            "sha256": "e2de92b65b7a374b8b2d696959661f5bc5a7a55395ad271b79c0ed11fa46bd04",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-102",
+            "file": "102.json",
+            "bytes": 6567,
+            "sha256": "026349da838accb2b185b84675fec5341b1ce02938671d1a7ebbd31322956f40",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-103",
+            "file": "103.json",
+            "bytes": 6241,
+            "sha256": "3255d40a2d3f0e5a7209c4494a16995a30e48292b754e070f5f31cfc49dbd091",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-104",
+            "file": "104.json",
+            "bytes": 6655,
+            "sha256": "ce9b81b30231b48baa4bb6bc3635e7ec791fb40e956922578f02641a5bcb2217",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-105",
+            "file": "105.json",
+            "bytes": 6392,
+            "sha256": "8b7317dbe031b5d1dafc067c3d44fa3431fa3910c2753bdeaf10c47932ad1665",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-106",
+            "file": "106.json",
+            "bytes": 6292,
+            "sha256": "96d157df720c607b1386860e316b7e96729c0a954893e5ed7faba4c222478980",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-107",
+            "file": "107.json",
+            "bytes": 6490,
+            "sha256": "3ad39dfb7b66ead5bf59e6406d75ae3eef1282e090a655d2fc91d2d86e481733",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-108",
+            "file": "108.json",
+            "bytes": 6135,
+            "sha256": "b364e0caeafb395cd8046a8f50abc438eec770a2df9069421811625c6e37c9b3",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-109",
+            "file": "109.json",
+            "bytes": 6421,
+            "sha256": "c16869967f9d2e9064105c09d22ccb09fd8465fafaa03b8725ebf0ab0f0a0d77",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-110",
+            "file": "110.json",
+            "bytes": 6277,
+            "sha256": "25f484b497a0b0b28caf93f7b1e7d9b0f2681cf5a2a32fc59dd811eaa59af40b",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-111",
+            "file": "111.json",
+            "bytes": 6334,
+            "sha256": "b8e0f3ad7de2136212ea5bd4f93ab0e26cd94c2d2aa95f9da2981ba852526c12",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-112",
+            "file": "112.json",
+            "bytes": 6172,
+            "sha256": "215e5755dd8a578d3503fa663cb72c1e76a72148524dfd4d971640f20c0258cc",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-113",
+            "file": "113.json",
+            "bytes": 6296,
+            "sha256": "a09c1235df667294aaa5755b146186fd1b4a2e06f1c42e69c4b940a5025de96e",
+            "mime": "application/json"
+          },
+          {
+            "id": "chapter-114",
+            "file": "114.json",
+            "bytes": 6331,
+            "sha256": "6c1862d627551db01c76433ca70c5dd83b821d8218b9cbfc0e45050996dcb856",
+            "mime": "application/json"
+          }
+        ],
+        "preparation": {
+          "kind": "quran-source-v1",
+          "editionId": "hafs-tanzil-uthmani-1.1",
+          "sourceAssetId": "original",
+          "notice": "# PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK\n#====================================================================\n#\n#  Tanzil Quran Text (Uthmani, Version 1.1)\n#  Copyright (C) 2007-2026 Tanzil Project\n#  License: Creative Commons Attribution 3.0\n#\n#  This copy of the Quran text is carefully produced, highly \n#  verified and continuously monitored by a group of specialists \n#  at Tanzil Project.\n#\n#  TERMS OF USE:\n#\n#  - Permission is granted to copy and distribute verbatim copies \n#    of this text, but CHANGING IT IS NOT ALLOWED.\n#\n#  - This Quran text can be used in any website or application, \n#    provided that its source (Tanzil Project) is clearly indicated, \n#    and a link is made to tanzil.net to enable users to keep\n#    track of changes.\n#\n#  - This copyright notice shall be included in all verbatim copies \n#    of the text, and shall be reproduced appropriately in all files \n#    derived from or containing substantial portion of this text.\n#\n#  Please check updates at: http://tanzil.net/updates/\n#\n#====================================================================\n\n\nNoto Sans Arabic (application font; not a Tanzil-supplied font).\nCopyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttps://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded, \nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+        }
+      },
+      "chapterAssets": {
+        "1": "chapter-1",
+        "2": "chapter-2",
+        "3": "chapter-3",
+        "4": "chapter-4",
+        "5": "chapter-5",
+        "6": "chapter-6",
+        "7": "chapter-7",
+        "8": "chapter-8",
+        "9": "chapter-9",
+        "10": "chapter-10",
+        "11": "chapter-11",
+        "12": "chapter-12",
+        "13": "chapter-13",
+        "14": "chapter-14",
+        "15": "chapter-15",
+        "16": "chapter-16",
+        "17": "chapter-17",
+        "18": "chapter-18",
+        "19": "chapter-19",
+        "20": "chapter-20",
+        "21": "chapter-21",
+        "22": "chapter-22",
+        "23": "chapter-23",
+        "24": "chapter-24",
+        "25": "chapter-25",
+        "26": "chapter-26",
+        "27": "chapter-27",
+        "28": "chapter-28",
+        "29": "chapter-29",
+        "30": "chapter-30",
+        "31": "chapter-31",
+        "32": "chapter-32",
+        "33": "chapter-33",
+        "34": "chapter-34",
+        "35": "chapter-35",
+        "36": "chapter-36",
+        "37": "chapter-37",
+        "38": "chapter-38",
+        "39": "chapter-39",
+        "40": "chapter-40",
+        "41": "chapter-41",
+        "42": "chapter-42",
+        "43": "chapter-43",
+        "44": "chapter-44",
+        "45": "chapter-45",
+        "46": "chapter-46",
+        "47": "chapter-47",
+        "48": "chapter-48",
+        "49": "chapter-49",
+        "50": "chapter-50",
+        "51": "chapter-51",
+        "52": "chapter-52",
+        "53": "chapter-53",
+        "54": "chapter-54",
+        "55": "chapter-55",
+        "56": "chapter-56",
+        "57": "chapter-57",
+        "58": "chapter-58",
+        "59": "chapter-59",
+        "60": "chapter-60",
+        "61": "chapter-61",
+        "62": "chapter-62",
+        "63": "chapter-63",
+        "64": "chapter-64",
+        "65": "chapter-65",
+        "66": "chapter-66",
+        "67": "chapter-67",
+        "68": "chapter-68",
+        "69": "chapter-69",
+        "70": "chapter-70",
+        "71": "chapter-71",
+        "72": "chapter-72",
+        "73": "chapter-73",
+        "74": "chapter-74",
+        "75": "chapter-75",
+        "76": "chapter-76",
+        "77": "chapter-77",
+        "78": "chapter-78",
+        "79": "chapter-79",
+        "80": "chapter-80",
+        "81": "chapter-81",
+        "82": "chapter-82",
+        "83": "chapter-83",
+        "84": "chapter-84",
+        "85": "chapter-85",
+        "86": "chapter-86",
+        "87": "chapter-87",
+        "88": "chapter-88",
+        "89": "chapter-89",
+        "90": "chapter-90",
+        "91": "chapter-91",
+        "92": "chapter-92",
+        "93": "chapter-93",
+        "94": "chapter-94",
+        "95": "chapter-95",
+        "96": "chapter-96",
+        "97": "chapter-97",
+        "98": "chapter-98",
+        "99": "chapter-99",
+        "100": "chapter-100",
+        "101": "chapter-101",
+        "102": "chapter-102",
+        "103": "chapter-103",
+        "104": "chapter-104",
+        "105": "chapter-105",
+        "106": "chapter-106",
+        "107": "chapter-107",
+        "108": "chapter-108",
+        "109": "chapter-109",
+        "110": "chapter-110",
+        "111": "chapter-111",
+        "112": "chapter-112",
+        "113": "chapter-113",
+        "114": "chapter-114"
+      },
+      "fontAssetId": "source-font",
+      "notice": "# PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK\n#====================================================================\n#\n#  Tanzil Quran Text (Uthmani, Version 1.1)\n#  Copyright (C) 2007-2026 Tanzil Project\n#  License: Creative Commons Attribution 3.0\n#\n#  This copy of the Quran text is carefully produced, highly \n#  verified and continuously monitored by a group of specialists \n#  at Tanzil Project.\n#\n#  TERMS OF USE:\n#\n#  - Permission is granted to copy and distribute verbatim copies \n#    of this text, but CHANGING IT IS NOT ALLOWED.\n#\n#  - This Quran text can be used in any website or application, \n#    provided that its source (Tanzil Project) is clearly indicated, \n#    and a link is made to tanzil.net to enable users to keep\n#    track of changes.\n#\n#  - This copyright notice shall be included in all verbatim copies \n#    of the text, and shall be reproduced appropriately in all files \n#    derived from or containing substantial portion of this text.\n#\n#  Please check updates at: http://tanzil.net/updates/\n#\n#====================================================================\n\n\nNoto Sans Arabic (application font; not a Tanzil-supplied font).\nCopyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttps://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded, \nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n",
+      "basmalaPolicy": "source-verbatim"
+    }
+  ],
+  "translations": [],
+  "recordings": []
+}

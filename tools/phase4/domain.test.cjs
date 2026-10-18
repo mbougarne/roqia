@@ -22,8 +22,8 @@ test('locators bind edition, numbering and version; no cross-edition ordinal fal
 test('metadata search finds Arabic variants and LTR names without mutating labels',()=>{
  const before=JSON.stringify(d.chapters);assert.equal(d.searchChapters('الفَاتِحَة')[0].number,1);assert.equal(d.searchChapters('Al-Faatiha')[0].number,1);assert.equal(JSON.stringify(d.chapters),before);
 });
-test('publication catalog stays empty and rejects unsupported translation correspondence',()=>{
- assert.deepEqual(quranCatalog,{texts:[],translations:[],recordings:[]});
+test('normal catalog keeps unsupported translations unavailable and rejects correspondence guesses',()=>{
+ assert.equal(quranCatalog.translations.length,0);assert.equal(quranCatalog.recordings.length,0);d.validateQuranCatalog(quranCatalog);
  assert.throws(()=>d.validateQuranCatalog({texts:[],recordings:[],translations:[{editionId:warsh.id,numberingScheme:warsh.numbering,notice:'test',language:'fr'}]}),/unreviewed_translation_mapping/);
 });
 test('partial recordings and selective totals use actual files and reject missing surahs',()=>{

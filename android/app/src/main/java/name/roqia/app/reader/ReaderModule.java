@@ -40,6 +40,32 @@ public final class ReaderModule extends ReactContextBaseJavaModule implements Li
       ReactFontManager.getInstance().addCustomFont(family,face);promise.resolve(family);
     } catch(Exception error) {promise.reject("quran_font_unavailable",error);}
   }
+  private File privateFile(String path) throws Exception {
+    File file = new File(path).getCanonicalFile();
+    File root = new File(getReactApplicationContext().getFilesDir(), "roqia").getCanonicalFile();
+    if (!file.getPath().startsWith(root.getPath() + File.separator)) throw new IllegalArgumentException("invalid_source_path");
+    return file;
+  }
+  @ReactMethod public void extractSource(String path, double size, String hash, ReadableArray members, Promise promise) {
+    try {
+      File archive = privateFile(path); SourceArchive.verify(archive, (long) size, hash);
+      if (members.size() < 1 || members.size() > 8) throw new IllegalArgumentException("invalid_members");
+      for (int i = 0; i < members.size(); i++) {
+        ReadableMap member = members.getMap(i); File target = privateFile(member.getString("path"));
+        if (!target.getParentFile().equals(archive.getParentFile()) || target.equals(archive)) throw new IllegalArgumentException("invalid_member_target");
+        SourceArchive.extract(archive, member.getString("entry"), target, (long) member.getDouble("bytes"), member.getString("sha256"));
+      }
+      promise.resolve(null);
+    } catch (Exception error) { promise.reject("source_extract_failed", error); }
+  }
+  @ReactMethod public void sourceOpenings(String path, double size, String hash, Promise promise) {
+    try {
+      File file = privateFile(path); SourceArchive.verify(file, (long) size, hash);
+      WritableMap result = Arguments.createMap();
+      for (java.util.Map.Entry<Integer, String> entry : SourceArchive.openings(file).entrySet()) result.putString(String.valueOf(entry.getKey()), entry.getValue());
+      promise.resolve(result);
+    } catch (Exception error) { promise.reject("source_openings_failed", error); }
+  }
   @ReactMethod public void keepAwake(boolean enabled) {
     Activity activity=getReactApplicationContext().getCurrentActivity();
     if(activity!=null)activity.runOnUiThread(()->{if(enabled)activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);else activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);});

@@ -1,5 +1,7 @@
 # Phase 4 source recheck — 18 October 2026
 
+> Subsequent delivery: [phase 5](../phase-5/README.md) replaces the empty normal catalog with downloads of pinned original sources and on-device preparation. Earlier derived-corpus hosting restrictions remain specific to that hosting approach; further manual Arabic review is owner-deferred.
+
 The implementation consumes only approved runtime descriptors. `src/features/quran/catalog.ts` remains empty. The private Android harness prepares locked local fixtures; its approval flag is only a transport test input, never an editorial or publication decision.
 
 - **Warsh:** same King Fahd v2.1/update 6 archive and matching original font as phase 1. The publisher copyright page at https://dm.qurancomplex.gov.sa/copyright-2/ was inaccessible again. The dataset redistribution basis and qualified rendering/basmala/numbering review remain open. The original U+FC00–U+FD1C ornaments are untouched. No AL Maghribi fallback.

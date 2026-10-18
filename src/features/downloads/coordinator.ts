@@ -1,5 +1,6 @@
 import {
   type Asset,
+  type LocalAsset,
   type Pack,
   type DownloadJob,
   type InstalledPack,
@@ -36,7 +37,8 @@ export type DownloadPorts = {
   start: (job: DownloadJob, asset: Asset, events: Events) => Task;
   exists: (path: string) => Promise<boolean>;
   size: (path: string) => Promise<number>;
-  verify: (path: string, asset: Asset) => Promise<void>;
+  verify: (path: string, asset: LocalAsset) => Promise<void>;
+  prepare?: (pack: Pack, directory: string) => Promise<void>;
   move: (from: string, to: string) => Promise<void>;
   remove: (path: string) => Promise<void>;
   free: () => Promise<number>;
@@ -235,22 +237,43 @@ export class DownloadCoordinator {
     for (const job of members as DownloadJob[])
       await this.ports.verify(job.relativeFinalPath, this.asset(job));
     const record: InstalledPack = {
-      active: true,
+      active: !pack.preparation,
       packId: pack.id,
       version: pack.version,
       relativeDirectory: `content/${pack.id}/${pack.version}`,
       manifestHash: pack.manifestHash,
       capabilities: pack.capabilities,
-      state: 'ready',
+      state: pack.preparation ? 'installing' : 'ready',
       activatedAt: this.ports.now(),
       sourceMetadata: pack.sourceMetadata,
-      files: (members as DownloadJob[]).map(j => j.relativeFinalPath),
+      files: [
+        ...(members as DownloadJob[]).map(j => j.relativeFinalPath),
+        ...(pack.derivedAssets ?? []).map(
+          a => `content/${pack.id}/${pack.version}/${a.file}`,
+        ),
+      ],
     };
     // Older versions remain intact; readers can finish using them. Exactly one version is active/ready.
-    this.installed = this.installed
-      .filter(p => !(p.packId === pack.id && p.version === pack.version))
-      .map(p => (p.packId === pack.id ? {...p, active: false} : p));
+    this.installed = this.installed.filter(
+      p => !(p.packId === pack.id && p.version === pack.version),
+    );
     this.installed.push(record);
+    if (pack.preparation) {
+      // Track all expected local outputs before preparing them, so deletion/recovery owns them.
+      await this.save();
+      if (!this.ports.prepare) throw Error('preparation_unavailable');
+      await this.ports.prepare(pack, record.relativeDirectory);
+      for (const asset of pack.derivedAssets ?? [])
+        await this.ports.verify(
+          `${record.relativeDirectory}/${asset.file}`,
+          asset,
+        );
+      record.state = 'ready';
+    }
+    record.active = true;
+    this.installed = this.installed.map(p =>
+      p.packId === pack.id && p !== record ? {...p, active: false} : p,
+    );
     for (const job of members as DownloadJob[]) job.state = 'ready';
     this.journals = this.journals.filter(
       j =>
@@ -317,6 +340,10 @@ export class DownloadCoordinator {
       try {
         const needed =
           job.expectedBytes +
+          (this.pack(job).derivedAssets ?? []).reduce(
+            (n, a) => n + a.bytes,
+            0,
+          ) +
           Math.max(job.expectedBytes * 0.1, 20 * 1024 * 1024);
         if ((await this.ports.free()) < needed)
           throw Error('insufficient_space');
@@ -456,7 +483,19 @@ export class DownloadCoordinator {
       if (!pack) throw Error('pack_unavailable');
       for (const asset of pack.assets) {
         const key = jobKey(pack, asset);
-        if (this.jobs.some(j => j.jobId === key)) continue;
+        const existing = this.jobs.find(j => j.jobId === key);
+        if (existing) {
+          if (['failed', 'removed', 'cancelled'].includes(existing.state)) {
+            await this.stopTask(existing);
+            existing.generation++;
+            existing.state = 'queued';
+            existing.errorCode = null;
+            existing.attempt = 0;
+            existing.retryAt = 0;
+            existing.consentNetworkPolicy = wifiOnly ? 'wifi' : 'any';
+          }
+          continue;
+        }
         this.jobs.push({
           jobId: key,
           assetId: asset.id,
@@ -527,6 +566,23 @@ export class DownloadCoordinator {
       job.generation++;
       job.state = 'cancelled';
       await this.save();
+      const preparing = this.installed.find(
+        p =>
+          p.packId === job.packId &&
+          p.version === job.version &&
+          p.state === 'installing',
+      );
+      if (preparing) {
+        preparing.state = 'deleting';
+        this.journals.push({
+          packId: job.packId,
+          version: job.version,
+          phase: 'delete',
+        });
+        await this.save();
+        await this.deleteFiles(preparing);
+        return;
+      }
       await this.stopTask(job);
       await this.ports.remove(job.relativeTempPath);
       await this.ports.remove(job.relativeFinalPath);
@@ -535,7 +591,10 @@ export class DownloadCoordinator {
     });
   private async deleteFiles(pack: InstalledPack) {
     await this.ports.release(pack.files, async () => {
-      for (const file of pack.files) await this.ports.remove(file);
+      for (const file of pack.files) {
+        await this.ports.remove(file);
+        await this.ports.remove(file + '.import');
+      }
     });
     for (const job of this.jobs.filter(
       j => j.packId === pack.packId && j.version === pack.version,
@@ -572,6 +631,7 @@ export class DownloadCoordinator {
           if (!files.has(file)) {
             files.add(file);
             installed += await this.ports.size(file);
+            partial += await this.ports.size(file + '.import');
           }
       for (const job of this.jobs) {
         partial += await this.ports.size(job.relativeTempPath);

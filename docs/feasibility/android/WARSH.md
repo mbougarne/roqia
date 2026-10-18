@@ -1,5 +1,7 @@
 # King Fahd Warsh source and Android font decision
 
+> Subsequent delivery: [phase 5](../../implementation/phase-5/README.md) replaces the empty normal catalog with downloads of pinned original sources and on-device preparation. Earlier derived-corpus hosting restrictions remain specific to that hosting approach; further manual Arabic review is owner-deferred.
+
 Checked 2026-10-18. The user selected the King Fahd package in place of Al-Mushaf Al-Mohammadi. Hafs stays on Tanzil. This is acquisition and rendering evidence, not authorization to publish a reviewed Quran pack.
 
 ## Selected artifact and provenance

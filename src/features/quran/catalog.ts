@@ -1,8 +1,5 @@
 import {type QuranCatalog} from './domain';
-// Source acquisition != publication approval. Only reviewed immutable packs belong here.
-// Private Android fixtures are injected into a separate runtime by the debug harness.
-export const quranCatalog: QuranCatalog = {
-  texts: [],
-  translations: [],
-  recordings: [],
-};
+import data from './catalog.data.json';
+// Metadata only. Originals download on demand and are verified/imported on the phone.
+// Manual Arabic reading review is explicitly deferred in each source record.
+export const quranCatalog = data as QuranCatalog;

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-18",
+  "branch": "phase_5/quran-download-delivery",
+  "baseCommit": "7f9034e5caffc462c3270acbeef8f35ea8aee021",
+  "device": "emulator-5554",
+  "androidApi": 36,
+  "architecture": "arm64-v8a",
+  "variant": "review",
+  "typecheck": "passed",
+  "focusedTests": 55,
+  "feasibilityTests": 21,
+  "nativeArchiveChecks": 7,
+  "sourceChapterHashes": 228,
+  "actualDeviceFilesVerified": 235,
+  "normalHttpsDownloadDeleteRedownload": "passed",
+  "offlineColdStartLightDark": "passed",
+  "chapterSwitchRegression": "At-Tawbah to An-Nas passed for both editions and themes",
+  "countersPreserved": 207,
+  "existingRecordsPreserved": 9,
+  "manualArabicReview": "deferred by owner, not claimed completed",
+  "limitations": [
+    "Android API 31+ font verification; older Android support pending",
+    "iOS source import/font adapters and native testing deferred",
+    "No newly delivered translation or audio catalog",
+    "Physical-device and signed Play upgrade acceptance pending"
+  ],
+  "reviewApkSha256": "9fcf598312b6c3b708b1b5e1c047b4695bfbe951a49717271e58e4e144c88735"
+}

@@ -52,7 +52,8 @@ const handle = (action: Promise<unknown>) => {
   );
 };
 export function DownloadsScreen({navigation}: any) {
-  const downloads = useQuran().downloads;
+  const runtime = useQuran(),
+    downloads = runtime.downloads;
   const {error, ready, retry} = useDownloads(),
     jobs = downloads
       .listJobs()
@@ -69,12 +70,40 @@ export function DownloadsScreen({navigation}: any) {
       ) : !jobs.length ? (
         <StateView
           title="لا توجد تنزيلات"
-          description="ستظهر هنا الحزم المتاحة بعد اكتمال مراجعة مصادرها. محتوى الرقية والأذكار الموجود يعمل دون اتصال."
+          description="اختر مصحفك من مكتبة القرآن لتنزيله وقراءته دون اتصال."
         />
       ) : (
         jobs.map(job => (
           <Card key={job.jobId}>
-            <AppText role="bodyStrong">{job.packId}</AppText>
+            <AppText role="bodyStrong">
+              {runtime.catalog.texts.find(t => t.pack.id === job.packId)?.pack
+                .title ?? job.packId}
+            </AppText>
+            <AppText role="caption">
+              {job.assetId === 'source-font'
+                ? 'الخط'
+                : job.assetId === 'original'
+                  ? 'ملف المصحف الأصلي'
+                  : ''}
+            </AppText>
+            {runtime.catalog.texts
+              .filter(
+                t => t.pack.id === job.packId && runtime.installed(t.pack),
+              )
+              .map(t => (
+                <Button
+                  key={t.editionId}
+                  label="فتح المصحف"
+                  onPress={() =>
+                    navigation.navigate('QuranReader', {
+                      editionId: t.editionId,
+                      surah: 1,
+                      verse: 1,
+                      packVersion: t.pack.version,
+                    })
+                  }
+                />
+              ))}
             <AppText accessibilityLiveRegion="polite">
               {labels[job.state]}
             </AppText>

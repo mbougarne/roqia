@@ -37,10 +37,11 @@ import {
 } from './runtime';
 import {act} from './LibraryScreens';
 export function QuranReaderScreen(props: any) {
+  let identity: string;
   try {
     const p = props.route.params,
       e = editionById(p.editionId);
-    validateLocator({
+    identity = locatorKey({
       editionId: e.id,
       numberingScheme: p.numberingScheme ?? e.numbering,
       surah: p.surah,
@@ -59,7 +60,9 @@ export function QuranReaderScreen(props: any) {
       </Page>
     );
   }
-  return <Reader {...props} />;
+  // Navigation can reuse this screen with new params. Never render the previous
+  // chapter against the new locator while the loading effect is still pending.
+  return <Reader key={identity} {...props} />;
 }
 function Reader({route, navigation}: any) {
   const {runtime, revision, ready, error: libraryError} = useLibrary(),
@@ -328,9 +331,22 @@ function Reader({route, navigation}: any) {
                 description="النص العربي مستقل. اختر ترجمة متوافقة أو أعد تنزيلها."
               />
             )}
-            <AppText role="caption">
-              النص وعلاماته كما وردت في المصدر؛ الأرقام في الأزرار مستقلة.
-            </AppText>
+            {anchor === 1 && chapter.opening && (
+              <Text
+                selectable
+                style={{
+                  fontFamily: font,
+                  fontSize: prefs.size,
+                  lineHeight: prefs.size * prefs.lineHeight,
+                  fontWeight: 'normal',
+                  includeFontPadding: true,
+                  textAlign: 'center',
+                  writingDirection: 'rtl',
+                  color: p.textPrimary,
+                }}>
+                {chapter.opening}
+              </Text>
+            )}
           </View>
         }
         renderItem={({item}) => (
