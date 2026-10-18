@@ -27,6 +27,8 @@ const player = {
 };
 const load = Module._load;
 Module._load = function (name, parent, isMain) {
+  if (name === 'react')
+    return {useSyncExternalStore: (_subscribe, getSnapshot) => getSnapshot()};
   if (name === 'react-native')
     return {Image: {resolveAssetSource: asset => ({uri: asset})}};
   if (name === 'react-native-track-player')
@@ -34,6 +36,8 @@ Module._load = function (name, parent, isMain) {
       __esModule: true,
       default: player,
       State: {Playing: 'playing', Buffering: 'buffering', Loading: 'loading'},
+      useActiveTrack: () => queue[0],
+      usePlaybackState: () => ({state}),
       Capability: {},
       AppKilledPlaybackBehavior: {ContinuePlayback: 1},
     };
@@ -70,4 +74,20 @@ test('single shared player toggles, replaces queues, preserves arrays and stops 
   assert.equal(queue[0].audioFile, array.audioArray[0].fileName);
   await playback.stop();
   assert.equal(queue.length, 0);
+});
+
+test('a saved single-item reader does not toggle the containing full-list queue', async () => {
+  const {
+    useHomeAudioPlayback,
+  } = require('../../src/hooks/useHomeAudioPlayback.ts');
+  await playback.all(data, data[0].id);
+  const full = useHomeAudioPlayback(data);
+  const item = useHomeAudioPlayback([data[0]], `devotional-item:${data[0].id}`);
+  assert.equal(full.isPlaylistActive, true);
+  assert.equal(item.isPlaylistActive, false);
+  await item.onPlayAllPress();
+  assert.equal(queue.length, data[0].repeat);
+  assert.equal(queue[0].scope, `devotional-item:${data[0].id}`);
+  assert.equal(state, 'playing');
+  await playback.stop();
 });

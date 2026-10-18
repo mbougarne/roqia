@@ -8,6 +8,8 @@ export type Mode = 'dark' | 'light';
 export type Themes = typeof themes;
 export type ContextState = {
   mode: Mode;
+  uiScale: number;
+  setUiScale: (scale: number) => Promise<void>;
   toggleMode: () => void;
   preference: ThemePreference;
   setPreference: (mode: ThemePreference) => void;
@@ -46,6 +48,8 @@ export const themes = {
 
 const initialContextState: ContextState = {
   mode: 'light',
+  uiScale: 1,
+  setUiScale: async () => undefined,
   preference: 'system',
   setPreference: () => undefined,
   toggleMode: () => undefined,

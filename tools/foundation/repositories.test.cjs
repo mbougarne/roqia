@@ -113,6 +113,52 @@ test('SQLite migration rollback, retry, backup hash, serialized writes and reset
   assert.equal((await persistence.bookmarks.list()).length, 1);
   assert.equal((await persistence.getSettings()).guidanceSeen, true);
   assert.deepEqual(legacy, before);
+  // Rapid snapshots remain ordered and do not rewrite unrelated progress metadata.
+  const defaults = defaultCounts();
+  const id = Object.keys(defaults).find(key => defaults[key] >= 5);
+  sql.exec('UPDATE counters SET updated_at=0');
+  await Promise.all(
+    [1, 2, 3, 4, 5].map(n =>
+      persistence.persistAppState('light', {
+        ...defaults,
+        [id]: defaults[id] - n,
+      }),
+    ),
+  );
+  assert.equal(
+    (await persistence.loadPersistedAppState()).repeatCounts[id],
+    defaults[id] - 5,
+  );
+  assert.equal(
+    sql
+      .prepare(
+        'SELECT count(*) n FROM counters WHERE updated_at != 0 AND content_id != ?',
+      )
+      .get(id).n,
+    0,
+  );
+  await assert.rejects(
+    persistence.persistAppState('dark', {'unknown-counter': 0}),
+    /unknown_counter/,
+  );
+  assert.equal((await persistence.getSettings()).themePreference, 'light');
+  const {
+    decrementCounter,
+    resetCounters,
+  } = require('../../src/repositories/counters.ts');
+  await resetCounters({[id]: 3});
+  assert.deepEqual(
+    await Promise.all(Array.from({length: 7}, () => decrementCounter(id))),
+    [2, 1, 0, 0, 0, 0, 0],
+  );
+  assert.equal((await persistence.loadPersistedAppState()).repeatCounts[id], 0);
+  await assert.rejects(
+    resetCounters({[id]: 2, 'unknown-counter': 0}),
+    /unknown_counter/,
+  );
+  assert.equal((await persistence.loadPersistedAppState()).repeatCounts[id], 0);
+  await resetCounters({[id]: defaults[id]});
+  assert.equal((await persistence.bookmarks.list()).length, 1);
   sql.close();
   fs.rmSync(root, {recursive: true});
 });

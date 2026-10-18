@@ -1,26 +1,31 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
-  ImageBackground,
   StatusBar,
+  Alert,
+  AppState,
   StyleSheet,
   useColorScheme,
   View,
 } from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
-import {IntroNoteModal, WalkthroughModal} from './components';
+import {Guide, Guidance, HydrationScreen} from './screens/EducationScreens';
 import {MainTabNavigation} from './navigation/MainTabNavigation';
-import {SplashScreen} from './screens';
+
 import {StateView} from './design/ui';
+import {ResetConfirmationProvider} from './features/devotional/ResetConfirmation';
+import {reconcileReminders} from './features/settings/reminders/service';
 import {startDownloadServices} from './features/downloads/native';
-import {contentGroups} from './repositories/content';
+import {contentGroups, defaultCounts} from './repositories/content';
+import {decrementCounter, resetCounters} from './repositories/counters';
 import {type ThemePreference} from './repositories/models';
 import {
+  getSettings,
+  updateSettings,
   loadIntroNoteSeen,
   loadPersistedAppState,
   loadWalkthroughSeen,
   persistIntroNoteSeen,
-  persistAppState,
   persistWalkthroughSeen,
 } from './services/persistence';
 import {adkarData, data, duaaData, tasbihatData} from './data';
@@ -52,6 +57,11 @@ const splitCountsByScope = (flat: RepeatCounts, scope: string): RepeatCounts =>
 export default function App() {
   const deviceColorScheme = useColorScheme();
   const defaultMode: Mode = deviceColorScheme === 'dark' ? 'dark' : 'light';
+  const [uiScale, setScale] = useState(1);
+  const setUiScale = useCallback(async (scale: number) => {
+    await updateSettings({uiScale: scale});
+    setScale((await getSettings()).uiScale);
+  }, []);
   const [preference, setPreference] = useState<ThemePreference>('system');
   const mode = preference === 'system' ? defaultMode : preference;
   const [storageError, setStorageError] = useState(false);
@@ -69,7 +79,6 @@ export default function App() {
     createRepeatCountsForItems(tasbihatData, 'tasbihat'),
   );
   const [isStateHydrated, setIsStateHydrated] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
   const [showWalkthrough, setShowWalkthrough] = useState(false);
   const [showIntroNote, setShowIntroNote] = useState(false);
   const [introNoteSeen, setIntroNoteSeen] = useState(false);
@@ -78,17 +87,19 @@ export default function App() {
 
   useEffect(() => {
     const hydrateState = async () => {
-      const [persisted, walkthroughSeen, loadedIntroNoteSeen] =
+      const [persisted, walkthroughSeen, loadedIntroNoteSeen, settings] =
         await Promise.all([
           loadPersistedAppState(),
           loadWalkthroughSeen(),
           loadIntroNoteSeen(),
+          getSettings(),
         ]);
 
       if (persisted.mode) {
         setPreference(persisted.mode);
       }
 
+      setScale(settings.uiScale);
       const flat = persisted.repeatCounts;
       setHomeCounts(prev => ({...prev, ...splitCountsByScope(flat, 'data')}));
       setAdkarCounts(prev => ({...prev, ...splitCountsByScope(flat, 'adkar')}));
@@ -109,70 +120,127 @@ export default function App() {
   }, [hydrationAttempt]);
 
   useEffect(() => {
-    if (!isStateHydrated) {
-      return;
-    }
-
-    const allCounts = {
-      ...homeCounts,
-      ...adkarCounts,
-      ...duaaCounts,
-      ...tasbihatCounts,
-    };
-    void persistAppState(preference, allCounts).catch(() =>
+    if (!isStateHydrated) return;
+    void updateSettings({themePreference: preference}).catch(() =>
       setStorageError(true),
     );
-  }, [
-    isStateHydrated,
-    preference,
-    homeCounts,
-    adkarCounts,
-    duaaCounts,
-    tasbihatCounts,
-  ]);
+  }, [isStateHydrated, preference]);
+
+  useEffect(() => {
+    if (!isStateHydrated) return;
+    // No permission request here. Retry saved schedules after restart/zone changes.
+    const reconcile = () => {
+      void reconcileReminders().catch(() => undefined);
+    };
+    reconcile();
+    const sub = AppState.addEventListener('change', state => {
+      if (state === 'active') reconcile();
+    });
+    return () => sub.remove();
+  }, [isStateHydrated]);
 
   const toggleMode = useCallback(() => {
     setPreference(mode === 'dark' ? 'light' : 'dark');
   }, [mode]);
 
-  const resetAllRepeats = useCallback(() => {
-    setHomeCounts(createRepeatCountsForItems(data, 'data'));
-    setAdkarCounts(createRepeatCountsForItems(adkarData, 'adkar'));
-    setDuaaCounts(createRepeatCountsForItems(duaaData, 'duaa'));
-    setTasbihatCounts(createRepeatCountsForItems(tasbihatData, 'tasbihat'));
+  const counterCommand = useCallback((operation: () => Promise<void>) => {
+    const run = () => {
+      void operation().catch(() =>
+        Alert.alert(
+          'تعذر حفظ التقدم',
+          'لم يتم حفظ هذا التغيير. أعد المحاولة لحفظ تقدمك على جهازك.',
+          [
+            {text: 'إلغاء', style: 'cancel'},
+            {text: 'إعادة المحاولة', onPress: run},
+          ],
+        ),
+      );
+    };
+    run();
   }, []);
+  const resetAllRepeats = useCallback(
+    () =>
+      counterCommand(async () => {
+        const counts = await resetCounters(defaultCounts());
+        setHomeCounts(splitCountsByScope(counts, 'data'));
+        setAdkarCounts(splitCountsByScope(counts, 'adkar'));
+        setDuaaCounts(splitCountsByScope(counts, 'duaa'));
+        setTasbihatCounts(splitCountsByScope(counts, 'tasbihat'));
+      }),
+    [counterCommand],
+  );
 
-  const decrementHome = useCallback((key: string) => {
-    setHomeCounts(c => ({...c, [key]: Math.max(0, (c[key] ?? 0) - 1)}));
-  }, []);
-  const resetHome = useCallback((next: RepeatCounts) => {
-    setHomeCounts(c => ({...c, ...next}));
-  }, []);
+  const decrementHome = useCallback(
+    (key: string) =>
+      counterCommand(async () => {
+        const remaining = await decrementCounter(key);
+        setHomeCounts(counts => ({...counts, [key]: remaining}));
+      }),
+    [counterCommand],
+  );
+  const resetHome = useCallback(
+    (next: RepeatCounts) =>
+      counterCommand(async () => {
+        const saved = await resetCounters(next);
+        setHomeCounts(counts => ({...counts, ...saved}));
+      }),
+    [counterCommand],
+  );
 
-  const decrementAdkar = useCallback((key: string) => {
-    setAdkarCounts(c => ({...c, [key]: Math.max(0, (c[key] ?? 0) - 1)}));
-  }, []);
-  const resetAdkar = useCallback((next: RepeatCounts) => {
-    setAdkarCounts(c => ({...c, ...next}));
-  }, []);
+  const decrementAdkar = useCallback(
+    (key: string) =>
+      counterCommand(async () => {
+        const remaining = await decrementCounter(key);
+        setAdkarCounts(counts => ({...counts, [key]: remaining}));
+      }),
+    [counterCommand],
+  );
+  const resetAdkar = useCallback(
+    (next: RepeatCounts) =>
+      counterCommand(async () => {
+        const saved = await resetCounters(next);
+        setAdkarCounts(counts => ({...counts, ...saved}));
+      }),
+    [counterCommand],
+  );
 
-  const decrementDuaa = useCallback((key: string) => {
-    setDuaaCounts(c => ({...c, [key]: Math.max(0, (c[key] ?? 0) - 1)}));
-  }, []);
-  const resetDuaa = useCallback((next: RepeatCounts) => {
-    setDuaaCounts(c => ({...c, ...next}));
-  }, []);
+  const decrementDuaa = useCallback(
+    (key: string) =>
+      counterCommand(async () => {
+        const remaining = await decrementCounter(key);
+        setDuaaCounts(counts => ({...counts, [key]: remaining}));
+      }),
+    [counterCommand],
+  );
+  const resetDuaa = useCallback(
+    (next: RepeatCounts) =>
+      counterCommand(async () => {
+        const saved = await resetCounters(next);
+        setDuaaCounts(counts => ({...counts, ...saved}));
+      }),
+    [counterCommand],
+  );
 
-  const decrementTasbihat = useCallback((key: string) => {
-    setTasbihatCounts(c => ({...c, [key]: Math.max(0, (c[key] ?? 0) - 1)}));
-  }, []);
-  const resetTasbihat = useCallback((next: RepeatCounts) => {
-    setTasbihatCounts(c => ({...c, ...next}));
-  }, []);
+  const decrementTasbihat = useCallback(
+    (key: string) =>
+      counterCommand(async () => {
+        const remaining = await decrementCounter(key);
+        setTasbihatCounts(counts => ({...counts, [key]: remaining}));
+      }),
+    [counterCommand],
+  );
+  const resetTasbihat = useCallback(
+    (next: RepeatCounts) =>
+      counterCommand(async () => {
+        const saved = await resetCounters(next);
+        setTasbihatCounts(counts => ({...counts, ...saved}));
+      }),
+    [counterCommand],
+  );
 
   const themeValue = useMemo(
-    () => ({mode, toggleMode, preference, setPreference}),
-    [mode, toggleMode, preference],
+    () => ({mode, toggleMode, preference, setPreference, uiScale, setUiScale}),
+    [mode, toggleMode, preference, uiScale, setUiScale],
   );
 
   const homeValue = useMemo(
@@ -236,82 +304,58 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider value={themeValue}>
-        <HomeRepeatProvider value={homeValue}>
-          <AdkarRepeatProvider value={adkarValue}>
-            <DuaaRepeatProvider value={duaaValue}>
-              <TasbihatRepeatProvider value={tasbihatValue}>
-                <StatusBar
-                  animated
-                  barStyle={statusBarStyle}
-                  translucent={false}
-                />
-                <ImageBackground
-                  source={require('./assets/images/arabesque.png')}
-                  style={[
-                    styles.backgroundContainer,
-                    {backgroundColor: theme.secondaryBg},
-                  ]}
-                  imageStyle={styles.backgroundStyle}>
-                  <SafeAreaView style={styles.safeArea}>
-                    {storageError ? (
-                      <View
-                        style={{
-                          flex: 1,
-                          justifyContent: 'center',
-                          padding: 20,
-                        }}>
-                        <StateView
-                          title="تعذر حفظ أو استرجاع بياناتك"
-                          description="بياناتك السابقة محفوظة. أعد المحاولة للمتابعة بأمان."
-                          action={{
-                            label: 'إعادة المحاولة',
-                            onPress: () => {
-                              if (isStateHydrated) {
-                                void persistAppState(preference, {
-                                  ...homeCounts,
-                                  ...adkarCounts,
-                                  ...duaaCounts,
-                                  ...tasbihatCounts,
-                                })
-                                  .then(() => setStorageError(false))
-                                  .catch(() => setStorageError(true));
-                              } else setHydrationAttempt(n => n + 1);
-                            },
-                          }}
-                        />
-                      </View>
-                    ) : showSplash || !isStateHydrated ? (
-                      <SplashScreen onFinish={() => setShowSplash(false)} />
-                    ) : !showWalkthrough && !showIntroNote ? (
-                      <MainTabNavigation />
-                    ) : (
-                      <View style={{flex: 1}} />
-                    )}
-                    <WalkthroughModal
-                      onFinish={onWalkthroughFinish}
-                      visible={
-                        isStateHydrated &&
-                        !storageError &&
-                        !showSplash &&
-                        showWalkthrough
-                      }
-                    />
-                    <IntroNoteModal
-                      onClose={onIntroNoteClose}
-                      visible={
-                        isStateHydrated &&
-                        !storageError &&
-                        !showSplash &&
-                        !showWalkthrough &&
-                        showIntroNote
-                      }
-                    />
-                  </SafeAreaView>
-                </ImageBackground>
-              </TasbihatRepeatProvider>
-            </DuaaRepeatProvider>
-          </AdkarRepeatProvider>
-        </HomeRepeatProvider>
+        <ResetConfirmationProvider>
+          <HomeRepeatProvider value={homeValue}>
+            <AdkarRepeatProvider value={adkarValue}>
+              <DuaaRepeatProvider value={duaaValue}>
+                <TasbihatRepeatProvider value={tasbihatValue}>
+                  <StatusBar barStyle={statusBarStyle} translucent={false} />
+                  <View
+                    style={[
+                      styles.backgroundContainer,
+                      {backgroundColor: theme.bg},
+                    ]}>
+                    <SafeAreaView style={styles.safeArea}>
+                      {storageError ? (
+                        <View
+                          style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            padding: 20,
+                          }}>
+                          <StateView
+                            title="تعذر حفظ أو استرجاع بياناتك"
+                            description="بياناتك السابقة محفوظة. أعد المحاولة للمتابعة بأمان."
+                            action={{
+                              label: 'إعادة المحاولة',
+                              onPress: () => {
+                                if (isStateHydrated) {
+                                  void updateSettings({
+                                    themePreference: preference,
+                                  })
+                                    .then(() => setStorageError(false))
+                                    .catch(() => setStorageError(true));
+                                } else setHydrationAttempt(n => n + 1);
+                              },
+                            }}
+                          />
+                        </View>
+                      ) : !isStateHydrated ? (
+                        <HydrationScreen />
+                      ) : showWalkthrough ? (
+                        <Guide onFinish={onWalkthroughFinish} />
+                      ) : showIntroNote ? (
+                        <Guidance onFinish={onIntroNoteClose} />
+                      ) : (
+                        <MainTabNavigation />
+                      )}
+                    </SafeAreaView>
+                  </View>
+                </TasbihatRepeatProvider>
+              </DuaaRepeatProvider>
+            </AdkarRepeatProvider>
+          </HomeRepeatProvider>
+        </ResetConfirmationProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );
@@ -324,8 +368,5 @@ const styles = StyleSheet.create({
   },
   backgroundContainer: {
     flex: 1,
-  },
-  backgroundStyle: {
-    resizeMode: 'repeat',
   },
 });

@@ -46,7 +46,7 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
           }}>
           <View style={{flex: 1}}>
             <AppText role="caption">{track.title}</AppText>
-            <Button label="المشغل" onPress={onOpen} secondary />
+            <Button compact label="المشغل" onPress={onOpen} secondary />
           </View>
           <IconButton
             name={state === State.Playing ? 'pause' : 'play'}

@@ -1,221 +1,140 @@
-import React, {useContext, useMemo, useRef, useState} from 'react';
+import React, {useContext} from 'react';
+import {FlatList, I18nManager, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {
-  Alert,
-  FlatList,
-  ImageBackground,
-  Pressable,
-  StyleSheet,
-  View,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import {getPressableScaleStyle, Header, Section} from '../components';
 import {type DataProps} from '../data';
+import {type RepeatContextState} from '../store';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
-import {
-  type RepeatContextState,
-  createRepeatCountsForItems,
-  getRepeatItemKey,
-  themeContext,
-  themes,
-} from '../store';
-
-type DevotionalListScreenProps = {
-  title: string;
-  items: DataProps[];
-  scope: string;
-  repeatCtx: React.Context<RepeatContextState>;
-};
-
-export const DevotionalListScreen = ({
+import {AppText, Button, IconButton, usePalette} from '../design/ui';
+import {number, ltr} from '../design/format';
+import {ReadingCard} from '../features/devotional/ReadingCard';
+import {useConfirmReset} from '../features/devotional/ResetConfirmation';
+import {reloadBookmarks, useBookmarks} from '../features/devotional/bookmarks';
+export function DevotionalListScreen({
   items,
-  scope,
   title,
   repeatCtx,
-}: DevotionalListScreenProps) => {
-  const listRef = useRef<FlatList<DataProps>>(null);
-  const [showStickyHeader, setShowStickyHeader] = useState(false);
-  const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const {activeAudioFile, isAudioPaused, onAudioPress} =
-    useScreenAudioPlayback(items);
-  const navigation = useNavigation<any>();
-  const {mode} = useContext(themeContext);
-  const {decrementRepeat, repeatCounts, resetAllRepeats, resetRepeats} =
-    useContext(repeatCtx);
-  const theme = themes[mode];
-  const screenRepeatCounts = useMemo(
-    () => createRepeatCountsForItems(items, scope),
-    [items, scope],
-  );
-
-  const openMore = () => {
-    navigation.navigate('MainTabs', {screen: 'More'});
-  };
-
-  const onBackToHomePress = () => {
-    navigation.goBack();
-  };
-
-  const onResetScreenPress = () => {
-    Alert.alert(
-      'إعادة عدادات هذه الصفحة',
-      'سيتم إعادة جميع العدادات في هذه الصفحة إلى القيم الأصلية.',
-      [
-        {text: 'إلغاء', style: 'cancel'},
-        {
-          text: 'إعادة',
-          style: 'destructive',
-          onPress: () => resetRepeats(screenRepeatCounts),
-        },
-      ],
-    );
-  };
-
-  const onResetAllPress = () => {
-    Alert.alert(
-      'إعادة جميع العدادات',
-      'سيتم إعادة جميع العدادات في التطبيق إلى القيم الأصلية.',
-      [
-        {text: 'إلغاء', style: 'cancel'},
-        {text: 'إعادة الكل', style: 'destructive', onPress: resetAllRepeats},
-      ],
-    );
-  };
-
-  const onListScroll = (offsetY: number) => {
-    const shouldShowSticky = offsetY > 170;
-    const shouldShowScrollTop = shouldShowSticky && offsetY > 350;
-
-    if (shouldShowSticky !== showStickyHeader) {
-      setShowStickyHeader(shouldShowSticky);
-    }
-
-    if (shouldShowScrollTop !== showScrollTopButton) {
-      setShowScrollTopButton(shouldShowScrollTop);
-    }
-  };
-
-  const onScrollTopPress = () => {
-    listRef.current?.scrollToOffset({animated: true, offset: 0});
-  };
-
+  root = false,
+}: {
+  items: DataProps[];
+  title: string;
+  scope?: string;
+  repeatCtx: React.Context<RepeatContextState>;
+  root?: boolean;
+}) {
+  const confirmReset = useConfirmReset();
+  const navigation = useNavigation<any>(),
+    p = usePalette();
+  const {repeatCounts, decrementRepeat, resetRepeats} = useContext(repeatCtx);
+  const audio = useScreenAudioPlayback(
+      items,
+      items.length === 1 ? `devotional-item:${items[0].id}` : undefined,
+    ),
+    saved = useBookmarks();
+  const completed = items.filter(
+    i => (i.repeat ?? 0) > 0 && repeatCounts[i.id] === 0,
+  ).length;
+  const total = items.filter(i => (i.repeat ?? 0) > 0).length;
   return (
-    <ImageBackground
-      source={require('../assets/images/asfalt-dark.png')}
-      style={[styles.background, {backgroundColor: theme.bg}]}
-      imageStyle={styles.cover}>
+    <View style={{flex: 1, backgroundColor: p.background}}>
       <View
-        importantForAccessibility={
-          showStickyHeader ? 'auto' : 'no-hide-descendants'
-        }
-        accessibilityElementsHidden={!showStickyHeader}
-        pointerEvents={showStickyHeader ? 'auto' : 'none'}
-        style={[
-          styles.stickyHeaderWrapper,
-          !showStickyHeader && styles.stickyHeaderHidden,
-        ]}>
-        <Header
-          compact
-          onBackPress={onBackToHomePress}
-          onMenuPress={openMore}
-          onResetAllPress={onResetAllPress}
-          onResetScreenPress={onResetScreenPress}
-          showBackButton
-          showMenuButton
-          showResetActions
-          title={title}
+        style={{
+          paddingHorizontal: 16,
+          minHeight: 56,
+          flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+          alignItems: 'center',
+        }}>
+        <IconButton
+          name="search"
+          label="البحث في المحتوى"
+          onPress={() => navigation.navigate('Search')}
         />
+        <AppText
+          role="screenTitle"
+          accessibilityRole="header"
+          style={{flex: 1}}>
+          {title}
+        </AppText>
+        {!root && (
+          <IconButton
+            name="chevron-right"
+            label="رجوع"
+            onPress={() => navigation.goBack()}
+          />
+        )}
       </View>
       <FlatList
-        ref={listRef}
         data={items}
-        extraData={{activeAudioFile, isAudioPaused, repeatCounts}}
-        initialNumToRender={8}
-        keyExtractor={(item, index) => getRepeatItemKey(item, index, scope)}
-        maxToRenderPerBatch={8}
-        onScroll={({nativeEvent}) => onListScroll(nativeEvent.contentOffset.y)}
-        removeClippedSubviews
-        renderItem={({item, index}) => {
-          const itemKey = getRepeatItemKey(item, index, scope);
-
-          return (
-            <Section
-              {...item}
-              activeAudioFile={activeAudioFile}
-              count={repeatCounts[itemKey] ?? item.repeat ?? 0}
-              isAudioPaused={isAudioPaused}
-              onPress={() => decrementRepeat(itemKey)}
-              onReset={() => resetRepeats({[itemKey]: item.repeat ?? 0})}
-              onAudioFilePress={onAudioPress}
-            />
-          );
+        keyExtractor={item => item.id}
+        initialNumToRender={3}
+        windowSize={5}
+        contentContainerStyle={{
+          padding: 20,
+          gap: 16,
+          maxWidth: 560,
+          width: '100%',
+          alignSelf: 'center',
         }}
         ListHeaderComponent={
-          <Header
-            onBackPress={onBackToHomePress}
-            onMenuPress={openMore}
-            onResetAllPress={onResetAllPress}
-            onResetScreenPress={onResetScreenPress}
-            showBackButton
-            showMenuButton
-            showResetActions
-            title={title}
-          />
+          <View style={{gap: 12}}>
+            <AppText role="caption">{`${ltr(`${number(completed)} / ${number(total)}`)} مكتمل · يبقى تقدمك محفوظا`}</AppText>
+            <Button
+              icon={
+                audio.isPlaylistActive && !audio.isAudioPaused
+                  ? 'pause'
+                  : 'play'
+              }
+              label={
+                audio.isPlaylistActive && !audio.isAudioPaused
+                  ? 'إيقاف مؤقت'
+                  : 'استماع للكل'
+              }
+              onPress={() => {
+                void audio.onPlayAllPress();
+              }}
+            />
+            <Button
+              secondary
+              icon="reset"
+              label="إعادة عدادات هذه الصفحة"
+              onPress={() =>
+                confirmReset('إعادة عدادات هذه الصفحة؟', () =>
+                  resetRepeats(
+                    Object.fromEntries(items.map(i => [i.id, i.repeat ?? 0])),
+                  ),
+                )
+              }
+            />
+            {audio.error && (
+              <AppText accessibilityRole="alert">
+                تعذر تشغيل الصوت. أعد المحاولة من زر الاستماع.
+              </AppText>
+            )}
+            {saved.error && (
+              <Button
+                secondary
+                label="إعادة تحميل المحفوظات"
+                onPress={() => {
+                  void reloadBookmarks().catch(() => undefined);
+                }}
+              />
+            )}
+          </View>
         }
-        scrollEventThrottle={16}
-        updateCellsBatchingPeriod={60}
-        windowSize={5}
-      />
-      {showScrollTopButton ? (
-        <Pressable
-          accessibilityHint="يعيدك إلى أعلى الصفحة"
-          accessibilityLabel="العودة إلى الأعلى"
-          accessibilityRole="button"
-          onPress={onScrollTopPress}
-          style={({pressed}) => [
-            styles.scrollTopButton,
-            {backgroundColor: theme.activeBg},
-            getPressableScaleStyle(pressed, 0.9, 0.94),
-          ]}>
-          <Icon
-            color={theme.secondaryColor}
-            name="keyboard-double-arrow-up"
-            size={22}
+        renderItem={({item, index}) => (
+          <ReadingCard
+            item={item}
+            index={index}
+            count={repeatCounts[item.id] ?? item.repeat ?? 0}
+            bookmarkReady={saved.loaded && !saved.error}
+            saved={saved.items.some(
+              b => b.kind === 'devotional' && b.contentId === item.id,
+            )}
+            audio={audio}
+            onCount={() => decrementRepeat(item.id)}
+            onReset={() => resetRepeats({[item.id]: item.repeat ?? 0})}
           />
-        </Pressable>
-      ) : null}
-    </ImageBackground>
+        )}
+      />
+    </View>
   );
-};
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    paddingBottom: 20,
-  },
-  cover: {
-    resizeMode: 'repeat',
-  },
-  stickyHeaderWrapper: {
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    zIndex: 10,
-  },
-  stickyHeaderHidden: {
-    opacity: 0,
-  },
-  scrollTopButton: {
-    alignItems: 'center',
-    borderRadius: 22,
-    bottom: 75,
-    height: 48,
-    justifyContent: 'center',
-    position: 'absolute',
-    right: 5,
-    width: 48,
-    zIndex: 12,
-  },
-});
+}

@@ -7,6 +7,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
+  type TextInputProps,
   View,
   type TextProps,
   type ViewProps,
@@ -44,6 +46,10 @@ export function AppText({
 }: Omit<TextProps, 'role'> & {role?: keyof typeof typography.roles}) {
   const p = usePalette(),
     t = typography.roles[role];
+  const {uiScale} = useContext(themeContext);
+  const scale = ['devotional', 'quran', 'translation'].includes(role)
+    ? 1
+    : uiScale;
   return (
     <Text
       {...props}
@@ -51,8 +57,8 @@ export function AppText({
       style={[
         {
           fontFamily: `RoqiaArabic${t.weight}`,
-          fontSize: t.size,
-          lineHeight: t.lineHeight,
+          fontSize: t.size * scale,
+          lineHeight: t.lineHeight * scale,
           fontWeight: 'normal',
           color: p.textPrimary,
           textAlign: 'right',
@@ -69,19 +75,23 @@ export function Button({
   icon,
   disabled = false,
   secondary = false,
+  selected,
+  compact = false,
 }: {
   label: string;
   onPress: () => void;
   icon?: IconName;
   disabled?: boolean;
   secondary?: boolean;
+  selected?: boolean;
+  compact?: boolean;
 }) {
   const p = usePalette();
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityState={{disabled}}
+      accessibilityState={{disabled, selected}}
       disabled={disabled}
       onPress={onPress}
       style={({pressed}) => [
@@ -106,6 +116,8 @@ export function Button({
         role="button"
         style={{
           flexShrink: 1,
+          flex: compact ? undefined : 1,
+          textAlign: 'center',
           color: disabled
             ? p.disabledText
             : secondary
@@ -121,18 +133,23 @@ export function IconButton({
   label,
   name,
   onPress,
+  disabled = false,
 }: {
   label: string;
   name: IconName;
   onPress: () => void;
+  disabled?: boolean;
 }) {
+  const p = usePalette();
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={label}
+      accessibilityState={{disabled}}
+      disabled={disabled}
       onPress={onPress}
       style={({pressed}) => [styles.iconButton, {opacity: pressed ? 0.65 : 1}]}>
-      <AppIcon name={name} />
+      <AppIcon name={name} color={disabled ? p.disabledText : p.iconPrimary} />
     </Pressable>
   );
 }
@@ -262,7 +279,7 @@ export function Sheet({
               {title}
             </AppText>
           </View>
-          <ScrollView>{children}</ScrollView>
+          <ScrollView contentContainerStyle={{gap: 16}}>{children}</ScrollView>
         </View>
       </View>
     </Modal>
@@ -317,3 +334,34 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 });
+
+export function Input({label, ...props}: TextInputProps & {label: string}) {
+  const p = usePalette(),
+    {uiScale} = useContext(themeContext);
+  return (
+    <View style={{gap: 8}}>
+      <AppText role="label">{label}</AppText>
+      <TextInput
+        {...props}
+        accessibilityLabel={label}
+        allowFontScaling
+        placeholderTextColor={p.textSecondary}
+        style={[
+          {
+            minHeight: 48,
+            borderWidth: 1,
+            borderColor: p.borderControl,
+            borderRadius: 12,
+            padding: 12,
+            color: p.textPrimary,
+            backgroundColor: p.surface,
+            textAlign: 'right',
+            fontFamily: 'RoqiaArabic400',
+            fontSize: 14 * uiScale,
+          },
+          props.style,
+        ]}
+      />
+    </View>
+  );
+}

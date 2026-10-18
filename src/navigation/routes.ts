@@ -18,11 +18,26 @@ export type RootRoutes = {
   Storage: undefined;
   Downloads: undefined;
   Player: undefined;
+  Bookmarks: undefined;
+  Search: undefined;
+  Guide: undefined;
+  Guidance: undefined;
+  Privacy: undefined;
+  Terms: undefined;
+  Sources: undefined;
+  Reminders: undefined;
+  Content: {contentId: string};
+  ExternalLink: {title: string; url: string};
   Recovery: {reason: 'invalid-link' | 'missing-pack'};
 };
 export type LinkTarget =
   | {tab: keyof Tabs}
-  | {screen: Exclude<keyof RootRoutes, 'MainTabs' | 'Recovery'>}
+  | {
+      screen: Exclude<
+        keyof RootRoutes,
+        'MainTabs' | 'Recovery' | 'Content' | 'ExternalLink'
+      >;
+    }
   | {recovery: 'invalid-link' | 'missing-pack'};
 export function resolveLink(url: string): LinkTarget {
   if (!url.startsWith('roqia://') || url.length > 2048)
@@ -51,6 +66,14 @@ export function resolveLink(url: string): LinkTarget {
     storage: {screen: 'Storage'},
     downloads: {screen: 'Downloads'},
     player: {screen: 'Player'},
+    bookmarks: {screen: 'Bookmarks'},
+    search: {screen: 'Search'},
+    guide: {screen: 'Guide'},
+    guidance: {screen: 'Guidance'},
+    privacy: {screen: 'Privacy'},
+    terms: {screen: 'Terms'},
+    sources: {screen: 'Sources'},
+    reminders: {screen: 'Reminders'},
   };
   if (aliases[path]) return aliases[path];
   if (/^quran\/[a-z0-9-]+\/[1-9][0-9]{0,2}(\/[1-9][0-9]{0,2})?$/.test(path))

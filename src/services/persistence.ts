@@ -142,12 +142,21 @@ export async function persistAppState(
       themePreference: mode,
       updatedAt: Date.now(),
     });
+    // Compare inside the serialized transaction, not against a stale React snapshot.
+    // A tap normally changes one counter; rewriting all 207 delayed durable writes.
+    const stored = new Map(
+      (await tx.execute('SELECT content_id, remaining FROM counters')).rows.map(
+        row => [row.content_id as string, row.remaining as number],
+      ),
+    );
     for (const [id, value] of Object.entries(repeatCounts)) {
       const item = contentById.get(id);
       if (!item) throw new Error('unknown_counter');
+      const remaining = clampCount(value, item.repeat ?? 0);
+      if (stored.get(id) === remaining) continue;
       await tx.execute(
         'UPDATE counters SET remaining=?, updated_at=? WHERE content_id=?',
-        [clampCount(value, item.repeat ?? 0), Date.now(), id],
+        [remaining, Date.now(), id],
       );
     }
   });
