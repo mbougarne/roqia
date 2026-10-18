@@ -1,0 +1,30 @@
+{
+  "counterRowsPreserved": 207,
+  "unchangedCollections": {
+    "bookmarks": 1,
+    "reminders": 3,
+    "settingsIgnoringWriteTimestamp": 1,
+    "prayerPreferencesAndSounds": 2
+  },
+  "existingContentFilesByteIdentical": 239,
+  "existingReaderSettingsPreservedExceptChosenTranslation": true,
+  "readingPositionIdentitiesRetained": 2,
+  "readingPositionsMayReflectTestNavigation": true,
+  "selectedHafsTranslation": "fr.hamidullah",
+  "translations": [
+    {
+      "id": "fr.hamidullah",
+      "installedFiles": 115,
+      "chapters": 114,
+      "verses": 6236,
+      "allInstalledHashesMatch": true
+    },
+    {
+      "id": "en.pickthall",
+      "installedFiles": 115,
+      "chapters": 114,
+      "verses": 6236,
+      "allInstalledHashesMatch": true
+    }
+  ]
+}

@@ -34,6 +34,16 @@ export type SourcePreparation = {
   documentAssetId?: string;
   archiveMembers?: {entry: string; assetId: string}[];
 };
+export type TranslationPreparation = {
+  kind: 'translation-source-v1';
+  editionId: string;
+  numberingScheme: string;
+  textVersion: string;
+  translationId: string;
+  sourceAssetId: string;
+  sourceFooter: string;
+  notice: string;
+};
 export type Pack = {
   id: string;
   version: string;
@@ -44,7 +54,7 @@ export type Pack = {
   sourceMetadata: Record<string, string>;
   assets: Asset[];
   derivedAssets?: LocalAsset[];
-  preparation?: SourcePreparation;
+  preparation?: SourcePreparation | TranslationPreparation;
 };
 export type DownloadJob = {
   jobId: string;
@@ -108,7 +118,9 @@ export function validateCatalog(packs: Pack[], allowLocalFixtures = false) {
     keys.add(key);
     if (
       pack.preparation &&
-      (pack.preparation.kind !== 'quran-source-v1' ||
+      (!['quran-source-v1', 'translation-source-v1'].includes(
+        pack.preparation.kind,
+      ) ||
         !pack.derivedAssets?.length ||
         !pack.assets.some(a => a.id === pack.preparation!.sourceAssetId))
     )

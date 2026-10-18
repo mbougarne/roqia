@@ -1,0 +1,1934 @@
+[
+  {
+    "id": "fr.hamidullah",
+    "title": "Muhammad Hamidullah",
+    "language": "fr",
+    "editionId": "hafs-tanzil-uthmani-1.1",
+    "numberingScheme": "tanzil-madina-hafs",
+    "textVersion": "source-1",
+    "pack": {
+      "id": "translation-fr.hamidullah",
+      "version": "source-1",
+      "title": "الفرنسية · Muhammad Hamidullah",
+      "review": "approved",
+      "capabilities": [
+        "translation"
+      ],
+      "sourceMetadata": {
+        "translator": "Muhammad Hamidullah",
+        "source": "https://tanzil.net/trans/?transID=fr.hamidullah&type=txt-2",
+        "termsUrl": "https://tanzil.net/trans/",
+        "usage": "non-commercial",
+        "sourceLastUpdate": "2011-07-18",
+        "sourceSha256": "9834cfcd14b506a6c0223d86ac259e896f2bfb44c0823d83d827c27ffea57f03",
+        "delivery": "original-source-on-device-import",
+        "structuralValidation": "114 chapters / 6236 Hafs verses; exact source strings",
+        "editorialReview": "not claimed"
+      },
+      "assets": [
+        {
+          "id": "original",
+          "file": "original.txt",
+          "bytes": 948096,
+          "sha256": "9834cfcd14b506a6c0223d86ac259e896f2bfb44c0823d83d827c27ffea57f03",
+          "mime": "text/plain",
+          "url": "https://tanzil.net/trans/?transID=fr.hamidullah&type=txt-2"
+        }
+      ],
+      "derivedAssets": [
+        {
+          "id": "chapter-1",
+          "file": "001.json",
+          "bytes": 1210,
+          "sha256": "30f5aa10214bafc38bbc74f112df125332ebc868fafb2935ab4035016de15d6b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-2",
+          "file": "002.json",
+          "bytes": 78015,
+          "sha256": "ae5483c00c2d4066334f79008d930641b7294483915559ce1ef4d21714dac484",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-3",
+          "file": "003.json",
+          "bytes": 45743,
+          "sha256": "ae92bfcb2546015f96bac3cfef2edec5d61e728c182420d1da66dcc4de9a625e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-4",
+          "file": "004.json",
+          "bytes": 48104,
+          "sha256": "177805edd11a5ebdd2278d2331b72a551ae9f5f30ef4838fc5f286b1fce23e4f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-5",
+          "file": "005.json",
+          "bytes": 35490,
+          "sha256": "2d1fff939fa670c984c97cf20cccdfaf2b10e52088cb019a540b1a2da1575f14",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-6",
+          "file": "006.json",
+          "bytes": 40228,
+          "sha256": "bda3c446a5940e2ebdd5918987ebe9f1fc6d499150b8972f8ab489035ae3a15e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-7",
+          "file": "007.json",
+          "bytes": 44987,
+          "sha256": "9f117f4bdd57c17eca903119d416ce7b0ac3fbee7c9cd073b3b233e105126ec0",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-8",
+          "file": "008.json",
+          "bytes": 16831,
+          "sha256": "e2d3695241ce4f0919291edba4084817257b46e436aa4751e10958d9e1c825d9",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-9",
+          "file": "009.json",
+          "bytes": 32758,
+          "sha256": "3027baa2dceed75bf9b79a5e547495131455d9d16c178efbcf12f0106c976c38",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-10",
+          "file": "010.json",
+          "bytes": 24095,
+          "sha256": "c9c1dbd65688b368ae77dc811802aaa4c11ba0a42ea5ac25d1a12237c603baee",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-11",
+          "file": "011.json",
+          "bytes": 25705,
+          "sha256": "4a345200ab6b6aa173947c4bc1645b4c5f7bbc228ea0e582fcfe07b58dfc98e1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-12",
+          "file": "012.json",
+          "bytes": 24052,
+          "sha256": "c968883639079921d3bc3b3c7e469648cb57680d6bc54604f8b8adf1409b9d13",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-13",
+          "file": "013.json",
+          "bytes": 11706,
+          "sha256": "b3e3e98202e5a3f08eaf0cc925e2d7c44c32185d68321d51c0dd15cb170c2a75",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-14",
+          "file": "014.json",
+          "bytes": 11644,
+          "sha256": "f19ae96f35c3d927857500c3f1d99131e6df1636ce17e2b5838df564e7429701",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-15",
+          "file": "015.json",
+          "bytes": 11180,
+          "sha256": "4980323df9b0ef0f0ff3bdc1f0410ef7eb34c8281286b8fedfbfee6a17073a8b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-16",
+          "file": "016.json",
+          "bytes": 25483,
+          "sha256": "67691dabc7942c7cab6d6bd1dc386e6ad5765bc2cd1816d88cc4f5d8f068b522",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-17",
+          "file": "017.json",
+          "bytes": 21896,
+          "sha256": "006cc8b2636167f34209439c6a62e232a68fb51715e027716dad356071edb70c",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-18",
+          "file": "018.json",
+          "bytes": 22354,
+          "sha256": "229ff9b8a69587f744f19361fa987819a23b18c8036d3bc4e25a9ce6cbf8667f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-19",
+          "file": "019.json",
+          "bytes": 14323,
+          "sha256": "56c5150e21f6c823e01c31b60ecabb7394c2d3161a1f9ea6db6a1f315581c0eb",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-20",
+          "file": "020.json",
+          "bytes": 19877,
+          "sha256": "33611fb8bfa32786426fd60bed800e5541e6bbd2aba9f9f548e5a767b178c5a6",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-21",
+          "file": "021.json",
+          "bytes": 17538,
+          "sha256": "cefb6d14db0b075234ad16d94d20d990222aa2b199996e04937d1a7a61ad8f08",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-22",
+          "file": "022.json",
+          "bytes": 16941,
+          "sha256": "e7c93f50c3ae7f6ad2bda901b512fa8af72d404d7667a638179cf418ff53a6bd",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-23",
+          "file": "023.json",
+          "bytes": 15816,
+          "sha256": "176d2b565a0c713d79a6f1c347b8e2cbf36f807b44ba6f16085db0ae6771e2f7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-24",
+          "file": "024.json",
+          "bytes": 16942,
+          "sha256": "000c8cb7561857274784bcec0e5272cd8edba366fce4cf58eba20d814d15a989",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-25",
+          "file": "025.json",
+          "bytes": 13209,
+          "sha256": "1fbad230257863f0bd42c53e8418e6fceba53fcebea3275d70fbe6db902255f8",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-26",
+          "file": "026.json",
+          "bytes": 21815,
+          "sha256": "1ba2fb47627fc0ccb59f74e41d0bd813dd2675869d873a13634c9c81d5837985",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-27",
+          "file": "027.json",
+          "bytes": 16215,
+          "sha256": "006b42201f5da71bc400038df92765ae5b8a0081dafb14d6f8b8bff0036f66db",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-28",
+          "file": "028.json",
+          "bytes": 18826,
+          "sha256": "4006f48f4b1dc8370a9323106a94d990a2b4cb0e1b5cc21c91e51dddb42e8fe3",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-29",
+          "file": "029.json",
+          "bytes": 13420,
+          "sha256": "0aea9546234ceecbe302bf590a14e06f4ba1162b3c6398e9a207cb10d23adc1e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-30",
+          "file": "030.json",
+          "bytes": 11339,
+          "sha256": "6b359b4f0990aacb3135d0ec0449d89b3200d01372505a58337bc496ba5c5fb7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-31",
+          "file": "031.json",
+          "bytes": 7537,
+          "sha256": "45a381f86deb4314f933559fb51c25e86b2932ff4ddb6c4952a768e2ef6edf6f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-32",
+          "file": "032.json",
+          "bytes": 5502,
+          "sha256": "630069eb375c5b655212d567116bcc015ed8f43750e58564bd9196140014a0f4",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-33",
+          "file": "033.json",
+          "bytes": 17154,
+          "sha256": "4bc38acb67880a5e6a94ebfee73c6095b9d48512a04f1dc0776e74d334fc1120",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-34",
+          "file": "034.json",
+          "bytes": 12009,
+          "sha256": "82b0d3776f98d131100d62aa29af2704ac2a6d01598fd663b77d2169f2c3de9a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-35",
+          "file": "035.json",
+          "bytes": 10427,
+          "sha256": "d1334643d14b62f168edd24adefd4f91935610c47a5bfece53a33ef89e51dc6b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-36",
+          "file": "036.json",
+          "bytes": 10971,
+          "sha256": "b9f126540b4ec836a6dad8a21e8ed53195aa314e83702d4c0f8917421e417f88",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-37",
+          "file": "037.json",
+          "bytes": 15755,
+          "sha256": "4d1cecfda2041ca4a6d13904998535860903e5444bad4db476f75fcd08cef6af",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-38",
+          "file": "038.json",
+          "bytes": 11347,
+          "sha256": "864df1123f0d4adf17314bfea0832342d4635ffbb032b5e7e2f44689acff0e74",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-39",
+          "file": "039.json",
+          "bytes": 15772,
+          "sha256": "fac3bd6c4d9bab8592b3144dad84ac3040f75aa1b8be22a01e7cf3971509997f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-40",
+          "file": "040.json",
+          "bytes": 16407,
+          "sha256": "62ebe67454b943878b60e5d8ae15646593ffb3d71e7c134172c1cc6a9751c596",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-41",
+          "file": "041.json",
+          "bytes": 11338,
+          "sha256": "bd37164c2014f073015446dd40e8ad5cf3ec045782f1052817e47f0236fcace4",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-42",
+          "file": "042.json",
+          "bytes": 11510,
+          "sha256": "19a3e3e9c6ec4d3063ea644d56a55cd35524935ec795f4334d95f289b910dc57",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-43",
+          "file": "043.json",
+          "bytes": 13078,
+          "sha256": "b3eda92e94642ede78e50db8936f6457f9b1f92397d68d831166fe91a2ebd85e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-44",
+          "file": "044.json",
+          "bytes": 6209,
+          "sha256": "656fafcbb0e9e82d473921a9e22ab9f41ae5ae507f222e4127172914b57d9b17",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-45",
+          "file": "045.json",
+          "bytes": 7009,
+          "sha256": "dbd12cee83faf8031b39aabd225aecffee97e81b3a4d1a6e9a258c1cad732124",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-46",
+          "file": "046.json",
+          "bytes": 9032,
+          "sha256": "6bcc3299da7b3caf8af472374718c48469f0c8655fcd85f568720e4e677963e5",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-47",
+          "file": "047.json",
+          "bytes": 8018,
+          "sha256": "68162458d0a611eef512a6547858387839ec0a26973e39f6b282659396fdbf1d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-48",
+          "file": "048.json",
+          "bytes": 8011,
+          "sha256": "1a6cf9cd206439a5c812c769d6b00389cc31fd448e582e739b746224e9d89ef8",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-49",
+          "file": "049.json",
+          "bytes": 4990,
+          "sha256": "4f51d3289e985a541b340957c77044d25f2a76e44464076e2065cea685c5d24d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-50",
+          "file": "050.json",
+          "bytes": 6102,
+          "sha256": "c0541cfa65a42e2a0553f37e75524ebcf14830e3b56804d5b4802099b5aa27c1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-51",
+          "file": "051.json",
+          "bytes": 6335,
+          "sha256": "78f40431786f8d053a4d4b6c240c6bd003a13860c775f21eb39a8b4f383c4901",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-52",
+          "file": "052.json",
+          "bytes": 5532,
+          "sha256": "d49b051b4208d7a150276a47066925bb8428e10808f3ee40945ecd570e31a965",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-53",
+          "file": "053.json",
+          "bytes": 6428,
+          "sha256": "443da66a4fbf3deef8de6f0f43043c3f97bda5519ef87b7ca6310c44ba3d3c58",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-54",
+          "file": "054.json",
+          "bytes": 6568,
+          "sha256": "5d5e71e6172147b125b6417a1669ca39b76daf0d4e64d4e1062e379c79ffd558",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-55",
+          "file": "055.json",
+          "bytes": 7288,
+          "sha256": "a4a01b6ca1dd3b8ae022850990774584c5287af4db237bf5ffde6fccff3e77a0",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-56",
+          "file": "056.json",
+          "bytes": 8074,
+          "sha256": "18c1af3b84dd9f0c86f45896720ff347239c75ea49b2713cdd3d9b08d1848891",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-57",
+          "file": "057.json",
+          "bytes": 8199,
+          "sha256": "046e932f3be5aaba47755c870c8bcd023bbfc06a7c5e32f3e15505fd5765df61",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-58",
+          "file": "058.json",
+          "bytes": 6497,
+          "sha256": "c23a2ef670fc3c0242f5c3daba0fc91c99ee4dc3cb356a7b7e8436459b660926",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-59",
+          "file": "059.json",
+          "bytes": 6394,
+          "sha256": "18c55494dc3fe4763181bdcabdc913f5137e76c28678265ed49e138838f2e2c1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-60",
+          "file": "060.json",
+          "bytes": 5056,
+          "sha256": "ed2f22972faba94b6ec817ba96ef97f966149944471c066663f6871053bb2c15",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-61",
+          "file": "061.json",
+          "bytes": 3360,
+          "sha256": "12af771aae121d10a36e6c7a395c5bca4a50083fd6a919559ff8aeffb53313bc",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-62",
+          "file": "062.json",
+          "bytes": 2767,
+          "sha256": "2c2c4cbad89b6491417bdceb8c3c148134f53a7b606a2769fd129832fee942fd",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-63",
+          "file": "063.json",
+          "bytes": 2989,
+          "sha256": "40405439b477bf8edb185b9a215d2215a2ce63419035b71b32c1ca311f63f83b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-64",
+          "file": "064.json",
+          "bytes": 4123,
+          "sha256": "e3b28f8279c579bf2f5302cee314cec70db73e84d88ed78d92cf0982b2447926",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-65",
+          "file": "065.json",
+          "bytes": 4269,
+          "sha256": "a6b5510946854b0f7b1ef665997f4bab888d996de6c347d5a0aaf52bc9817b43",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-66",
+          "file": "066.json",
+          "bytes": 3752,
+          "sha256": "71eef4657963f5ae83201bbdab1717092ff19ff95fb0522c4417ddb197682568",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-67",
+          "file": "067.json",
+          "bytes": 5195,
+          "sha256": "3b2637de14d8cc56cc2ac10a64f767b2716c16d9d575d0fdb471a1d9e1ea4397",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-68",
+          "file": "068.json",
+          "bytes": 5806,
+          "sha256": "1c88c40ef36fb9d8f0b1be91c1d3e57798c69675e737348e03546b4a5ffe97e0",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-69",
+          "file": "069.json",
+          "bytes": 4966,
+          "sha256": "01af678e10cc315802bc861ae5c9452b04d2b26113f2565a3391934dd852a151",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-70",
+          "file": "070.json",
+          "bytes": 4292,
+          "sha256": "2c6e90c6040cb09ebe9b6ea16caf12624ad975f0e8a320fcade12e5b4be3576b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-71",
+          "file": "071.json",
+          "bytes": 3762,
+          "sha256": "42a8adc1b28a80d2ff1ddb813340573b487942d5812e0701b024dceafc14e20a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-72",
+          "file": "072.json",
+          "bytes": 4530,
+          "sha256": "71a13075f4a187ca20b7857310f56480faf9361bf33c980baeca048e86a7f2d9",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-73",
+          "file": "073.json",
+          "bytes": 3449,
+          "sha256": "f5da4f80fcec21324fe8929f323322a9a2ca1e420c4af84c2e9adf17980b6150",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-74",
+          "file": "074.json",
+          "bytes": 5036,
+          "sha256": "6c7413e5dec84660e58f0698f6859e1b47d0a0ddbd573c18aa99a01112f6a5ee",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-75",
+          "file": "075.json",
+          "bytes": 3644,
+          "sha256": "2bd2da57112da458eeffdd879ef08342680a3ab936a0d70bca10a3baf2d5ea7f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-76",
+          "file": "076.json",
+          "bytes": 4350,
+          "sha256": "b680b34b9a06d5a4fd973709873450a48f48c8c86eff7511802d4c790910d7a3",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-77",
+          "file": "077.json",
+          "bytes": 4425,
+          "sha256": "2a6d21dea3c014411962e8a0981605bd760963fe93ba77863532219966d48a9a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-78",
+          "file": "078.json",
+          "bytes": 3768,
+          "sha256": "188ca1604168399d25c564476f90a3ccd36645b41b09cf4beeb07884acaa17c3",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-79",
+          "file": "079.json",
+          "bytes": 4025,
+          "sha256": "ab1b416b1289c080c04e6fc3d778ff6363c3fc2418823c15b05008cc559cc76d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-80",
+          "file": "080.json",
+          "bytes": 3245,
+          "sha256": "527781a6bc046619366506647f2e8baf8102f417132e5e1a1a1cac2ce039d2c0",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-81",
+          "file": "081.json",
+          "bytes": 2534,
+          "sha256": "28eb998981fe85a0ef66c09597c13f0119fd45490b111171d86a397939f4fad7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-82",
+          "file": "082.json",
+          "bytes": 2048,
+          "sha256": "7a37da7ab514e28a4814dbcf5d8b4a1b0a3cf64bed04c30c9112cad297396c1b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-83",
+          "file": "083.json",
+          "bytes": 3444,
+          "sha256": "b3bdca780f893c3f45670b38dee537fa7a62f363be95695d15d505f9cff6ee42",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-84",
+          "file": "084.json",
+          "bytes": 2459,
+          "sha256": "8dcbe5d878f266e16c6e6e9e61059fd7661819c64f77c928eefbe0a2c475cdfa",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-85",
+          "file": "085.json",
+          "bytes": 2371,
+          "sha256": "4cdbf73c9f5eb373d6be469ac0c15c8cf1dcf6db3dc14cd72da41d41670052e4",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-86",
+          "file": "086.json",
+          "bytes": 1795,
+          "sha256": "11b12f1cf57fe0314ed6b8e74f11dc11be8c2e2a2034e4e3ae90e7282c56ba33",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-87",
+          "file": "087.json",
+          "bytes": 1957,
+          "sha256": "f4144a41d8f71ee70fb4fa0ec2f63e2cce3af93e9b801d13ab72862d47eae43c",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-88",
+          "file": "088.json",
+          "bytes": 2246,
+          "sha256": "bc38588c8c35aace346fe9d2fe3650f80a427e4a31ea77b9107b717a54606ec4",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-89",
+          "file": "089.json",
+          "bytes": 2974,
+          "sha256": "0ad79434dfb8d3470b45b213e6c62bb0cef40a7cb1265fab3ddd3161924aeb96",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-90",
+          "file": "090.json",
+          "bytes": 2012,
+          "sha256": "e99325e1207ff4e35d9f72b53d6ca8d7588316afb13aa138e5a5e814b58552e2",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-91",
+          "file": "091.json",
+          "bytes": 1809,
+          "sha256": "2bf9b367771aa8bbe1ac3325d9d330638f539000badfd7c9aa6b53370682d313",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-92",
+          "file": "092.json",
+          "bytes": 2098,
+          "sha256": "735cfacc7c218bd77e6d27e6975537a5a14441dbf0918bdeda361631b7ed7157",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-93",
+          "file": "093.json",
+          "bytes": 1433,
+          "sha256": "169274f11de2b29317d94b38a5a084d0155dfcda906fdd03d00e813a33cfe6e7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-94",
+          "file": "094.json",
+          "bytes": 1135,
+          "sha256": "4e22c0122537f7f64ed61a7eb82c2d61663129e57a7898ffeb9db973da003fd4",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-95",
+          "file": "095.json",
+          "bytes": 1234,
+          "sha256": "22c283c3a810f942c0644a2732db7570fd903a669f2293fa034ae5499b05960b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-96",
+          "file": "096.json",
+          "bytes": 1927,
+          "sha256": "931458284a4ced5c786ae2ce01f537a0923096008fcfb4aabdbe711df698086d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-97",
+          "file": "097.json",
+          "bytes": 1073,
+          "sha256": "59e2555f44b49dfecba5fa9b77087b4c6a4b828eddbb88931ae057e4c8e116b9",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-98",
+          "file": "098.json",
+          "bytes": 1885,
+          "sha256": "ddbfb23f7803a0d41e18832fb594b68a1389a606b7767f0c980f8b2f59137229",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-99",
+          "file": "099.json",
+          "bytes": 1256,
+          "sha256": "320d3374f5fbf59442c9daa2722658c324076c08f2da372b248d8876c613e38a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-100",
+          "file": "100.json",
+          "bytes": 1401,
+          "sha256": "342c16aa8fd23d1bddc68e4a0355895dbc09fd2a1be067b3f625ecac69905a2e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-101",
+          "file": "101.json",
+          "bytes": 1290,
+          "sha256": "6ffaf5e7682c768a9b97da38d46affb7b00534b620295afbf02078e973b0dd26",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-102",
+          "file": "102.json",
+          "bytes": 1180,
+          "sha256": "31e9fd536a351efc52d5b88093822d9bd0b64e79767496ac391b9cd5d62e3448",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-103",
+          "file": "103.json",
+          "bytes": 889,
+          "sha256": "2fbbcae324dec8f34166163c7e558ef710d6afb1e2c67b3565cdfc1c15fd942c",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-104",
+          "file": "104.json",
+          "bytes": 1151,
+          "sha256": "dbd0cfa923430a2d5f2bd24e1f196a829f990868fe64425272fb12cfd3d56a9b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-105",
+          "file": "105.json",
+          "bytes": 1009,
+          "sha256": "ee607226c749b2d97d433ebdd6f349aa527fa1e83000c1166cdde17291484b8f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-106",
+          "file": "106.json",
+          "bytes": 935,
+          "sha256": "1caa87bc7f129de8214208c6a38d8813bbaaae56512d257900d7e6a3e639a331",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-107",
+          "file": "107.json",
+          "bytes": 1095,
+          "sha256": "06dae5b377f68d2df16f40a868b7a5d7fcc8a3ca1900e6fde842b230abf8c06e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-108",
+          "file": "108.json",
+          "bytes": 845,
+          "sha256": "428f9a69a4dccd974158fe8b2ebd3c7ae7523b57b4904522b3d2c99f6769e433",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-109",
+          "file": "109.json",
+          "bytes": 1029,
+          "sha256": "2ea6a1a6e81ff754f527b080690becaed8a7d7d422da3bc87bd6de30a59175e1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-110",
+          "file": "110.json",
+          "bytes": 954,
+          "sha256": "4f1df20a9610f9288cf7757a77200b039794a660be602b4ee4b0356eb6eb67e7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-111",
+          "file": "111.json",
+          "bytes": 989,
+          "sha256": "9ebb36b76988b03e50139af9f0a3ac04cce7653421331f42642435318da50e8d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-112",
+          "file": "112.json",
+          "bytes": 902,
+          "sha256": "83b86e2de53c36d5ac518570dfa06e4c2f7e86db523339c9d856fbe251f4eed1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-113",
+          "file": "113.json",
+          "bytes": 1033,
+          "sha256": "40e049c5d88f74b53ab26d30ff51d9d87088cd0b9cb4b048d6beabb3831dfb07",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-114",
+          "file": "114.json",
+          "bytes": 1025,
+          "sha256": "e5e017764f685480e8580a5b72d162e5554de7bce2ba955871f2459c3c6a4cdc",
+          "mime": "application/json"
+        }
+      ],
+      "preparation": {
+        "kind": "translation-source-v1",
+        "editionId": "hafs-tanzil-uthmani-1.1",
+        "numberingScheme": "tanzil-madina-hafs",
+        "textVersion": "source-1",
+        "translationId": "fr.hamidullah",
+        "sourceAssetId": "original",
+        "sourceFooter": "# --------------------------------------------------------------------\n#\n#  Quran Translation\n#  Name: Hamidullah\n#  Translator: Muhammad Hamidullah\n#  Language: French\n#  ID: fr.hamidullah\n#  Last Update: July 18, 2011\n#  Source: Tanzil.net\n#\n# --------------------------------------------------------------------\n",
+        "notice": "# --------------------------------------------------------------------\n#\n#  Quran Translation\n#  Name: Hamidullah\n#  Translator: Muhammad Hamidullah\n#  Language: French\n#  ID: fr.hamidullah\n#  Last Update: July 18, 2011\n#  Source: Tanzil.net\n#\n# --------------------------------------------------------------------\n\nSource and terms: https://tanzil.net/trans/\nNon-commercial use. Translation of meanings; not a replacement for the Arabic Quran.\n"
+      },
+      "manifestHash": "c0e464074451db7072593b84491edb9ca8ee4520027c89eb6299d96b5236f41c"
+    },
+    "chapterAssets": {
+      "1": "chapter-1",
+      "2": "chapter-2",
+      "3": "chapter-3",
+      "4": "chapter-4",
+      "5": "chapter-5",
+      "6": "chapter-6",
+      "7": "chapter-7",
+      "8": "chapter-8",
+      "9": "chapter-9",
+      "10": "chapter-10",
+      "11": "chapter-11",
+      "12": "chapter-12",
+      "13": "chapter-13",
+      "14": "chapter-14",
+      "15": "chapter-15",
+      "16": "chapter-16",
+      "17": "chapter-17",
+      "18": "chapter-18",
+      "19": "chapter-19",
+      "20": "chapter-20",
+      "21": "chapter-21",
+      "22": "chapter-22",
+      "23": "chapter-23",
+      "24": "chapter-24",
+      "25": "chapter-25",
+      "26": "chapter-26",
+      "27": "chapter-27",
+      "28": "chapter-28",
+      "29": "chapter-29",
+      "30": "chapter-30",
+      "31": "chapter-31",
+      "32": "chapter-32",
+      "33": "chapter-33",
+      "34": "chapter-34",
+      "35": "chapter-35",
+      "36": "chapter-36",
+      "37": "chapter-37",
+      "38": "chapter-38",
+      "39": "chapter-39",
+      "40": "chapter-40",
+      "41": "chapter-41",
+      "42": "chapter-42",
+      "43": "chapter-43",
+      "44": "chapter-44",
+      "45": "chapter-45",
+      "46": "chapter-46",
+      "47": "chapter-47",
+      "48": "chapter-48",
+      "49": "chapter-49",
+      "50": "chapter-50",
+      "51": "chapter-51",
+      "52": "chapter-52",
+      "53": "chapter-53",
+      "54": "chapter-54",
+      "55": "chapter-55",
+      "56": "chapter-56",
+      "57": "chapter-57",
+      "58": "chapter-58",
+      "59": "chapter-59",
+      "60": "chapter-60",
+      "61": "chapter-61",
+      "62": "chapter-62",
+      "63": "chapter-63",
+      "64": "chapter-64",
+      "65": "chapter-65",
+      "66": "chapter-66",
+      "67": "chapter-67",
+      "68": "chapter-68",
+      "69": "chapter-69",
+      "70": "chapter-70",
+      "71": "chapter-71",
+      "72": "chapter-72",
+      "73": "chapter-73",
+      "74": "chapter-74",
+      "75": "chapter-75",
+      "76": "chapter-76",
+      "77": "chapter-77",
+      "78": "chapter-78",
+      "79": "chapter-79",
+      "80": "chapter-80",
+      "81": "chapter-81",
+      "82": "chapter-82",
+      "83": "chapter-83",
+      "84": "chapter-84",
+      "85": "chapter-85",
+      "86": "chapter-86",
+      "87": "chapter-87",
+      "88": "chapter-88",
+      "89": "chapter-89",
+      "90": "chapter-90",
+      "91": "chapter-91",
+      "92": "chapter-92",
+      "93": "chapter-93",
+      "94": "chapter-94",
+      "95": "chapter-95",
+      "96": "chapter-96",
+      "97": "chapter-97",
+      "98": "chapter-98",
+      "99": "chapter-99",
+      "100": "chapter-100",
+      "101": "chapter-101",
+      "102": "chapter-102",
+      "103": "chapter-103",
+      "104": "chapter-104",
+      "105": "chapter-105",
+      "106": "chapter-106",
+      "107": "chapter-107",
+      "108": "chapter-108",
+      "109": "chapter-109",
+      "110": "chapter-110",
+      "111": "chapter-111",
+      "112": "chapter-112",
+      "113": "chapter-113",
+      "114": "chapter-114"
+    },
+    "notice": "# --------------------------------------------------------------------\n#\n#  Quran Translation\n#  Name: Hamidullah\n#  Translator: Muhammad Hamidullah\n#  Language: French\n#  ID: fr.hamidullah\n#  Last Update: July 18, 2011\n#  Source: Tanzil.net\n#\n# --------------------------------------------------------------------\n\nSource and terms: https://tanzil.net/trans/\nNon-commercial use. Translation of meanings; not a replacement for the Arabic Quran.\n"
+  },
+  {
+    "id": "en.pickthall",
+    "title": "Mohammed Marmaduke William Pickthall",
+    "language": "en",
+    "editionId": "hafs-tanzil-uthmani-1.1",
+    "numberingScheme": "tanzil-madina-hafs",
+    "textVersion": "source-1",
+    "pack": {
+      "id": "translation-en.pickthall",
+      "version": "source-1",
+      "title": "الإنجليزية · Mohammed Marmaduke William Pickthall",
+      "review": "approved",
+      "capabilities": [
+        "translation"
+      ],
+      "sourceMetadata": {
+        "translator": "Mohammed Marmaduke William Pickthall",
+        "source": "https://tanzil.net/trans/?transID=en.pickthall&type=txt-2",
+        "termsUrl": "https://tanzil.net/trans/",
+        "usage": "non-commercial",
+        "sourceLastUpdate": "2010-09-04",
+        "sourceSha256": "4aabbfa9d96796f5a6b0217d2c39dce1a3084f772bf6f2650e37082a774e3cc7",
+        "delivery": "original-source-on-device-import",
+        "structuralValidation": "114 chapters / 6236 Hafs verses; exact source strings",
+        "editorialReview": "not claimed"
+      },
+      "assets": [
+        {
+          "id": "original",
+          "file": "original.txt",
+          "bytes": 864918,
+          "sha256": "4aabbfa9d96796f5a6b0217d2c39dce1a3084f772bf6f2650e37082a774e3cc7",
+          "mime": "text/plain",
+          "url": "https://tanzil.net/trans/?transID=en.pickthall&type=txt-2"
+        }
+      ],
+      "derivedAssets": [
+        {
+          "id": "chapter-1",
+          "file": "001.json",
+          "bytes": 1158,
+          "sha256": "5805f9cf0d2ecf06e2015611b6448db3537f32fe7af3b433e390207579133067",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-2",
+          "file": "002.json",
+          "bytes": 73068,
+          "sha256": "91a3fc0f23b9929d335a9129f57e1780f1961c4b9ff7f430719d060a31eb943b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-3",
+          "file": "003.json",
+          "bytes": 43293,
+          "sha256": "1ec462276261f58b008517382476b315614b11e8bd33bded0ec64391d3dc0d98",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-4",
+          "file": "004.json",
+          "bytes": 44134,
+          "sha256": "4fcfa685081184f6a3fbe09adf2a64b839a1109ce19ddc063290c96bffb266f5",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-5",
+          "file": "005.json",
+          "bytes": 33119,
+          "sha256": "a3d95e96e8092b8b93d272b259e55542f29906b118197165f1c95b7660ac568f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-6",
+          "file": "006.json",
+          "bytes": 36755,
+          "sha256": "de6deaadf3e2a46d42a1db30e867c166927e0d5f4857760ce2c45b7e18bd0f6c",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-7",
+          "file": "007.json",
+          "bytes": 41426,
+          "sha256": "c607b310d5aaed2131ab773320831e4e5dc1d3e60866315a5b583f8038cc726e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-8",
+          "file": "008.json",
+          "bytes": 15733,
+          "sha256": "1558567afcc2940b9df025776b9428a80fb7fb39e6a159d60ed7bcd2d92abbd5",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-9",
+          "file": "009.json",
+          "bytes": 30986,
+          "sha256": "bfdf1249d3b13cedbbe55be2e3459215c29478a69149fd55f80089b16c6ff3b5",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-10",
+          "file": "010.json",
+          "bytes": 22039,
+          "sha256": "82de30bd81d2d9d11cbcbe1a937eed6b6e402290499fea97a93943d8784fb443",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-11",
+          "file": "011.json",
+          "bytes": 23650,
+          "sha256": "5b18450acd85d165f1eb77378cfcebb929b97bf44e6f60b9627f3846e010b4e3",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-12",
+          "file": "012.json",
+          "bytes": 21322,
+          "sha256": "e7727eefcf0b500eefeb6f718182153f949f0b9e4a91dca585d7a8a4cd345840",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-13",
+          "file": "013.json",
+          "bytes": 10742,
+          "sha256": "6acba4c5d502e844cc391e6187bce24700acea7541a0361b5e2b869cc888e593",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-14",
+          "file": "014.json",
+          "bytes": 10420,
+          "sha256": "8a393acb470bf9ea9c560f82433712313cb88e16874fcdf74ce47a7d196fea94",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-15",
+          "file": "015.json",
+          "bytes": 10175,
+          "sha256": "1d812c16f4e2a3b9d3e8dbc6b159fb423be5020fe712a15c5d48dddb8bad649b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-16",
+          "file": "016.json",
+          "bytes": 23284,
+          "sha256": "89b6eddff8cd54374f468bfe297ee5491e46e83b9eb8baabbf56d890e5d6b8a1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-17",
+          "file": "017.json",
+          "bytes": 19863,
+          "sha256": "2fcb6bb7d78222d1f47262d4ce516e0717ec7722bb3328605634e58641adb127",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-18",
+          "file": "018.json",
+          "bytes": 20074,
+          "sha256": "4ed312a318418593d419c1aad5e88244ab7fb72c81ef3d5f90aa25daa4d5765e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-19",
+          "file": "019.json",
+          "bytes": 13342,
+          "sha256": "077b0fc40cd69bd8c6d0587121409bca6764885fb924b1d1c068f4ead263f5d3",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-20",
+          "file": "020.json",
+          "bytes": 18424,
+          "sha256": "c96ff030a5b488a79d6b48e797e052f1e31489e2c4e9d612eb63d68bb16cadb1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-21",
+          "file": "021.json",
+          "bytes": 15711,
+          "sha256": "56318befe57d8185af17f5df4aae0e6b7d0e012b5bc2249fd7528dc48ab4e167",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-22",
+          "file": "022.json",
+          "bytes": 15953,
+          "sha256": "cbdb4d412c2b3fef4368949a161b44d32f388fada0ee0e8f62e6648959c1fc7f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-23",
+          "file": "023.json",
+          "bytes": 14268,
+          "sha256": "4fba030e373f19e1ab1507cb4e3909f86603b4ca7df44764e91e17a7c03be462",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-24",
+          "file": "024.json",
+          "bytes": 15334,
+          "sha256": "b49bbcc378980f5fce9e51e9a0005fc471e414da1e983e0ae0857e74c4fb2c45",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-25",
+          "file": "025.json",
+          "bytes": 12096,
+          "sha256": "b5955b69d96855ba8356fe81881f6bf352db0d38e3f4242a3b6b626243cc403f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-26",
+          "file": "026.json",
+          "bytes": 20115,
+          "sha256": "c203aba67e605fa5e963a4d822f49b41fbb2060e3dfce3cad1176a4b297f64aa",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-27",
+          "file": "027.json",
+          "bytes": 15214,
+          "sha256": "506e9ec39dadfddfc83ff7acd776f3308601e447ba0be353f78075fea4e06b0b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-28",
+          "file": "028.json",
+          "bytes": 17617,
+          "sha256": "97a0add1292f9a9e27ae7e14e9633104947921374894c5d3b1db582074391f0b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-29",
+          "file": "029.json",
+          "bytes": 12651,
+          "sha256": "e8b6849e14cd38de6df8d009d0944b325722452a43eaab4064e0fb898ee09324",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-30",
+          "file": "030.json",
+          "bytes": 10781,
+          "sha256": "324644845bf185203a4e8ab9797010d20ccd8ba285cae4e638704702b84a5027",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-31",
+          "file": "031.json",
+          "bytes": 6883,
+          "sha256": "58077a19109319bffbf313d03a0e5e32d37831e99aa13da286fe15986842b0f8",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-32",
+          "file": "032.json",
+          "bytes": 5191,
+          "sha256": "c565c645d5967d5651015793bb30d42a282c11d16cf296746bf8f40795b8a207",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-33",
+          "file": "033.json",
+          "bytes": 16274,
+          "sha256": "8bcfaee57fabd84c959979704338c1d140e56fd31c3c229e958f248b61ea6dfb",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-34",
+          "file": "034.json",
+          "bytes": 10750,
+          "sha256": "d713d901c28a0a78910dcb075f29f04439d25e9dcf1e1d247f0c3e569b093932",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-35",
+          "file": "035.json",
+          "bytes": 9640,
+          "sha256": "a082410252d7063f9e718a1914a74b6ebf81cbd05ae3c64028e3303e54de9917",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-36",
+          "file": "036.json",
+          "bytes": 10067,
+          "sha256": "fbdacf8b7c3676b554269b6c90826a79c74ecbae13b50ed885a5262a9dc33b09",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-37",
+          "file": "037.json",
+          "bytes": 14519,
+          "sha256": "7d12d0fccfa81203b70497adc9f6149062896af7331572a6d8559aba2059d28b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-38",
+          "file": "038.json",
+          "bytes": 10831,
+          "sha256": "a8e31c0183a4aad8dd67589cdc6270f9d01592c8a661b1dbd76c1e83149cd277",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-39",
+          "file": "039.json",
+          "bytes": 14737,
+          "sha256": "309ec4687c43d261881ca20e372a09b0eafdda937403c5f8619c371b7cb05646",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-40",
+          "file": "040.json",
+          "bytes": 15275,
+          "sha256": "b42e77803ec5153eaec28b9cef218beedf223ede0bcfdef255d1116b3c684f78",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-41",
+          "file": "041.json",
+          "bytes": 10342,
+          "sha256": "4660b91e5a1eeb0c9d348eb0dd7fde0b2a7f649f30db74c793a1e3e740320916",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-42",
+          "file": "042.json",
+          "bytes": 10687,
+          "sha256": "7b6b01c860a67eecb401b5e1d1288cd28d78d2ab960501d98534f5c222d59fbe",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-43",
+          "file": "043.json",
+          "bytes": 11899,
+          "sha256": "308c41efba85cb5b9584cb1b39500abc2fc20ac863a6563886d8dd16cc37da23",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-44",
+          "file": "044.json",
+          "bytes": 5711,
+          "sha256": "efe30993a52998727fa37b0463fb1382a6c5d50f242a5424b4a38f0b19bb4bd0",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-45",
+          "file": "045.json",
+          "bytes": 6722,
+          "sha256": "98a2ca38286646271057702d3f2fa7de36ec8e7b8acbf4d2b44eaa0177c28039",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-46",
+          "file": "046.json",
+          "bytes": 8307,
+          "sha256": "308225bc0fb9d35513997bf48b4b37782bbb4949a58bcd84926031a0f60bb246",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-47",
+          "file": "047.json",
+          "bytes": 7565,
+          "sha256": "ca12bc0dae9d6171336e299c6ebe791fa0c33542c1be7e7b94d4bc702ede0056",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-48",
+          "file": "048.json",
+          "bytes": 7618,
+          "sha256": "ef74127c4408397a2e9c5401384934dad6a7ed2f47c97468eab5a3db25518f6d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-49",
+          "file": "049.json",
+          "bytes": 4575,
+          "sha256": "9c1bf6cbc63cce7d1e14f57dcfa3566aff128472a72a68b1ed6258795ec29bc1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-50",
+          "file": "050.json",
+          "bytes": 5843,
+          "sha256": "ddf906eb53b662e0e6a36f3d9ab10352a604bd02a6be29f1b34651faef6590e9",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-51",
+          "file": "051.json",
+          "bytes": 6158,
+          "sha256": "85217451b82730fd2ca14d913126a4ccc8be43d6a32d60310ffcf534a8f1fdbf",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-52",
+          "file": "052.json",
+          "bytes": 5389,
+          "sha256": "cee7d462a6709ed72ddc141e46191976a94fab3ebec10612e6e339c914920c5f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-53",
+          "file": "053.json",
+          "bytes": 5867,
+          "sha256": "728fc47b1d72eaac5f22ab709b529b3a9633232ffbc524446cfdbe0ec474428f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-54",
+          "file": "054.json",
+          "bytes": 6047,
+          "sha256": "d9d24aff8e3dfd0163a5858e4bba728f7468343f802b3434812471fe0e670387",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-55",
+          "file": "055.json",
+          "bytes": 6710,
+          "sha256": "1f9167cca4e1f9ba3233f81b9be548dbd2b9cdf03c1d82963f29034296c657c5",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-56",
+          "file": "056.json",
+          "bytes": 7005,
+          "sha256": "7162c39851d18b2600027432867dea67e75b7c02eda942b7d7e7dcdc1c5afd45",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-57",
+          "file": "057.json",
+          "bytes": 7536,
+          "sha256": "4a12b846e0b4177342f8e444a1840dfcae81bdbf9b2dafba413bb5ba1337a4da",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-58",
+          "file": "058.json",
+          "bytes": 6087,
+          "sha256": "40c0c7e1b19eb037b1e426bd117738e5eed08cd9e2b88d5db971c6958fa1f205",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-59",
+          "file": "059.json",
+          "bytes": 6102,
+          "sha256": "2f65d93ac3735ccf49b92e537d250b2de66edd3231f00e07cf89ba2a222b9209",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-60",
+          "file": "060.json",
+          "bytes": 4732,
+          "sha256": "c85364e34d486e391e879f2b6eb161f1b48ebb06623603b2d412d58fe0f0147c",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-61",
+          "file": "061.json",
+          "bytes": 3176,
+          "sha256": "83f19a376260ae369f5aed44ab5fcf7b6aaaa562c373ad53a9c261ae9c11a68e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-62",
+          "file": "062.json",
+          "bytes": 2667,
+          "sha256": "e19d1288414856f4f0ea7fb809ebb9020a34b8d71ad65a1ad3eb2ecbb83277ee",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-63",
+          "file": "063.json",
+          "bytes": 2856,
+          "sha256": "b89e0916224bc4ceda54b9d08e05e06062e09b01c5068c17d3b50c9cfa45009e",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-64",
+          "file": "064.json",
+          "bytes": 3809,
+          "sha256": "12fc2b89498fb38b27ceeb953737ba1ec5f9b748e48516a5c7f259716f48d5c6",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-65",
+          "file": "065.json",
+          "bytes": 4004,
+          "sha256": "5d157469e75830a8bff4e824d88d49b808bb97617116f7e3c4635b03f20c82c6",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-66",
+          "file": "066.json",
+          "bytes": 3593,
+          "sha256": "676fc862e347e052df9526597c97d9ab10ee228c411861dd7286218e6466b8cc",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-67",
+          "file": "067.json",
+          "bytes": 4796,
+          "sha256": "b2820f053b1fc4487fb2dc1439cf56ef7b38ec654fe08f7d905692ccffb483ca",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-68",
+          "file": "068.json",
+          "bytes": 5246,
+          "sha256": "39250273e1806f2ee9f642085523f750399ebdcd38b191fefef584b0b5bf2f19",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-69",
+          "file": "069.json",
+          "bytes": 4708,
+          "sha256": "65170c8e0839c988ec0b55741a0aad333febb1d8d60945e5d7ee1442df9d074d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-70",
+          "file": "070.json",
+          "bytes": 4054,
+          "sha256": "de7b601190968939c51eb4041ce62c6e34dbc36ade6bad695404548092440274",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-71",
+          "file": "071.json",
+          "bytes": 3647,
+          "sha256": "29d67a5f266af36658a73f6c19f1f29c38dae235d09ceab3e92d9298ff7b91c7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-72",
+          "file": "072.json",
+          "bytes": 4422,
+          "sha256": "0340020721dce8082a9754665764c238a8e27d3e5a66adf52265acdeb52c6a7a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-73",
+          "file": "073.json",
+          "bytes": 3279,
+          "sha256": "faeac9332b05013b06407b4b7bc5fa23cb99ccbccf944e0d6b9a0efeca71d57d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-74",
+          "file": "074.json",
+          "bytes": 4654,
+          "sha256": "2902fb5a03019761d70fd25a7fb55801297bbb6fc585898f8e572c5cd37e96c3",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-75",
+          "file": "075.json",
+          "bytes": 3318,
+          "sha256": "d272c99fcc75806e8f2bb8fe47bedbe5f31d62d7eb32f02afcf52e24c4c518c4",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-76",
+          "file": "076.json",
+          "bytes": 4001,
+          "sha256": "5815fb31bf086afd41c800a1329713988587af1f7718309b03c948218dd2b84b",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-77",
+          "file": "077.json",
+          "bytes": 3981,
+          "sha256": "548632466b38feffbbfd0b10ed1cff88f19697e7780cb5237d5d73949d56ce09",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-78",
+          "file": "078.json",
+          "bytes": 3542,
+          "sha256": "d5ea1fcf3153bf451e622737e09309f3e489893f1f7c4c38ce2aea1fe4bf1a69",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-79",
+          "file": "079.json",
+          "bytes": 3818,
+          "sha256": "73fdbb0011d697702f3f4d35db00b1ec042c54d9aafa60f96a52072e669210b0",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-80",
+          "file": "080.json",
+          "bytes": 3159,
+          "sha256": "dc24755d26c4297d3f5df0bb176520ad3c19dd5534da23d88b7d59c4f81e1fe8",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-81",
+          "file": "081.json",
+          "bytes": 2442,
+          "sha256": "0899c985299fbff8375fffdbcf3bff26e681c54d3be2c0fdc8f3f4b385bfff93",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-82",
+          "file": "082.json",
+          "bytes": 1977,
+          "sha256": "ae50f5f6768cba13801e670322c3b9e42317b17f6e7ca240b0bf4df96d88d7a6",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-83",
+          "file": "083.json",
+          "bytes": 3288,
+          "sha256": "a19930727dea7a5177c76b3e3c6f45bf063b311bb6c2b627f3ffbc94775e8ab6",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-84",
+          "file": "084.json",
+          "bytes": 2374,
+          "sha256": "3bfd7f1b35ecd24bdddc5e0ef76611a83d23dbd40213d66abdc7ba8fda4bf8fc",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-85",
+          "file": "085.json",
+          "bytes": 2315,
+          "sha256": "a0215885d784ca20e4d1ff06c8da74c6ad636341ee18177c67b1f8c73007bd92",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-86",
+          "file": "086.json",
+          "bytes": 1795,
+          "sha256": "ee95ec1752ae689e55d7a1803dd3c11a6c8f088c8191f509260dfdf158ebf089",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-87",
+          "file": "087.json",
+          "bytes": 1886,
+          "sha256": "47da54433b73b99aa9ac19a2c65602fcf07541e48eab6d96f5c4564b5c215fde",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-88",
+          "file": "088.json",
+          "bytes": 2128,
+          "sha256": "8f853aca5d8365d745f25871ba2bf369eaca62cb86aae3e83b7e788f155e8081",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-89",
+          "file": "089.json",
+          "bytes": 2791,
+          "sha256": "65054276827ed7cb122dcdb930d6415bffd67f89df02842a2b4f6dd310e71850",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-90",
+          "file": "090.json",
+          "bytes": 1959,
+          "sha256": "91281a3bfd6654079cd3e6db7d122e3bff76455813a59af047cf37194ef7421f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-91",
+          "file": "091.json",
+          "bytes": 1754,
+          "sha256": "4282d96d68c3536cbacca9ac5887bdc3d64d4985e877565f5398790e9d1d4bc0",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-92",
+          "file": "092.json",
+          "bytes": 2036,
+          "sha256": "2fa82523667d00cd606007b49ae0b828e8d5bdf5234f1bd421656d79dacb0614",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-93",
+          "file": "093.json",
+          "bytes": 1426,
+          "sha256": "2f45aff8bc254ef1bf4c87eb58e1e60d339070e4089bce38e19fe24dee3bdaa7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-94",
+          "file": "094.json",
+          "bytes": 1083,
+          "sha256": "63cfb251a6d0d2c38cc4a801222b597f4282ee13722fc2ff697495515ad3648a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-95",
+          "file": "095.json",
+          "bytes": 1176,
+          "sha256": "be2183babf9d743b88e3361c4d281b79f03a115ca2a1e23b019c8a4cf2ebe585",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-96",
+          "file": "096.json",
+          "bytes": 1832,
+          "sha256": "8166c3b50792f5a906083ab76d3b76d19be23d4d4201f18f2068700de0d3c229",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-97",
+          "file": "097.json",
+          "bytes": 1072,
+          "sha256": "a860dc239ba3ccfd2b910aa0dee86e53ad8aee97d2f7adf175a346e13288913d",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-98",
+          "file": "098.json",
+          "bytes": 1763,
+          "sha256": "57a494fb0b3bdb5af320d9b7eb0d2ebb3f5bc4d62eeb426c000f648bb0f2711f",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-99",
+          "file": "099.json",
+          "bytes": 1209,
+          "sha256": "96ecb1c159d3ab310cc3854b58b9e60a7ee3b36db9517b68c6d3e43c2543a8d1",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-100",
+          "file": "100.json",
+          "bytes": 1368,
+          "sha256": "029707e3491c03bb5bb0524207d361ebc1a347692a90cffee5d0a7ce165b2418",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-101",
+          "file": "101.json",
+          "bytes": 1322,
+          "sha256": "f8f58d2e2a88e62b67b9bbd80bf561705951a79a95ad57995fa3bf54021c0b15",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-102",
+          "file": "102.json",
+          "bytes": 1147,
+          "sha256": "62881fac6cd1743aaa8614a55867b2c8bb7f85e02747fc027320a0bfd56fd623",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-103",
+          "file": "103.json",
+          "bytes": 882,
+          "sha256": "5bc0dea0f866a791fd7c6a03d01a702ab59dd93013011ff1b0bfbe17ab75c8f7",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-104",
+          "file": "104.json",
+          "bytes": 1246,
+          "sha256": "0805782af343cf083ebb7babb9d965ccd51e366b8e62ad9bcc38cfc176d9bf9a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-105",
+          "file": "105.json",
+          "bytes": 1028,
+          "sha256": "c00aa80a6d8b8ba475df887e1c4ddd75048245f4a95ed51456bde13e9636100a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-106",
+          "file": "106.json",
+          "bytes": 958,
+          "sha256": "362b854dd067927669be655af2a8458bd015aba6852c0e788482bb62dd606118",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-107",
+          "file": "107.json",
+          "bytes": 1051,
+          "sha256": "d5d58a9309cb5a7a27441ae695ec8a025792ed8a62772ad565dc5610faed7c41",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-108",
+          "file": "108.json",
+          "bytes": 857,
+          "sha256": "8094578f2953ecec26faf34e50fbd980bc870ee9c627c5f976055cacc678a32a",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-109",
+          "file": "109.json",
+          "bytes": 1020,
+          "sha256": "40fb3bb417ea2d88237ca95195e0f8d05221ce08a50e74ef2beba0b09a0b9eda",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-110",
+          "file": "110.json",
+          "bytes": 930,
+          "sha256": "142c77be7e276181bdbc047e0be675600db0ab50e4ee2351e470239bbcca36c9",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-111",
+          "file": "111.json",
+          "bytes": 979,
+          "sha256": "1b5f60a6e32910159f33aa227cccc3d64e0da2cd2e353273ce0feda7d772a5be",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-112",
+          "file": "112.json",
+          "bytes": 882,
+          "sha256": "92d0b619ce7eb873e14395d52c6162f2d50257b6e80a8651d6fdc39e185c7e35",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-113",
+          "file": "113.json",
+          "bytes": 994,
+          "sha256": "8bd6ae5a53505bc1481e37ec76e79770eecad8fde8a0639f8f383296af498457",
+          "mime": "application/json"
+        },
+        {
+          "id": "chapter-114",
+          "file": "114.json",
+          "bytes": 981,
+          "sha256": "a9353ce5413a31ec1a8a36698daee0c8280575c91a45730f26affa91a29c12f4",
+          "mime": "application/json"
+        }
+      ],
+      "preparation": {
+        "kind": "translation-source-v1",
+        "editionId": "hafs-tanzil-uthmani-1.1",
+        "numberingScheme": "tanzil-madina-hafs",
+        "textVersion": "source-1",
+        "translationId": "en.pickthall",
+        "sourceAssetId": "original",
+        "sourceFooter": "# --------------------------------------------------------------------\n#\n#  Quran Translation\n#  Name: Pickthall\n#  Translator: Mohammed Marmaduke William Pickthall\n#  Language: English\n#  ID: en.pickthall\n#  Last Update: September 4, 2010\n#  Source: Tanzil.net\n#\n# --------------------------------------------------------------------\n",
+        "notice": "# --------------------------------------------------------------------\n#\n#  Quran Translation\n#  Name: Pickthall\n#  Translator: Mohammed Marmaduke William Pickthall\n#  Language: English\n#  ID: en.pickthall\n#  Last Update: September 4, 2010\n#  Source: Tanzil.net\n#\n# --------------------------------------------------------------------\n\nSource and terms: https://tanzil.net/trans/\nNon-commercial use. Translation of meanings; not a replacement for the Arabic Quran.\n"
+      },
+      "manifestHash": "e00f9ddceeb8ae6a4739266b88ac27edd8b914b843ae134588bc57fcd29e4fa2"
+    },
+    "chapterAssets": {
+      "1": "chapter-1",
+      "2": "chapter-2",
+      "3": "chapter-3",
+      "4": "chapter-4",
+      "5": "chapter-5",
+      "6": "chapter-6",
+      "7": "chapter-7",
+      "8": "chapter-8",
+      "9": "chapter-9",
+      "10": "chapter-10",
+      "11": "chapter-11",
+      "12": "chapter-12",
+      "13": "chapter-13",
+      "14": "chapter-14",
+      "15": "chapter-15",
+      "16": "chapter-16",
+      "17": "chapter-17",
+      "18": "chapter-18",
+      "19": "chapter-19",
+      "20": "chapter-20",
+      "21": "chapter-21",
+      "22": "chapter-22",
+      "23": "chapter-23",
+      "24": "chapter-24",
+      "25": "chapter-25",
+      "26": "chapter-26",
+      "27": "chapter-27",
+      "28": "chapter-28",
+      "29": "chapter-29",
+      "30": "chapter-30",
+      "31": "chapter-31",
+      "32": "chapter-32",
+      "33": "chapter-33",
+      "34": "chapter-34",
+      "35": "chapter-35",
+      "36": "chapter-36",
+      "37": "chapter-37",
+      "38": "chapter-38",
+      "39": "chapter-39",
+      "40": "chapter-40",
+      "41": "chapter-41",
+      "42": "chapter-42",
+      "43": "chapter-43",
+      "44": "chapter-44",
+      "45": "chapter-45",
+      "46": "chapter-46",
+      "47": "chapter-47",
+      "48": "chapter-48",
+      "49": "chapter-49",
+      "50": "chapter-50",
+      "51": "chapter-51",
+      "52": "chapter-52",
+      "53": "chapter-53",
+      "54": "chapter-54",
+      "55": "chapter-55",
+      "56": "chapter-56",
+      "57": "chapter-57",
+      "58": "chapter-58",
+      "59": "chapter-59",
+      "60": "chapter-60",
+      "61": "chapter-61",
+      "62": "chapter-62",
+      "63": "chapter-63",
+      "64": "chapter-64",
+      "65": "chapter-65",
+      "66": "chapter-66",
+      "67": "chapter-67",
+      "68": "chapter-68",
+      "69": "chapter-69",
+      "70": "chapter-70",
+      "71": "chapter-71",
+      "72": "chapter-72",
+      "73": "chapter-73",
+      "74": "chapter-74",
+      "75": "chapter-75",
+      "76": "chapter-76",
+      "77": "chapter-77",
+      "78": "chapter-78",
+      "79": "chapter-79",
+      "80": "chapter-80",
+      "81": "chapter-81",
+      "82": "chapter-82",
+      "83": "chapter-83",
+      "84": "chapter-84",
+      "85": "chapter-85",
+      "86": "chapter-86",
+      "87": "chapter-87",
+      "88": "chapter-88",
+      "89": "chapter-89",
+      "90": "chapter-90",
+      "91": "chapter-91",
+      "92": "chapter-92",
+      "93": "chapter-93",
+      "94": "chapter-94",
+      "95": "chapter-95",
+      "96": "chapter-96",
+      "97": "chapter-97",
+      "98": "chapter-98",
+      "99": "chapter-99",
+      "100": "chapter-100",
+      "101": "chapter-101",
+      "102": "chapter-102",
+      "103": "chapter-103",
+      "104": "chapter-104",
+      "105": "chapter-105",
+      "106": "chapter-106",
+      "107": "chapter-107",
+      "108": "chapter-108",
+      "109": "chapter-109",
+      "110": "chapter-110",
+      "111": "chapter-111",
+      "112": "chapter-112",
+      "113": "chapter-113",
+      "114": "chapter-114"
+    },
+    "notice": "# --------------------------------------------------------------------\n#\n#  Quran Translation\n#  Name: Pickthall\n#  Translator: Mohammed Marmaduke William Pickthall\n#  Language: English\n#  ID: en.pickthall\n#  Last Update: September 4, 2010\n#  Source: Tanzil.net\n#\n# --------------------------------------------------------------------\n\nSource and terms: https://tanzil.net/trans/\nNon-commercial use. Translation of meanings; not a replacement for the Arabic Quran.\n"
+  }
+]

@@ -174,6 +174,24 @@ export function validateQuranCatalog(catalog: QuranCatalog) {
       )
     )
       throw Error('unreviewed_translation_mapping');
+    const identity = `translation:${t.id}`;
+    const preparation = t.pack.preparation;
+    if (
+      !t.id ||
+      identities.has(identity) ||
+      !t.title ||
+      !t.pack.capabilities.includes('translation') ||
+      new Set(Object.values(t.chapterAssets)).size !== 114 ||
+      (preparation &&
+        (preparation.kind !== 'translation-source-v1' ||
+          preparation.translationId !== t.id ||
+          preparation.editionId !== t.editionId ||
+          preparation.numberingScheme !== t.numberingScheme ||
+          preparation.textVersion !== t.textVersion ||
+          preparation.notice !== t.notice))
+    )
+      throw Error('invalid_translation_pack');
+    identities.add(identity);
     const assets = [...t.pack.assets, ...(t.pack.derivedAssets ?? [])];
     for (const c of chapters)
       if (

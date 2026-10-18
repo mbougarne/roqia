@@ -54,7 +54,7 @@ def main(source,translations,out):
         notice='\n'.join(l for l in text.splitlines() if l.startswith('#'))+'\nhttps://tanzil.net/trans/ · Non-commercial use. Private validation; editorial review pending.'
         files=[]
         for s in range(1,115):
-            c={'translationId':id,'editionId':'hafs-tanzil-uthmani-1.1','numberingScheme':'tanzil-madina-hafs','surah':s,'verses':[{'number':v,'text':t} for n,v,t in verses if n==s],'sourceNotice':notice}
+            c={'translationId':id,'textVersion':'fixture-1','editionId':'hafs-tanzil-uthmani-1.1','numberingScheme':'tanzil-madina-hafs','surah':s,'verses':[{'number':v,'text':t} for n,v,t in verses if n==s],'sourceNotice':notice}
             data=(json.dumps(c,ensure_ascii=False)+'\n').encode();assert json.loads(data)==c
             files.append((f'{s:03}.json',data,'application/json'))
         p=pack('phase4-lab-'+lang,title,files,['translation'],{'translator':title,'source':'https://tanzil.net/trans/','purpose':'private-debug-only'})

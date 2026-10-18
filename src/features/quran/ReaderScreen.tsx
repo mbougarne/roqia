@@ -329,6 +329,13 @@ function Reader({route, navigation}: any) {
               <StateView
                 title="الترجمة المختارة غير متاحة"
                 description="النص العربي مستقل. اختر ترجمة متوافقة أو أعد تنزيلها."
+                action={{
+                  label: 'إدارة الترجمة',
+                  onPress: () =>
+                    navigation.navigate('QuranTranslations', {
+                      editionId: edition.id,
+                    }),
+                }}
               />
             )}
             {anchor === 1 && chapter.opening && (
@@ -385,6 +392,11 @@ function Reader({route, navigation}: any) {
                 </AppText>
                 <AppText
                   role="translation"
+                  accessibilityLanguage={
+                    runtime.catalog.translations.find(
+                      t => t.id === prefs.translationId,
+                    )?.language
+                  }
                   style={{writingDirection: 'ltr', textAlign: 'left'}}>
                   {translated[item.number - 1].text}
                 </AppText>
