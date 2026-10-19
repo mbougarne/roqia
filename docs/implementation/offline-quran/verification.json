@@ -1,0 +1,25 @@
+{
+  "existingRecordsRetained": 7,
+  "changedFields": {
+    "('settings', 'singleton')": [
+      "updatedAt",
+      "onboardingVersion",
+      "guidanceSeen"
+    ]
+  },
+  "verifiedContentFiles": 349,
+  "bundledPacks": 3,
+  "deviceModel": "SM_A566B",
+  "installMode": "in-place adb install -r, normal profile only",
+  "apkSha256": "edacdad554015ff5299df964e1630ff7d8c8587d9df4036050e5d07354cb31b0",
+  "tests": 104,
+  "onDevice": [
+    "Warsh default saved on device",
+    "English and French both saved offline",
+    "English/French Fatiha rendering",
+    "French Baqarah Warsh 1 maps to Hafs-source 1-2",
+    "French selection and reader survive cold restart"
+  ],
+  "networkIsolation": "Phone connectivity was not changed; no-network import verified by transport tests and local-job records.",
+  "privacy": "Only Roqia was opened and interacted with. App-private backups remain outside git."
+}

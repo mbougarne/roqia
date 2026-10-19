@@ -24,6 +24,8 @@ export type Events = {
 export type DownloadPorts = {
   // Only a transport that validates entity/range responses before append may retain partials.
   resumable?: boolean;
+  bundled?: (pack: Pack) => boolean;
+  copyBundled?: (pack: Pack, asset: Asset, target: string) => Promise<void>;
   sync?: (paths: string[]) => Promise<void>;
   load: () => Promise<{
     jobs: DownloadJob[];
@@ -291,6 +293,62 @@ export class DownloadCoordinator {
     );
     await this.save();
   }
+  private async importBundled(pack: Pack) {
+    if (!this.ports.bundled?.(pack) || !this.ports.copyBundled) return false;
+    if (
+      this.installed.some(
+        p =>
+          p.packId === pack.id &&
+          p.version === pack.version &&
+          p.state === 'ready' &&
+          p.manifestHash === pack.manifestHash,
+      )
+    )
+      return true;
+    for (const asset of pack.assets) {
+      const key = jobKey(pack, asset);
+      let job = this.jobs.find(j => j.jobId === key);
+      if (job) await this.stopTask(job);
+      const previousGeneration = job?.generation ?? 0;
+      const fresh: DownloadJob = {
+        jobId: key,
+        assetId: asset.id,
+        packId: pack.id,
+        version: pack.version,
+        nativeTaskId: null,
+        generation: previousGeneration + 1,
+        state: 'installing',
+        pauseReason: null,
+        relativeTempPath: `staging/${key}.part`,
+        relativeFinalPath: `content/${pack.id}/${pack.version}/${asset.file}`,
+        bytesReceived: 0,
+        expectedBytes: asset.bytes,
+        expectedHash: asset.sha256,
+        etag: null,
+        lastModified: null,
+        attempt: 0,
+        errorCode: null,
+        consentNetworkPolicy: 'wifi',
+        updatedAt: this.ports.now(),
+        retryAt: 0,
+      };
+      if (job) Object.assign(job, fresh);
+      else {
+        job = fresh;
+        this.jobs.push(job);
+      }
+      await this.save();
+      await this.ports.copyBundled(pack, asset, job.relativeTempPath);
+      await this.finishAsset(job);
+    }
+    return true;
+  }
+  installBundled = (id: string, version: string) =>
+    this.run(async () => {
+      if (!this.ready) throw Error('downloads_not_initialized');
+      const pack = this.catalog.find(p => p.id === id && p.version === version);
+      return pack ? this.importBundled(pack) : false;
+    });
   networkChanged = (network: {connected: boolean; wifi: boolean}) =>
     this.run(() => this.updateNetwork(network));
   private async updateNetwork(network: {connected: boolean; wifi: boolean}) {
@@ -523,6 +581,21 @@ export class DownloadCoordinator {
               }
               break;
             }
+      }
+      // Seed only absent/interrupted built-ins. Explicit storage removal stays removed
+      // until the user chooses the pack again; existing installations stay untouched.
+      for (const pack of this.catalog) {
+        if (!this.ports.bundled?.(pack)) continue;
+        const jobs = this.jobs.filter(
+          j => j.packId === pack.id && j.version === pack.version,
+        );
+        if (
+          jobs.some(j =>
+            ['removed', 'cancelled', 'paused_user'].includes(j.state),
+          )
+        )
+          continue;
+        await this.importBundled(pack);
       }
       this.ready = true;
       await this.save();

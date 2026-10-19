@@ -35,8 +35,8 @@ test('bundled IANA rules handle Morocco Ramadan and September change independent
     /timezone/,
   );
 });
-test('all 330 official source days have ordered instants; source expiry never silently switches method', () => {
-  assert.equal(tables.length, 11);
+test('all 360 official source days have ordered instants; source expiry never silently switches method', () => {
+  assert.equal(tables.length, 12);
   let count = 0;
   for (const table of tables)
     for (const date of Object.keys(table.dates)) {
@@ -52,7 +52,7 @@ test('all 330 official source days have ordered instants; source expiry never si
       );
       count++;
     }
-  assert.equal(count, 330);
+  assert.equal(count, 360);
   assert.throws(
     () => d.day(p(), '2027-01-01', tables[0]),
     /timetable_unavailable/,

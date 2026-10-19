@@ -52,7 +52,9 @@ export function PrayerLandmark({clock = false}: {clock?: boolean}) {
 export function QiblaCompass({
   bearing,
   heading,
+  aligned = false,
 }: {
+  aligned?: boolean;
   bearing: number;
   heading: number | null;
 }) {
@@ -69,8 +71,8 @@ export function QiblaCompass({
           cy="160"
           r="154"
           fill={p.background}
-          stroke={p.accent}
-          strokeWidth="1.5"
+          stroke={aligned ? p.success : p.accent}
+          strokeWidth={aligned ? 4 : 1.5}
         />
         <Circle
           cx="160"
@@ -80,7 +82,11 @@ export function QiblaCompass({
           stroke={p.surfaceMuted}
           strokeWidth="5"
         />
-        <G stroke={p.accent} opacity={0.13} fill="none" strokeWidth="1.5">
+        <G
+          stroke={aligned ? p.success : p.accent}
+          opacity={0.13}
+          fill="none"
+          strokeWidth={aligned ? 4 : 1.5}>
           <Path d="M160 77L180 112L215 105L208 140L243 160L208 180L215 215L180 208L160 243L140 208L105 215L112 180L77 160L112 140L105 105L140 112Z" />
           <Path d="M160 100L202 118L220 160L202 202L160 220L118 202L100 160L118 118ZM160 100V220M100 160H220M118 118L202 202M202 118L118 202" />
         </G>
@@ -92,7 +98,9 @@ export function QiblaCompass({
               y1="12"
               x2="160"
               y2={i % 5 === 0 ? 26 : 20}
-              stroke={i % 5 === 0 ? p.accent : p.borderControl}
+              stroke={
+                i % 5 === 0 ? (aligned ? p.success : p.accent) : p.borderControl
+              }
               strokeWidth={i % 5 === 0 ? 1.6 : 1}
               rotation={i * 6}
               origin="160,160"
@@ -117,21 +125,28 @@ export function QiblaCompass({
           ))}
         </G>
         <G rotation={angle} origin="160,160">
-          <Path d="M154 160L160 83L166 160Z" fill={p.accent} />
-          <Path d="M160 83L160 160L166 160Z" fill={p.accent} opacity={0.5} />
+          <Path
+            d="M154 160L160 83L166 160Z"
+            fill={aligned ? p.success : p.accent}
+          />
+          <Path
+            d="M160 83L160 160L166 160Z"
+            fill={aligned ? p.success : p.accent}
+            opacity={0.5}
+          />
           <Circle
             cx="160"
             cy="70"
             r="15"
             fill={p.background}
-            stroke={p.accent}
+            stroke={aligned ? p.success : p.accent}
             strokeWidth="1.6"
           />
           <G
             rotation={-angle}
             origin="160,70"
             fill="none"
-            stroke={p.accent}
+            stroke={aligned ? p.success : p.accent}
             strokeWidth="1.3"
             strokeLinejoin="round">
             <Polygon
@@ -141,7 +156,12 @@ export function QiblaCompass({
             <Path d="M151 65L160 69L169 65M160 69V80M151 69L160 73L169 69" />
           </G>
         </G>
-        <Circle cx="160" cy="160" r="11" fill={p.accent} />
+        <Circle
+          cx="160"
+          cy="160"
+          r="11"
+          fill={aligned ? p.success : p.accent}
+        />
         <Circle cx="160" cy="160" r="8" fill={p.actionPrimary} />
       </Svg>
     </View>

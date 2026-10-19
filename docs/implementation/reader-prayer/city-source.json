@@ -1,0 +1,9 @@
+{
+  "city": "بني ملال",
+  "cityId": "73",
+  "timetableSource": "https://www.habous.gov.ma/prieres/index.php?ville=73",
+  "coordinatesSource": "https://www.geonames.org/2555745/beni-mellal.html",
+  "coordinatesAttribution": "GeoNames, CC BY 4.0",
+  "retrieved": "2026-10-19",
+  "htmlSha256": "aca2bac30249fecdedf7856b903431d70352260de0202c8dd2c701c1729b233d"
+}

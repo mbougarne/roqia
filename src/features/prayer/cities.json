@@ -97,5 +97,14 @@
     "zone": "Africa/Casablanca",
     "source": "city",
     "acquiredAt": 0
+  },
+  {
+    "cityId": "73",
+    "name": "بني ملال",
+    "latitude": 32.33725,
+    "longitude": -6.34983,
+    "zone": "Africa/Casablanca",
+    "source": "city",
+    "acquiredAt": 0
   }
 ]
