@@ -4,7 +4,8 @@ import {adkarRepeatContext, themeContext} from '../store';
 import {AppText, AppIcon, IconButton, usePalette} from '../design/ui';
 import {rtlRow} from '../design/components';
 import {View, Pressable, ScrollView, useWindowDimensions} from 'react-native';
-import {number, ltr} from '../design/format';
+import {ltr} from '../design/format';
+import {useFormat} from '../design/useFormat';
 import {DevotionalListScreen} from './DevotionalListScreen';
 import {AdhkarArtwork, AdhkarOrnament} from './AdhkarArtwork';
 const categories = [
@@ -16,6 +17,7 @@ const groups = Object.fromEntries(
   categories.map(c => [c.id, adkarData.filter(i => i.category === c.id)]),
 );
 export function AdkarMenuScreen({navigation}: any) {
+  const {number} = useFormat();
   const {repeatCounts} = useContext(adkarRepeatContext);
   const {mode, uiScale} = useContext(themeContext);
   const {width, fontScale} = useWindowDimensions();

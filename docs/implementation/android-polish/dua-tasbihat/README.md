@@ -31,7 +31,7 @@ Captures use hash-verified review APKs on `emulator-5554`, user 0. The user acce
 
 ### Focused circle-fit correction
 
-The light-theme dial is reduced from 280 to 240 dp, with 32 dp more space above it. Its circle now sits inside the doorway instead of crossing the curved shoulders. Text and number sizes, counter behavior, the tap control and the dark-theme layout remain unchanged.
+The light-theme dial is reduced from 280 to 240 dp, with 32 dp more space above it. Its circle now sits inside the doorway instead of crossing the curved shoulders. Text and number sizes, counter behavior, the tap control and the dark-theme layout remain unchanged. The user approved this correction on 2026-10-19 and authorized continuing the remaining phases.
 
 Compare the same saved remaining count in the [before](screenshots/before-circle-fit-light.png) and [corrected](screenshots/after-circle-fit-light.png) captures. Additional checks show the [longer quick-choice text](screenshots/after-circle-fit-praise-light.png) and [1.5× app text](screenshots/after-circle-fit-large-light.png). The correction passes TypeScript, changed-file formatting and the Android arm64 review build. All 207 counter rows remain byte-exact; the original settings and vibration preference are preserved. Only the app's automatic prayer renewal and settings write timestamp may differ after startup. No counter was tapped during this check.
 

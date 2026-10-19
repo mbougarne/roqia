@@ -12,7 +12,7 @@ import {
   type IconName,
 } from './ui';
 import {Illustration} from './Illustration';
-import {number} from './format';
+import {useFormat} from './useFormat';
 export const rtlRow = {
   flexDirection: 'row-reverse' as const,
   direction: 'ltr' as const,
@@ -221,11 +221,13 @@ export function RadioRow({
   onPress,
   icon = 'book',
   multiple = false,
+  disabled = false,
 }: {
   title: string;
   detail?: string;
   selected: boolean;
   multiple?: boolean;
+  disabled?: boolean;
   onPress: () => void;
   icon?: IconName;
 }) {
@@ -234,7 +236,10 @@ export function RadioRow({
     <Pressable
       accessibilityRole={multiple ? 'checkbox' : 'radio'}
       accessibilityLabel={title}
-      accessibilityState={multiple ? {checked: selected} : {selected}}
+      accessibilityState={
+        multiple ? {checked: selected, disabled} : {selected, disabled}
+      }
+      disabled={disabled}
       onPress={onPress}
       style={{
         ...rtlRow,
@@ -244,6 +249,7 @@ export function RadioRow({
         borderWidth: 1,
         borderColor: selected ? p.actionPrimary : p.borderSubtle,
         backgroundColor: selected ? p.selection : p.surface,
+        opacity: disabled ? 0.55 : 1,
       }}>
       <AppIcon
         name={icon}
@@ -289,6 +295,7 @@ export function RadioRow({
   );
 }
 export function NumberBadge({value}: {value: number}) {
+  const {number} = useFormat();
   const p = usePalette();
   return (
     <View
@@ -459,6 +466,7 @@ export function Range({
   stops?: readonly number[];
   onChange: (v: number) => void;
 }) {
+  const {number} = useFormat();
   const p = usePalette();
   const [width, setWidth] = useState(1);
   const nearest = (value: number) =>

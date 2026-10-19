@@ -26,6 +26,11 @@ Module._load = function (request, parent, ...rest) {
     if (request === 'react-native-svg')
       return {__esModule: true, default: 'Svg', Path: 'Path'};
     if (request === './Illustration') return {Illustration: 'Illustration'};
+    if (request === './useFormat')
+      return {
+        useFormat: () =>
+          require('../../src/design/format.ts').createFormatters('western'),
+      };
     if (request === './ui')
       return {
         AppText: 'AppText',
@@ -119,5 +124,18 @@ test('storage selection exposes independent checkbox semantics', () => {
     onPress: () => {},
   });
   assert.equal(control.props.accessibilityRole, 'checkbox');
-  assert.deepEqual(control.props.accessibilityState, {checked: true});
+  assert.deepEqual(control.props.accessibilityState, {
+    checked: true,
+    disabled: false,
+  });
+});
+test('unavailable sound choices expose their disabled state', () => {
+  const control = RadioRow({
+    title: 'Sound',
+    selected: false,
+    disabled: true,
+    onPress: () => {},
+  });
+  assert.equal(control.props.disabled, true);
+  assert.equal(control.props.accessibilityState.disabled, true);
 });

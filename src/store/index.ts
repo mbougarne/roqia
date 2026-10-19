@@ -1,6 +1,6 @@
 import {createContext} from 'react';
 import {palettes} from '../design/tokens';
-import {type ThemePreference} from '../repositories/models';
+import {type DigitStyle, type ThemePreference} from '../repositories/models';
 
 import {adkarData, type DataProps, data, duaaData, tasbihatData} from '../data';
 
@@ -10,6 +10,8 @@ export type ContextState = {
   mode: Mode;
   uiScale: number;
   setUiScale: (scale: number) => Promise<void>;
+  digitStyle: DigitStyle;
+  setDigitStyle: (style: DigitStyle) => Promise<void>;
   toggleMode: () => void;
   preference: ThemePreference;
   setPreference: (mode: ThemePreference) => void;
@@ -50,6 +52,8 @@ const initialContextState: ContextState = {
   mode: 'light',
   uiScale: 1,
   setUiScale: async () => undefined,
+  digitStyle: 'western',
+  setDigitStyle: async () => undefined,
   preference: 'system',
   setPreference: () => undefined,
   toggleMode: () => undefined,

@@ -21,7 +21,8 @@ import {
   rtlRow,
 } from '../design/components';
 import {matches} from '../features/devotional/discovery';
-import {number, ltr} from '../design/format';
+import {ltr} from '../design/format';
+import {useFormat} from '../design/useFormat';
 import {ReadingCard} from '../features/devotional/ReadingCard';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
 import {reloadBookmarks, useBookmarks} from '../features/devotional/bookmarks';
@@ -37,6 +38,7 @@ export function DevotionalListScreen({
   repeatCtx: React.Context<RepeatContextState>;
   root?: boolean;
 }) {
+  const {number} = useFormat();
   const confirmReset = useConfirmReset();
   const [query, setQuery] = useState(''),
     [filter, setFilter] = useState<'all' | 'saved'>('all');
