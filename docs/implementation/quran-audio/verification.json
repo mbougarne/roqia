@@ -85,5 +85,46 @@
       ]
     },
     "retainedPublicChanges": "Refreshed timing catalogs and additional Al-Qazabri Al-Kawthar chapter; automatic prayer renewal retained."
+  },
+  "savedAudioStartupFollowUp": {
+    "date": "2026-10-19",
+    "nodeTests": 137,
+    "typeScript": true,
+    "formatting": true,
+    "androidReviewBuild": true,
+    "inPlaceUpdate": true,
+    "apkSha256": "8d783da152e25a1957a148aff3c7a6ca1df504e982922be0d5904a9638b117b3",
+    "finalBuildCachedPlaybackWithoutSheetBothModes": true,
+    "finalBuildMissingChapterPromptVerified": {
+      "recording": 80,
+      "surah": 112
+    },
+    "slowLocalVerificationAndPlaybackNoSheetRegression": true,
+    "missingChapterMetadataRegression": true,
+    "playbackErrorVisibleRegression": true,
+    "savedTimingWithoutAudioRequiresDownloadRegression": true,
+    "preferencesRestored": true,
+    "temporaryDeviceHelperRemoved": true,
+    "globalSettingsChanged": false,
+    "otherAppsOpened": false,
+    "preservation": {
+      "existingRecords": 66,
+      "missingOriginalRecords": 0,
+      "unchangedCounters": 207,
+      "restoredOriginalCollections": [
+        "playback",
+        "quran-positions",
+        "quran-preferences",
+        "settings"
+      ],
+      "originalRecordsByteExact": 65,
+      "retainedChanges": [
+        {
+          "collection": "prayer",
+          "id": "renewal"
+        }
+      ],
+      "restorationVerifiedOnDevice": true
+    }
   }
 }

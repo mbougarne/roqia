@@ -73,3 +73,13 @@ All 56 records present before this follow-up remain, and all 207 counters are un
 | Missing audio over reader | [PNG](screenshots/inline-missing-audio.png) |
 | Download progress over reader | [PNG](screenshots/inline-download-progress.png) |
 | Missing/invalid timing over reader | [PNG](screenshots/inline-timing-fallback.png) |
+
+## Saved-audio startup follow-up
+
+Downloaded recordings with valid local verse timings now start without a preparation sheet, regardless of how long local file verification takes. Removed the elapsed-time trigger that opened the sheet after 1.2 seconds. A compact status line stays in the reader while preparing playback. Missing audio, missing/invalid timings, unsupported segment playback and actionable errors still open preparation explicitly; a saved timing set without its audio file still requires download. Recording and riwaya selection, file integrity verification and download-first playback remain unchanged.
+
+137 Node tests pass, including delayed local timing resolution and delayed playback beyond the former timeout, playback failure visibility and saved timings without audio. TypeScript and formatting pass. Device/build and preservation details are recorded in `savedAudioStartupFollowUp` in [verification.json](verification.json).
+
+The final build was installed in place on Samsung SM_A566B: downloaded Al-Qazabri Fatiha ayahs play without a preparation sheet in both modes; the missing Al-Ikhlas chapter still prompts to download. All 66 original records remain. After restoring QA preferences, 65 are byte-for-byte identical; only automatic prayer renewal is retained as changed. All 207 counters are unchanged. The restored database was verified on the device and the inspection helper removed.
+
+Evidence: [continuous reader](screenshots/direct-continuous-final.png), [verse cards](screenshots/direct-verse-card-final.png), [missing chapter](screenshots/missing-download-final.png).

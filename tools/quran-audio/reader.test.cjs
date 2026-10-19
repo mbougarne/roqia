@@ -26,11 +26,13 @@ let plays = [],
   network = 0,
   closed = 0,
   timing = null,
-  duration = async () => 50000;
+  downloaded = true,
+  duration = async () => 50000,
+  start = async () => true;
 const runtime = {
   catalog: {recordings: [recording]},
   downloads: {listJobs: () => []},
-  installed: () => true,
+  installed: () => downloaded,
   recordingDuration: (...args) => duration(...args),
 };
 const original = Module._load;
@@ -73,7 +75,7 @@ Module._load = function (name, parent, ...rest) {
           downloaded: async (entries, options) => {
             if (!options.isCurrent()) return;
             plays.push(entries);
-            return true;
+            return start();
           },
         },
       };
@@ -136,20 +138,95 @@ test('a cached verse plays locally without rendering the player or requesting ti
   assert.deepEqual(plays[0][0].segment, timing.segments[0]);
   assert.equal(closed, 1);
   assert.equal(network, 0);
+  assert.equal(view.root.findAllByType('Sheet').length, 0);
+  await unmount(view);
+});
+test('slow local verification and playback never open preparation for a saved verse', async () => {
+  let finishDuration, finishStart;
+  const before = plays.length,
+    closedBefore = closed;
+  duration = () =>
+    new Promise(resolve => {
+      finishDuration = resolve;
+    });
+  start = () =>
+    new Promise(resolve => {
+      finishStart = resolve;
+    });
+  const view = await mount();
+  await act(async () => {
+    await new Promise(resolve => setTimeout(resolve, 1300));
+  });
   assert.equal(
-    view.toJSON(),
-    null,
-    'no preparation sheet flashes for a cached verse',
+    view.root.findAllByType('Sheet').length,
+    0,
+    'slow local timing resolution needs no download alert',
+  );
+  assert.equal(plays.length, before);
+  await act(async () => finishDuration(50000));
+  await act(async () => {
+    await new Promise(resolve => setTimeout(resolve, 1300));
+  });
+  assert.equal(plays.length, before + 1);
+  assert.equal(closed, closedBefore);
+  assert.equal(
+    view.root.findAllByType('Sheet').length,
+    0,
+    'slow integrity verification needs no download alert',
+  );
+  assert.equal(network, 0);
+  await act(async () => finishStart(true));
+  assert.equal(closed, closedBefore + 1);
+  await unmount(view);
+  duration = async () => 50000;
+  start = async () => true;
+});
+test('a saved recording that fails playback opens an actionable error instead of remaining hidden', async () => {
+  start = async () => undefined;
+  const view = await mount();
+  assert.equal(view.root.findAllByType('Sheet').length, 1);
+  assert.ok(
+    view.root
+      .findAllByType('Text')
+      .some(n => String(n.props.children).includes('تعذر تشغيل الملف')),
   );
   await unmount(view);
+  start = async () => true;
+});
+test('saved timings without the audio file still offer the required download', async () => {
+  downloaded = false;
+  const before = plays.length;
+  const view = await mount();
+  assert.equal(view.root.findAllByType('Sheet').length, 1);
+  assert.ok(
+    view.root
+      .findAllByType('Button')
+      .some(n => n.props.label.startsWith('تنزيل السورة والتشغيل')),
+  );
+  assert.equal(plays.length, before);
+  assert.equal(network, 0);
+  await unmount(view);
+  downloaded = true;
+});
+test('a reciter without local chapter metadata prompts after the saved selection loads', async () => {
+  runtime.catalog.recordings = [];
+  const before = plays.length;
+  const view = await mount();
+  assert.equal(view.root.findAllByType('Sheet').length, 1);
+  assert.ok(
+    view.root
+      .findAllByType('Button')
+      .some(n => n.props.label === 'تنزيل السورة والتشغيل'),
+  );
+  assert.equal(plays.length, before);
+  assert.equal(network, 0);
+  await unmount(view);
+  runtime.catalog.recordings = [recording];
 });
 test('missing timing stays over the reader until explicit preparation; dismissing prevents delayed playback', async () => {
   timing = null;
   const before = plays.length;
   const view = await mount();
-  await act(async () => {
-    await new Promise(resolve => setTimeout(resolve, 370));
-  });
   assert.equal(view.root.findAllByType('Sheet').length, 1);
   assert.ok(
     view.root
@@ -158,8 +235,9 @@ test('missing timing stays over the reader until explicit preparation; dismissin
   );
   assert.equal(network, 0);
   assert.equal(plays.length, before);
+  const closedBeforeDismiss = closed;
   await act(async () => view.root.findByType('Sheet').props.onClose());
-  assert.equal(closed, 2);
+  assert.equal(closed, closedBeforeDismiss + 1);
   await unmount(view);
   let complete;
   duration = () =>

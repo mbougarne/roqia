@@ -78,12 +78,6 @@ function QuranListening({route, navigation, onClose}: any) {
     generation = useRef(0);
   const autoVerse = useRef(false);
   const [showPreparation, setShowPreparation] = useState(false);
-  useEffect(() => {
-    // Cached verses start directly; show preparation only if the work takes time
-    // or needs the reader's input. The reader stays mounted underneath.
-    const timer = setTimeout(() => setShowPreparation(true), 1200);
-    return () => clearTimeout(timer);
-  }, []);
   const source = choices.find(r => r.id === chosen);
   const recording = runtime.catalog.recordings.find(r => r.id === chosen);
   const chapter = recording?.chapters.find(c => c.surah === surah);
@@ -172,7 +166,13 @@ function QuranListening({route, navigation, onClose}: any) {
         .then(cached => {
           if (current === generation.current) {
             setTiming(cached);
-            if (inline && cached?.status !== 'ready') setShowPreparation(true);
+            if (
+              inline &&
+              (!installed ||
+                cached?.status !== 'ready' ||
+                !segmentPlaybackSupported())
+            )
+              setShowPreparation(true);
           }
         })
         .catch(() => {
@@ -180,7 +180,7 @@ function QuranListening({route, navigation, onClose}: any) {
             setMessage('تعذر قراءة توقيت الآيات المحفوظ.');
         });
     else if (inline && chosen) setShowPreparation(true);
-  }, [key, !!installed]);
+  }, [key, !!installed, chosen]);
   const prepare = async (force = false) => {
     if (!identity || !chapter || !recording) return;
     const current = generation.current;
@@ -569,8 +569,16 @@ function QuranListening({route, navigation, onClose}: any) {
   if (inline)
     return (
       <>
+        {!showPreparation && !message && !error && (
+          <AppText
+            role="caption"
+            accessibilityLiveRegion="polite"
+            style={{textAlign: 'center', padding: 6}}>
+            جارٍ تجهيز الاستماع…
+          </AppText>
+        )}
         <Sheet
-          visible={showPreparation && !selecting}
+          visible={(showPreparation || !!message || error) && !selecting}
           title={
             chapters[surah - 1].name + ' · الآية ' + number(route.params.verse)
           }
