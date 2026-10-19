@@ -1,6 +1,6 @@
 {
   "date": "2026-10-19",
-  "scope": "Five provided adhans and 15-second clip, with only a page title and shared recording list",
+  "scope": "Five provided adhans and 15-second clip; header simplified while original bottom controls and note are retained",
   "basePullRequest": 24,
   "nodeTestsPassed": 147,
   "typeScriptPassed": true,
@@ -8,7 +8,7 @@
   "diffCheckPassed": true,
   "androidArm64ReviewBuildPassed": true,
   "install": {
-    "apkSHA256": "369a03724f893b389c4b2271a22c0f7f4695f1b20593f5c069363a6b844f6fd9",
+    "apkSHA256": "611d66b0140b095f36230a75ef9b122730b878eb23b6174ed13107bdffc9a965",
     "inPlaceUpdate": true,
     "device": "emulator-5554",
     "user": 0,
@@ -17,7 +17,7 @@
     "reserveRestoredImmediately": true
   },
   "apkResources": {
-    "apkSHA256": "369a03724f893b389c4b2271a22c0f7f4695f1b20593f5c069363a6b844f6fd9",
+    "apkSHA256": "611d66b0140b095f36230a75ef9b122730b878eb23b6174ed13107bdffc9a965",
     "packagedRecordingCount": 6,
     "allSixAPKFilesMatchPinnedBytes": true,
     "removedRecordingsAbsent": true
@@ -33,12 +33,12 @@
   },
   "functionalUI": {
     "passed": true,
-    "titleAndRecordingListOnly": true,
-    "allSixChoicesRetained": true,
-    "removedTabsAndExplanatoryTextAbsentInBothThemes": true,
-    "previewAndStopWorkWithoutSuccessText": true,
-    "oneSelectionSavedForNormalAndFajr": true,
-    "selectionPersistedAcrossRestart": true,
+    "headerStillSimplifiedInBothThemes": true,
+    "bottomStopButtonRestoredAndStopsNativePlayback": true,
+    "bottomAlarmPermissionButtonRestoredAndEnabled": true,
+    "originalBottomBannerRestored": true,
+    "noSuccessTextAddedAboveList": true,
+    "recordingsAndSelectionsUnchangedByQA": true,
     "deviceNetworkChanged": false
   },
   "preservation": {
@@ -49,7 +49,6 @@
     "settingsRestoredIgnoringWriteTimestamp": true,
     "bookmarksPlaybackAndVibrationPreferenceByteExact": true,
     "retainedAutomaticChanges": [
-      ["prayer", "coverage"],
       ["prayer", "renewal"],
       ["settings", "singleton"]
     ],
@@ -62,8 +61,8 @@
   "finalState": {
     "noQAAlarmsRemain": true,
     "finalNativeAudioEvents": 0,
-    "titleAndListOnlyWithOriginalPreferences": true,
-    "finalScreen": "prayer/sounds",
+    "simplifiedHeaderAndOriginalFooterPreserved": true,
+    "finalScreen": "prayer/sounds (footer visible)",
     "reserveRestored": true
   },
   "limitations": [
@@ -139,5 +138,60 @@
       "originalUnmodified": true
     },
     "sourceFilesUnchangedByListSimplification": true
+  },
+  "headerSimplificationBaseline": {
+    "install": {
+      "apkSHA256": "369a03724f893b389c4b2271a22c0f7f4695f1b20593f5c069363a6b844f6fd9",
+      "inPlaceUpdate": true,
+      "device": "emulator-5554",
+      "user": 0,
+      "temporaryReserveChangeAuthorized": true,
+      "originalReserveValue": "null",
+      "reserveRestoredImmediately": true
+    },
+    "functionalUI": {
+      "passed": true,
+      "titleAndRecordingListOnly": true,
+      "allSixChoicesRetained": true,
+      "removedTabsAndExplanatoryTextAbsentInBothThemes": true,
+      "previewAndStopWorkWithoutSuccessText": true,
+      "oneSelectionSavedForNormalAndFajr": true,
+      "selectionPersistedAcrossRestart": true,
+      "deviceNetworkChanged": false
+    },
+    "preservation": {
+      "originalRecords": 39,
+      "originalCountersByteExact": 207,
+      "counterRowsTouchedByQA": 0,
+      "recordKeysUnchanged": true,
+      "settingsRestoredIgnoringWriteTimestamp": true,
+      "bookmarksPlaybackAndVibrationPreferenceByteExact": true,
+      "retainedAutomaticChanges": [
+        ["prayer", "coverage"],
+        ["prayer", "renewal"],
+        ["settings", "singleton"]
+      ],
+      "originalPrayerPreferencesAndSoundSelectionByteExact": true,
+      "installedAndDownloadRecordsByteExact": true,
+      "nativeSchedulesReconciledFromRestoredPreferences": true,
+      "reserveRestored": true,
+      "privateDataCommitted": false
+    },
+    "finalState": {
+      "noQAAlarmsRemain": true,
+      "finalNativeAudioEvents": 0,
+      "titleAndListOnlyWithOriginalPreferences": true,
+      "finalScreen": "prayer/sounds",
+      "reserveRestored": true
+    }
+  },
+  "nodeTestsBaselineCommit": "429bd3df0631b21f8faf363f16250b1667773dc1",
+  "footerRestorationChecks": {
+    "typeScriptPassed": true,
+    "formattingPassed": true,
+    "diffCheckPassed": true,
+    "androidArm64ReviewBuildPassed": true,
+    "newUnitTestsAdded": false,
+    "scope": "Restore original bottom stop/permission buttons and volume/DND note; keep header as approved"
   }
 }

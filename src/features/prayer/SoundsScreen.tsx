@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Platform} from 'react-native';
-import {Page, IconButton} from '../../design/ui';
-import {Group, SettingRow, RadioRow} from '../../design/components';
+import {Page, IconButton, Button} from '../../design/ui';
+import {Banner, Group, SettingRow, RadioRow} from '../../design/components';
 import {useFormat} from '../../design/useFormat';
 import {useOnFocus} from '../quran/context';
 import {
@@ -110,6 +110,23 @@ export function SoundsScreen({navigation}: any) {
           </Group>
         );
       })}
+      <Button
+        secondary
+        label="إيقاف الأذان"
+        onPress={() => {
+          adhanNative()?.stopAdhan();
+          void act(() => reconcilePrayer());
+        }}
+      />
+      <Button
+        secondary
+        label="إذن المنبهات والتذكيرات"
+        onPress={() => void act(() => adhanNative()?.openAdhanAlarms())}
+      />
+      <Banner
+        text="نتبع مستوى صوت المنبه وعدم الإزعاج في الجهاز. معاينة الأذان لا تفعّل تنبيهات الصلاة."
+        icon="volume"
+      />
     </Page>
   );
 }
