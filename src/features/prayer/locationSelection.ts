@@ -55,3 +55,12 @@ export function cityMatches(name: string, query: string) {
       normalize('beni mellal beni melal بني ملال').includes(normalize(query)))
   );
 }
+
+export function qiblaAligned(
+  target: number,
+  heading: number,
+  wasAligned: boolean,
+): boolean {
+  const delta = Math.abs(((heading - target + 540) % 360) - 180);
+  return delta <= (wasAligned ? 8 : 5);
+}

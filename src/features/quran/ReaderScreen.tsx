@@ -1,4 +1,4 @@
-import {readerPassages} from './readerLayout';
+import {readerPassages, verseAtOffset} from './readerLayout';
 import {type DisplayTranslation} from './translationAlignment';
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
@@ -9,6 +9,8 @@ import {
   AccessibilityInfo,
   Platform,
   Pressable,
+  Modal,
+  useWindowDimensions,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -20,7 +22,6 @@ import {
   IconButton,
   Page,
   StateView,
-  Sheet,
   usePalette,
 } from '../../design/ui';
 import {NumberBadge, Ornament, rtlRow} from '../../design/components';
@@ -85,6 +86,12 @@ function Reader({route, navigation}: any) {
     [selectedVerse, setSelectedVerse] = useState<Verse | null>(null);
   const [focused, setFocused] = useState(false),
     [foreground, setForeground] = useState(AppState.currentState === 'active');
+  const dimensions = useWindowDimensions();
+  const [tapPoint, setTapPoint] = useState({x: 0, y: 100});
+  const continuous = useRef(false);
+  continuous.current = prefs.view === 'continuous';
+  const textLines = useRef<{y: number; height: number; verse: number}[]>([]);
+  const headerHeight = useRef(0);
   const loadedRoute = useRef('');
   const position = useRef(1);
   const [anchor, setAnchor] = useState(1);
@@ -186,7 +193,8 @@ function Reader({route, navigation}: any) {
     packVersion: text!.pack.version,
   });
   const viewable = useRef(({viewableItems}: any) => {
-    if (viewableItems[0]) position.current = viewableItems[0].item[0].number;
+    if (!continuous.current && viewableItems[0])
+      position.current = viewableItems[0].item[0].number;
   }).current;
   useEffect(() => {
     if (!chapter || !text) return;
@@ -206,6 +214,48 @@ function Reader({route, navigation}: any) {
       act(persist());
     };
   }, [chapter, text, runtime, edition.id, edition.numbering, surah]);
+  const actions = (verse: Verse) => (
+    <View style={{...rtlRow, justifyContent: 'center', gap: 8}}>
+      <IconButton
+        name="copy"
+        label="نسخ الآية"
+        onPress={() => {
+          Clipboard.setString(verse.text);
+          AccessibilityInfo.announceForAccessibility('تم نسخ الآية');
+          setSelectedVerse(null);
+        }}
+      />
+      <IconButton
+        name="bookmark"
+        selected={saved.includes(locatorKey(locator(verse.number)))}
+        label={
+          saved.includes(locatorKey(locator(verse.number)))
+            ? 'إزالة علامة القراءة'
+            : 'حفظ علامة القراءة'
+        }
+        onPress={() =>
+          act(
+            runtime
+              .toggleBookmark(locator(verse.number))
+              .then(() => runtime.bookmarks())
+              .then(rows => {
+                setSaved(rows.map(b => b.bookmarkId));
+                setSelectedVerse(null);
+              }),
+          )
+        }
+      />
+      <IconButton
+        name="volume"
+        label="الاستماع للآية — قريبا"
+        disabled
+        onPress={() => {}}
+      />
+    </View>
+  );
+  const verseText = (verse: Verse) =>
+    verse.text +
+    (edition.riwaya === 'hafs' ? ` ﴿${number(verse.number)}﴾ ` : ' ');
   const translationFor = (item: Verse) => {
     return translated?.[item.number - 1]?.text ? (
       <View style={{gap: 8}}>
@@ -321,6 +371,16 @@ function Reader({route, navigation}: any) {
           alignSelf: 'center',
           gap: prefs.view === 'verses' ? 12 : 0,
         }}
+        scrollEventThrottle={80}
+        onScroll={e => {
+          if (!continuous.current) return;
+          const y = Math.max(
+            0,
+            e.nativeEvent.contentOffset.y - headerHeight.current - 12,
+          );
+          const line = textLines.current.find(line => line.y + line.height > y);
+          if (line) position.current = line.verse;
+        }}
         onMomentumScrollEnd={() => {
           act(runtime.remember(locator(position.current)));
         }}
@@ -330,7 +390,11 @@ function Reader({route, navigation}: any) {
         onViewableItemsChanged={viewable}
         viewabilityConfig={{viewAreaCoveragePercentThreshold: 20}}
         ListHeaderComponent={
-          <View style={{gap: 8, marginBottom: 8}}>
+          <View
+            onLayout={e => {
+              headerHeight.current = e.nativeEvent.layout.height;
+            }}
+            style={{gap: 8, marginBottom: 8}}>
             {anchor > 1 && (
               <Button
                 secondary
@@ -411,13 +475,28 @@ function Reader({route, navigation}: any) {
           <View style={{gap: 12}}>
             {prefs.view === 'continuous' ? (
               <Text
+                onTextLayout={e => {
+                  const source = passage.map(verseText).join('');
+                  const lengths = passage.map(v => verseText(v).length);
+                  let offset = 0;
+                  textLines.current = e.nativeEvent.lines.map(line => {
+                    const found = source.indexOf(line.text.trim(), offset);
+                    const start = found < 0 ? offset : found;
+                    offset = start + line.text.trim().length;
+                    return {
+                      y: line.y,
+                      height: line.height,
+                      verse: passage[verseAtOffset(lengths, start)].number,
+                    };
+                  });
+                }}
                 style={{
                   fontFamily: font,
                   fontSize: prefs.size,
                   lineHeight: prefs.size * prefs.lineHeight,
                   fontWeight: 'normal',
                   includeFontPadding: true,
-                  textAlign: 'justify',
+                  textAlign: 'right',
                   writingDirection: 'rtl',
                   color: p.textPrimary,
                 }}>
@@ -426,7 +505,11 @@ function Reader({route, navigation}: any) {
                     key={verse.number}
                     accessibilityRole="button"
                     accessibilityLabel={`الآية ${verse.number}، خيارات الآية`}
-                    onPress={() => {
+                    onPress={e => {
+                      setTapPoint({
+                        x: e.nativeEvent.pageX,
+                        y: e.nativeEvent.pageY,
+                      });
                       position.current = verse.number;
                       setSelectedVerse(verse);
                     }}>
@@ -438,10 +521,7 @@ function Reader({route, navigation}: any) {
                 ))}
               </Text>
             ) : (
-              <Pressable
-                accessibilityRole="button"
-                accessibilityLabel={`الآية ${passage[0].number}، خيارات الآية`}
-                onPress={() => setSelectedVerse(passage[0])}>
+              <View>
                 <Card>
                   <NumberBadge value={passage[0].number} />
                   <Text
@@ -458,8 +538,9 @@ function Reader({route, navigation}: any) {
                     {passage[0].text}
                   </Text>
                   {translationFor(passage[0])}
+                  {actions(passage[0])}
                 </Card>
-              </Pressable>
+              </View>
             )}
             {prefs.view === 'continuous' &&
               passage
@@ -487,46 +568,39 @@ function Reader({route, navigation}: any) {
           </View>
         }
       />
-      <Sheet
-        visible={selectedVerse !== null}
-        title={
-          selectedVerse
-            ? `الآية ${number(selectedVerse.number)}`
-            : 'خيارات الآية'
-        }
-        onClose={() => setSelectedVerse(null)}>
-        <Button
-          label="نسخ الآية"
-          icon="copy"
-          onPress={() => {
-            if (!selectedVerse) return;
-            Clipboard.setString(selectedVerse.text);
-            AccessibilityInfo.announceForAccessibility('تم نسخ الآية');
-            setSelectedVerse(null);
-          }}
-        />
-        <Button
-          label={
-            selectedVerse &&
-            saved.includes(locatorKey(locator(selectedVerse.number)))
-              ? 'إزالة علامة القراءة'
-              : 'حفظ علامة القراءة'
-          }
-          icon="bookmark"
-          onPress={() => {
-            if (!selectedVerse) return;
-            act(
-              runtime
-                .toggleBookmark(locator(selectedVerse.number))
-                .then(() => runtime.bookmarks())
-                .then(rows => {
-                  setSaved(rows.map(b => b.bookmarkId));
-                  setSelectedVerse(null);
-                }),
-            );
-          }}
-        />
-      </Sheet>
+      <Modal
+        transparent
+        visible={selectedVerse !== null && focused}
+        animationType="fade"
+        statusBarTranslucent
+        onRequestClose={() => setSelectedVerse(null)}>
+        <Pressable
+          style={{flex: 1}}
+          accessibilityLabel="إغلاق خيارات الآية"
+          onPress={() => setSelectedVerse(null)}>
+          <View
+            style={{
+              position: 'absolute',
+              top: Math.max(
+                12,
+                Math.min(dimensions.height - 80, tapPoint.y - 76),
+              ),
+              left: Math.max(
+                12,
+                Math.min(dimensions.width - 196, tapPoint.x - 92),
+              ),
+              width: 184,
+              padding: 8,
+              borderRadius: 16,
+              borderWidth: 1,
+              borderColor: p.borderSubtle,
+              backgroundColor: p.surface,
+              elevation: 8,
+            }}>
+            {selectedVerse && actions(selectedVerse)}
+          </View>
+        </Pressable>
+      </Modal>
       <View
         style={{
           ...rtlRow,

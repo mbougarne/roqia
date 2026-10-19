@@ -1,23 +1,17 @@
 import {type Verse} from './domain';
-// Bounded paragraphs keep long chapters virtualized without making each verse a row.
-// Original verse strings, including the publisher's end markers, remain untouched.
+// Keep source strings and publisher markers intact in one continuous paragraph.
 export function readerPassages(
   verses: Verse[],
   continuous: boolean,
 ): Verse[][] {
-  if (!continuous) return verses.map(v => [v]);
-  const result: Verse[][] = [];
-  let group: Verse[] = [],
-    length = 0;
-  for (const verse of verses) {
-    if (length >= 1600) {
-      result.push(group);
-      group = [];
-      length = 0;
-    }
-    group.push(verse);
-    length += verse.text.length;
+  return continuous ? (verses.length ? [verses] : []) : verses.map(v => [v]);
+}
+
+export function verseAtOffset(lengths: number[], offset: number): number {
+  let end = 0;
+  for (let i = 0; i < lengths.length; i++) {
+    end += lengths[i];
+    if (offset < end) return i;
   }
-  if (group.length) result.push(group);
-  return result;
+  return Math.max(0, lengths.length - 1);
 }

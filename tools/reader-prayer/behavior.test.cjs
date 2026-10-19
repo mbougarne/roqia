@@ -18,7 +18,7 @@ test('continuous paragraphs preserve every exact source string and keep verse-mo
   }));
   const pages = readerPassages(verses, true);
   assert.deepEqual(pages.flat(), verses);
-  assert.ok(pages.length < verses.length / 2);
+  assert.equal(pages.length, 1);
   assert.ok(pages.every(p => p.length > 0));
   assert.deepEqual(
     readerPassages(verses, false),
@@ -86,4 +86,22 @@ test('bundled Beni Mellal table comes from the selected official city, not a leg
     parseHabous(html, '73').dates,
     tables.find(t => t.cityId === '73').dates,
   );
+});
+
+test('alignment wraps north and has distinct entry and exit thresholds', () => {
+  const {
+    qiblaAligned,
+  } = require('../../src/features/prayer/locationSelection.ts');
+  assert.equal(qiblaAligned(359, 2, false), true);
+  assert.equal(qiblaAligned(2, 359, false), true);
+  assert.equal(qiblaAligned(90, 96, false), false);
+  assert.equal(qiblaAligned(90, 96, true), true);
+  assert.equal(qiblaAligned(90, 99, true), false);
+});
+test('continuous scroll offsets retain edition-local verse boundaries', () => {
+  const {verseAtOffset} = require('../../src/features/quran/readerLayout.ts');
+  assert.equal(verseAtOffset([10, 20, 30], 0), 0);
+  assert.equal(verseAtOffset([10, 20, 30], 10), 1);
+  assert.equal(verseAtOffset([10, 20, 30], 29), 1);
+  assert.equal(verseAtOffset([10, 20, 30], 60), 2);
 });

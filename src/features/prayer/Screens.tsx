@@ -1,4 +1,5 @@
 import {
+  qiblaAligned,
   gpsLocation,
   preferencesForLocation,
   liveHeading,
@@ -13,6 +14,7 @@ import React, {
 } from 'react';
 import {
   Alert,
+  Vibration,
   AppState,
   Linking,
   Pressable,
@@ -483,6 +485,7 @@ export function LocationScreen({navigation}: any) {
     }),
     [busy, setBusy] = useState(false),
     [query, setQuery] = useState(''),
+    [searchFocused, setSearchFocused] = useState(false),
     [choice, setChoice] = useState<Location | null>(null);
   const locationActive = useRef(false);
   useEffect(() => {
@@ -513,45 +516,58 @@ export function LocationScreen({navigation}: any) {
   return (
     <Page title="المدينة والموقع" onBack={() => navigation.goBack()}>
       <Status error={error} retry={load} />
-      <View style={{alignItems: 'center', paddingVertical: 14}}>
-        <AppIcon name="location" size={44} />
-      </View>
-      {prefs?.location && (
-        <Banner icon="check" text={`الموقع المحفوظ: ${prefs.location.name}`} />
-      )}
-      <Button
-        secondary
-        label={
-          busy
-            ? 'جار تحديد الموقع'
-            : prefs?.location?.source === 'gps'
-              ? 'تحديث موقعي المحفوظ'
-              : 'استخدام موقعي وحفظه'
-        }
-        disabled={busy || !prefs}
-        onPress={() =>
-          attempt(async () => {
-            setBusy(true);
-            try {
-              const result = await locate();
-              if (!locationActive.current) return;
-              const location = gpsLocation(
-                result,
-                Intl.DateTimeFormat().resolvedOptions().timeZone,
-              );
-              await save(location);
-            } finally {
-              setBusy(false);
+      {!searchFocused && !query && (
+        <>
+          <View style={{alignItems: 'center', paddingVertical: 14}}>
+            <AppIcon name="location" size={44} />
+          </View>
+          {prefs?.location && (
+            <Banner
+              icon="check"
+              text={`الموقع المحفوظ: ${prefs.location.name}`}
+            />
+          )}
+          <Button
+            secondary
+            label={
+              busy
+                ? 'جار تحديد الموقع'
+                : prefs?.location?.source === 'gps'
+                  ? 'تحديث موقعي المحفوظ'
+                  : 'استخدام موقعي وحفظه'
             }
-          })
-        }
+            disabled={busy || !prefs}
+            onPress={() =>
+              attempt(async () => {
+                setBusy(true);
+                try {
+                  const result = await locate();
+                  if (!locationActive.current) return;
+                  const location = gpsLocation(
+                    result,
+                    Intl.DateTimeFormat().resolvedOptions().timeZone,
+                  );
+                  await save(location);
+                } finally {
+                  setBusy(false);
+                }
+              })
+            }
+          />
+          <AppText role="caption" style={{textAlign: 'center'}}>
+            يُحفظ الموقع للصلاة والقبلة. مواقيت الإحداثيات تُحسب بالطريقة
+            المختارة؛ عند استخدام حصة الأوقاف ننتقل إلى رابطة العالم الإسلامي.
+          </AppText>
+          <Ornament title="أو اختر المدينة" />
+        </>
+      )}
+      <SearchField
+        label="ابحث عن مدينة"
+        value={query}
+        onChange={setQuery}
+        onFocus={() => setSearchFocused(true)}
+        onBlur={() => setSearchFocused(false)}
       />
-      <AppText role="caption" style={{textAlign: 'center'}}>
-        يُحفظ الموقع للصلاة والقبلة. مواقيت الإحداثيات تُحسب بالطريقة المختارة؛
-        عند استخدام حصة الأوقاف ننتقل إلى رابطة العالم الإسلامي.
-      </AppText>
-      <Ornament title="أو اختر المدينة" />
-      <SearchField label="ابحث عن مدينة" value={query} onChange={setQuery} />
       <Group>
         {cities
           .filter(c => cityMatches(c.name, query))
@@ -679,6 +695,22 @@ export function QiblaScreen({navigation}: any) {
   // Sensor events arrive more often than the one-second stale-reading timer.
   // Compare against the current clock, never the older timer snapshot.
   const live = liveHeading(heading, Date.now());
+  const [aligned, setAligned] = useState(false);
+  const wasAligned = useRef(false);
+  const lastBuzz = useRef(0);
+  useEffect(() => {
+    const next =
+      live &&
+      target !== null &&
+      !!heading &&
+      qiblaAligned(target, heading.heading, wasAligned.current);
+    if (next && !wasAligned.current && Date.now() - lastBuzz.current > 2000) {
+      Vibration.vibrate(60);
+      lastBuzz.current = Date.now();
+    }
+    wasAligned.current = next;
+    setAligned(next);
+  }, [live, heading, target]);
   return (
     <Page
       title="القبلة"
@@ -718,6 +750,7 @@ export function QiblaScreen({navigation}: any) {
             accessible
             accessibilityLabel={`اتجاه القبلة ${target.toFixed(1)} درجة من الشمال الحقيقي. ${live ? 'اتجاه حي نسبي لأعلى الجهاز' : 'مخطط ثابت، الشمال إلى أعلى'}`}>
             <QiblaCompass
+              aligned={aligned && live}
               bearing={target}
               heading={live ? heading!.heading : null}
             />
@@ -741,7 +774,11 @@ export function QiblaScreen({navigation}: any) {
           <AppText
             role="bodyStrong"
             style={[visual.instruction, {backgroundColor: p.surfaceMuted}]}>
-            {live ? 'وجّه الهاتف نحو السهم' : 'مخطط ثابت: الشمال إلى أعلى'}
+            {aligned && live
+              ? 'أنت باتجاه القبلة'
+              : live
+                ? 'وجّه الهاتف نحو السهم'
+                : 'مخطط ثابت: الشمال إلى أعلى'}
           </AppText>
           <View
             style={[
@@ -754,11 +791,13 @@ export function QiblaScreen({navigation}: any) {
             <AppText
               role="bodyStrong"
               style={{flex: 1, color: live ? p.success : p.warning}}>
-              {live
-                ? 'قراءة البوصلة متاحة'
-                : heading
-                  ? 'دقة منخفضة أو قراءة قديمة'
-                  : state}
+              {aligned && live
+                ? 'أنت باتجاه القبلة ✓'
+                : live
+                  ? 'قراءة البوصلة متاحة'
+                  : heading
+                    ? 'دقة منخفضة أو قراءة قديمة'
+                    : state}
             </AppText>
             <AppIcon
               name={live ? 'check' : 'warning'}
