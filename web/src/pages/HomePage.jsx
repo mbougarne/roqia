@@ -11,7 +11,7 @@ export function HomePage() {
 
       <div className="store-buttons">
         <a
-          href="#"
+          href="https://play.google.com/store/apps/details?id=name.roqia.app&hl=en_US"
           className="store-button"
           aria-label="رابط Google Play placeholder">
           <FaGooglePlay size={18} />
