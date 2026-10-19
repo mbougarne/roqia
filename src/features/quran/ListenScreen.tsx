@@ -30,6 +30,30 @@ import {
 } from './timing';
 
 export function QuranListenScreen({route, navigation}: any) {
+  return <QuranListening route={route} navigation={navigation} />;
+}
+
+export function ReaderVerseAudio({
+  editionId,
+  surah,
+  verse,
+  onClose,
+}: {
+  editionId: EditionId;
+  surah: number;
+  verse: number;
+  onClose: () => void;
+}) {
+  return (
+    <QuranListening
+      route={{params: {editionId, surah, verse}}}
+      onClose={onClose}
+    />
+  );
+}
+
+function QuranListening({route, navigation, onClose}: any) {
+  const inline = !!onClose;
   const {runtime, ready, error, revision, retry} = useLibrary();
   const editionId: EditionId =
     route.params?.editionId ?? 'warsh-kfgqpc-v2.1-update6';
@@ -53,6 +77,13 @@ export function QuranListenScreen({route, navigation}: any) {
   const focus = useRef(false),
     generation = useRef(0);
   const autoVerse = useRef(false);
+  const [showPreparation, setShowPreparation] = useState(false);
+  useEffect(() => {
+    // Cached verses start directly; show preparation only if the work takes time
+    // or needs the reader's input. The reader stays mounted underneath.
+    const timer = setTimeout(() => setShowPreparation(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
   const source = choices.find(r => r.id === chosen);
   const recording = runtime.catalog.recordings.find(r => r.id === chosen);
   const chapter = recording?.chapters.find(c => c.surah === surah);
@@ -87,6 +118,7 @@ export function QuranListenScreen({route, navigation}: any) {
       focus.current = true;
       return () => {
         focus.current = false;
+        generation.current++;
         setWaiting(false);
         autoVerse.current = false;
       };
@@ -138,12 +170,16 @@ export function QuranListenScreen({route, navigation}: any) {
           : cachedTiming(identity)
       )
         .then(cached => {
-          if (current === generation.current) setTiming(cached);
+          if (current === generation.current) {
+            setTiming(cached);
+            if (inline && cached?.status !== 'ready') setShowPreparation(true);
+          }
         })
         .catch(() => {
           if (current === generation.current)
             setMessage('تعذر قراءة توقيت الآيات المحفوظ.');
         });
+    else if (inline && chosen) setShowPreparation(true);
   }, [key, !!installed]);
   const prepare = async (force = false) => {
     if (!identity || !chapter || !recording) return;
@@ -175,20 +211,27 @@ export function QuranListenScreen({route, navigation}: any) {
     autoVerse.current = false;
     setBusy(true);
     setMessage('');
+    const current = generation.current;
+    const isCurrent = () => focus.current && current === generation.current;
     try {
-      const result = await playback.downloaded([
-        {
-          packId: chapter.pack.id,
-          version: chapter.pack.version,
-          assetId: chapter.assetId,
-          title: recording.title + ' · ' + chapters[surah - 1].name,
-          segment,
-        },
-      ]);
+      const result = await playback.downloaded(
+        [
+          {
+            packId: chapter.pack.id,
+            version: chapter.pack.version,
+            assetId: chapter.assetId,
+            title: recording.title + ' · ' + chapters[surah - 1].name,
+            segment,
+          },
+        ],
+        {isCurrent},
+      );
+      if (!isCurrent()) return;
+      if (result && inline) onClose();
       if (!result)
         setMessage('تعذر تشغيل الملف. أعد المحاولة أو أعد تنزيله من التخزين.');
     } finally {
-      setBusy(false);
+      if (isCurrent()) setBusy(false);
     }
   };
   // Existing installations acquire their sidecar from the whole-surah player.
@@ -252,20 +295,26 @@ export function QuranListenScreen({route, navigation}: any) {
   const intro = (
     <>
       <Group>
-        <SettingRow
-          title={chapters[surah - 1]?.name ?? 'اختر السورة'}
-          detail="تغيير السورة"
-          icon="book"
-          onPress={() => setSurahSheet(true)}
-        />
+        {!inline && (
+          <SettingRow
+            title={chapters[surah - 1]?.name ?? 'اختر السورة'}
+            detail="تغيير السورة"
+            icon="book"
+            onPress={busy ? undefined : () => setSurahSheet(true)}
+          />
+        )}
         <SettingRow
           title={source?.title ?? 'اختر القارئ'}
           detail={edition.title}
           icon="headphones"
-          onPress={() => {
-            setTimedOnly(false);
-            setSelecting(true);
-          }}
+          onPress={
+            busy
+              ? undefined
+              : () => {
+                  setTimedOnly(false);
+                  setSelecting(true);
+                }
+          }
         />
       </Group>
       {error && (
@@ -406,6 +455,7 @@ export function QuranListenScreen({route, navigation}: any) {
               secondary
               compact
               label="الاستماع للسورة كاملة"
+              disabled={busy}
               onPress={() => {
                 autoVerse.current = false;
                 setVerse(null);
@@ -432,6 +482,7 @@ export function QuranListenScreen({route, navigation}: any) {
         <Button
           secondary
           label="اختيار قارئ تتوفر له توقيتات الآيات"
+          disabled={busy}
           onPress={() => {
             setQuery('');
             setTimedOnly(true);
@@ -439,6 +490,10 @@ export function QuranListenScreen({route, navigation}: any) {
           }}
         />
       )}
+    </>
+  );
+  const selectors = (
+    <>
       <Sheet
         title={'اختر القارئ · ' + edition.title}
         visible={selecting}
@@ -511,10 +566,42 @@ export function QuranListenScreen({route, navigation}: any) {
       </Sheet>
     </>
   );
+  if (inline)
+    return (
+      <>
+        <Sheet
+          visible={showPreparation && !selecting}
+          title={
+            chapters[surah - 1].name + ' · الآية ' + number(route.params.verse)
+          }
+          onClose={() => {
+            generation.current++;
+            focus.current = false;
+            onClose();
+          }}>
+          {intro}
+          {busy && <StateView title="جارٍ تجهيز الاستماع" busy />}
+          {installed && verseAllowed && (
+            <Button
+              label="تشغيل"
+              icon="play"
+              disabled={!ready || error || busy}
+              onPress={() => void play()}
+            />
+          )}
+        </Sheet>
+        {selectors}
+      </>
+    );
   return (
     <PlayerScreen
       navigation={navigation}
-      intro={intro}
+      intro={
+        <>
+          {intro}
+          {selectors}
+        </>
+      }
       contextPackId={chapter?.pack.id ?? ''}
       contextVerse={verse}
       contextTitle={

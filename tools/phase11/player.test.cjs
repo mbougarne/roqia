@@ -209,3 +209,36 @@ test('remote play restarts an ended local segment at its relative zero', async (
   assert.equal(state, 'playing');
   assert.equal(queue[0].roqiaClipStartMs, 7200);
 });
+
+test('a dismissed or superseded reader request cannot replace playback after file verification', async () => {
+  const previous = queue,
+    playsBefore = plays;
+  await playback.downloaded(
+    [
+      {
+        packId: 'pack',
+        version: 'v1',
+        assetId: 'b',
+        title: 'Old reader request',
+      },
+    ],
+    {isCurrent: () => false},
+  );
+  assert.equal(queue, previous);
+  assert.equal(plays, playsBefore);
+  assert.equal(audioErrors.getSnapshot(), null);
+  let checks = 0;
+  await playback.downloaded(
+    [
+      {
+        packId: 'pack',
+        version: 'v1',
+        assetId: 'b',
+        title: 'Dismissed during setup',
+      },
+    ],
+    {isCurrent: () => ++checks === 1},
+  );
+  assert.equal(checks, 2);
+  assert.equal(plays, playsBefore, 'dismissal during setup cannot start audio');
+});

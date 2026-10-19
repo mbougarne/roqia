@@ -112,7 +112,12 @@ const tracksFor = (
 export const playback = {
   downloaded: (
     entries: DownloadedAudioEntry[],
-    options: {paused?: boolean; position?: number; index?: number} = {},
+    options: {
+      paused?: boolean;
+      position?: number;
+      index?: number;
+      isCurrent?: () => boolean;
+    } = {},
   ) =>
     command(async () => {
       const queue: AddTrack[] = [];
@@ -166,7 +171,9 @@ export const playback = {
           downloadEntry: entry,
         });
       }
-      if (!queue.length) return;
+      // Reader requests may be dismissed or superseded while the local file is
+      // being verified. Leave existing playback intact when that intent expires.
+      if (!queue.length || options.isCurrent?.() === false) return;
       await TrackPlayer.reset();
       await TrackPlayer.setRepeatMode(RepeatMode.Off);
       await TrackPlayer.add(queue);
@@ -183,6 +190,7 @@ export const playback = {
           ),
         );
       }
+      if (options.isCurrent?.() === false) return;
       if (options.paused) await TrackPlayer.pause();
       else await TrackPlayer.play();
       return true;

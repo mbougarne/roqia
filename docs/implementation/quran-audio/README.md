@@ -4,7 +4,9 @@ Requested 19 October 2026. Branch: `codex/quran-audio-offline-timing`, based on 
 
 ## Behavior
 
-The reader's listening action opens the surah player directly. Existing audio links and library entry points use the same flow. Reciter selection is constrained by the reader's riwaya. The player includes surah selection, missing-recording states, download progress, pause/resume/cancel/retry and playback after the complete file is installed. Leaving the screen cancels pending automatic playback, while the authorized download may continue. Download and storage management remain available separately.
+The reader's whole-surah listening action opens the surah player directly. Existing audio links and library entry points use the same flow. Single-ayah actions play in the reader, in both continuous reading and verse cards, with pause/replay available in the existing mini player. Missing audio or timings open a preparation sheet over the reader, reusing the same reciter selection, downloader and timing checks. The sheet closes after successful playback starts; dismissing it or leaving the reader cancels pending automatic playback. An authorized download may continue. Audio download progress no longer reloads the reader text or changes its position.
+
+Reciter selection is constrained by the reader's riwaya. The whole-surah player includes surah selection, missing-recording states, download progress, pause/resume/cancel/retry and playback after the complete file is installed. Download and storage management remain available separately. iPhone work is deferred until Android is complete.
 
 The offline reciter snapshot contains every recording returned by the official Arabic Hafs and Warsh catalogs on 19 October: 221 Hafs recording choices from 219 reciters, and 13 Warsh recordings. The timing catalog matches 98 Hafs and five Warsh recordings. Availability is displayed before selection. The bundled snapshot is refreshed explicitly with `tools/quran-audio/update-catalog.py`; the app does not claim it updates automatically.
 
@@ -32,7 +34,7 @@ Automated checks cover source URL restrictions, complete-download hash pinning, 
 
 Physical Samsung SM_A566B checks passed:
 
-- Reader audio opens the player directly; its central control starts an already downloaded surah. Existing audio links resolve to the same flow.
+- The reader's whole-surah action opens the player directly; its central control starts an already downloaded surah. Existing audio links resolve to the same flow.
 - Warsh and Hafs selectors show their own reciters, partial coverage and timing availability.
 - First-time downloads for Al-Koshi, Ibrahim Aldosari and Yassen use the app's downloader and persist complete-file integrity hashes. Al-Koshi and Yassen verse timing caches match their own recording IDs and files. Aldosari remains available for whole-surah listening without timings.
 - Al-Husary's Warsh Fatiha verse 1 uses `[13240,18720]` ms. Warsh Baqarah verse 275 seeks to `[11739200,11759600]` ms, over three hours into the existing local recording. The native player stops at the selected segment; displayed positions/durations are segment-relative. Native reported progress can include MP3 frame granularity.
@@ -55,3 +57,19 @@ No gallery, other apps or global settings were used. Device networking was left 
 | Invalid timing fallback | [PNG](screenshots/invalid-timing-fallback.png) |
 | Whole-surah fallback playing | [PNG](screenshots/invalid-timing-whole-surah-playing.png) |
 | Return after closing player | [PNG](screenshots/cached-verse-after-player-close.png) |
+
+## In-reader verse playback follow-up
+
+The follow-up passes 133 Node tests, TypeScript, formatting and the Android arm64 review build. New regressions exercise cached verse playback without a player screen or timing request, explicit missing-timing preparation, dismissal while local timing resolution is pending, and cancellation before the native queue is replaced or started. Playback intent is checked again after asynchronous file integrity verification, so a dismissed or superseded reader request cannot start later.
+
+Samsung checks cover the continuous floating toolbar, verse-card listening with the reader retained, first-time Al-Qazabri Al-Kawthar download/preparation over the reader, and the existing separate whole-surah player. The preparation sheet handles missing timing locally and offers explicit preparation, whole-surah playback or a timed reciter of the same riwaya. See the follow-up entries in [verification.json](verification.json) for the final build and data-preservation checks.
+
+All 56 records present before this follow-up remain, and all 207 counters are unchanged. After restoring QA preferences, 52 original records are byte-for-byte identical. The four retained changes are automatic prayer renewal, two refreshed public timing-catalog records and Al-Qazabri's expanded recording metadata for the newly downloaded Al-Kawthar. The restored database was checked on the device; the temporary inspection helper was removed. Original reciter, reader mode, settings, position and saved playback preferences are restored.
+
+| Evidence | Capture |
+| --- | --- |
+| Continuous reader, verse playback | [PNG](screenshots/inline-continuous-final.png) |
+| Verse card, verse playback | [PNG](screenshots/inline-verse-card-final.png) |
+| Missing audio over reader | [PNG](screenshots/inline-missing-audio.png) |
+| Download progress over reader | [PNG](screenshots/inline-download-progress.png) |
+| Missing/invalid timing over reader | [PNG](screenshots/inline-timing-fallback.png) |
