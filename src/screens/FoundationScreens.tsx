@@ -1,6 +1,6 @@
-import {useQuran} from '../features/quran/context';
 import React, {useContext} from 'react';
 import {Alert, View} from 'react-native';
+
 import {
   Group,
   Ornament,
@@ -10,6 +10,7 @@ import {
   Toggle,
   Disclosure,
 } from '../design/components';
+import {ltr} from '../design/format';
 import {
   AppIcon,
   AppText,
@@ -20,11 +21,11 @@ import {
   StateView,
   usePalette,
 } from '../design/ui';
-import {themeContext, homeRepeatContext} from '../store';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
-import {ltr} from '../design/format';
-import {type ThemePreference} from '../repositories/models';
+import {useQuran} from '../features/quran/context';
 import {getSettings, updateSettings} from '../services/persistence';
+import {themeContext, homeRepeatContext} from '../store';
+
 export function MoreScreen({navigation}: any) {
   const p = usePalette();
   const rows = [
@@ -127,6 +128,7 @@ export function RecoveryScreen({route, navigation}: any) {
     </Page>
   );
 }
+
 export function SettingsScreen({navigation}: any) {
   const quran = useQuran();
   const confirmReset = useConfirmReset();

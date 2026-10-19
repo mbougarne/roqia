@@ -1,4 +1,5 @@
 import {type Verse} from './domain';
+
 // Keep source strings and publisher markers intact in one continuous paragraph.
 export function readerPassages(
   verses: Verse[],

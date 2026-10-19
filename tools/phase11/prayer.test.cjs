@@ -5,6 +5,7 @@ const d = require('../../src/features/prayer/domain.ts'),
   t = require('../../src/features/prayer/time.ts');
 const cities = require('../../src/features/prayer/cities.json'),
   tables = require('../../src/features/prayer/timetables.json');
+
 const p = () => ({
   ...d.defaults(),
   location: cities[0],

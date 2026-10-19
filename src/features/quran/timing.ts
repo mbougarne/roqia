@@ -10,7 +10,9 @@ export type TimingIdentity = {
   audioVersion: string;
   audioUrl: string;
 };
+
 export type VerseSegment = {verse: number; startMs: number; endMs: number};
+
 export type CachedTiming = {
   identity: TimingIdentity;
   status: 'ready' | 'unavailable' | 'invalid';
@@ -18,6 +20,7 @@ export type CachedTiming = {
   fetchedAt: number;
   durationMs: number;
 };
+
 export type TimingSource = Omit<TimingIdentity, 'audioSha256' | 'audioEtag'>;
 
 export function timingSource(
@@ -42,6 +45,7 @@ export function timingSource(
     audioUrl: asset.url,
   };
 }
+
 export function timingIdentity(
   recording: Recording,
   surah: number,

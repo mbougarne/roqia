@@ -6,6 +6,7 @@ const fs = require('node:fs'),
 const {parseHabous} = require('../../src/features/prayer/habous.ts'),
   tables = require('../../src/features/prayer/timetables.json');
 const locks = require('../../docs/implementation/phase-6/evidence/habous-sources.json');
+
 for (const lock of locks) {
   const raw = fs.readFileSync(
     path.join(process.argv[2], lock.cityId + '.html'),

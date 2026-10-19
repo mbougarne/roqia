@@ -8,6 +8,7 @@ const {
   validateTiming,
 } = require('../../src/features/quran/timing.ts');
 const {quranCatalog} = require('../../src/features/quran/catalog.ts');
+
 const warsh = timingIdentity(
   quranCatalog.recordings[0],
   108,

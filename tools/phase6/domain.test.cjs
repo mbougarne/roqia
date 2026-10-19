@@ -1,11 +1,11 @@
 require('../foundation/register.cjs');
 const {test} = require('node:test'),
-  assert = require('node:assert/strict'),
-  fs = require('node:fs');
+  assert = require('node:assert/strict');
 const d = require('../../src/features/prayer/domain.ts'),
   t = require('../../src/features/prayer/time.ts');
 const tables = require('../../src/features/prayer/timetables.json'),
   cities = require('../../src/features/prayer/cities.json');
+
 const p = () => ({...d.defaults(), location: cities[0]});
 test('bundled IANA rules handle Morocco Ramadan and September change independently of host ICU', () => {
   for (const [utc, expected] of [

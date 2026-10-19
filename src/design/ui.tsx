@@ -18,13 +18,17 @@ import {
   type ViewStyle,
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
+
 import {themeContext} from '../store';
-import {layout, palettes, typography} from './tokens';
-import icons from './icons.json';
 import {normalizeDigits} from './format';
+import icons from './icons.json';
+import {palettes, typography} from './tokens';
 import {useFormat} from './useFormat';
+
 export const usePalette = () => palettes[useContext(themeContext).mode];
+
 export type IconName = keyof typeof icons;
+
 export function AppIcon({
   name,
   size = 24,
@@ -64,6 +68,7 @@ export function AppIcon({
     />
   );
 }
+
 export function IconBadge({name, size = 36}: {name: IconName; size?: number}) {
   const p = usePalette();
   return (
@@ -80,6 +85,7 @@ export function IconBadge({name, size = 36}: {name: IconName; size?: number}) {
     </View>
   );
 }
+
 export function AppText({
   role = 'body',
   style,
@@ -110,6 +116,7 @@ export function AppText({
     />
   );
 }
+
 export function Button({
   label,
   onPress,
@@ -175,6 +182,7 @@ export function Button({
     </Pressable>
   );
 }
+
 export function IconButton({
   label,
   name,
@@ -215,6 +223,7 @@ export function IconButton({
     </Pressable>
   );
 }
+
 export function Card({style, ...props}: ViewProps) {
   const p = usePalette();
   return (
@@ -228,6 +237,7 @@ export function Card({style, ...props}: ViewProps) {
     />
   );
 }
+
 export function Row({
   title,
   detail,
@@ -265,6 +275,7 @@ export function Row({
     </Pressable>
   );
 }
+
 export function Page({
   title,
   children,
@@ -334,6 +345,7 @@ export function Page({
     </KeyboardAvoidingView>
   );
 }
+
 export function StateView({
   title,
   description,
@@ -355,6 +367,7 @@ export function StateView({
     </Card>
   );
 }
+
 export function Sheet({
   centered = false,
   visible,

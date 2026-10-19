@@ -7,6 +7,7 @@
 package name.roqia.app;
 
 import android.content.Context;
+
 import com.facebook.react.ReactInstanceManager;
 
 /**

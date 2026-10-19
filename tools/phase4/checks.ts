@@ -1,8 +1,9 @@
 import {NativeModules} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
+
 import {type QuranRuntime} from '../../src/features/quran/runtime';
 import {getSettings, updateSettings} from '../../src/services/persistence';
-import {editionById, type Locator} from '../../src/features/quran/domain';
+
 export async function checkRuntime(q: QuranRuntime) {
   const results: object[] = [];
   for (const t of q.catalog.texts) {
@@ -33,6 +34,7 @@ export async function checkRuntime(q: QuranRuntime) {
       exactHafsMapping: true,
     });
   }
+
   async function rejects(fn: () => Promise<unknown>) {
     let rejected = false;
     try {
@@ -46,13 +48,13 @@ export async function checkRuntime(q: QuranRuntime) {
   const warsh = q.catalog.texts[0],
     hafs = q.catalog.texts[1],
     chapter = await q.chapter(warsh, 1);
-  const other = await q.asset(hafs.pack, hafs.fontAssetId),
-    fontHash = hafs.pack.assets.find(a => a.id === hafs.fontAssetId)!.sha256;
+  const _other = await q.asset(hafs.pack, hafs.fontAssetId),
+    _fontHash = hafs.pack.assets.find(a => a.id === hafs.fontAssetId)!.sha256;
   const mismatchedFont = await rejects(() =>
     q.font({...warsh, pack: hafs.pack, fontAssetId: hafs.fontAssetId}, chapter),
   );
   const font = await q.asset(warsh.pack, warsh.fontAssetId);
-  let missingFont = false;
+  let missingFont: boolean;
   await FileSystem.mv(font, font + '.test-held');
   try {
     missingFont = await rejects(() => q.font(warsh, chapter));
@@ -61,7 +63,7 @@ export async function checkRuntime(q: QuranRuntime) {
   }
   const path = await q.asset(warsh.pack, warsh.chapterAssets[1]),
     original = await FileSystem.readFile(path, 'utf8');
-  let corruptedText = false;
+  let corruptedText: boolean;
   await FileSystem.writeFile(path, '{}', 'utf8');
   try {
     corruptedText = await rejects(() => q.chapter(warsh, 1));

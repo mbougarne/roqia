@@ -6,6 +6,14 @@ import {
   View,
   useWindowDimensions,
 } from 'react-native';
+
+import {tasbihatData} from '../data';
+import {
+  TasbihArch,
+  TasbihRing,
+  TasbihTouch,
+  TasbihVibration,
+} from './TasbihArtwork';
 import {
   Disclosure,
   Segments,
@@ -13,8 +21,6 @@ import {
   Toggle,
   rtlRow,
 } from '../design/components';
-import {tasbihatData} from '../data';
-import {tasbihatRepeatContext, themeContext} from '../store';
 import {
   AppText,
   AppIcon,
@@ -25,18 +31,13 @@ import {
   usePalette,
 } from '../design/ui';
 import {useFormat} from '../design/useFormat';
-import {ReadingCard} from '../features/devotional/ReadingCard';
-import {useConfirmReset} from '../features/devotional/ResetConfirmation';
 import {useBookmarks, reloadBookmarks} from '../features/devotional/bookmarks';
 import {itemTitle} from '../features/devotional/discovery';
+import {ReadingCard} from '../features/devotional/ReadingCard';
+import {useConfirmReset} from '../features/devotional/ResetConfirmation';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
 import {readRecord, saveRecord} from '../repositories/database';
-import {
-  TasbihArch,
-  TasbihRing,
-  TasbihTouch,
-  TasbihVibration,
-} from './TasbihArtwork';
+import {tasbihatRepeatContext, themeContext} from '../store';
 
 const quickChoices = [
   {value: 'devotional.tasbih.0001', label: 'سبحان الله'},

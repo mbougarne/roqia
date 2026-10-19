@@ -1,8 +1,10 @@
 import React, {useContext} from 'react';
 import {View} from 'react-native';
 import {SvgXml} from 'react-native-svg';
+
 import {themeContext} from '../store';
 import {usePalette} from './ui';
+
 // Eight-point interlocking stars, clipped by the screen edges as in 01-splash.
 export const cornerPath = Array.from({length: 3}, (_, row) =>
   Array.from({length: 3 - row}, (_, col) => {
@@ -33,6 +35,7 @@ export const cornerPath = Array.from({length: 3}, (_, row) =>
     );
   }).join(' '),
 ).join(' ');
+
 export function LaunchOrnaments() {
   const p = usePalette(),
     dark = useContext(themeContext).mode === 'dark';

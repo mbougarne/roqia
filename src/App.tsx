@@ -10,18 +10,18 @@ import {
 } from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
-import {Guide, Guidance, HydrationScreen} from './screens/EducationScreens';
-import {MainTabNavigation} from './navigation/MainTabNavigation';
-
+import {adkarData, data, duaaData, tasbihatData} from './data';
 import {StateView} from './design/ui';
 import {ResetConfirmationProvider} from './features/devotional/ResetConfirmation';
 import {onPrayerTimeChanged} from './features/prayer/native';
 import {reconcilePrayer} from './features/prayer/service';
-import {reconcileReminders} from './features/settings/reminders/service';
 import {useQuran} from './features/quran/context';
+import {reconcileReminders} from './features/settings/reminders/service';
+import {MainTabNavigation} from './navigation/MainTabNavigation';
 import {contentGroups, defaultCounts} from './repositories/content';
 import {decrementCounter, resetCounters} from './repositories/counters';
 import {type DigitStyle, type ThemePreference} from './repositories/models';
+import {Guide, Guidance, HydrationScreen} from './screens/EducationScreens';
 import {
   getSettings,
   updateSettings,
@@ -31,7 +31,6 @@ import {
   persistIntroNoteSeen,
   persistWalkthroughSeen,
 } from './services/persistence';
-import {adkarData, data, duaaData, tasbihatData} from './data';
 import {
   createRepeatCountsForItems,
   type Mode,

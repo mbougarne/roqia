@@ -6,9 +6,12 @@ import {
   PrayerTimes,
   Qibla,
 } from 'adhan';
+
 import cities from './cities.json';
 import {civilDate, nextDate, localInstant, zoneNames} from './time';
+
 export const prayers = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'] as const;
+
 export const events = [
   'fajr',
   'sunrise',
@@ -17,8 +20,11 @@ export const events = [
   'maghrib',
   'isha',
 ] as const;
+
 export type Prayer = (typeof prayers)[number];
+
 export type EventName = (typeof events)[number];
+
 export const labels: Record<EventName, string> = {
   fajr: 'الفجر',
   sunrise: 'الشروق',
@@ -27,6 +33,7 @@ export const labels: Record<EventName, string> = {
   maghrib: 'المغرب',
   isha: 'العشاء',
 };
+
 export const methods = {
   habous: 'حصة وزارة الأوقاف المغربية',
   MuslimWorldLeague: 'رابطة العالم الإسلامي',
@@ -34,6 +41,7 @@ export const methods = {
   UmmAlQura: 'أم القرى',
   NorthAmerica: 'أمريكا الشمالية',
 };
+
 export type Location = {
   cityId: string | null;
   name: string;
@@ -44,6 +52,7 @@ export type Location = {
   acquiredAt: number;
   accuracy?: number;
 };
+
 export type Preferences = {
   location: Location | null;
   method: keyof typeof methods;
@@ -55,6 +64,7 @@ export type Preferences = {
   preMinutes: number;
   revision: number;
 };
+
 export const defaults = (): Preferences => ({
   location: null,
   method: 'habous',
@@ -66,6 +76,7 @@ export const defaults = (): Preferences => ({
   preMinutes: 0,
   revision: 0,
 });
+
 export function validateLocation(l: Location) {
   if (
     !l.name.trim() ||
@@ -97,6 +108,7 @@ export function validateLocation(l: Location) {
   }
   return l;
 }
+
 export function validatePreferences(p: Preferences) {
   if (p.location) validateLocation(p.location);
   if (
@@ -121,17 +133,20 @@ export function validatePreferences(p: Preferences) {
     throw Error('invalid_mode');
   return p;
 }
+
 export type Timetable = {
   cityId: string;
   sourceUrl: string;
   retrievedAt: number;
   dates: Record<string, string[]>;
 };
+
 export type Day = {
   date: string;
   source: string;
   rows: {name: EventName; raw: number; at: number}[];
 };
+
 export function day(p: Preferences, date: string, table?: Timetable): Day {
   validatePreferences(p);
   nextDate(date, 0);
@@ -176,6 +191,7 @@ export function day(p: Preferences, date: string, table?: Timetable): Day {
     throw Error('undefined_prayer_times');
   return {date, source, rows};
 }
+
 export function bearing(l: Pick<Location, 'latitude' | 'longitude'>) {
   if (
     !Number.isFinite(l.latitude) ||
@@ -191,10 +207,14 @@ export function bearing(l: Pick<Location, 'latitude' | 'longitude'>) {
     throw Error('at_kaaba');
   return Qibla(new Coordinates(l.latitude, l.longitude));
 }
+
 export const normalize = (n: number) => ((n % 360) + 360) % 360;
+
 export const smoothHeading = (previous: number, next: number) =>
   normalize(previous + 0.2 * (normalize(next - previous + 180) - 180));
+
 export type Planned = {id: string; at: number; name: Prayer; pre: boolean};
+
 export function notificationPlan(
   p: Preferences,
   now: number,

@@ -11,6 +11,7 @@ const {
 const {defaults, day, bearing} = require('../../src/features/prayer/domain.ts');
 const cities = require('../../src/features/prayer/cities.json'),
   tables = require('../../src/features/prayer/timetables.json');
+
 test('continuous paragraphs preserve every exact source string and keep verse-mode rows separate', () => {
   const verses = Array.from({length: 286}, (_, i) => ({
     number: i + 1,

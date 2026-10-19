@@ -1,4 +1,5 @@
-import {sleepDeadline, setSleepTimer, clearSleepTimer} from './sleep';
+import {NativeModules, Platform} from 'react-native';
+import {FileSystem} from 'react-native-file-access';
 import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
@@ -6,18 +7,19 @@ import TrackPlayer, {
   RepeatMode,
   type AddTrack,
 } from 'react-native-track-player';
+
+import {devotionalQueue} from './queue';
+import {sleepDeadline, setSleepTimer, clearSleepTimer} from './sleep';
 import {audioAssets} from '../../assets/audio';
 import {type DataProps} from '../../data';
-import {devotionalQueue} from './queue';
+import {privatePath} from '../../platform/files';
 import {saveRecord, readRecord} from '../../repositories/database';
 import {type InstalledPack, type DownloadJob} from '../downloads/types';
-import {privatePath} from '../../platform/files';
-import {FileSystem} from 'react-native-file-access';
-import {NativeModules, Platform} from 'react-native';
 
 export const segmentPlaybackSupported = () =>
   Platform.OS === 'android' &&
   NativeModules.RoqiaAudio?.segmentPlayback === true;
+
 export type DownloadedAudioEntry = {
   packId: string;
   version: string;
@@ -31,6 +33,7 @@ let setup: Promise<void> | undefined,
 let dismissalVersion = 0;
 let error: string | null = null;
 const listeners = new Set<() => void>();
+
 export const audioErrors = {
   subscribe: (listener: () => void) => {
     listeners.add(listener);
@@ -44,6 +47,7 @@ const report = (value: string | null) => {
   error = value;
   listeners.forEach(fn => fn());
 };
+
 export function ensurePlayer() {
   return (setup ??= (async () => {
     try {
@@ -71,6 +75,7 @@ export function ensurePlayer() {
     throw e;
   }));
 }
+
 function command<T>(fn: () => Promise<T>): Promise<T | undefined> {
   const result = tail.then(async () => {
     await ensurePlayer();
@@ -82,6 +87,7 @@ function command<T>(fn: () => Promise<T>): Promise<T | undefined> {
   tail = result.catch(() => report('تعذر تشغيل الصوت. حاول مرة أخرى.'));
   return result.catch(() => undefined);
 }
+
 async function toggle() {
   const {state} = await TrackPlayer.getPlaybackState();
   if ([State.Playing, State.Buffering, State.Loading].includes(state))
@@ -110,6 +116,7 @@ const tracksFor = (
       assetVersion: 'bundled-v1',
     };
   });
+
 export const playback = {
   downloaded: (
     entries: DownloadedAudioEntry[],
@@ -294,6 +301,7 @@ export const playback = {
     return result;
   },
 };
+
 async function persistSnapshot() {
   const track = await TrackPlayer.getActiveTrack();
   if (!track) return;
@@ -314,11 +322,13 @@ async function persistSnapshot() {
     updatedAt: Date.now(),
   });
 }
+
 export function persistPlayback() {
   const result = tail.then(persistSnapshot);
   tail = result.catch(() => undefined);
   return result;
 }
+
 export function playbackFailed() {
   report('تعذر تشغيل الصوت. أعد المحاولة أو اختر مقطعاً آخر.');
 }

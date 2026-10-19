@@ -2,6 +2,7 @@
 const http = require('node:http'),
   crypto = require('node:crypto'),
   fs = require('node:fs');
+
 const bytes = Buffer.from(
   JSON.stringify({fixture: 'phase10', data: '0123456789'.repeat(800000)}),
 );

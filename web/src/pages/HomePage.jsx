@@ -10,11 +10,17 @@ export function HomePage() {
       </p>
 
       <div className="store-buttons">
-        <a href="#" className="store-button" aria-label="رابط Google Play placeholder">
+        <a
+          href="#"
+          className="store-button"
+          aria-label="رابط Google Play placeholder">
           <FaGooglePlay size={18} />
           متجر Google Play
         </a>
-        <a href="#" className="store-button" aria-label="رابط App Store placeholder">
+        <a
+          href="#"
+          className="store-button"
+          aria-label="رابط App Store placeholder">
           <FaApple size={18} />
           متجر App Store
         </a>

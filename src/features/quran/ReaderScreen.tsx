@@ -1,8 +1,5 @@
-import {readerPassages, verseAtOffset} from './readerLayout';
-import {
-  translationForVerse,
-  type DisplayTranslation,
-} from './translationAlignment';
+import Clipboard from '@react-native-clipboard/clipboard';
+import {useFocusEffect} from '@react-navigation/native';
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   AppState,
@@ -15,8 +12,27 @@ import {
   Modal,
   useWindowDimensions,
 } from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
-import Clipboard from '@react-native-clipboard/clipboard';
+
+import {useLibrary} from './context';
+import {
+  type Chapter,
+  type Locator,
+  type Verse,
+  editionById,
+  chapters,
+  validateLocator,
+  locatorKey,
+} from './domain';
+import {act} from './LibraryScreens';
+import {ReaderVerseAudio} from './ListenScreen';
+import {readerPassages, verseAtOffset} from './readerLayout';
+import {readerDefaults, type ReaderPreferences, keepAwake} from './runtime';
+import {
+  translationForVerse,
+  type DisplayTranslation,
+} from './translationAlignment';
+import {NumberBadge, Ornament, rtlRow} from '../../design/components';
+import {number as markerNumber} from '../../design/format';
 import {
   AppText,
   AppIcon,
@@ -28,27 +44,8 @@ import {
   Sheet,
   usePalette,
 } from '../../design/ui';
-import {NumberBadge, Ornament, rtlRow} from '../../design/components';
-import {ltr, number as markerNumber} from '../../design/format';
 import {useFormat} from '../../design/useFormat';
-import {
-  type Chapter,
-  type Locator,
-  type Verse,
-  editionById,
-  chapters,
-  validateLocator,
-  locatorKey,
-} from './domain';
-import {useLibrary} from './context';
-import {
-  readerDefaults,
-  type ReaderPreferences,
-  keepAwake,
-  supportsKeepAwake,
-} from './runtime';
-import {act} from './LibraryScreens';
-import {ReaderVerseAudio} from './ListenScreen';
+
 export function QuranReaderScreen(props: any) {
   let identity: string;
   try {
@@ -77,6 +74,7 @@ export function QuranReaderScreen(props: any) {
   // chapter against the new locator while the loading effect is still pending.
   return <Reader key={identity} {...props} />;
 }
+
 function Reader({route, navigation}: any) {
   const {number} = useFormat();
   const {runtime, ready, error: libraryError} = useLibrary(),

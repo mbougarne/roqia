@@ -1,5 +1,15 @@
 import React, {useState} from 'react';
 import {Alert, FlatList, I18nManager, View} from 'react-native';
+
+import {reloadBookmarks, removeBookmark, useBookmarks} from './bookmarks';
+import {
+  groupLabels,
+  groupOf,
+  itemTitle,
+  matches,
+  type DevotionalGroup,
+} from './discovery';
+import {rtlRow} from '../../design/components';
 import {
   AppText,
   Button,
@@ -12,28 +22,21 @@ import {
   usePalette,
 } from '../../design/ui';
 import {contentById, contentItems} from '../../repositories/content';
-import {
-  groupLabels,
-  groupOf,
-  itemTitle,
-  matches,
-  type DevotionalGroup,
-} from './discovery';
-import {reloadBookmarks, removeBookmark, useBookmarks} from './bookmarks';
 import {DevotionalListScreen} from '../../screens/DevotionalListScreen';
-import {rtlRow} from '../../design/components';
 import {
   homeRepeatContext,
   adkarRepeatContext,
   duaaRepeatContext,
   tasbihatRepeatContext,
 } from '../../store';
+
 const contexts = {
   ruqya: homeRepeatContext,
   adhkar: adkarRepeatContext,
   dua: duaaRepeatContext,
   tasbih: tasbihatRepeatContext,
 };
+
 export function ContentScreen({route, navigation}: any) {
   const item = contentById.get(route.params.contentId);
   if (!item)
@@ -53,6 +56,7 @@ export function ContentScreen({route, navigation}: any) {
     />
   );
 }
+
 export function DiscoveryScreen({navigation, route}: any) {
   const isSaved = route.name === 'Bookmarks',
     saved = useBookmarks(),

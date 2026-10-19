@@ -7,6 +7,7 @@ const {test} = require('node:test'),
   os = require('node:os'),
   path = require('node:path'),
   crypto = require('node:crypto');
+
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'roqia-repository-'));
 const sql = new DatabaseSync(path.join(root, 'test.sqlite'));
 let failOnce = true,
@@ -37,6 +38,7 @@ const adapter = {
 };
 const aliases = require('../../src/repositories/legacy-counter-map.json'),
   oldKey = Object.keys(aliases)[0];
+
 const legacy = {
   '@roqia/app-state': JSON.stringify({
     mode: 'dark',
@@ -72,6 +74,7 @@ Module._load = function (name, parent, isMain) {
 const persistence = require('../../src/services/persistence.ts');
 const {listRecords, readRecord} = require('../../src/repositories/database.ts');
 const {defaultCounts} = require('../../src/repositories/content.ts');
+
 test('SQLite migration rollback, retry, backup hash, serialized writes and reset isolation', async () => {
   const before = structuredClone(legacy);
   await assert.rejects(persistence.hydrateStorage(), /interrupted_migration/);

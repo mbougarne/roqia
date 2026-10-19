@@ -1,11 +1,5 @@
 import React, {useContext} from 'react';
-import {
-  Modal,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {Modal, Pressable, ScrollView, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {noteData} from '../data';
@@ -24,7 +18,7 @@ export const IntroNoteModal = ({visible, onClose}: IntroNoteModalProps) => {
   return (
     <Modal animationType="fade" transparent visible={visible}>
       <View style={styles.overlay}>
-        <View style={[styles.card, {backgroundColor: theme.secondaryBg}]}> 
+        <View style={[styles.card, {backgroundColor: theme.secondaryBg}]}>
           <View style={styles.headerRow}>
             <Pressable
               accessibilityHint="يغلق نافذة التنبيه"
@@ -36,14 +30,15 @@ export const IntroNoteModal = ({visible, onClose}: IntroNoteModalProps) => {
             </Pressable>
           </View>
 
-          <StyledText customStyle={[styles.title, {color: theme.tertiaryColor}]}> 
+          <StyledText
+            customStyle={[styles.title, {color: theme.tertiaryColor}]}>
             {noteData.title}
           </StyledText>
 
           <ScrollView
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}>
-            <StyledText customStyle={[styles.body, {color: theme.color}]}> 
+            <StyledText customStyle={[styles.body, {color: theme.color}]}>
               {noteData.content}
             </StyledText>
           </ScrollView>
@@ -53,8 +48,15 @@ export const IntroNoteModal = ({visible, onClose}: IntroNoteModalProps) => {
             accessibilityLabel="إغلاق التنبيه"
             accessibilityRole="button"
             onPress={onClose}
-            style={[styles.primaryButton, {backgroundColor: theme.tertiaryColor}]}> 
-            <StyledText customStyle={[styles.primaryButtonText, {color: theme.secondaryColor}]}> 
+            style={[
+              styles.primaryButton,
+              {backgroundColor: theme.tertiaryColor},
+            ]}>
+            <StyledText
+              customStyle={[
+                styles.primaryButtonText,
+                {color: theme.secondaryColor},
+              ]}>
               إغلاق
             </StyledText>
           </Pressable>

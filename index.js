@@ -3,15 +3,16 @@
  */
 
 import 'react-native-gesture-handler';
-import {AppRegistry, Platform} from 'react-native';
 import notifee from '@notifee/react-native';
+import {AppRegistry, Platform} from 'react-native';
 import TrackPlayer from 'react-native-track-player';
+
+import {name as appName} from './app.json';
 import App from './src';
 import {startLinkCapture} from './src/navigation/linkInbox';
-startLinkCapture();
-import {name as appName} from './app.json';
 import {onBackgroundNotificationPress} from './src/services/notifications';
 
+startLinkCapture();
 notifee.onBackgroundEvent(onBackgroundNotificationPress);
 TrackPlayer.registerPlaybackService(
   () => require('./src/services/audioPlaybackService').default,

@@ -1,3 +1,4 @@
+import Clipboard from '@react-native-clipboard/clipboard';
 import React, {type FC, useContext} from 'react';
 import {
   View,
@@ -7,7 +8,6 @@ import {
   type GestureResponderEvent,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Clipboard from '@react-native-clipboard/clipboard';
 
 import {type DataProps} from '../data';
 import {getPressableScaleStyle} from './pressableStyles';

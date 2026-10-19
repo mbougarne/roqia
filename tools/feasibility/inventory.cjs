@@ -4,6 +4,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 const {createHash} = require('node:crypto');
 const ts = require('typescript');
+
 const root = path.resolve(__dirname, '../..');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const source = fs.readFileSync(path.join(root, 'src/data/index.ts'), 'utf8');

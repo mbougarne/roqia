@@ -1,6 +1,8 @@
+import {type DownloadTask} from '@kesha-antonov/react-native-background-downloader';
 import {AppState, NativeModules, Platform} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
-import {type DownloadTask} from '@kesha-antonov/react-native-background-downloader';
+
+import {catalog} from './catalog';
 import {
   DownloadCoordinator,
   type DownloadPorts,
@@ -11,9 +13,9 @@ import {
   type DownloadJob,
   type InstalledPack,
   type InstallJournal,
-  type Asset,
   type LocalAsset,
 } from './types';
+import {validateCatalog} from './types';
 import {
   ensureDirectory,
   ensurePrivateRoot,
@@ -22,14 +24,13 @@ import {
 } from '../../platform/files';
 import {listRecords, putRecord, write} from '../../repositories/database';
 import {playback} from '../audio/controller';
-import {catalog} from './catalog';
 import {quranCatalog} from '../quran/catalog';
 import {type Recording, validateQuranCatalog} from '../quran/domain';
-import {validateCatalog} from './types';
 
 // Lazy native import keeps an unavailable transport from disabling offline devotional content.
 const transport = () =>
   require('@kesha-antonov/react-native-background-downloader') as typeof import('@kesha-antonov/react-native-background-downloader');
+
 function attach(task: Task, events: Events) {
   (task as DownloadTask)
     .begin(e => events.begin(e.headers))
@@ -37,6 +38,7 @@ function attach(task: Task, events: Events) {
     .done(() => events.done())
     .error(e => events.error(String(e.errorCode)));
 }
+
 async function verify(relative: string, asset: LocalAsset) {
   const path = privatePath(relative),
     stat = await FileSystem.stat(path);
@@ -68,6 +70,7 @@ async function verify(relative: string, asset: LocalAsset) {
       throw Error('json_structure_failed');
   }
 }
+
 export const nativeDownloadPorts: DownloadPorts = {
   sha256: relative => FileSystem.hash(privatePath(relative), 'SHA-256'),
   resumable: Platform.OS === 'android',
@@ -195,10 +198,12 @@ export const nativeDownloadPorts: DownloadPorts = {
   },
   now: Date.now,
 };
+
 export const downloads = new DownloadCoordinator(catalog, nativeDownloadPorts);
 
 let networkStarted = false;
 let restoringAudio: Promise<void> | undefined;
+
 export async function startDownloadServices() {
   await (restoringAudio ??= (async () => {
     for (const recording of await listRecords<Recording>(

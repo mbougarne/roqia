@@ -1,16 +1,17 @@
 import React, {useContext, useRef, useState} from 'react';
 import {AccessibilityInfo, ScrollView, View} from 'react-native';
-import Svg, {Path} from 'react-native-svg';
 import {
   Gesture,
   GestureDetector,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
+import Svg, {Path} from 'react-native-svg';
+
+import {names} from './content';
 import {Ornament, rtlRow} from '../../design/components';
 import {AppIcon, AppText, Card, Page, usePalette} from '../../design/ui';
 import {useFormat} from '../../design/useFormat';
 import {themeContext} from '../../store';
-import {names} from './content';
 
 export function AsmaScreen({navigation}: any) {
   const p = usePalette();
@@ -20,6 +21,7 @@ export function AsmaScreen({navigation}: any) {
   const scroll = useRef<ScrollView>(null);
   const item = names[index];
   const nameSize = item.name.includes(' ') ? 34 : 56;
+
   function move(offset: number) {
     const next = Math.max(0, Math.min(names.length - 1, index + offset));
     if (next === index) return;

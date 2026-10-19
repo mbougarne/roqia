@@ -1,11 +1,13 @@
 import {createContext} from 'react';
+
+import {adkarData, type DataProps, data, duaaData, tasbihatData} from '../data';
 import {palettes} from '../design/tokens';
 import {type DigitStyle, type ThemePreference} from '../repositories/models';
 
-import {adkarData, type DataProps, data, duaaData, tasbihatData} from '../data';
-
 export type Mode = 'dark' | 'light';
+
 export type Themes = typeof themes;
+
 export type ContextState = {
   mode: Mode;
   uiScale: number;
@@ -43,6 +45,7 @@ const legacyTheme = (p: typeof palettes.light) => ({
   secondaryColor: p.textOnAction,
   tertiaryColor: p.iconPrimary,
 });
+
 export const themes = {
   light: legacyTheme(palettes.light),
   dark: legacyTheme(palettes.dark),
@@ -106,12 +109,15 @@ export const repeatContext = createContext<RepeatContextState>(
 export const homeRepeatContext = createContext<RepeatContextState>(
   makeInitialRepeatContextState(createRepeatCountsForItems(data, 'data')),
 );
+
 export const adkarRepeatContext = createContext<RepeatContextState>(
   makeInitialRepeatContextState(createRepeatCountsForItems(adkarData, 'adkar')),
 );
+
 export const duaaRepeatContext = createContext<RepeatContextState>(
   makeInitialRepeatContextState(createRepeatCountsForItems(duaaData, 'duaa')),
 );
+
 export const tasbihatRepeatContext = createContext<RepeatContextState>(
   makeInitialRepeatContextState(
     createRepeatCountsForItems(tasbihatData, 'tasbihat'),

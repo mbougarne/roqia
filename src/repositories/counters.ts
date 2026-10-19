@@ -1,5 +1,6 @@
-import {write} from './database';
 import {clampCount, contentById} from './content';
+import {write} from './database';
+
 // The database owns the remaining count. UI acknowledges a mutation only after commit.
 export const decrementCounter = (id: string) =>
   write(async tx => {
@@ -13,6 +14,7 @@ export const decrementCounter = (id: string) =>
     if (!rows.length) throw new Error('missing_counter');
     return rows[0].remaining as number;
   });
+
 export const resetCounters = (counts: Record<string, number>) =>
   write(async tx => {
     const result: Record<string, number> = {};

@@ -4,7 +4,9 @@ module.exports = {
     android: {},
   },
   dependencies: {
-    '@kesha-antonov/react-native-background-downloader': {platforms: {ios: null}},
+    '@kesha-antonov/react-native-background-downloader': {
+      platforms: {ios: null},
+    },
   },
   assets: ['./src/assets/fonts'],
 };

@@ -1,7 +1,10 @@
 import chapters from './chapters.json';
 import {type Pack} from '../downloads/types';
+
 export {chapters};
+
 export type EditionId = 'warsh-kfgqpc-v2.1-update6' | 'hafs-tanzil-uthmani-1.1';
+
 export type Edition = {
   id: EditionId;
   title: string;
@@ -12,6 +15,7 @@ export type Edition = {
   recommended: boolean;
   requiredFontSha256?: string;
 };
+
 export const editions: Edition[] = [
   {
     id: 'warsh-kfgqpc-v2.1-update6',
@@ -34,11 +38,13 @@ export const editions: Edition[] = [
     recommended: false,
   },
 ];
+
 export const editionById = (id: string) => {
   const edition = editions.find(e => e.id === id);
   if (!edition) throw Error('unknown_edition');
   return edition;
 };
+
 export type Locator = {
   editionId: EditionId;
   numberingScheme: string;
@@ -46,6 +52,7 @@ export type Locator = {
   verse: number;
   packVersion: string;
 };
+
 export function validateLocator(l: Locator) {
   const e = editionById(l.editionId),
     c = chapters[l.surah - 1];
@@ -61,11 +68,14 @@ export function validateLocator(l: Locator) {
     throw Error('invalid_locator');
   return l;
 }
+
 export const locatorKey = (l: Locator) => {
   validateLocator(l);
   return `quran:${l.editionId}:${l.numberingScheme}:${l.surah}:${l.verse}:${l.packVersion}`;
 };
+
 export type Verse = {number: number; text: string; sourceId?: string};
+
 export type Chapter = {
   editionId: EditionId;
   numberingScheme: string;
@@ -74,6 +84,7 @@ export type Chapter = {
   sourceNotice: string;
   opening?: string;
 };
+
 export function validateChapter(
   value: Chapter,
   edition: Edition,
@@ -97,6 +108,7 @@ export function validateChapter(
   });
   return value; // Never normalize, split basmala, remove ornaments or synthesize text here.
 }
+
 export type TextPack = {
   editionId: EditionId;
   pack: Pack;
@@ -105,6 +117,7 @@ export type TextPack = {
   notice: string;
   basmalaPolicy: 'source-verbatim';
 };
+
 export type TranslationPack = {
   id: string;
   title: string;
@@ -116,6 +129,7 @@ export type TranslationPack = {
   chapterAssets: Record<number, string>;
   notice: string;
 };
+
 export type Recording = {
   id: string;
   title: string;
@@ -125,11 +139,13 @@ export type Recording = {
   notice: string;
   chapters: {surah: number; pack: Pack; assetId: string; durationMs?: number}[];
 };
+
 export type QuranCatalog = {
   texts: TextPack[];
   translations: TranslationPack[];
   recordings: Recording[];
 };
+
 export function validateQuranCatalog(catalog: QuranCatalog) {
   const identities = new Set<string>();
   for (const t of catalog.texts) {
@@ -221,6 +237,7 @@ export function validateQuranCatalog(catalog: QuranCatalog) {
         throw Error('invalid_recording_chapter');
   }
 }
+
 export const normalizeSearch = (s: string) =>
   s
     .normalize('NFD')
@@ -231,6 +248,7 @@ export const normalizeSearch = (s: string) =>
     .replace(/[أإآٱ]/g, 'ا')
     .toLowerCase()
     .trim();
+
 export function searchChapters(query: string) {
   const q = normalizeSearch(query);
   return chapters.filter(c =>
@@ -239,6 +257,7 @@ export function searchChapters(query: string) {
     ),
   );
 }
+
 export function selectedAudio(r: Recording, selected: number[]) {
   const requested = new Set(selected);
   if ([...requested].some(n => !r.chapters.some(c => c.surah === n)))

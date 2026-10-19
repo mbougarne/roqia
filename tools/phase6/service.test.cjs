@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 const records = new Map(),
   scheduled = new Map([['unrelated', {id: 'unrelated'}]]);
 let authorized = true,
@@ -60,6 +61,7 @@ Module._load = function (name, parent, isMain) {
 const service = require('../../src/features/prayer/service.ts');
 const {defaults, prayers} = require('../../src/features/prayer/domain.ts');
 const cities = require('../../src/features/prayer/cities.json');
+
 Date.now = () => Date.parse('2026-10-18T10:00:00Z');
 const enabled = () => ({
   ...defaults(),

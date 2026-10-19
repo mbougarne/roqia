@@ -1,4 +1,5 @@
 import {useContext, useMemo} from 'react';
+
 import {themeContext} from '../store';
 import {createFormatters} from './format';
 

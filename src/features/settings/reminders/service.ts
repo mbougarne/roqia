@@ -5,14 +5,7 @@ import notifee, {
   TriggerType,
 } from '@notifee/react-native';
 import {Platform} from 'react-native';
-import {
-  listRecords,
-  putRecord,
-  readRecord,
-  saveRecord,
-  write,
-} from '../../../repositories/database';
-import {type Reminder} from '../../../repositories/models';
+
 import {
   isOwnedReminder,
   reminderDefaults,
@@ -22,7 +15,17 @@ import {
   reminderSignature,
   validateReminders,
 } from './plan';
+import {
+  listRecords,
+  putRecord,
+  readRecord,
+  saveRecord,
+  write,
+} from '../../../repositories/database';
+import {type Reminder} from '../../../repositories/models';
+
 export const REMINDER_CHANNEL = 'daily-adhkar-reminders';
+
 export async function loadReminders() {
   const stored = await listRecords<Reminder>('reminders');
   const rows = reminderDefaults.map(
@@ -31,6 +34,7 @@ export async function loadReminders() {
   validateReminders(rows);
   return rows;
 }
+
 export async function reminderPermission() {
   const settings = await notifee.getNotificationSettings();
   const channel =
@@ -44,11 +48,13 @@ export async function reminderPermission() {
   };
 }
 let tail: Promise<unknown> = Promise.resolve();
+
 function serialize<T>(fn: () => Promise<T>) {
   const next = tail.then(fn);
   tail = next.catch(() => undefined);
   return next;
 }
+
 async function reconcile() {
   const rows = await loadReminders(),
     permission = await reminderPermission();
@@ -96,7 +102,9 @@ async function reconcile() {
   await saveRecord('reminder-runtime', 'signature', signature);
   return permission;
 }
+
 export const reconcileReminders = () => serialize(reconcile);
+
 export const saveReminders = (rows: Reminder[]) =>
   serialize(async () => {
     validateReminders(rows);
@@ -109,8 +117,10 @@ export const saveReminders = (rows: Reminder[]) =>
     });
     return reconcile();
   });
+
 // Called only from the explicit save/test action in the reminders screen.
 export const requestReminderPermission = () => notifee.requestPermission();
+
 export async function testReminder(category = 'Morning') {
   if (!reminderLinks[category]) throw new Error('invalid_category');
   const permission = await reminderPermission();
@@ -132,5 +142,6 @@ export async function testReminder(category = 'Morning') {
     ios: {sound: 'default'},
   });
 }
+
 export const openReminderSettings = () =>
   notifee.openNotificationSettings(REMINDER_CHANNEL);

@@ -2,14 +2,17 @@
 import React, {useEffect, useState} from 'react';
 import {NativeModules, Text} from 'react-native';
 import {FileSystem, Dirs} from 'react-native-file-access';
+
 import App from '../../src/App';
-import {QuranContext} from '../../src/features/quran/context';
-import {QuranRuntime} from '../../src/features/quran/runtime';
-import {type QuranCatalog} from '../../src/features/quran/domain';
 import {DownloadCoordinator} from '../../src/features/downloads/coordinator';
 import {nativeDownloadPorts} from '../../src/features/downloads/native';
+import {QuranContext} from '../../src/features/quran/context';
+import {type QuranCatalog} from '../../src/features/quran/domain';
+import {QuranRuntime} from '../../src/features/quran/runtime';
+
 const log = (event: string, detail: object) =>
   NativeModules.RoqiaProbe.record(event, JSON.stringify(detail));
+
 export default function Phase4Probe({scenario}: {scenario: string}) {
   const [runtime, setRuntime] = useState<QuranRuntime | null>(null),
     [status, setStatus] = useState('Loading private phase 4 fixture');

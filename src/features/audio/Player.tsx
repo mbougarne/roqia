@@ -1,28 +1,36 @@
-import {PanelArtwork} from '../../design/PanelArtwork';
 import React, {
   useContext,
   useEffect,
   useState,
   useSyncExternalStore,
 } from 'react';
+import {AppState, Pressable, View, useWindowDimensions} from 'react-native';
 import TrackPlayer, {
   RepeatMode,
   Event,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 import {
-  AppState,
-  I18nManager,
-  Pressable,
-  View,
-  useWindowDimensions,
-} from 'react-native';
-import {
   useActiveTrack,
   usePlaybackState,
   useProgress,
   State,
 } from 'react-native-track-player';
+
+import {audioErrors, playback, restoreDownloadedSession} from './controller';
+import {sleepDeadline, sleepSupported} from './sleep';
+import {
+  Disclosure,
+  Group,
+  Progress,
+  Range,
+  Segments,
+  SettingRow,
+  rtlRow,
+} from '../../design/components';
+import {ltr} from '../../design/format';
+import {ListeningArtwork} from '../../design/ListeningArtwork';
+import {PanelArtwork} from '../../design/PanelArtwork';
 import {
   AppIcon,
   Sheet,
@@ -34,24 +42,11 @@ import {
   Page,
   usePalette,
 } from '../../design/ui';
-import {themeContext} from '../../store';
-import {ltr} from '../../design/format';
 import {useFormat} from '../../design/useFormat';
-import {audioErrors, playback, restoreDownloadedSession} from './controller';
-import {readRecord} from '../../repositories/database';
 import {Waveform} from '../../design/Waveform';
-import {ListeningArtwork} from '../../design/ListeningArtwork';
-import {
-  Disclosure,
-  Group,
-  Ornament,
-  Progress,
-  Range,
-  Segments,
-  SettingRow,
-  rtlRow,
-} from '../../design/components';
-import {sleepDeadline, sleepSupported} from './sleep';
+import {readRecord} from '../../repositories/database';
+import {themeContext} from '../../store';
+
 export function MiniPlayer({onOpen}: {onOpen: () => void}) {
   const {digits} = useFormat();
   const track = useActiveTrack(),
@@ -161,6 +156,7 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
     </View>
   );
 }
+
 export function PlayerScreen({
   navigation,
   intro,

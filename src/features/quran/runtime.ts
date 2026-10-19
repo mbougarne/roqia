@@ -1,24 +1,6 @@
-import {alignWarshTranslation} from './translationAlignment';
-import {FileSystem} from 'react-native-file-access';
 import {NativeModules, Platform} from 'react-native';
-import {privatePath} from '../../platform/files';
-import {
-  readRecord,
-  saveRecord,
-  listRecords,
-  write,
-  putRecord,
-  removeRecord,
-} from '../../repositories/database';
-import {getSettings, updateSettings} from '../../services/persistence';
-import {
-  downloads,
-  nativeDownloadPorts,
-  startDownloadServices,
-} from '../downloads/native';
-import {type DownloadCoordinator} from '../downloads/coordinator';
-import {type Pack, type InstalledPack} from '../downloads/types';
-import {type Bookmark} from '../../repositories/models';
+import {FileSystem} from 'react-native-file-access';
+
 import {quranCatalog} from './catalog';
 import {
   chapters,
@@ -36,6 +18,26 @@ import {
   normalizeSearch,
   type Recording,
 } from './domain';
+import {alignWarshTranslation} from './translationAlignment';
+import {privatePath} from '../../platform/files';
+import {
+  readRecord,
+  saveRecord,
+  listRecords,
+  write,
+  putRecord,
+  removeRecord,
+} from '../../repositories/database';
+import {type Bookmark} from '../../repositories/models';
+import {getSettings, updateSettings} from '../../services/persistence';
+import {type DownloadCoordinator} from '../downloads/coordinator';
+import {
+  downloads,
+  nativeDownloadPorts,
+  startDownloadServices,
+} from '../downloads/native';
+import {type Pack, type InstalledPack} from '../downloads/types';
+
 export type ReaderPreferences = {
   size: number;
   lineHeight: number;
@@ -43,6 +45,7 @@ export type ReaderPreferences = {
   translationId: string | null;
   keepAwake: boolean;
 };
+
 export const readerDefaults: ReaderPreferences = {
   size: 26,
   lineHeight: 1.9,
@@ -50,6 +53,7 @@ export const readerDefaults: ReaderPreferences = {
   translationId: null,
   keepAwake: false,
 };
+
 export function validateReaderPreferences(p: ReaderPreferences) {
   if (
     ![22, 26, 30, 34].includes(p.size) ||
@@ -61,6 +65,7 @@ export function validateReaderPreferences(p: ReaderPreferences) {
     throw Error('invalid_reader_preferences');
   return p;
 }
+
 export class QuranRuntime {
   private audioTail: Promise<unknown> = Promise.resolve();
   constructor(
@@ -341,12 +346,15 @@ export class QuranRuntime {
     return duration as number;
   }
 }
+
 export const quran = new QuranRuntime(
   quranCatalog,
   downloads,
   startDownloadServices,
 );
+
 export const supportsKeepAwake = () =>
   Platform.OS === 'android' && !!NativeModules.RoqiaReader?.keepAwake;
+
 export const keepAwake = (enabled: boolean) =>
   NativeModules.RoqiaReader?.keepAwake(enabled);

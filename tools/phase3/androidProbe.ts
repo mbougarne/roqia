@@ -1,12 +1,8 @@
 /* Explicit debug entry points only. Reminder scheduling restores saved user choices. */
-import {NativeModules} from 'react-native';
 import notifee from '@notifee/react-native';
-import {
-  loadPersistedAppState,
-  getSettings,
-  updateSettings,
-} from '../../src/services/persistence';
-import {listRecords} from '../../src/repositories/database';
+import {NativeModules} from 'react-native';
+
+import {isOwnedReminder} from '../../src/features/settings/reminders/plan';
 import {
   loadReminders,
   reconcileReminders,
@@ -14,9 +10,16 @@ import {
   testReminder,
   reminderPermission,
 } from '../../src/features/settings/reminders/service';
-import {isOwnedReminder} from '../../src/features/settings/reminders/plan';
+import {listRecords} from '../../src/repositories/database';
+import {
+  loadPersistedAppState,
+  getSettings,
+  updateSettings,
+} from '../../src/services/persistence';
+
 const log = (event: string, detail: object) =>
   NativeModules.RoqiaProbe.record(event, JSON.stringify(detail));
+
 export async function phase3Probe(scenario: string) {
   const state = await loadPersistedAppState();
   if (scenario === 'phase3-inspect') {

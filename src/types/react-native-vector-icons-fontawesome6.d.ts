@@ -11,5 +11,6 @@ declare module 'react-native-vector-icons/FontAwesome6' {
   }
 
   const FontAwesomeIcons: React.ComponentType<FontAwesomeProps>;
+
   export default FontAwesomeIcons;
 }

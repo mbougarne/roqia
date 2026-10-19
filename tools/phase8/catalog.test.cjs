@@ -9,6 +9,7 @@ const {
 } = require('../../src/features/quran/domain.ts');
 const sounds = require('./legacy-sounds.fixture.json');
 const proof = require('../../docs/implementation/phase-8/audio-verification.json');
+
 test('complete Warsh/Hafs catalog and historical normal/Fajr audit match source bytes without mixing riwayas', () => {
   validateQuranCatalog(quranCatalog);
   assert.deepEqual(quranCatalog.recordings.map(r => r.riwaya).sort(), [

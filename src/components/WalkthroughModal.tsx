@@ -1,10 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {
-  Modal,
-  Pressable,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {Modal, Pressable, StyleSheet, View} from 'react-native';
 
 import {StyledText} from './StyledText';
 import {themeContext, themes} from '../store';
@@ -47,7 +42,10 @@ const walkthroughSteps: WalkthroughStep[] = [
   },
 ];
 
-export const WalkthroughModal = ({visible, onFinish}: WalkthroughModalProps) => {
+export const WalkthroughModal = ({
+  visible,
+  onFinish,
+}: WalkthroughModalProps) => {
   const {mode} = React.useContext(themeContext);
   const [stepIndex, setStepIndex] = useState(0);
   const theme = themes[mode];
@@ -74,14 +72,15 @@ export const WalkthroughModal = ({visible, onFinish}: WalkthroughModalProps) => 
   return (
     <Modal animationType="fade" transparent visible={visible}>
       <View style={styles.overlay}>
-        <View style={[styles.card, {backgroundColor: theme.secondaryBg}]}> 
-          <StyledText customStyle={[styles.progressText, {color: theme.color}]}> 
+        <View style={[styles.card, {backgroundColor: theme.secondaryBg}]}>
+          <StyledText customStyle={[styles.progressText, {color: theme.color}]}>
             {progressText}
           </StyledText>
-          <StyledText customStyle={[styles.title, {color: theme.tertiaryColor}]}> 
+          <StyledText
+            customStyle={[styles.title, {color: theme.tertiaryColor}]}>
             {walkthroughSteps[stepIndex].title}
           </StyledText>
-          <StyledText customStyle={[styles.description, {color: theme.color}]}> 
+          <StyledText customStyle={[styles.description, {color: theme.color}]}>
             {walkthroughSteps[stepIndex].description}
           </StyledText>
 
@@ -90,8 +89,15 @@ export const WalkthroughModal = ({visible, onFinish}: WalkthroughModalProps) => 
               accessibilityLabel="تخطي الدليل"
               accessibilityRole="button"
               onPress={onSkipPress}
-              style={[styles.secondaryButton, {borderColor: theme.tertiaryColor}]}> 
-              <StyledText customStyle={[styles.secondaryButtonText, {color: theme.tertiaryColor}]}> 
+              style={[
+                styles.secondaryButton,
+                {borderColor: theme.tertiaryColor},
+              ]}>
+              <StyledText
+                customStyle={[
+                  styles.secondaryButtonText,
+                  {color: theme.tertiaryColor},
+                ]}>
                 تخطي
               </StyledText>
             </Pressable>
@@ -100,8 +106,15 @@ export const WalkthroughModal = ({visible, onFinish}: WalkthroughModalProps) => 
               accessibilityLabel={isLastStep ? 'إنهاء الدليل' : 'التالي'}
               accessibilityRole="button"
               onPress={onNextPress}
-              style={[styles.primaryButton, {backgroundColor: theme.tertiaryColor}]}> 
-              <StyledText customStyle={[styles.primaryButtonText, {color: theme.secondaryColor}]}> 
+              style={[
+                styles.primaryButton,
+                {backgroundColor: theme.tertiaryColor},
+              ]}>
+              <StyledText
+                customStyle={[
+                  styles.primaryButtonText,
+                  {color: theme.secondaryColor},
+                ]}>
                 {isLastStep ? 'ابدأ الآن' : 'التالي'}
               </StyledText>
             </Pressable>

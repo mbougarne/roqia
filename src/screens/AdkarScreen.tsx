@@ -1,13 +1,15 @@
 import React, {useContext} from 'react';
-import {adkarData} from '../data';
-import {adkarRepeatContext, themeContext} from '../store';
-import {AppText, AppIcon, IconButton, usePalette} from '../design/ui';
-import {rtlRow} from '../design/components';
 import {View, Pressable, ScrollView, useWindowDimensions} from 'react-native';
-import {ltr} from '../design/format';
-import {useFormat} from '../design/useFormat';
-import {DevotionalListScreen} from './DevotionalListScreen';
+
+import {adkarData} from '../data';
 import {AdhkarArtwork, AdhkarOrnament} from './AdhkarArtwork';
+import {DevotionalListScreen} from './DevotionalListScreen';
+import {rtlRow} from '../design/components';
+import {ltr} from '../design/format';
+import {AppText, AppIcon, IconButton, usePalette} from '../design/ui';
+import {useFormat} from '../design/useFormat';
+import {adkarRepeatContext, themeContext} from '../store';
+
 const categories = [
   {id: 'Morning', title: 'أذكار الصباح', icon: 'sun', art: 'morning'},
   {id: 'Night', title: 'أذكار المساء', icon: 'moon', art: 'evening'},
@@ -16,6 +18,7 @@ const categories = [
 const groups = Object.fromEntries(
   categories.map(c => [c.id, adkarData.filter(i => i.category === c.id)]),
 );
+
 export function AdkarMenuScreen({navigation}: any) {
   const {number} = useFormat();
   const {repeatCounts} = useContext(adkarRepeatContext);
@@ -186,6 +189,7 @@ export function AdkarMenuScreen({navigation}: any) {
     </ScrollView>
   );
 }
+
 export function AdkarCategoryScreen({route}: any) {
   const category = categories.find(c => c.id === route.name)!;
   return (
@@ -196,4 +200,5 @@ export function AdkarCategoryScreen({route}: any) {
     />
   );
 }
+
 export const AdkarScreen = AdkarMenuScreen;

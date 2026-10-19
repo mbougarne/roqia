@@ -9,6 +9,18 @@ import TrackPlayer, {
   useActiveTrack,
   useProgress,
 } from 'react-native-track-player';
+
+import {data, noteData} from '../data';
+import {
+  Banner,
+  Disclosure,
+  Ornament,
+  Progress,
+  Range,
+  rtlRow,
+} from '../design/components';
+import {Illustration} from '../design/Illustration';
+import {LaunchOrnaments} from '../design/LaunchOrnaments';
 import {
   AppIcon,
   AppText,
@@ -19,22 +31,12 @@ import {
   usePalette,
   type IconName,
 } from '../design/ui';
-import {Illustration} from '../design/Illustration';
-import {
-  Banner,
-  Disclosure,
-  Ornament,
-  Progress,
-  Range,
-  rtlRow,
-} from '../design/components';
-import {LaunchOrnaments} from '../design/LaunchOrnaments';
-import {Waveform} from '../design/Waveform';
-import {themeContext} from '../store';
 import {useFormat} from '../design/useFormat';
-import {data, noteData} from '../data';
-import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
+import {Waveform} from '../design/Waveform';
 import {playback} from '../features/audio/controller';
+import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
+import {themeContext} from '../store';
+
 const slides = [
   ['مرحبا بك في الرقية', 'الرقية والأذكار والقرآن في مكان واحد'],
   ['اقرأ واستمع', 'استمع للنص وأكمل من حيث توقفت'],
@@ -42,6 +44,7 @@ const slides = [
   ['أذكارك على مهل', 'اضغط بعد القراءة لتتبع التكرار'],
   ['اجعله مناسبا لك', 'يمكنك تعديل اختياراتك لاحقا'],
 ];
+
 function GuideCard({style, ...props}: ViewProps) {
   const dark = useContext(themeContext).mode === 'dark';
   return (
@@ -57,6 +60,7 @@ function GuideCard({style, ...props}: ViewProps) {
     />
   );
 }
+
 function RoundIcon({name, size = 28}: {name: IconName; size?: number}) {
   const p = usePalette();
   return (
@@ -73,6 +77,7 @@ function RoundIcon({name, size = 28}: {name: IconName; size?: number}) {
     </View>
   );
 }
+
 function AudioPreview() {
   const audio = useScreenAudioPlayback(data.slice(0, 1), 'guide-preview');
   const track = useActiveTrack(),
@@ -133,6 +138,7 @@ function AudioPreview() {
     </GuideCard>
   );
 }
+
 export function Guide({onFinish}: {onFinish: () => void}) {
   const {number, digits} = useFormat();
   const [step, setStep] = useState(0),
@@ -489,6 +495,7 @@ export function Guide({onFinish}: {onFinish: () => void}) {
     </Page>
   );
 }
+
 export function Guidance({onFinish}: {onFinish: () => void}) {
   const p = usePalette(),
     {uiScale} = useContext(themeContext);
@@ -543,12 +550,15 @@ export function Guidance({onFinish}: {onFinish: () => void}) {
     </Page>
   );
 }
+
 export function GuideScreen({navigation}: any) {
   return <Guide onFinish={() => navigation.goBack()} />;
 }
+
 export function GuidanceScreen({navigation}: any) {
   return <Guidance onFinish={() => navigation.goBack()} />;
 }
+
 export function HydrationScreen() {
   const p = usePalette();
   return (

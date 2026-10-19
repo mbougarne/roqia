@@ -8,8 +8,9 @@ import Svg, {
   Polygon,
   Text as SvgText,
 } from 'react-native-svg';
-import {usePalette} from '../../design/ui';
+
 import {normalize} from './domain';
+import {usePalette} from '../../design/ui';
 
 // Original vector linework for the approved prayer/Qibla compositions. No
 // scripture, publisher logo or screenshot pixels are used as runtime artwork.
@@ -167,6 +168,7 @@ export function QiblaCompass({
     </View>
   );
 }
+
 export function OrnamentDivider() {
   const p = usePalette();
   return (

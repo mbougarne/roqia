@@ -1,6 +1,8 @@
-import Svg, {Path} from 'react-native-svg';
 import React, {useState} from 'react';
 import {Pressable, View, type ViewProps} from 'react-native';
+import Svg, {Path} from 'react-native-svg';
+
+import {Illustration} from './Illustration';
 import {
   AppIcon,
   IconBadge,
@@ -11,14 +13,15 @@ import {
   usePalette,
   type IconName,
 } from './ui';
-import {Illustration} from './Illustration';
 import {useFormat} from './useFormat';
+
 export const rtlRow = {
   flexDirection: 'row-reverse' as const,
   direction: 'ltr' as const,
   alignItems: 'center' as const,
   gap: 10,
 };
+
 export function Ornament({title}: {title?: string}) {
   const p = usePalette();
   return (
@@ -41,6 +44,7 @@ export function Ornament({title}: {title?: string}) {
     </View>
   );
 }
+
 export function Group({style, ...props}: ViewProps) {
   return (
     <Card
@@ -49,6 +53,7 @@ export function Group({style, ...props}: ViewProps) {
     />
   );
 }
+
 export function SettingRow({
   title,
   detail,
@@ -105,6 +110,7 @@ export function SettingRow({
     <View style={style}>{content}</View>
   );
 }
+
 export function Toggle({
   label,
   value,
@@ -162,6 +168,7 @@ export function Toggle({
     </View>
   );
 }
+
 export function Segments<T extends string | number>({
   options,
   value,
@@ -214,6 +221,7 @@ export function Segments<T extends string | number>({
     </View>
   );
 }
+
 export function RadioRow({
   title,
   detail,
@@ -294,6 +302,7 @@ export function RadioRow({
     </Pressable>
   );
 }
+
 export function NumberBadge({value}: {value: number}) {
   const {number} = useFormat();
   const p = usePalette();
@@ -339,6 +348,7 @@ export function NumberBadge({value}: {value: number}) {
     </View>
   );
 }
+
 export function Banner({
   text,
   icon = 'info',
@@ -367,6 +377,7 @@ export function Banner({
     </View>
   );
 }
+
 export function SearchField({
   label,
   value,
@@ -418,6 +429,7 @@ export function SearchField({
     </View>
   );
 }
+
 export function Progress({value}: {value: number}) {
   const p = usePalette();
   return (
@@ -447,6 +459,7 @@ export function Progress({value}: {value: number}) {
     </View>
   );
 }
+
 export function Range({
   label,
   hideLabel = false,
@@ -550,6 +563,7 @@ export function Range({
     </View>
   );
 }
+
 export function Disclosure({
   title,
   children,
@@ -569,6 +583,7 @@ export function Disclosure({
     </Group>
   );
 }
+
 export function FeatureCard({
   title,
   detail,

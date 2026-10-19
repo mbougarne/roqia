@@ -1,10 +1,17 @@
-import {PanelArtwork} from '../design/PanelArtwork';
+import {useNavigation} from '@react-navigation/native';
 import React, {useContext, useState} from 'react';
 import {FlatList, I18nManager, Pressable, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+
 import {type DataProps} from '../data';
-import {type RepeatContextState, themeContext} from '../store';
-import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
+import {
+  SearchField,
+  Segments,
+  FeatureCard,
+  Progress,
+  rtlRow,
+} from '../design/components';
+import {ltr} from '../design/format';
+import {PanelArtwork} from '../design/PanelArtwork';
 import {
   AppIcon,
   AppText,
@@ -13,19 +20,14 @@ import {
   StateView,
   usePalette,
 } from '../design/ui';
-import {
-  SearchField,
-  Segments,
-  FeatureCard,
-  Progress,
-  rtlRow,
-} from '../design/components';
-import {matches} from '../features/devotional/discovery';
-import {ltr} from '../design/format';
 import {useFormat} from '../design/useFormat';
+import {reloadBookmarks, useBookmarks} from '../features/devotional/bookmarks';
+import {matches} from '../features/devotional/discovery';
 import {ReadingCard} from '../features/devotional/ReadingCard';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
-import {reloadBookmarks, useBookmarks} from '../features/devotional/bookmarks';
+import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
+import {type RepeatContextState, themeContext} from '../store';
+
 export function DevotionalListScreen({
   items,
   title,

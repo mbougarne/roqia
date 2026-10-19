@@ -1,13 +1,11 @@
-import React, {useEffect, useRef} from 'react';
-import {
-  AccessibilityInfo,
-  Alert,
-  I18nManager,
-  Pressable,
-  View,
-} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
+import React, {useEffect, useRef} from 'react';
+import {AccessibilityInfo, Alert, Pressable, View} from 'react-native';
+
+import {toggleBookmark} from './bookmarks';
+import {useConfirmReset} from './ResetConfirmation';
 import {type DataProps} from '../../data';
+import {rtlRow} from '../../design/components';
 import {
   AppIcon,
   AppText,
@@ -17,9 +15,7 @@ import {
   usePalette,
 } from '../../design/ui';
 import {useFormat} from '../../design/useFormat';
-import {Ornament, rtlRow} from '../../design/components';
-import {toggleBookmark} from './bookmarks';
-import {useConfirmReset} from './ResetConfirmation';
+
 export function ReadingCard({
   item,
   index,

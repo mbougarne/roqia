@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict');
 const {parseHabous} = require('../../src/features/prayer/habous.ts');
+
 function fixture() {
   return (
     '<h2>أكتوبر / نونبر 2026</h2><select><option value="index.php?ville=58" selected>الدار البيضاء</option></select><table id="horaire">' +

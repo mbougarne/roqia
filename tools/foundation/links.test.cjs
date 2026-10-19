@@ -2,6 +2,7 @@ require('./register.cjs');
 const {test} = require('node:test');
 const assert = require('node:assert/strict');
 const Module = require('node:module');
+
 const originalLoad = Module._load;
 let link, notification, initial;
 Module._load = function (id, ...args) {
@@ -30,6 +31,7 @@ const {
   startLinkCapture,
   consumeLinks,
 } = require('../../src/navigation/linkInbox.ts');
+
 Module._load = originalLoad;
 test('links survive hydration and overlapping activity mounts without stale cleanup or initial-link replay', async () => {
   startLinkCapture();

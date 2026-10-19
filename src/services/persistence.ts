@@ -1,5 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {FileSystem} from 'react-native-file-access';
+
+import {
+  ensureDirectory,
+  ensurePrivateRoot,
+  privatePath,
+} from '../platform/files';
 import {contentById, clampCount} from '../repositories/content';
 import {
   database,
@@ -18,13 +24,9 @@ import {
   type Bookmark,
   type MigrationReceipt,
 } from '../repositories/models';
-import {
-  ensureDirectory,
-  ensurePrivateRoot,
-  privatePath,
-} from '../platform/files';
 
 let hydration: Promise<void> | undefined;
+
 export function hydrateStorage(): Promise<void> {
   return (hydration ??= (async () => {
     await database();
@@ -73,6 +75,7 @@ export function hydrateStorage(): Promise<void> {
     throw error;
   }));
 }
+
 export async function loadPersistedAppState() {
   await hydrateStorage();
   const settings = (await readRecord<Settings>('settings', 'singleton'))!;
@@ -88,11 +91,13 @@ export async function loadPersistedAppState() {
     ),
   };
 }
+
 export async function getSettings() {
   await hydrateStorage();
   const saved = (await readRecord<Settings>('settings', 'singleton'))!;
   return {...saved, digitStyle: saved.digitStyle ?? defaultSettings.digitStyle};
 }
+
 export async function updateSettings(
   patch: Partial<Omit<Settings, 'schemaVersion'>>,
 ) {
@@ -130,6 +135,7 @@ export async function updateSettings(
     await putRecord(tx, 'settings', 'singleton', next);
   });
 }
+
 export async function persistAppState(
   mode: ThemePreference,
   repeatCounts: Record<string, number>,
@@ -165,12 +171,17 @@ export async function persistAppState(
     }
   });
 }
+
 export const loadWalkthroughSeen = async () =>
   (await getSettings()).onboardingVersion >= 1;
+
 export const loadIntroNoteSeen = async () => (await getSettings()).guidanceSeen;
+
 export const persistWalkthroughSeen = () =>
   updateSettings({onboardingVersion: 1});
+
 export const persistIntroNoteSeen = () => updateSettings({guidanceSeen: true});
+
 export const bookmarks = {
   list: () => listRecords<Bookmark>('bookmarks'),
   async save(bookmark: Bookmark) {

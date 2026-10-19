@@ -1,10 +1,12 @@
 import {type DataProps} from '../../data';
+
 export type AudioEntry = {
   id: string;
   audioFile: string;
   title: string;
   contentId: string;
 };
+
 export function devotionalQueue(
   items: DataProps[],
   repeat = true,

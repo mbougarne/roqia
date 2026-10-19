@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 const load = Module._load;
 Module._load = function (name, parent, main) {
   if (name === 'react-native-file-access')
@@ -12,6 +13,7 @@ const {
   remoteRecordings,
   remoteAudioUrl,
 } = require('../../src/features/quran/remoteRecordings.ts');
+
 test('all publisher Warsh/Hafs reads retain distinct recording identities, real coverage and timing availability', () => {
   assert.equal(remoteRecordings.length, 234);
   assert.equal(remoteRecordings.filter(r => r.riwaya === 'warsh').length, 13);

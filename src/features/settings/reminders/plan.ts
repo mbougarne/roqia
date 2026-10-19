@@ -1,4 +1,5 @@
 import {type Reminder} from '../../../repositories/models';
+
 export const reminderDefaults: Reminder[] = [
   ['adhkar-morning-0600', 'Morning', '06:00'],
   ['adhkar-night-1800', 'Night', '18:00'],
@@ -13,20 +14,25 @@ export const reminderDefaults: Reminder[] = [
   zonePolicy: 'device',
   updatedAt: 0,
 }));
+
 export const reminderLabels: Record<string, string> = {
   Morning: 'أذكار الصباح',
   Night: 'أذكار المساء',
   BeforeSleep: 'أذكار قبل النوم',
 };
+
 export const reminderLinks: Record<string, string> = {
   Morning: 'roqia://adkar/morning',
   Night: 'roqia://adkar/night',
   BeforeSleep: 'roqia://adkar/before-sleep',
 };
+
 export const reminderPrefix = 'roqia-reminder:';
+
 export const isOwnedReminder = (id: string) =>
   id.startsWith(reminderPrefix) ||
   reminderDefaults.some(r => r.reminderId === id);
+
 export function validateReminders(rows: Reminder[]) {
   if (
     rows.length !== reminderDefaults.length ||
@@ -50,6 +56,7 @@ export function validateReminders(rows: Reminder[]) {
       throw new Error('invalid_reminder');
   }
 }
+
 export function reminderPlan(rows: Reminder[], now = new Date()) {
   validateReminders(rows);
   return rows
@@ -72,6 +79,7 @@ export function reminderPlan(rows: Reminder[], now = new Date()) {
       }),
     );
 }
+
 export function reminderSignature(rows: Reminder[], now = new Date()) {
   return JSON.stringify([
     Intl.DateTimeFormat().resolvedOptions().timeZone,

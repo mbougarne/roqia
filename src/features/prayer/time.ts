@@ -1,7 +1,11 @@
 import data from './timezones.json';
+
 const zones = data.zones as Record<string, number[][]>;
+
 export const zoneNames = Object.keys(zones);
+
 export const tzVersion = data.version;
+
 export function offsetAt(zone: string, instant: number) {
   const rows = zones[zone],
     t = Math.floor(instant / 1000);
@@ -16,9 +20,11 @@ export function offsetAt(zone: string, instant: number) {
   }
   return rows[lo][1] * 1000;
 }
+
 export function civilDate(zone: string, instant = Date.now()) {
   return new Date(instant + offsetAt(zone, instant)).toISOString().slice(0, 10);
 }
+
 export function nextDate(date: string, days = 1) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw Error('invalid_date');
   const t = Date.parse(date + 'T12:00:00Z');
@@ -26,6 +32,7 @@ export function nextDate(date: string, days = 1) {
     throw Error('invalid_date');
   return new Date(t + days * 86400000).toISOString().slice(0, 10);
 }
+
 export function clock(
   zone: string,
   instant: number,
@@ -38,6 +45,7 @@ export function clock(
     ? `${String(h).padStart(2, '0')}:${m}`
     : `${h % 12 || 12}:${m} ${h < 12 ? 'ص' : 'م'}`;
 }
+
 export function localInstant(zone: string, date: string, hhmm: string) {
   nextDate(date, 0);
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(hhmm) || !zones[zone])

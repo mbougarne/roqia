@@ -1,10 +1,12 @@
 import React, {useContext} from 'react';
 import {View} from 'react-native';
 import {SvgXml} from 'react-native-svg';
-import assets from './illustrations.json';
+
 import {artwork} from './artwork';
+import assets from './illustrations.json';
 import {usePalette} from './ui';
 import {themeContext} from '../store';
+
 export function Illustration({
   name,
   height = 160,

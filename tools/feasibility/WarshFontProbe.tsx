@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {NativeModules, ScrollView, Text, View} from 'react-native';
 
 type Sample = {ref: string; text: string};
+
 export default function WarshFontProbe({scenario}: {scenario: string}) {
   const [samples, setSamples] = useState<Sample[]>([]);
   const [error, setError] = useState('Loading and checking fonts…');
