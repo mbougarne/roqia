@@ -1,1 +1,0 @@
-11 independently fetched source pages match all 330 bundled schedules; wrong-city and malformed rows rejected

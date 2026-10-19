@@ -58,10 +58,9 @@ react {
     autolinkLibrariesWithApp()
 }
 
-// React Native's default bundle inputs include JS/TS but omit imported design JSON.
+// React Native's default bundle inputs include JS/TS but omit imported JSON.
 tasks.withType(com.facebook.react.tasks.BundleHermesCTask).configureEach {
     inputs.files(fileTree("../../src") { include "**/*.json" })
-    inputs.files(fileTree("../../design/roqia-v2/tokens") { include "**/*.json" })
 }
 
 /**

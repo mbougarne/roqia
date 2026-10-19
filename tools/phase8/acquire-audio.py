@@ -183,7 +183,7 @@ def main():
     (ROOT / 'tools/phase8/legacy-sounds.fixture.json').write_text(
         json.dumps(sounds, ensure_ascii=False, indent=2) + '\n'
     )
-    (ROOT / 'docs/implementation/phase-8/audio-verification.json').write_text(
+    (ROOT / 'tools/phase8/audio-verification.fixture.json').write_text(
         json.dumps(evidence, ensure_ascii=False, indent=2) + '\n'
     )
 

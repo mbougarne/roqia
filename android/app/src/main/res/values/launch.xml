@@ -1,5 +1,5 @@
 <resources>
-    <!-- Same semantic colors as design/roqia-v2/tokens/colors.json. -->
+    <!-- Same semantic colors as src/design/tokens/colors.json. -->
     <color name="roqia_launch_background">#F7F5EF</color>
     <color name="roqia_launch_text">#123B32</color>
     <color name="roqia_launch_accent">#8B641F</color>

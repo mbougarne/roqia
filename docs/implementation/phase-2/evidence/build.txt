@@ -1,8 +1,0 @@
-Android debug, API 36 arm64 emulator; JDK 21
-Command: ./android/gradlew -p android :app:assembleDebug -PreactNativeArchitectures=arm64-v8a
-BUILD SUCCESSFUL in 14s
-448 actionable tasks: 23 executed, 425 up-to-date
-APK SHA-256: bc04a4a9482ea7d9a0d8f998f44cf22c20d7214831626eebb6ae644ba2d692ab
-In-place adb install -r: Success
-TypeScript: npx tsc --noEmit exited 0
-Debug JavaScript served by Metro; APK checksum does not identify the JS source. Use this PR commit for source identity.

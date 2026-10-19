@@ -92,6 +92,11 @@ test-results/
 .roqia-feasibility/
 .kotlin/
 
+# Historical design references and verification evidence; see docs/ARCHIVED_EVIDENCE.md.
+/design/
+/docs/implementation/
+/docs/feasibility/
+
 # Code-quality tool environments and caches
 .venv/
 .venv-*/

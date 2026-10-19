@@ -242,7 +242,7 @@ def main(source, translations, out):
             }
         )
     audioReport = json.loads(
-        (ROOT / 'docs/feasibility/android/evidence/audio-inventory.json').read_text()
+        (ROOT / 'tools/feasibility/fixtures/audio-inventory.json').read_text()
     )
     for recording in audioReport['recordings']:
         # Only locked, previously acquired sample files; never label the fixture complete.

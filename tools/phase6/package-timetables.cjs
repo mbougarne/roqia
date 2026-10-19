@@ -18,7 +18,7 @@ fs.writeFileSync(
 );
 fs.copyFileSync(
   path.join(source, 'sources.json'),
-  'docs/implementation/phase-6/evidence/habous-sources.json',
+  'tools/phase6/habous-sources.fixture.json',
 );
 console.log(
   `${rows.length} city tables, ${rows.reduce((n, t) => n + Object.keys(t.dates).length, 0)} daily schedules`,

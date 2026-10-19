@@ -71,9 +71,10 @@ configuration JSON exceptions. Installed dependencies, build directories and
 tool caches are also excluded. Vendor wrappers, Ruby/CocoaPods configuration,
 and Android/iOS resource XML are outside this source-formatting baseline.
 
-`docs/implementation/`, `docs/feasibility/` and `design/` contain saved evidence
-and references, so linting and formatting leave them untouched. The current
-configuration excludes the entire `docs/` tree.
+`docs/implementation/`, `docs/feasibility/` and `design/` contain archived
+evidence and references. They are Git-ignored and are not required in a fresh
+checkout. The current formatter configuration also excludes the entire `docs/`
+tree. See [the archive guide](ARCHIVED_EVIDENCE.md) for the retained history.
 
 Keep maintained code in `tools/` covered: regression tests, content importers
 and validators, dependency-patch scripts, and quality tooling can affect the
@@ -91,11 +92,12 @@ settings, signing credentials, tool caches, coverage/test reports and temporary
 editor files. The generated web output is no longer tracked; CI builds it from
 `web/src` and copies the domain, font and fallback page from `web/public`.
 
-Keep `design/`, `docs/implementation/`, `docs/feasibility/` and maintained
-`tools/` files versioned. The app imports design tokens, tests read documentation
-evidence, and the tools contain regression tests and reproducible content/patch
-recipes. Their lint/format exclusions do not remove them from Git. Store new
-private captures, device backups and ad hoc evidence in `.roqia-feasibility/`.
+Keep `tools/` versioned: it contains regression tests, build-time dependency
+patches and reproducible content recipes. Runtime tokens live in
+`src/design/tokens/`; required evidence fixtures live beside their tools/tests.
+Those inputs are copied byte-for-byte from the archive. The canonical font
+license remains in `src/assets/fonts/`. Store new private captures, device
+backups and ad hoc evidence in `.roqia-feasibility/`.
 
 Run existing source-integrity tests when updating content. The complete local
 Python regression suite additionally checks Quran font coverage using the

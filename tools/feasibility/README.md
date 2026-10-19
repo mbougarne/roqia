@@ -1,6 +1,6 @@
 # Maintainer feasibility tools
 
-These tools support the first 10 ordered tickets. They are not production download, prayer or media services. Results and open gates are in [the Android report](../../docs/feasibility/android/README.md).
+These tools support the first 10 ordered tickets. They are not production download, prayer or media services. Results and open gates are in [the Android report](https://github.com/mbougarne/roqia/blob/b4c8644b6cdf72e30eb32ea0985a4df1efbec484/docs/feasibility/android/README.md).
 
 ## Requirements
 
@@ -67,7 +67,7 @@ The debug activity, synthetic tone and native probe classes live in the debug so
 
 ## Warsh source and font comparison
 
-The selected source is KFGQPC Warsh v2.1/update 6; see [the source, terms and font report](../../docs/feasibility/android/WARSH.md). Acquisition now includes its pinned ZIP and the official-host AL Maghribi font for **local comparison only**. No font/corpus binary is bundled or committed. The shared source lock distinguishes the publisher URL from the mirror transport URL.
+The selected source is KFGQPC Warsh v2.1/update 6; see [the source, terms and font report](https://github.com/mbougarne/roqia/blob/b4c8644b6cdf72e30eb32ea0985a4df1efbec484/docs/feasibility/android/WARSH.md). Acquisition now includes its pinned ZIP and the official-host AL Maghribi font for **local comparison only**. No font/corpus binary is bundled or committed. The shared source lock distinguishes the publisher URL from the mirror transport URL.
 
 ```sh
 python3 tools/feasibility/content.py acquire

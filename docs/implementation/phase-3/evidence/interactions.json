@@ -1,6 +1,0 @@
-[
-  {
-    "journey": "copy/bookmark/audio do not count; counter and bookmark survive restart; bookmark removal and reset cancellation preserve count; confirmed item reset restores default",
-    "pass": true
-  }
-]

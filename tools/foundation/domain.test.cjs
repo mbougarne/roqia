@@ -144,7 +144,7 @@ test('generated numbers use Western digits in Arabic, French and English', () =>
 });
 
 test('both themes keep normal text and action text above 4.5:1 contrast', () => {
-  const colors = require('../../design/roqia-v2/tokens/colors.json');
+  const colors = require('../../src/design/tokens/colors.json');
   const luminance = hex => {
     const rgb = hex
       .slice(1)

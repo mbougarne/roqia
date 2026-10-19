@@ -41,7 +41,7 @@ async function download(scenario: string) {
   let sourceUrl = `${server}/file?case=${name}`;
   if (name === 'provider') {
     const sample =
-      require('../../docs/feasibility/android/evidence/audio-inventory.json')
+      require('./fixtures/audio-inventory.json')
         .recordings[0].files[0];
     manifest = {
       scenario,

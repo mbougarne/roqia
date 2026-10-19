@@ -27,7 +27,7 @@ docs/**
 design/**
 bundled-content/**
 src/data/**
-tools/feasibility/fixtures/**
+tools/**/fixtures/**
 # Historical device probes keep their original source alongside saved evidence.
 tools/**/androidProbe.ts
 tools/feasibility/ProbeApp.tsx

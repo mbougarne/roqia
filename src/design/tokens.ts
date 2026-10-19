@@ -1,6 +1,6 @@
-import colors from '../../design/roqia-v2/tokens/colors.json';
-import layout from '../../design/roqia-v2/tokens/layout.json';
-import baseTypography from '../../design/roqia-v2/tokens/typography.json';
+import colors from './tokens/colors.json';
+import layout from './tokens/layout.json';
+import baseTypography from './tokens/typography.json';
 
 // Interface sizing follows the screen references; scripture keeps its source font and reader preferences.
 export const typography = {

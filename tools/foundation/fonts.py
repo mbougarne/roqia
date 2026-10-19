@@ -26,11 +26,6 @@ for weight in (400, 500, 600, 700):
         f'{family}: usWeightClass={font["OS/2"].usWeightClass}, glyphs={len(font.getBestCmap())}'
     )
 shutil.copyfile(
-    root / 'design/roqia-v2/assets/fonts/OFL-NotoSansArabic.txt',
-    root / 'src/assets/fonts/OFL-NotoSansArabic.txt',
-)
-
-shutil.copyfile(
     root / 'src/assets/fonts/OFL-NotoSansArabic.txt',
     root / 'android/app/src/main/assets/fonts/OFL-RoqiaArabic.txt',
 )

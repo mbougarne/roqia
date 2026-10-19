@@ -1,7 +1,0 @@
-{
-  "checks": [
-    "Exact alarm starts native adhan while locked and forced idle, using a local file; Quran paused on focus loss"
-  ],
-  "network": "enabled during this locked/Doze check; separate preview and Quran tests disabled Wi-Fi/data",
-  "cleanup": "Notification action was collapsed after unlock; test cleanup force-stopped the app. Notification Stop passed in both independent previews; final in-app Stop passed."
-}

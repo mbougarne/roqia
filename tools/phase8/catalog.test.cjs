@@ -8,7 +8,7 @@ const {
   selectedAudio,
 } = require('../../src/features/quran/domain.ts');
 const sounds = require('./legacy-sounds.fixture.json');
-const proof = require('../../docs/implementation/phase-8/audio-verification.json');
+const proof = require('./audio-verification.fixture.json');
 
 test('complete Warsh/Hafs catalog and historical normal/Fajr audit match source bytes without mixing riwayas', () => {
   validateQuranCatalog(quranCatalog);
