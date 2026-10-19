@@ -214,7 +214,7 @@ export function TranslationScreen({route, navigation}: any) {
         .then(p => runtime.savePreferences(id, {...p, translationId}))
         .then(() => setSelected(translationId)),
     );
-  const choices = runtime.catalog.translations.filter(t => t.editionId === id);
+  const choices = runtime.catalog.translations;
   return (
     <Page title="ترجمة المعاني" onBack={() => navigation.goBack()}>
       <Group>
@@ -233,12 +233,7 @@ export function TranslationScreen({route, navigation}: any) {
           action={{label: 'إعادة المحاولة', onPress: retry}}
         />
       )}
-      {e.riwaya === 'warsh' ? (
-        <StateView
-          title="الترجمة غير متاحة لورش"
-          description="لن نربط ترجمة حفص بأرقام آيات ورش دون مراجعة المطابقة. يمكنك اختيار حفص لقراءة ترجماته عند توفرها."
-        />
-      ) : !choices.length ? (
+      {!choices.length ? (
         <StateView
           title="الفرنسية والإنجليزية غير متاحتين للتنزيل بعد"
           description="تظهر الترجمات هنا بعد مراجعة ملفاتها ومطابقتها ومصادرها."
@@ -275,7 +270,13 @@ export function TranslationScreen({route, navigation}: any) {
           </Group>
         ))
       )}
-      <Banner text="الترجمة بيان للمعاني، والنص القرآني يبقى بالعربية." />
+      <Banner
+        text={
+          e.riwaya === 'warsh'
+            ? 'ترجمة للمعاني مصدرها مصحف حفص. تُعرض المقاطع كاملة عند اختلاف حدود الآيات، وقد لا تعكس الترجمة فروق القراءات.'
+            : 'الترجمة بيان للمعاني، والنص القرآني يبقى بالعربية.'
+        }
+      />
       {choices.length > 0 && (
         <Button
           secondary

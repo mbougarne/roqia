@@ -1,3 +1,4 @@
+import {type DisplayTranslation} from './translationAlignment';
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   AppState,
@@ -75,9 +76,7 @@ function Reader({route, navigation}: any) {
     [failure, setFailure] = useState(false),
     [attempt, setAttempt] = useState(0),
     [prefs, setPrefs] = useState<ReaderPreferences>(readerDefaults),
-    [translated, setTranslated] = useState<
-      {number: number; text: string}[] | null
-    >(null),
+    [translated, setTranslated] = useState<DisplayTranslation[] | null>(null),
     [translationError, setTranslationError] = useState(false),
     [saved, setSaved] = useState<string[]>([]);
   const [focused, setFocused] = useState(false),
@@ -132,7 +131,7 @@ function Reader({route, navigation}: any) {
         family = await runtime.font(text, c),
         settings = await runtime.preferences(edition.id),
         marks = await runtime.bookmarks();
-      let translation: null | {number: number; text: string}[] = null,
+      let translation: null | DisplayTranslation[] = null,
         translationFailed = false;
       if (settings.translationId) {
         const t = runtime.catalog.translations.find(
@@ -361,6 +360,17 @@ function Reader({route, navigation}: any) {
                 {chapter.opening}
               </Text>
             )}
+            {anchor === 1 && translated?.find(v => v.number === 0) && (
+              <AppText
+                role="translation"
+                style={{
+                  writingDirection: 'ltr',
+                  textAlign: 'left',
+                  fontFamily: 'sans-serif',
+                }}>
+                {translated.find(v => v.number === 0)!.text}
+              </AppText>
+            )}
           </View>
         }
         renderItem={({item}) => (
@@ -405,7 +415,7 @@ function Reader({route, navigation}: any) {
               }}>
               {item.text}
             </Text>
-            {translated && (
+            {!!translated?.[item.number - 1]?.text && (
               <View style={{gap: 8}}>
                 <Ornament />
                 <AppText role="caption" style={{color: p.textSecondary}}>
@@ -416,6 +426,18 @@ function Reader({route, navigation}: any) {
                     )?.title
                   }
                 </AppText>
+                {translated[item.number - 1].warshStart !== undefined && (
+                  <AppText role="caption">
+                    {'معاني آيات ورش ' +
+                      number(translated[item.number - 1].warshStart!) +
+                      '–' +
+                      number(item.number) +
+                      ' · مرجع الترجمة ' +
+                      number(translated[item.number - 1].sourceStart!) +
+                      '–' +
+                      number(translated[item.number - 1].sourceEnd!)}
+                  </AppText>
+                )}
                 <AppText
                   role="translation"
                   accessibilityLanguage={

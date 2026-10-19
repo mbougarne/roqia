@@ -64,3 +64,16 @@ test('translation reader checks saved file identity, chapter, version and comple
  install(value);fs.writeFileSync(path.join(root,'roqia',file),'{}');await assert.rejects(runtime.translation(t,chapter,text),/integrity_failed/);
  install(value);installed=[];await assert.rejects(runtime.translation(t,chapter,text),/missing_pack/);
 });
+test('pinned Hafs-source translation serves Warsh through passage alignment and preserves source guards',async()=>{
+ const e=d.editions[1],w=d.editions[0];
+ const value={translationId:'test-en',editionId:e.id,numberingScheme:e.numbering,textVersion:'source-1',surah:1,verses:Array.from({length:7},(_,i)=>({number:i+1,text:`Meaning ${i+1}`}))};
+ const dir='packs/test-en/source-1',file=dir+'/001.json',bytes=Buffer.from(JSON.stringify(value));
+ fs.mkdirSync(path.join(root,'roqia',dir),{recursive:true});fs.writeFileSync(path.join(root,'roqia',file),bytes);
+ const t={id:'test-en',editionId:e.id,numberingScheme:e.numbering,textVersion:'source-1',chapterAssets:{1:'chapter'},pack:{id:'test-en',version:'source-1',manifestHash:'c'.repeat(64),assets:[{id:'chapter',file:'001.json',bytes:bytes.length,sha256:sha(bytes)}]}};
+ installed=[{packId:t.pack.id,version:'source-1',manifestHash:t.pack.manifestHash,state:'ready',files:[file],relativeDirectory:dir}];
+ const chapter={editionId:w.id,numberingScheme:w.numbering,surah:1},text={editionId:w.id,pack:{version:'source-1'}};
+ const result=await runtime.translation(t,chapter,text);
+ assert.equal(result[0].text,'Meaning 2');assert.equal(result[6].warshStart,6);
+ assert.equal(result.find(v=>v.number===0).text,'Meaning 1');
+ for(const patch of [{textVersion:'future'},{numberingScheme:'wrong'},{editionId:w.id}])await assert.rejects(runtime.translation({...t,...patch},chapter,text),/translation_mismatch/);
+});

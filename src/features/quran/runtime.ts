@@ -1,3 +1,4 @@
+import {alignWarshTranslation} from './translationAlignment';
 import {FileSystem} from 'react-native-file-access';
 import {NativeModules, Platform} from 'react-native';
 import {privatePath} from '../../platform/files';
@@ -20,6 +21,7 @@ import {type Pack, type InstalledPack} from '../downloads/types';
 import {type Bookmark} from '../../repositories/models';
 import {quranCatalog} from './catalog';
 import {
+  chapters,
   type Chapter,
   type EditionId,
   type Locator,
@@ -138,13 +140,26 @@ export class QuranRuntime {
     ]) as Promise<string>;
   }
   async translation(t: TranslationPack, chapter: Chapter, text: TextPack) {
+    const isWarsh = chapter.editionId === 'warsh-kfgqpc-v2.1-update6';
     if (
-      t.editionId !== chapter.editionId ||
-      t.numberingScheme !== chapter.numberingScheme ||
-      t.textVersion !== text.pack.version ||
-      editionById(t.editionId).riwaya !== 'hafs'
+      !isWarsh &&
+      (t.editionId !== chapter.editionId ||
+        t.numberingScheme !== chapter.numberingScheme ||
+        t.textVersion !== text.pack.version ||
+        editionById(t.editionId).riwaya !== 'hafs')
     )
       throw Error('translation_mismatch');
+    if (isWarsh) {
+      if (
+        text.pack.version !== 'source-1' ||
+        chapter.numberingScheme !== 'kfgqpc-warsh-v2.1' ||
+        t.editionId !== 'hafs-tanzil-uthmani-1.1' ||
+        t.numberingScheme !== 'tanzil-madina-hafs' ||
+        text.editionId !== chapter.editionId ||
+        t.textVersion !== 'source-1'
+      )
+        throw Error('translation_mismatch');
+    }
     const value = JSON.parse(
       await FileSystem.readFile(
         await this.asset(t.pack, t.chapterAssets[chapter.surah]),
@@ -158,13 +173,14 @@ export class QuranRuntime {
       value.textVersion !== t.textVersion ||
       value.surah !== chapter.surah ||
       !Array.isArray(value.verses) ||
-      value.verses.length !== chapter.verses.length
+      value.verses.length !== chapters[chapter.surah - 1].hafsVerses
     )
       throw Error('translation_mismatch');
     value.verses.forEach((v: any, i: number) => {
       if (v.number !== i + 1 || typeof v.text !== 'string' || !v.text.trim())
         throw Error('translation_mismatch');
     });
+    if (isWarsh) return alignWarshTranslation(chapter.surah, value.verses);
     return value.verses as {number: number; text: string}[];
   }
   async preferences(id: EditionId) {
@@ -265,6 +281,7 @@ export class QuranRuntime {
   }
   async download(pack: Pack) {
     await this.initialize();
+    if (await this.downloads.installBundled(pack.id, pack.version)) return;
     await this.downloads.enqueue(
       pack.id,
       pack.version,

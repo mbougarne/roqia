@@ -67,6 +67,23 @@ async function verify(relative: string, asset: LocalAsset) {
 }
 export const nativeDownloadPorts: DownloadPorts = {
   resumable: Platform.OS === 'android',
+  bundled: pack =>
+    pack.version === 'source-1' &&
+    (pack.id !== 'quran-warsh' || !!NativeModules.RoqiaReader?.extractSource) &&
+    [
+      'quran-warsh',
+      'translation-fr.hamidullah',
+      'translation-en.pickthall',
+    ].includes(pack.id),
+  copyBundled: async (pack, asset, target) => {
+    await ensurePrivateRoot();
+    await ensureDirectory(privatePath('staging'));
+    await removeIfPresent(privatePath(target));
+    await FileSystem.cpAsset(
+      `roqia-offline/${pack.id}/${pack.version}/${asset.file}`,
+      privatePath(target),
+    );
+  },
   sync:
     Platform.OS === 'android'
       ? paths =>

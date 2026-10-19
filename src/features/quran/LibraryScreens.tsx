@@ -261,18 +261,14 @@ export function MushafDownloadScreen({route, navigation}: any) {
             />
           </Group>
           <Ornament title="ترجمة المعاني" />
-          {e.riwaya === 'hafs' ? (
-            <Row
-              title="اختيار الترجمة"
-              detail="Français · English · دون ترجمة"
-              icon="translate"
-              onPress={() =>
-                navigation.navigate('QuranTranslations', {editionId: e.id})
-              }
-            />
-          ) : (
-            <Banner text="الترجمات متاحة مع حفص؛ لا نربطها بآيات ورش دون مطابقة." />
-          )}
+          <Row
+            title="اختيار الترجمة"
+            detail="Français · English · دون ترجمة"
+            icon="translate"
+            onPress={() =>
+              navigation.navigate('QuranTranslations', {editionId: e.id})
+            }
+          />
           <Group>
             <SettingRow
               title="سياسة التنزيل"
