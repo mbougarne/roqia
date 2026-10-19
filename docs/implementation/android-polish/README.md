@@ -29,12 +29,15 @@ Du'a and Tasbihat were updated using the `13-dua.png` and `14-tasbih.png` refere
 
 ## 5. Mini-player close
 
-The mini-player has a small close icon with a 48 dp accessible target, available during playback, while paused and for an error-only bar. It uses the existing stop operation to clear the native queue, sleep timer and saved session. A pending saved-session restore is invalidated when stopping. See [verification and captures](mini-player-close/README.md).
+The mini-player has a small close icon with a 48 dp accessible target, available during playback, while paused and for an error-only bar. It uses the existing stop operation to clear the native queue, sleep timer and saved session. A pending saved-session restore is invalidated when stopping. See [verification and captures](mini-player-close/README.md). The user accepted this part and authorized continuing on 2026-10-19.
 
-## Remaining requested batch, in order
+## 6. Persisted digit styles
 
-6. Implement persisted Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩` throughout user-visible formatting. Preserve canonical storage and IDs, source Quran text, timing math, URLs and edition/font-specific verse markers. Inspect current formatting/settings boundaries first.
-7. Keep Doha and bundle at least two additional full regional adhans plus an honestly labelled short option. Inspect the existing sounds catalog, attribution and Android native sound handling first. Verify sources, provenance and redistribution permission; do not invent regional or performer labels. Preview, selection, scheduling and background playback must all work offline immediately, without a download. Searching for suitable recordings is authorized.
+Settings now offers Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩`. Generated interface counts, times, dates, sizes and numeric fields follow the saved choice immediately and after restart. Canonical values, IDs, URLs, source Quran text and edition/font-specific inline verse markers are preserved. See [verification and captures](digit-styles/README.md). The user accepted this part and authorized continuing on 2026-10-19.
+
+## 7. User-provided adhans
+
+The regional-recording proposal was rejected. The replacement uses the user's five supplied MP3 originals, labelled **الأذان الأول** through **الأذان الخامس**, plus **أذان قصير**, a separate clip of Adhan-05 from 00:00 to 00:15. The information, source and rights sections are removed. The final screen keeps the title and six offline recording rows with selection and playback controls, plus the original bottom buttons and note. Only the header tabs and explanatory text are removed; choosing a recording applies it to all prayers, including Fajr. See [Android verification](bundled-adhans/README.md). This replacement awaits the user's review.
 
 Continue in this checkout on an appropriate `codex/` branch. Use only `emulator-5554`, user 0, `name.roqia.app`, with in-place updates and restored QA preferences/counters. Keep private backups outside Git. Preserve the accepted Quran recording/riwaya/numbering/integrity/native-clipping safeguards from PR #19. Do not expand visual acceptance from tests or a screenshot gallery.
 

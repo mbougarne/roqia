@@ -16,7 +16,7 @@ import {
   IconButton,
   usePalette,
 } from '../../design/ui';
-import {number} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {Ornament, rtlRow} from '../../design/components';
 import {toggleBookmark} from './bookmarks';
 import {useConfirmReset} from './ResetConfirmation';
@@ -49,6 +49,7 @@ export function ReadingCard({
   dua?: boolean;
   showCompletion?: boolean;
 }) {
+  const {number, digits} = useFormat();
   const confirmReset = useConfirmReset();
   const p = usePalette();
   const completed =
@@ -120,7 +121,7 @@ export function ReadingCard({
                   paddingTop: 8,
                 }),
               }}>
-              {text}
+              {digits(text ?? '')}
             </AppText>
           ))}
         <View style={{...rtlRow, alignItems: 'stretch', gap: 8}}>
@@ -274,7 +275,7 @@ export function ReadingCard({
           role="caption"
           selectable
           style={{color: p.textSecondary, textAlign: 'center'}}>
-          {item.note}
+          {digits(item.note)}
         </AppText>
       )}
       {item.repeatDescription && (
@@ -282,7 +283,7 @@ export function ReadingCard({
           role="caption"
           selectable
           style={{color: p.textSecondary, textAlign: 'center'}}>
-          {item.repeatDescription}
+          {digits(item.repeatDescription)}
         </AppText>
       )}
       <View style={{...rtlRow, alignItems: 'stretch', gap: 6}}>

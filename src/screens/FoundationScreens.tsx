@@ -22,7 +22,7 @@ import {
 } from '../design/ui';
 import {themeContext, homeRepeatContext} from '../store';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
-import {number, ltr} from '../design/format';
+import {ltr} from '../design/format';
 import {type ThemePreference} from '../repositories/models';
 import {getSettings, updateSettings} from '../services/persistence';
 export function MoreScreen({navigation}: any) {
@@ -123,8 +123,14 @@ export function RecoveryScreen({route, navigation}: any) {
 export function SettingsScreen({navigation}: any) {
   const quran = useQuran();
   const confirmReset = useConfirmReset();
-  const {preference, setPreference, uiScale, setUiScale} =
-    useContext(themeContext);
+  const {
+    preference,
+    setPreference,
+    uiScale,
+    setUiScale,
+    digitStyle,
+    setDigitStyle,
+  } = useContext(themeContext);
   const {resetAllRepeats} = useContext(homeRepeatContext);
   const [wifi, setWifi] = React.useState(true);
   React.useEffect(() => {
@@ -172,7 +178,19 @@ export function SettingsScreen({navigation}: any) {
             void setUiScale(v).catch(() => Alert.alert('تعذر حفظ حجم النص'))
           }
         />
-        <SettingRow title="الأرقام" detail="0123456789" icon="text-size" />
+        <AppText role="label">الأرقام</AppText>
+        <Segments
+          value={digitStyle}
+          options={[
+            {value: 'western', label: ltr('0123456789')},
+            {value: 'eastern', label: ltr('٠١٢٣٤٥٦٧٨٩')},
+          ]}
+          onChange={value =>
+            void setDigitStyle(value).catch(() =>
+              Alert.alert('تعذر حفظ شكل الأرقام'),
+            )
+          }
+        />
       </Card>
       <Ornament title="القرآن والتنزيلات" />
       <Group>

@@ -16,7 +16,7 @@ import {
   SettingRow,
   rtlRow,
 } from '../../design/components';
-import {number} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {chapters} from './domain';
 import {useLibrary} from './context';
 import {act} from './LibraryScreens';
@@ -76,6 +76,7 @@ export function QuranAudioScreen({route, navigation}: any) {
   );
 }
 export function OfflineAudioScreen({navigation}: any) {
+  const {number} = useFormat();
   const {runtime, error, retry} = useLibrary(),
     p = usePalette();
   const recordings = runtime.catalog.recordings

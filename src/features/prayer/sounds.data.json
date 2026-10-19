@@ -1,72 +1,68 @@
 [
   {
-    "id": "adhan-doha-normal",
-    "variant": "normal",
-    "title": "أذان الدوحة",
-    "notice": "تسجيل من الدوحة (2013–2014) · اسم المؤذن غير مذكور في المصدر. Internet Archive · Public Domain Mark 1.0 · الملف الأصلي دون تعديل.",
-    "pack": {
-      "id": "adhan-doha-normal",
-      "version": "2026.10.18",
-      "title": "أذان الدوحة",
-      "review": "approved",
-      "capabilities": [
-        "adhan"
-      ],
-      "sourceMetadata": {
-        "publisher": "Internet Archive · Doha, Qatar",
-        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
-        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
-        "muezzin": "not identified by source",
-        "variant": "normal",
-        "verifiedAt": "2026-10-18"
-      },
-      "assets": [
-        {
-          "id": "audio",
-          "file": "audio.mp3",
-          "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_02_Dhuhr_Adhan.mp3",
-          "bytes": 2419879,
-          "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
-          "mime": "audio/mpeg"
-        }
-      ],
-      "manifestHash": "bb2b3735c7299c46aa28e36ee74d2e82a08169d152a21d75e20139aa9e696b97"
+    "id": "adhan-01",
+    "title": "الأذان الأول",
+    "kind": "full",
+    "bundled": {
+      "resource": "roqia_adhan_01",
+      "bytes": 304369,
+      "sha256": "6bbc400b43e80c8fb1950aa143f1681c51fa2a58b1c053fcd14508ed9f9834cf",
+      "duration": 120.448
     }
   },
   {
-    "id": "adhan-doha-fajr",
-    "variant": "fajr",
-    "title": "أذان الفجر · الدوحة",
-    "notice": "تسجيل من الدوحة (2013–2014) · اسم المؤذن غير مذكور في المصدر. Internet Archive · Public Domain Mark 1.0 · الملف الأصلي دون تعديل.",
-    "pack": {
-      "id": "adhan-doha-fajr",
-      "version": "2026.10.18",
-      "title": "أذان الفجر · الدوحة",
-      "review": "approved",
-      "capabilities": [
-        "adhan"
-      ],
-      "sourceMetadata": {
-        "publisher": "Internet Archive · Doha, Qatar",
-        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
-        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
-        "muezzin": "not identified by source",
-        "variant": "fajr",
-        "verifiedAt": "2026-10-18"
-      },
-      "assets": [
-        {
-          "id": "audio",
-          "file": "audio.mp3",
-          "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_01_Fajr_Adhan.mp3",
-          "bytes": 2901706,
-          "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
-          "mime": "audio/mpeg"
-        }
-      ],
-      "manifestHash": "f24c2134161749da0a6aacf50c8234693f79910e4d1b5f3b83b12ba00e6c3741"
+    "id": "adhan-02",
+    "title": "الأذان الثاني",
+    "kind": "full",
+    "bundled": {
+      "resource": "roqia_adhan_02",
+      "bytes": 465224,
+      "sha256": "2f97e880c0a51a5eedfb7623bdff8507b0a55dba9e84f3792a56a2a989bb816c",
+      "duration": 200.836
+    }
+  },
+  {
+    "id": "adhan-03",
+    "title": "الأذان الثالث",
+    "kind": "full",
+    "bundled": {
+      "resource": "roqia_adhan_03",
+      "bytes": 318554,
+      "sha256": "bf601b1e075ace128b40270ab08a90ea30d8be989456c657858c52520991396a",
+      "duration": 127.504
+    }
+  },
+  {
+    "id": "adhan-04",
+    "title": "الأذان الرابع",
+    "kind": "full",
+    "bundled": {
+      "resource": "roqia_adhan_04",
+      "bytes": 1567897,
+      "sha256": "b7b1ec5511a6a3ddf544ea2bfea29f3c46d7253bfb503982ef580907a338a5de",
+      "duration": 187.274376
+    }
+  },
+  {
+    "id": "adhan-05",
+    "title": "الأذان الخامس",
+    "kind": "full",
+    "bundled": {
+      "resource": "roqia_adhan_05",
+      "bytes": 1897034,
+      "sha256": "22202889003280d028a38f36ca32b4e1bf87bf51c3fb72cc0ca026065a606dbd",
+      "duration": 237.0
+    }
+  },
+  {
+    "id": "adhan-05-short",
+    "title": "أذان قصير",
+    "kind": "short",
+    "bundled": {
+      "resource": "roqia_adhan_05_short",
+      "bytes": 151604,
+      "sha256": "f6193e5ebd475c56038d6890534e47f84883c8a72509b0f2713904a2d572d3c4",
+      "duration": 15.0
     }
   }
 ]

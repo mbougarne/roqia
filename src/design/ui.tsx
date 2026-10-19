@@ -21,6 +21,8 @@ import {SvgXml} from 'react-native-svg';
 import {themeContext} from '../store';
 import {layout, palettes, typography} from './tokens';
 import icons from './icons.json';
+import {normalizeDigits} from './format';
+import {useFormat} from './useFormat';
 export const usePalette = () => palettes[useContext(themeContext).mode];
 export type IconName = keyof typeof icons;
 export function AppIcon({
@@ -461,8 +463,18 @@ const styles = StyleSheet.create({
 export function Input({
   label,
   hideLabel = false,
+  numeric = false,
   ...props
-}: TextInputProps & {label: string; hideLabel?: boolean}) {
+}: TextInputProps & {label: string; hideLabel?: boolean; numeric?: boolean}) {
+  const {digits} = useFormat();
+  const numericValue =
+    numeric ||
+    [
+      'numeric',
+      'number-pad',
+      'decimal-pad',
+      'numbers-and-punctuation',
+    ].includes(props.keyboardType ?? '');
   const p = usePalette(),
     {uiScale} = useContext(themeContext);
   return (
@@ -470,6 +482,14 @@ export function Input({
       {!hideLabel && <AppText role="label">{label}</AppText>}
       <TextInput
         {...props}
+        value={
+          numericValue && props.value !== undefined
+            ? digits(props.value)
+            : props.value
+        }
+        onChangeText={value =>
+          props.onChangeText?.(numericValue ? normalizeDigits(value) : value)
+        }
         accessibilityLabel={label}
         allowFontScaling
         placeholderTextColor={p.textSecondary}

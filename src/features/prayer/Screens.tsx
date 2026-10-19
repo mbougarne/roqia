@@ -50,7 +50,8 @@ import {
 } from '../../design/components';
 import {Illustration} from '../../design/Illustration';
 import {PanelArtwork} from '../../design/PanelArtwork';
-import {ltr, number} from '../../design/format';
+import {ltr} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {
   defaults,
   methods,
@@ -166,6 +167,7 @@ function Status({error, retry}: {error: boolean; retry: () => void}) {
   ) : null;
 }
 export function PrayerScreen({navigation}: any) {
+  const {digits, date: formatDate} = useFormat();
   const {prefs, tables, coverage, error, now, load} = usePrayer();
   const p = usePalette(),
     {mode, uiScale} = useContext(themeContext);
@@ -197,13 +199,12 @@ export function PrayerScreen({navigation}: any) {
     ),
     remaining = next ? Math.max(0, Math.ceil((next.at - now) / 1000)) : 0;
   const humanDate = /^\d{4}-\d{2}-\d{2}$/.test(date)
-    ? new Intl.DateTimeFormat('ar-MA-u-nu-latn', {
+    ? formatDate(new Date(date + 'T12:00:00Z'), {
         weekday: 'long',
         day: 'numeric',
         month: 'long',
         timeZone: 'UTC',
-        numberingSystem: 'latn',
-      }).format(new Date(date + 'T12:00:00Z'))
+      })
     : date;
   const adhan = () => navigation.navigate('PrayerAdhan');
   return (
@@ -248,12 +249,14 @@ export function PrayerScreen({navigation}: any) {
             <AppText role="caption">الصلاة القادمة</AppText>
             <AppText role="bodyStrong">{labels[next.name]}</AppText>
             <AppText role="prayerTime" style={visual.time}>
-              {clock(l.zone, next.at, prefs.format)}
+              {digits(clock(l.zone, next.at, prefs.format))}
             </AppText>
             <AppText role="caption" style={{color: p.textSecondary}}>
               المتبقي{' '}
               {ltr(
-                `${Math.floor(remaining / 3600)}:${String(Math.floor(remaining / 60) % 60).padStart(2, '0')}:${String(remaining % 60).padStart(2, '0')}`,
+                digits(
+                  `${Math.floor(remaining / 3600)}:${String(Math.floor(remaining / 60) % 60).padStart(2, '0')}:${String(remaining % 60).padStart(2, '0')}`,
+                ),
               )}
             </AppText>
           </View>
@@ -287,7 +290,7 @@ export function PrayerScreen({navigation}: any) {
                         'full' &&
                       coverage?.exact &&
                       !coverage?.fullFallback
-                    ? 'أذان كامل'
+                    ? 'تشغيل الأذان'
                     : 'تنبيه إشعار، قد يؤخره توفير الطاقة';
               return (
                 <View
@@ -330,7 +333,7 @@ export function PrayerScreen({navigation}: any) {
                     <AppText
                       role="bodyStrong"
                       style={[visual.time, {color: foreground, flexShrink: 1}]}>
-                      {clock(l.zone, r.at, prefs.format)}
+                      {digits(clock(l.zone, r.at, prefs.format))}
                     </AppText>
                     {r.name === 'sunrise' ? (
                       <View
@@ -476,6 +479,7 @@ export function PrayerScreen({navigation}: any) {
 }
 
 export function LocationScreen({navigation}: any) {
+  const {digits} = useFormat();
   const {prefs, error, load} = usePrayer(),
     [draft, setDraft] = useState({
       name: 'موقع يدوي',
@@ -596,14 +600,15 @@ export function LocationScreen({navigation}: any) {
         {(['name', 'latitude', 'longitude', 'zone'] as const).map((k, i) => (
           <Input
             key={k}
-            label={
+            numeric={k === 'latitude' || k === 'longitude'}
+            label={digits(
               [
                 'اسم المكان',
                 'خط العرض (-90 إلى 90)',
                 'خط الطول (-180 إلى 180)',
                 'المنطقة الزمنية، مثل Europe/Paris',
-              ][i]
-            }
+              ][i],
+            )}
             value={draft[k]}
             autoCapitalize="none"
             onChangeText={v => {
@@ -639,6 +644,7 @@ export function LocationScreen({navigation}: any) {
   );
 }
 export function QiblaScreen({navigation}: any) {
+  const {number} = useFormat();
   const {prefs, error, load} = usePrayer(),
     p = usePalette(),
     [heading, setHeading] = useState<{
@@ -748,7 +754,7 @@ export function QiblaScreen({navigation}: any) {
           </Pressable>
           <View
             accessible
-            accessibilityLabel={`اتجاه القبلة ${target.toFixed(1)} درجة من الشمال الحقيقي. ${live ? 'اتجاه حي نسبي لأعلى الجهاز' : 'مخطط ثابت، الشمال إلى أعلى'}`}>
+            accessibilityLabel={`اتجاه القبلة ${number(target, {minimumFractionDigits: 1, maximumFractionDigits: 1})} درجة من الشمال الحقيقي. ${live ? 'اتجاه حي نسبي لأعلى الجهاز' : 'مخطط ثابت، الشمال إلى أعلى'}`}>
             <QiblaCompass
               aligned={aligned && live}
               bearing={target}
@@ -763,7 +769,11 @@ export function QiblaScreen({navigation}: any) {
             <AppText
               role="prayerTime"
               style={[visual.time, {textAlign: 'center'}]}>
-              {target.toFixed(1)}°
+              {number(target, {
+                minimumFractionDigits: 1,
+                maximumFractionDigits: 1,
+              })}
+              °
             </AppText>
             <AppText
               role="caption"
@@ -875,6 +885,7 @@ export function CalibrationScreen({navigation}: any) {
   );
 }
 export function CalculationScreen({navigation}: any) {
+  const {number, digits} = useFormat();
   const {prefs, error, load} = usePrayer(),
     [draft, setDraft] = useState<Preferences | null>(null),
     [offsets, setOffsets] = useState<Record<string, string>>({}),
@@ -945,7 +956,9 @@ export function CalculationScreen({navigation}: any) {
               ))}
             </Disclosure>
           )}
-          <AppText role="sectionTitle">تعديل الدقائق (-30 إلى 30)</AppText>
+          <AppText role="sectionTitle">
+            {digits('تعديل الدقائق (-30 إلى 30)')}
+          </AppText>
           <Group>
             {events.map(n => (
               <SettingRow key={n} title={labels[n]}>
@@ -966,7 +979,7 @@ export function CalculationScreen({navigation}: any) {
                     textAlign: 'center',
                     writingDirection: 'ltr',
                   }}>
-                  {offsets[n] ?? '0'}
+                  {digits(offsets[n] ?? '0')}
                 </AppText>
                 <IconButton
                   name="plus"
@@ -986,8 +999,8 @@ export function CalculationScreen({navigation}: any) {
           <Segments
             value={draft.format}
             options={[
-              {value: '24', label: '24 ساعة'},
-              {value: '12', label: '12 ساعة'},
+              {value: '24', label: `${number(24)} ساعة`},
+              {value: '12', label: `${number(12)} ساعة`},
             ]}
             onChange={format => setDraft({...draft, format})}
           />
@@ -1040,6 +1053,7 @@ export function CalculationScreen({navigation}: any) {
   );
 }
 export function AdhanScreen({navigation}: any) {
+  const {number, digits} = useFormat();
   const {prefs, coverage, error, load} = usePrayer(),
     [draft, setDraft] = useState<Preferences | null>(null),
     [pre, setPre] = useState('0'),
@@ -1068,9 +1082,11 @@ export function AdhanScreen({navigation}: any) {
                 key={n}
                 title={labels[n]}
                 detail={
-                  {off: 'صامت', notification: 'إشعار فقط', full: 'أذان كامل'}[
-                    draft.modes[n]
-                  ]
+                  {
+                    off: 'صامت',
+                    notification: 'إشعار فقط',
+                    full: 'تشغيل الأذان',
+                  }[draft.modes[n]]
                 }
                 icon={n === 'isha' ? 'moon' : 'mosque'}>
                 <IconButton
@@ -1106,7 +1122,7 @@ export function AdhanScreen({navigation}: any) {
                     {
                       off: 'متوقف',
                       notification: 'إشعار فقط',
-                      full: 'أذان كامل',
+                      full: 'تشغيل الأذان',
                     }[m]
                   }
                   selected={draft.modes[editing] === m}
@@ -1121,7 +1137,7 @@ export function AdhanScreen({navigation}: any) {
           <Group>
             <SettingRow
               title="تنبيه قبل الصلاة"
-              detail="بالدقائق · 0 لإيقافه، حتى 30"
+              detail={digits('بالدقائق · 0 لإيقافه، حتى 30')}
               icon="bell">
               <IconButton
                 name="minus"
@@ -1129,7 +1145,7 @@ export function AdhanScreen({navigation}: any) {
                 disabled={Number(pre) <= 0}
                 onPress={() => setPre(String(Math.max(0, Number(pre) - 1)))}
               />
-              <AppText>{pre}</AppText>
+              <AppText>{digits(pre)}</AppText>
               <IconButton
                 name="plus"
                 label="زيادة دقائق التذكير"
@@ -1165,7 +1181,7 @@ export function AdhanScreen({navigation}: any) {
       <Disclosure title="الإذن والتغطية المحفوظة">
         <Card>
           <AppText>
-            لتشغيل الأذان الكامل، نزّل واختر صوت الأذان ونسخة الفجر، ثم فعّل إذن
+            لتشغيل الأذان، اختر أحد الأصوات المرفقة ونسخة الفجر، ثم فعّل إذن
             المنبهات والإشعارات. إذا تعذر ذلك، يستخدم التطبيق إشعارا فقط ويحفظ
             اختيارك.
           </AppText>
@@ -1182,7 +1198,7 @@ export function AdhanScreen({navigation}: any) {
         </AppText>
         <AppText role="caption">
           {coverage && prefs?.location
-            ? `${number(coverage.scheduled)} إشعارات مجدولة · التغطية حتى ${civilDate(prefs.location.zone, coverage.coveredUntil)} ${clock(prefs.location.zone, coverage.coveredUntil)}`
+            ? `${number(coverage.scheduled)} إشعارات مجدولة · التغطية حتى ${digits(civilDate(prefs.location.zone, coverage.coveredUntil))} ${digits(clock(prefs.location.zone, coverage.coveredUntil))}`
             : 'لا توجد تغطية مجدولة'}
         </AppText>
         <Button
@@ -1190,7 +1206,7 @@ export function AdhanScreen({navigation}: any) {
           label="إعدادات الإشعارات في الجهاز"
           onPress={() => attempt(openPrayerSettings)}
         />
-        <AppText>{`أذان كامل مجدول: ${number(coverage?.fullAdhan ?? 0)} · إشعار بديل: ${number(coverage?.fullFallback ?? 0)}`}</AppText>
+        <AppText>{`أذان صوتي مجدول: ${number(coverage?.fullAdhan ?? 0)} · إشعار بديل: ${number(coverage?.fullFallback ?? 0)}`}</AppText>
         <Button
           secondary
           label="إذن المنبهات والتذكيرات"

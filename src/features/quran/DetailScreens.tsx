@@ -27,7 +27,8 @@ import {
   usePalette,
   Sheet,
 } from '../../design/ui';
-import {number, bytes, ltr} from '../../design/format';
+import {ltr} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {
   chapters,
   editionById,
@@ -46,6 +47,7 @@ import {type Bookmark} from '../../repositories/models';
 import {removeBookmark} from '../devotional/bookmarks';
 import {noteData} from '../../data';
 export function QuranPreferencesScreen({route, navigation}: any) {
+  const {digits} = useFormat();
   const p = usePalette();
   const [preview, setPreview] = useState<{text: string; font: string} | null>(
     null,
@@ -166,8 +168,9 @@ export function QuranPreferencesScreen({route, navigation}: any) {
             />
             <SettingRow
               title="شكل الأرقام"
-              detail="0123456789"
+              detail={ltr(digits('0123456789'))}
               icon="text-size"
+              onPress={() => navigation.navigate('Settings')}
             />
             <SettingRow title="إبقاء الشاشة مضاءة" icon="sun">
               <Toggle
@@ -199,6 +202,7 @@ export function QuranPreferencesScreen({route, navigation}: any) {
   );
 }
 export function TranslationScreen({route, navigation}: any) {
+  const {bytes} = useFormat();
   const {runtime, ready, error, retry} = useLibrary(),
     id: EditionId = route.params.editionId,
     e = editionById(id),
@@ -298,6 +302,7 @@ export function TranslationScreen({route, navigation}: any) {
   );
 }
 export function QuranSearchScreen({navigation}: any) {
+  const {number} = useFormat();
   const palette = usePalette();
   const {runtime, ready} = useLibrary(),
     [id, setId] = useState<EditionId>('warsh-kfgqpc-v2.1-update6'),
@@ -440,6 +445,7 @@ export function QuranSearchScreen({navigation}: any) {
   );
 }
 export function QuranBookmarksScreen({navigation}: any) {
+  const {number} = useFormat();
   const runtime = useQuran(),
     [rows, setRows] = useState<Bookmark[]>([]),
     [failed, setFailed] = useState(false);

@@ -21,13 +21,13 @@ import {
   Row,
   StateView,
 } from '../../design/ui';
-import {bytes, ltr, number} from '../../design/format';
+import {ltr} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {nativeDownloadPorts} from './native';
 import {catalog} from './catalog';
 const packTitle = (id: string) => catalog.find(p => p.id === id)?.title ?? id;
 import {useQuran} from '../quran/context';
 import {type DownloadState, type InstalledPack} from './types';
-const displayBytes = (value: number) => ltr(bytes(value));
 const labels: Record<DownloadState, string> = {
   queued: 'في الانتظار',
   waiting_network: 'بانتظار الشبكة المسموحة',
@@ -74,6 +74,8 @@ const handle = (action: Promise<unknown>) => {
   );
 };
 export function DownloadsScreen({navigation}: any) {
+  const {bytes} = useFormat();
+  const displayBytes = (value: number) => ltr(bytes(value));
   const runtime = useQuran(),
     downloads = runtime.downloads;
   const [tab, setTab] = useState<'active' | 'done'>('active');
@@ -257,6 +259,8 @@ export function DownloadsScreen({navigation}: any) {
   );
 }
 export function StorageScreen({navigation}: any) {
+  const {number, bytes} = useFormat();
+  const displayBytes = (value: number) => ltr(bytes(value));
   const downloads = useQuran().downloads;
   const {revision, error, ready, retry} = useDownloads(),
     [usage, setUsage] = useState({installed: 0, partial: 0, free: 0}),

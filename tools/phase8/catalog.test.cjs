@@ -7,9 +7,9 @@ const {
   validateQuranCatalog,
   selectedAudio,
 } = require('../../src/features/quran/domain.ts');
-const sounds = require('../../src/features/prayer/sounds.data.json');
+const sounds = require('./legacy-sounds.fixture.json');
 const proof = require('../../docs/implementation/phase-8/audio-verification.json');
-test('complete Warsh/Hafs catalog and normal/Fajr files match acquired source bytes and do not mix riwayas', () => {
+test('complete Warsh/Hafs catalog and historical normal/Fajr audit match source bytes without mixing riwayas', () => {
   validateQuranCatalog(quranCatalog);
   assert.deepEqual(quranCatalog.recordings.map(r => r.riwaya).sort(), [
     'hafs',
@@ -30,10 +30,11 @@ test('complete Warsh/Hafs catalog and normal/Fajr files match acquired source by
       );
     }
   }
-  assert.deepEqual(sounds.map(s => s.variant).sort(), ['fajr', 'normal']);
+  const legacySounds = sounds.filter(s => s.pack);
+  assert.deepEqual(legacySounds.map(s => s.variant).sort(), ['fajr', 'normal']);
   const packs = [
     ...quranCatalog.recordings.flatMap(r => r.chapters.map(c => c.pack)),
-    ...sounds.map(s => s.pack),
+    ...legacySounds.map(s => s.pack),
   ];
   validateCatalog(packs);
   assert.equal(packs.length, 230);

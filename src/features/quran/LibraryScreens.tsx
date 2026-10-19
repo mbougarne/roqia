@@ -24,7 +24,8 @@ import {
   Row,
   StateView,
 } from '../../design/ui';
-import {number, bytes, ltr} from '../../design/format';
+import {ltr, normalizeDigits} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {
   editions,
   chapters,
@@ -43,6 +44,7 @@ export const act = (promise: Promise<unknown>) => {
   );
 };
 export function QuranLibraryScreen({navigation}: any) {
+  const {number} = useFormat();
   const {runtime, ready, error, retry} = useLibrary();
   const p = usePalette();
   const [id, setId] = useState<EditionId>(editions[0].id),
@@ -140,7 +142,7 @@ export function QuranLibraryScreen({navigation}: any) {
         onFocus={() => setSearchFocused(true)}
         onBlur={() => setSearchFocused(false)}
       />
-      {searchChapters(query).map(c => (
+      {searchChapters(normalizeDigits(query)).map(c => (
         <Pressable
           key={c.number}
           accessibilityRole="button"
@@ -194,7 +196,7 @@ export function QuranLibraryScreen({navigation}: any) {
           })
         }
       />
-      {!searchChapters(query).length && (
+      {!searchChapters(normalizeDigits(query)).length && (
         <StateView title="لا توجد سورة مطابقة" />
       )}
     </Page>
@@ -249,6 +251,7 @@ export function EditionScreen({navigation}: any) {
   );
 }
 export function MushafDownloadScreen({route, navigation}: any) {
+  const {bytes} = useFormat();
   const {runtime, ready, error, retry} = useLibrary(),
     e = editionById(route.params.editionId),
     t = runtime.text(e.id),

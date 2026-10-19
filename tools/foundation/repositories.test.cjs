@@ -159,6 +159,32 @@ test('SQLite migration rollback, retry, backup hash, serialized writes and reset
   assert.equal((await persistence.loadPersistedAppState()).repeatCounts[id], 0);
   await resetCounters({[id]: defaults[id]});
   assert.equal((await persistence.bookmarks.list()).length, 1);
+  const oldSettings = await readRecord('settings', 'singleton');
+  delete oldSettings.digitStyle;
+  sql
+    .prepare(
+      "UPDATE records SET value=? WHERE collection='settings' AND id='singleton'",
+    )
+    .run(JSON.stringify(oldSettings));
+  const beforeDigitChange = sql
+    .prepare('SELECT * FROM counters ORDER BY content_id')
+    .all();
+  assert.equal((await persistence.getSettings()).digitStyle, 'western');
+  await persistence.updateSettings({digitStyle: 'eastern'});
+  await persistence.persistAppState(
+    'light',
+    (await persistence.loadPersistedAppState()).repeatCounts,
+  );
+  assert.equal((await persistence.getSettings()).digitStyle, 'eastern');
+  await assert.rejects(
+    persistence.updateSettings({digitStyle: 'unknown'}),
+    /invalid_settings/,
+  );
+  assert.equal((await persistence.getSettings()).digitStyle, 'eastern');
+  assert.deepEqual(
+    sql.prepare('SELECT * FROM counters ORDER BY content_id').all(),
+    beforeDigitChange,
+  );
   sql.close();
   fs.rmSync(root, {recursive: true});
 });
