@@ -364,10 +364,14 @@ export function SearchField({
   label,
   value,
   onChange,
+  onFocus,
+  onBlur,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }) {
   const p = usePalette();
   return (
@@ -388,6 +392,8 @@ export function SearchField({
           value={value}
           placeholder={label}
           onChangeText={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
           style={{
             borderWidth: 0,
             backgroundColor: 'transparent',

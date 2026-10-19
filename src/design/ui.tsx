@@ -2,6 +2,8 @@ import React, {useContext} from 'react';
 import {
   ActivityIndicator,
   I18nManager,
+  KeyboardAvoidingView,
+  Platform,
   Modal,
   Pressable,
   ScrollView,
@@ -275,7 +277,9 @@ export function Page({
 }) {
   const p = usePalette();
   return (
-    <View style={{flex: 1, backgroundColor: p.background}}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1, backgroundColor: p.background}}>
       <View style={styles.header}>
         {onBack && (
           <IconButton label="رجوع" name="chevron-right" onPress={onBack} />
@@ -314,7 +318,7 @@ export function Page({
           {footer}
         </View>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 export function StateView({

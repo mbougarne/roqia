@@ -1,4 +1,16 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {
+  gpsLocation,
+  preferencesForLocation,
+  liveHeading,
+  cityMatches,
+} from './locationSelection';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Alert,
   AppState,
@@ -469,10 +481,10 @@ export function LocationScreen({navigation}: any) {
       longitude: '',
       zone: 'Africa/Casablanca',
     }),
-    [gps, setGps] = useState<Awaited<ReturnType<typeof locate>> | null>(null),
     [busy, setBusy] = useState(false),
     [query, setQuery] = useState(''),
     [choice, setChoice] = useState<Location | null>(null);
+  const locationActive = useRef(false);
   useEffect(() => {
     if (prefs?.location) {
       const l = prefs.location;
@@ -485,16 +497,17 @@ export function LocationScreen({navigation}: any) {
     }
   }, [prefs]);
   useFocusEffect(
-    useCallback(
-      () => () => {
+    useCallback(() => {
+      locationActive.current = true;
+      return () => {
+        locationActive.current = false;
         adapter?.cancelLocation();
-      },
-      [],
-    ),
+      };
+    }, []),
   );
   const save = async (l: Location) => {
     if (!prefs) return;
-    await savePreferences({...prefs, location: validateLocation(l)});
+    await savePreferences(preferencesForLocation(prefs, l));
     navigation.goBack();
   };
   return (
@@ -503,23 +516,30 @@ export function LocationScreen({navigation}: any) {
       <View style={{alignItems: 'center', paddingVertical: 14}}>
         <AppIcon name="location" size={44} />
       </View>
+      {prefs?.location && (
+        <Banner icon="check" text={`الموقع المحفوظ: ${prefs.location.name}`} />
+      )}
       <Button
         secondary
-        label={busy ? 'جار تحديد الموقع' : 'استخدام موقعي مرة واحدة'}
+        label={
+          busy
+            ? 'جار تحديد الموقع'
+            : prefs?.location?.source === 'gps'
+              ? 'تحديث موقعي المحفوظ'
+              : 'استخدام موقعي وحفظه'
+        }
         disabled={busy || !prefs}
         onPress={() =>
           attempt(async () => {
             setBusy(true);
             try {
               const result = await locate();
-              setGps(result);
-              setChoice(null);
-              setDraft(d => ({
-                ...d,
-                name: 'موقعي',
-                latitude: String(result.latitude),
-                longitude: String(result.longitude),
-              }));
+              if (!locationActive.current) return;
+              const location = gpsLocation(
+                result,
+                Intl.DateTimeFormat().resolvedOptions().timeZone,
+              );
+              await save(location);
             } finally {
               setBusy(false);
             }
@@ -527,16 +547,14 @@ export function LocationScreen({navigation}: any) {
         }
       />
       <AppText role="caption" style={{textAlign: 'center'}}>
-        لتحديد مواقيت الصلاة واتجاه القبلة
+        يُحفظ الموقع للصلاة والقبلة. مواقيت الإحداثيات تُحسب بالطريقة المختارة؛
+        عند استخدام حصة الأوقاف ننتقل إلى رابطة العالم الإسلامي.
       </AppText>
-      {gps && (
-        <Banner text="تم تحديد موقعك. راجع الإحداثيات والمنطقة الزمنية أدناه ثم احفظ الموقع." />
-      )}
       <Ornament title="أو اختر المدينة" />
       <SearchField label="ابحث عن مدينة" value={query} onChange={setQuery} />
       <Group>
         {cities
-          .filter(c => !query || c.name.includes(query))
+          .filter(c => cityMatches(c.name, query))
           .map(c => (
             <RadioRow
               key={c.cityId}
@@ -558,17 +576,7 @@ export function LocationScreen({navigation}: any) {
         disabled={!prefs || !choice || busy}
         onPress={() => attempt(() => save(choice!))}
       />
-      <Disclosure
-        key={gps?.acquiredAt ?? 'manual'}
-        initiallyOpen={!!gps}
-        title="إحداثيات ومنطقة زمنية يدويا">
-        {gps && (
-          <AppText>
-            دقة الموقع {number(Math.round(gps.accuracy!))} متر. راجع المنطقة
-            الزمنية ثم احفظ. إحداثيات GPS لا تختار مدينة تلقائيا.
-          </AppText>
-        )}
-
+      <Disclosure title="إحداثيات ومنطقة زمنية يدويا">
         {(['name', 'latitude', 'longitude', 'zone'] as const).map((k, i) => (
           <Input
             key={k}
@@ -583,7 +591,6 @@ export function LocationScreen({navigation}: any) {
             value={draft[k]}
             autoCapitalize="none"
             onChangeText={v => {
-              if (k === 'latitude' || k === 'longitude') setGps(null);
               setDraft(d => ({...d, [k]: v}));
             }}
           />
@@ -605,9 +612,8 @@ export function LocationScreen({navigation}: any) {
                 latitude: Number(draft.latitude),
                 longitude: Number(draft.longitude),
                 zone: draft.zone.trim(),
-                source: gps ? 'gps' : 'manual',
-                acquiredAt: gps?.acquiredAt ?? Date.now(),
-                ...(gps ? {accuracy: gps.accuracy} : {}),
+                source: 'manual',
+                acquiredAt: Date.now(),
               });
             })
           }
@@ -617,7 +623,7 @@ export function LocationScreen({navigation}: any) {
   );
 }
 export function QiblaScreen({navigation}: any) {
-  const {prefs, error, load, now} = usePrayer(),
+  const {prefs, error, load} = usePrayer(),
     p = usePalette(),
     [heading, setHeading] = useState<{
       heading: number;
@@ -670,11 +676,9 @@ export function QiblaScreen({navigation}: any) {
   try {
     if (l) target = bearing(l);
   } catch {}
-  const live =
-    !!heading &&
-    now - heading.at >= 0 &&
-    now - heading.at < 2500 &&
-    heading.accuracy >= 2;
+  // Sensor events arrive more often than the one-second stale-reading timer.
+  // Compare against the current clock, never the older timer snapshot.
+  const live = liveHeading(heading, Date.now());
   return (
     <Page
       title="القبلة"

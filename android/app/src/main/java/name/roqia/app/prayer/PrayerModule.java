@@ -111,6 +111,22 @@ public final class PrayerModule extends ReactContextBaseJavaModule implements Li
       } catch(Exception e){finishLocation(null,"location_unavailable");}
     });
   }
+  @ReactMethod public void locationName(double latitude, double longitude, Promise promise) {
+    new Thread(() -> {
+      try {
+        if (!Geocoder.isPresent()) { promise.resolve(null); return; }
+        java.util.List<Address> results = new Geocoder(getReactApplicationContext(), new java.util.Locale("ar")).getFromLocation(latitude, longitude, 1);
+        String name = null;
+        if (results != null && !results.isEmpty()) {
+          Address address = results.get(0);
+          name = address.getLocality();
+          if (name == null) name = address.getSubAdminArea();
+          if (name == null) name = address.getAdminArea();
+        }
+        promise.resolve(name);
+      } catch (Exception ignored) { promise.resolve(null); }
+    }, "roqia-location-name").start();
+  }
   @ReactMethod public void cancelLocation(){handler.post(()->finishLocation(null,"location_cancelled"));}
   @ReactMethod public void startHeading(double latitude,double longitude,Promise promise){handler.post(()->{
     stop();

@@ -47,7 +47,8 @@ export function QuranLibraryScreen({navigation}: any) {
   const p = usePalette();
   const [id, setId] = useState<EditionId>(editions[0].id),
     [resume, setResume] = useState<Locator | null>(null),
-    [query, setQuery] = useState('');
+    [query, setQuery] = useState(''),
+    [searchFocused, setSearchFocused] = useState(false);
   useOnFocus(() => {
     let active = true;
     act(
@@ -83,48 +84,62 @@ export function QuranLibraryScreen({navigation}: any) {
           />
         </View>
       }>
-      <Group>
-        <SettingRow
-          title={edition.title}
-          icon="book"
-          onPress={() => navigation.navigate('QuranEditions')}
-        />
-      </Group>
-      {error ? (
-        <StateView
-          title="تعذر فتح المكتبة"
-          action={{label: 'إعادة المحاولة', onPress: retry}}
-        />
-      ) : !ready ? (
-        <StateView title="جارٍ فتح المكتبة" busy />
-      ) : !installed ? (
-        <Card>
-          <AppText role="sectionTitle">اختر مصحفك للقراءة دون اتصال</AppText>
-          <AppText>
-            يمكنك البحث في أسماء السور الآن. اختيار الرواية لا يبدأ التنزيل.
-          </AppText>
-          <Button
-            label="تنزيل المصحف"
-            onPress={() =>
-              navigation.navigate('QuranDownload', {editionId: id})
-            }
-          />
-        </Card>
-      ) : (
-        <Banner icon="offline" text="المصحف محفوظ على جهازك" />
-      )}
-      {resume && (
-        <FeatureCard
-          title="متابعة القراءة"
-          detail={
-            chapters[resume.surah - 1].name + ' · الآية ' + number(resume.verse)
-          }
-          art="quran-book"
-          onPress={() => navigation.navigate('QuranReader', resume)}
-        />
+      {!searchFocused && !query && (
+        <>
+          <Group>
+            <SettingRow
+              title={edition.title}
+              icon="book"
+              onPress={() => navigation.navigate('QuranEditions')}
+            />
+          </Group>
+          {error ? (
+            <StateView
+              title="تعذر فتح المكتبة"
+              action={{label: 'إعادة المحاولة', onPress: retry}}
+            />
+          ) : !ready ? (
+            <StateView title="جارٍ فتح المكتبة" busy />
+          ) : !installed ? (
+            <Card>
+              <AppText role="sectionTitle">
+                اختر مصحفك للقراءة دون اتصال
+              </AppText>
+              <AppText>
+                يمكنك البحث في أسماء السور الآن. اختيار الرواية لا يبدأ التنزيل.
+              </AppText>
+              <Button
+                label="تنزيل المصحف"
+                onPress={() =>
+                  navigation.navigate('QuranDownload', {editionId: id})
+                }
+              />
+            </Card>
+          ) : (
+            <Banner icon="offline" text="المصحف محفوظ على جهازك" />
+          )}
+          {resume && (
+            <FeatureCard
+              title="متابعة القراءة"
+              detail={
+                chapters[resume.surah - 1].name +
+                ' · الآية ' +
+                number(resume.verse)
+              }
+              art="quran-book"
+              onPress={() => navigation.navigate('QuranReader', resume)}
+            />
+          )}
+        </>
       )}
       <Ornament title="السور" />
-      <SearchField label="البحث عن سورة" value={query} onChange={setQuery} />
+      <SearchField
+        label="البحث عن سورة"
+        value={query}
+        onChange={setQuery}
+        onFocus={() => setSearchFocused(true)}
+        onBlur={() => setSearchFocused(false)}
+      />
       {searchChapters(query).map(c => (
         <Pressable
           key={c.number}
@@ -252,7 +267,7 @@ export function MushafDownloadScreen({route, navigation}: any) {
         <>
           <Group>
             <SettingRow
-              title="المصحف والخط"
+              title="معلومات المصحف"
               detail={size}
               icon="book"
               onPress={() =>

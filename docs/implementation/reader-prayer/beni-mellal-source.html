@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+	<head>
+	  <title>مواقيت الصلاة</title>
+
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+	  <link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript">
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-35630430-1']);
+			  _gaq.push(['_setDomainName', 'habous.gov.ma']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+		</script>
+		<script type="text/javascript">
+			function imprimer_page(){
+			  window.print();
+			}
+		</script>
+		<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=607832d79ce2660019ef9cd7&product=inline-share-buttons" async="async"></script>
+		<style>
+			* {
+				-webkit-print-color-adjust: exact !important;   /* Chrome, Safari */
+				color-adjust: exact !important;                 /*Firefox*/
+			}
+			.imgtop{
+				width:800px;
+				margin: 0 auto;
+				display:block;
+			}
+			.imgbot{
+				width:800px;
+				margin: -60px auto 0;
+				/*background : url("./images/motif3.png") no-repeat;
+				padding-top: 30px;*/
+			}
+			.imgbot .infodeleg{
+				background:#d19000;
+				width:500px;
+				margin:0 auto;
+				padding: 10px 60px;
+				border-radius:50px;
+				direction: rtl;
+				color:#fff;
+			}
+			
+			#horaire{
+				font-size: 14px;
+				direction: rtl;
+				width: 690px;
+				background: white;
+				position: relative;
+			}
+			
+			#horaire td{
+				border-bottom:1px solid #d19000;
+				padding: 2px 0;
+				font-size: 13px;
+			}
+			
+			.cournt{
+				background-color:#ECE8DC;
+			}
+			#horaire td.wakt{
+				background:#d19000;
+				color:#fff;
+				font-weight:bold;
+				font-size:14px;
+				padding-right:5px;
+				border:0;
+			}
+			optgroup {
+				background:#41281B;
+				color:#fff;
+			}
+			option {
+				background:#fff;
+				color:#41281B;
+				cursor:pointer;
+			}
+			@media print {
+				html, body {
+					zoom:92%; 
+			    }
+				.hide-print {display: none !important;visibility: hidden;}
+				#MyForm > div {
+					padding: 0 120px 0 0!important;
+					display: flex;
+					justify-content: center;
+				}
+				select{
+					border: none !important;
+					background: none;
+					color: #fff !important;;
+					font-weight: bold;
+					font-size: 1rem;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					text-indent: 1px;
+					text-overflow: '';
+				}
+				#horaire td {
+					padding: 0;
+					font-size: 12px;
+				}
+				.priere-section-top .logo img {
+					width: 130px;
+				}
+			}
+		</style>
+    </head> 
+	<body>
+
+		<section class="priere-section">
+			<div class="container">
+				<div class="priere-section-top">
+					<div class="logo">
+						<a href="https://habous.gov.ma"><img src="images/logo_habous-ar.png" alt="logo" /></a>
+					</div>
+					<h1>مواقيت الصلاة</h1>
+				</div>
+
+				<div class="pageh">
+					<div class="priere-section-month">
+						<p class="first">
+جُمَادَى ٱلْأُولَى 1448                         
+						</p>
+						<p>
+ أكتوبر / نونبر 2026						
+						</p>
+                    </div>
+											<form  id="MyForm" action="" method="post" name="horairep" style="text-align:center;">
+							<div style="border-radius: 6px 6px 0 0;color:#000000; border-top:3px solid #F8B334; border-bottom:2px solid #F8B334; background-color:#d19000; padding-top:10px; padding-bottom:10px; min-height: 35px; padding: 10px 15px;">
+								<div style="float:right;">
+									<span style="font-size: 15px;color:#fff; font-weight:bold;margin-left: 5px;"> حصة الصلاة الخاصة بمدينة : </span> 
+									<select name="ville" onChange="location.href=this.options[this.selectedIndex].value;" style="">
+									<option value='index.php?ville=1'  >الرباط</option><option value='index.php?ville=2'  >الخميسات</option><option value='index.php?ville=3'  >تيفلت</option><option value='index.php?ville=4'  >الرماني</option><option value='index.php?ville=5'  >والماس</option><option value='index.php?ville=6'  >بوزنيقة</option><option value='index.php?ville=7'  >القنيطرة</option><option value='index.php?ville=8'  >سيدي قاسم</option><option value='index.php?ville=9'  >سيدي يحيى الغرب</option><option value='index.php?ville=10'  >سيدي سليمان</option><option value='index.php?ville=11'  >سوق أربعاء الغرب</option><option value='index.php?ville=12'  >عرباوة</option><option value='index.php?ville=13'  >مولاي بوسلهام</option><option value='index.php?ville=14'  >طنجة</option><option value='index.php?ville=15'  >تطوان</option><option value='index.php?ville=16'  >العرائش</option><option value='index.php?ville=17'  >أصيلة</option><option value='index.php?ville=18'  >شفشاون</option><option value='index.php?ville=19'  >مرتيل</option><option value='index.php?ville=20'  >المضيق</option><option value='index.php?ville=21'  >القصر الكبير</option><option value='index.php?ville=22'  >القصر الصغير</option><option value='index.php?ville=23'  >الحسيمة</option><option value='index.php?ville=24'  >سبتة</option><option value='index.php?ville=25'  >الفنيدق</option><option value='index.php?ville=26'  >الجبهة</option><option value='index.php?ville=27'  >واد لاو</option><option value='index.php?ville=28'  >باب برد</option><option value='index.php?ville=29'  >وزان</option><option value='index.php?ville=30'  >بوسكور</option><option value='index.php?ville=31'  >وجدة</option><option value='index.php?ville=32'  >بركان</option><option value='index.php?ville=33'  >فكيك</option><option value='index.php?ville=34'  >بوعرفة</option><option value='index.php?ville=35'  >كرسيف</option><option value='index.php?ville=36'  >جرادة</option><option value='index.php?ville=37'  >عين الشعير</option><option value='index.php?ville=38'  >تاوريرت</option><option value='index.php?ville=39'  >الناظور</option><option value='index.php?ville=40'  >مليلية</option><option value='index.php?ville=41'  >دبدو</option><option value='index.php?ville=42'  >سلوان</option><option value='index.php?ville=43'  >بني أنصار</option><option value='index.php?ville=44'  >فرخانة</option><option value='index.php?ville=45'  >تالسينت</option><option value='index.php?ville=46'  >تندرارة</option><option value='index.php?ville=47'  >العيون الشرقية</option><option value='index.php?ville=48'  >بني ادرار</option><option value='index.php?ville=49'  >السعيدية</option><option value='index.php?ville=50'  >رأس الماء</option><option value='index.php?ville=51'  >تافوغالت</option><option value='index.php?ville=52'  >فزوان</option><option value='index.php?ville=53'  >أحفير</option><option value='index.php?ville=54'  >زايو</option><option value='index.php?ville=55'  >دريوش</option><option value='index.php?ville=56'  >بني تجيت</option><option value='index.php?ville=57'  >بوعنان</option><option value='index.php?ville=58'  >الدار البيضاء</option><option value='index.php?ville=59'  >المحمدية</option><option value='index.php?ville=60'  >بن سليمان</option><option value='index.php?ville=61'  >سطات</option><option value='index.php?ville=62'  >الكارة</option><option value='index.php?ville=63'  >البروج</option><option value='index.php?ville=64'  >ابن أحمد</option><option value='index.php?ville=65'  >برشيد</option><option value='index.php?ville=66'  >الجديدة</option><option value='index.php?ville=67'  >أزمور</option><option value='index.php?ville=68'  >سيدي بنور</option><option value='index.php?ville=69'  >خميس الزمامرة</option><option value='index.php?ville=70'  >خنيفرة</option><option value='index.php?ville=71'  >مولاي بوعزة</option><option value='index.php?ville=72'  >زاوية أحنصال</option><option value='index.php?ville=73'  selected=selected >بني ملال</option><option value='index.php?ville=74'  >أزيلال</option><option value='index.php?ville=75'  >الفقيه بنصالح</option><option value='index.php?ville=76'  >دمنات</option><option value='index.php?ville=77'  >القصيبة</option><option value='index.php?ville=78'  >قصبة تادلة</option><option value='index.php?ville=79'  >خريبكة</option><option value='index.php?ville=80'  >وادي زم</option><option value='index.php?ville=81'  >فاس</option><option value='index.php?ville=82'  >صفرو</option><option value='index.php?ville=83'  >مولاي يعقوب</option><option value='index.php?ville=84'  >بولمان</option><option value='index.php?ville=85'  >ميسور</option><option value='index.php?ville=86'  >رباط الخير</option><option value='index.php?ville=87'  >المنزل بني يازغة</option><option value='index.php?ville=88'  >إموزار كندر</option><option value='index.php?ville=89'  >تازة</option><option value='index.php?ville=90'  >تاونات</option><option value='index.php?ville=91'  >أكنول</option><option value='index.php?ville=92'  >تيزي وسلي</option><option value='index.php?ville=93'  >بورد</option><option value='index.php?ville=94'  >تاهلة</option><option value='index.php?ville=95'  >تيسة</option><option value='index.php?ville=96'  >قرية با محمد</option><option value='index.php?ville=97'  >كتامة</option><option value='index.php?ville=98'  >واد أمليل</option><option value='index.php?ville=99'  >مكناس</option><option value='index.php?ville=100'  >يفرن</option><option value='index.php?ville=101'  >الحاجب</option><option value='index.php?ville=102'  >زرهون</option><option value='index.php?ville=103'  >آزرو</option><option value='index.php?ville=104'  >مراكش</option><option value='index.php?ville=105'  >قلعة السراغنة</option><option value='index.php?ville=106'  >الصويرة</option><option value='index.php?ville=107'  >شيشاوة</option><option value='index.php?ville=108'  >بنجرير</option><option value='index.php?ville=109'  >الرحامنة</option><option value='index.php?ville=110'  >تمنار</option><option value='index.php?ville=111'  >آسفي</option><option value='index.php?ville=112'  >الوليدية</option><option value='index.php?ville=113'  >اليوسفية</option><option value='index.php?ville=114'  >تسلطانت</option><option value='index.php?ville=115'  >تامصلوحت</option><option value='index.php?ville=116'  >قطارة</option><option value='index.php?ville=117'  >أكادير</option><option value='index.php?ville=118'  >تارودانت</option><option value='index.php?ville=119'  >تزنيت</option><option value='index.php?ville=120'  >إغرم</option><option value='index.php?ville=121'  >تالوين</option><option value='index.php?ville=122'  >تافراوت</option><option value='index.php?ville=123'  >طاطا</option><option value='index.php?ville=124'  >أقا</option><option value='index.php?ville=125'  >فم لحصن</option><option value='index.php?ville=126'  >بويكرة</option><option value='index.php?ville=127'  >أولاد تايمة</option><option value='index.php?ville=128'  >الرشيدية</option><option value='index.php?ville=129'  >الريصاني</option><option value='index.php?ville=130'  >أرفود</option><option value='index.php?ville=131'  >تنديت</option><option value='index.php?ville=132'  >كلميمة</option><option value='index.php?ville=133'  >إملشيل</option><option value='index.php?ville=134'  >تنجداد</option><option value='index.php?ville=135'  >الريش</option><option value='index.php?ville=136'  >ميدلت</option><option value='index.php?ville=137'  >زاكورة</option><option value='index.php?ville=138'  >ورزازات</option><option value='index.php?ville=139'  >تنغير</option><option value='index.php?ville=140'  >هسكورة</option><option value='index.php?ville=141'  >قلعة مكونة</option><option value='index.php?ville=142'  >أكدز</option><option value='index.php?ville=143'  >بومالن دادس</option><option value='index.php?ville=144'  >النيف</option><option value='index.php?ville=145'  >أسول</option><option value='index.php?ville=146'  >أمسمرير</option><option value='index.php?ville=147'  >تازارين</option><option value='index.php?ville=148'  >سيدي إفني</option><option value='index.php?ville=149'  >كلميم</option><option value='index.php?ville=150'  >أسا</option><option value='index.php?ville=151'  >الزاك</option><option value='index.php?ville=152'  >طانطان</option><option value='index.php?ville=153'  >بويزكارن</option><option value='index.php?ville=154'  >المحبس</option><option value='index.php?ville=155'  >لمسيد</option><option value='index.php?ville=156'  >العيون</option><option value='index.php?ville=157'  >السمارة</option><option value='index.php?ville=158'  >بوجدور</option><option value='index.php?ville=159'  >طرفاية</option><option value='index.php?ville=160'  >تفاريتي</option><option value='index.php?ville=161'  >بوكراع</option><option value='index.php?ville=162'  >كلتة زمور</option><option value='index.php?ville=163'  >أمكالة</option><option value='index.php?ville=164'  >أخفنير</option><option value='index.php?ville=165'  >الداخلة</option><option value='index.php?ville=166'  >الكويرة</option><option value='index.php?ville=167'  >أوسرد</option><option value='index.php?ville=168'  >بئر كندوز</option><option value='index.php?ville=169'  >بئر أنزاران</option><option value='index.php?ville=301'  >خميس سيدي عبد الجليل</option><option value='index.php?ville=302'  >أولاد عياد</option><option value='index.php?ville=303'  >تاهلة</option><option value='index.php?ville=304'  >مطماطة</option><option value='index.php?ville=305'  >إيمنتانوت</option><option value='index.php?ville=306'  >سيدي غانم</option><option value='index.php?ville=307'  >تفنتان</option><option value='index.php?ville=308'  >آيت القاق</option><option value='index.php?ville=309'  >أكدال أملشيل</option><option value='index.php?ville=310'  >اكودال املشيل ميدلت</option><option value='index.php?ville=311'  >أكايوار</option><option value='index.php?ville=312'  >عين العودة</option><option value='index.php?ville=313'  >أسكين</option><option value='index.php?ville=314'  >آيت ورير</option><option value='index.php?ville=315'  >زاوية مولاي ابراهيم</option><option value='index.php?ville=316'  >تولكولت</option><option value='index.php?ville=317'  >إيكس</option><option value='index.php?ville=318'  >كرس</option><option value='index.php?ville=319'  >تيسنت</option><option value='index.php?ville=320'  >فم زكيد</option><option value='index.php?ville=321'  >قصر إيش</option><option value='index.php?ville=322'  >إيمين ثلاث</option>									</select> 
+								</div>
+								<div class="hide-print sharethis-inline-share-buttons"></div>
+							</div>
+						</form>
+										<table id="horaire" cellspacing="0" cellpadding="0">
+						<tr align="center">
+							<td class="wakt">الأيام</td>
+							<td class="wakt">جُمَادَى ٱلْأُولَى</td>
+							<td class="wakt">أكتوبر / نونبر</td>
+							<td class="wakt">الصبح</td>
+							<td class="wakt">الشروق</td>
+							<td class="wakt">الظهر</td>
+							<td class="wakt">العصر</td>
+							<td class="wakt">المغرب</td>
+							<td class="wakt">العشاء</td>
+						</tr>
+						<tr align="center">						<td>الثلاثاء</td>
+						<td>1 </td>
+						<td>13 </td>
+						<td>05:01</td>
+						<td>06:21</td>
+						<td>12:17 </td>
+						<td>
+							15:27						</td>
+						<td>18:02</td>
+						<td> 19:12</td>
+						</tr>
+						<tr align="center">						<td>الأربعاء</td>
+						<td>2 </td>
+						<td>14 </td>
+						<td>05:02</td>
+						<td>06:22</td>
+						<td>12:16 </td>
+						<td>
+							15:27						</td>
+						<td>18:01</td>
+						<td> 19:11</td>
+						</tr>
+						<tr align="center">						<td>الخميس</td>
+						<td>3 </td>
+						<td>15 </td>
+						<td>05:02</td>
+						<td>06:23</td>
+						<td>12:16 </td>
+						<td>
+							15:26						</td>
+						<td>18:00</td>
+						<td> 19:10</td>
+						</tr>
+						<tr align="center" class="cournt" style="border-bottom: 2px solid #69633F !important;">						<td>الجمعة</td>
+						<td>4 </td>
+						<td>16 </td>
+						<td>05:03</td>
+						<td>06:23</td>
+						<td>12:16 </td>
+						<td>
+							15:25						</td>
+						<td>17:59</td>
+						<td> 19:09</td>
+						</tr>
+						<tr align="center">						<td>السبت</td>
+						<td>5 </td>
+						<td>17 </td>
+						<td>05:04</td>
+						<td>06:24</td>
+						<td>12:16 </td>
+						<td>
+							15:24						</td>
+						<td>17:58</td>
+						<td> 19:08</td>
+						</tr>
+						<tr align="center">						<td>الأحد</td>
+						<td>6 </td>
+						<td>18 </td>
+						<td>05:04</td>
+						<td>06:25</td>
+						<td>12:16 </td>
+						<td>
+							15:23						</td>
+						<td>17:56</td>
+						<td> 19:06</td>
+						</tr>
+						<tr align="center">						<td>الإثنين</td>
+						<td>7 </td>
+						<td>19 </td>
+						<td>05:05</td>
+						<td>06:26</td>
+						<td>12:15 </td>
+						<td>
+							15:22						</td>
+						<td>17:55</td>
+						<td> 19:05</td>
+						</tr>
+						<tr align="center">						<td>الثلاثاء</td>
+						<td>8 </td>
+						<td>20 </td>
+						<td>05:06</td>
+						<td>06:26</td>
+						<td>12:15 </td>
+						<td>
+							15:21						</td>
+						<td>17:54</td>
+						<td> 19:04</td>
+						</tr>
+						<tr align="center">						<td>الأربعاء</td>
+						<td>9 </td>
+						<td>21 </td>
+						<td>05:06</td>
+						<td>06:27</td>
+						<td>12:15 </td>
+						<td>
+							15:21						</td>
+						<td>17:53</td>
+						<td> 19:03</td>
+						</tr>
+						<tr align="center">						<td>الخميس</td>
+						<td>10 </td>
+						<td>22 </td>
+						<td>05:07</td>
+						<td>06:28</td>
+						<td>12:15 </td>
+						<td>
+							15:20						</td>
+						<td>17:52</td>
+						<td> 19:02</td>
+						</tr>
+						<tr align="center" class="cournt" style="border-bottom: 2px solid #69633F !important;">						<td>الجمعة</td>
+						<td>11 </td>
+						<td>23 </td>
+						<td>05:08</td>
+						<td>06:29</td>
+						<td>12:15 </td>
+						<td>
+							15:19						</td>
+						<td>17:51</td>
+						<td> 19:01</td>
+						</tr>
+						<tr align="center">						<td>السبت</td>
+						<td>12 </td>
+						<td>24 </td>
+						<td>05:08</td>
+						<td>06:29</td>
+						<td>12:15 </td>
+						<td>
+							15:18						</td>
+						<td>17:50</td>
+						<td> 19:00</td>
+						</tr>
+						<tr align="center">						<td>الأحد</td>
+						<td>13 </td>
+						<td>25 </td>
+						<td>05:09</td>
+						<td>06:30</td>
+						<td>12:15 </td>
+						<td>
+							15:18						</td>
+						<td>17:49</td>
+						<td> 18:59</td>
+						</tr>
+						<tr align="center">						<td>الإثنين</td>
+						<td>14 </td>
+						<td>26 </td>
+						<td>05:10</td>
+						<td>06:31</td>
+						<td>12:14 </td>
+						<td>
+							15:17						</td>
+						<td>17:48</td>
+						<td> 18:59</td>
+						</tr>
+						<tr align="center">						<td>الثلاثاء</td>
+						<td>15 </td>
+						<td>27 </td>
+						<td>05:11</td>
+						<td>06:32</td>
+						<td>12:14 </td>
+						<td>
+							15:16						</td>
+						<td>17:47</td>
+						<td> 18:58</td>
+						</tr>
+						<tr align="center">						<td>الأربعاء</td>
+						<td>16 </td>
+						<td>28 </td>
+						<td>05:11</td>
+						<td>06:33</td>
+						<td>12:14 </td>
+						<td>
+							15:15						</td>
+						<td>17:46</td>
+						<td> 18:57</td>
+						</tr>
+						<tr align="center">						<td>الخميس</td>
+						<td>17 </td>
+						<td>29 </td>
+						<td>05:12</td>
+						<td>06:33</td>
+						<td>12:14 </td>
+						<td>
+							15:15						</td>
+						<td>17:45</td>
+						<td> 18:56</td>
+						</tr>
+						<tr align="center" class="cournt" style="border-bottom: 2px solid #69633F !important;">						<td>الجمعة</td>
+						<td>18 </td>
+						<td>30 </td>
+						<td>05:13</td>
+						<td>06:34</td>
+						<td>12:14 </td>
+						<td>
+							15:14						</td>
+						<td>17:44</td>
+						<td> 18:55</td>
+						</tr>
+						<tr align="center">						<td>السبت</td>
+						<td>19 </td>
+						<td>31 </td>
+						<td>05:13</td>
+						<td>06:35</td>
+						<td>12:14 </td>
+						<td>
+							15:13						</td>
+						<td>17:43</td>
+						<td> 18:54</td>
+						</tr>
+						<tr align="center">						<td>الأحد</td>
+						<td>20 </td>
+						<td>1 </td>
+						<td>05:14</td>
+						<td>06:36</td>
+						<td>12:14 </td>
+						<td>
+							15:12						</td>
+						<td>17:42</td>
+						<td> 18:53</td>
+						</tr>
+						<tr align="center">						<td>الإثنين</td>
+						<td>21 </td>
+						<td>2 </td>
+						<td>05:15</td>
+						<td>06:37</td>
+						<td>12:14 </td>
+						<td>
+							15:12						</td>
+						<td>17:41</td>
+						<td> 18:53</td>
+						</tr>
+						<tr align="center">						<td>الثلاثاء</td>
+						<td>22 </td>
+						<td>3 </td>
+						<td>05:16</td>
+						<td>06:37</td>
+						<td>12:14 </td>
+						<td>
+							15:11						</td>
+						<td>17:41</td>
+						<td> 18:52</td>
+						</tr>
+						<tr align="center">						<td>الأربعاء</td>
+						<td>23 </td>
+						<td>4 </td>
+						<td>05:16</td>
+						<td>06:38</td>
+						<td>12:14 </td>
+						<td>
+							15:11						</td>
+						<td>17:40</td>
+						<td> 18:51</td>
+						</tr>
+						<tr align="center">						<td>الخميس</td>
+						<td>24 </td>
+						<td>5 </td>
+						<td>05:17</td>
+						<td>06:39</td>
+						<td>12:14 </td>
+						<td>
+							15:10						</td>
+						<td>17:39</td>
+						<td> 18:51</td>
+						</tr>
+						<tr align="center" class="cournt" style="border-bottom: 2px solid #69633F !important;">						<td>الجمعة</td>
+						<td>25 </td>
+						<td>6 </td>
+						<td>05:18</td>
+						<td>06:40</td>
+						<td>12:14 </td>
+						<td>
+							15:09						</td>
+						<td>17:38</td>
+						<td> 18:50</td>
+						</tr>
+						<tr align="center">						<td>السبت</td>
+						<td>26 </td>
+						<td>7 </td>
+						<td>05:19</td>
+						<td>06:41</td>
+						<td>12:14 </td>
+						<td>
+							15:09						</td>
+						<td>17:37</td>
+						<td> 18:49</td>
+						</tr>
+						<tr align="center">						<td>الأحد</td>
+						<td>27 </td>
+						<td>8 </td>
+						<td>05:19</td>
+						<td>06:42</td>
+						<td>12:14 </td>
+						<td>
+							15:08						</td>
+						<td>17:37</td>
+						<td> 18:49</td>
+						</tr>
+						<tr align="center">						<td>الإثنين</td>
+						<td>28 </td>
+						<td>9 </td>
+						<td>05:20</td>
+						<td>06:43</td>
+						<td>12:14 </td>
+						<td>
+							15:08						</td>
+						<td>17:36</td>
+						<td> 18:48</td>
+						</tr>
+						<tr align="center">						<td>الثلاثاء</td>
+						<td>29 </td>
+						<td>10 </td>
+						<td>05:21</td>
+						<td>06:43</td>
+						<td>12:14 </td>
+						<td>
+							15:07						</td>
+						<td>17:35</td>
+						<td> 18:47</td>
+						</tr>
+						<tr align="center">						<td>الأربعاء</td>
+						<td>حسب نتيجة المراقبة </td>
+						<td>11 </td>
+						<td>05:22</td>
+						<td>06:44</td>
+						<td>12:14 </td>
+						<td>
+							15:07						</td>
+						<td>17:35</td>
+						<td> 18:47</td>
+						</tr>
+											</table> 
+				</div>
+
+				<div class="imgbot">
+					<img src="./images/bg_cadre-bottom.png" style="display: block;">
+				</div>
+			</div>
+		</section>
+
+	</body>
+</html>

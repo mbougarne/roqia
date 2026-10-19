@@ -1,0 +1,25 @@
+{
+  "device": "Samsung SM_A566B",
+  "install": "in-place review update, no uninstall/data clear",
+  "recordsUnchangedBeforeTesting": 17,
+  "tests": 109,
+  "apkSha256": "9f6bc1c1543ec6584c405257641cb0ca7f0a904d16839cc374cc0f77e60e5dce",
+  "checks": [
+    "Continuous Fatiha flows inline with original verse markers",
+    "Tap inline verse opens action sheet",
+    "Bookmark add/remove round-trip",
+    "Separate verse cards retain their layout",
+    "Surah input and Al-Fatiha result visible above keyboard",
+    "GPS resolves Beni Mellal city name and saves directly",
+    "Saved GPS status visible on return to picker",
+    "GPS city and calculated prayer times survive cold restart",
+    "Beni Mellal found via Latin city search",
+    "Official Beni Mellal timetable shown after cold restart",
+    "Qibla displays fresh live compass readings with GPS and manual city"
+  ],
+  "limits": [
+    "No independent physical bearing/calibration accuracy measurement",
+    "iOS not verified"
+  ],
+  "privacy": "Only Roqia and its requested keyboard/permission facilities used. No gallery, albums, or other apps opened. Precise coordinates and app-private backups stay outside git."
+}

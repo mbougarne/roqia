@@ -1,3 +1,4 @@
+import {readerPassages} from './readerLayout';
 import {type DisplayTranslation} from './translationAlignment';
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
@@ -7,6 +8,7 @@ import {
   Text,
   AccessibilityInfo,
   Platform,
+  Pressable,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -18,6 +20,7 @@ import {
   IconButton,
   Page,
   StateView,
+  Sheet,
   usePalette,
 } from '../../design/ui';
 import {NumberBadge, Ornament, rtlRow} from '../../design/components';
@@ -78,7 +81,8 @@ function Reader({route, navigation}: any) {
     [prefs, setPrefs] = useState<ReaderPreferences>(readerDefaults),
     [translated, setTranslated] = useState<DisplayTranslation[] | null>(null),
     [translationError, setTranslationError] = useState(false),
-    [saved, setSaved] = useState<string[]>([]);
+    [saved, setSaved] = useState<string[]>([]),
+    [selectedVerse, setSelectedVerse] = useState<Verse | null>(null);
   const [focused, setFocused] = useState(false),
     [foreground, setForeground] = useState(AppState.currentState === 'active');
   const loadedRoute = useRef('');
@@ -182,7 +186,7 @@ function Reader({route, navigation}: any) {
     packVersion: text!.pack.version,
   });
   const viewable = useRef(({viewableItems}: any) => {
-    if (viewableItems[0]) position.current = viewableItems[0].item.number;
+    if (viewableItems[0]) position.current = viewableItems[0].item[0].number;
   }).current;
   useEffect(() => {
     if (!chapter || !text) return;
@@ -202,6 +206,45 @@ function Reader({route, navigation}: any) {
       act(persist());
     };
   }, [chapter, text, runtime, edition.id, edition.numbering, surah]);
+  const translationFor = (item: Verse) => {
+    return translated?.[item.number - 1]?.text ? (
+      <View style={{gap: 8}}>
+        <Ornament />
+        <AppText role="caption" style={{color: p.textSecondary}}>
+          ترجمة المعاني ·{' '}
+          {
+            runtime.catalog.translations.find(t => t.id === prefs.translationId)
+              ?.title
+          }
+        </AppText>
+        {translated[item.number - 1].warshStart !== undefined && (
+          <AppText role="caption">
+            {'معاني آيات ورش ' +
+              number(translated[item.number - 1].warshStart!) +
+              '–' +
+              number(item.number) +
+              ' · مرجع الترجمة ' +
+              number(translated[item.number - 1].sourceStart!) +
+              '–' +
+              number(translated[item.number - 1].sourceEnd!)}
+          </AppText>
+        )}
+        <AppText
+          role="translation"
+          accessibilityLanguage={
+            runtime.catalog.translations.find(t => t.id === prefs.translationId)
+              ?.language
+          }
+          style={{
+            writingDirection: 'ltr',
+            textAlign: 'left',
+            fontFamily: 'sans-serif',
+          }}>
+          {translated[item.number - 1].text}
+        </AppText>
+      </View>
+    ) : null;
+  };
   if (libraryError || failure)
     return (
       <Page title="قراءة القرآن" onBack={() => navigation.goBack()}>
@@ -221,13 +264,6 @@ function Reader({route, navigation}: any) {
           label="المصحف والتنزيل"
           onPress={() =>
             navigation.navigate('QuranDownload', {editionId: edition.id})
-          }
-        />
-        <Button
-          secondary
-          label="معلومات المصدر"
-          onPress={() =>
-            navigation.navigate('QuranSource', {editionId: edition.id})
           }
         />
       </Page>
@@ -268,9 +304,12 @@ function Reader({route, navigation}: any) {
         />
       </View>
       <FlatList
-        key={`${chapter.surah}:${anchor}`}
-        data={chapter.verses.slice(anchor - 1)}
-        keyExtractor={v => String(v.number)}
+        key={`${chapter.surah}:${anchor}:${prefs.view}`}
+        data={readerPassages(
+          chapter.verses.slice(anchor - 1),
+          prefs.view === 'continuous',
+        )}
+        keyExtractor={v => String(v[0].number)}
         initialNumToRender={10}
         maxToRenderPerBatch={8}
         windowSize={7}
@@ -307,11 +346,6 @@ function Reader({route, navigation}: any) {
               />
             )}
 
-            <AppText
-              role="caption"
-              style={{textAlign: 'center', color: p.textSecondary}}>
-              {edition.title} · {edition.publisher}
-            </AppText>
             <View
               style={{
                 ...rtlRow,
@@ -373,113 +407,67 @@ function Reader({route, navigation}: any) {
             )}
           </View>
         }
-        renderItem={({item}) => (
-          <Card
-            style={
-              prefs.view === 'continuous'
-                ? {borderWidth: 0, borderRadius: 0, paddingVertical: 20}
-                : undefined
-            }>
-            <View style={rtlRow}>
-              <NumberBadge value={item.number} />
-              <View style={{flex: 1}} />
-              <IconButton
-                name="bookmark"
-                selected={saved.includes(locatorKey(locator(item.number)))}
-                label={
-                  saved.includes(locatorKey(locator(item.number)))
-                    ? 'إزالة علامة القراءة'
-                    : 'حفظ علامة القراءة'
-                }
-                onPress={() =>
-                  act(
-                    runtime
-                      .toggleBookmark(locator(item.number))
-                      .then(() => runtime.bookmarks())
-                      .then(rows => setSaved(rows.map(b => b.bookmarkId))),
-                  )
-                }
-              />
-            </View>
-            <Text
-              selectable
-              style={{
-                fontFamily: font,
-                fontSize: prefs.size,
-                lineHeight: prefs.size * prefs.lineHeight,
-                fontWeight: 'normal',
-                includeFontPadding: true,
-                textAlign: 'center',
-                writingDirection: 'rtl',
-                color: p.textPrimary,
-              }}>
-              {item.text}
-            </Text>
-            {!!translated?.[item.number - 1]?.text && (
-              <View style={{gap: 8}}>
-                <Ornament />
-                <AppText role="caption" style={{color: p.textSecondary}}>
-                  ترجمة المعاني ·{' '}
-                  {
-                    runtime.catalog.translations.find(
-                      t => t.id === prefs.translationId,
-                    )?.title
-                  }
-                </AppText>
-                {translated[item.number - 1].warshStart !== undefined && (
-                  <AppText role="caption">
-                    {'معاني آيات ورش ' +
-                      number(translated[item.number - 1].warshStart!) +
-                      '–' +
-                      number(item.number) +
-                      ' · مرجع الترجمة ' +
-                      number(translated[item.number - 1].sourceStart!) +
-                      '–' +
-                      number(translated[item.number - 1].sourceEnd!)}
-                  </AppText>
-                )}
-                <AppText
-                  role="translation"
-                  accessibilityLanguage={
-                    runtime.catalog.translations.find(
-                      t => t.id === prefs.translationId,
-                    )?.language
-                  }
-                  style={{
-                    writingDirection: 'ltr',
-                    textAlign: 'left',
-                    fontFamily: 'sans-serif',
-                  }}>
-                  {translated[item.number - 1].text}
-                </AppText>
-              </View>
+        renderItem={({item: passage}) => (
+          <View style={{gap: 12}}>
+            {prefs.view === 'continuous' ? (
+              <Text
+                style={{
+                  fontFamily: font,
+                  fontSize: prefs.size,
+                  lineHeight: prefs.size * prefs.lineHeight,
+                  fontWeight: 'normal',
+                  includeFontPadding: true,
+                  textAlign: 'justify',
+                  writingDirection: 'rtl',
+                  color: p.textPrimary,
+                }}>
+                {passage.map(verse => (
+                  <Text
+                    key={verse.number}
+                    accessibilityRole="button"
+                    accessibilityLabel={`الآية ${verse.number}، خيارات الآية`}
+                    onPress={() => {
+                      position.current = verse.number;
+                      setSelectedVerse(verse);
+                    }}>
+                    {verse.text}
+                    {edition.riwaya === 'hafs'
+                      ? ` ﴿${number(verse.number)}﴾ `
+                      : ' '}
+                  </Text>
+                ))}
+              </Text>
+            ) : (
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={`الآية ${passage[0].number}، خيارات الآية`}
+                onPress={() => setSelectedVerse(passage[0])}>
+                <Card>
+                  <NumberBadge value={passage[0].number} />
+                  <Text
+                    style={{
+                      fontFamily: font,
+                      fontSize: prefs.size,
+                      lineHeight: prefs.size * prefs.lineHeight,
+                      fontWeight: 'normal',
+                      includeFontPadding: true,
+                      textAlign: 'center',
+                      writingDirection: 'rtl',
+                      color: p.textPrimary,
+                    }}>
+                    {passage[0].text}
+                  </Text>
+                  {translationFor(passage[0])}
+                </Card>
+              </Pressable>
             )}
-            <View
-              style={{
-                ...rtlRow,
-                borderTopWidth: 0.5,
-                borderColor: p.borderSubtle,
-                justifyContent: 'center',
-              }}>
-              <IconButton
-                name="copy"
-                label="نسخ الآية"
-                onPress={() => {
-                  Clipboard.setString(item.text);
-                  AccessibilityInfo.announceForAccessibility(
-                    'تم نسخ النص كما في المصدر',
-                  );
-                }}
-              />
-              <IconButton
-                name="info"
-                label="الإبلاغ عن ملاحظة في النص"
-                onPress={() =>
-                  navigation.navigate('QuranSource', locator(item.number))
-                }
-              />
-            </View>
-          </Card>
+            {prefs.view === 'continuous' &&
+              passage
+                .filter(item => translated?.[item.number - 1]?.text)
+                .map(item => (
+                  <View key={item.number}>{translationFor(item)}</View>
+                ))}
+          </View>
         )}
         ListFooterComponent={
           <View style={{gap: 12, paddingTop: 20}}>
@@ -496,14 +484,49 @@ function Reader({route, navigation}: any) {
                 }
               />
             )}
-            <AppText
-              role="caption"
-              style={{writingDirection: 'auto', textAlign: 'auto'}}>
-              {chapter.sourceNotice}
-            </AppText>
           </View>
         }
       />
+      <Sheet
+        visible={selectedVerse !== null}
+        title={
+          selectedVerse
+            ? `الآية ${number(selectedVerse.number)}`
+            : 'خيارات الآية'
+        }
+        onClose={() => setSelectedVerse(null)}>
+        <Button
+          label="نسخ الآية"
+          icon="copy"
+          onPress={() => {
+            if (!selectedVerse) return;
+            Clipboard.setString(selectedVerse.text);
+            AccessibilityInfo.announceForAccessibility('تم نسخ الآية');
+            setSelectedVerse(null);
+          }}
+        />
+        <Button
+          label={
+            selectedVerse &&
+            saved.includes(locatorKey(locator(selectedVerse.number)))
+              ? 'إزالة علامة القراءة'
+              : 'حفظ علامة القراءة'
+          }
+          icon="bookmark"
+          onPress={() => {
+            if (!selectedVerse) return;
+            act(
+              runtime
+                .toggleBookmark(locator(selectedVerse.number))
+                .then(() => runtime.bookmarks())
+                .then(rows => {
+                  setSaved(rows.map(b => b.bookmarkId));
+                  setSelectedVerse(null);
+                }),
+            );
+          }}
+        />
+      </Sheet>
       <View
         style={{
           ...rtlRow,
