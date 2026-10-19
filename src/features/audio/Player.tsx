@@ -35,7 +35,8 @@ import {
   usePalette,
 } from '../../design/ui';
 import {themeContext} from '../../store';
-import {number, ltr} from '../../design/format';
+import {ltr} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {audioErrors, playback, restoreDownloadedSession} from './controller';
 import {readRecord} from '../../repositories/database';
 import {Waveform} from '../../design/Waveform';
@@ -52,6 +53,7 @@ import {
 } from '../../design/components';
 import {sleepDeadline, sleepSupported} from './sleep';
 export function MiniPlayer({onOpen}: {onOpen: () => void}) {
+  const {digits} = useFormat();
   const track = useActiveTrack(),
     state = usePlaybackState().state,
     p = usePalette();
@@ -83,16 +85,16 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
           {error}
         </AppText>
       )}
-      {track && (
-        <>
-          <View style={rtlRow}>
+      <View style={rtlRow}>
+        {track && (
+          <>
             <Pressable
               accessibilityRole="button"
               accessibilityLabel="المشغل"
               onPress={onOpen}
               style={{flex: 1, minHeight: 48, justifyContent: 'center'}}>
               <AppText role="bodyStrong" numberOfLines={1} style={{color: ink}}>
-                {track.title}
+                {digits(track.title ?? '')}
               </AppText>
               <AppText
                 role="caption"
@@ -123,30 +125,38 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
                 color="#12392E"
               />
             </Pressable>
-          </View>
+          </>
+        )}
+        <IconButton
+          name="close"
+          label="إيقاف الصوت وإغلاق المشغل"
+          color={ink}
+          onPress={() => void playback.stop()}
+        />
+      </View>
+      {track && (
+        <View
+          accessibilityRole="progressbar"
+          accessibilityValue={{
+            min: 0,
+            max: 100,
+            now: Math.round(duration ? (position / duration) * 100 : 0),
+          }}
+          style={{
+            height: 3,
+            backgroundColor: '#FFFFFF25',
+            borderRadius: 2,
+            overflow: 'hidden',
+            marginTop: 6,
+          }}>
           <View
-            accessibilityRole="progressbar"
-            accessibilityValue={{
-              min: 0,
-              max: 100,
-              now: Math.round(duration ? (position / duration) * 100 : 0),
-            }}
             style={{
               height: 3,
-              backgroundColor: '#FFFFFF25',
-              borderRadius: 2,
-              overflow: 'hidden',
-              marginTop: 6,
-            }}>
-            <View
-              style={{
-                height: 3,
-                width: `${Math.min(100, duration ? (position / duration) * 100 : 0)}%`,
-                backgroundColor: control,
-              }}
-            />
-          </View>
-        </>
+              width: `${Math.min(100, duration ? (position / duration) * 100 : 0)}%`,
+              backgroundColor: control,
+            }}
+          />
+        </View>
       )}
     </View>
   );
@@ -172,6 +182,7 @@ export function PlayerScreen({
   startDisabled?: boolean;
   startLabel?: string;
 }) {
+  const {number, duration: formatDuration, digits} = useFormat();
   const p = usePalette();
   const {width, fontScale} = useWindowDimensions();
   const {uiScale} = useContext(themeContext);
@@ -253,10 +264,7 @@ export function PlayerScreen({
     parts && parts.length > 1 ? parts[parts.length - 1] : track?.title;
   const displayArtist =
     parts && parts.length > 1 ? parts.slice(0, -1).join(' · ') : track?.artist;
-  const clock = (s: number) =>
-    ltr(
-      `${number(Math.floor(s / 60))}:${String(Math.floor(s % 60)).padStart(2, '0')}`,
-    );
+  const clock = (s: number) => ltr(formatDuration(s));
   return (
     <Page title="الاستماع" onBack={() => navigation.goBack()}>
       {intro}
@@ -268,7 +276,7 @@ export function PlayerScreen({
           fontSize: 24 * uiScale,
           lineHeight: 36 * uiScale,
         }}>
-        {displayTitle ?? contextTitle ?? 'اختر مقطعا للاستماع'}
+        {digits(displayTitle ?? contextTitle ?? 'اختر مقطعا للاستماع')}
       </AppText>
       {(displayArtist ?? contextArtist) && (
         <AppText role="caption" style={{textAlign: 'center'}}>
@@ -424,14 +432,14 @@ export function PlayerScreen({
       <Disclosure title="القائمة وأدوات التشغيل">
         {queue.slice(0, 114).map((title, i) => (
           <AppText key={i}>
-            {number(i + 1)} · {title}
+            {number(i + 1)} · {digits(title)}
           </AppText>
         ))}
         <View style={rtlRow}>
           <Button
             compact
             secondary
-            label="تقديم 15 ثانية"
+            label={`تقديم ${number(15)} ثانية`}
             disabled={!track || !duration}
             onPress={() =>
               void playback.seek(Math.min(duration, position + 15))
@@ -440,7 +448,7 @@ export function PlayerScreen({
           <Button
             compact
             secondary
-            label="رجوع 15 ثانية"
+            label={`رجوع ${number(15)} ثانية`}
             disabled={!track}
             onPress={() => void playback.seek(Math.max(0, position - 15))}
           />

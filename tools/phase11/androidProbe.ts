@@ -112,7 +112,7 @@ export async function phase11Probe(scenario: string) {
   }
   if (mode === 'focus') {
     await tone();
-    const sound = await localSound(sounds.find(s => s.variant === 'normal')!);
+    const sound = await localSound(sounds[0]);
     check(sound, 'adhan_not_installed');
     await native.previewAdhan(
       JSON.stringify({
@@ -138,8 +138,8 @@ export async function phase11Probe(scenario: string) {
     return;
   }
   if (mode === 'preview-replace') {
-    const normal = await localSound(sounds.find(s => s.variant === 'normal')!);
-    const fajr = await localSound(sounds.find(s => s.variant === 'fajr')!);
+    const normal = await localSound(sounds[0]);
+    const fajr = await localSound(sounds[1]);
     check(normal && fajr, 'sounds_not_installed');
     for (const sound of [normal, fajr]) {
       await native.previewAdhan(

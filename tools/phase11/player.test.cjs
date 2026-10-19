@@ -11,7 +11,8 @@ let queue = [],
   repeat = 0,
   plays = 0,
   corrupt = false,
-  session = null;
+  session = null,
+  sessionReadGate;
 const player = {
   setupPlayer: async () => {},
   updateOptions: async () => {},
@@ -87,24 +88,28 @@ Module._load = function (name, parent, isMain) {
       saveRecord: async (_c, _i, s) => {
         session = s;
       },
-      readRecord: async (c, id) =>
-        c === 'playback'
-          ? session
-          : c === 'installed'
-            ? {
-                state: 'ready',
-                capabilities: ['audio'],
-                files: ['packs/a.mp3', 'packs/b.mp3'],
-              }
-            : {
-                state: 'ready',
-                relativeFinalPath: id.includes('.a@')
-                  ? 'packs/a.mp3'
-                  : 'packs/b.mp3',
-                expectedBytes: 10,
-                expectedHash: 'hash',
-                jobId: id,
-              },
+      readRecord: async (c, id) => {
+        if (c === 'playback') {
+          const saved = session;
+          await sessionReadGate;
+          return saved;
+        }
+        return c === 'installed'
+          ? {
+              state: 'ready',
+              capabilities: ['audio'],
+              files: ['packs/a.mp3', 'packs/b.mp3'],
+            }
+          : {
+              state: 'ready',
+              relativeFinalPath: id.includes('.a@')
+                ? 'packs/a.mp3'
+                : 'packs/b.mp3',
+              expectedBytes: 10,
+              expectedHash: 'hash',
+              jobId: id,
+            };
+      },
     };
   if (name.endsWith('assets/audio')) return {audioAssets: {'test.mp3': 701}};
   return load.call(this, name, parent, isMain);
@@ -241,4 +246,42 @@ test('a dismissed or superseded reader request cannot replace playback after fil
   );
   assert.equal(checks, 2);
   assert.equal(plays, playsBefore, 'dismissal during setup cannot start audio');
+});
+
+test('closing playing or paused audio clears queue, sleep and restore state despite late progress', async () => {
+  for (const paused of [false, true]) {
+    await playback.downloaded([
+      {packId: 'pack', version: 'v1', assetId: 'a', title: 'Saved recording'},
+    ]);
+    await playback.sleep(15);
+    if (paused) await playback.pause();
+    const pendingProgress = persistPlayback();
+    await playback.stop();
+    await pendingProgress;
+    await persistPlayback();
+    assert.deepEqual(queue, []);
+    assert.equal(deadline, 0);
+    assert.equal(session, null);
+    await assert.rejects(restoreDownloadedSession(), /no_download_session/);
+  }
+});
+
+test('closing audio invalidates a restore that is still reading its old saved session', async () => {
+  await playback.downloaded([
+    {packId: 'pack', version: 'v1', assetId: 'a', title: 'Saved recording'},
+  ]);
+  let finishRead;
+  sessionReadGate = new Promise(resolve => {
+    finishRead = resolve;
+  });
+  const restoring = restoreDownloadedSession();
+  const rejected = assert.rejects(restoring, /no_download_session/);
+  await playback.stop();
+  finishRead();
+  await rejected;
+  sessionReadGate = undefined;
+  await persistPlayback();
+  assert.deepEqual(queue, []);
+  assert.equal(session, null);
+  assert.equal(deadline, 0);
 });

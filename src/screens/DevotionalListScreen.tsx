@@ -3,9 +3,16 @@ import React, {useContext, useState} from 'react';
 import {FlatList, I18nManager, Pressable, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {type DataProps} from '../data';
-import {type RepeatContextState} from '../store';
+import {type RepeatContextState, themeContext} from '../store';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
-import {AppIcon, AppText, Button, IconButton, usePalette} from '../design/ui';
+import {
+  AppIcon,
+  AppText,
+  Button,
+  IconButton,
+  StateView,
+  usePalette,
+} from '../design/ui';
 import {
   SearchField,
   Segments,
@@ -14,7 +21,8 @@ import {
   rtlRow,
 } from '../design/components';
 import {matches} from '../features/devotional/discovery';
-import {number, ltr} from '../design/format';
+import {ltr} from '../design/format';
+import {useFormat} from '../design/useFormat';
 import {ReadingCard} from '../features/devotional/ReadingCard';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
 import {reloadBookmarks, useBookmarks} from '../features/devotional/bookmarks';
@@ -30,10 +38,12 @@ export function DevotionalListScreen({
   repeatCtx: React.Context<RepeatContextState>;
   root?: boolean;
 }) {
+  const {number} = useFormat();
   const confirmReset = useConfirmReset();
   const [query, setQuery] = useState(''),
     [filter, setFilter] = useState<'all' | 'saved'>('all');
   const dua = title === 'الأدعية';
+  const {uiScale} = useContext(themeContext);
   const navigation = useNavigation<any>(),
     p = usePalette();
   const {repeatCounts, decrementRepeat, resetRepeats} = useContext(repeatCtx);
@@ -75,7 +85,7 @@ export function DevotionalListScreen({
       <View
         style={{
           paddingHorizontal: 16,
-          minHeight: 56,
+          minHeight: dua ? 64 : 56,
           flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
           alignItems: 'center',
         }}>
@@ -84,7 +94,6 @@ export function DevotionalListScreen({
           label="البحث في المحتوى"
           onPress={() => navigation.navigate('Search')}
         />
-        {dua && <AppIcon name="hands" color={p.accent} size={30} />}
         {adhkar && (
           <AppIcon
             name={title === 'أذكار الصباح' ? 'sun' : 'moon'}
@@ -99,9 +108,11 @@ export function DevotionalListScreen({
             flex: 1,
             textAlign: root ? 'right' : 'center',
             paddingHorizontal: 8,
+            ...(dua && {fontSize: 24 * uiScale, lineHeight: 38 * uiScale}),
           }}>
           {title}
         </AppText>
+        {dua && <AppIcon name="hands" color={p.accent} size={28} />}
         {root && <AppIcon name="medallion" size={32} color={p.accent} />}
         {!root && (
           <IconButton
@@ -133,17 +144,17 @@ export function DevotionalListScreen({
         contentContainerStyle={{
           padding: 16,
           paddingTop: 8,
-          gap: 12,
+          gap: dua ? 16 : 12,
           maxWidth: 560,
           width: '100%',
           alignSelf: 'center',
         }}
         ListHeaderComponent={
-          <View style={{gap: 12}}>
+          <View style={{gap: dua ? 16 : 12}}>
             {dua && (
               <>
                 <AppText
-                  role="caption"
+                  role="body"
                   style={{textAlign: 'center', color: p.textSecondary}}>
                   أدعية من القرآن والسنة
                 </AppText>
@@ -156,7 +167,7 @@ export function DevotionalListScreen({
                   value={filter}
                   options={[
                     {value: 'all', label: 'الكل'},
-                    {value: 'saved', label: 'المحفوظات'},
+                    {value: 'saved', label: 'المفضلة'},
                   ]}
                   onChange={setFilter}
                 />
@@ -214,7 +225,7 @@ export function DevotionalListScreen({
                 </AppText>
                 <AppIcon name="headphones" size={44} color={p.textOnAction} />
               </Pressable>
-            ) : !adhkar ? (
+            ) : !adhkar && !dua ? (
               controls
             ) : null}
 
@@ -233,6 +244,23 @@ export function DevotionalListScreen({
               />
             )}
           </View>
+        }
+        ListEmptyComponent={
+          dua ? (
+            <StateView
+              title={
+                filter === 'saved' && saved.error
+                  ? 'تعذر تحميل المفضلة'
+                  : filter === 'saved' && !saved.loaded
+                    ? 'جار تحميل المفضلة'
+                    : filter === 'saved'
+                      ? 'لا توجد أدعية مفضلة'
+                      : 'لا توجد نتائج'
+              }
+              busy={filter === 'saved' && !saved.loaded && !saved.error}
+              description="غيّر البحث أو احفظ دعاء من زر الإشارة في بطاقته."
+            />
+          ) : undefined
         }
         ListFooterComponent={
           <View style={{gap: 12}}>
@@ -262,6 +290,7 @@ export function DevotionalListScreen({
           ) : (
             <ReadingCard
               item={item}
+              showCompletion={root}
               dua={dua}
               index={adhkar ? index - 1 : index}
               count={repeatCounts[item.id] ?? item.repeat ?? 0}

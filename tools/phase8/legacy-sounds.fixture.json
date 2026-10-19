@@ -1,0 +1,68 @@
+[
+  {
+    "id": "adhan-doha-normal",
+    "variant": "normal",
+    "title": "أذان الدوحة",
+    "notice": "تسجيل من الدوحة (2013–2014) · اسم المؤذن غير مذكور في المصدر. Internet Archive · Public Domain Mark 1.0 · الملف الأصلي دون تعديل.",
+    "pack": {
+      "id": "adhan-doha-normal",
+      "version": "2026.10.18",
+      "title": "أذان الدوحة",
+      "review": "approved",
+      "capabilities": ["adhan"],
+      "sourceMetadata": {
+        "publisher": "Internet Archive · Doha, Qatar",
+        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
+        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
+        "muezzin": "not identified by source",
+        "variant": "normal",
+        "verifiedAt": "2026-10-18"
+      },
+      "assets": [
+        {
+          "id": "audio",
+          "file": "audio.mp3",
+          "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_02_Dhuhr_Adhan.mp3",
+          "bytes": 2419879,
+          "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
+          "mime": "audio/mpeg"
+        }
+      ],
+      "manifestHash": "bb2b3735c7299c46aa28e36ee74d2e82a08169d152a21d75e20139aa9e696b97"
+    }
+  },
+  {
+    "id": "adhan-doha-fajr",
+    "variant": "fajr",
+    "title": "أذان الفجر · الدوحة",
+    "notice": "تسجيل من الدوحة (2013–2014) · اسم المؤذن غير مذكور في المصدر. Internet Archive · Public Domain Mark 1.0 · الملف الأصلي دون تعديل.",
+    "pack": {
+      "id": "adhan-doha-fajr",
+      "version": "2026.10.18",
+      "title": "أذان الفجر · الدوحة",
+      "review": "approved",
+      "capabilities": ["adhan"],
+      "sourceMetadata": {
+        "publisher": "Internet Archive · Doha, Qatar",
+        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
+        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
+        "muezzin": "not identified by source",
+        "variant": "fajr",
+        "verifiedAt": "2026-10-18"
+      },
+      "assets": [
+        {
+          "id": "audio",
+          "file": "audio.mp3",
+          "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_01_Fajr_Adhan.mp3",
+          "bytes": 2901706,
+          "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
+          "mime": "audio/mpeg"
+        }
+      ],
+      "manifestHash": "f24c2134161749da0a6aacf50c8234693f79910e4d1b5f3b83b12ba00e6c3741"
+    }
+  }
+]

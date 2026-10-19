@@ -14,6 +14,7 @@ import {
   AppText,
   Button,
   Card,
+  IconButton,
   Page,
   usePalette,
   type IconName,
@@ -30,7 +31,7 @@ import {
 import {LaunchOrnaments} from '../design/LaunchOrnaments';
 import {Waveform} from '../design/Waveform';
 import {themeContext} from '../store';
-import {number} from '../design/format';
+import {useFormat} from '../design/useFormat';
 import {data, noteData} from '../data';
 import {useScreenAudioPlayback} from '../hooks/useScreenAudioPlayback';
 import {playback} from '../features/audio/controller';
@@ -133,6 +134,7 @@ function AudioPreview() {
   );
 }
 export function Guide({onFinish}: {onFinish: () => void}) {
+  const {number, digits} = useFormat();
   const [step, setStep] = useState(0),
     [sample, setSample] = useState(3);
   const {preference, setPreference, uiScale, setUiScale, mode} =
@@ -184,7 +186,7 @@ export function Guide({onFinish}: {onFinish: () => void}) {
         <AppText
           role="caption"
           style={{textAlign: 'center', color: p.textSecondary}}>
-          {number(step + 1)} / 5
+          {number(step + 1)} / {number(5)}
         </AppText>
       )}
       <View style={{gap: 6, marginBottom: step === 2 ? 8 : 0}}>
@@ -281,7 +283,7 @@ export function Guide({onFinish}: {onFinish: () => void}) {
             <AppText
               role="counter"
               style={{textAlign: 'center', fontSize: 36, lineHeight: 50}}>
-              {number(sample)} / 3
+              {number(sample)} / {number(3)}
             </AppText>
             <Button
               icon="check"
@@ -433,7 +435,7 @@ export function Guide({onFinish}: {onFinish: () => void}) {
                 padding: 10,
                 borderRadius: 8,
               }}>
-              0123456789
+              {digits('0123456789')}
             </AppText>
           </GuideCard>
           <Banner text="يمكنك إعادة العدادات وقتما شئت" icon="reset" />
@@ -475,8 +477,12 @@ export function Guide({onFinish}: {onFinish: () => void}) {
           />
         </View>
         {step > 0 && (
-          <View style={{flex: 1}}>
-            <Button secondary label="رجوع" onPress={() => setStep(step - 1)} />
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <IconButton
+              name="chevron-right"
+              label="رجوع"
+              onPress={() => setStep(step - 1)}
+            />
           </View>
         )}
       </View>
