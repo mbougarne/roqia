@@ -23,6 +23,7 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, DuaaScreen, TasbihatScreen, AboutScreen} from '../screens';
 import {AdkarMenuScreen, AdkarCategoryScreen} from '../screens/AdkarScreen';
+import {AsmaScreen} from '../features/asma/AsmaScreen';
 import {
   MoreScreen,
   SettingsScreen,
@@ -223,6 +224,7 @@ const details = {
   BeforeSleep: withPlayer(AdkarCategoryScreen),
   Duaa: withPlayer(DuaaScreen),
   Tasbihat: withPlayer(TasbihatScreen),
+  Asma: withPlayer(AsmaScreen),
   About: withPlayer(AboutScreen),
   Settings: withPlayer(SettingsScreen),
   Downloads: withPlayer(DownloadsScreen),
@@ -327,6 +329,7 @@ export function MainTabNavigation() {
         <Stack.Screen name="BeforeSleep" component={details.BeforeSleep} />
         <Stack.Screen name="Duaa" component={details.Duaa} />
         <Stack.Screen name="Tasbihat" component={details.Tasbihat} />
+        <Stack.Screen name="Asma" component={details.Asma} />
         <Stack.Screen name="About" component={details.About} />
         <Stack.Screen name="Settings" component={details.Settings} />
         <Stack.Screen name="Downloads" component={details.Downloads} />

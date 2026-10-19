@@ -18,6 +18,7 @@ export type RootRoutes = {
   BeforeSleep: undefined;
   Duaa: undefined;
   Tasbihat: undefined;
+  Asma: undefined;
   About: undefined;
   Settings: undefined;
   Storage: undefined;
@@ -107,6 +108,7 @@ export function resolveLink(url: string): LinkTarget {
     dua: {screen: 'Duaa'},
     tasbihat: {screen: 'Tasbihat'},
     tasbih: {screen: 'Tasbihat'},
+    asma: {screen: 'Asma'},
     about: {screen: 'About'},
     more: {tab: 'More'},
     quran: {tab: 'Quran'},

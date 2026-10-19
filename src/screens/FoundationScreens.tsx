@@ -74,6 +74,13 @@ export function MoreScreen({navigation}: any) {
               onPress={() => navigation.navigate(screen)}
             />
           ))}
+          {i === 0 && (
+            <SettingRow
+              title="أسماء الله الحسنى"
+              icon="medallion"
+              onPress={() => navigation.navigate('Asma')}
+            />
+          )}
         </Group>
       ))}
       <Disclosure title="الدليل والمزيد">

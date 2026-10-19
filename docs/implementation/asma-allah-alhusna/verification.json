@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-19",
+  "baseCommit": "77c82f2e02e1b4b42932986f9845d96a7ada6b09",
+  "branch": "feat/asma-allah-alhusna",
+  "content": {
+    "entries": 99,
+    "input": "src/features/asma/1792441861026.json",
+    "inputSHA256": "187a94be69913f5c68e952c7507203300ddb20b650b62165ad24254b6e0f2ccf",
+    "userProvidedFileUnchanged": true,
+    "fullNamesAndMeaningsPreservedVerbatim": true,
+    "translationsOrTransliterationAdded": false,
+    "bundledOffline": true
+  },
+  "checks": {
+    "typescriptNoEmit": "passed",
+    "foundationTests": {
+      "passed": 35,
+      "failed": 0
+    },
+    "quranAudioTests": {
+      "passed": 14,
+      "failed": 0
+    },
+    "formattingAndDiffCheck": "passed",
+    "androidReviewArm64Build": "passed"
+  },
+  "install": {
+    "apkSHA256": "e9dd36e9e7aeea6a7100dbd8ca47b72ce5d89d2ae80b1a8d2d667d5ee9c62fa2",
+    "inPlaceUpdate": true,
+    "device": "emulator-5554",
+    "user": 0,
+    "temporaryReserveChangeAuthorized": true,
+    "originalReserveValue": "null",
+    "reserveRestoredImmediately": true
+  },
+  "androidUI": {
+    "passed": true,
+    "device": "emulator-5554",
+    "user": 0,
+    "package": "name.roqia.app",
+    "oneCardAtATime": true,
+    "fullUserProvidedMeaningsMatchNativeText": true,
+    "nextPreviousButtons": true,
+    "scrollResetOnCardChange": true,
+    "bothBoundariesDisabled": true,
+    "all99CardsReachedByButtons": true,
+    "bothThemes": true,
+    "longMeaningVerticalScrollAndPersistentControls": true,
+    "savedEasternDigitsAfterColdRestart": true,
+    "sourceNumbersAndTextUnchanged": true,
+    "compoundNamesWrap": true,
+    "sourceExternalLinkScreen": true,
+    "adhanHeaderAndBottomControlsPreserved": true,
+    "deviceNetworkFontDisplayChanged": false,
+    "visualAcceptance": "pending user review"
+  },
+  "preservation": {
+    "originalRecords": 39,
+    "originalCountersByteExact": 207,
+    "counterRowsTouchedByQA": 0,
+    "recordKeysUnchanged": true,
+    "settingsRestoredIgnoringWriteTimestamp": true,
+    "bookmarksPlaybackAndVibrationPreferenceByteExact": true,
+    "retainedAutomaticChanges": [
+      ["prayer", "renewal"],
+      ["settings", "singleton"]
+    ],
+    "originalPrayerPreferencesAndSoundSelectionByteExact": true,
+    "installedAndDownloadRecordsByteExact": true,
+    "nativeSchedulesReconciledFromRestoredPreferences": true,
+    "reserveRestored": true,
+    "privateDataCommitted": false
+  },
+  "files": {
+    "originalFileCount": 487,
+    "fileSetUnchanged": true,
+    "originalFilesSHA256Unchanged": 486,
+    "automaticInstallMarkerChanged": true,
+    "downloadedContentFiles": 469,
+    "downloadedContentSHA256Unchanged": true
+  },
+  "limits": {
+    "visualAcceptance": "pending user review",
+    "iOS": "deferred",
+    "spokenScreenReader": "not verified",
+    "externalBrowser": "not opened; existing external-link screen verified"
+  },
+  "privateBackupsDatabasesHierarchiesLogsCommitted": false
+}
