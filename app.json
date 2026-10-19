@@ -9,12 +9,7 @@
     "github": " https://github.com/mbougarne"
   },
   "license": "MIT",
-  "keywords": [
-    "ruqya",
-    "adhkar",
-    "islamic",
-    "audio"
-  ],
+  "keywords": ["ruqya", "adhkar", "islamic", "audio"],
   "metadata": {
     "defaultLocale": "ar",
     "direction": "rtl",

@@ -1,11 +1,12 @@
-import data from './remote-recordings.data.json';
 import {FileSystem} from 'react-native-file-access';
+
+import {chapters, type Recording} from './domain';
+import data from './remote-recordings.data.json';
 import {
   ensureDirectory,
   privatePath,
   removeIfPresent,
 } from '../../platform/files';
-import {chapters, type Recording} from './domain';
 import {type Pack, isPublisherAudioUrl} from '../downloads/types';
 
 export type RemoteRecording = {
@@ -20,6 +21,7 @@ export type RemoteRecording = {
   sourceUrl: string;
   timingAvailable: boolean;
 };
+
 export const remoteRecordings: RemoteRecording[] = data.recordings.map(r => ({
   ...r,
   riwaya: r.riwaya as RemoteRecording['riwaya'],

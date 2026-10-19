@@ -7,11 +7,13 @@ const Module = require('node:module');
 const React = require('react');
 const {act, create} = require('react-test-renderer');
 const supplied = require('../../src/features/asma/1792441861026.json');
+
 const names = supplied.map(row => ({
   name: row['الاسم'],
   meaning: row['المعنى'],
 }));
 const {createFormatters} = require('../../src/design/format.ts');
+
 global.IS_REACT_ACT_ENVIRONMENT = true;
 require.extensions['.tsx'] = (module, file) =>
   module._compile(
@@ -98,6 +100,7 @@ Module._load = function (id, parent, ...rest) {
   return originalLoad.call(this, id, parent, ...rest);
 };
 const {AsmaScreen} = require('../../src/features/asma/AsmaScreen.tsx');
+
 Module._load = originalLoad;
 const texts = tree =>
   tree.root

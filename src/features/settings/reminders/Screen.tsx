@@ -1,26 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {useFormat} from '../../../design/useFormat';
-import {Alert, AppState, I18nManager, Switch, View} from 'react-native';
-import {
-  IconButton,
-  Sheet,
-  AppText,
-  Button,
-  Card,
-  Input,
-  Page,
-  usePalette,
-} from '../../../design/ui';
-import {
-  Banner,
-  Disclosure,
-  Group,
-  Ornament,
-  SettingRow,
-  Toggle,
-  rtlRow,
-} from '../../../design/components';
-import {type Reminder} from '../../../repositories/models';
+import {Alert, AppState, View} from 'react-native';
+
 import {reminderLabels, validateReminders} from './plan';
 import {
   loadReminders,
@@ -31,6 +11,27 @@ import {
   saveReminders,
   testReminder,
 } from './service';
+import {
+  Disclosure,
+  Group,
+  Ornament,
+  SettingRow,
+  Toggle,
+  rtlRow,
+} from '../../../design/components';
+import {
+  IconButton,
+  Sheet,
+  AppText,
+  Button,
+  Card,
+  Input,
+  Page,
+  usePalette,
+} from '../../../design/ui';
+import {useFormat} from '../../../design/useFormat';
+import {type Reminder} from '../../../repositories/models';
+
 export function RemindersScreen({navigation}: any) {
   const {digits} = useFormat();
   const [rows, setRows] = useState<Reminder[]>([]),
@@ -38,7 +39,8 @@ export function RemindersScreen({navigation}: any) {
     [busy, setBusy] = useState(false),
     [error, setError] = useState(false),
     [editing, setEditing] = useState<string | null>(null);
-  const p = usePalette();
+  const _p = usePalette();
+
   async function refresh() {
     try {
       const permission = await reminderPermission();
@@ -53,6 +55,7 @@ export function RemindersScreen({navigation}: any) {
       setError(true);
     }
   }
+
   async function load() {
     try {
       setRows(await loadReminders());
@@ -74,6 +77,7 @@ export function RemindersScreen({navigation}: any) {
     setRows(prev =>
       prev.map(r => (r.reminderId === id ? {...r, ...changes} : r)),
     );
+
   async function save() {
     try {
       validateReminders(rows);

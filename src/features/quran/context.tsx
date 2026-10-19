@@ -1,3 +1,4 @@
+import {useFocusEffect} from '@react-navigation/native';
 import React, {
   createContext,
   useContext,
@@ -5,10 +6,13 @@ import React, {
   useState,
   useSyncExternalStore,
 } from 'react';
-import {useFocusEffect} from '@react-navigation/native';
+
 import {quran, type QuranRuntime} from './runtime';
+
 export const QuranContext = createContext<QuranRuntime>(quran);
+
 export const useQuran = () => useContext(QuranContext);
+
 export function useLibrary() {
   const runtime = useQuran(),
     revision = useSyncExternalStore(
@@ -33,6 +37,7 @@ export function useLibrary() {
     retry,
   };
 }
+
 export function useOnFocus(action: () => void, deps: React.DependencyList) {
   // Screens stay mounted in the stack; refresh preference/installation state on return.
   useFocusEffect(React.useCallback(action, deps));

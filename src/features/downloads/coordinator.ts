@@ -9,6 +9,7 @@ import {
   validateCatalog,
   publisherAudioIntake,
 } from './types';
+
 export type Task = {
   id: string;
   state: string;
@@ -16,12 +17,14 @@ export type Task = {
   resume: () => Promise<void>;
   stop: () => Promise<void>;
 };
+
 export type Events = {
   begin: (headers: Record<string, string | null>) => void;
   progress: (received: number) => void;
   done: () => void;
   error: (code: string) => void;
 };
+
 export type DownloadPorts = {
   // Only a transport that validates entity/range responses before append may retain partials.
   resumable?: boolean;
@@ -53,6 +56,7 @@ export type DownloadPorts = {
   now: () => number;
 };
 const activeStates = new Set(['waiting_network', 'downloading']);
+
 export class DownloadCoordinator {
   private jobs: DownloadJob[] = [];
   private installed: InstalledPack[] = [];

@@ -9,6 +9,7 @@ const {
 const {chapters} = require('../../src/features/quran/domain.ts');
 const translations = require('../../src/features/quran/translations.data.json');
 const catalog = require('../../src/features/quran/catalog.data.json');
+
 test('bundled originals exactly match pinned sizes and hashes', () => {
   for (const {pack} of [catalog.texts[0], ...translations])
     for (const a of pack.assets) {

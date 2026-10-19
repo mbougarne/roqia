@@ -1,9 +1,9 @@
-import {Linking} from 'react-native';
 import notifee, {
   EventType,
   type Event,
   type InitialNotification,
 } from '@notifee/react-native';
+import {Linking} from 'react-native';
 
 const extractDeepLinkFromNotification = (
   notification?:

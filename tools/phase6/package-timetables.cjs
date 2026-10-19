@@ -1,10 +1,10 @@
 require('../foundation/register.cjs');
 const fs = require('node:fs'),
-  path = require('node:path'),
-  crypto = require('node:crypto');
+  path = require('node:path');
 const {parseHabous} = require('../../src/features/prayer/habous.ts');
 const source = process.argv[2],
   cities = require('../../src/features/prayer/cities.json');
+
 const rows = cities.map(c =>
   parseHabous(
     fs.readFileSync(path.join(source, c.cityId + '.html'), 'utf8'),
@@ -18,7 +18,7 @@ fs.writeFileSync(
 );
 fs.copyFileSync(
   path.join(source, 'sources.json'),
-  'docs/implementation/phase-6/evidence/habous-sources.json',
+  'tools/phase6/habous-sources.fixture.json',
 );
 console.log(
   `${rows.length} city tables, ${rows.reduce((n, t) => n + Object.keys(t.dates).length, 0)} daily schedules`,

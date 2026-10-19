@@ -1,9 +1,11 @@
+import {type NavigatorScreenParams} from '@react-navigation/native';
+
 import {
   type EditionId,
   editionById,
   validateLocator,
 } from '../features/quran/domain';
-import {type NavigatorScreenParams} from '@react-navigation/native';
+
 export type Tabs = {
   Home: undefined;
   Adkar: undefined;
@@ -11,6 +13,7 @@ export type Tabs = {
   Prayer: undefined;
   More: undefined;
 };
+
 export type RootRoutes = {
   MainTabs: NavigatorScreenParams<Tabs> | undefined;
   Morning: undefined;
@@ -71,6 +74,7 @@ export type RootRoutes = {
   ExternalLink: {title: string; url: string};
   Recovery: {reason: 'invalid-link' | 'missing-pack'};
 };
+
 export type LinkTarget =
   | {tab: keyof Tabs}
   | {
@@ -89,6 +93,7 @@ export type LinkTarget =
     }
   | {reader: RootRoutes['QuranReader']}
   | {recovery: 'invalid-link' | 'missing-pack'};
+
 export function resolveLink(url: string): LinkTarget {
   if (!url.startsWith('roqia://') || url.length > 2048)
     return {recovery: 'invalid-link'};

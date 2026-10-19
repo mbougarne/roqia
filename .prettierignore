@@ -1,0 +1,36 @@
+# Format maintained source/configuration only. Preserve data, assets and evidence.
+*
+!*/
+!**/*.js
+!**/*.cjs
+!**/*.mjs
+!**/*.jsx
+!**/*.ts
+!**/*.tsx
+!**/*.css
+!**/*.html
+!/.github/**/*.yml
+!/package.json
+!/app.json
+!/tsconfig.json
+!/web/package.json
+!/tools/quality/**
+**/node_modules/**
+**/build/**
+**/.gradle/**
+**/.cxx/**
+**/Pods/**
+**/.venv*/**
+.roqia-feasibility/**
+web/dist/**
+docs/**
+design/**
+bundled-content/**
+src/data/**
+tools/**/fixtures/**
+# Historical device probes keep their original source alongside saved evidence.
+tools/**/androidProbe.ts
+tools/feasibility/ProbeApp.tsx
+tools/feasibility/WarshFontProbe.tsx
+tools/phase4/Probe.tsx
+tools/phase4/checks.ts

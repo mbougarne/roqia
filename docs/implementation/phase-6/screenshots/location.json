@@ -1,6 +1,0 @@
-[
-  {
-    "journey": "foreground permission denial then explicit grant, fresh emulator fix reporting 5-meter accuracy, explicit save with no automatic city mapping, then restore Casablanca",
-    "pass": true
-  }
-]

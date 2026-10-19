@@ -1,10 +1,4 @@
-import {
-  qiblaAligned,
-  gpsLocation,
-  preferencesForLocation,
-  liveHeading,
-  cityMatches,
-} from './locationSelection';
+import {useFocusEffect} from '@react-navigation/native';
 import React, {
   useCallback,
   useContext,
@@ -22,7 +16,63 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+
+import cities from './cities.json';
+import {
+  defaults,
+  methods,
+  labels,
+  prayers,
+  events,
+  day,
+  bearing,
+  smoothHeading,
+  type Preferences,
+  type Location,
+  type Timetable,
+  type Day,
+} from './domain';
+import {
+  qiblaAligned,
+  gpsLocation,
+  preferencesForLocation,
+  liveHeading,
+  cityMatches,
+} from './locationSelection';
+import {adapter, locate, onHeading, onPrayerTimeChanged} from './native';
+import {
+  loadPreferences,
+  loadTables,
+  savePreferences,
+  reconcilePrayer,
+  refreshTable,
+  requestPrayerPermission,
+  openPrayerSettings,
+  testPrayerNotification,
+  type Coverage,
+} from './service';
+import {adhanNative} from './sounds';
+import {
+  civilDate as sourceDate,
+  clock as sourceClock,
+  nextDate,
+  tzVersion,
+} from './time';
+import {PrayerLandmark, QiblaCompass, OrnamentDivider} from './visuals';
+import {
+  Banner,
+  Disclosure,
+  Group,
+  Ornament,
+  RadioRow,
+  SearchField,
+  Segments,
+  SettingRow,
+  Toggle,
+} from '../../design/components';
+import {ltr} from '../../design/format';
+import {Illustration} from '../../design/Illustration';
+import {PanelArtwork} from '../../design/PanelArtwork';
 import {
   Sheet,
   IconButton,
@@ -36,59 +86,9 @@ import {
   StateView,
   usePalette,
 } from '../../design/ui';
-import {
-  Banner,
-  Disclosure,
-  Group,
-  Ornament,
-  RadioRow,
-  SearchField,
-  Segments,
-  SettingRow,
-  Toggle,
-  rtlRow,
-} from '../../design/components';
-import {Illustration} from '../../design/Illustration';
-import {PanelArtwork} from '../../design/PanelArtwork';
-import {ltr} from '../../design/format';
 import {useFormat} from '../../design/useFormat';
-import {
-  defaults,
-  methods,
-  labels,
-  prayers,
-  events,
-  day,
-  bearing,
-  smoothHeading,
-  validateLocation,
-  type Preferences,
-  type Location,
-  type Timetable,
-  type Day,
-} from './domain';
-import {
-  civilDate as sourceDate,
-  clock as sourceClock,
-  nextDate,
-  tzVersion,
-} from './time';
-import {
-  loadPreferences,
-  loadTables,
-  savePreferences,
-  reconcilePrayer,
-  refreshTable,
-  requestPrayerPermission,
-  openPrayerSettings,
-  testPrayerNotification,
-  type Coverage,
-} from './service';
-import {adapter, locate, onHeading, onPrayerTimeChanged} from './native';
-import cities from './cities.json';
-import {adhanNative} from './sounds';
 import {themeContext} from '../../store';
-import {PrayerLandmark, QiblaCompass, OrnamentDivider} from './visuals';
+
 const civilDate = (zone: string, at = Date.now()) => {
   try {
     return sourceDate(zone, at);
@@ -103,6 +103,7 @@ const clock = (zone: string, at: number, format: '12' | '24' = '24') => {
     return '—';
   }
 };
+
 function usePrayer() {
   const [prefs, setPrefs] = useState<Preferences | null>(null),
     [tables, setTables] = useState<Timetable[]>([]),
@@ -155,9 +156,11 @@ const fail = (error: unknown) => {
       : 'تحقق من القيم أو الاتصال وأعد المحاولة. تبقى البيانات المحفوظة متاحة.',
   );
 };
+
 function attempt(action: () => Promise<unknown>) {
   void action().catch(fail);
 }
+
 function Status({error, retry}: {error: boolean; retry: () => void}) {
   return error ? (
     <StateView
@@ -166,6 +169,7 @@ function Status({error, retry}: {error: boolean; retry: () => void}) {
     />
   ) : null;
 }
+
 export function PrayerScreen({navigation}: any) {
   const {digits, date: formatDate} = useFormat();
   const {prefs, tables, coverage, error, now, load} = usePrayer();
@@ -643,6 +647,7 @@ export function LocationScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function QiblaScreen({navigation}: any) {
   const {number} = useFormat();
   const {prefs, error, load} = usePrayer(),
@@ -848,6 +853,7 @@ export function QiblaScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function CalibrationScreen({navigation}: any) {
   return (
     <Page
@@ -884,6 +890,7 @@ export function CalibrationScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function CalculationScreen({navigation}: any) {
   const {number, digits} = useFormat();
   const {prefs, error, load} = usePrayer(),
@@ -1052,6 +1059,7 @@ export function CalculationScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function AdhanScreen({navigation}: any) {
   const {number, digits} = useFormat();
   const {prefs, coverage, error, load} = usePrayer(),
@@ -1241,7 +1249,9 @@ export function AdhanScreen({navigation}: any) {
     </Page>
   );
 }
+
 export {SoundsScreen} from './SoundsScreen';
+
 export function PrayerSourcesScreen({navigation}: any) {
   return (
     <Page title="مصادر الصلاة والقبلة" onBack={() => navigation.goBack()}>

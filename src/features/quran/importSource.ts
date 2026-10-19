@@ -1,9 +1,10 @@
 import {NativeModules} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
-import {type Pack} from '../downloads/types';
-import {privatePath} from '../../platform/files';
+
 import {parseOriginalSource} from './sourceParser';
 import {parseTranslationSource} from './translationParser';
+import {privatePath} from '../../platform/files';
+import {type Pack} from '../downloads/types';
 
 export async function prepareSource(pack: Pack, directory: string) {
   const p = pack.preparation;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
+
 // Decorative listening motif, not measured amplitude or a fake playback position.
 export function Waveform({color}: {color: string}) {
   const heights = [

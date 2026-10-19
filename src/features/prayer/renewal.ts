@@ -1,4 +1,5 @@
 import {NativeModules} from 'react-native';
+
 import {
   loadPreferences,
   loadTables,
@@ -38,6 +39,7 @@ export async function renewPrayerCoverage() {
   });
   return {coverage, refresh};
 }
+
 export default async function prayerRenewalTask({token}: {token: string}) {
   let success = false;
   try {

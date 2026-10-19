@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 let deadline = 0;
 let queue = [],
   state = 'none',
@@ -120,6 +121,7 @@ const {
   restoreDownloadedSession,
   audioErrors,
 } = require('../../src/features/audio/controller.ts');
+
 test('queue changes save a recoverable session immediately and preserve native sleep across unrelated deletion', async () => {
   const entries = ['a', 'b'].map(assetId => ({
     packId: 'pack',

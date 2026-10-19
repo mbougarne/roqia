@@ -17,6 +17,7 @@ const {
   bytes,
   arabicPlural,
 } = require('../../src/design/format.ts');
+
 const raw = counts => ({
   '@roqia/app-state': JSON.stringify({mode: 'dark', repeatCounts: counts}),
   '@roqia/walkthrough-seen': '1',
@@ -28,7 +29,7 @@ test('stable IDs are unique and original religious text, defaults and audio are 
   assert.equal(
     crypto
       .createHash('sha256')
-      .update(JSON.stringify(contentItems.map(({id, ...item}) => item)))
+      .update(JSON.stringify(contentItems.map(({id: _id, ...item}) => item)))
       .digest('hex'),
     baseline.sha256,
     'Original religious fields/defaults/audio changed from the reviewed baseline',
@@ -143,7 +144,7 @@ test('generated numbers use Western digits in Arabic, French and English', () =>
 });
 
 test('both themes keep normal text and action text above 4.5:1 contrast', () => {
-  const colors = require('../../design/roqia-v2/tokens/colors.json');
+  const colors = require('../../src/design/tokens/colors.json');
   const luminance = hex => {
     const rgb = hex
       .slice(1)

@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 let deadline = 0,
   calls = [];
 const native = {
@@ -18,6 +19,7 @@ Module._load = function (name, parent, isMain) {
   return load.call(this, name, parent, isMain);
 };
 const sleep = require('../../src/features/audio/sleep.ts');
+
 test('sleep controls persist a native duration, clear explicitly and reject invalid or unsupported requests', async () => {
   assert.equal(sleep.sleepSupported(), true);
   await sleep.setSleepTimer(15);

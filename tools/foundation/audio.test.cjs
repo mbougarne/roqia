@@ -2,12 +2,13 @@ require('./register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 let queue = [{id: 'persisted-paused', url: 'file:///private/audio.mp3'}],
   state = 'paused',
   removed = false;
 const player = {
   getQueue: async () => queue,
-  getProgress: async () => ({position:0}),
+  getProgress: async () => ({position: 0}),
   getRepeatMode: async () => 0,
   getRate: async () => 1,
   getActiveTrack: async () => queue[0],
@@ -55,6 +56,7 @@ require.extensions['.mp3'] = (module, file) => {
 };
 const {playback} = require('../../src/features/audio/controller.ts'),
   {adkarData, data} = require('../../src/data/index.ts');
+
 test('deletion stops an already-native paused queue even before this JS controller sets up', async () => {
   await playback.releaseFiles(['/private/audio.mp3'], async () => {
     assert.equal(queue.length, 0);

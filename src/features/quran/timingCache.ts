@@ -1,4 +1,3 @@
-import {readRecord, saveRecord} from '../../repositories/database';
 import {
   type CachedTiming,
   type TimingIdentity,
@@ -7,6 +6,7 @@ import {
   timingKey,
   validateTiming,
 } from './timing';
+import {readRecord, saveRecord} from '../../repositories/database';
 
 type SourceTiming = {
   source: TimingSource;
@@ -20,6 +20,7 @@ const sourcePending = new Map<string, Promise<SourceTiming>>();
 const sourceKey = (s: TimingSource) =>
   `entity-v1:${s.read}:${s.riwaya}:${s.numberingScheme}:${s.surah}:${s.audioVersion}:${s.audioUrl}`;
 const strongEtag = (value: string) => /^"[^"\r\n]+"$/.test(value);
+
 async function audioEntity(url: string) {
   const controller = new AbortController(),
     timer = setTimeout(() => controller.abort(), 15000);
@@ -36,6 +37,7 @@ async function audioEntity(url: string) {
     clearTimeout(timer);
   }
 }
+
 async function json(url: string) {
   const controller = new AbortController(),
     timer = setTimeout(() => controller.abort(), 15000);

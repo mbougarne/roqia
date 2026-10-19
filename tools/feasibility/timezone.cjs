@@ -8,6 +8,7 @@ const fixtures = [
   ['2026-09-20T12:00:00Z', '12:00'],
   ['2026-10-18T12:00:00Z', '12:00'],
 ];
+
 function checkMoroccoTimeZoneData() {
   const formatter = new Intl.DateTimeFormat('en-GB-u-nu-latn', {
     timeZone: 'Africa/Casablanca',

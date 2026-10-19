@@ -2,12 +2,13 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 const records = new Map(),
   scheduled = new Map([['unrelated', {id: 'unrelated'}]]);
 let authorized = true,
   blocked = false,
   failOnce = false,
-  permissionRequests = 0,
+  _permissionRequests = 0,
   creates = 0;
 const notifee = {
   getNotificationSettings: async () => ({
@@ -27,7 +28,7 @@ const notifee = {
     scheduled.set(n.id, {n, t});
   },
   requestPermission: async () => {
-    permissionRequests++;
+    _permissionRequests++;
   },
   displayNotification: async () => {},
 };
@@ -90,6 +91,7 @@ const service = require('../../src/features/prayer/service.ts');
 const {defaults, prayers} = require('../../src/features/prayer/domain.ts');
 const cities = require('../../src/features/prayer/cities.json');
 const sounds = require('../../src/features/prayer/sounds.data.json');
+
 Date.now = () => Date.parse('2026-10-18T10:00:00Z');
 test('full adhan routes only available selected recordings to native alarms, with exclusive fallback and recovery', async () => {
   records.set('prayer:sounds', {

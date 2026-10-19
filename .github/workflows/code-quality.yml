@@ -1,0 +1,66 @@
+name: Code quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: yarn
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: tools/quality/requirements.txt
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install application dependencies and reviewed native patches
+        run: yarn install --frozen-lockfile
+      - name: Install Python and Objective-C style tools
+        run: yarn quality:setup
+      - name: Lint JavaScript, TypeScript and Python
+        run: yarn lint:js && yarn lint:python
+      - name: Check source formatting and TypeScript
+        run: yarn format:check && yarn typecheck
+      - name: Check Java, Kotlin and Gradle style
+        run: node tools/quality/native.cjs check jvm
+      - name: Check Objective-C style
+        run: node tools/quality/native.cjs check objc
+      - name: Run domain and UI regression tests
+        run: yarn test:regression
+      - name: Run portable Python and native regression tests
+        run: |
+          python3 -m unittest discover -s tools/feasibility -p 'test_*.py'
+          python3 -m unittest discover -s tools/phase10 -p 'test_*.py'
+          PYTHONPATH=tools/phase11 python3 -m unittest test_patch test_sleep_native
+          python3 -m unittest discover -s tools/phase12 -p 'test_*.py'
+      - name: Install and build web app
+        working-directory: web
+        run: npm ci && npm run build
+
+  swift:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Check Swift style with the Xcode toolchain
+        run: node tools/quality/native.cjs check swift

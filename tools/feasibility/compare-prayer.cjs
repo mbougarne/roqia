@@ -1,6 +1,7 @@
 // Keep the source's printed clock and calculated UTC/local clocks separate.
 const {calculate} = require('./prayer.cjs');
 const fixtures = require('./fixtures/habous-samples.json');
+
 const minutes = clock =>
   Number(clock.slice(0, 2)) * 60 + Number(clock.slice(3, 5));
 const results = fixtures.map(source => {

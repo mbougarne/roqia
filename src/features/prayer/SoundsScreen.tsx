@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Platform} from 'react-native';
-import {Page, IconButton, Button} from '../../design/ui';
-import {Banner, Group, SettingRow, RadioRow} from '../../design/components';
-import {useFormat} from '../../design/useFormat';
-import {useOnFocus} from '../quran/context';
+
+import {reconcilePrayer, requestPrayerPermission} from './service';
 import {
   sounds,
   selectedSounds,
@@ -14,8 +12,12 @@ import {
   type SoundSelection,
   type AdhanSound,
 } from './sounds';
-import {reconcilePrayer, requestPrayerPermission} from './service';
+import {Banner, Group, SettingRow, RadioRow} from '../../design/components';
+import {Page, IconButton, Button} from '../../design/ui';
+import {useFormat} from '../../design/useFormat';
 import {playback} from '../audio/controller';
+import {useOnFocus} from '../quran/context';
+
 export function SoundsScreen({navigation}: any) {
   const {number} = useFormat();
   const [selected, setSelected] = useState<SoundSelection>({

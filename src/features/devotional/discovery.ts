@@ -1,20 +1,27 @@
 import {type DataProps} from '../../data';
+
 export const groupLabels = {
   ruqya: 'الرقية',
   adhkar: 'الأذكار',
   dua: 'الأدعية',
   tasbih: 'التسبيح',
 };
+
 export type DevotionalGroup = keyof typeof groupLabels;
+
 export const groupOf = (id: string) => id.split('.')[1] as DevotionalGroup;
+
 // Normalize only the search index, never the displayed or copied canonical text.
 export const searchKey = (value: string) =>
   value
     .normalize('NFD')
+    // Intentionally match individual Arabic/Latin combining marks after NFD.
+    // eslint-disable-next-line no-misleading-character-class
     .replace(/[\u064b-\u065f\u0670\u0640\u0300-\u036f]/g, '')
     .replace(/[أإآ]/g, 'ا')
     .toLocaleLowerCase()
     .trim();
+
 export function matches(
   item: DataProps,
   query: string,
@@ -27,6 +34,7 @@ export function matches(
     ).includes(searchKey(query))
   );
 }
+
 export function itemTitle(item: DataProps) {
   const text =
     item.content?.trim().replace(/\s+/g, ' ') ||

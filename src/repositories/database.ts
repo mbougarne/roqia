@@ -1,6 +1,7 @@
 import {open, type DB, type Transaction} from '@op-engineering/op-sqlite';
 
 let opening: Promise<DB> | undefined;
+
 export const database = () =>
   (opening ??= (async () => {
     const db = open({name: 'roqia-v2.sqlite'});
@@ -29,6 +30,7 @@ export const database = () =>
 
 // One queue for all repository transactions, including migration and install commits.
 let tail: Promise<unknown> = Promise.resolve();
+
 export function write<T>(
   operation: (tx: Transaction) => Promise<T>,
 ): Promise<T> {
@@ -43,6 +45,7 @@ export function write<T>(
   tail = result.catch(() => undefined);
   return result;
 }
+
 export async function readRecord<T>(
   collection: string,
   id: string,
@@ -56,6 +59,7 @@ export async function readRecord<T>(
   ]);
   return result.rows.length ? JSON.parse(result.rows[0].value as string) : null;
 }
+
 export async function listRecords<T>(collection: string): Promise<T[]> {
   await tail;
   const result = await (
@@ -65,6 +69,7 @@ export async function listRecords<T>(collection: string): Promise<T[]> {
   ]);
   return result.rows.map(row => JSON.parse(row.value as string));
 }
+
 export async function putRecord(
   tx: Transaction,
   collection: string,
@@ -76,8 +81,10 @@ export async function putRecord(
     [collection, id, JSON.stringify(value)],
   );
 }
+
 export const saveRecord = (collection: string, id: string, value: unknown) =>
   write(tx => putRecord(tx, collection, id, value));
+
 export const removeRecord = (collection: string, id: string) =>
   write(async tx => {
     await tx.execute('DELETE FROM records WHERE collection = ? AND id = ?', [

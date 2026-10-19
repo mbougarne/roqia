@@ -6,6 +6,7 @@ const fs = require('node:fs'),
   Module = require('node:module');
 const react = require('react'),
   original = Module._load;
+
 require.extensions['.tsx'] = (module, file) =>
   module._compile(
     ts.transpileModule(fs.readFileSync(file, 'utf8'), {
@@ -44,12 +45,15 @@ Module._load = function (request, parent, ...rest) {
   return original.call(this, request, parent, ...rest);
 };
 const {Range, Toggle, RadioRow} = require('../../src/design/components.tsx');
+
 Module._load = original;
+
 function nodes(node) {
   return !node || typeof node !== 'object'
     ? []
     : [node, ...[node.props?.children].flat(Infinity).flatMap(nodes)];
 }
+
 function slider(value, onChange, extra = {}) {
   return nodes(
     Range({

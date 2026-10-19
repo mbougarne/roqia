@@ -1,6 +1,21 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
-import {AppText, Button, Sheet, StateView} from '../../design/ui';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+
+import {useLibrary} from './context';
+import {chapters, editionById, normalizeSearch, type EditionId} from './domain';
+import {remoteRecordings, prepareRemoteRecording} from './remoteRecordings';
+import {
+  timingIdentity,
+  timingSource,
+  timingKey,
+  type CachedTiming,
+} from './timing';
+import {
+  cachedTiming,
+  bindCachedTiming,
+  prepareTiming,
+  prepareTimingSource,
+} from './timingCache';
 import {
   Banner,
   Group,
@@ -9,26 +24,12 @@ import {
   SettingRow,
   SearchField,
 } from '../../design/components';
-import {useFormat} from '../../design/useFormat';
 import {normalizeDigits} from '../../design/format';
+import {AppText, Button, Sheet, StateView} from '../../design/ui';
+import {useFormat} from '../../design/useFormat';
 import {readRecord, saveRecord} from '../../repositories/database';
-import {PlayerScreen} from '../audio/Player';
 import {playback, segmentPlaybackSupported} from '../audio/controller';
-import {chapters, editionById, normalizeSearch, type EditionId} from './domain';
-import {remoteRecordings, prepareRemoteRecording} from './remoteRecordings';
-import {useLibrary} from './context';
-import {
-  cachedTiming,
-  bindCachedTiming,
-  prepareTiming,
-  prepareTimingSource,
-} from './timingCache';
-import {
-  timingIdentity,
-  timingSource,
-  timingKey,
-  type CachedTiming,
-} from './timing';
+import {PlayerScreen} from '../audio/Player';
 
 export function QuranListenScreen({route, navigation}: any) {
   return <QuranListening route={route} navigation={navigation} />;

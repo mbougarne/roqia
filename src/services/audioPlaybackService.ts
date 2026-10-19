@@ -1,9 +1,11 @@
 import TrackPlayer, {Event} from 'react-native-track-player';
+
 import {
   playback,
   persistPlayback,
   playbackFailed,
 } from '../features/audio/controller';
+
 export default async function audioPlaybackService() {
   // Adhan/calls take focus; leave the Quran paused when focus returns.
   TrackPlayer.addEventListener(Event.RemoteDuck, e => {

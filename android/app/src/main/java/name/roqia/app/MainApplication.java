@@ -1,19 +1,23 @@
 package name.roqia.app;
 
+import java.util.List;
+
 import android.app.Application;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactHost;
-import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactNativeApplicationEntryPoint;
+import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.defaults.DefaultReactHost;
 import com.facebook.react.defaults.DefaultReactNativeHost;
-import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication, androidx.work.Configuration.Provider {
+public class MainApplication extends Application
+    implements ReactApplication, androidx.work.Configuration.Provider {
 
-  @Override public androidx.work.Configuration getWorkManagerConfiguration() {
+  @Override
+  public androidx.work.Configuration getWorkManagerConfiguration() {
     // Up to 48 notification jobs plus periodic and immediate prayer renewal.
     return new androidx.work.Configuration.Builder().setMaxSchedulerLimit(50).build();
   }
@@ -38,7 +42,11 @@ public class MainApplication extends Application implements ReactApplication, an
           packages.add(new name.roqia.app.downloads.DownloadFilesPackage());
           if ("debug".equals(BuildConfig.BUILD_TYPE)) {
             try {
-              packages.add((ReactPackage) Class.forName("name.roqia.app.feasibility.ProbePackage").getDeclaredConstructor().newInstance());
+              packages.add(
+                  (ReactPackage)
+                      Class.forName("name.roqia.app.feasibility.ProbePackage")
+                          .getDeclaredConstructor()
+                          .newInstance());
             } catch (ReflectiveOperationException error) {
               throw new IllegalStateException("Missing debug feasibility package", error);
             }
@@ -62,7 +70,8 @@ public class MainApplication extends Application implements ReactApplication, an
   @Override
   public ReactHost getReactHost() {
     if (mReactHost == null) {
-      mReactHost = DefaultReactHost.getDefaultReactHost(getApplicationContext(), mReactNativeHost, null);
+      mReactHost =
+          DefaultReactHost.getDefaultReactHost(getApplicationContext(), mReactNativeHost, null);
     }
     return mReactHost;
   }
@@ -74,7 +83,10 @@ public class MainApplication extends Application implements ReactApplication, an
     ReactNativeApplicationEntryPoint.loadReactNative(this);
     // Boot broadcasts can be lost if Android kills an early startup. A subsequent
     // worker/service/Activity process must also replenish the saved prayer window.
-    try { name.roqia.app.prayer.PrayerRenewal.request(this); }
-    catch (RuntimeException error) { android.util.Log.w("RoqiaRenewal", "startup_request_failed", error); }
+    try {
+      name.roqia.app.prayer.PrayerRenewal.request(this);
+    } catch (RuntimeException error) {
+      android.util.Log.w("RoqiaRenewal", "startup_request_failed", error);
+    }
   }
 }

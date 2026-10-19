@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Svg, {Circle, Path} from 'react-native-svg';
+
 import {AppIcon, usePalette} from '../design/ui';
 
 export function TasbihArch() {

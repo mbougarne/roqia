@@ -1,6 +1,7 @@
 // Research harness only. No Morocco profile is approved for production by this spike.
 const {CalculationMethod, Coordinates, Madhab, PrayerTimes} = require('adhan');
 const {checkMoroccoTimeZoneData} = require('./timezone.cjs');
+
 const PRAYERS = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 const candidate = Object.freeze({
   id: 'morocco-research-19-17',
@@ -10,6 +11,7 @@ const candidate = Object.freeze({
   provenance:
     'Research hypothesis only; authoritative parameter and seasonal validation pending.',
 });
+
 function civilParts(date) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date))
     throw Error('Expected a civil YYYY-MM-DD date');
@@ -22,10 +24,12 @@ function civilParts(date) {
     throw Error('Invalid civil date');
   return [y, m, d];
 }
+
 function nextCivilDate(date) {
   const [y, m, d] = civilParts(date);
   return new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10);
 }
+
 function calculate({
   date,
   latitude,
@@ -93,6 +97,7 @@ function calculate({
     }),
   };
 }
+
 function nextPrayer(input, now) {
   const instant = new Date(now).getTime();
   if (!Number.isFinite(instant)) throw Error('Invalid current instant');

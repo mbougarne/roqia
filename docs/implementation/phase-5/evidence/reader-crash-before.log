@@ -1,3 +1,0 @@
-10-18 17:19:31.480 24987 25030 E AndroidRuntime: FATAL EXCEPTION: mqt_v_native
-10-18 17:19:31.480 24987 25030 E AndroidRuntime: Process: name.roqia.app, PID: 24987
-10-18 17:19:31.480 24987 25030 E AndroidRuntime: com.facebook.react.common.JavascriptException: Error: invalid_locator

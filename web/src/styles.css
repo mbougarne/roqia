@@ -24,8 +24,7 @@ body {
   font-family: 'NotoSansArabic', 'Segoe UI', Tahoma, sans-serif;
   background:
     radial-gradient(circle at 90% 0%, #f4efdf 0%, transparent 40%),
-    radial-gradient(circle at 0% 100%, #e7efd7 0%, transparent 35%),
-    var(--bg);
+    radial-gradient(circle at 0% 100%, #e7efd7 0%, transparent 35%), var(--bg);
   color: var(--ink);
 }
 

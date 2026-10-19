@@ -6,6 +6,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const Module = require('node:module');
 const rows = require('../../src/features/prayer/sounds.data.json');
+
 const records = new Map();
 let failPreparation = false;
 const preparations = [];
@@ -45,6 +46,7 @@ const {
   selectSound,
   adhanCapability,
 } = require('../../src/features/prayer/sounds.ts');
+
 Module._load = load;
 
 test('the five numbered originals and separate 15-second clip match the packaged bytes', () => {

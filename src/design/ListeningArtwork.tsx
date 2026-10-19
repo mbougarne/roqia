@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Svg, {Circle, G, Path} from 'react-native-svg';
+
 import {usePalette} from './ui';
 
 export function ListeningArtwork({size = 180}: {size?: number}) {

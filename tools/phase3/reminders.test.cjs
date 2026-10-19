@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 const records = new Map(),
   scheduled = new Map([['unrelated', {id: 'unrelated'}]]);
 let authorized = true,
@@ -61,6 +62,7 @@ const service = require('../../src/features/settings/reminders/service.ts');
 const {
   reminderDefaults,
 } = require('../../src/features/settings/reminders/plan.ts');
+
 test('native reconciliation is idempotent, serialized, owned-only and recovers partial failure', async () => {
   await service.reconcileReminders();
   assert.equal(scheduled.size, 1);

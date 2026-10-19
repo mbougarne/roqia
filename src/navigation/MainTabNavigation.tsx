@@ -1,4 +1,28 @@
 import {
+  createBottomTabNavigator,
+  type BottomTabBarProps,
+} from '@react-navigation/bottom-tabs';
+import {
+  NavigationContainer,
+  CommonActions,
+  DefaultTheme,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useContext, useEffect, useRef} from 'react';
+import {I18nManager, Pressable, View} from 'react-native';
+
+import {consumeLinks} from './linkInbox';
+import {resolveLink, type Tabs, type RootRoutes} from './routes';
+import {AppIcon, AppText, usePalette, type IconName} from '../design/ui';
+import {AsmaScreen} from '../features/asma/AsmaScreen';
+import {MiniPlayer, PlayerScreen} from '../features/audio/Player';
+import {
+  DiscoveryScreen,
+  ContentScreen,
+} from '../features/devotional/DiscoveryScreens';
+import {StorageScreen, DownloadsScreen} from '../features/downloads/Screens';
+import {
   PrayerScreen,
   LocationScreen,
   QiblaScreen,
@@ -8,43 +32,10 @@ import {
   SoundsScreen,
   PrayerSourcesScreen,
 } from '../features/prayer/Screens';
-import React, {useContext, useEffect, useRef} from 'react';
-import {I18nManager, Pressable, View} from 'react-native';
 import {
-  NavigationContainer,
-  CommonActions,
-  DefaultTheme,
-  useNavigationContainerRef,
-} from '@react-navigation/native';
-import {
-  createBottomTabNavigator,
-  type BottomTabBarProps,
-} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HomeScreen, DuaaScreen, TasbihatScreen, AboutScreen} from '../screens';
-import {AdkarMenuScreen, AdkarCategoryScreen} from '../screens/AdkarScreen';
-import {AsmaScreen} from '../features/asma/AsmaScreen';
-import {
-  MoreScreen,
-  SettingsScreen,
-  RecoveryScreen,
-} from '../screens/FoundationScreens';
-import {
-  DiscoveryScreen,
-  ContentScreen,
-} from '../features/devotional/DiscoveryScreens';
-import {GuideScreen, GuidanceScreen} from '../screens/EducationScreens';
-import {
-  LegalScreen,
-  SourcesScreen,
-  ExternalLinkScreen,
-} from '../screens/AboutScreen';
-import {
-  QuranLibraryScreen,
-  EditionScreen,
-  MushafDownloadScreen,
-} from '../features/quran/LibraryScreens';
-import {QuranReaderScreen} from '../features/quran/ReaderScreen';
+  QuranAudioScreen,
+  OfflineAudioScreen,
+} from '../features/quran/AudioScreens';
 import {
   QuranPreferencesScreen,
   TranslationScreen,
@@ -53,17 +44,28 @@ import {
   QuranSourceScreen,
 } from '../features/quran/DetailScreens';
 import {
-  QuranAudioScreen,
-  OfflineAudioScreen,
-} from '../features/quran/AudioScreens';
-import {RemindersScreen} from '../features/settings/reminders/Screen';
-import {StorageScreen, DownloadsScreen} from '../features/downloads/Screens';
-import {MiniPlayer, PlayerScreen} from '../features/audio/Player';
+  QuranLibraryScreen,
+  EditionScreen,
+  MushafDownloadScreen,
+} from '../features/quran/LibraryScreens';
 import {QuranListenScreen} from '../features/quran/ListenScreen';
-import {AppIcon, AppText, usePalette, type IconName} from '../design/ui';
+import {QuranReaderScreen} from '../features/quran/ReaderScreen';
+import {RemindersScreen} from '../features/settings/reminders/Screen';
+import {HomeScreen, DuaaScreen, TasbihatScreen, AboutScreen} from '../screens';
+import {
+  LegalScreen,
+  SourcesScreen,
+  ExternalLinkScreen,
+} from '../screens/AboutScreen';
+import {AdkarMenuScreen, AdkarCategoryScreen} from '../screens/AdkarScreen';
+import {GuideScreen, GuidanceScreen} from '../screens/EducationScreens';
+import {
+  MoreScreen,
+  SettingsScreen,
+  RecoveryScreen,
+} from '../screens/FoundationScreens';
 import {themeContext} from '../store';
-import {consumeLinks} from './linkInbox';
-import {resolveLink, type Tabs, type RootRoutes} from './routes';
+
 const Tab = createBottomTabNavigator<Tabs>(),
   Stack = createNativeStackNavigator<RootRoutes>();
 const labels: Record<keyof Tabs, {title: string; icon: IconName}> = {
@@ -73,6 +75,7 @@ const labels: Record<keyof Tabs, {title: string; icon: IconName}> = {
   Prayer: {title: 'الصلاة', icon: 'mosque'},
   More: {title: 'المزيد', icon: 'more'},
 };
+
 function TabBar({state, navigation: tabs}: BottomTabBarProps) {
   const p = usePalette();
   const {mode} = useContext(themeContext);
@@ -162,6 +165,7 @@ function TabBar({state, navigation: tabs}: BottomTabBarProps) {
     </View>
   );
 }
+
 function MainTabs() {
   return (
     <Tab.Navigator
@@ -178,6 +182,7 @@ function MainTabs() {
     </Tab.Navigator>
   );
 }
+
 function withPlayer(Component: React.ComponentType<any>) {
   return function Detail(props: any) {
     return (
@@ -231,6 +236,7 @@ const details = {
   Storage: withPlayer(StorageScreen),
   Recovery: withPlayer(RecoveryScreen),
 };
+
 export function MainTabNavigation() {
   const navigation = useNavigationContainerRef<RootRoutes>();
   const {mode} = useContext(themeContext),

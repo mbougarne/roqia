@@ -18,7 +18,9 @@ export function Layout({children}) {
               key={item.to}
               to={item.to}
               end={item.to === '/'}
-              className={({isActive}) => (isActive ? 'nav-link active' : 'nav-link')}>
+              className={({isActive}) =>
+                isActive ? 'nav-link active' : 'nav-link'
+              }>
               {item.label}
             </NavLink>
           ))}

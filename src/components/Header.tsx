@@ -1,5 +1,6 @@
 import React, {type FC, useContext} from 'react';
 import {I18nManager, View} from 'react-native';
+
 import {AppText, IconButton, usePalette} from '../design/ui';
 import {themeContext} from '../store';
 

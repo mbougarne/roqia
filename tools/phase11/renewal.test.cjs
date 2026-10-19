@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 let prefs,
   tables,
   refreshes = 0,
@@ -40,7 +41,9 @@ const {
   default: task,
 } = require('../../src/features/prayer/renewal.ts');
 const {defaults} = require('../../src/features/prayer/domain.ts');
+
 Date.now = () => Date.parse('2026-10-18T12:00:00Z');
+
 function setup() {
   prefs = {
     ...defaults(),

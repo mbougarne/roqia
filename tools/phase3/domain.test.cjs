@@ -12,6 +12,7 @@ const {
   searchKey,
 } = require('../../src/features/devotional/discovery.ts');
 const {contentItems} = require('../../src/repositories/content.ts');
+
 test('fresh reminders are off; legacy times and identities are retained', () => {
   assert.deepEqual(reminderPlan(reminderDefaults), []);
   assert.deepEqual(

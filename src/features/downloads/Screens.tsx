@@ -1,9 +1,11 @@
 import React, {useEffect, useState, useSyncExternalStore} from 'react';
 import {Alert, View} from 'react-native';
+
+import {catalog} from './catalog';
+import {nativeDownloadPorts} from './native';
+import {type DownloadState, type InstalledPack} from './types';
 import {
   Banner,
-  Disclosure,
-  Group,
   Ornament,
   Progress,
   RadioRow,
@@ -11,23 +13,21 @@ import {
   SettingRow,
   rtlRow,
 } from '../../design/components';
+import {ltr} from '../../design/format';
 import {
   AppIcon,
   AppText,
   Button,
   Card,
-  IconButton,
   Page,
   Row,
   StateView,
 } from '../../design/ui';
-import {ltr} from '../../design/format';
 import {useFormat} from '../../design/useFormat';
-import {nativeDownloadPorts} from './native';
-import {catalog} from './catalog';
-const packTitle = (id: string) => catalog.find(p => p.id === id)?.title ?? id;
 import {useQuran} from '../quran/context';
-import {type DownloadState, type InstalledPack} from './types';
+
+const packTitle = (id: string) => catalog.find(p => p.id === id)?.title ?? id;
+
 const labels: Record<DownloadState, string> = {
   queued: 'في الانتظار',
   waiting_network: 'بانتظار الشبكة المسموحة',
@@ -41,6 +41,7 @@ const labels: Record<DownloadState, string> = {
   deleting: 'جارٍ الحذف',
   removed: 'محذوف',
 };
+
 function useDownloads() {
   const runtime = useQuran(),
     downloads = runtime.downloads;
@@ -73,6 +74,7 @@ const handle = (action: Promise<unknown>) => {
     ),
   );
 };
+
 export function DownloadsScreen({navigation}: any) {
   const {bytes} = useFormat();
   const displayBytes = (value: number) => ltr(bytes(value));
@@ -258,6 +260,7 @@ export function DownloadsScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function StorageScreen({navigation}: any) {
   const {number, bytes} = useFormat();
   const displayBytes = (value: number) => ltr(bytes(value));

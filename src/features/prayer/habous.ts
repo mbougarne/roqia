@@ -1,5 +1,6 @@
 import {type Timetable, events} from './domain';
 import {nextDate} from './time';
+
 export const sourceUrl = (id: string) =>
   `https://www.habous.gov.ma/prieres/index.php?ville=${id}`;
 const months: Record<string, number> = {
@@ -24,6 +25,7 @@ const plain = (s: string) =>
     .replace(/&nbsp;|&#160;/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+
 export function parseHabous(
   html: string,
   cityId: string,

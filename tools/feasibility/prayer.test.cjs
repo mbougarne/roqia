@@ -2,6 +2,7 @@ const {test} = require('node:test');
 const assert = require('node:assert/strict');
 const {execFileSync} = require('node:child_process');
 const {calculate, nextCivilDate, nextPrayer} = require('./prayer.cjs');
+
 const base = {
   date: '2026-10-18',
   latitude: 33.5731,

@@ -14,6 +14,7 @@ export const number = (
     ...options,
     numberingSystem: numberingSystem(style),
   }).format(value);
+
 export const time = (
   date: Date,
   options: Intl.DateTimeFormatOptions = {},
@@ -27,6 +28,7 @@ export const time = (
     ...options,
     numberingSystem: numberingSystem(style),
   }).format(date);
+
 export function bytes(value: number, style: DigitStyle = 'western') {
   const units = ['B', 'KB', 'MB', 'GB'];
   let unit = 0;
@@ -36,6 +38,7 @@ export function bytes(value: number, style: DigitStyle = 'western') {
   }
   return `${number(value, {maximumFractionDigits: unit ? 1 : 0}, 'ar-MA', style)} ${units[unit]}`;
 }
+
 // Use only for generated interface values, never source Quran text or IDs.
 export const digits = (value: string, style: DigitStyle = 'western') =>
   style === 'eastern'
@@ -79,7 +82,9 @@ export const createFormatters = (style: DigitStyle) => ({
     );
   },
 });
+
 export const ltr = (value: string) => `\u2066${value}\u2069`;
+
 export const arabicPlural = (
   value: number,
   forms: Record<Intl.LDMLPluralRule, string>,

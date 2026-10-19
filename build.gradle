@@ -1,0 +1,45 @@
+plugins {
+    id 'com.diffplug.spotless' version '8.10.4'
+}
+
+repositories {
+    mavenCentral()
+}
+
+def repository = rootDir
+
+spotless {
+    java {
+        target fileTree(repository) {
+            include 'android/app/src/**/*.java', 'tools/**/*.java'
+            exclude '**/build/**', '**/node_modules/**', 'tools/phase6/Hierarchy.java'
+        }
+        googleJavaFormat('1.28.0')
+        importOrder('java', 'javax', 'android', '', 'name.roqia', '\\#')
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    kotlin {
+        target fileTree(repository) {
+            include 'android/app/src/**/*.kt', 'tools/**/*.kt'
+            exclude '**/build/**', '**/node_modules/**'
+        }
+        ktlint('1.8.0')
+    }
+    kotlinGradle {
+        target fileTree(repository) {
+            include 'android/**/*.gradle.kts', '*.gradle.kts'
+            exclude '**/build/**', '**/.gradle/**'
+        }
+        ktlint('1.8.0')
+    }
+    groovyGradle {
+        target fileTree(repository) {
+            include 'android/*.gradle', 'android/app/*.gradle', '*.gradle'
+        }
+        greclipse('4.35')
+        leadingTabsToSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}

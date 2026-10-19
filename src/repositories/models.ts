@@ -1,5 +1,7 @@
 export type ThemePreference = 'light' | 'dark' | 'system';
+
 export type DigitStyle = 'western' | 'eastern';
+
 export type Settings = {
   schemaVersion: 2;
   themePreference: ThemePreference;
@@ -14,6 +16,7 @@ export type Settings = {
   guidanceSeen: boolean;
   updatedAt: number;
 };
+
 export const defaultSettings: Settings = {
   schemaVersion: 2,
   themePreference: 'system',
@@ -28,6 +31,7 @@ export const defaultSettings: Settings = {
   guidanceSeen: false,
   updatedAt: 0,
 };
+
 export type Bookmark = {bookmarkId: string; createdAt: number} & (
   | {kind: 'devotional'; contentId: string}
   | {
@@ -40,6 +44,7 @@ export type Bookmark = {bookmarkId: string; createdAt: number} & (
     }
   | {kind: 'quran-page'; editionId: string; pageId: string; packVersion: string}
 );
+
 export type Reminder = {
   reminderId: string;
   category: string;
@@ -50,6 +55,7 @@ export type Reminder = {
   zonePolicy: 'device';
   updatedAt: number;
 };
+
 export type MigrationReceipt = {
   migrationId: string;
   fromVersion: number;

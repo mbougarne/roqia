@@ -1,4 +1,0 @@
-Variant: review; production JS bundle, debug signing/native variants; Android arm64-v8a
-Command: JAVA_HOME=<JDK21> ANDROID_HOME=<SDK> ./gradlew :app:assembleReview -PreactNativeArchitectures=arm64-v8a
-BUILD SUCCESSFUL in 34s
-449 actionable tasks: 23 executed, 426 up-to-date

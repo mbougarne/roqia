@@ -2,6 +2,7 @@ require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict'),
   Module = require('node:module');
+
 let db = new Map(),
   requests = [];
 const load = Module._load;
@@ -21,6 +22,7 @@ const {
   prepareTimingSource,
   bindCachedTiming,
 } = require('../../src/features/quran/timingCache.ts');
+
 const identity = {
   read: 120,
   riwaya: 'warsh',
@@ -121,7 +123,7 @@ test('a persisted source sidecar binds to a completed download after restart wit
     audioVersion: 'offline-download-v2',
     audioSha256: 'd'.repeat(64),
   };
-  const {audioSha256, ...source} = completed;
+  const {audioSha256: _audioSha256, ...source} = completed;
   await prepareTimingSource(source);
   assert.equal(
     await cachedTiming(completed),

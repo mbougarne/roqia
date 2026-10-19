@@ -1,6 +1,8 @@
 import {useEffect, useSyncExternalStore} from 'react';
-import {bookmarks} from '../../services/persistence';
+
 import {type Bookmark} from '../../repositories/models';
+import {bookmarks} from '../../services/persistence';
+
 let snapshot: {items: Bookmark[]; error: boolean; loaded: boolean} = {
   items: [],
   error: false,
@@ -9,11 +11,13 @@ let snapshot: {items: Bookmark[]; error: boolean; loaded: boolean} = {
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach(fn => fn());
 let tail: Promise<unknown> = Promise.resolve();
+
 function serial<T>(fn: () => Promise<T>) {
   const next = tail.then(fn);
   tail = next.catch(() => undefined);
   return next;
 }
+
 async function refresh() {
   try {
     snapshot = {items: await bookmarks.list(), error: false, loaded: true};
@@ -24,7 +28,9 @@ async function refresh() {
     emit();
   }
 }
+
 export const reloadBookmarks = () => serial(refresh);
+
 export function useBookmarks() {
   const state = useSyncExternalStore(
     fn => {
@@ -40,6 +46,7 @@ export function useBookmarks() {
   }, []);
   return state;
 }
+
 export function toggleBookmark(contentId: string) {
   return serial(async () => {
     const existing = (await bookmarks.list()).filter(
@@ -58,6 +65,7 @@ export function toggleBookmark(contentId: string) {
     return existing.length === 0;
   });
 }
+
 export function removeBookmark(id: string) {
   return serial(async () => {
     await bookmarks.remove(id);

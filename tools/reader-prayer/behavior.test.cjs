@@ -11,6 +11,7 @@ const {
 const {defaults, day, bearing} = require('../../src/features/prayer/domain.ts');
 const cities = require('../../src/features/prayer/cities.json'),
   tables = require('../../src/features/prayer/timetables.json');
+
 test('continuous paragraphs preserve every exact source string and keep verse-mode rows separate', () => {
   const verses = Array.from({length: 286}, (_, i) => ({
     number: i + 1,
@@ -75,7 +76,7 @@ test('bundled Beni Mellal table comes from the selected official city, not a leg
   const fs = require('node:fs');
   const {parseHabous} = require('../../src/features/prayer/habous.ts');
   const html = fs.readFileSync(
-    'docs/implementation/reader-prayer/beni-mellal-source.html',
+    'tools/reader-prayer/fixtures/beni-mellal-source.html',
     'utf8',
   );
   assert.match(

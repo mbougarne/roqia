@@ -1,12 +1,13 @@
-import {defaultSettings} from './models';
 import {clampCount, defaultCounts} from './content';
 import legacyMap from './legacy-counter-map.json';
+import {defaultSettings} from './models';
 
 export const legacyKeys = [
   '@roqia/app-state',
   '@roqia/walkthrough-seen',
   '@roqia/intro-note-seen',
 ] as const;
+
 export function prepareMigration(raw: Record<string, string | null>) {
   const input = raw[legacyKeys[0]];
   if (input && input.length > 2 * 1024 * 1024)

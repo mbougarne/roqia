@@ -1,4 +1,21 @@
-import {Text, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Text} from 'react-native';
+
+import {useLibrary, useOnFocus, useQuran} from './context';
+import {
+  chapters,
+  editionById,
+  searchChapters,
+  type EditionId,
+  type Locator,
+} from './domain';
+import {act} from './LibraryScreens';
+import {
+  readerDefaults,
+  type ReaderPreferences,
+  supportsKeepAwake,
+} from './runtime';
+import {noteData} from '../../data';
 import {
   Banner,
   Disclosure,
@@ -10,42 +27,23 @@ import {
   Segments,
   SettingRow,
   Toggle,
-  NumberBadge,
-  rtlRow,
 } from '../../design/components';
-import {Illustration} from '../../design/Illustration';
-import React, {useEffect, useRef, useState} from 'react';
+import {ltr} from '../../design/format';
 import {
   IconButton,
   AppText,
   Button,
   Card,
-  Input,
   Page,
   Row,
   StateView,
   usePalette,
   Sheet,
 } from '../../design/ui';
-import {ltr} from '../../design/format';
 import {useFormat} from '../../design/useFormat';
-import {
-  chapters,
-  editionById,
-  searchChapters,
-  type EditionId,
-  type Locator,
-} from './domain';
-import {useLibrary, useOnFocus, useQuran} from './context';
-import {
-  readerDefaults,
-  type ReaderPreferences,
-  supportsKeepAwake,
-} from './runtime';
-import {act} from './LibraryScreens';
 import {type Bookmark} from '../../repositories/models';
 import {removeBookmark} from '../devotional/bookmarks';
-import {noteData} from '../../data';
+
 export function QuranPreferencesScreen({route, navigation}: any) {
   const {digits} = useFormat();
   const p = usePalette();
@@ -201,9 +199,10 @@ export function QuranPreferencesScreen({route, navigation}: any) {
     </Page>
   );
 }
+
 export function TranslationScreen({route, navigation}: any) {
   const {bytes} = useFormat();
-  const {runtime, ready, error, retry} = useLibrary(),
+  const {runtime, ready: _ready, error, retry} = useLibrary(),
     id: EditionId = route.params.editionId,
     e = editionById(id),
     [selected, setSelected] = useState<string | null>(null);
@@ -301,6 +300,7 @@ export function TranslationScreen({route, navigation}: any) {
     </Page>
   );
 }
+
 export function QuranSearchScreen({navigation}: any) {
   const {number} = useFormat();
   const palette = usePalette();
@@ -444,6 +444,7 @@ export function QuranSearchScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function QuranBookmarksScreen({navigation}: any) {
   const {number} = useFormat();
   const runtime = useQuran(),
@@ -506,6 +507,7 @@ export function QuranBookmarksScreen({navigation}: any) {
     </Page>
   );
 }
+
 function editionsTitle(id: string) {
   try {
     return editionById(id).title;
@@ -513,6 +515,7 @@ function editionsTitle(id: string) {
     return 'مصحف غير متاح';
   }
 }
+
 export function QuranSourceScreen({route, navigation}: any) {
   const runtime = useQuran(),
     e = editionById(route.params.editionId),

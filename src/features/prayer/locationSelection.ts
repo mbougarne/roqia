@@ -1,4 +1,5 @@
 import {type Location, type Preferences, validateLocation} from './domain';
+
 export function gpsLocation(
   fix: Pick<Location, 'latitude' | 'longitude' | 'accuracy' | 'acquiredAt'> & {
     name?: string;
@@ -16,6 +17,7 @@ export function gpsLocation(
     zone,
   });
 }
+
 export function preferencesForLocation(
   prefs: Preferences,
   location: Location,
@@ -30,6 +32,7 @@ export function preferencesForLocation(
         : prefs.method,
   };
 }
+
 export function liveHeading(
   heading: {at: number; accuracy: number} | null,
   now: number,
@@ -41,6 +44,7 @@ export function liveHeading(
     heading.accuracy >= 2
   );
 }
+
 export function cityMatches(name: string, query: string) {
   const normalize = (s: string) =>
     s

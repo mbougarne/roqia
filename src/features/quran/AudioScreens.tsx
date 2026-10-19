@@ -1,5 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Pressable, View} from 'react-native';
+
+import {useLibrary} from './context';
+import {chapters} from './domain';
+import {act} from './LibraryScreens';
+import {
+  Banner,
+  Group,
+  NumberBadge,
+  SettingRow,
+  rtlRow,
+} from '../../design/components';
 import {
   AppIcon,
   AppText,
@@ -9,17 +20,7 @@ import {
   StateView,
   usePalette,
 } from '../../design/ui';
-import {
-  Banner,
-  Group,
-  NumberBadge,
-  SettingRow,
-  rtlRow,
-} from '../../design/components';
 import {useFormat} from '../../design/useFormat';
-import {chapters} from './domain';
-import {useLibrary} from './context';
-import {act} from './LibraryScreens';
 import {playback} from '../audio/controller';
 
 // Keep existing links and library entry points on the same listening flow.
@@ -75,6 +76,7 @@ export function QuranAudioScreen({route, navigation}: any) {
     </Page>
   );
 }
+
 export function OfflineAudioScreen({navigation}: any) {
   const {number} = useFormat();
   const {runtime, error, retry} = useLibrary(),

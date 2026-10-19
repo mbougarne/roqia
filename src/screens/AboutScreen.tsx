@@ -1,16 +1,8 @@
+import Clipboard from '@react-native-clipboard/clipboard';
 import React, {useState} from 'react';
 import {AccessibilityInfo, Linking, Modal, View} from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
-import {
-  AppIcon,
-  AppText,
-  Button,
-  Card,
-  Page,
-  Row,
-  StateView,
-  usePalette,
-} from '../design/ui';
+
+import {noteData} from '../data';
 import {
   Banner,
   Disclosure,
@@ -18,11 +10,19 @@ import {
   Ornament,
   SettingRow,
 } from '../design/components';
-import {editions} from '../features/quran/domain';
-import {Illustration} from '../design/Illustration';
-import {noteData} from '../data';
-import legal from '../features/settings/legal-copy.json';
+import {
+  AppIcon,
+  AppText,
+  Button,
+  Card,
+  Page,
+  Row,
+  usePalette,
+} from '../design/ui';
 import {source as asmaSource} from '../features/asma/content';
+import {editions} from '../features/quran/domain';
+import legal from '../features/settings/legal-copy.json';
+
 export function AboutScreen({navigation}: any) {
   const p = usePalette();
   const external = (title: string, url: string) =>
@@ -80,6 +80,7 @@ export function AboutScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function LegalScreen({navigation, route}: any) {
   const privacy = route.name === 'Privacy';
   return (
@@ -153,6 +154,7 @@ export function LegalScreen({navigation, route}: any) {
     </Page>
   );
 }
+
 export function SourcesScreen({navigation}: any) {
   return (
     <Page title="المصادر" onBack={() => navigation.goBack()}>
@@ -191,11 +193,13 @@ export function SourcesScreen({navigation}: any) {
     </Page>
   );
 }
+
 export function ExternalLinkScreen({route, navigation}: any) {
   const {url, title} = route.params,
     [failed, setFailed] = useState(false),
     [busy, setBusy] = useState(false);
   const p = usePalette();
+
   async function open() {
     setBusy(true);
     setFailed(false);

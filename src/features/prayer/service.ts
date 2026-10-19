@@ -4,7 +4,8 @@ import notifee, {
   TriggerType,
 } from '@notifee/react-native';
 import {Platform, NativeModules} from 'react-native';
-import {readRecord, saveRecord, listRecords} from '../../repositories/database';
+
+import cities from './cities.json';
 import {
   defaults,
   validatePreferences,
@@ -14,20 +15,25 @@ import {
   type Timetable,
 } from './domain';
 import {parseHabous, sourceUrl} from './habous';
+import {adhanCapability, adhanNative} from './sounds';
 import {civilDate, clock} from './time';
 import bundled from './timetables.json';
-import cities from './cities.json';
-import {adhanCapability, adhanNative} from './sounds';
+import {readRecord, saveRecord, listRecords} from '../../repositories/database';
+
 export const CHANNEL = 'prayer-notifications';
+
 export const owned = (id: string) => id.startsWith('roqia-prayer:');
+
 export const loadPreferences = async () =>
   validatePreferences(
     (await readRecord<Preferences>('prayer', 'preferences')) ?? defaults(),
   );
+
 export async function loadTables(): Promise<Timetable[]> {
   const cached = await listRecords<Timetable>('prayer-timetables');
   return bundled.map(t => cached.find(c => c.cityId === t.cityId) ?? t);
 }
+
 export async function permission() {
   const settings = await notifee.getNotificationSettings(),
     channel =
@@ -39,11 +45,13 @@ export async function permission() {
   };
 }
 let tail: Promise<unknown> = Promise.resolve();
+
 function serial<T>(action: () => Promise<T>) {
   const next = tail.then(action);
   tail = next.catch(() => undefined);
   return next;
 }
+
 export type Coverage = {
   coveredUntil: number;
   scheduled: number;
@@ -56,6 +64,7 @@ export type Coverage = {
   fullFallback?: number;
   backgroundRenewal?: boolean;
 };
+
 async function reconcile(): Promise<Coverage> {
   const p = await loadPreferences(),
     status = await permission(),
@@ -170,7 +179,9 @@ async function reconcile(): Promise<Coverage> {
   await saveRecord('prayer', 'coverage', result);
   return result;
 }
+
 export const reconcilePrayer = () => serial(reconcile);
+
 export const savePreferences = (value: Preferences) =>
   serial(async () => {
     const previous = await loadPreferences(),
@@ -179,6 +190,7 @@ export const savePreferences = (value: Preferences) =>
     await reconcile();
     return next;
   });
+
 export const refreshTable = (cityId: string) =>
   serial(async () => {
     if (!cities.some(c => c.cityId === cityId)) throw Error('unknown_city');
@@ -214,9 +226,12 @@ export const refreshTable = (cityId: string) =>
       clearTimeout(timeout);
     }
   });
+
 export const requestPrayerPermission = () => notifee.requestPermission();
+
 export const openPrayerSettings = () =>
   notifee.openNotificationSettings(CHANNEL);
+
 export async function testPrayerNotification() {
   const status = await permission();
   if (!status.authorized || status.blocked) throw Error('permission_denied');

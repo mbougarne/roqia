@@ -6,7 +6,7 @@
     "retrievedAt": "2026-10-18",
     "review": "non-commercial-source-delivery",
     "termsUrl": "https://tanzil.net/trans/",
-    "deliveryEvidence": "docs/implementation/phase-9/README.md"
+    "deliveryEvidence": "https://github.com/mbougarne/roqia/blob/b4c8644b6cdf72e30eb32ea0985a4df1efbec484/docs/implementation/phase-9/README.md"
   },
   "en.pickthall": {
     "bytes": 864918,
@@ -15,6 +15,6 @@
     "retrievedAt": "2026-10-18",
     "review": "non-commercial-source-delivery",
     "termsUrl": "https://tanzil.net/trans/",
-    "deliveryEvidence": "docs/implementation/phase-9/README.md"
+    "deliveryEvidence": "https://github.com/mbougarne/roqia/blob/b4c8644b6cdf72e30eb32ea0985a4df1efbec484/docs/implementation/phase-9/README.md"
   }
 }

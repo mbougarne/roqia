@@ -10,6 +10,7 @@ export type DownloadState =
   | 'cancelled'
   | 'deleting'
   | 'removed';
+
 export type Asset = {
   id: string;
   file: string;
@@ -27,7 +28,9 @@ export type Asset = {
     | 'application/zip'
     | 'text/plain';
 };
+
 export type LocalAsset = Omit<Asset, 'url'>;
+
 export type SourcePreparation = {
   kind: 'quran-source-v1';
   editionId: string;
@@ -37,6 +40,7 @@ export type SourcePreparation = {
   documentAssetId?: string;
   archiveMembers?: {entry: string; assetId: string}[];
 };
+
 export type TranslationPreparation = {
   kind: 'translation-source-v1';
   editionId: string;
@@ -47,6 +51,7 @@ export type TranslationPreparation = {
   sourceFooter: string;
   notice: string;
 };
+
 export type Pack = {
   id: string;
   version: string;
@@ -59,6 +64,7 @@ export type Pack = {
   derivedAssets?: LocalAsset[];
   preparation?: SourcePreparation | TranslationPreparation;
 };
+
 export type DownloadJob = {
   jobId: string;
   assetId: string;
@@ -81,6 +87,7 @@ export type DownloadJob = {
   updatedAt: number;
   retryAt: number;
 };
+
 export type InstalledPack = {
   active: boolean;
   packId: string;
@@ -93,19 +100,24 @@ export type InstalledPack = {
   sourceMetadata: Record<string, string>;
   files: string[];
 };
+
 export type InstallJournal = {
   packId: string;
   version: string;
   phase: 'install' | 'delete';
 };
+
 export const packKey = (pack: Pick<Pack, 'id' | 'version'>) =>
   `${pack.id}@${pack.version}`;
+
 export const jobKey = (pack: Pack, asset: Asset) =>
   `${pack.id}.${asset.id}@${pack.version}`;
+
 export const isPublisherAudioUrl = (url: string) =>
   /^https:\/\/(?:cdn\.mp3quran\.net\/audio\/[a-z0-9-]+\/r\d+|server\d+\.mp3quran\.net\/[A-Za-z0-9_/-]+)\/\d{3}\.mp3$/.test(
     url,
   );
+
 export function publisherAudioIntake(pack: Pack, asset: LocalAsset) {
   return (
     asset.pinAfterDownload === true &&
@@ -123,6 +135,7 @@ export function publisherAudioIntake(pack: Pack, asset: LocalAsset) {
     isPublisherAudioUrl(asset.url)
   );
 }
+
 export function validateCatalog(packs: Pack[], allowLocalFixtures = false) {
   const keys = new Set<string>();
   for (const pack of packs) {

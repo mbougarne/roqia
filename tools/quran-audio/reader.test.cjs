@@ -6,6 +6,7 @@ const {test} = require('node:test'),
   Module = require('node:module'),
   React = require('react'),
   {act, create} = require('react-test-renderer');
+
 global.IS_REACT_ACT_ENVIRONMENT = true;
 require.extensions['.tsx'] = (module, file) =>
   module._compile(
@@ -22,6 +23,7 @@ const recording =
   require('../../src/features/quran/catalog.ts').quranCatalog.recordings.find(
     r => r.id === 'mp3quran-120-warsh',
   );
+
 let plays = [],
   network = 0,
   closed = 0,
@@ -110,7 +112,9 @@ Module._load = function (name, parent, ...rest) {
   return original.call(this, name, parent, ...rest);
 };
 const {ReaderVerseAudio} = require('../../src/features/quran/ListenScreen.tsx');
+
 Module._load = original;
+
 async function mount(verse = 1) {
   let view;
   await act(async () => {
@@ -125,6 +129,7 @@ async function mount(verse = 1) {
   });
   return view;
 }
+
 async function unmount(view) {
   await act(async () => view.unmount());
 }

@@ -3,5 +3,6 @@
     "ignoreDeprecations": "6.0",
     "jsx": "react"
   },
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "include": ["src/**/*", "tools/**/*.ts", "tools/**/*.tsx", "__tests__/**/*"]
 }

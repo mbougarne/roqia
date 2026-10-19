@@ -1,5 +1,6 @@
-import mapping from './warsh-translation-map.json';
 import {chapters} from './domain';
+import mapping from './warsh-translation-map.json';
+
 export type DisplayTranslation = {
   number: number;
   text: string;
@@ -7,6 +8,7 @@ export type DisplayTranslation = {
   sourceStart?: number;
   sourceEnd?: number;
 };
+
 // The translation remains a Hafs-source meaning reference. Group complete source
 // verses across differing boundaries; never split or rewrite a translator's text.
 export function alignWarshTranslation(

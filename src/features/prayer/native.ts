@@ -4,8 +4,11 @@ import {
   Platform,
   NativeEventEmitter,
 } from 'react-native';
+
 import {type Location} from './domain';
+
 export const adapter = NativeModules.RoqiaPrayer;
+
 export async function locate(): Promise<
   Pick<Location, 'latitude' | 'longitude' | 'accuracy' | 'acquiredAt'> & {
     name?: string;
@@ -41,6 +44,7 @@ export async function locate(): Promise<
     if (timeout) clearTimeout(timeout);
   }
 }
+
 export function onHeading(
   listener: (e: {heading: number; accuracy: number; at: number}) => void,
 ) {

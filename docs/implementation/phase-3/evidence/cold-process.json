@@ -1,5 +1,0 @@
-{
-  "priorProcessKilled": true,
-  "backgroundProcessRestartedBeforeTap": false,
-  "note": "Android WorkManager may restart a headless process. MainActivity was not running; notification tap must create a new app session. Package was not force-stopped."
-}

@@ -1,19 +1,45 @@
-import importlib.util,json,shutil,subprocess,tempfile,unittest
+import importlib.util
+import json
+import shutil
+import subprocess
+import tempfile
+import unittest
 from pathlib import Path
-HERE=Path(__file__).resolve().parent
-spec=importlib.util.spec_from_file_location('patch_player',HERE/'patch-player.py')
-module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+
+HERE = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location('patch_player', HERE / 'patch-player.py')
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+
+
 class PatchTest(unittest.TestCase):
- def test_exact_pinned_sources_apply_once_and_reject_drift(self):
-  original=module.PACKAGE
-  with tempfile.TemporaryDirectory() as directory:
-   package=Path(directory);module.PACKAGE=package
-   (package/'package.json').write_text('{"version":"5.0.0-alpha0"}')
-   for name in json.loads((HERE/'player-patch.json').read_text()):
-    target=package/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(original/name,target)
-   subprocess.run(['patch','-R','-p1','-i',str(HERE/'player.patch')],cwd=package,check=True,capture_output=True)
-   module.main();module.main()
-   file=package/'android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt';file.write_text(file.read_text()+'// unexpected dependency drift\n')
-   with self.assertRaisesRegex(RuntimeError,'differ'):module.main()
-  module.PACKAGE=original
-if __name__=='__main__':unittest.main()
+    def test_exact_pinned_sources_apply_once_and_reject_drift(self):
+        original = module.PACKAGE
+        with tempfile.TemporaryDirectory() as directory:
+            package = Path(directory)
+            module.PACKAGE = package
+            (package / 'package.json').write_text('{"version":"5.0.0-alpha0"}')
+            for name in json.loads((HERE / 'player-patch.json').read_text()):
+                target = package / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(original / name, target)
+            subprocess.run(
+                ['patch', '-R', '-p1', '-i', str(HERE / 'player.patch')],
+                cwd=package,
+                check=True,
+                capture_output=True,
+            )
+            module.main()
+            module.main()
+            file = (
+                package
+                / 'android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt'
+            )
+            file.write_text(file.read_text() + '// unexpected dependency drift\n')
+            with self.assertRaisesRegex(RuntimeError, 'differ'):
+                module.main()
+        module.PACKAGE = original
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -4,6 +4,7 @@ const {test} = require('node:test'),
 const {
   DownloadCoordinator,
 } = require('../../src/features/downloads/coordinator.ts');
+
 const pack = {
   id: 'phase10',
   version: '1',
@@ -23,6 +24,7 @@ const pack = {
     },
   ],
 };
+
 function fixture() {
   let disk = {jobs: [], installed: [], journals: []},
     files = new Map(),

@@ -4,8 +4,10 @@ import {
   useActiveTrack,
   usePlaybackState,
 } from 'react-native-track-player';
+
 import {type DataProps} from '../data';
 import {audioErrors, playback} from '../features/audio/controller';
+
 export function useHomeAudioPlayback(
   tracks: DataProps[],
   scopeOverride?: string,

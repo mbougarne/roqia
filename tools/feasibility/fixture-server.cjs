@@ -1,6 +1,7 @@
 // Loopback-only deterministic HTTP fixtures. No external files or credentials are served.
 const http = require('node:http');
 const {createHash} = require('node:crypto');
+
 const SIZE = 8 * 1024 * 1024;
 const a = Buffer.alloc(SIZE);
 const b = Buffer.alloc(SIZE);
@@ -18,6 +19,7 @@ const cases = [
   'unknown',
   'recovery',
 ];
+
 function createServer() {
   return http.createServer((request, response) => {
     const url = new URL(request.url, 'http://localhost');

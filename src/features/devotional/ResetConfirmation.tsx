@@ -1,14 +1,18 @@
-import {View} from 'react-native';
 import React, {createContext, useCallback, useContext, useState} from 'react';
+import {View} from 'react-native';
+
 import {AppIcon, AppText, Button, Sheet, usePalette} from '../../design/ui';
+
 type Request = {title: string; action: () => void};
 type Confirm = (title: string, action: () => void) => void;
 const context = createContext<Confirm | null>(null);
+
 export function useConfirmReset() {
   const confirm = useContext(context);
   if (!confirm) throw new Error('missing_reset_confirmation_provider');
   return confirm;
 }
+
 export function ResetConfirmationProvider({
   children,
 }: {

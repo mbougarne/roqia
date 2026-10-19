@@ -1,30 +1,38 @@
 import {NativeModules, Platform} from 'react-native';
-import {readRecord, saveRecord} from '../../repositories/database';
 
 import data from './sounds.data.json';
+import {readRecord, saveRecord} from '../../repositories/database';
+
 type BundledSound = {
   resource: string;
   bytes: number;
   sha256: string;
   duration: number;
 };
+
 export type AdhanSound = {
   id: string;
   title: string;
   kind: 'full' | 'short';
   bundled: BundledSound;
 };
+
 export const sounds = data as AdhanSound[];
+
 export const adhanNative = () =>
   Platform.OS === 'android' ? NativeModules?.RoqiaPrayer : undefined;
+
 export const bundledSoundAvailable = (sound: AdhanSound) =>
   !!sound.bundled && !!adhanNative()?.prepareBundledAdhan;
+
 export type SoundSelection = {normal: string | null; fajr: string | null};
+
 export const selectedSounds = async (): Promise<SoundSelection> =>
   (await readRecord<SoundSelection>('prayer', 'sounds')) ?? {
     normal: null,
     fajr: null,
   };
+
 export async function selectSound(
   sound: AdhanSound,
   variant: keyof SoundSelection | 'all' = 'normal',
@@ -38,6 +46,7 @@ export async function selectSound(
       : {...(await selectedSounds()), [variant]: sound.id},
   );
 }
+
 export type LocalSound = {
   path: string;
   bytes: number;
@@ -45,6 +54,7 @@ export type LocalSound = {
   title: string;
   kind: 'full' | 'short';
 };
+
 export async function localSound(
   sound: AdhanSound,
 ): Promise<LocalSound | null> {

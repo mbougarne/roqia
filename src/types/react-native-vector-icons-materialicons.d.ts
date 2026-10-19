@@ -11,5 +11,6 @@ declare module 'react-native-vector-icons/MaterialIcons' {
   }
 
   const MaterialIcons: React.ComponentType<MaterialIconsProps>;
+
   export default MaterialIcons;
 }

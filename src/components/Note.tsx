@@ -1,7 +1,7 @@
+import Clipboard from '@react-native-clipboard/clipboard';
 import React, {FC, useContext} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Clipboard from '@react-native-clipboard/clipboard';
 
 import {noteData} from '../data';
 import {getPressableScaleStyle} from './pressableStyles';

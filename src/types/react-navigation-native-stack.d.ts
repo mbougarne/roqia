@@ -3,7 +3,7 @@ declare module '@react-navigation/native-stack' {
 
   export type NativeStackNavigationProp<
     ParamList extends Record<string, object | undefined>,
-    RouteName extends keyof ParamList = keyof ParamList,
+    _RouteName extends keyof ParamList = keyof ParamList,
   > = {
     navigate: (screen: keyof ParamList) => void;
     goBack: () => void;
