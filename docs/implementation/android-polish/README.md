@@ -25,7 +25,7 @@ The next focused change replaces the remaining text-only back buttons in search/
 
 ## 4. Du'a and Tasbihat
 
-The next review updates Du'a against both `13-dua.png` references and Tasbihat against both `14-tasbih.png` references. Listen-to-all is removed from Du'a, and both screens retain per-item audio. The reference's texts and sample count are represented using the existing bundled content and real saved progress. See [the review evidence](dua-tasbihat/README.md). Visual approval is pending.
+Du'a and Tasbihat were updated using the `13-dua.png` and `14-tasbih.png` references. Listen-to-all is removed from Du'a, and both screens retain per-item audio. The existing bundled content and real saved progress are preserved. The user accepts the current design deviations and requested only a smaller Tasbihat circle inside the light-theme doorway before continuing. That focused correction is recorded in [the review evidence](dua-tasbihat/README.md); full reference fidelity is not claimed.
 
 ## Remaining requested batch, in order
 

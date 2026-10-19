@@ -10,7 +10,7 @@ Original text, citations, audio mapping, stable IDs, ordering and defaults remai
 
 ## Tasbihat
 
-The screen follows the reference's larger ring, decorative arch in light mode, three quick choices, large tap control and reset/chooser layout. Quick choices link to the actual bundled سبحان الله, الحمد لله and الله أكبر entries. All 17 original items remain available in the chooser, including long texts. The counter still counts remaining repetitions down; its ring represents completed repetitions. It exposes the actual source default as the goal. Bundled defaults are 100, while the reference shows 33.
+The screen uses a progress ring, decorative arch in light mode, three quick choices, large tap control and reset/chooser layout. Quick choices link to the actual bundled سبحان الله, الحمد لله and الله أكبر entries. All 17 original items remain available in the chooser, including long texts. The counter still counts remaining repetitions down; its ring represents completed repetitions. It exposes the actual source default as the goal. Bundled defaults are 100, while the reference shows 33.
 
 The vibration switch is functional, off by default and persisted independently in `tasbih-vibration/singleton` using the existing serialized repository. Enabled feedback requests a 20 ms native vibration after a count tap; emulator checks cannot establish physical tactile quality. Failure to read the preference offers retry, and a failed save leaves the prior value in force. Individual audio, copy/bookmark/source access and confirmed per-item/page resets remain available. There is no listen-to-all control on this screen.
 
@@ -27,7 +27,13 @@ Large interface text moves the devotional text above the dial, keeping the numbe
 
 The shorter existing anxiety prayer, filtered by its source number 6363, is captured in [light](screenshots/after-duaa-reference-light.png) and [dark](screenshots/after-duaa-reference-dark.png) for comparison with the reference card composition. Additional captures show 1.5× interface text in [Du'a](screenshots/after-duaa-large-dark.png) and [Tasbihat](screenshots/after-tasbihat-large-dark.png).
 
-Captures use the hash-verified new APK on `emulator-5554`, user 0. Visual approval of these two screens remains pending. Native artwork, shared chrome and the preserved source texts/defaults differ from the sample images. iPhone work stays deferred. Results and preservation checks are recorded in [verification.json](verification.json).
+Captures use hash-verified review APKs on `emulator-5554`, user 0. The user accepts the current Du'a/Tasbihat design deviations and requested only the circle-fit correction below before continuing. This is not approval of full reference fidelity. Native artwork, shared chrome and the preserved source texts/defaults differ from the sample images. iPhone work stays deferred. Results and preservation checks are recorded in [verification.json](verification.json).
+
+### Focused circle-fit correction
+
+The light-theme dial is reduced from 280 to 240 dp, with 32 dp more space above it. Its circle now sits inside the doorway instead of crossing the curved shoulders. Text and number sizes, counter behavior, the tap control and the dark-theme layout remain unchanged.
+
+Compare the same saved remaining count in the [before](screenshots/before-circle-fit-light.png) and [corrected](screenshots/after-circle-fit-light.png) captures. Additional checks show the [longer quick-choice text](screenshots/after-circle-fit-praise-light.png) and [1.5× app text](screenshots/after-circle-fit-large-light.png). The correction passes TypeScript, changed-file formatting and the Android arm64 review build. All 207 counter rows remain byte-exact; the original settings and vibration preference are preserved. Only the app's automatic prayer renewal and settings write timestamp may differ after startup. No counter was tapped during this check.
 
 All 137 existing Node tests, TypeScript, changed-file formatting and the Android arm64 review build pass. Emulator checks cover search, favorites add/filter/remove, explicit empty results, Du'a completion/reset/cancel, independent Tasbihat quick-choice counters, selected reset/cancel, final repetition to zero and disabled state, long-text selection, vibration preference across cold restart, 1.5× app text and per-item native playback on both screens. Zero-state QA temporarily seeded one remaining repetition in app-private data, then exercised the real UI transition to zero. TalkBack listening, physical tactile quality, 320 dp and 200% OS font scaling are unverified. Lint remains blocked by the existing ESLint 10/legacy-config mismatch.
 

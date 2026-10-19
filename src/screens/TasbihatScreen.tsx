@@ -92,7 +92,7 @@ export function TasbihatScreen({navigation}: any) {
   const item = tasbihatData[index];
   const count = state.repeatCounts[id] ?? item.repeat ?? 0;
   const max = item.repeat ?? 0;
-  const size = Math.min(dark ? 300 : 280, width - 72);
+  const size = Math.min(dark ? 300 : 240, width - 72);
   const outsideText = largeType || (item.content?.length ?? 0) > 40;
   const activeAudio =
     audio.activeAudioFile === item.audioFile && !audio.isAudioPaused;
@@ -112,7 +112,8 @@ export function TasbihatScreen({navigation}: any) {
         style={{
           backgroundColor: dark ? 'transparent' : p.surface,
           borderRadius: 16,
-          paddingVertical: 16,
+          paddingTop: dark ? 16 : 48,
+          paddingBottom: 16,
           paddingHorizontal: 8,
           alignItems: 'center',
           gap: 12,

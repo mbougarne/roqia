@@ -175,5 +175,55 @@
     "after-duaa-reference-dark",
     "after-duaa-large-dark",
     "after-tasbihat-large-dark"
-  ]
+  ],
+  "userAcceptedDesignDeviations": true,
+  "circleFitCorrection": {
+    "date": "2026-10-19",
+    "scope": "Only the light-theme circle diameter and spacing within the doorway",
+    "lightDialDp": {
+      "before": 280,
+      "after": 240
+    },
+    "lightTopPaddingDp": {
+      "before": 16,
+      "after": 48
+    },
+    "darkLayoutUnchanged": true,
+    "textAndNumberSizesUnchanged": true,
+    "typeScriptPassed": true,
+    "formattingPassed": true,
+    "androidArm64ReviewBuildPassed": true,
+    "install": {
+      "apkSHA256": "75aafa3f251d13a01df448df8de3f9e2d1b99a1a0fc7e22fac001ba0fb881e26",
+      "inPlaceUpdate": true,
+      "device": "emulator-5554",
+      "user": 0,
+      "temporaryReserveChangeAuthorized": true,
+      "originalReserveValue": "null",
+      "reserveRestoredImmediately": true
+    },
+    "preservation": {
+      "originalRecords": 39,
+      "originalCountersByteExact": 207,
+      "counterRowsTouchedByQA": 0,
+      "recordKeysUnchanged": true,
+      "settingsRestoredIgnoringWriteTimestamp": true,
+      "bookmarksPlaybackAndVibrationPreferenceByteExact": true,
+      "retainedAutomaticChanges": [
+        ["prayer", "renewal"],
+        ["settings", "singleton"]
+      ],
+      "reserveRestored": true,
+      "lightStandardAndLargeTextCaptured": true,
+      "longerQuickChoiceCaptured": true,
+      "privateDataCommitted": false
+    },
+    "screenshots": [
+      "before-circle-fit-light",
+      "after-circle-fit-light",
+      "after-circle-fit-praise-light",
+      "after-circle-fit-large-light"
+    ],
+    "referenceFidelityClaimed": false
+  }
 }
