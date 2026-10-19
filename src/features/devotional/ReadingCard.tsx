@@ -8,7 +8,14 @@ import {
 } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {type DataProps} from '../../data';
-import {AppText, Button, Card, IconButton, usePalette} from '../../design/ui';
+import {
+  AppIcon,
+  AppText,
+  Button,
+  Card,
+  IconButton,
+  usePalette,
+} from '../../design/ui';
 import {number} from '../../design/format';
 import {Ornament, rtlRow} from '../../design/components';
 import {toggleBookmark} from './bookmarks';
@@ -24,6 +31,7 @@ export function ReadingCard({
   audio,
   hideCounter = false,
   dua = false,
+  showCompletion = false,
 }: {
   item: DataProps;
   index: number;
@@ -39,9 +47,12 @@ export function ReadingCard({
   };
   hideCounter?: boolean;
   dua?: boolean;
+  showCompletion?: boolean;
 }) {
   const confirmReset = useConfirmReset();
   const p = usePalette();
+  const completed =
+    showCompletion && !hideCounter && (item.repeat ?? 0) > 0 && count === 0;
   const previous = useRef({id: item.id, count});
   useEffect(() => {
     if (
@@ -75,7 +86,15 @@ export function ReadingCard({
       )
       .catch(() => Alert.alert('تعذر حفظ التغيير', 'أعد المحاولة.'));
   return (
-    <Card style={{gap: 8, padding: 12}}>
+    <Card
+      style={{
+        gap: 8,
+        padding: 12,
+        ...(completed && {
+          backgroundColor: p.successSurface,
+          borderColor: p.success,
+        }),
+      }}>
       <View style={rtlRow}>
         <AppText
           role="caption"
@@ -161,30 +180,44 @@ export function ReadingCard({
             accessibilityLabel={
               count
                 ? `المتبقي ${number(count)} · اضغط بعد القراءة`
-                : 'اكتمل الذكر'
+                : completed
+                  ? 'تمت القراءة · يمكنك إعادة العداد من زر الإعادة'
+                  : 'اكتمل الذكر'
             }
             accessibilityState={{disabled: !count}}
             onPress={onCount}
             style={{
               flex: 1,
               minHeight: 48,
-              backgroundColor: p.selection,
+              backgroundColor: completed ? p.successSurface : p.selection,
               borderRadius: 10,
               padding: 5,
               justifyContent: 'center',
             }}>
-            <AppText
-              role="bodyStrong"
-              style={{textAlign: 'center', color: p.textOnSelection}}>
-              {count ? `المتبقي ${number(count)}` : 'اكتمل الذكر'}
-            </AppText>
+            <View style={{...rtlRow, justifyContent: 'center', gap: 6}}>
+              {completed && (
+                <AppIcon name="check" size={20} color={p.success} />
+              )}
+              <AppText
+                role="bodyStrong"
+                style={{
+                  textAlign: 'center',
+                  color: completed ? p.success : p.textOnSelection,
+                }}>
+                {count
+                  ? `المتبقي ${number(count)}`
+                  : completed
+                    ? 'تمت القراءة'
+                    : 'اكتمل الذكر'}
+              </AppText>
+            </View>
             <AppText
               role="caption"
               style={{
                 textAlign: 'center',
-                color: p.textOnSelection,
+                color: completed ? p.textSecondary : p.textOnSelection,
               }}>
-              اضغط بعد القراءة
+              {completed ? 'للتكرار، أعد العداد' : 'اضغط بعد القراءة'}
             </AppText>
           </Pressable>
         )}
