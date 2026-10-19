@@ -28,6 +28,7 @@ export type DownloadedAudioEntry = {
 
 let setup: Promise<void> | undefined,
   tail: Promise<unknown> = Promise.resolve();
+let dismissalVersion = 0;
 let error: string | null = null;
 const listeners = new Set<() => void>();
 export const audioErrors = {
@@ -249,12 +250,15 @@ export const playback = {
     command(async () => {
       await TrackPlayer.pause();
     }),
-  stop: () =>
-    command(async () => {
+  stop: () => {
+    // Invalidate restore requests before they finish reading the saved session.
+    dismissalVersion++;
+    return command(async () => {
       await TrackPlayer.reset();
       await clearSleepTimer();
       await saveRecord('playback', 'session', null);
-    }),
+    });
+  },
   next: () => command(() => TrackPlayer.skipToNext()),
   previous: () => command(() => TrackPlayer.skipToPrevious()),
   seek: (seconds: number) =>
@@ -275,6 +279,7 @@ export const playback = {
             ),
           )
         ) {
+          dismissalVersion++;
           await TrackPlayer.reset();
           await clearSleepTimer();
           await saveRecord('playback', 'session', null);
@@ -319,6 +324,7 @@ export function playbackFailed() {
 }
 
 export async function restoreDownloadedSession() {
+  const version = dismissalVersion;
   const saved = await readRecord<{
     downloadEntries: Parameters<typeof playback.downloaded>[0] | null;
     activeIndex: number;
@@ -327,6 +333,7 @@ export async function restoreDownloadedSession() {
     repeatMode: RepeatMode;
   }>('playback', 'session');
   if (
+    version !== dismissalVersion ||
     !saved?.downloadEntries?.length ||
     !Number.isInteger(saved.activeIndex) ||
     saved.activeIndex < 0 ||
@@ -338,9 +345,11 @@ export async function restoreDownloadedSession() {
     paused: true,
     index: saved.activeIndex,
     position: saved.positionMs / 1000,
+    isCurrent: () => version === dismissalVersion,
   });
   // A failed integrity check must not change settings or overwrite the saved session.
-  if (!restored) throw Error('audio_restore_failed');
+  if (!restored || version !== dismissalVersion)
+    throw Error('audio_restore_failed');
   await playback.rate(
     [0.75, 1, 1.25, 1.5].includes(saved.speed) ? saved.speed : 1,
   );

@@ -16,7 +16,7 @@ import {
   IconButton,
   usePalette,
 } from '../../design/ui';
-import {number} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {Ornament, rtlRow} from '../../design/components';
 import {toggleBookmark} from './bookmarks';
 import {useConfirmReset} from './ResetConfirmation';
@@ -49,6 +49,7 @@ export function ReadingCard({
   dua?: boolean;
   showCompletion?: boolean;
 }) {
+  const {number, digits} = useFormat();
   const confirmReset = useConfirmReset();
   const p = usePalette();
   const completed =
@@ -85,6 +86,151 @@ export function ReadingCard({
         ),
       )
       .catch(() => Alert.alert('تعذر حفظ التغيير', 'أعد المحاولة.'));
+  if (dua)
+    return (
+      <Card style={{gap: 12, padding: 16, borderRadius: 16}}>
+        <View style={rtlRow}>
+          <IconButton
+            name={saved ? 'check' : 'bookmark'}
+            label={saved ? 'إزالة من المحفوظات' : 'حفظ في المحفوظات'}
+            selected={saved}
+            disabled={!bookmarkReady}
+            onPress={bookmark}
+          />
+          <View style={{flex: 1}} />
+          <AppIcon name="medallion" size={28} color={p.accent} />
+        </View>
+        {item.content && (
+          <AppText role="devotional" selectable style={{textAlign: 'center'}}>
+            {item.content}
+          </AppText>
+        )}
+        {[item.caption, item.note, item.repeatDescription]
+          .filter(Boolean)
+          .map((text, i) => (
+            <AppText
+              key={i}
+              role="caption"
+              selectable
+              style={{
+                textAlign: 'center',
+                color: p.textSecondary,
+                ...(i === 0 && {
+                  borderTopWidth: 0.5,
+                  borderColor: p.borderSubtle,
+                  paddingTop: 8,
+                }),
+              }}>
+              {digits(text ?? '')}
+            </AppText>
+          ))}
+        <View style={{...rtlRow, alignItems: 'stretch', gap: 8}}>
+          <View
+            style={{
+              borderWidth: 0.5,
+              borderColor: p.borderControl,
+              borderRadius: 12,
+            }}>
+            <IconButton
+              name={saved ? 'check' : 'bookmark'}
+              label={saved ? 'إزالة من المحفوظات' : 'حفظ في المحفوظات'}
+              selected={saved}
+              disabled={!bookmarkReady}
+              onPress={bookmark}
+            />
+          </View>
+          {files.length > 0 && (
+            <View style={{flex: 1, borderRadius: 12, overflow: 'hidden'}}>
+              <Button
+                icon={
+                  audio.activeAudioFile === files[0].fileName &&
+                  !audio.isAudioPaused
+                    ? 'pause'
+                    : 'play'
+                }
+                label={
+                  audio.activeAudioFile === files[0].fileName &&
+                  !audio.isAudioPaused
+                    ? 'إيقاف مؤقت'
+                    : 'استمع'
+                }
+                onPress={() => void audio.onAudioPress(files[0].fileName)}
+              />
+            </View>
+          )}
+          <View
+            style={{
+              borderWidth: 0.5,
+              borderColor: p.borderControl,
+              borderRadius: 12,
+            }}>
+            <IconButton name="copy" label="نسخ النص" onPress={copy} />
+          </View>
+        </View>
+        {!hideCounter && (item.repeat ?? 0) > 0 && (
+          <View
+            style={{
+              ...rtlRow,
+              backgroundColor: count ? p.selection : p.successSurface,
+              borderRadius: 12,
+              overflow: 'hidden',
+            }}>
+            <Pressable
+              disabled={!count}
+              accessibilityRole="button"
+              accessibilityLabel={
+                count
+                  ? `المتبقي ${number(count)} · اضغط بعد القراءة`
+                  : 'اكتمل الذكر'
+              }
+              accessibilityState={{disabled: !count}}
+              onPress={onCount}
+              style={{
+                flex: 1,
+                minHeight: 56,
+                paddingVertical: 8,
+                justifyContent: 'center',
+              }}>
+              <AppText
+                role="bodyStrong"
+                style={{
+                  textAlign: 'center',
+                  color: count ? p.textOnSelection : p.success,
+                }}>
+                {count ? `المتبقي ${number(count)}` : 'تمت القراءة'}
+              </AppText>
+              <AppText
+                role="caption"
+                style={{
+                  textAlign: 'center',
+                  color: count ? p.textOnSelection : p.textSecondary,
+                }}>
+                {count ? 'اضغط بعد القراءة' : 'للتكرار، أعد العداد'}
+              </AppText>
+            </Pressable>
+            <IconButton
+              name="reset"
+              label="إعادة عداد هذا الذكر"
+              color={count ? p.textOnSelection : p.success}
+              onPress={() => confirmReset('إعادة عداد هذا الذكر؟', onReset)}
+            />
+          </View>
+        )}
+        {files.slice(1).map(file => (
+          <Button
+            key={file.fileName}
+            secondary
+            icon={
+              audio.activeAudioFile === file.fileName && !audio.isAudioPaused
+                ? 'pause'
+                : 'play'
+            }
+            label={`استماع · ${file.title}`}
+            onPress={() => void audio.onAudioPress(file.fileName)}
+          />
+        ))}
+      </Card>
+    );
   return (
     <Card
       style={{
@@ -129,7 +275,7 @@ export function ReadingCard({
           role="caption"
           selectable
           style={{color: p.textSecondary, textAlign: 'center'}}>
-          {item.note}
+          {digits(item.note)}
         </AppText>
       )}
       {item.repeatDescription && (
@@ -137,26 +283,11 @@ export function ReadingCard({
           role="caption"
           selectable
           style={{color: p.textSecondary, textAlign: 'center'}}>
-          {item.repeatDescription}
+          {digits(item.repeatDescription)}
         </AppText>
       )}
-      {dua && files.length > 0 && (
-        <Button
-          icon={
-            audio.activeAudioFile === files[0].fileName && !audio.isAudioPaused
-              ? 'pause'
-              : 'play'
-          }
-          label={
-            audio.activeAudioFile === files[0].fileName && !audio.isAudioPaused
-              ? 'إيقاف مؤقت'
-              : 'استماع'
-          }
-          onPress={() => void audio.onAudioPress(files[0].fileName)}
-        />
-      )}
       <View style={{...rtlRow, alignItems: 'stretch', gap: 6}}>
-        {!dua && files.length > 0 && (
+        {files.length > 0 && (
           <IconButton
             name={
               audio.activeAudioFile === files[0].fileName &&

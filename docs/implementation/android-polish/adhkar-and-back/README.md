@@ -20,7 +20,7 @@ Both actual `09-adhkar.png` references were inspected before editing. Review the
 | Adhkar, dark  | [Before](screenshots/before-adhkar-dark.png)  | [After](screenshots/after-adhkar-dark.png)  |
 | Search, light | [Before](screenshots/before-search-light.png) | [After](screenshots/after-search-light.png) |
 
-The composition follows the reference hierarchy, wording, card emphasis, illustration placement and shortcut arrangement. Native vector details and system chrome differ; shared tabs and global screen styling are outside this change. Visual approval of this screen remains pending.
+The composition follows the reference hierarchy, wording, card emphasis, illustration placement and shortcut arrangement. Native vector details and system chrome differ; shared tabs and global screen styling are outside this change. **The user approved the Adhkar/back-control change on 2026-10-19 and authorized continuing to Du'a and Tasbihat.**
 
 Additional captures: [dark search](screenshots/after-search-dark.png), [guide footer back icon](screenshots/after-guide-back-light.png), [1.5× interface text](screenshots/after-adhkar-large-dark.png) and [stacked shortcuts after scrolling](screenshots/after-adhkar-large-shortcuts-dark.png).
 
