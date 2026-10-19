@@ -22,6 +22,7 @@ import {editions} from '../features/quran/domain';
 import {Illustration} from '../design/Illustration';
 import {noteData} from '../data';
 import legal from '../features/settings/legal-copy.json';
+import {source as asmaSource} from '../features/asma/content';
 export function AboutScreen({navigation}: any) {
   const p = usePalette();
   const external = (title: string, url: string) =>
@@ -36,7 +37,7 @@ export function AboutScreen({navigation}: any) {
       <Group>
         <SettingRow
           title="مجاني بالكامل"
-          detail="بلا إعلانات أو اشتراكات"
+          detail="بدو إعلانات أو اشتراكات"
           icon="medallion"
         />
         <SettingRow
@@ -176,6 +177,7 @@ export function SourcesScreen({navigation}: any) {
         ['لهجاتي', noteData.audioSourceThreeUrl],
         ['الأدعية', noteData.duaaSourceUrl],
         ['التسبيحات', noteData.tasbihatSourceUrl],
+        [asmaSource.title, asmaSource.url],
       ].map(([title, url]) => (
         <Row
           key={url}

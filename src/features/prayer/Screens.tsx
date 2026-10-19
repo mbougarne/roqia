@@ -339,7 +339,7 @@ export function PrayerScreen({navigation}: any) {
                       <View
                         style={visual.bell}
                         accessible
-                        accessibilityLabel="الشروق: وقت إرشادي بلا تنبيه"
+                        accessibilityLabel="الشروق: وقت إرشادي بدون تنبيه"
                       />
                     ) : (
                       <Pressable
