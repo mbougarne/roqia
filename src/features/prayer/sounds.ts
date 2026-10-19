@@ -1,6 +1,5 @@
 import {NativeModules, Platform} from 'react-native';
-import type {Pack, InstalledPack, DownloadJob} from '../downloads/types';
-import {listRecords, readRecord, saveRecord} from '../../repositories/database';
+import {readRecord, saveRecord} from '../../repositories/database';
 
 import data from './sounds.data.json';
 type BundledSound = {
@@ -8,37 +7,32 @@ type BundledSound = {
   bytes: number;
   sha256: string;
   duration: number;
-  sourceMetadata: Record<string, string>;
 };
 export type AdhanSound = {
   id: string;
-  variant: 'normal' | 'fajr';
   title: string;
-  notice: string;
-  kind?: 'full' | 'short';
-} & (
-  | {pack: Pack; bundled?: BundledSound}
-  | {pack?: undefined; bundled: BundledSound}
-);
+  kind: 'full' | 'short';
+  bundled: BundledSound;
+};
 export const sounds = data as AdhanSound[];
 export const adhanNative = () =>
   Platform.OS === 'android' ? NativeModules?.RoqiaPrayer : undefined;
 export const bundledSoundAvailable = (sound: AdhanSound) =>
   !!sound.bundled && !!adhanNative()?.prepareBundledAdhan;
-export const soundSource = (sound: AdhanSound) =>
-  sound.bundled?.sourceMetadata ?? sound.pack!.sourceMetadata;
 export type SoundSelection = {normal: string | null; fajr: string | null};
 export const selectedSounds = async (): Promise<SoundSelection> =>
   (await readRecord<SoundSelection>('prayer', 'sounds')) ?? {
     normal: null,
     fajr: null,
   };
-export async function selectSound(sound: AdhanSound) {
-  if (sound.bundled && !(await localSound(sound)))
-    throw Error('bundled_adhan_unavailable');
+export async function selectSound(
+  sound: AdhanSound,
+  variant: keyof SoundSelection = 'normal',
+) {
+  if (!(await localSound(sound))) throw Error('bundled_adhan_unavailable');
   await saveRecord('prayer', 'sounds', {
     ...(await selectedSounds()),
-    [sound.variant]: sound.id,
+    [variant]: sound.id,
   });
 }
 export type LocalSound = {
@@ -66,37 +60,9 @@ export async function localSound(
       kind: sound.kind ?? 'full',
     };
   }
-  const descriptor = sound.pack;
-  if (!descriptor) return null;
-  const installed = await listRecords<InstalledPack>('installed');
-  const pack = installed.find(
-    p =>
-      p.packId === descriptor.id &&
-      p.version === descriptor.version &&
-      p.state === 'ready' &&
-      p.manifestHash === descriptor.manifestHash,
-  );
-  if (!pack) return null;
-  const asset = descriptor.assets[0];
-  const job = (await listRecords<DownloadJob>('downloads')).find(
-    j =>
-      j.packId === pack.packId &&
-      j.version === pack.version &&
-      j.assetId === asset.id &&
-      j.state === 'ready',
-  );
-  return job
-    ? {
-        path: require('../../platform/files').privatePath(
-          job.relativeFinalPath,
-        ),
-        bytes: asset.bytes,
-        sha256: asset.sha256,
-        title: sound.title,
-        kind: sound.kind ?? 'full',
-      }
-    : null;
+  return null;
 }
+
 export async function adhanCapability() {
   const native = adhanNative();
   if (!native?.adhanStatus)
@@ -112,9 +78,7 @@ export async function adhanCapability() {
     selectedSounds(),
   ]);
   const resolve = async (variant: 'normal' | 'fajr') => {
-    const sound = sounds.find(
-      s => s.id === selected[variant] && s.variant === variant,
-    );
+    const sound = sounds.find(s => s.id === selected[variant]);
     return sound ? localSound(sound).catch(() => null) : null;
   };
   return {

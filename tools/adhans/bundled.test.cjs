@@ -47,60 +47,67 @@ const {
 } = require('../../src/features/prayer/sounds.ts');
 Module._load = load;
 
-test('every advertised offline choice is packaged with pinned bytes, provenance and an explicit license', () => {
+test('the five numbered originals and separate 15-second clip match the packaged bytes', () => {
+  const proof = require('./bundled-sources.json');
+  assert.equal(rows.length, 6);
   assert.equal(new Set(rows.map(s => s.id)).size, rows.length);
-  assert.ok(
-    rows.filter(s => s.kind === 'full' && !s.id.startsWith('adhan-doha'))
-      .length >= 2,
+  assert.deepEqual(
+    rows.map(s => s.title),
+    [
+      'الأذان الأول',
+      'الأذان الثاني',
+      'الأذان الثالث',
+      'الأذان الرابع',
+      'الأذان الخامس',
+      'أذان قصير',
+    ],
   );
-  assert.ok(rows.some(s => s.kind === 'short' && s.bundled.duration < 30));
-  assert.ok(rows.some(s => s.variant === 'fajr'));
-  for (const sound of rows) {
-    const b = sound.bundled;
+  const resources = fs
+    .readdirSync(path.resolve(__dirname, '../../android/app/src/main/res/raw'))
+    .filter(f => f.startsWith('roqia_adhan_'))
+    .sort();
+  assert.deepEqual(
+    resources,
+    rows.map(s => s.bundled.resource + '.mp3').sort(),
+    'removed recordings must not remain in the APK',
+  );
+  for (let index = 0; index < rows.length; index++) {
+    const sound = rows[index],
+      b = sound.bundled,
+      source = proof[index];
     const bytes = fs.readFileSync(
-      path.resolve(
-        __dirname,
-        '../../android/app/src/main/res/raw',
-        b.resource + '.mp3',
-      ),
+      path.resolve(__dirname, '../..', source.file),
+    );
+    const original = fs.readFileSync(
+      path.resolve(__dirname, '../..', source.sourceFile),
     );
     assert.equal(bytes.length, b.bytes);
     assert.equal(
       crypto.createHash('sha256').update(bytes).digest('hex'),
       b.sha256,
     );
-    for (const key of [
-      'publisher',
-      'sourceUrl',
-      'rightsUrl',
-      'rights',
-      'verifiedAt',
-      'sourceSHA256',
-    ])
-      assert.ok(b.sourceMetadata[key], sound.id + ': ' + key);
-    assert.match(
-      b.sourceMetadata.sourceUrl,
-      /^https:\/\/(archive.org|commons.wikimedia.org)\//,
+    assert.equal(
+      crypto.createHash('sha256').update(original).digest('hex'),
+      source.sourceSHA256,
     );
-    assert.match(
-      b.sourceMetadata.rightsUrl,
-      /^https:\/\/creativecommons.org\//,
-    );
-    if (sound.pack) {
-      assert.equal(
-        b.sha256,
-        sound.pack.assets[0].sha256,
-        'original Doha bytes must stay unchanged',
-      );
-      assert.equal(b.bytes, sound.pack.assets[0].bytes);
+    assert.equal(original.length, source.sourceBytes);
+    if (index < 5) {
+      assert.deepEqual(bytes, original, 'full originals are unchanged');
+      assert.equal(sound.kind, 'full');
+      assert.equal(source.clip, null);
+    } else {
+      assert.equal(sound.kind, 'short');
+      assert.equal(b.duration, 15);
+      assert.equal(source.sourceFile, 'src/assets/audio/Adhan-05.mp3');
+      assert.deepEqual(source.clip, {start: 0, end: 15});
     }
   }
 });
 
 test('bundled preview/selection needs no installed pack and preserves independent Fajr selection', async () => {
-  const fajr = sounds.find(s => s.variant === 'fajr');
-  await selectSound(fajr);
-  for (const sound of sounds.filter(s => s.variant === 'normal')) {
+  const fajr = sounds[1];
+  await selectSound(fajr, 'fajr');
+  for (const sound of sounds) {
     const local = await localSound(sound);
     assert.equal(local.sha256, sound.bundled.sha256);
     assert.equal(local.bytes, sound.bundled.bytes);
@@ -122,12 +129,26 @@ test('bundled preview/selection needs no installed pack and preserves independen
 test('failed bundled preparation leaves the saved choice unchanged and exposes notification fallback', async () => {
   const previous = structuredClone(await selectedSounds());
   failPreparation = true;
-  await assert.rejects(
-    selectSound(sounds.find(s => s.id === 'adhan-makkah')),
-    /disk_full/,
-  );
+  await assert.rejects(selectSound(sounds[0]), /disk_full/);
   assert.deepEqual(await selectedSounds(), previous);
   const capability = await adhanCapability();
   assert.equal(capability.normal, null);
   assert.equal(capability.fajr, null);
+});
+
+test('removed selections fall back without silently substituting a different recording', async () => {
+  failPreparation = false;
+  records.set('prayer:sounds', {
+    normal: 'adhan-doha-normal',
+    fajr: 'adhan-doha-fajr',
+  });
+  const capability = await adhanCapability();
+  assert.equal(capability.normal, null);
+  assert.equal(capability.fajr, null);
+  await selectSound(sounds[4], 'fajr');
+  assert.deepEqual(await selectedSounds(), {
+    normal: 'adhan-doha-normal',
+    fajr: 'adhan-05',
+  });
+  assert.equal((await adhanCapability()).fajr.sha256, sounds[4].bundled.sha256);
 });

@@ -1,13 +1,14 @@
 {
   "date": "2026-10-19",
-  "scope": "Requested item 7: bundled offline regional adhans and labelled short reading",
+  "scope": "Five user-supplied numbered adhans plus a separate first-15-second clip; information/source/rights UI removed",
   "basePullRequest": 24,
-  "nodeTestsPassed": 145,
+  "nodeTestsPassed": 146,
   "typeScriptPassed": true,
   "formattingPassed": true,
+  "diffCheckPassed": true,
   "androidArm64ReviewBuildPassed": true,
   "install": {
-    "apkSHA256": "bff689653fa37b5e604a2206170c0983788f46296ea29ad1be7873832e3f7c3c",
+    "apkSHA256": "c440a923fcb4964f029d29367399a7318317ac1642d1371cbc852e4764a4f09e",
     "inPlaceUpdate": true,
     "device": "emulator-5554",
     "user": 0,
@@ -15,77 +16,65 @@
     "originalReserveValue": "null",
     "reserveRestoredImmediately": true
   },
+  "apkResources": {
+    "apkSHA256": "c440a923fcb4964f029d29367399a7318317ac1642d1371cbc852e4764a4f09e",
+    "packagedRecordingCount": 6,
+    "allSixAPKFilesMatchPinnedBytes": true,
+    "removedRecordingsAbsent": true
+  },
+  "clip": {
+    "source": "Adhan-05.mp3",
+    "startSeconds": 0,
+    "endSeconds": 15,
+    "decodedSamplesAt16kHz": 240000,
+    "durationSeconds": 15.0,
+    "referenceCorrelation": 0.997957048160719,
+    "originalUnmodified": true
+  },
   "functionalUI": {
     "passed": true,
     "checks": [
-      "preview and direct selection work without downloading adhan-doha-normal",
-      "native background alarm starts adhan-doha-normal from its packaged-byte-verified local file",
-      "preview and direct selection work without downloading adhan-doha-fajr",
-      "native background alarm starts adhan-doha-fajr from its packaged-byte-verified local file",
-      "preview and direct selection work without downloading adhan-makkah",
-      "native background alarm starts adhan-makkah from its packaged-byte-verified local file",
-      "preview and direct selection work without downloading adhan-shalqar",
-      "native background alarm starts adhan-shalqar from its packaged-byte-verified local file",
-      "preview and direct selection work without downloading adhan-short",
-      "native background alarm starts adhan-short from its packaged-byte-verified local file and the short reading completes automatically",
-      "normal and Fajr selections survive cold restart",
-      "corrupt owned Makkah cache is repaired from the APK and plays with the original expected hash",
-      "future prayer alarms independently route Fajr to Doha Fajr and Isha to selected Makkah",
-      "selected bundled sound and playback controls remain readable in dark mode",
-      "SQLite confirms independent Makkah normal and Doha Fajr selections persisted"
+      "select/preview/verified bundled cache adhan-01",
+      "select/preview/verified bundled cache adhan-02",
+      "select/preview/verified bundled cache adhan-03",
+      "select/preview/verified bundled cache adhan-04",
+      "select/preview/verified bundled cache adhan-05",
+      "select/preview/verified bundled cache adhan-05-short",
+      "15-second short playback continues in background and completes automatically",
+      "independent short normal / second Fajr selections persist after cold restart",
+      "real future prayer events route Fajr to second and Isha to short; no test alarm remains"
     ],
     "onDeviceBundledFiles": [
       {
-        "resource": "roqia_adhan_doha_normal",
-        "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
-        "expectedSHA256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b"
+        "resource": "roqia_adhan_01",
+        "sha256": "6bbc400b43e80c8fb1950aa143f1681c51fa2a58b1c053fcd14508ed9f9834cf"
       },
       {
-        "resource": "roqia_adhan_doha_fajr",
-        "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
-        "expectedSHA256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0"
+        "resource": "roqia_adhan_02",
+        "sha256": "2f97e880c0a51a5eedfb7623bdff8507b0a55dba9e84f3792a56a2a989bb816c"
       },
       {
-        "resource": "roqia_adhan_makkah",
-        "sha256": "fa24b2b6c2f375967c67a8e902c3b57b7e667bf9bdd3c04d8aad034ef0cbf848",
-        "expectedSHA256": "fa24b2b6c2f375967c67a8e902c3b57b7e667bf9bdd3c04d8aad034ef0cbf848"
+        "resource": "roqia_adhan_03",
+        "sha256": "bf601b1e075ace128b40270ab08a90ea30d8be989456c657858c52520991396a"
       },
       {
-        "resource": "roqia_adhan_shalqar",
-        "sha256": "d4d567f2fd0f44ee009b60247e9bd5fa1fbee2e73400773baf73f1dc3a654f9f",
-        "expectedSHA256": "d4d567f2fd0f44ee009b60247e9bd5fa1fbee2e73400773baf73f1dc3a654f9f"
+        "resource": "roqia_adhan_04",
+        "sha256": "b7b1ec5511a6a3ddf544ea2bfea29f3c46d7253bfb503982ef580907a338a5de"
       },
       {
-        "resource": "roqia_adhan_short",
-        "sha256": "60542007f1b95c0de34f21bc3ef7fdcf8e43ea20b75c8b3fc46e3ae03d1a0841",
-        "expectedSHA256": "60542007f1b95c0de34f21bc3ef7fdcf8e43ea20b75c8b3fc46e3ae03d1a0841"
+        "resource": "roqia_adhan_05",
+        "sha256": "22202889003280d028a38f36ca32b4e1bf87bf51c3fb72cc0ca026065a606dbd"
+      },
+      {
+        "resource": "roqia_adhan_05_short",
+        "sha256": "f6193e5ebd475c56038d6890534e47f84883c8a72509b0f2713904a2d572d3c4"
       }
     ],
     "deviceNetworkChanged": false,
-    "backgroundMethod": "Home key; no other app content inspected"
-  },
-  "screenshots": [
-    "before-bundled-sounds-light",
-    "after-bundled-sounds-light",
-    "after-bundled-sounds-dark",
-    "after-bundled-adhan-makkah-light",
-    "after-bundled-adhan-shalqar-light",
-    "after-bundled-adhan-short-light",
-    "after-bundled-prayer-routing-light"
-  ],
-  "sourceVerification": "source-verification.json",
-  "licenses": "../../../../bundled-content/ADHAN-LICENSES.md",
-  "limits": {
-    "deviceNetworkChanged": false,
-    "airplaneModeRunPerformed": false,
-    "humanAuditoryContentAcceptance": false,
-    "physicalSpeakerQualityVerified": false,
-    "iOSVerified": false,
-    "TalkBackListeningVerified": false,
-    "freshCallDozeRebootRepetitionPerformed": false,
-    "nativeNotificationShortLabelScreenshotInspected": false,
-    "visualParityClaimed": false,
-    "privateDataCommitted": false
+    "backgroundMethod": "Home after short preview; no other app inspected",
+    "futurePrayerEventsVerified": true,
+    "newBackgroundAlarmStartClaimed": false,
+    "shortNativeCompletionSeconds": 15.12
   },
   "preservation": {
     "originalRecords": 39,
@@ -103,8 +92,21 @@
     "installedAndDownloadRecordsByteExact": true,
     "nativeSchedulesReconciledFromRestoredPreferences": true,
     "reserveRestored": true,
-    "privateDataCommitted": false,
-    "nativeFutureEventsMatchRestoredPrayerModes": true,
-    "QATestAlarmsAbsent": true
-  }
+    "privateDataCommitted": false
+  },
+  "finalState": {
+    "noQAAlarmsRemain": true,
+    "finalNativeAudioEvents": 0,
+    "removedChoicesPromptForNewSelection": true,
+    "finalScreen": "prayer/sounds",
+    "reserveRestored": true
+  },
+  "limitations": [
+    "iOS deferred",
+    "Full visual parity is not claimed",
+    "No new background alarm-start test; immediate short preview was backgrounded through Home and completed naturally",
+    "Physical speaker quality and human audio acceptance unverified",
+    "No TalkBack listening, incoming-call, Doze or reboot repetition in this run",
+    "Existing ESLint version/configuration mismatch outside scope"
+  ]
 }

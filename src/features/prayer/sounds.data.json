@@ -1,173 +1,68 @@
 [
   {
-    "id": "adhan-doha-normal",
-    "variant": "normal",
-    "title": "أذان الدوحة",
-    "notice": "تسجيل من الدوحة (2013–2014) · اسم المؤذن غير مذكور في المصدر. Internet Archive · Public Domain Mark 1.0 · الملف الأصلي دون تعديل.",
-    "pack": {
-      "id": "adhan-doha-normal",
-      "version": "2026.10.18",
-      "title": "أذان الدوحة",
-      "review": "approved",
-      "capabilities": ["adhan"],
-      "sourceMetadata": {
-        "publisher": "Internet Archive · Doha, Qatar",
-        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
-        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
-        "muezzin": "not identified by source",
-        "variant": "normal",
-        "verifiedAt": "2026-10-18"
-      },
-      "assets": [
-        {
-          "id": "audio",
-          "file": "audio.mp3",
-          "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_02_Dhuhr_Adhan.mp3",
-          "bytes": 2419879,
-          "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
-          "mime": "audio/mpeg"
-        }
-      ],
-      "manifestHash": "bb2b3735c7299c46aa28e36ee74d2e82a08169d152a21d75e20139aa9e696b97"
-    },
+    "id": "adhan-01",
+    "title": "الأذان الأول",
     "kind": "full",
     "bundled": {
-      "resource": "roqia_adhan_doha_normal",
-      "bytes": 2419879,
-      "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
-      "duration": 178.831383,
-      "sourceMetadata": {
-        "publisher": "Internet Archive · Doha, Qatar",
-        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
-        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
-        "muezzin": "not identified by source",
-        "variant": "normal",
-        "verifiedAt": "2026-10-19",
-        "region": "Doha, Qatar",
-        "sourceSHA256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b"
-      }
+      "resource": "roqia_adhan_01",
+      "bytes": 304369,
+      "sha256": "6bbc400b43e80c8fb1950aa143f1681c51fa2a58b1c053fcd14508ed9f9834cf",
+      "duration": 120.448
     }
   },
   {
-    "id": "adhan-doha-fajr",
-    "variant": "fajr",
-    "title": "أذان الفجر · الدوحة",
-    "notice": "تسجيل من الدوحة (2013–2014) · اسم المؤذن غير مذكور في المصدر. Internet Archive · Public Domain Mark 1.0 · الملف الأصلي دون تعديل.",
-    "pack": {
-      "id": "adhan-doha-fajr",
-      "version": "2026.10.18",
-      "title": "أذان الفجر · الدوحة",
-      "review": "approved",
-      "capabilities": ["adhan"],
-      "sourceMetadata": {
-        "publisher": "Internet Archive · Doha, Qatar",
-        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
-        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
-        "muezzin": "not identified by source",
-        "variant": "fajr",
-        "verifiedAt": "2026-10-18"
-      },
-      "assets": [
-        {
-          "id": "audio",
-          "file": "audio.mp3",
-          "url": "https://archive.org/download/adhan.recordings.from.doha.qatar/Adhan_Doha_Qatar_01_Fajr_Adhan.mp3",
-          "bytes": 2901706,
-          "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
-          "mime": "audio/mpeg"
-        }
-      ],
-      "manifestHash": "f24c2134161749da0a6aacf50c8234693f79910e4d1b5f3b83b12ba00e6c3741"
-    },
+    "id": "adhan-02",
+    "title": "الأذان الثاني",
     "kind": "full",
     "bundled": {
-      "resource": "roqia_adhan_doha_fajr",
-      "bytes": 2901706,
-      "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
-      "duration": 217.167528,
-      "sourceMetadata": {
-        "publisher": "Internet Archive · Doha, Qatar",
-        "sourceUrl": "https://archive.org/details/adhan.recordings.from.doha.qatar",
-        "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
-        "rights": "Uploader marks the recordings Public Domain. Original MP3, unchanged.",
-        "muezzin": "not identified by source",
-        "variant": "fajr",
-        "verifiedAt": "2026-10-19",
-        "region": "Doha, Qatar",
-        "sourceSHA256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0"
-      }
+      "resource": "roqia_adhan_02",
+      "bytes": 465224,
+      "sha256": "2f97e880c0a51a5eedfb7623bdff8507b0a55dba9e84f3792a56a2a989bb816c",
+      "duration": 200.836
     }
   },
   {
-    "id": "adhan-makkah",
-    "variant": "normal",
-    "title": "أذان مكة · تسجيل ميداني",
-    "notice": "تسجيل أذان المغرب من المسجد الحرام، 25 فبراير 2012، بصوت بيئة المكان. تسجيل 3omar Faruq؛ اسم المؤذن غير موثق. CC BY 3.0. استُخرج الصوت وحُوّل إلى MP3 وقُص الانتظار قبل النداء وما بعده. يحتفظ ببداية النداء ونهايته.",
+    "id": "adhan-03",
+    "title": "الأذان الثالث",
     "kind": "full",
     "bundled": {
-      "resource": "roqia_adhan_makkah",
-      "bytes": 2020724,
-      "sha256": "fa24b2b6c2f375967c67a8e902c3b57b7e667bf9bdd3c04d8aad034ef0cbf848",
-      "duration": 199.0,
-      "sourceMetadata": {
-        "publisher": "3omar Faruq · Wikimedia Commons / YouTube",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maghrib_Adhan_at_the_Masjid_al_Haram,_Mecca_-_25_Feb,_2012.webm",
-        "rightsUrl": "https://creativecommons.org/licenses/by/3.0/",
-        "rights": "CC BY 3.0. Recording by 3omar Faruq. Audio extracted, converted to mono MP3; the waiting before the call and trailing ambience are trimmed (source 95–294 seconds). No endorsement implied.",
-        "region": "Makkah, Saudi Arabia",
-        "muezzin": "not identified by source",
-        "verifiedAt": "2026-10-19",
-        "sourceSHA256": "b48a38d64a07be777407f764b38fb87edc03a923542514c8be40c8995c56e87e"
-      }
+      "resource": "roqia_adhan_03",
+      "bytes": 318554,
+      "sha256": "bf601b1e075ace128b40270ab08a90ea30d8be989456c657858c52520991396a",
+      "duration": 127.504
     }
   },
   {
-    "id": "adhan-shalqar",
-    "variant": "normal",
-    "title": "أذان شالقار · كازاخستان",
-    "notice": "تسجيل من مسجد ماتاي قوقان أولي في شالقار، 27 ديسمبر 2014. تسجيل Esetok؛ اسم المؤذن غير موثق. CC BY-SA 4.0. استُخرج مسار الصوت كاملا وحُوّل إلى MP3 دون قص. تحتفظ النسخة الصوتية بالترخيص نفسه.",
+    "id": "adhan-04",
+    "title": "الأذان الرابع",
     "kind": "full",
     "bundled": {
-      "resource": "roqia_adhan_shalqar",
-      "bytes": 1600652,
-      "sha256": "d4d567f2fd0f44ee009b60247e9bd5fa1fbee2e73400773baf73f1dc3a654f9f",
-      "duration": 155.369333,
-      "sourceMetadata": {
-        "publisher": "Esetok · Wikimedia Commons",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adhan_in_Shalqar_mosque.webm",
-        "rightsUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "rights": "CC BY-SA 4.0. Own recording by Esetok, 2014-12-27. Entire audio track extracted and converted to mono MP3 without trimming. This audio adaptation remains CC BY-SA 4.0. No endorsement implied.",
-        "region": "Shalqar, Kazakhstan",
-        "muezzin": "not identified by source",
-        "verifiedAt": "2026-10-19",
-        "sourceSHA256": "0e711594149d8b5aef3bfa759b6861fffddb201053febae4d6f20df110f5421c"
-      }
+      "resource": "roqia_adhan_04",
+      "bytes": 1567897,
+      "sha256": "b7b1ec5511a6a3ddf544ea2bfea29f3c46d7253bfb503982ef580907a338a5de",
+      "duration": 187.274376
     }
   },
   {
-    "id": "adhan-short",
-    "variant": "normal",
-    "title": "أذان قصير · قراءة سريعة",
-    "notice": "قراءة عادية سريعة للأذان بصوت Jarih، مدتها نحو 27 ثانية؛ ليست أذان منطقة بعينها. CC BY-SA 3.0. حُوّل التسجيل كاملا إلى MP3 دون قص، وتحتفظ النسخة الصوتية بالترخيص نفسه.",
+    "id": "adhan-05",
+    "title": "الأذان الخامس",
+    "kind": "full",
+    "bundled": {
+      "resource": "roqia_adhan_05",
+      "bytes": 1897034,
+      "sha256": "22202889003280d028a38f36ca32b4e1bf87bf51c3fb72cc0ca026065a606dbd",
+      "duration": 237.0
+    }
+  },
+  {
+    "id": "adhan-05-short",
+    "title": "أذان قصير",
     "kind": "short",
     "bundled": {
-      "resource": "roqia_adhan_short",
-      "bytes": 203581,
-      "sha256": "60542007f1b95c0de34f21bc3ef7fdcf8e43ea20b75c8b3fc46e3ae03d1a0841",
-      "duration": 26.563129,
-      "sourceMetadata": {
-        "publisher": "Jarih · Wikimedia Commons",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adhan_wiki.oga",
-        "rightsUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-        "rights": "CC BY-SA 3.0 selected from the offered licenses. Own spoken reading by Jarih, 2007-03-29. Entire recording converted to mono MP3 without trimming. This audio adaptation remains CC BY-SA 3.0. No endorsement implied.",
-        "region": "not specified by source",
-        "muezzin": "Jarih (own spoken reading)",
-        "verifiedAt": "2026-10-19",
-        "sourceSHA256": "b42b66fd80c1c2fc9d53f5ee561e0761912e51d762ba1d22d7d909b5966a913e"
-      }
+      "resource": "roqia_adhan_05_short",
+      "bytes": 151604,
+      "sha256": "f6193e5ebd475c56038d6890534e47f84883c8a72509b0f2713904a2d572d3c4",
+      "duration": 15.0
     }
   }
 ]
