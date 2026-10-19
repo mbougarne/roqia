@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-19",
+  "scope": "Requested item 7: bundled offline regional adhans and labelled short reading",
+  "basePullRequest": 24,
+  "nodeTestsPassed": 145,
+  "typeScriptPassed": true,
+  "formattingPassed": true,
+  "androidArm64ReviewBuildPassed": true,
+  "install": {
+    "apkSHA256": "bff689653fa37b5e604a2206170c0983788f46296ea29ad1be7873832e3f7c3c",
+    "inPlaceUpdate": true,
+    "device": "emulator-5554",
+    "user": 0,
+    "temporaryReserveChangeAuthorized": true,
+    "originalReserveValue": "null",
+    "reserveRestoredImmediately": true
+  },
+  "functionalUI": {
+    "passed": true,
+    "checks": [
+      "preview and direct selection work without downloading adhan-doha-normal",
+      "native background alarm starts adhan-doha-normal from its packaged-byte-verified local file",
+      "preview and direct selection work without downloading adhan-doha-fajr",
+      "native background alarm starts adhan-doha-fajr from its packaged-byte-verified local file",
+      "preview and direct selection work without downloading adhan-makkah",
+      "native background alarm starts adhan-makkah from its packaged-byte-verified local file",
+      "preview and direct selection work without downloading adhan-shalqar",
+      "native background alarm starts adhan-shalqar from its packaged-byte-verified local file",
+      "preview and direct selection work without downloading adhan-short",
+      "native background alarm starts adhan-short from its packaged-byte-verified local file and the short reading completes automatically",
+      "normal and Fajr selections survive cold restart",
+      "corrupt owned Makkah cache is repaired from the APK and plays with the original expected hash",
+      "future prayer alarms independently route Fajr to Doha Fajr and Isha to selected Makkah",
+      "selected bundled sound and playback controls remain readable in dark mode",
+      "SQLite confirms independent Makkah normal and Doha Fajr selections persisted"
+    ],
+    "onDeviceBundledFiles": [
+      {
+        "resource": "roqia_adhan_doha_normal",
+        "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
+        "expectedSHA256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b"
+      },
+      {
+        "resource": "roqia_adhan_doha_fajr",
+        "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
+        "expectedSHA256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0"
+      },
+      {
+        "resource": "roqia_adhan_makkah",
+        "sha256": "fa24b2b6c2f375967c67a8e902c3b57b7e667bf9bdd3c04d8aad034ef0cbf848",
+        "expectedSHA256": "fa24b2b6c2f375967c67a8e902c3b57b7e667bf9bdd3c04d8aad034ef0cbf848"
+      },
+      {
+        "resource": "roqia_adhan_shalqar",
+        "sha256": "d4d567f2fd0f44ee009b60247e9bd5fa1fbee2e73400773baf73f1dc3a654f9f",
+        "expectedSHA256": "d4d567f2fd0f44ee009b60247e9bd5fa1fbee2e73400773baf73f1dc3a654f9f"
+      },
+      {
+        "resource": "roqia_adhan_short",
+        "sha256": "60542007f1b95c0de34f21bc3ef7fdcf8e43ea20b75c8b3fc46e3ae03d1a0841",
+        "expectedSHA256": "60542007f1b95c0de34f21bc3ef7fdcf8e43ea20b75c8b3fc46e3ae03d1a0841"
+      }
+    ],
+    "deviceNetworkChanged": false,
+    "backgroundMethod": "Home key; no other app content inspected"
+  },
+  "screenshots": [
+    "before-bundled-sounds-light",
+    "after-bundled-sounds-light",
+    "after-bundled-sounds-dark",
+    "after-bundled-adhan-makkah-light",
+    "after-bundled-adhan-shalqar-light",
+    "after-bundled-adhan-short-light",
+    "after-bundled-prayer-routing-light"
+  ],
+  "sourceVerification": "source-verification.json",
+  "licenses": "../../../../bundled-content/ADHAN-LICENSES.md",
+  "limits": {
+    "deviceNetworkChanged": false,
+    "airplaneModeRunPerformed": false,
+    "humanAuditoryContentAcceptance": false,
+    "physicalSpeakerQualityVerified": false,
+    "iOSVerified": false,
+    "TalkBackListeningVerified": false,
+    "freshCallDozeRebootRepetitionPerformed": false,
+    "nativeNotificationShortLabelScreenshotInspected": false,
+    "visualParityClaimed": false,
+    "privateDataCommitted": false
+  },
+  "preservation": {
+    "originalRecords": 39,
+    "originalCountersByteExact": 207,
+    "counterRowsTouchedByQA": 0,
+    "recordKeysUnchanged": true,
+    "settingsRestoredIgnoringWriteTimestamp": true,
+    "bookmarksPlaybackAndVibrationPreferenceByteExact": true,
+    "retainedAutomaticChanges": [
+      ["prayer", "coverage"],
+      ["prayer", "renewal"],
+      ["settings", "singleton"]
+    ],
+    "originalPrayerPreferencesAndSoundSelectionByteExact": true,
+    "installedAndDownloadRecordsByteExact": true,
+    "nativeSchedulesReconciledFromRestoredPreferences": true,
+    "reserveRestored": true,
+    "privateDataCommitted": false,
+    "nativeFutureEventsMatchRestoredPrayerModes": true,
+    "QATestAlarmsAbsent": true
+  }
+}

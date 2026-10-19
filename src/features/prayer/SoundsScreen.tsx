@@ -1,13 +1,6 @@
 import React, {useState} from 'react';
-import {Linking, Platform, View} from 'react-native';
-import {
-  AppText,
-  Button,
-  Card,
-  Page,
-  StateView,
-  IconButton,
-} from '../../design/ui';
+import {Linking, Platform} from 'react-native';
+import {AppText, Button, Page, IconButton} from '../../design/ui';
 import {
   Banner,
   Disclosure,
@@ -18,13 +11,15 @@ import {
   rtlRow,
 } from '../../design/components';
 import {useFormat} from '../../design/useFormat';
-import {useLibrary, useOnFocus} from '../quran/context';
+import {useQuran, useOnFocus} from '../quran/context';
 import {
   sounds,
   selectedSounds,
   selectSound,
   localSound,
   adhanNative,
+  bundledSoundAvailable,
+  soundSource,
   type SoundSelection,
   type AdhanSound,
 } from './sounds';
@@ -32,7 +27,7 @@ import {reconcilePrayer, requestPrayerPermission} from './service';
 import {playback} from '../audio/controller';
 export function SoundsScreen({navigation}: any) {
   const {number} = useFormat();
-  const {runtime, ready, error, retry} = useLibrary();
+  const runtime = useQuran();
   const [selected, setSelected] = useState<SoundSelection>({
     normal: null,
     fajr: null,
@@ -40,7 +35,13 @@ export function SoundsScreen({navigation}: any) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   useOnFocus(() => {
-    void selectedSounds().then(setSelected);
+    void selectedSounds()
+      .then(setSelected)
+      .catch(() =>
+        setMessage(
+          'تعذر استرجاع الصوت المختار. أعد فتح الصفحة للمحاولة مجددا.',
+        ),
+      );
   }, []);
   const act = async (fn: () => Promise<unknown>) => {
     setBusy(true);
@@ -49,7 +50,7 @@ export function SoundsScreen({navigation}: any) {
       await fn();
     } catch {
       setMessage(
-        'تعذر إكمال العملية. تحقق من التنزيل وإذن الإشعارات والمنبهات، ثم أعد المحاولة.',
+        'تعذر إكمال العملية. تحقق من المساحة وإذن الإشعارات والمنبهات، ثم أعد المحاولة.',
       );
     } finally {
       setBusy(false);
@@ -71,7 +72,9 @@ export function SoundsScreen({navigation}: any) {
     if (delayed) {
       if (!status.exact) throw Error('exact_alarm_permission_required');
       await native.testAdhan(JSON.stringify(event));
-      setMessage('سيبدأ الأذان التجريبي بعد 10 ثوان. يمكنك قفل الشاشة.');
+      setMessage(
+        `سيبدأ الأذان التجريبي بعد ${number(10)} ثوان. يمكنك قفل الشاشة.`,
+      );
     } else {
       await playback.pause();
       await native.previewAdhan(JSON.stringify(event));
@@ -81,17 +84,14 @@ export function SoundsScreen({navigation}: any) {
   return (
     <Page title="أصوات الأذان" onBack={() => navigation.goBack()}>
       <AppText role="caption">
-        اختر تسجيلا محفوظا، ونسخة مستقلة لأذان الفجر.
+        التسجيلات المرفقة متاحة دون تنزيل، مع اختيار مستقل لأذان الفجر.
       </AppText>
-      {(!ready || error) && (
-        <StateView
-          title={error ? 'تعذر تحميل التنزيلات' : 'جار تحميل التنزيلات'}
-          action={error ? {label: 'إعادة المحاولة', onPress: retry} : undefined}
-        />
-      )}
       {!!message && <AppText>{message}</AppText>}
       {sounds.map(sound => {
-        const installed = !!runtime.installed(sound.pack),
+        const installed =
+            bundledSoundAvailable(sound) ||
+            !!(sound.pack && runtime.installed(sound.pack)),
+          source = soundSource(sound),
           chosen = selected[sound.variant] === sound.id;
         return (
           <Group key={sound.id}>
@@ -101,17 +101,27 @@ export function SoundsScreen({navigation}: any) {
                 (sound.variant === 'fajr' ? 'نسخة الفجر' : 'باقي الصلوات') +
                 ' · ' +
                 (installed
-                  ? 'متاح دون اتصال'
-                  : number(sound.pack.assets[0].bytes / 1048576, {
-                      maximumFractionDigits: 1,
-                    }) + ' MB')
+                  ? (sound.kind === 'short' ? 'قراءة قصيرة' : 'أذان كامل') +
+                    ' · متاح دون اتصال' +
+                    (sound.bundled
+                      ? ' · ' +
+                        number(Math.round(sound.bundled.duration)) +
+                        ' ثانية'
+                      : '')
+                  : sound.pack
+                    ? number(sound.pack.assets[0].bytes / 1048576, {
+                        maximumFractionDigits: 1,
+                      }) + ' MB'
+                    : 'غير متاح على هذا الجهاز')
               }
               icon="mosque"
               selected={chosen}
+              disabled={busy || (!installed && !sound.pack)}
               onPress={() => {
                 if (!busy)
                   void act(async () => {
                     if (!installed) {
+                      if (!sound.pack) throw Error('bundled_adhan_unavailable');
                       await runtime.download(sound.pack);
                       navigation.navigate('Downloads');
                     } else {
@@ -139,19 +149,23 @@ export function SoundsScreen({navigation}: any) {
             )}
             <Disclosure title={'معلومات ' + sound.title}>
               <AppText role="caption">{sound.notice}</AppText>
+              <AppText role="caption">{source.publisher}</AppText>
+              <AppText role="caption">{source.rights}</AppText>
+              <AppText role="caption" selectable>
+                {source.sourceUrl}
+              </AppText>
+              <AppText role="caption" selectable>
+                {source.rightsUrl}
+              </AppText>
               <Button
                 secondary
                 label={'مصدر ' + sound.title}
-                onPress={() =>
-                  void Linking.openURL(sound.pack.sourceMetadata.sourceUrl)
-                }
+                onPress={() => void Linking.openURL(source.sourceUrl)}
               />
               <Button
                 secondary
                 label={'حقوق استخدام ' + sound.title}
-                onPress={() =>
-                  void Linking.openURL(sound.pack.sourceMetadata.rightsUrl)
-                }
+                onPress={() => void Linking.openURL(source.rightsUrl)}
               />
               {installed && (
                 <Button

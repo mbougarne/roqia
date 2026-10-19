@@ -30,10 +30,11 @@ test('complete Warsh/Hafs catalog and normal/Fajr files match acquired source by
       );
     }
   }
-  assert.deepEqual(sounds.map(s => s.variant).sort(), ['fajr', 'normal']);
+  const legacySounds = sounds.filter(s => s.pack);
+  assert.deepEqual(legacySounds.map(s => s.variant).sort(), ['fajr', 'normal']);
   const packs = [
     ...quranCatalog.recordings.flatMap(r => r.chapters.map(c => c.pack)),
-    ...sounds.map(s => s.pack),
+    ...legacySounds.map(s => s.pack),
   ];
   validateCatalog(packs);
   assert.equal(packs.length, 230);

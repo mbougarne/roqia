@@ -104,7 +104,7 @@ function install(sound) {
   });
 }
 test('full adhan routes only installed selected variants to native alarms, with exclusive fallback and recovery', async () => {
-  for (const sound of sounds) install(sound);
+  for (const sound of sounds.filter(s => s.pack)) install(sound);
   records.set('prayer:sounds', {
     normal: sounds.find(s => s.variant === 'normal').id,
     fajr: sounds.find(s => s.variant === 'fajr').id,

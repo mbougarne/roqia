@@ -124,5 +124,18 @@ test('storage selection exposes independent checkbox semantics', () => {
     onPress: () => {},
   });
   assert.equal(control.props.accessibilityRole, 'checkbox');
-  assert.deepEqual(control.props.accessibilityState, {checked: true});
+  assert.deepEqual(control.props.accessibilityState, {
+    checked: true,
+    disabled: false,
+  });
+});
+test('unavailable sound choices expose their disabled state', () => {
+  const control = RadioRow({
+    title: 'Sound',
+    selected: false,
+    disabled: true,
+    onPress: () => {},
+  });
+  assert.equal(control.props.disabled, true);
+  assert.equal(control.props.accessibilityState.disabled, true);
 });

@@ -35,9 +35,9 @@ The mini-player has a small close icon with a 48 dp accessible target, available
 
 Settings now offers Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩`. Generated interface counts, times, dates, sizes and numeric fields follow the saved choice immediately and after restart. Canonical values, IDs, URLs, source Quran text and edition/font-specific inline verse markers are preserved. See [verification and captures](digit-styles/README.md).
 
-## Remaining requested batch
+## 7. Bundled regional adhans
 
-7. Keep Doha and bundle at least two additional full regional adhans plus an honestly labelled short option. Inspect the existing sounds catalog, attribution and Android native sound handling first. Verify sources, provenance and redistribution permission; do not invent regional or performer labels. Preview, selection, scheduling and background playback must all work offline immediately, without a download. Searching for suitable recordings is authorized.
+Android now packages the original Doha normal/Fajr recordings, additional recordings from Makkah and Shalqar, and a clearly labelled short spoken reading. Preview, selection and native scheduling use the included files; no audio download is required. Credits, source/license URLs and alterations remain available offline. See [source evidence and Android verification](bundled-adhans/README.md).
 
 Continue in this checkout on an appropriate `codex/` branch. Use only `emulator-5554`, user 0, `name.roqia.app`, with in-place updates and restored QA preferences/counters. Keep private backups outside Git. Preserve the accepted Quran recording/riwaya/numbering/integrity/native-clipping safeguards from PR #19. Do not expand visual acceptance from tests or a screenshot gallery.
 

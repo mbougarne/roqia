@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-19",
+  "sourceVerification": "Publisher/license pages inspected directly; rights and alterations are reproduced offline in the app. Automatic transcripts are approximate and do not certify spoken accuracy or recording quality.",
+  "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "assets": [
+    {
+      "key": "doha_normal",
+      "file": "android/app/src/main/res/raw/roqia_adhan_doha_normal.mp3",
+      "sourceFile": "doha-normal.mp3",
+      "sourceBytes": 2419879,
+      "sourceSHA256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
+      "bytes": 2419879,
+      "sha256": "106b6c632799eb1da7e87782b3cf160e27a76dde086f9557e920cdcb1883dc3b",
+      "duration": 178.831383,
+      "clip": null
+    },
+    {
+      "key": "doha_fajr",
+      "file": "android/app/src/main/res/raw/roqia_adhan_doha_fajr.mp3",
+      "sourceFile": "doha-fajr.mp3",
+      "sourceBytes": 2901706,
+      "sourceSHA256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
+      "bytes": 2901706,
+      "sha256": "a64afe612048e2e068d9475cf481f34acc1fe3c7f34de700bebe6779fa3d1bc0",
+      "duration": 217.167528,
+      "clip": null
+    },
+    {
+      "key": "makkah",
+      "file": "android/app/src/main/res/raw/roqia_adhan_makkah.mp3",
+      "sourceFile": "makkah-maghrib.webm",
+      "sourceBytes": 32255226,
+      "sourceSHA256": "b48a38d64a07be777407f764b38fb87edc03a923542514c8be40c8995c56e87e",
+      "bytes": 2020724,
+      "sha256": "fa24b2b6c2f375967c67a8e902c3b57b7e667bf9bdd3c04d8aad034ef0cbf848",
+      "duration": 199.0,
+      "clip": [95, 199]
+    },
+    {
+      "key": "shalqar",
+      "file": "android/app/src/main/res/raw/roqia_adhan_shalqar.mp3",
+      "sourceFile": "shalqar.webm",
+      "sourceBytes": 31501823,
+      "sourceSHA256": "0e711594149d8b5aef3bfa759b6861fffddb201053febae4d6f20df110f5421c",
+      "bytes": 1600652,
+      "sha256": "d4d567f2fd0f44ee009b60247e9bd5fa1fbee2e73400773baf73f1dc3a654f9f",
+      "duration": 155.369333,
+      "clip": null
+    },
+    {
+      "key": "short",
+      "file": "android/app/src/main/res/raw/roqia_adhan_short.mp3",
+      "sourceFile": "short.oga",
+      "sourceBytes": 197820,
+      "sourceSHA256": "b42b66fd80c1c2fc9d53f5ee561e0761912e51d762ba1d22d7d909b5966a913e",
+      "bytes": 203581,
+      "sha256": "60542007f1b95c0de34f21bc3ef7fdcf8e43ea20b75c8b3fc46e3ae03d1a0841",
+      "duration": 26.563129,
+      "clip": null
+    }
+  ],
+  "allResourceBytes": 9146542,
+  "additionalRegions": ["Makkah, Saudi Arabia", "Shalqar, Kazakhstan"],
+  "regionalLabelsDescribeDocumentedRecordingLocation": true,
+  "unknownMuezzinsNotInvented": true,
+  "shortReadingRegionUnspecified": true,
+  "DohaOriginalsUnchanged": true
+}

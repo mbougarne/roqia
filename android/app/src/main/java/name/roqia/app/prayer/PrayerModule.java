@@ -55,6 +55,14 @@ public final class PrayerModule extends ReactContextBaseJavaModule implements Li
     try{WritableMap r=Arguments.createMap();r.putBoolean("exact",AdhanAlarms.exact(getReactApplicationContext()));r.putBoolean("notifications",AdhanAlarms.allowed(getReactApplicationContext()));r.putString("events",AdhanAlarms.stored(getReactApplicationContext()).toString());r.putString("activePath",AdhanService.activePath);r.putString("lastEvent",AdhanAlarms.prefs(getReactApplicationContext()).getString("lastEvent",""));promise.resolve(r);}catch(Exception e){promise.reject("adhan_status",e);}
   }
   @ReactMethod public void scheduleAdhan(String json,Promise promise){new Thread(()->{try{AdhanAlarms.replacePrayers(getReactApplicationContext(),new org.json.JSONArray(json));promise.resolve(true);}catch(Exception e){promise.reject("adhan_schedule",e);}},"adhan-schedule").start();}
+  @ReactMethod public void prepareBundledAdhan(String resource, double bytes, String sha256, Promise promise) {
+    new Thread(() -> {
+      try {
+        java.io.File file = BundledAdhan.prepare(getReactApplicationContext(), resource, bytes, sha256);
+        promise.resolve(file.getPath());
+      } catch (Exception error) { promise.reject("bundled_adhan", error); }
+    }, "adhan-bundle").start();
+  }
   @ReactMethod public void testAdhan(String json,Promise promise){new Thread(()->{try{AdhanAlarms.test(getReactApplicationContext(),new org.json.JSONObject(json));promise.resolve(true);}catch(Exception e){promise.reject("adhan_test",e);}},"adhan-test").start();}
   @ReactMethod public void releaseAdhan(String paths,Promise promise){try{AdhanAlarms.release(getReactApplicationContext(),paths);promise.resolve(true);}catch(Exception e){promise.reject("adhan_release",e);}}
   @ReactMethod public void previewAdhan(String json,Promise promise){
