@@ -56,7 +56,7 @@ export function MoreScreen({navigation}: any) {
         <View style={{flex: 1}}>
           <AppText role="sectionTitle">الرقية</AppText>
           <AppText role="caption" style={{color: p.textSecondary}}>
-            مجاني · بلا إعلانات
+            مجاني · بدون إعلانات
           </AppText>
         </View>
       </Card>

@@ -37,7 +37,7 @@ export function AboutScreen({navigation}: any) {
       <Group>
         <SettingRow
           title="مجاني بالكامل"
-          detail="بلا إعلانات أو اشتراكات"
+          detail="بدو إعلانات أو اشتراكات"
           icon="medallion"
         />
         <SettingRow

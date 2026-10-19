@@ -204,7 +204,7 @@ export function Guide({onFinish}: {onFinish: () => void}) {
           {(
             [
               ['مجاني بالكامل', 'جميع المحتويات متاحة دون اشتراك', 'gift'],
-              ['بلا إعلانات', 'تجربة هادئة ومريحة', 'no-ads'],
+              ['بدون إعلانات', 'تجربة هادئة ومريحة', 'no-ads'],
               ['اقرأ دون اتصال', 'المحتوى المحفوظ معك في أي وقت', 'download'],
             ] as const
           ).map(([title, detail, icon]) => (
@@ -570,7 +570,7 @@ export function HydrationScreen() {
         رفيقك للذكر والقرآن
       </AppText>
       <View style={{position: 'absolute', bottom: 30}}>
-        <AppText role="caption">مجاني · بلا إعلانات</AppText>
+        <AppText role="caption">مجاني · بدون إعلانات</AppText>
       </View>
     </View>
   );
