@@ -1,0 +1,5 @@
+BasedOnStyle: Google
+Language: ObjC
+ColumnLimit: 100
+IndentWidth: 2
+SortIncludes: Never
