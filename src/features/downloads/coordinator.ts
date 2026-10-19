@@ -7,6 +7,7 @@ import {
   type InstallJournal,
   jobKey,
   validateCatalog,
+  publisherAudioIntake,
 } from './types';
 export type Task = {
   id: string;
@@ -43,6 +44,7 @@ export type DownloadPorts = {
   exists: (path: string) => Promise<boolean>;
   size: (path: string) => Promise<number>;
   verify: (path: string, asset: LocalAsset) => Promise<void>;
+  sha256?: (path: string) => Promise<string>;
   prepare?: (pack: Pack, directory: string) => Promise<void>;
   move: (from: string, to: string) => Promise<void>;
   remove: (path: string) => Promise<void>;
@@ -80,6 +82,19 @@ export class DownloadCoordinator {
   getError = () => this.failure;
   listJobs = () => this.jobs.map(j => ({...j}));
   listInstalled = () => this.installed.map(p => ({...p}));
+  register = (pack: Pack) =>
+    this.run(async () => {
+      validateCatalog([pack]);
+      const previous = this.catalog.find(
+        p => p.id === pack.id && p.version === pack.version,
+      );
+      if (previous && previous.manifestHash !== pack.manifestHash)
+        throw Error('catalog_version_conflict');
+      if (!previous) {
+        this.catalog.push(pack);
+        this.notify();
+      }
+    });
   private notify() {
     this.revision++;
     this.listeners.forEach(fn => fn());
@@ -114,7 +129,9 @@ export class DownloadCoordinator {
   private asset(job: DownloadJob) {
     const asset = this.pack(job).assets.find(a => a.id === job.assetId);
     if (!asset) throw Error('asset_unavailable');
-    return asset;
+    return asset.pinAfterDownload && /^[a-f0-9]{64}$/.test(job.expectedHash)
+      ? {...asset, sha256: job.expectedHash}
+      : asset;
   }
   private async stopTask(job: DownloadJob) {
     const task = job.nativeTaskId
@@ -210,7 +227,15 @@ export class DownloadCoordinator {
     const source = (await this.ports.exists(job.relativeTempPath))
       ? job.relativeTempPath
       : job.relativeFinalPath;
-    await this.ports.verify(source, this.asset(job));
+    let asset = this.asset(job);
+    if (!job.expectedHash && publisherAudioIntake(this.pack(job), asset)) {
+      const hash = await this.ports.sha256?.(source);
+      if (!hash || !/^[a-f0-9]{64}$/.test(hash))
+        throw Error('audio_hash_unavailable');
+      asset = {...asset, sha256: hash};
+      await this.ports.verify(source, asset);
+      job.expectedHash = hash;
+    } else await this.ports.verify(source, asset);
     job.state = 'installing';
     job.bytesReceived = job.expectedBytes;
     const pack = this.pack(job);

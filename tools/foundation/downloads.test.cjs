@@ -130,6 +130,25 @@ test('catalog rejects drafts, traversal, duplicate files and non-HTTPS URLs', ()
     assert.throws(() => validateCatalog([p]));
   }
 });
+test('publisher intake pins only complete approved HTTPS audio and checks that pin after restart', async () => {
+  const p=pack('publisher');p.sourceMetadata={publisher:'MP3Quran',checksumPolicy:'pin-after-https-download'};
+  p.assets[0]={...p.assets[0],url:'https://cdn.mp3quran.net/audio/test-reciter/r1/001.mp3',sha256:'',pinAfterDownload:true};
+  validateCatalog([p]);
+  for(const change of [q=>q.assets[0].url='https://evil.invalid/audio/test.mp3',q=>q.sourceMetadata.publisher='Other',q=>q.capabilities=['quran-text'],q=>q.assets[0].mime='application/json']) {
+    const bad=structuredClone(p);change(bad);assert.throws(()=>validateCatalog([bad]));
+  }
+  const f=fixture([p]);
+  f.ports.sha256=async path=>f.files.get(path)?.hash;
+  f.ports.verify=async(path,asset)=>{const file=f.files.get(path);if(!file||file.size!==asset.bytes||file.hash!==asset.sha256)throw Error('integrity_failed');};
+  const c=f.coordinator();await c.initialize();await c.enqueue(p.id,p.version);
+  await f.done(c,[...f.tasks.values()][0]);
+  assert.equal(c.listInstalled()[0].state,'ready');assert.equal(c.listJobs()[0].expectedHash,hash);
+  const reopened=f.coordinator();await reopened.initialize();assert.equal(reopened.listInstalled()[0].state,'ready');
+  f.files.get(reopened.listJobs()[0].relativeFinalPath).hash='b'.repeat(64);
+  const corrupted=f.coordinator();await corrupted.initialize();
+  assert.equal(corrupted.listJobs()[0].expectedHash,hash,'restart never learns a new hash from changed bytes');
+  await assert.rejects(f.ports.verify(corrupted.listJobs()[0].relativeFinalPath,{...p.assets[0],sha256:corrupted.listJobs()[0].expectedHash}),/integrity_failed/);
+});
 test('deduplicates jobs, bounds concurrency and activates an entire pack together', async () => {
   const p = pack('three', 3),
     f = fixture([p]),

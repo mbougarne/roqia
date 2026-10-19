@@ -23,7 +23,8 @@
     "phase9:test": "node --test tools/phase9/*.test.cjs",
     "postinstall": "python3 tools/phase10/patch-downloader.py && python3 tools/phase11/patch-player.py",
     "phase10:test": "python3 -m unittest discover -s tools/phase10 -p \"test_*.py\" && node --test tools/phase10/*.test.cjs",
-    "phase11:test": "python3 -m unittest discover -s tools/phase11 -p \"test_*.py\" && node --test tools/phase11/*.test.cjs"
+    "phase11:test": "python3 -m unittest discover -s tools/phase11 -p \"test_*.py\" && node --test tools/phase11/*.test.cjs",
+    "quran-audio:test": "node --test tools/quran-audio/*.test.cjs"
   },
   "dependencies": {
     "@kesha-antonov/react-native-background-downloader": "4.6.3",

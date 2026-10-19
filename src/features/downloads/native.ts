@@ -23,6 +23,9 @@ import {
 import {listRecords, putRecord, write} from '../../repositories/database';
 import {playback} from '../audio/controller';
 import {catalog} from './catalog';
+import {quranCatalog} from '../quran/catalog';
+import {type Recording, validateQuranCatalog} from '../quran/domain';
+import {validateCatalog} from './types';
 
 // Lazy native import keeps an unavailable transport from disabling offline devotional content.
 const transport = () =>
@@ -66,6 +69,7 @@ async function verify(relative: string, asset: LocalAsset) {
   }
 }
 export const nativeDownloadPorts: DownloadPorts = {
+  sha256: relative => FileSystem.hash(privatePath(relative), 'SHA-256'),
   resumable: Platform.OS === 'android',
   bundled: pack =>
     pack.version === 'source-1' &&
@@ -194,7 +198,31 @@ export const nativeDownloadPorts: DownloadPorts = {
 export const downloads = new DownloadCoordinator(catalog, nativeDownloadPorts);
 
 let networkStarted = false;
+let restoringAudio: Promise<void> | undefined;
 export async function startDownloadServices() {
+  await (restoringAudio ??= (async () => {
+    for (const recording of await listRecords<Recording>(
+      'quran-audio-recordings',
+    )) {
+      validateQuranCatalog({
+        texts: [],
+        translations: [],
+        recordings: [recording],
+      });
+      validateCatalog(recording.chapters.map(c => c.pack));
+      const known = quranCatalog.recordings.find(r => r.id === recording.id);
+      if (!known) quranCatalog.recordings.push(recording);
+      else
+        for (const chapter of recording.chapters)
+          if (!known.chapters.some(c => c.surah === chapter.surah))
+            known.chapters.push(chapter);
+      for (const chapter of recording.chapters)
+        await downloads.register(chapter.pack);
+    }
+  })().catch(e => {
+    restoringAudio = undefined;
+    throw e;
+  }));
   if (!networkStarted) {
     const NetInfo = require('@react-native-community/netinfo')
       .default as typeof import('@react-native-community/netinfo').default;

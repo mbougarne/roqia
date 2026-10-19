@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-19",
+  "device": "Samsung SM_A566B",
+  "package": "name.roqia.app",
+  "androidUser": 0,
+  "inPlaceUpdate": true,
+  "existingRecords": 25,
+  "missingOriginalRecords": 0,
+  "unchangedCounters": 207,
+  "restoredOriginalCollections": [
+    "playback",
+    "settings"
+  ],
+  "retainedAutomaticChanges": [
+    "prayer renewal"
+  ],
+  "nodeTests": 130,
+  "typeScript": true,
+  "androidReviewBuild": true,
+  "nativePatchAndTimerTests": 3,
+  "transportPatchTests": 1,
+  "globalSettingsChanged": false,
+  "otherAppsOpened": false,
+  "preferencesRestored": true,
+  "deviceNetworkDisabled": false,
+  "offlineBindingWithNetworkDeniedRegression": true,
+  "apkSha256": "8bff1f7598abe7edea3f3b4ac35474e577193e48cf699e26ec63eb6d9978b134",
+  "strongEntityMatchesVerifiedDownload": true,
+  "verifiedEntitySamples": [
+    {
+      "read": 120,
+      "surah": 1
+    }
+  ],
+  "restorationVerifiedOnDevice": true,
+  "originalRecordsByteExactExceptPrayerRenewal": 24
+}

@@ -123,7 +123,7 @@ export type Recording = {
   tariq: string | null;
   quality: string;
   notice: string;
-  chapters: {surah: number; pack: Pack; assetId: string}[];
+  chapters: {surah: number; pack: Pack; assetId: string; durationMs?: number}[];
 };
 export type QuranCatalog = {
   texts: TextPack[];

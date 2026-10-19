@@ -13,6 +13,18 @@ import {saveRecord, readRecord} from '../../repositories/database';
 import {type InstalledPack, type DownloadJob} from '../downloads/types';
 import {privatePath} from '../../platform/files';
 import {FileSystem} from 'react-native-file-access';
+import {NativeModules, Platform} from 'react-native';
+
+export const segmentPlaybackSupported = () =>
+  Platform.OS === 'android' &&
+  NativeModules.RoqiaAudio?.segmentPlayback === true;
+export type DownloadedAudioEntry = {
+  packId: string;
+  version: string;
+  assetId: string;
+  title: string;
+  segment?: {verse: number; startMs: number; endMs: number};
+};
 
 let setup: Promise<void> | undefined,
   tail: Promise<unknown> = Promise.resolve();
@@ -73,7 +85,10 @@ async function toggle() {
   const {state} = await TrackPlayer.getPlaybackState();
   if ([State.Playing, State.Buffering, State.Loading].includes(state))
     await TrackPlayer.pause();
-  else await TrackPlayer.play();
+  else {
+    if (state === State.Ended) await TrackPlayer.seekTo(0);
+    await TrackPlayer.play();
+  }
 }
 const tracksFor = (
   items: DataProps[],
@@ -96,17 +111,24 @@ const tracksFor = (
   });
 export const playback = {
   downloaded: (
-    entries: {
-      packId: string;
-      version: string;
-      assetId: string;
-      title: string;
-    }[],
+    entries: DownloadedAudioEntry[],
     options: {paused?: boolean; position?: number; index?: number} = {},
   ) =>
     command(async () => {
       const queue: AddTrack[] = [];
       for (const entry of entries) {
+        const segment = entry.segment;
+        if (
+          segment &&
+          (!segmentPlaybackSupported() ||
+            ![segment.verse, segment.startMs, segment.endMs].every(
+              Number.isSafeInteger,
+            ) ||
+            segment.verse < 1 ||
+            segment.startMs < 0 ||
+            segment.endMs <= segment.startMs)
+        )
+          throw Error('invalid_audio_segment');
         const pack = await readRecord<InstalledPack>(
           'installed',
           `${entry.packId}@${entry.version}`,
@@ -132,9 +154,12 @@ export const playback = {
         )
           throw Error('audio_integrity_failed');
         queue.push({
-          id: job.jobId,
+          id: job.jobId + (segment ? `:verse:${segment.verse}` : ''),
           url: `file://${path}`,
-          title: entry.title,
+          title: entry.title + (segment ? ` · الآية ${segment.verse}` : ''),
+          ...(segment
+            ? {roqiaClipStartMs: segment.startMs, roqiaClipEndMs: segment.endMs}
+            : {}),
           assetVersion: entry.version,
           scope: entry.packId,
           queueMode: 'all',
@@ -143,10 +168,21 @@ export const playback = {
       }
       if (!queue.length) return;
       await TrackPlayer.reset();
+      await TrackPlayer.setRepeatMode(RepeatMode.Off);
       await TrackPlayer.add(queue);
       if (options.index !== undefined) await TrackPlayer.skip(options.index);
-      if (options.position !== undefined)
-        await TrackPlayer.seekTo(Math.max(0, options.position));
+      if (options.position !== undefined) {
+        const segment = entries[options.index ?? 0]?.segment;
+        await TrackPlayer.seekTo(
+          Math.max(
+            0,
+            Math.min(
+              options.position,
+              segment ? (segment.endMs - segment.startMs) / 1000 : Infinity,
+            ),
+          ),
+        );
+      }
       if (options.paused) await TrackPlayer.pause();
       else await TrackPlayer.play();
       return true;
@@ -195,7 +231,12 @@ export const playback = {
       await setSleepTimer(minutes);
     }),
   toggle: () => command(toggle),
-  play: () => command(() => TrackPlayer.play()),
+  play: () =>
+    command(async () => {
+      if ((await TrackPlayer.getPlaybackState()).state === State.Ended)
+        await TrackPlayer.seekTo(0);
+      await TrackPlayer.play();
+    }),
   pause: () =>
     command(async () => {
       await TrackPlayer.pause();

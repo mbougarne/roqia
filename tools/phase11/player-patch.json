@@ -1,11 +1,23 @@
 {
-  "android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt": {
-    "before": "8010e4434ab9e869a7fbd4824904e67ed97bbb3ed4de7a1091b796147ee303d6",
-    "after": "a94bd01994bc9d7f15a1bd709930120d13378fbabd245eea6df30b7fbfd39945"
+  "android/src/main/java/com/doublesymmetry/kotlinaudio/models/AudioItem.kt": {
+    "before": "965cfd7d7f7a7522eb2fca7fc3f2758af2ab743133a848953a38f5268f0f607d",
+    "after": "5054b0f41c3f9740738c3b45641b50536fea611c4bf717aad51481f484af74de"
   },
   "android/src/main/java/com/doublesymmetry/kotlinaudio/players/BaseAudioPlayer.kt": {
     "before": "4bd022730995c383e77582b69401ea7155c04594af5bd5b70ef3a6a7a6a7ba42",
     "after": "858c07f257e898b277c563495eab90781b073d5f9be9f9af7fc1be0113a49248"
+  },
+  "android/src/main/java/com/doublesymmetry/kotlinaudio/players/components/MediaFactory.kt": {
+    "before": "a8cfd35c08fe40bfb40e096935087c2d7625fa1c7b82ff2aa1eeb6a18d8af01e",
+    "after": "bdbf91d1323bc8c68fb05d613fdf4eb600c5019e6dc675f7918289fb46ea0db4"
+  },
+  "android/src/main/java/com/doublesymmetry/trackplayer/model/Track.kt": {
+    "before": "a33aed9e8d9732c3c6a8d697e314afa686ed03de150209349130f598e70a4460",
+    "after": "26ec0a60db5155840f2351e08f2b28dbc0efce866ad1a5f6b4845b571bee11ec"
+  },
+  "android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt": {
+    "before": "8010e4434ab9e869a7fbd4824904e67ed97bbb3ed4de7a1091b796147ee303d6",
+    "after": "a94bd01994bc9d7f15a1bd709930120d13378fbabd245eea6df30b7fbfd39945"
   },
   "android/src/main/java/com/doublesymmetry/trackplayer/service/RoqiaSleepTimer.java": {
     "before": null,

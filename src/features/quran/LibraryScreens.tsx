@@ -185,9 +185,14 @@ export function QuranLibraryScreen({navigation}: any) {
         </Pressable>
       ))}
       <Row
-        title="القراء والتنزيلات الصوتية"
+        title="الاستماع للقرآن"
         icon="headphones"
-        onPress={() => navigation.navigate('QuranAudio')}
+        onPress={() =>
+          navigation.navigate('QuranPlayer', {
+            editionId: id,
+            surah: resume?.surah ?? 1,
+          })
+        }
       />
       {!searchChapters(query).length && (
         <StateView title="لا توجد سورة مطابقة" />

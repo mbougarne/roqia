@@ -59,6 +59,12 @@ export type RootRoutes = {
     packVersion?: string;
   };
   QuranAudio: {editionId?: EditionId; surah?: number} | undefined;
+  QuranPlayer: {
+    editionId: EditionId;
+    surah: number;
+    verse?: number;
+    recordingId?: string;
+  };
   QuranOfflineAudio: undefined;
   Content: {contentId: string};
   ExternalLink: {title: string; url: string};

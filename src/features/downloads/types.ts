@@ -16,6 +16,9 @@ export type Asset = {
   url: string;
   bytes: number;
   sha256: string;
+  // MP3Quran supplies no checksum. Only explicitly approved HTTPS MP3 intake
+  // may pin its first complete download; all other assets require a source hash.
+  pinAfterDownload?: true;
   mime:
     | 'audio/mpeg'
     | 'application/json'
@@ -99,6 +102,27 @@ export const packKey = (pack: Pick<Pack, 'id' | 'version'>) =>
   `${pack.id}@${pack.version}`;
 export const jobKey = (pack: Pack, asset: Asset) =>
   `${pack.id}.${asset.id}@${pack.version}`;
+export const isPublisherAudioUrl = (url: string) =>
+  /^https:\/\/(?:cdn\.mp3quran\.net\/audio\/[a-z0-9-]+\/r\d+|server\d+\.mp3quran\.net\/[A-Za-z0-9_/-]+)\/\d{3}\.mp3$/.test(
+    url,
+  );
+export function publisherAudioIntake(pack: Pack, asset: LocalAsset) {
+  return (
+    asset.pinAfterDownload === true &&
+    asset.sha256 === '' &&
+    pack.capabilities.length === 1 &&
+    pack.capabilities[0] === 'audio' &&
+    pack.assets.length === 1 &&
+    !pack.preparation &&
+    !pack.derivedAssets?.length &&
+    pack.sourceMetadata.publisher === 'MP3Quran' &&
+    pack.sourceMetadata.checksumPolicy === 'pin-after-https-download' &&
+    asset.mime === 'audio/mpeg' &&
+    'url' in asset &&
+    typeof asset.url === 'string' &&
+    isPublisherAudioUrl(asset.url)
+  );
+}
 export function validateCatalog(packs: Pack[], allowLocalFixtures = false) {
   const keys = new Set<string>();
   for (const pack of packs) {
@@ -135,7 +159,8 @@ export function validateCatalog(packs: Pack[], allowLocalFixtures = false) {
         ids.has(asset.id) ||
         !Number.isSafeInteger(asset.bytes) ||
         asset.bytes <= 0 ||
-        !/^[a-f0-9]{64}$/.test(asset.sha256) ||
+        (!/^[a-f0-9]{64}$/.test(asset.sha256) &&
+          !publisherAudioIntake(pack, asset)) ||
         ![
           'audio/mpeg',
           'application/json',

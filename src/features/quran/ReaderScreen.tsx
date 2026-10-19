@@ -263,9 +263,14 @@ function Reader({route, navigation}: any) {
       )}
       <IconButton
         name="volume"
-        label="الاستماع للآية — قريبا"
-        disabled
-        onPress={() => {}}
+        label="الاستماع للآية"
+        onPress={() => {
+          setSelectedVerse(null);
+          navigation.navigate('QuranPlayer', {
+            ...locator(verse.number),
+            verse: verse.number,
+          });
+        }}
       />
     </View>
   );
@@ -666,7 +671,7 @@ function Reader({route, navigation}: any) {
           name="volume"
           label="الاستماع لهذه الرواية"
           onPress={() =>
-            navigation.navigate('QuranAudio', {editionId: edition.id, surah})
+            navigation.navigate('QuranPlayer', {editionId: edition.id, surah})
           }
         />
         <IconButton
