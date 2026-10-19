@@ -290,7 +290,7 @@ export function PrayerScreen({navigation}: any) {
                         'full' &&
                       coverage?.exact &&
                       !coverage?.fullFallback
-                    ? 'أذان كامل'
+                    ? 'تشغيل الأذان'
                     : 'تنبيه إشعار، قد يؤخره توفير الطاقة';
               return (
                 <View
@@ -1082,9 +1082,11 @@ export function AdhanScreen({navigation}: any) {
                 key={n}
                 title={labels[n]}
                 detail={
-                  {off: 'صامت', notification: 'إشعار فقط', full: 'أذان كامل'}[
-                    draft.modes[n]
-                  ]
+                  {
+                    off: 'صامت',
+                    notification: 'إشعار فقط',
+                    full: 'تشغيل الأذان',
+                  }[draft.modes[n]]
                 }
                 icon={n === 'isha' ? 'moon' : 'mosque'}>
                 <IconButton
@@ -1120,7 +1122,7 @@ export function AdhanScreen({navigation}: any) {
                     {
                       off: 'متوقف',
                       notification: 'إشعار فقط',
-                      full: 'أذان كامل',
+                      full: 'تشغيل الأذان',
                     }[m]
                   }
                   selected={draft.modes[editing] === m}
@@ -1179,7 +1181,7 @@ export function AdhanScreen({navigation}: any) {
       <Disclosure title="الإذن والتغطية المحفوظة">
         <Card>
           <AppText>
-            لتشغيل الأذان الكامل، نزّل واختر صوت الأذان ونسخة الفجر، ثم فعّل إذن
+            لتشغيل الأذان، اختر أحد الأصوات المرفقة ونسخة الفجر، ثم فعّل إذن
             المنبهات والإشعارات. إذا تعذر ذلك، يستخدم التطبيق إشعارا فقط ويحفظ
             اختيارك.
           </AppText>
@@ -1204,7 +1206,7 @@ export function AdhanScreen({navigation}: any) {
           label="إعدادات الإشعارات في الجهاز"
           onPress={() => attempt(openPrayerSettings)}
         />
-        <AppText>{`أذان كامل مجدول: ${number(coverage?.fullAdhan ?? 0)} · إشعار بديل: ${number(coverage?.fullFallback ?? 0)}`}</AppText>
+        <AppText>{`أذان صوتي مجدول: ${number(coverage?.fullAdhan ?? 0)} · إشعار بديل: ${number(coverage?.fullFallback ?? 0)}`}</AppText>
         <Button
           secondary
           label="إذن المنبهات والتذكيرات"
