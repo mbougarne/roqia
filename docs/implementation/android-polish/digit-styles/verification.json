@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-19",
+  "scope": "Requested item 6: saved Western/Eastern interface digit styles",
+  "basePullRequest": 23,
+  "nodeTestsPassed": 141,
+  "typeScriptPassed": true,
+  "formattingPassed": true,
+  "androidArm64ReviewBuildPassed": true,
+  "install": {
+    "apkSHA256": "5f0e1605dad1e6ebe1b80052d793b0d9330a13a8519bbea58c368db634027ea4",
+    "inPlaceUpdate": true,
+    "device": "emulator-5554",
+    "user": 0,
+    "temporaryReserveChangeAuthorized": true,
+    "originalReserveValue": "null",
+    "reserveRestoredImmediately": true
+  },
+  "functionalUI": {
+    "passed": true,
+    "checks": [
+      "Eastern option immediately shapes the preserved Tasbihat countdown and goal",
+      "Eastern choice survives cold restart",
+      "prayer date, times and countdown use Eastern digits",
+      "storage byte formatting follows the saved choice",
+      "reminder times use Eastern display digits",
+      "hafs source text and inline markers match the pre-update native hierarchy exactly",
+      "warsh source text and inline markers match the pre-update native hierarchy exactly",
+      "playback minutes and padded seconds both use Eastern digits",
+      "Eastern digits remain legible in dark mode",
+      "switching back restores Western digits immediately",
+      "Hafs continuous inline markers remain Western while the interface preference is Eastern",
+      "reminder numeric input displays Eastern digits"
+    ]
+  },
+  "preservation": {
+    "originalRecords": 39,
+    "originalCountersByteExact": 207,
+    "counterRowsTouchedByQA": 0,
+    "recordKeysUnchanged": true,
+    "settingsRestoredIgnoringWriteTimestampAndNewWesternDefault": true,
+    "bookmarksPlaybackAndVibrationPreferenceByteExact": true,
+    "retainedAutomaticChanges": [
+      ["prayer", "renewal"],
+      ["settings", "singleton"]
+    ],
+    "reserveRestored": true,
+    "privateDataCommitted": false
+  },
+  "screenshots": [
+    "before-digit-settings-light",
+    "after-digits-settings-western-light",
+    "after-digits-settings-eastern-light",
+    "after-digits-tasbihat-eastern-light",
+    "after-digits-tasbihat-eastern-dark",
+    "after-digits-tasbihat-western-dark",
+    "after-digits-prayer-eastern-light",
+    "after-digits-storage-eastern-light",
+    "after-digits-reminder-input-eastern",
+    "after-digits-player-eastern-light",
+    "before-digits-hafs",
+    "after-digits-hafs-eastern-light",
+    "after-digits-hafs-continuous-eastern",
+    "before-digits-warsh",
+    "after-digits-warsh-eastern-light"
+  ],
+  "canonicalSourceAndMarkersRetained": true,
+  "OSOwnedMediaClockStyleVerified": false,
+  "allNativeAlternateKeyboardEntryVerified": false,
+  "iOSVerified": false,
+  "TalkBackListeningVerified": false,
+  "visualParityClaimed": false
+}

@@ -1,0 +1,229 @@
+{
+  "date": "2026-10-19",
+  "branch": "codex/dua-tasbihat-polish",
+  "baseCommit": "bbe191e460a65da98b6e0b8a46a04b913b494045",
+  "basePullRequest": 21,
+  "scope": "Requested item 4: Dua and Tasbihat",
+  "visualAcceptance": false,
+  "referencesInspected": [
+    "design/roqia-v2/reference/light/13-dua.png",
+    "design/roqia-v2/reference/light/14-tasbih.png",
+    "design/roqia-v2/reference/dark/13-dua.png",
+    "design/roqia-v2/reference/dark/14-tasbih.png"
+  ],
+  "automatedChecks": {
+    "node": {
+      "passed": 137,
+      "failed": 0,
+      "command": "node --test tools/*/*.test.cjs"
+    },
+    "typeScript": {
+      "passed": true,
+      "command": "tsc --noEmit"
+    },
+    "formatting": {
+      "passed": true,
+      "scope": "changed TSX files and review documentation"
+    },
+    "diffCheck": {
+      "passed": true
+    },
+    "lint": {
+      "passed": false,
+      "status": "blocked by existing tooling configuration",
+      "reason": "ESLint 10.2.0 requires eslint.config.*; repository has legacy .eslintrc.js."
+    }
+  },
+  "androidBuild": {
+    "passed": true,
+    "variant": "review",
+    "architectures": ["arm64-v8a"],
+    "temporaryInitScript": "Existing /private/tmp/roqia-polish/cached-dependencies.gradle; not committed"
+  },
+  "finalInstall": {
+    "installed": true,
+    "apkSHA256": "96c503e06a5b715c0f17a97f52bd0eae2c1a62f27cf251d2f75c2c49e1505665",
+    "temporaryReserveChangeAuthorized": true,
+    "originalReserveValue": "null",
+    "reserveRestoredImmediately": true,
+    "device": "emulator-5554",
+    "user": 0,
+    "inPlaceUpdate": true,
+    "dataClear": false
+  },
+  "functionalUI": {
+    "passed": true,
+    "device": "emulator-5554",
+    "user": 0,
+    "checks": [
+      "Dua single-item native playback starts",
+      "Dua search retains exact source text/citation",
+      "favorites add/filter/remove and empty state",
+      "Dua counter completion and confirmed/cancelled reset",
+      "Dua no-results state and dark reference capture",
+      "three quick choices address their own canonical IDs/counters",
+      "individual Tasbih reset and cancel leave other counters independent",
+      "vibration preference persists across cold restart",
+      "Tasbih single-item native playback starts",
+      "seeded final remaining repetition reaches zero, disables tap, and resets to source default",
+      "all-items chooser retains long canonical text outside dial",
+      "1.5x app interface text remains readable and scrollable on both screens",
+      "approved Arruqya completion and Adhkar category listen-all retained"
+    ],
+    "zeroStateSeededPrivately": true,
+    "physicalTactileFeedbackVerified": false,
+    "auditoryContentCertification": false,
+    "visualAcceptance": false,
+    "OSFontScaleChanged": false,
+    "networkToggles": false
+  },
+  "functionalUIBuildSHA256": "3fe9feb08860a66a22cf49913c2372e80b7ccec41c1021a80e346cb9e0ad6d6c",
+  "finalChangeAfterFunctionalUI": "Optional icon color for Dua counter reset contrast; all final public after captures retaken on the final hash-verified build. No callback or persistence change.",
+  "DuaResetContrastRatios": {
+    "light": {
+      "active": 10.221368061255493,
+      "complete": 6.413885333373393
+    },
+    "dark": {
+      "active": 8.16877153055246,
+      "complete": 7.247107641684609
+    }
+  },
+  "finalVisualReview": {
+    "lightAndDark": true,
+    "appTextScale1Point5": true,
+    "DuaResetIconContrastCorrectedAndInspected": true,
+    "sourceTextAndCitationPreserved": true
+  },
+  "preservationAfterFunctionalQA": {
+    "existingRecords": 38,
+    "missingOriginalRecords": 0,
+    "originalRecordsByteExactBeforeRestart": 37,
+    "originalCountersRestoredByteExact": 207,
+    "counterRowsTouchedByQA": 4,
+    "restoredCollections": ["playback", "settings", "tasbih-vibration"],
+    "retainedAutomaticChanges": [
+      {
+        "collection": "prayer",
+        "id": "renewal"
+      }
+    ],
+    "restorationVerifiedOnDevice": true,
+    "emulatorReserveRestored": true,
+    "privateBackupsCommitted": false
+  },
+  "finalPreservationAfterCaptures": {
+    "existingRecords": 38,
+    "missingOriginalRecords": 0,
+    "originalRecordsByteExactBeforeRestart": 37,
+    "originalCountersRestoredByteExact": 207,
+    "counterRowsTouchedByQA": 0,
+    "restoredCollections": ["settings"],
+    "retainedAutomaticChanges": [
+      {
+        "collection": "prayer",
+        "id": "renewal"
+      }
+    ],
+    "restorationVerifiedOnDevice": true,
+    "emulatorReserveRestored": true,
+    "privateBackupsCommitted": false,
+    "originalRecordsByteExactAfterRestart": 36,
+    "verifiedAgainAfterAppRestart": true,
+    "settingsIgnoringWriteTimestampUnchanged": true,
+    "bookmarksAndPlaybackByteExact": true,
+    "QAOnlyVibrationRecordAbsent": true
+  },
+  "sampledBundledAudioFiles": ["duaa-06.mp3", "tasbihat-01.mp3"],
+  "limits": {
+    "physicalDevicesUsed": false,
+    "iOSVerified": false,
+    "TalkBackListeningVerified": false,
+    "physicalVibrationQualityVerified": false,
+    "allAudioContentCertified": false,
+    "storageFailureInjectionPerformed": false,
+    "deviceNetworkChanged": false,
+    "otherAppsUsed": false,
+    "displaySizeChanged": false,
+    "OSFontScaleChanged": false,
+    "320dpVerified": false,
+    "200PercentOSFontVerified": false,
+    "contentHashAuditPerformed": false,
+    "wholeAppVisualParityClaimed": false
+  },
+  "preservedSourceBoundaries": [
+    "Bundled data texts, citations, IDs and audio-file mapping unchanged",
+    "Dua original repetitions and Tasbihat defaults of 100 unchanged",
+    "Countdown and ring completion math retained",
+    "Quran reader, editions, numbering, clipping, timing and integrity safeguards unchanged"
+  ],
+  "remainingBatch": [
+    "Mini-player close and durable saved-session dismissal",
+    "Persisted Western/Eastern digits",
+    "Bundled permitted regional adhans plus short option"
+  ],
+  "screenshots": [
+    "before-duaa-light",
+    "before-duaa-dark",
+    "before-tasbihat-light",
+    "before-tasbihat-dark",
+    "after-duaa-light",
+    "after-duaa-dark",
+    "after-tasbihat-light",
+    "after-tasbihat-dark",
+    "after-duaa-reference-light",
+    "after-duaa-reference-dark",
+    "after-duaa-large-dark",
+    "after-tasbihat-large-dark"
+  ],
+  "userAcceptedDesignDeviations": true,
+  "circleFitCorrection": {
+    "date": "2026-10-19",
+    "scope": "Only the light-theme circle diameter and spacing within the doorway",
+    "lightDialDp": {
+      "before": 280,
+      "after": 240
+    },
+    "lightTopPaddingDp": {
+      "before": 16,
+      "after": 48
+    },
+    "darkLayoutUnchanged": true,
+    "textAndNumberSizesUnchanged": true,
+    "typeScriptPassed": true,
+    "formattingPassed": true,
+    "androidArm64ReviewBuildPassed": true,
+    "install": {
+      "apkSHA256": "75aafa3f251d13a01df448df8de3f9e2d1b99a1a0fc7e22fac001ba0fb881e26",
+      "inPlaceUpdate": true,
+      "device": "emulator-5554",
+      "user": 0,
+      "temporaryReserveChangeAuthorized": true,
+      "originalReserveValue": "null",
+      "reserveRestoredImmediately": true
+    },
+    "preservation": {
+      "originalRecords": 39,
+      "originalCountersByteExact": 207,
+      "counterRowsTouchedByQA": 0,
+      "recordKeysUnchanged": true,
+      "settingsRestoredIgnoringWriteTimestamp": true,
+      "bookmarksPlaybackAndVibrationPreferenceByteExact": true,
+      "retainedAutomaticChanges": [
+        ["prayer", "renewal"],
+        ["settings", "singleton"]
+      ],
+      "reserveRestored": true,
+      "lightStandardAndLargeTextCaptured": true,
+      "longerQuickChoiceCaptured": true,
+      "privateDataCommitted": false
+    },
+    "screenshots": [
+      "before-circle-fit-light",
+      "after-circle-fit-light",
+      "after-circle-fit-praise-light",
+      "after-circle-fit-large-light"
+    ],
+    "referenceFidelityClaimed": false
+  }
+}

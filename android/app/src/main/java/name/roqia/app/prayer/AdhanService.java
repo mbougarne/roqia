@@ -26,7 +26,8 @@ public final class AdhanService extends Service {
       PendingIntent stop=PendingIntent.getService(this,810,new Intent(this,AdhanService.class).setAction("STOP"),PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
       PendingIntent open=PendingIntent.getActivity(this,811,new Intent(Intent.ACTION_VIEW,android.net.Uri.parse("roqia://prayer")).setPackage(getPackageName()),PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
       Notification.Builder builder=Build.VERSION.SDK_INT>=26?new Notification.Builder(this,AdhanAlarms.CHANNEL):new Notification.Builder(this);
-      Notification n=builder.setSmallIcon(android.R.drawable.ic_media_play).setContentTitle(event.getString("title")).setContentText("الأذان الكامل · إيقاف التشغيل من هنا").setContentIntent(open).setOngoing(true).setOnlyAlertOnce(true).addAction(new Notification.Action.Builder(android.R.drawable.ic_media_pause,"إيقاف الأذان",stop).build()).build();
+      String description = event.optString("kind").equals("short") ? "أذان قصير · إيقاف التشغيل من هنا" : "الأذان الكامل · إيقاف التشغيل من هنا";
+      Notification n=builder.setSmallIcon(android.R.drawable.ic_media_play).setContentTitle(event.getString("title")).setContentText(description).setContentIntent(open).setOngoing(true).setOnlyAlertOnce(true).addAction(new Notification.Action.Builder(android.R.drawable.ic_media_pause,"إيقاف الأذان",stop).build()).build();
       if(Build.VERSION.SDK_INT>=29)startForeground(810,n,ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);else startForeground(810,n);
       AudioAttributes attributes=new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build();
       listener=change->{if(change<0 && generation==session)stopSelf();};

@@ -13,7 +13,7 @@ import {type DataProps} from '../data';
 import {getPressableScaleStyle} from './pressableStyles';
 import {type ContextState, themeContext, themes} from '../store';
 import {StyledText} from './StyledText';
-import {number} from '../design/format';
+import {useFormat} from '../design/useFormat';
 
 type SectionProp = DataProps & {
   activeAudioFile?: string | null;
@@ -26,6 +26,7 @@ type SectionProp = DataProps & {
 
 export const Section: FC<SectionProp> = React.memo(
   item => {
+    const {number, digits} = useFormat();
     const {mode} = useContext<ContextState>(themeContext);
     const safeCount = Number.isFinite(item.count)
       ? Math.max(0, item.count)
@@ -105,7 +106,7 @@ export const Section: FC<SectionProp> = React.memo(
                         : theme.tertiaryColor,
                     },
                   ]}>
-                  {item.note}
+                  {digits(item.note)}
                 </StyledText>
               ) : null}
               <StyledText
@@ -127,7 +128,7 @@ export const Section: FC<SectionProp> = React.memo(
                   styles.repeat,
                   {color: isDone ? theme.secondaryColor : theme.color},
                 ]}>
-                {item.repeatDescription}
+                {digits(item.repeatDescription ?? '')}
               </StyledText>
               {hasPlaylist ? (
                 <View style={styles.playlistContainer}>

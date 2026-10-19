@@ -32,6 +32,6 @@ def main():
   source={'publisher':'Internet Archive · Doha, Qatar','sourceUrl':'https://archive.org/details/adhan.recordings.from.doha.qatar','rightsUrl':'https://creativecommons.org/publicdomain/mark/1.0/','rights':'Uploader marks the recordings Public Domain. Original MP3, unchanged.','muezzin':'not identified by source','variant':variant,'verifiedAt':'2026-10-18'}
   sounds.append({'id':key,'variant':variant,'title':title,'notice':'تسجيل من الدوحة (2013–2014) · اسم المؤذن غير مذكور في المصدر. Internet Archive · Public Domain Mark 1.0 · الملف الأصلي دون تعديل.','pack':pack(key,title,asset,source,'adhan')});evidence.append({**asset,**meta,'id':key})
  (ROOT/'src/features/quran/recordings.data.json').write_text(json.dumps(recordings,ensure_ascii=False,indent=2)+'\n')
- (ROOT/'src/features/prayer/sounds.data.json').write_text(json.dumps(sounds,ensure_ascii=False,indent=2)+'\n')
+ (ROOT/'tools/phase8/legacy-sounds.fixture.json').write_text(json.dumps(sounds,ensure_ascii=False,indent=2)+'\n')
  (ROOT/'docs/implementation/phase-8/audio-verification.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n')
 if __name__=='__main__':main()

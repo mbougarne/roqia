@@ -4,7 +4,7 @@
 
 Implemented for the main **الرقية الشرعية** screen only. A card whose saved remaining count is zero now uses the existing success surface and border, shows a checkmark and **تمت القراءة**, and explains **للتكرار، أعد العداد**. Text stays fully readable and selectable. Copy, bookmark, per-item listening and confirmed reset remain available. The completed counter remains disabled; resetting it restores the active presentation. No counter storage or audio behavior changes.
 
-This is a focused completion-state change, not a claim that the whole screen matches `08-ruqya.png`. The light and dark reference images were inspected. Visual approval is pending before expanding the styling work.
+This is a focused completion-state change, not a claim that the whole screen matches `08-ruqya.png`. The light and dark reference images were inspected. **The user approved the completed-card appearance on 2026-10-19 and authorized continuing the remaining batch.**
 
 ### Before and after
 
@@ -19,15 +19,26 @@ Both builds show the same pre-existing completed first card on `emulator-5554`, 
 
 See [verification.json](verification.json) for the build, checks and emulator data-preservation results. No physical device, other app, device-network toggle, uninstall or data clear is part of this verification. iPhone work remains deferred. Accessibility labels and disabled states are inspected in the Android hierarchy; TalkBack listening is not verified.
 
-## Remaining requested batch, in order
+## 2–3. Back controls and Adhkar landing
 
-These items remain queued; this PR implements item 1 only.
+The next focused change replaces the remaining text-only back buttons in search/bookmarks, the guide footer and the edition picker. It also updates only the Adhkar landing screen against both `09-adhkar.png` references. See [the review evidence](adhkar-and-back/README.md). **The user approved this change on 2026-10-19 and authorized the next phase.** Category subpages keep their existing presentation.
 
-2. Replace text-only back controls, including search, with the app's accessible back icon. Preserve navigation, RTL direction and touch targets; top-left search may stay.
-3. Match only the main Adhkar landing screen to light/dark `09-adhkar.png`. Keep other Adhkar subpages as they are.
-4. Match Du'a to light/dark `13-dua.png` and inspect light/dark `14-tasbih.png` for Tasbihat. Remove listen-to-all from both while retaining supported per-item audio. Inspect each actual reference before editing its screen.
-5. Add a small accessible mini-player close control. Stop/dismiss playback and hide the bar, including when paused and after navigation. Ensure saved-session restoration does not reopen a dismissed player. The reader-tabs idea was withdrawn; do not change reader tabs or segments.
-6. Implement persisted Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩` throughout user-visible formatting. Preserve canonical storage and IDs, source Quran text, timing math, URLs and edition/font-specific verse markers. Inspect current formatting/settings boundaries first.
-7. Keep Doha and bundle at least two additional full regional adhans plus an honestly labelled short option. Inspect the existing sounds catalog, attribution and Android native sound handling first. Verify sources, provenance and redistribution permission; do not invent regional or performer labels. Preview, selection, scheduling and background playback must all work offline immediately, without a download. Searching for suitable recordings is authorized.
+## 4. Du'a and Tasbihat
+
+Du'a and Tasbihat were updated using the `13-dua.png` and `14-tasbih.png` references. Listen-to-all is removed from Du'a, and both screens retain per-item audio. The existing bundled content and real saved progress are preserved. The user accepts the current design deviations and approved the smaller Tasbihat circle inside the light-theme doorway on 2026-10-19, authorizing the remaining phases. That focused correction is recorded in [the review evidence](dua-tasbihat/README.md); full reference fidelity is not claimed.
+
+## 5. Mini-player close
+
+The mini-player has a small close icon with a 48 dp accessible target, available during playback, while paused and for an error-only bar. It uses the existing stop operation to clear the native queue, sleep timer and saved session. A pending saved-session restore is invalidated when stopping. See [verification and captures](mini-player-close/README.md). The user accepted this part and authorized continuing on 2026-10-19.
+
+## 6. Persisted digit styles
+
+Settings now offers Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩`. Generated interface counts, times, dates, sizes and numeric fields follow the saved choice immediately and after restart. Canonical values, IDs, URLs, source Quran text and edition/font-specific inline verse markers are preserved. See [verification and captures](digit-styles/README.md). The user accepted this part and authorized continuing on 2026-10-19.
+
+## 7. User-provided adhans
+
+The regional-recording proposal was rejected. The replacement uses the user's five supplied MP3 originals, labelled **الأذان الأول** through **الأذان الخامس**, plus **أذان قصير**, a separate clip of Adhan-05 from 00:00 to 00:15. The information, source and rights sections are removed. The final screen keeps the title and six offline recording rows with selection and playback controls, plus the original bottom buttons and note. Only the header tabs and explanatory text are removed; choosing a recording applies it to all prayers, including Fajr. See [Android verification](bundled-adhans/README.md). This replacement awaits the user's review.
 
 Continue in this checkout on an appropriate `codex/` branch. Use only `emulator-5554`, user 0, `name.roqia.app`, with in-place updates and restored QA preferences/counters. Keep private backups outside Git. Preserve the accepted Quran recording/riwaya/numbering/integrity/native-clipping safeguards from PR #19. Do not expand visual acceptance from tests or a screenshot gallery.
+
+The reader-tabs idea remains withdrawn; do not change reader tabs or segments.

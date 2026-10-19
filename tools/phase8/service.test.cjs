@@ -47,7 +47,12 @@ let exact = true,
   fullNotifications = true,
   nativeEvents = [],
   failNative = false;
+let unavailableResource = null;
 const native = {
+  prepareBundledAdhan: async resource => {
+    if (resource === unavailableResource) throw Error('file_missing');
+    return `/private/bundled-adhan/${resource}.mp3`;
+  },
   adhanStatus: async () => ({
     exact,
     notifications: fullNotifications,
@@ -86,28 +91,10 @@ const {defaults, prayers} = require('../../src/features/prayer/domain.ts');
 const cities = require('../../src/features/prayer/cities.json');
 const sounds = require('../../src/features/prayer/sounds.data.json');
 Date.now = () => Date.parse('2026-10-18T10:00:00Z');
-function install(sound) {
-  const p = sound.pack,
-    a = p.assets[0];
-  records.set(`installed:${p.id}`, {
-    packId: p.id,
-    version: p.version,
-    state: 'ready',
-    manifestHash: p.manifestHash,
-  });
-  records.set(`downloads:${p.id}`, {
-    packId: p.id,
-    version: p.version,
-    assetId: a.id,
-    state: 'ready',
-    relativeFinalPath: `packs/${p.id}/audio.mp3`,
-  });
-}
-test('full adhan routes only installed selected variants to native alarms, with exclusive fallback and recovery', async () => {
-  for (const sound of sounds) install(sound);
+test('full adhan routes only available selected recordings to native alarms, with exclusive fallback and recovery', async () => {
   records.set('prayer:sounds', {
-    normal: sounds.find(s => s.variant === 'normal').id,
-    fajr: sounds.find(s => s.variant === 'fajr').id,
+    normal: sounds[0].id,
+    fajr: sounds[1].id,
   });
   await service.savePreferences({
     ...defaults(),
@@ -122,9 +109,7 @@ test('full adhan routes only installed selected variants to native alarms, with 
     assert.equal(event.pre, false);
     assert.equal(
       event.sha256,
-      sounds.find(
-        s => s.variant === (event.name === 'fajr' ? 'fajr' : 'normal'),
-      ).pack.assets[0].sha256,
+      sounds[event.name === 'fajr' ? 1 : 0].bundled.sha256,
     );
     assert.ok(!scheduled.has(event.id));
   }
@@ -164,8 +149,7 @@ test('full adhan routes only installed selected variants to native alarms, with 
   failNative = false;
   result = await service.reconcilePrayer();
   assert.ok(result.fullAdhan > 10);
-  const fajr = sounds.find(s => s.variant === 'fajr');
-  records.delete(`installed:${fajr.id}`);
+  unavailableResource = sounds[1].bundled.resource;
   result = await service.reconcilePrayer();
   assert.ok(result.fullFallback > 0);
   assert.ok(nativeEvents.every(e => e.name !== 'fajr'));

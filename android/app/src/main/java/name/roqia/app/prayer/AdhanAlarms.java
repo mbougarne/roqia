@@ -17,7 +17,7 @@ final class AdhanAlarms {
   static boolean exact(Context c){return Build.VERSION.SDK_INT<31||manager(c).canScheduleExactAlarms();}
   static void channel(Context c){
     if(Build.VERSION.SDK_INT<26)return;
-    NotificationChannel channel=new NotificationChannel(CHANNEL,"الأذان الكامل",NotificationManager.IMPORTANCE_LOW);
+    NotificationChannel channel=new NotificationChannel(CHANNEL,"الأذان الصوتي",NotificationManager.IMPORTANCE_LOW);
     channel.setSound(null,null);((NotificationManager)c.getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
   }
   static boolean allowed(Context c){

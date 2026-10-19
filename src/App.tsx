@@ -21,7 +21,7 @@ import {reconcileReminders} from './features/settings/reminders/service';
 import {useQuran} from './features/quran/context';
 import {contentGroups, defaultCounts} from './repositories/content';
 import {decrementCounter, resetCounters} from './repositories/counters';
-import {type ThemePreference} from './repositories/models';
+import {type DigitStyle, type ThemePreference} from './repositories/models';
 import {
   getSettings,
   updateSettings,
@@ -62,6 +62,11 @@ export default function App() {
   const deviceColorScheme = useColorScheme();
   const defaultMode: Mode = deviceColorScheme === 'dark' ? 'dark' : 'light';
   const [uiScale, setScale] = useState(1);
+  const [digitStyle, setDigits] = useState<DigitStyle>('western');
+  const setDigitStyle = useCallback(async (style: DigitStyle) => {
+    await updateSettings({digitStyle: style});
+    setDigits((await getSettings()).digitStyle);
+  }, []);
   const setUiScale = useCallback(async (scale: number) => {
     await updateSettings({uiScale: scale});
     setScale((await getSettings()).uiScale);
@@ -106,6 +111,7 @@ export default function App() {
       }
 
       setScale(settings.uiScale);
+      setDigits(settings.digitStyle);
       const flat = persisted.repeatCounts;
       setHomeCounts(prev => ({...prev, ...splitCountsByScope(flat, 'data')}));
       setAdkarCounts(prev => ({...prev, ...splitCountsByScope(flat, 'adkar')}));
@@ -255,8 +261,25 @@ export default function App() {
   );
 
   const themeValue = useMemo(
-    () => ({mode, toggleMode, preference, setPreference, uiScale, setUiScale}),
-    [mode, toggleMode, preference, uiScale, setUiScale],
+    () => ({
+      mode,
+      toggleMode,
+      preference,
+      setPreference,
+      uiScale,
+      setUiScale,
+      digitStyle,
+      setDigitStyle,
+    }),
+    [
+      mode,
+      toggleMode,
+      preference,
+      uiScale,
+      setUiScale,
+      digitStyle,
+      setDigitStyle,
+    ],
   );
 
   const homeValue = useMemo(

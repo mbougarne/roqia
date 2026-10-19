@@ -29,7 +29,8 @@ import {
   usePalette,
 } from '../../design/ui';
 import {NumberBadge, Ornament, rtlRow} from '../../design/components';
-import {number, ltr} from '../../design/format';
+import {ltr, number as markerNumber} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {
   type Chapter,
   type Locator,
@@ -77,6 +78,7 @@ export function QuranReaderScreen(props: any) {
   return <Reader key={identity} {...props} />;
 }
 function Reader({route, navigation}: any) {
+  const {number} = useFormat();
   const {runtime, ready, error: libraryError} = useLibrary(),
     p = usePalette(),
     params = route.params;
@@ -285,7 +287,7 @@ function Reader({route, navigation}: any) {
   );
   const verseText = (verse: Verse) =>
     verse.text +
-    (edition.riwaya === 'hafs' ? ` ﴿${number(verse.number)}﴾ ` : ' ');
+    (edition.riwaya === 'hafs' ? ` ﴿${markerNumber(verse.number)}﴾ ` : ' ');
   const translationContent = (translation: DisplayTranslation | undefined) => {
     return translation?.text ? (
       <View style={{gap: 8}}>
@@ -552,7 +554,7 @@ function Reader({route, navigation}: any) {
                   <Text
                     key={verse.number}
                     accessibilityRole="button"
-                    accessibilityLabel={`الآية ${verse.number}، خيارات الآية`}
+                    accessibilityLabel={`الآية ${number(verse.number)}، خيارات الآية`}
                     onPress={e => {
                       setTapPoint({
                         x: e.nativeEvent.pageX,
@@ -563,7 +565,7 @@ function Reader({route, navigation}: any) {
                     }}>
                     {verse.text}
                     {edition.riwaya === 'hafs'
-                      ? ` ﴿${number(verse.number)}﴾ `
+                      ? ` ﴿${markerNumber(verse.number)}﴾ `
                       : ' '}
                   </Text>
                 ))}
