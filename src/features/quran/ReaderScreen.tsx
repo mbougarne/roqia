@@ -1,5 +1,8 @@
 import {readerPassages, verseAtOffset} from './readerLayout';
-import {type DisplayTranslation} from './translationAlignment';
+import {
+  translationForVerse,
+  type DisplayTranslation,
+} from './translationAlignment';
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   AppState,
@@ -22,6 +25,7 @@ import {
   IconButton,
   Page,
   StateView,
+  Sheet,
   usePalette,
 } from '../../design/ui';
 import {NumberBadge, Ornament, rtlRow} from '../../design/components';
@@ -86,6 +90,7 @@ function Reader({route, navigation}: any) {
     [selectedVerse, setSelectedVerse] = useState<Verse | null>(null);
   const [focused, setFocused] = useState(false),
     [foreground, setForeground] = useState(AppState.currentState === 'active');
+  const [translationVerse, setTranslationVerse] = useState<number | null>(null);
   const dimensions = useWindowDimensions();
   const [tapPoint, setTapPoint] = useState({x: 0, y: 100});
   const continuous = useRef(false);
@@ -214,7 +219,7 @@ function Reader({route, navigation}: any) {
       act(persist());
     };
   }, [chapter, text, runtime, edition.id, edition.numbering, surah]);
-  const actions = (verse: Verse) => (
+  const actions = (verse: Verse, inline = false) => (
     <View style={{...rtlRow, justifyContent: 'center', gap: 8}}>
       <IconButton
         name="copy"
@@ -245,6 +250,17 @@ function Reader({route, navigation}: any) {
           )
         }
       />
+      {inline && prefs.translationId && (
+        <IconButton
+          name="translate"
+          label="ترجمة الآية"
+          disabled={!translated}
+          onPress={() => {
+            setSelectedVerse(null);
+            setTranslationVerse(verse.number);
+          }}
+        />
+      )}
       <IconButton
         name="volume"
         label="الاستماع للآية — قريبا"
@@ -256,8 +272,8 @@ function Reader({route, navigation}: any) {
   const verseText = (verse: Verse) =>
     verse.text +
     (edition.riwaya === 'hafs' ? ` ﴿${number(verse.number)}﴾ ` : ' ');
-  const translationFor = (item: Verse) => {
-    return translated?.[item.number - 1]?.text ? (
+  const translationContent = (translation: DisplayTranslation | undefined) => {
+    return translation?.text ? (
       <View style={{gap: 8}}>
         <Ornament />
         <AppText role="caption" style={{color: p.textSecondary}}>
@@ -267,16 +283,16 @@ function Reader({route, navigation}: any) {
               ?.title
           }
         </AppText>
-        {translated[item.number - 1].warshStart !== undefined && (
+        {translation.warshStart !== undefined && (
           <AppText role="caption">
             {'معاني آيات ورش ' +
-              number(translated[item.number - 1].warshStart!) +
+              number(translation.warshStart!) +
               '–' +
-              number(item.number) +
+              number(translation.number) +
               ' · مرجع الترجمة ' +
-              number(translated[item.number - 1].sourceStart!) +
+              number(translation.sourceStart!) +
               '–' +
-              number(translated[item.number - 1].sourceEnd!)}
+              number(translation.sourceEnd!)}
           </AppText>
         )}
         <AppText
@@ -290,11 +306,14 @@ function Reader({route, navigation}: any) {
             textAlign: 'left',
             fontFamily: 'sans-serif',
           }}>
-          {translated[item.number - 1].text}
+          {translation.text}
         </AppText>
       </View>
     ) : null;
   };
+  const translationFor = (item: Verse) =>
+    translationContent(translated?.[item.number - 1]);
+  const toolbarWidth = prefs.translationId ? 240 : 184;
   if (libraryError || failure)
     return (
       <Page title="قراءة القرآن" onBack={() => navigation.goBack()}>
@@ -425,7 +444,7 @@ function Reader({route, navigation}: any) {
               <AppText
                 role="sectionTitle"
                 style={{flex: 1, textAlign: 'center'}}>
-                {translated ? 'ترجمة المعاني' : chapters[surah - 1].name}
+                {chapters[surah - 1].name}
               </AppText>
               <AppIcon name="medallion" size={30} color={p.accent} />
             </View>
@@ -444,7 +463,19 @@ function Reader({route, navigation}: any) {
             )}
             {anchor === 1 && chapter.opening && (
               <Text
-                selectable
+                onPress={
+                  prefs.view === 'continuous' &&
+                  translated?.some(t => t.number === 0)
+                    ? () => setTranslationVerse(0)
+                    : undefined
+                }
+                accessibilityLabel={
+                  prefs.view === 'continuous' &&
+                  translated?.some(t => t.number === 0)
+                    ? 'البسملة، ترجمة المعاني'
+                    : undefined
+                }
+                selectable={prefs.view !== 'continuous'}
                 style={{
                   fontFamily: font,
                   fontSize: prefs.size,
@@ -458,17 +489,19 @@ function Reader({route, navigation}: any) {
                 {chapter.opening}
               </Text>
             )}
-            {anchor === 1 && translated?.find(v => v.number === 0) && (
-              <AppText
-                role="translation"
-                style={{
-                  writingDirection: 'ltr',
-                  textAlign: 'left',
-                  fontFamily: 'sans-serif',
-                }}>
-                {translated.find(v => v.number === 0)!.text}
-              </AppText>
-            )}
+            {prefs.view !== 'continuous' &&
+              anchor === 1 &&
+              translated?.find(v => v.number === 0) && (
+                <AppText
+                  role="translation"
+                  style={{
+                    writingDirection: 'ltr',
+                    textAlign: 'left',
+                    fontFamily: 'sans-serif',
+                  }}>
+                  {translated.find(v => v.number === 0)!.text}
+                </AppText>
+              )}
           </View>
         }
         renderItem={({item: passage}) => (
@@ -496,7 +529,8 @@ function Reader({route, navigation}: any) {
                   lineHeight: prefs.size * prefs.lineHeight,
                   fontWeight: 'normal',
                   includeFontPadding: true,
-                  textAlign: 'right',
+                  textAlign: 'justify',
+                  direction: 'rtl',
                   writingDirection: 'rtl',
                   color: p.textPrimary,
                 }}>
@@ -522,8 +556,15 @@ function Reader({route, navigation}: any) {
               </Text>
             ) : (
               <View>
-                <Card>
-                  <NumberBadge value={passage[0].number} />
+                <Card
+                  style={{
+                    backgroundColor: p.surfaceMuted,
+                    borderColor: p.borderControl,
+                    borderRadius: 20,
+                  }}>
+                  <View style={{flexDirection: 'row-reverse'}}>
+                    <NumberBadge value={passage[0].number} />
+                  </View>
                   <Text
                     style={{
                       fontFamily: font,
@@ -542,12 +583,6 @@ function Reader({route, navigation}: any) {
                 </Card>
               </View>
             )}
-            {prefs.view === 'continuous' &&
-              passage
-                .filter(item => translated?.[item.number - 1]?.text)
-                .map(item => (
-                  <View key={item.number}>{translationFor(item)}</View>
-                ))}
           </View>
         )}
         ListFooterComponent={
@@ -587,9 +622,12 @@ function Reader({route, navigation}: any) {
               ),
               left: Math.max(
                 12,
-                Math.min(dimensions.width - 196, tapPoint.x - 92),
+                Math.min(
+                  dimensions.width - toolbarWidth - 12,
+                  tapPoint.x - toolbarWidth / 2,
+                ),
               ),
-              width: 184,
+              width: toolbarWidth,
               padding: 8,
               borderRadius: 16,
               borderWidth: 1,
@@ -597,10 +635,24 @@ function Reader({route, navigation}: any) {
               backgroundColor: p.surface,
               elevation: 8,
             }}>
-            {selectedVerse && actions(selectedVerse)}
+            {selectedVerse && actions(selectedVerse, true)}
           </View>
         </Pressable>
       </Modal>
+      <Sheet
+        centered
+        visible={translationVerse !== null && focused}
+        title={
+          translationVerse === 0
+            ? 'ترجمة معاني البسملة'
+            : `ترجمة معاني الآية ${number(translationVerse ?? 1)}`
+        }
+        onClose={() => setTranslationVerse(null)}>
+        {translationVerse !== null &&
+          translationContent(
+            translationForVerse(translated ?? [], translationVerse),
+          )}
+      </Sheet>
       <View
         style={{
           ...rtlRow,

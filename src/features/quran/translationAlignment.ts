@@ -60,3 +60,18 @@ export function alignWarshTranslation(
   if (surah === 1) result.push({number: 0, text: verses[0].text});
   return result;
 }
+
+// A selected Warsh verse may belong to a passage stored at its final verse.
+export function translationForVerse(
+  translations: DisplayTranslation[],
+  verse: number,
+): DisplayTranslation | undefined {
+  return translations.find(
+    t =>
+      !!t.text &&
+      (t.number === verse ||
+        (t.warshStart !== undefined &&
+          t.warshStart <= verse &&
+          verse <= t.number)),
+  );
+}

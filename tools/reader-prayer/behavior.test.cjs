@@ -105,3 +105,21 @@ test('continuous scroll offsets retain edition-local verse boundaries', () => {
   assert.equal(verseAtOffset([10, 20, 30], 29), 1);
   assert.equal(verseAtOffset([10, 20, 30], 60), 2);
 });
+
+test('translation popups resolve every verse in a grouped passage without changing text', () => {
+  const {
+    translationForVerse,
+  } = require('../../src/features/quran/translationAlignment.ts');
+  const group = {
+    number: 7,
+    warshStart: 6,
+    sourceStart: 7,
+    sourceEnd: 7,
+    text: 'Complete source meaning',
+  };
+  const rows = [{number: 0, text: 'Opening'}, {number: 6, text: ''}, group];
+  assert.equal(translationForVerse(rows, 6), group);
+  assert.equal(translationForVerse(rows, 7), group);
+  assert.equal(translationForVerse(rows, 0).text, 'Opening');
+  assert.equal(translationForVerse(rows, 5), undefined);
+});
