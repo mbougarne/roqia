@@ -83,9 +83,9 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
           {error}
         </AppText>
       )}
-      {track && (
-        <>
-          <View style={rtlRow}>
+      <View style={rtlRow}>
+        {track && (
+          <>
             <Pressable
               accessibilityRole="button"
               accessibilityLabel="المشغل"
@@ -123,30 +123,38 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
                 color="#12392E"
               />
             </Pressable>
-          </View>
+          </>
+        )}
+        <IconButton
+          name="close"
+          label="إيقاف الصوت وإغلاق المشغل"
+          color={ink}
+          onPress={() => void playback.stop()}
+        />
+      </View>
+      {track && (
+        <View
+          accessibilityRole="progressbar"
+          accessibilityValue={{
+            min: 0,
+            max: 100,
+            now: Math.round(duration ? (position / duration) * 100 : 0),
+          }}
+          style={{
+            height: 3,
+            backgroundColor: '#FFFFFF25',
+            borderRadius: 2,
+            overflow: 'hidden',
+            marginTop: 6,
+          }}>
           <View
-            accessibilityRole="progressbar"
-            accessibilityValue={{
-              min: 0,
-              max: 100,
-              now: Math.round(duration ? (position / duration) * 100 : 0),
-            }}
             style={{
               height: 3,
-              backgroundColor: '#FFFFFF25',
-              borderRadius: 2,
-              overflow: 'hidden',
-              marginTop: 6,
-            }}>
-            <View
-              style={{
-                height: 3,
-                width: `${Math.min(100, duration ? (position / duration) * 100 : 0)}%`,
-                backgroundColor: control,
-              }}
-            />
-          </View>
-        </>
+              width: `${Math.min(100, duration ? (position / duration) * 100 : 0)}%`,
+              backgroundColor: control,
+            }}
+          />
+        </View>
       )}
     </View>
   );
