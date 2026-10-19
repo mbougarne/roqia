@@ -1,25 +1,32 @@
---- a/android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt
-+++ b/android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt
-@@ -206,9 +206,10 @@
-             handleAudioFocus = playerOptions?.getBoolean(AUTO_HANDLE_INTERRUPTIONS) ?: true,
-             interceptPlayerActionsTriggeredExternally = true,
-             skipSilence = playerOptions?.getBoolean(SKIP_SILENCE) ?: false,
--            wakeMode = playerOptions?.getInt(WAKE_MODE, 0) ?: 0
-+            wakeMode = playerOptions?.getInt(WAKE_MODE, 1) ?: 1
-         )
-         player = QueuedAudioPlayer(this@MusicService, options)
-+        RoqiaSleepTimer.attach(this) { player.pause() }
-         fakePlayer.release()
-         mediaSession.player = player.forwardingPlayer
-         observeEvents()
-@@ -792,6 +793,7 @@
+--- a/android/src/main/java/com/doublesymmetry/kotlinaudio/models/AudioItem.kt
++++ b/android/src/main/java/com/doublesymmetry/kotlinaudio/models/AudioItem.kt
+@@ -27,6 +27,8 @@
+             options?.resourceId?.let {
+                 putInt("resource-id", it)
+             }
++            options?.clipStartMs?.let { putLong("roqia-clip-start-ms", it) }
++            options?.clipEndMs?.let { putLong("roqia-clip-end-ms", it) }
+             putString("type", type.toString())
+             putString("uri", audioUrl)
+         }
+@@ -54,7 +56,9 @@
+ data class AudioItemOptions(
+     val headers: MutableMap<String, String>? = null,
+     val userAgent: String? = null,
+-    val resourceId: Int? = null
++    val resourceId: Int? = null,
++    val clipStartMs: Long? = null,
++    val clipEndMs: Long? = null
+ )
  
-     @MainThread
-     override fun onDestroy() {
-+        RoqiaSleepTimer.detach()
-         if (::player.isInitialized) {
-             Timber.d("Releasing media session and destroying player")
-             mediaSession.release()
+ enum class MediaType(val value: String) {
+@@ -77,4 +81,4 @@
+      * The SmoothStreaming media type for adaptive streams. Should be used with SmoothStreaming manifests.
+      */
+     SMOOTH_STREAMING("smoothstreaming");
+-}
+\ No newline at end of file
++}
 --- a/android/src/main/java/com/doublesymmetry/kotlinaudio/players/BaseAudioPlayer.kt
 +++ b/android/src/main/java/com/doublesymmetry/kotlinaudio/players/BaseAudioPlayer.kt
 @@ -219,6 +219,7 @@
@@ -62,6 +69,85 @@
          }
  
          fun abandonAudioFocusIfHeld() {
+--- a/android/src/main/java/com/doublesymmetry/kotlinaudio/players/components/MediaFactory.kt
++++ b/android/src/main/java/com/doublesymmetry/kotlinaudio/players/components/MediaFactory.kt
+@@ -87,12 +87,23 @@
+             }
+         }
+ 
+-        return when (resourceType) {
++        val source = when (resourceType) {
+             "dash" -> createDashSource(mediaItem, factory)
+             "hls" -> createHlsSource(mediaItem, factory)
+             "smoothstreaming" -> createSsSource(mediaItem, factory)
+             else -> createProgressiveSource(mediaItem, factory)
+         }
++        val extras = mediaItem.mediaMetadata.extras
++        if (extras?.containsKey("roqia-clip-start-ms") == true) {
++            // Native sample clipping: positions and duration become segment-relative,
++            // including seek/repeat/remote controls and playback with JS suspended.
++            return androidx.media3.exoplayer.source.ClippingMediaSource(
++                source,
++                extras.getLong("roqia-clip-start-ms") * 1000,
++                extras.getLong("roqia-clip-end-ms") * 1000
++            )
++        }
++        return source
+     }
+ 
+     private fun createDashSource(mediaItem: MediaItem, factory: DataSource.Factory?): MediaSource {
+--- a/android/src/main/java/com/doublesymmetry/trackplayer/model/Track.kt
++++ b/android/src/main/java/com/doublesymmetry/trackplayer/model/Track.kt
+@@ -41,12 +41,19 @@
+             albumTitle = album,
+             artwork = artwork.toString(),
+             duration = duration,
+-            options = AudioItemOptions(headers, userAgent, resourceId),
++            options = AudioItemOptions(headers, userAgent, resourceId, clipStartMs, clipEndMs),
+             mediaId = mediaId
+         )
+     }
+ 
++    private val clipStartMs: Long? = if (bundle.containsKey("roqiaClipStartMs")) bundle.getDouble("roqiaClipStartMs").toLong() else null
++    private val clipEndMs: Long? = if (bundle.containsKey("roqiaClipEndMs")) bundle.getDouble("roqiaClipEndMs").toLong() else null
++
+     init {
++        if (clipStartMs != null || clipEndMs != null) {
++            require(clipStartMs != null && clipEndMs != null && clipStartMs >= 0 && clipEndMs > clipStartMs)
++            require(bundle.getString("url")?.startsWith("file://") == true)
++        }
+         originalItem = bundle
+         resourceId = BundleUtils.getRawResourceId(context, bundle, "url")
+         uri = if (resourceId == 0) {
+@@ -77,4 +84,4 @@
+         setMetadata(context, bundle, ratingType)
+         queueId = System.currentTimeMillis()
+     }
+-}
+\ No newline at end of file
++}
+--- a/android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt
++++ b/android/src/main/java/com/doublesymmetry/trackplayer/service/MusicService.kt
+@@ -206,9 +206,10 @@
+             handleAudioFocus = playerOptions?.getBoolean(AUTO_HANDLE_INTERRUPTIONS) ?: true,
+             interceptPlayerActionsTriggeredExternally = true,
+             skipSilence = playerOptions?.getBoolean(SKIP_SILENCE) ?: false,
+-            wakeMode = playerOptions?.getInt(WAKE_MODE, 0) ?: 0
++            wakeMode = playerOptions?.getInt(WAKE_MODE, 1) ?: 1
+         )
+         player = QueuedAudioPlayer(this@MusicService, options)
++        RoqiaSleepTimer.attach(this) { player.pause() }
+         fakePlayer.release()
+         mediaSession.player = player.forwardingPlayer
+         observeEvents()
+@@ -792,6 +793,7 @@
+ 
+     @MainThread
+     override fun onDestroy() {
++        RoqiaSleepTimer.detach()
+         if (::player.isInitialized) {
+             Timber.d("Releasing media session and destroying player")
+             mediaSession.release()
 --- /dev/null
 +++ b/android/src/main/java/com/doublesymmetry/trackplayer/service/RoqiaSleepTimer.java
 @@ -0,0 +1,67 @@

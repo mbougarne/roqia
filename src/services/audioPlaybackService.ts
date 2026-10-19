@@ -33,5 +33,8 @@ export default async function audioPlaybackService() {
   TrackPlayer.addEventListener(Event.PlaybackActiveTrackChanged, () => {
     void persistPlayback().catch(playbackFailed);
   });
+  TrackPlayer.addEventListener(Event.PlaybackQueueEnded, () => {
+    void persistPlayback().catch(playbackFailed);
+  });
   TrackPlayer.addEventListener(Event.PlaybackError, playbackFailed);
 }

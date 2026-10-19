@@ -38,6 +38,7 @@ const player = {
   getActiveTrack: async () => queue[index],
   getQueue: async () => queue,
   getProgress: async () => ({position}),
+  getPlaybackState: async () => ({state}),
   getRepeatMode: async () => repeat,
   getRate: async () => rate,
   setRepeatMode: async n => {
@@ -55,6 +56,7 @@ Module._load = function (name, parent, isMain) {
       Platform: {OS: 'android'},
       NativeModules: {
         RoqiaAudio: {
+          segmentPlayback: true,
           sleepDeadline: async () => deadline,
           setSleepTimer: async ms => {
             deadline = ms ? Date.now() + ms : 0;
@@ -68,7 +70,7 @@ Module._load = function (name, parent, isMain) {
       default: player,
       Capability: {},
       AppKilledPlaybackBehavior: {},
-      State: {},
+      State: {Ended: 'ended'},
       RepeatMode: {Off: 0, Track: 1, Queue: 2},
     };
   if (name === 'react-native-file-access')
@@ -161,4 +163,82 @@ test('bundled playback preserves require handles for native raw resource resolut
   assert.equal(queue[0].url, 701);
   assert.equal(queue[1].url, 701);
   assert.equal(state, 'playing');
+});
+test('verse playback clips the same local file and session restoration retains boundaries with segment-relative seek', async () => {
+  const segment = {verse: 2, startMs: 13240, endMs: 18720};
+  const entry = {
+    packId: 'pack',
+    version: 'v1',
+    assetId: 'a',
+    title: 'Reciter · Surah',
+    segment,
+  };
+  const {
+    restoreDownloadedSession,
+  } = require('../../src/features/audio/controller.ts');
+  await playback.downloaded([entry]);
+  assert.equal(queue[0].url, 'file:///private/roqia/packs/a.mp3');
+  assert.equal(queue[0].roqiaClipStartMs, 13240);
+  assert.equal(queue[0].roqiaClipEndMs, 18720);
+  assert.deepEqual(session.downloadEntries, [entry]);
+  session.positionMs = 2000;
+  await restoreDownloadedSession();
+  assert.equal(position, 2);
+  assert.equal(state, 'paused');
+  const playsBefore = plays;
+  await playback.downloaded([{...entry, segment: {...segment, endMs: 0}}]);
+  assert.equal(plays, playsBefore);
+  await playback.downloaded([{...entry, segment: undefined}]);
+  assert.equal(queue[0].roqiaClipStartMs, undefined);
+  assert.equal(repeat, 0);
+});
+test('remote play restarts an ended local segment at its relative zero', async () => {
+  await playback.downloaded([
+    {
+      packId: 'pack',
+      version: 'v1',
+      assetId: 'a',
+      title: 'Reciter · Surah',
+      segment: {verse: 1, startMs: 7200, endMs: 10460},
+    },
+  ]);
+  state = 'ended';
+  position = 3.26;
+  await playback.play();
+  assert.equal(position, 0);
+  assert.equal(state, 'playing');
+  assert.equal(queue[0].roqiaClipStartMs, 7200);
+});
+
+test('a dismissed or superseded reader request cannot replace playback after file verification', async () => {
+  const previous = queue,
+    playsBefore = plays;
+  await playback.downloaded(
+    [
+      {
+        packId: 'pack',
+        version: 'v1',
+        assetId: 'b',
+        title: 'Old reader request',
+      },
+    ],
+    {isCurrent: () => false},
+  );
+  assert.equal(queue, previous);
+  assert.equal(plays, playsBefore);
+  assert.equal(audioErrors.getSnapshot(), null);
+  let checks = 0;
+  await playback.downloaded(
+    [
+      {
+        packId: 'pack',
+        version: 'v1',
+        assetId: 'b',
+        title: 'Dismissed during setup',
+      },
+    ],
+    {isCurrent: () => ++checks === 1},
+  );
+  assert.equal(checks, 2);
+  assert.equal(plays, playsBefore, 'dismissal during setup cannot start audio');
 });

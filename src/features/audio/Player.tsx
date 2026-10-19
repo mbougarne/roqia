@@ -151,14 +151,42 @@ export function MiniPlayer({onOpen}: {onOpen: () => void}) {
     </View>
   );
 }
-export function PlayerScreen({navigation}: any) {
+export function PlayerScreen({
+  navigation,
+  intro,
+  contextPackId,
+  contextVerse,
+  contextTitle,
+  contextArtist,
+  onStart,
+  startDisabled = false,
+  startLabel = 'تشغيل',
+}: {
+  navigation: any;
+  intro?: React.ReactNode;
+  contextPackId?: string;
+  contextVerse?: number | null;
+  contextTitle?: string;
+  contextArtist?: string;
+  onStart?: () => void;
+  startDisabled?: boolean;
+  startLabel?: string;
+}) {
   const p = usePalette();
   const {width, fontScale} = useWindowDimensions();
   const {uiScale} = useContext(themeContext);
   const stackOptions = width < 360 || fontScale * uiScale > 1.2;
-  const track = useActiveTrack(),
-    {position, duration} = useProgress(),
+  const activeTrack = useActiveTrack(),
+    progress = useProgress(250),
     state = usePlaybackState().state;
+  const track =
+    contextPackId === undefined ||
+    (activeTrack?.scope === contextPackId &&
+      (activeTrack?.downloadEntry?.segment?.verse ?? null) ===
+        (contextVerse ?? null))
+      ? activeTrack
+      : undefined;
+  const {position, duration} = track ? progress : {position: 0, duration: 0};
   const [rate, setRate] = useState(1),
     [repeat, setRepeat] = useState(RepeatMode.Off),
     [queue, setQueue] = useState<string[]>([]),
@@ -180,7 +208,17 @@ export function PlayerScreen({navigation}: any) {
       .then(([r, m, q]) => {
         setRate(r);
         setRepeat(m);
-        setQueue(q.map(t => t.title ?? ''));
+        setQueue(
+          q
+            .filter(
+              t =>
+                contextPackId === undefined ||
+                (t.scope === contextPackId &&
+                  (t.downloadEntry?.segment?.verse ?? null) ===
+                    (contextVerse ?? null)),
+            )
+            .map(t => t.title ?? ''),
+        );
       })
       .catch(() => undefined);
   };
@@ -189,7 +227,7 @@ export function PlayerScreen({navigation}: any) {
     void readRecord<any>('playback', 'session')
       .then(s => setResume(!!s?.downloadEntries?.length))
       .catch(() => undefined);
-  }, [track?.id]);
+  }, [track?.id, contextPackId, contextVerse]);
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], refresh);
   useEffect(() => {
     const update = () => {
@@ -221,6 +259,7 @@ export function PlayerScreen({navigation}: any) {
     );
   return (
     <Page title="الاستماع" onBack={() => navigation.goBack()}>
+      {intro}
       <ListeningArtwork size={stackOptions ? 140 : 160} />
       <AppText
         role="screenTitle"
@@ -229,15 +268,15 @@ export function PlayerScreen({navigation}: any) {
           fontSize: 24 * uiScale,
           lineHeight: 36 * uiScale,
         }}>
-        {displayTitle ?? 'اختر مقطعا للاستماع'}
+        {displayTitle ?? contextTitle ?? 'اختر مقطعا للاستماع'}
       </AppText>
-      {displayArtist && (
+      {(displayArtist ?? contextArtist) && (
         <AppText role="caption" style={{textAlign: 'center'}}>
-          {displayArtist}
+          {displayArtist ?? contextArtist}
         </AppText>
       )}
       {error && <AppText accessibilityLiveRegion="polite">{error}</AppText>}
-      {!track && resume && (
+      {!track && resume && contextPackId === undefined && (
         <Button
           label="استعادة موضع الاستماع دون تشغيل"
           onPress={() =>
@@ -278,11 +317,17 @@ export function PlayerScreen({navigation}: any) {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={
-              state === State.Playing ? 'إيقاف مؤقت' : 'تشغيل'
+              track
+                ? state === State.Playing
+                  ? 'إيقاف مؤقت'
+                  : 'تشغيل'
+                : startLabel
             }
-            accessibilityState={{disabled: !track}}
-            disabled={!track}
-            onPress={() => void playback.toggle()}
+            accessibilityState={{
+              disabled: !track && (!onStart || startDisabled),
+            }}
+            disabled={!track && (!onStart || startDisabled)}
+            onPress={() => (track ? void playback.toggle() : onStart?.())}
             style={({pressed}) => ({
               width: 88,
               height: 88,
@@ -290,10 +335,11 @@ export function PlayerScreen({navigation}: any) {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: p.actionPrimary,
-              opacity: !track || pressed ? 0.5 : 1,
+              opacity:
+                (!track && (!onStart || startDisabled)) || pressed ? 0.5 : 1,
             })}>
             <AppIcon
-              name={state === State.Playing ? 'pause' : 'play'}
+              name={track && state === State.Playing ? 'pause' : 'play'}
               size={32}
               color={p.textOnAction}
             />

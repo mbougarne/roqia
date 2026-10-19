@@ -47,6 +47,7 @@ import {
   supportsKeepAwake,
 } from './runtime';
 import {act} from './LibraryScreens';
+import {ReaderVerseAudio} from './ListenScreen';
 export function QuranReaderScreen(props: any) {
   let identity: string;
   try {
@@ -76,7 +77,7 @@ export function QuranReaderScreen(props: any) {
   return <Reader key={identity} {...props} />;
 }
 function Reader({route, navigation}: any) {
-  const {runtime, revision, ready, error: libraryError} = useLibrary(),
+  const {runtime, ready, error: libraryError} = useLibrary(),
     p = usePalette(),
     params = route.params;
   const [chapter, setChapter] = useState<Chapter | null>(null),
@@ -91,6 +92,11 @@ function Reader({route, navigation}: any) {
   const [focused, setFocused] = useState(false),
     [foreground, setForeground] = useState(AppState.currentState === 'active');
   const [translationVerse, setTranslationVerse] = useState<number | null>(null);
+  const [audioVerse, setAudioVerse] = useState<{
+    verse: number;
+    request: number;
+  } | null>(null);
+  const audioRequest = useRef(0);
   const dimensions = useWindowDimensions();
   const [tapPoint, setTapPoint] = useState({x: 0, y: 100});
   const continuous = useRef(false);
@@ -108,6 +114,7 @@ function Reader({route, navigation}: any) {
       setFocused(true);
       return () => {
         setFocused(false);
+        setAudioVerse(null);
         keepAwake(false);
       };
     }, []),
@@ -187,7 +194,9 @@ function Reader({route, navigation}: any) {
     params.verse,
     params.packVersion,
     params.numberingScheme,
-    revision,
+    // Audio download progress must not reload the text or move the reader.
+    // Text selection and focus changes still revalidate the reader assets.
+    text,
     attempt,
   ]);
   const locator = (verse: number): Locator => ({
@@ -263,9 +272,14 @@ function Reader({route, navigation}: any) {
       )}
       <IconButton
         name="volume"
-        label="الاستماع للآية — قريبا"
-        disabled
-        onPress={() => {}}
+        label="الاستماع للآية"
+        onPress={() => {
+          setSelectedVerse(null);
+          setAudioVerse({
+            verse: verse.number,
+            request: ++audioRequest.current,
+          });
+        }}
       />
     </View>
   );
@@ -639,6 +653,15 @@ function Reader({route, navigation}: any) {
           </View>
         </Pressable>
       </Modal>
+      {audioVerse && focused && (
+        <ReaderVerseAudio
+          key={audioVerse.request}
+          editionId={edition.id}
+          surah={surah}
+          verse={audioVerse.verse}
+          onClose={() => setAudioVerse(null)}
+        />
+      )}
       <Sheet
         centered
         visible={translationVerse !== null && focused}
@@ -666,7 +689,7 @@ function Reader({route, navigation}: any) {
           name="volume"
           label="الاستماع لهذه الرواية"
           onPress={() =>
-            navigation.navigate('QuranAudio', {editionId: edition.id, surah})
+            navigation.navigate('QuranPlayer', {editionId: edition.id, surah})
           }
         />
         <IconButton

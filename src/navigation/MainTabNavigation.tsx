@@ -58,6 +58,7 @@ import {
 import {RemindersScreen} from '../features/settings/reminders/Screen';
 import {StorageScreen, DownloadsScreen} from '../features/downloads/Screens';
 import {MiniPlayer, PlayerScreen} from '../features/audio/Player';
+import {QuranListenScreen} from '../features/quran/ListenScreen';
 import {AppIcon, AppText, usePalette, type IconName} from '../design/ui';
 import {themeContext} from '../store';
 import {consumeLinks} from './linkInbox';
@@ -306,6 +307,7 @@ export function MainTabNavigation() {
         />
         <Stack.Screen name="QuranSource" component={details.QuranSource} />
         <Stack.Screen name="QuranAudio" component={details.QuranAudio} />
+        <Stack.Screen name="QuranPlayer" component={QuranListenScreen} />
         <Stack.Screen
           name="QuranOfflineAudio"
           component={details.QuranOfflineAudio}

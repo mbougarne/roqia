@@ -34,6 +34,7 @@ import {
   locatorKey,
   validateQuranCatalog,
   normalizeSearch,
+  type Recording,
 } from './domain';
 export type ReaderPreferences = {
   size: number;
@@ -61,6 +62,7 @@ export function validateReaderPreferences(p: ReaderPreferences) {
   return p;
 }
 export class QuranRuntime {
+  private audioTail: Promise<unknown> = Promise.resolve();
   constructor(
     public catalog: QuranCatalog,
     public downloads: DownloadCoordinator,
@@ -113,7 +115,20 @@ export class QuranRuntime {
     if (!a || !p) throw Error('missing_pack');
     const relative = `${p.relativeDirectory}/${a.file}`;
     if (!p.files.includes(relative)) throw Error('missing_asset');
-    await nativeDownloadPorts.verify(relative, a);
+    const job = a.pinAfterDownload
+      ? this.downloads
+          .listJobs()
+          .find(
+            j =>
+              j.packId === pack.id &&
+              j.version === pack.version &&
+              j.assetId === id,
+          )
+      : undefined;
+    await nativeDownloadPorts.verify(
+      relative,
+      a.pinAfterDownload && job ? {...a, sha256: job.expectedHash} : a,
+    );
     return privatePath(relative);
   }
   async chapter(t: TextPack, surah: number) {
@@ -287,6 +302,43 @@ export class QuranRuntime {
       pack.version,
       (await getSettings()).wifiOnly,
     );
+  }
+  registerRecording(recording: Recording) {
+    const task = this.audioTail.then(async () => {
+      const index = this.catalog.recordings.findIndex(
+        r => r.id === recording.id,
+      );
+      const previous = this.catalog.recordings[index];
+      const merged = {
+        ...recording,
+        chapters: [
+          ...(previous?.chapters ?? []).filter(
+            c => !recording.chapters.some(n => n.surah === c.surah),
+          ),
+          ...recording.chapters,
+        ].sort((a, b) => a.surah - b.surah),
+      };
+      validateQuranCatalog({texts: [], translations: [], recordings: [merged]});
+      for (const chapter of merged.chapters)
+        await this.downloads.register(chapter.pack);
+      await saveRecord('quran-audio-recordings', merged.id, merged);
+      if (index < 0) this.catalog.recordings.push(merged);
+      else this.catalog.recordings[index] = merged;
+    });
+    this.audioTail = task.catch(() => undefined);
+    return task;
+  }
+  async recordingDuration(recording: Recording, surah: number) {
+    const chapter = recording.chapters.find(c => c.surah === surah);
+    if (!chapter) throw Error('recording_mismatch');
+    if (chapter.durationMs) return chapter.durationMs;
+    const path = await this.asset(chapter.pack, chapter.assetId);
+    const duration = await NativeModules.RoqiaAudio?.audioDuration(path);
+    if (!Number.isSafeInteger(duration) || duration <= 0)
+      throw Error('audio_duration_unavailable');
+    chapter.durationMs = duration;
+    await saveRecord('quran-audio-recordings', recording.id, recording);
+    return duration as number;
   }
 }
 export const quran = new QuranRuntime(
