@@ -274,6 +274,7 @@ export function Page({
   subtitle,
   footer,
   scrollRef,
+  headerContent,
 }: {
   title: string;
   children: React.ReactNode;
@@ -283,6 +284,7 @@ export function Page({
   subtitle?: string;
   footer?: React.ReactNode;
   scrollRef?: React.Ref<ScrollView>;
+  headerContent?: React.ReactNode;
 }) {
   const p = usePalette();
   return (
@@ -310,6 +312,7 @@ export function Page({
         </View>
         {actions ?? (onBack && <View style={{width: 48}} />)}
       </View>
+      {headerContent}
       <ScrollView
         ref={scrollRef}
         keyboardShouldPersistTaps="handled"

@@ -41,6 +41,34 @@ Module._load = function (id, parent, ...rest) {
       };
     if (id === 'react-native-svg')
       return {__esModule: true, default: 'Svg', Path: 'Path'};
+    if (id === 'react-native-gesture-handler')
+      return {
+        GestureDetector: 'GestureDetector',
+        GestureHandlerRootView: 'GestureRoot',
+        Gesture: {
+          Pan: () => {
+            const gesture = {
+              maxPointers() {
+                return this;
+              },
+              activeOffsetX() {
+                return this;
+              },
+              failOffsetY() {
+                return this;
+              },
+              runOnJS() {
+                return this;
+              },
+              onEnd(callback) {
+                this.finish = callback;
+                return this;
+              },
+            };
+            return gesture;
+          },
+        },
+      };
     if (id.endsWith('/design/components'))
       return {Ornament: 'Ornament', rtlRow: {}};
     if (id.endsWith('/store')) return {themeContext};
@@ -53,11 +81,17 @@ Module._load = function (id, parent, ...rest) {
         Button: 'Button',
         Card: 'Card',
         usePalette: () => ({}),
-        Page: ({children, footer, scrollRef, ...props}) => {
+        Page: ({children, footer, headerContent, scrollRef, ...props}) => {
           React.useImperativeHandle(scrollRef, () => ({
             scrollTo: p => scrolls.push(p),
           }));
-          return React.createElement('Page', props, children, footer);
+          return React.createElement(
+            'Page',
+            props,
+            headerContent,
+            children,
+            footer,
+          );
         },
       };
   }
@@ -71,15 +105,37 @@ const texts = tree =>
     .map(n => n.props.children)
     .flat()
     .join(' ');
-const button = (tree, label) =>
-  tree.root.findAllByType('Button').find(n => n.props.label === label);
+const swipe = (tree, x, y = 0, success = true) =>
+  act(() =>
+    tree.root
+      .findByType('GestureDetector')
+      .props.gesture.finish({translationX: x, translationY: y}, success),
+  );
+const position = tree =>
+  tree.root
+    .findAllByType('View')
+    .find(n => n.props.accessibilityRole === 'adjustable');
 
-test('one card keeps every name paired with its meaning while buttons traverse and stop at both ends', async () => {
+test('horizontal swipes traverse paired cards; cancelled, short, vertical and boundary gestures preserve position', async () => {
   let tree;
   await act(() => {
     tree = create(React.createElement(AsmaScreen, {navigation: {goBack() {}}}));
   });
-  assert.equal(button(tree, 'السابق').props.disabled, true);
+  assert.equal(tree.root.findAllByType('Button').length, 0);
+  assert.deepEqual(
+    position(tree).props.accessibilityActions.map(a => a.name),
+    ['increment'],
+  );
+  for (const [x, y, success] of [
+    [30, 0, true],
+    [150, 200, true],
+    [150, 0, false],
+    [-150, 0, true],
+  ]) {
+    await swipe(tree, x, y, success);
+    assert.equal(position(tree).props.accessibilityValue.now, 1);
+    assert.equal(scrolls.length, 0);
+  }
   for (let i = 0; i < names.length; i++) {
     assert.equal(tree.root.findAllByType('Card').length, 1);
     const headers = tree.root
@@ -90,16 +146,32 @@ test('one card keeps every name paired with its meaning while buttons traverse a
       [names[i].name],
     );
     assert.ok(texts(tree).includes(names[i].meaning));
-    assert.equal(button(tree, 'التالي').props.disabled, i === names.length - 1);
-    if (i < names.length - 1)
-      await act(() => button(tree, 'التالي').props.onPress());
+    if (i < names.length - 1) await swipe(tree, 150);
   }
   assert.equal(scrolls.length, 98);
   assert.ok(scrolls.every(s => s.y === 0 && s.animated === false));
   assert.equal(announcements.at(-1), names.at(-1).name);
-  await act(() => button(tree, 'السابق').props.onPress());
+  await swipe(tree, 150);
+  assert.equal(position(tree).props.accessibilityValue.now, 99);
+  assert.equal(scrolls.length, 98);
+  assert.deepEqual(
+    position(tree).props.accessibilityActions.map(a => a.name),
+    ['decrement'],
+  );
+  await swipe(tree, -150);
   assert.ok(texts(tree).includes(names.at(-2).meaning));
-  assert.equal(button(tree, 'التالي').props.disabled, false);
+  await act(() =>
+    position(tree).props.onAccessibilityAction({
+      nativeEvent: {actionName: 'increment'},
+    }),
+  );
+  assert.equal(position(tree).props.accessibilityValue.now, 99);
+  await act(() =>
+    position(tree).props.onAccessibilityAction({
+      nativeEvent: {actionName: 'decrement'},
+    }),
+  );
+  assert.equal(position(tree).props.accessibilityValue.now, 98);
   digitStyle = 'eastern';
   await act(() =>
     tree.update(React.createElement(AsmaScreen, {navigation: {goBack() {}}})),

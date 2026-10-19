@@ -25,7 +25,7 @@
     "androidReviewArm64Build": "passed"
   },
   "install": {
-    "apkSHA256": "e9dd36e9e7aeea6a7100dbd8ca47b72ce5d89d2ae80b1a8d2d667d5ee9c62fa2",
+    "apkSHA256": "cd47d6df0652d7e2b06c413badcc418f8f97e49e1f4df42d6f4a25bb0e04a472",
     "inPlaceUpdate": true,
     "device": "emulator-5554",
     "user": 0,
@@ -38,21 +38,23 @@
     "device": "emulator-5554",
     "user": 0,
     "package": "name.roqia.app",
-    "oneCardAtATime": true,
-    "fullUserProvidedMeaningsMatchNativeText": true,
-    "nextPreviousButtons": true,
+    "topProgressBelowTitle": true,
+    "noPreviousNextButtons": true,
+    "smallDirectionalCues": true,
+    "rightSwipeNextLeftSwipePrevious": true,
+    "firstBoundaryPreserved": true,
+    "lastBoundary": "covered by component gesture test",
+    "all99PairsAndGestureTransitions": "covered by component test",
+    "nativeFull99SwipeTraversal": "not claimed; representative gestures and reading verified",
+    "verticalLongTextScrollDoesNotChangeCard": true,
+    "scrollMovementPixels": 18,
     "scrollResetOnCardChange": true,
-    "bothBoundariesDisabled": true,
-    "all99CardsReachedByButtons": true,
     "bothThemes": true,
-    "longMeaningVerticalScrollAndPersistentControls": true,
     "savedEasternDigitsAfterColdRestart": true,
-    "sourceNumbersAndTextUnchanged": true,
-    "compoundNamesWrap": true,
-    "sourceExternalLinkScreen": true,
-    "adhanHeaderAndBottomControlsPreserved": true,
+    "fullUserProvidedTextUnchanged": true,
     "deviceNetworkFontDisplayChanged": false,
-    "visualAcceptance": "pending user review"
+    "visualAcceptance": "base card design approved; enhancement pending review",
+    "spokenScreenReader": "not verified; adjustable accessibility actions tested in component test"
   },
   "preservation": {
     "originalRecords": 39,
@@ -80,10 +82,12 @@
     "downloadedContentSHA256Unchanged": true
   },
   "limits": {
-    "visualAcceptance": "pending user review",
+    "visualAcceptance": "base card design approved; progress and gesture enhancement pending review",
     "iOS": "deferred",
     "spokenScreenReader": "not verified",
-    "externalBrowser": "not opened; existing external-link screen verified"
+    "externalBrowser": "not opened; existing external-link screen verified",
+    "all99NativeSwipes": "not claimed; all 99 transitions are covered by the component gesture test"
   },
-  "privateBackupsDatabasesHierarchiesLogsCommitted": false
+  "privateBackupsDatabasesHierarchiesLogsCommitted": false,
+  "baseFeatureReviewCommit": "596cdc22d2224b2d986572a8a2868c8bb2ba3e03"
 }
