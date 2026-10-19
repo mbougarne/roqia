@@ -4,7 +4,7 @@
 
 Implemented for the main **الرقية الشرعية** screen only. A card whose saved remaining count is zero now uses the existing success surface and border, shows a checkmark and **تمت القراءة**, and explains **للتكرار، أعد العداد**. Text stays fully readable and selectable. Copy, bookmark, per-item listening and confirmed reset remain available. The completed counter remains disabled; resetting it restores the active presentation. No counter storage or audio behavior changes.
 
-This is a focused completion-state change, not a claim that the whole screen matches `08-ruqya.png`. The light and dark reference images were inspected. Visual approval is pending before expanding the styling work.
+This is a focused completion-state change, not a claim that the whole screen matches `08-ruqya.png`. The light and dark reference images were inspected. **The user approved the completed-card appearance on 2026-10-19 and authorized continuing the remaining batch.**
 
 ### Before and after
 
@@ -19,12 +19,12 @@ Both builds show the same pre-existing completed first card on `emulator-5554`, 
 
 See [verification.json](verification.json) for the build, checks and emulator data-preservation results. No physical device, other app, device-network toggle, uninstall or data clear is part of this verification. iPhone work remains deferred. Accessibility labels and disabled states are inspected in the Android hierarchy; TalkBack listening is not verified.
 
+## 2–3. Back controls and Adhkar landing
+
+The next focused change replaces the remaining text-only back buttons in search/bookmarks, the guide footer and the edition picker. It also updates only the Adhkar landing screen against both `09-adhkar.png` references. See [the review evidence](adhkar-and-back/README.md). Adhkar visual approval is pending; category subpages keep their existing presentation.
+
 ## Remaining requested batch, in order
 
-These items remain queued; this PR implements item 1 only.
-
-2. Replace text-only back controls, including search, with the app's accessible back icon. Preserve navigation, RTL direction and touch targets; top-left search may stay.
-3. Match only the main Adhkar landing screen to light/dark `09-adhkar.png`. Keep other Adhkar subpages as they are.
 4. Match Du'a to light/dark `13-dua.png` and inspect light/dark `14-tasbih.png` for Tasbihat. Remove listen-to-all from both while retaining supported per-item audio. Inspect each actual reference before editing its screen.
 5. Add a small accessible mini-player close control. Stop/dismiss playback and hide the bar, including when paused and after navigation. Ensure saved-session restoration does not reopen a dismissed player. The reader-tabs idea was withdrawn; do not change reader tabs or segments.
 6. Implement persisted Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩` throughout user-visible formatting. Preserve canonical storage and IDs, source Quran text, timing math, URLs and edition/font-specific verse markers. Inspect current formatting/settings boundaries first.

@@ -4,6 +4,7 @@ import {
   AppText,
   Button,
   Card,
+  IconButton,
   Input,
   Page,
   Row,
@@ -20,6 +21,7 @@ import {
 } from './discovery';
 import {reloadBookmarks, removeBookmark, useBookmarks} from './bookmarks';
 import {DevotionalListScreen} from '../../screens/DevotionalListScreen';
+import {rtlRow} from '../../design/components';
 import {
   homeRepeatContext,
   adkarRepeatContext,
@@ -70,6 +72,20 @@ export function DiscoveryScreen({navigation, route}: any) {
   );
   return (
     <View style={{flex: 1, backgroundColor: p.background}}>
+      <View style={{...rtlRow, minHeight: 56, paddingHorizontal: 16}}>
+        <IconButton
+          name="chevron-right"
+          label="رجوع"
+          onPress={() => navigation.goBack()}
+        />
+        <AppText
+          role="screenTitle"
+          accessibilityRole="header"
+          style={{flex: 1, textAlign: 'center'}}>
+          {isSaved ? 'المحفوظات' : 'البحث في المحتوى'}
+        </AppText>
+        <View style={{width: 48}} />
+      </View>
       <FlatList
         data={filtered}
         keyExtractor={r => r.key}
@@ -83,14 +99,6 @@ export function DiscoveryScreen({navigation, route}: any) {
         }}
         ListHeaderComponent={
           <View style={{gap: 12}}>
-            <Button
-              secondary
-              label="رجوع"
-              onPress={() => navigation.goBack()}
-            />
-            <AppText role="screenTitle" accessibilityRole="header">
-              {isSaved ? 'المحفوظات' : 'البحث في المحتوى'}
-            </AppText>
             <Input
               label="البحث في الأذكار والأدعية والرقية والتسبيح"
               value={query}

@@ -14,6 +14,7 @@ import {
   AppText,
   Button,
   Card,
+  IconButton,
   Page,
   usePalette,
   type IconName,
@@ -475,8 +476,12 @@ export function Guide({onFinish}: {onFinish: () => void}) {
           />
         </View>
         {step > 0 && (
-          <View style={{flex: 1}}>
-            <Button secondary label="رجوع" onPress={() => setStep(step - 1)} />
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <IconButton
+              name="chevron-right"
+              label="رجوع"
+              onPress={() => setStep(step - 1)}
+            />
           </View>
         )}
       </View>

@@ -238,11 +238,13 @@ export function EditionScreen({navigation}: any) {
           navigation.navigate('QuranDownload', {editionId: selected})
         }
       />
-      <Button
-        secondary
-        label="العودة دون تنزيل"
-        onPress={() => navigation.goBack()}
-      />
+      <View style={{alignItems: 'center'}}>
+        <IconButton
+          name="chevron-right"
+          label="العودة دون تنزيل"
+          onPress={() => navigation.goBack()}
+        />
+      </View>
     </Page>
   );
 }

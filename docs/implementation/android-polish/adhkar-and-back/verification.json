@@ -1,0 +1,124 @@
+{
+  "passed": true,
+  "device": "emulator-5554",
+  "user": 0,
+  "checks": [
+    "light and dark Adhkar landing captures",
+    "search back icon: right side, button role, minimum 48 dp target",
+    "search header stays fixed while results scroll",
+    "search back returns to Adhkar",
+    "bookmarks back icon and navigation",
+    "morning, evening and before-sleep links and back navigation",
+    "Dua and Tasbihat shortcuts and return navigation",
+    "guide footer icon returns to previous step",
+    "edition picker return-without-download icon navigates back",
+    "dark search header",
+    "1.5x app interface text reflows; shortcuts stack and remain reachable by scrolling"
+  ],
+  "OSFontScaleChanged": false,
+  "displaySizeChanged": false,
+  "talkBackListeningVerified": false,
+  "visualAcceptance": false,
+  "date": "2026-10-19",
+  "baseCommit": "634cea7f83e4ca3d37d832274f9f2c3384d55dda",
+  "basePullRequest": 20,
+  "basePullRequestStatus": "open; Arruqya visual change approved by user",
+  "branch": "codex/adhkar-landing-and-back-icons",
+  "scope": "Back controls and main Adhkar landing screen only",
+  "automatedChecks": {
+    "node": {
+      "passed": 137,
+      "failed": 0,
+      "command": "node --test tools/*/*.test.cjs"
+    },
+    "typeScript": {
+      "passed": true,
+      "command": "tsc --noEmit"
+    },
+    "formatting": {
+      "passed": true,
+      "scope": "changed TSX files and review documentation"
+    },
+    "diffCheck": {
+      "passed": true
+    },
+    "lint": {
+      "passed": false,
+      "status": "blocked by existing tooling configuration",
+      "reason": "Installed ESLint 10.2.0 requires eslint.config.*; repository provides legacy .eslintrc.js only."
+    }
+  },
+  "androidBuild": {
+    "passed": true,
+    "variant": "review",
+    "architectures": ["arm64-v8a"],
+    "temporaryInitScript": "Existing /private/tmp/roqia-polish/cached-dependencies.gradle; not committed"
+  },
+  "install": {
+    "installed": true,
+    "apkSHA256": "e9c18f1205cedf8035162e88eb88a0367cb8e129d5f09d6057b33703fa624f01",
+    "temporaryReserveChangeAuthorized": true,
+    "reserveKey": "sys_storage_threshold_max_bytes",
+    "originalValue": "null",
+    "temporaryValue": "67108864",
+    "restoredImmediatelyAfterInstall": true,
+    "device": "emulator-5554",
+    "user": 0,
+    "install": "in-place -r; no uninstall or data clear"
+  },
+  "preservation": {
+    "existingRecords": 38,
+    "missingOriginalRecords": 0,
+    "originalRecordsByteExactBeforeRestart": 37,
+    "unchangedCounters": 207,
+    "originalSettingsRestored": true,
+    "retainedAutomaticChanges": [
+      {
+        "collection": "prayer",
+        "id": "renewal"
+      }
+    ],
+    "restorationVerifiedOnDevice": true,
+    "contentFilesModifiedByQA": false,
+    "privateBackupsCommitted": false,
+    "emulatorReserveRestored": true,
+    "originalRecordsByteExactAfterRestart": 36,
+    "verifiedAgainAfterAppRestart": true,
+    "settingsIgnoringWriteTimestampUnchanged": true,
+    "density": "Physical density: 420"
+  },
+  "referencesInspected": [
+    "design/roqia-v2/reference/light/09-adhkar.png",
+    "design/roqia-v2/reference/dark/09-adhkar.png"
+  ],
+  "limits": {
+    "physicalDevicesUsed": false,
+    "iOSVerified": false,
+    "deviceNetworkChanged": false,
+    "otherAppsUsed": false,
+    "OSRtlConfigurationChanged": false,
+    "320dpDeviceVerification": false,
+    "200PercentOSFontVerification": false,
+    "contentHashAuditPerformed": false,
+    "audioPlaybackRetested": false,
+    "wholeAppVisualParityClaimed": false
+  },
+  "remainingBatch": [
+    "Dua and Tasbihat references; remove listen-all",
+    "Mini-player close and saved-session dismissal",
+    "Persisted Western/Eastern digit styles",
+    "Bundled permitted regional adhans and short option"
+  ],
+  "screenshots": [
+    "before-adhkar-light",
+    "before-adhkar-dark",
+    "before-search-light",
+    "after-adhkar-light",
+    "after-adhkar-dark",
+    "after-search-light",
+    "after-search-dark",
+    "after-guide-back-light",
+    "after-adhkar-large-dark",
+    "after-adhkar-large-shortcuts-dark"
+  ]
+}
