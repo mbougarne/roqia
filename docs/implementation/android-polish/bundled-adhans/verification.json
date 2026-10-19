@@ -1,14 +1,14 @@
 {
   "date": "2026-10-19",
-  "scope": "Five user-supplied numbered adhans plus a separate first-15-second clip; information/source/rights UI removed",
+  "scope": "Five provided adhans and 15-second clip, with only a page title and shared recording list",
   "basePullRequest": 24,
-  "nodeTestsPassed": 146,
+  "nodeTestsPassed": 147,
   "typeScriptPassed": true,
   "formattingPassed": true,
   "diffCheckPassed": true,
   "androidArm64ReviewBuildPassed": true,
   "install": {
-    "apkSHA256": "c440a923fcb4964f029d29367399a7318317ac1642d1371cbc852e4764a4f09e",
+    "apkSHA256": "369a03724f893b389c4b2271a22c0f7f4695f1b20593f5c069363a6b844f6fd9",
     "inPlaceUpdate": true,
     "device": "emulator-5554",
     "user": 0,
@@ -17,7 +17,7 @@
     "reserveRestoredImmediately": true
   },
   "apkResources": {
-    "apkSHA256": "c440a923fcb4964f029d29367399a7318317ac1642d1371cbc852e4764a4f09e",
+    "apkSHA256": "369a03724f893b389c4b2271a22c0f7f4695f1b20593f5c069363a6b844f6fd9",
     "packagedRecordingCount": 6,
     "allSixAPKFilesMatchPinnedBytes": true,
     "removedRecordingsAbsent": true
@@ -33,48 +33,13 @@
   },
   "functionalUI": {
     "passed": true,
-    "checks": [
-      "select/preview/verified bundled cache adhan-01",
-      "select/preview/verified bundled cache adhan-02",
-      "select/preview/verified bundled cache adhan-03",
-      "select/preview/verified bundled cache adhan-04",
-      "select/preview/verified bundled cache adhan-05",
-      "select/preview/verified bundled cache adhan-05-short",
-      "15-second short playback continues in background and completes automatically",
-      "independent short normal / second Fajr selections persist after cold restart",
-      "real future prayer events route Fajr to second and Isha to short; no test alarm remains"
-    ],
-    "onDeviceBundledFiles": [
-      {
-        "resource": "roqia_adhan_01",
-        "sha256": "6bbc400b43e80c8fb1950aa143f1681c51fa2a58b1c053fcd14508ed9f9834cf"
-      },
-      {
-        "resource": "roqia_adhan_02",
-        "sha256": "2f97e880c0a51a5eedfb7623bdff8507b0a55dba9e84f3792a56a2a989bb816c"
-      },
-      {
-        "resource": "roqia_adhan_03",
-        "sha256": "bf601b1e075ace128b40270ab08a90ea30d8be989456c657858c52520991396a"
-      },
-      {
-        "resource": "roqia_adhan_04",
-        "sha256": "b7b1ec5511a6a3ddf544ea2bfea29f3c46d7253bfb503982ef580907a338a5de"
-      },
-      {
-        "resource": "roqia_adhan_05",
-        "sha256": "22202889003280d028a38f36ca32b4e1bf87bf51c3fb72cc0ca026065a606dbd"
-      },
-      {
-        "resource": "roqia_adhan_05_short",
-        "sha256": "f6193e5ebd475c56038d6890534e47f84883c8a72509b0f2713904a2d572d3c4"
-      }
-    ],
-    "deviceNetworkChanged": false,
-    "backgroundMethod": "Home after short preview; no other app inspected",
-    "futurePrayerEventsVerified": true,
-    "newBackgroundAlarmStartClaimed": false,
-    "shortNativeCompletionSeconds": 15.12
+    "titleAndRecordingListOnly": true,
+    "allSixChoicesRetained": true,
+    "removedTabsAndExplanatoryTextAbsentInBothThemes": true,
+    "previewAndStopWorkWithoutSuccessText": true,
+    "oneSelectionSavedForNormalAndFajr": true,
+    "selectionPersistedAcrossRestart": true,
+    "deviceNetworkChanged": false
   },
   "preservation": {
     "originalRecords": 39,
@@ -97,7 +62,7 @@
   "finalState": {
     "noQAAlarmsRemain": true,
     "finalNativeAudioEvents": 0,
-    "removedChoicesPromptForNewSelection": true,
+    "titleAndListOnlyWithOriginalPreferences": true,
     "finalScreen": "prayer/sounds",
     "reserveRestored": true
   },
@@ -108,5 +73,71 @@
     "Physical speaker quality and human audio acceptance unverified",
     "No TalkBack listening, incoming-call, Doze or reboot repetition in this run",
     "Existing ESLint version/configuration mismatch outside scope"
-  ]
+  ],
+  "unchangedMediaBaseline": {
+    "install": {
+      "apkSHA256": "c440a923fcb4964f029d29367399a7318317ac1642d1371cbc852e4764a4f09e",
+      "inPlaceUpdate": true,
+      "device": "emulator-5554",
+      "user": 0,
+      "temporaryReserveChangeAuthorized": true,
+      "originalReserveValue": "null",
+      "reserveRestoredImmediately": true
+    },
+    "functionalUI": {
+      "passed": true,
+      "checks": [
+        "select/preview/verified bundled cache adhan-01",
+        "select/preview/verified bundled cache adhan-02",
+        "select/preview/verified bundled cache adhan-03",
+        "select/preview/verified bundled cache adhan-04",
+        "select/preview/verified bundled cache adhan-05",
+        "select/preview/verified bundled cache adhan-05-short",
+        "15-second short playback continues in background and completes automatically",
+        "independent short normal / second Fajr selections persist after cold restart",
+        "real future prayer events route Fajr to second and Isha to short; no test alarm remains"
+      ],
+      "onDeviceBundledFiles": [
+        {
+          "resource": "roqia_adhan_01",
+          "sha256": "6bbc400b43e80c8fb1950aa143f1681c51fa2a58b1c053fcd14508ed9f9834cf"
+        },
+        {
+          "resource": "roqia_adhan_02",
+          "sha256": "2f97e880c0a51a5eedfb7623bdff8507b0a55dba9e84f3792a56a2a989bb816c"
+        },
+        {
+          "resource": "roqia_adhan_03",
+          "sha256": "bf601b1e075ace128b40270ab08a90ea30d8be989456c657858c52520991396a"
+        },
+        {
+          "resource": "roqia_adhan_04",
+          "sha256": "b7b1ec5511a6a3ddf544ea2bfea29f3c46d7253bfb503982ef580907a338a5de"
+        },
+        {
+          "resource": "roqia_adhan_05",
+          "sha256": "22202889003280d028a38f36ca32b4e1bf87bf51c3fb72cc0ca026065a606dbd"
+        },
+        {
+          "resource": "roqia_adhan_05_short",
+          "sha256": "f6193e5ebd475c56038d6890534e47f84883c8a72509b0f2713904a2d572d3c4"
+        }
+      ],
+      "deviceNetworkChanged": false,
+      "backgroundMethod": "Home after short preview; no other app inspected",
+      "futurePrayerEventsVerified": true,
+      "newBackgroundAlarmStartClaimed": false,
+      "shortNativeCompletionSeconds": 15.12
+    },
+    "clip": {
+      "source": "Adhan-05.mp3",
+      "startSeconds": 0,
+      "endSeconds": 15,
+      "decodedSamplesAt16kHz": 240000,
+      "durationSeconds": 15.0,
+      "referenceCorrelation": 0.997957048160719,
+      "originalUnmodified": true
+    },
+    "sourceFilesUnchangedByListSimplification": true
+  }
 }

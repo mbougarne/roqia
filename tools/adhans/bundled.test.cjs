@@ -152,3 +152,18 @@ test('removed selections fall back without silently substituting a different rec
   });
   assert.equal((await adhanCapability()).fajr.sha256, sounds[4].bundled.sha256);
 });
+
+test('the single list shares one verified recording across prayers and preserves choices on failure', async () => {
+  records.set('prayer:sounds', {normal: sounds[0].id, fajr: sounds[1].id});
+  await selectSound(sounds[4], 'all');
+  assert.deepEqual(await selectedSounds(), {
+    normal: sounds[4].id,
+    fajr: sounds[4].id,
+  });
+  failPreparation = true;
+  await assert.rejects(selectSound(sounds[3], 'all'), /disk_full/);
+  assert.deepEqual(await selectedSounds(), {
+    normal: sounds[4].id,
+    fajr: sounds[4].id,
+  });
+});

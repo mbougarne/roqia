@@ -27,13 +27,16 @@ export const selectedSounds = async (): Promise<SoundSelection> =>
   };
 export async function selectSound(
   sound: AdhanSound,
-  variant: keyof SoundSelection = 'normal',
+  variant: keyof SoundSelection | 'all' = 'normal',
 ) {
   if (!(await localSound(sound))) throw Error('bundled_adhan_unavailable');
-  await saveRecord('prayer', 'sounds', {
-    ...(await selectedSounds()),
-    [variant]: sound.id,
-  });
+  await saveRecord(
+    'prayer',
+    'sounds',
+    variant === 'all'
+      ? {normal: sound.id, fajr: sound.id}
+      : {...(await selectedSounds()), [variant]: sound.id},
+  );
 }
 export type LocalSound = {
   path: string;

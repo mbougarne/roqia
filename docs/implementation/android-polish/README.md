@@ -37,7 +37,7 @@ Settings now offers Western digits `0123456789` (default) and Eastern digits `٠
 
 ## 7. User-provided adhans
 
-The regional-recording proposal was rejected. The replacement uses the user's five supplied MP3 originals, labelled **الأذان الأول** through **الأذان الخامس**, plus **أذان قصير**, a separate clip of Adhan-05 from 00:00 to 00:15. The information, source and rights sections are removed. The same six offline choices can be selected independently for Fajr and other prayers. See [Android verification](bundled-adhans/README.md). This replacement awaits the user's review.
+The regional-recording proposal was rejected. The replacement uses the user's five supplied MP3 originals, labelled **الأذان الأول** through **الأذان الخامس**, plus **أذان قصير**, a separate clip of Adhan-05 from 00:00 to 00:15. The information, source and rights sections are removed. The final screen keeps only the title and six offline recording rows with selection and playback controls. Tabs and explanatory text are removed; choosing a recording applies it to all prayers, including Fajr. See [Android verification](bundled-adhans/README.md). This replacement awaits the user's review.
 
 Continue in this checkout on an appropriate `codex/` branch. Use only `emulator-5554`, user 0, `name.roqia.app`, with in-place updates and restored QA preferences/counters. Keep private backups outside Git. Preserve the accepted Quran recording/riwaya/numbering/integrity/native-clipping safeguards from PR #19. Do not expand visual acceptance from tests or a screenshot gallery.
 

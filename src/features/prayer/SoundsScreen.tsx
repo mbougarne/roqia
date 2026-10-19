@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
-import {Platform} from 'react-native';
-import {AppText, Button, Page, IconButton} from '../../design/ui';
-import {
-  Banner,
-  Group,
-  SettingRow,
-  RadioRow,
-  Segments,
-} from '../../design/components';
+import {Alert, Platform} from 'react-native';
+import {Page, IconButton} from '../../design/ui';
+import {Group, SettingRow, RadioRow} from '../../design/components';
 import {useFormat} from '../../design/useFormat';
 import {useOnFocus} from '../quran/context';
 import {
@@ -24,30 +18,29 @@ import {reconcilePrayer, requestPrayerPermission} from './service';
 import {playback} from '../audio/controller';
 export function SoundsScreen({navigation}: any) {
   const {number} = useFormat();
-  const [variant, setVariant] = useState<keyof SoundSelection>('normal');
   const [selected, setSelected] = useState<SoundSelection>({
     normal: null,
     fajr: null,
   });
   const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState('');
   useOnFocus(() => {
     void selectedSounds()
       .then(setSelected)
       .catch(() =>
-        setMessage(
-          'تعذر استرجاع الصوت المختار. أعد فتح الصفحة للمحاولة مجددا.',
+        Alert.alert(
+          'تعذر استرجاع الصوت المختار',
+          'أعد فتح الصفحة للمحاولة مجددا.',
         ),
       );
   }, []);
   const act = async (fn: () => Promise<unknown>) => {
     setBusy(true);
-    setMessage('');
     try {
       await fn();
     } catch {
-      setMessage(
-        'تعذر إكمال العملية. تحقق من المساحة وإذن الإشعارات والمنبهات، ثم أعد المحاولة.',
+      Alert.alert(
+        'تعذر إكمال العملية',
+        'تحقق من المساحة وإذن الإشعارات والمنبهات، ثم أعد المحاولة.',
       );
     } finally {
       setBusy(false);
@@ -69,28 +62,12 @@ export function SoundsScreen({navigation}: any) {
         title: sound.title,
       }),
     );
-    setMessage('زر الإيقاف متاح هنا وفي الإشعار.');
   };
   return (
     <Page title="أصوات الأذان" onBack={() => navigation.goBack()}>
-      <AppText role="caption">
-        التسجيلات المرفقة متاحة دون تنزيل، مع اختيار مستقل لأذان الفجر.
-      </AppText>
-      <Segments
-        value={variant}
-        options={[
-          {value: 'normal', label: 'باقي الصلوات'},
-          {value: 'fajr', label: 'الفجر'},
-        ]}
-        onChange={setVariant}
-      />
-      {!sounds.some(sound => sound.id === selected[variant]) && (
-        <AppText role="caption">اختر صوت الأذان لهذه الصلوات.</AppText>
-      )}
-      {!!message && <AppText>{message}</AppText>}
       {sounds.map(sound => {
         const installed = bundledSoundAvailable(sound),
-          chosen = selected[variant] === sound.id;
+          chosen = selected.normal === sound.id && selected.fajr === sound.id;
         return (
           <Group key={sound.id}>
             <RadioRow
@@ -109,7 +86,7 @@ export function SoundsScreen({navigation}: any) {
               onPress={() => {
                 if (!busy)
                   void act(async () => {
-                    await selectSound(sound, variant);
+                    await selectSound(sound, 'all');
                     setSelected(await selectedSounds());
                     await reconcilePrayer();
                   });
@@ -133,26 +110,6 @@ export function SoundsScreen({navigation}: any) {
           </Group>
         );
       })}
-      <Button
-        secondary
-        label="إيقاف الأذان"
-        onPress={() => {
-          adhanNative()?.stopAdhan();
-          void act(async () => {
-            await reconcilePrayer();
-            setMessage('تم إيقاف التشغيل وإلغاء التجربة.');
-          });
-        }}
-      />
-      <Button
-        secondary
-        label="إذن المنبهات والتذكيرات"
-        onPress={() => void act(() => adhanNative()?.openAdhanAlarms())}
-      />
-      <Banner
-        text="نتبع مستوى صوت المنبه وعدم الإزعاج في الجهاز. معاينة الأذان لا تفعّل تنبيهات الصلاة."
-        icon="volume"
-      />
     </Page>
   );
 }
