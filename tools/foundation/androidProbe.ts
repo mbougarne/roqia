@@ -1,12 +1,9 @@
 /* Debug-only validation against the same production coordinator/native ports.
  * Uses isolated SQLite collections and unique fixture file IDs; never resets user data.
  */
-import {open} from '@op-engineering/op-sqlite';
 import {NativeModules} from 'react-native';
+import {open} from '@op-engineering/op-sqlite';
 import {FileSystem} from 'react-native-file-access';
-import TrackPlayer from 'react-native-track-player';
-
-import {ensurePlayer} from '../../src/features/audio/controller';
 import {DownloadCoordinator} from '../../src/features/downloads/coordinator';
 import {nativeDownloadPorts} from '../../src/features/downloads/native';
 import {
@@ -15,7 +12,6 @@ import {
   type InstalledPack,
   type InstallJournal,
 } from '../../src/features/downloads/types';
-import {privatePath} from '../../src/platform/files';
 import {
   listRecords,
   putRecord,
@@ -26,12 +22,13 @@ import {
   getSettings,
   loadPersistedAppState,
 } from '../../src/services/persistence';
-
+import {privatePath} from '../../src/platform/files';
+import TrackPlayer from 'react-native-track-player';
+import {ensurePlayer} from '../../src/features/audio/controller';
 const log = (event: string, detail: object) =>
   NativeModules.RoqiaProbe.record(event, JSON.stringify(detail));
 const wait = (ms: number) =>
   new Promise<void>(resolve => setTimeout(resolve, ms));
-
 async function until(check: () => boolean) {
   for (let i = 0; i < 90; i++) {
     if (check()) return;
@@ -39,7 +36,6 @@ async function until(check: () => boolean) {
   }
   throw Error('probe_timeout');
 }
-
 export async function foundationProbe(scenario: string) {
   const bookmarksBefore = JSON.stringify(await listRecords('bookmarks'));
   const state = await loadPersistedAppState(),

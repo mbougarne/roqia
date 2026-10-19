@@ -20,6 +20,12 @@ export default ts.config(
       'web/dist/**',
       'docs/**',
       'design/**',
+      // Historical device probes are outside the maintained source baseline.
+      'tools/**/androidProbe.ts',
+      'tools/feasibility/ProbeApp.tsx',
+      'tools/feasibility/WarshFontProbe.tsx',
+      'tools/phase4/Probe.tsx',
+      'tools/phase4/checks.ts',
       'bundled-content/**',
       // Canonical content is validated by its existing provenance/hash tests.
       'src/data/**',

@@ -1,6 +1,13 @@
 target-version = "py311"
 line-length = 88
 include = ["tools/**/*.py"]
+extend-exclude = [
+    "tools/**/android-*.py",
+    "tools/**/verify-android.py",
+    "tools/feasibility/run-android-probe.py",
+    "tools/phase6/build-ui-helper.py",
+    "tools/phase12/build-gallery.py",
+]
 
 [lint]
 select = ["E4", "E7", "E9", "F", "I"]
@@ -11,8 +18,6 @@ ignore = ["E731", "E741"]
 # These source importers intentionally load sibling tools after extending sys.path.
 "tools/phase4/prepare.py" = ["E402"]
 "tools/phase5/catalog.py" = ["E402"]
-# This historical capture script injects android-visual.py's helpers with runpy.
-"tools/phase12/android-journeys.py" = ["F821"]
 
 [format]
 quote-style = "single"

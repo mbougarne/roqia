@@ -12,7 +12,7 @@ spotless {
     java {
         target fileTree(repository) {
             include 'android/app/src/**/*.java', 'tools/**/*.java'
-            exclude '**/build/**', '**/node_modules/**'
+            exclude '**/build/**', '**/node_modules/**', 'tools/phase6/Hierarchy.java'
         }
         googleJavaFormat('1.28.0')
         importOrder('java', 'javax', 'android', '', 'name.roqia', '\\#')

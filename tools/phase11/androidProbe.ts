@@ -1,20 +1,18 @@
 /* Debug-only probes through production adapters. Preserve user records across process-death tests. */
 import {NativeModules} from 'react-native';
 import TrackPlayer, {RepeatMode, State} from 'react-native-track-player';
-
 import {ensurePlayer, playback} from '../../src/features/audio/controller';
+import {
+  readRecord,
+  saveRecord,
+  removeRecord,
+} from '../../src/repositories/database';
 import {
   loadPreferences,
   savePreferences,
   reconcilePrayer,
 } from '../../src/features/prayer/service';
 import {localSound, sounds} from '../../src/features/prayer/sounds';
-import {
-  readRecord,
-  saveRecord,
-  removeRecord,
-} from '../../src/repositories/database';
-
 const probe = NativeModules.RoqiaProbe;
 const native = NativeModules.RoqiaPrayer;
 const log = (event: string, value: object = {}) =>
@@ -29,7 +27,6 @@ const keys = [
   ['prayer', 'preferences'],
   ['prayer', 'renewal'],
 ] as const;
-
 async function backup() {
   if (await readRecord('phase11-backup', 'original')) return;
   const records = [];
@@ -37,7 +34,6 @@ async function backup() {
     records.push({collection, id, value: await readRecord(collection, id)});
   await saveRecord('phase11-backup', 'original', records);
 }
-
 async function tone() {
   await ensurePlayer();
   await TrackPlayer.reset();
@@ -54,7 +50,6 @@ async function tone() {
     'tone_not_playing',
   );
 }
-
 export async function phase11Probe(scenario: string) {
   await backup();
   const mode = scenario.replace('phase11-', '');

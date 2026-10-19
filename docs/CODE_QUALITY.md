@@ -71,6 +71,20 @@ configuration JSON exceptions. Installed dependencies, build directories and
 tool caches are also excluded. Vendor wrappers, Ruby/CocoaPods configuration,
 and Android/iOS resource XML are outside this source-formatting baseline.
 
+`docs/implementation/`, `docs/feasibility/` and `design/` contain saved evidence
+and references, so linting and formatting leave them untouched. The current
+configuration excludes the entire `docs/` tree.
+
+Keep maintained code in `tools/` covered: regression tests, content importers
+and validators, dependency-patch scripts, and quality tooling can affect the
+application or its verification. Exclude historical device capture/probe code:
+`android-*.py`, `verify-android.py`, `androidProbe.ts`, the feasibility probe
+screens/launcher, the phase-4 probe/check harness, the UI hierarchy helper and
+the phase-12 gallery generator. Their original sources are preserved in this
+PR. Generated fixtures, source data and patch files also remain untouched.
+These exclusions affect linting/formatting; they do not disable regression
+tests or content-integrity checks.
+
 Run existing source-integrity tests when updating content. The complete local
 Python regression suite additionally checks Quran font coverage using the
 prepared source packs in `.roqia-feasibility`; CI runs the portable Python and

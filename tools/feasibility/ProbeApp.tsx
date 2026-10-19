@@ -1,11 +1,4 @@
 /* Android debug harness. This is not a product screen or production download coordinator. */
-import {
-  createDownloadTask,
-  directories,
-  getExistingDownloadTasks,
-  setConfig,
-  type DownloadTask,
-} from '@kesha-antonov/react-native-background-downloader';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Button, NativeModules, ScrollView, Text, View} from 'react-native';
 import TrackPlayer, {
@@ -14,6 +7,13 @@ import TrackPlayer, {
   Event,
   RepeatMode,
 } from 'react-native-track-player';
+import {
+  createDownloadTask,
+  directories,
+  getExistingDownloadTasks,
+  setConfig,
+  type DownloadTask,
+} from '@kesha-antonov/react-native-background-downloader';
 
 import WarshFontProbe from './WarshFontProbe';
 
@@ -27,7 +27,6 @@ const message = (error: unknown) =>
   error instanceof Error ? error.message : String(error);
 
 type Manifest = {scenario: string; bytes: number; sha256: string; etag: string};
-
 async function download(scenario: string) {
   await probe.prepare();
   setConfig({
@@ -241,8 +240,8 @@ async function run(scenario: string) {
 
 export default function ProbeApp({scenario}: {scenario?: string}) {
   if (scenario?.startsWith('phase4-')) {
-    const Phase4Probe = require('../phase4/Probe').default;
-    return <Phase4Probe scenario={scenario} />;
+    const Phase4Probe=require('../phase4/Probe').default;
+    return <Phase4Probe scenario={scenario}/>;
   }
   if (scenario?.startsWith('fonts-'))
     return <WarshFontProbe scenario={scenario} />;

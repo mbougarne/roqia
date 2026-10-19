@@ -1,7 +1,6 @@
 /* Opt-in debug harness; production ports/coordinator, isolated records and fixture-only files. */
 import {NativeModules} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
-
 import {DownloadCoordinator} from '../../src/features/downloads/coordinator';
 import {nativeDownloadPorts} from '../../src/features/downloads/native';
 import {
@@ -10,15 +9,13 @@ import {
   type InstalledPack,
   type InstallJournal,
 } from '../../src/features/downloads/types';
-import {privatePath} from '../../src/platform/files';
 import {listRecords, putRecord, write} from '../../src/repositories/database';
-
+import {privatePath} from '../../src/platform/files';
 const log = (event: string, detail: object) =>
   NativeModules.RoqiaProbe.record(event, JSON.stringify(detail));
 const wait = (ms: number) =>
   new Promise<void>(resolve => setTimeout(resolve, ms));
 const hold = () => new Promise<void>(() => {});
-
 async function until(test: () => boolean) {
   for (let i = 0; i < 180; i++) {
     if (test()) return;
@@ -26,7 +23,6 @@ async function until(test: () => boolean) {
   }
   throw Error('phase10_timeout');
 }
-
 export async function phase10Probe(scenario: string) {
   const recovering = scenario.startsWith('phase10-recover-');
   const mode = scenario.replace(/^phase10-(recover-)?/, '');
