@@ -12,7 +12,7 @@ import {
   type IconName,
 } from './ui';
 import {Illustration} from './Illustration';
-import {number} from './format';
+import {useFormat} from './useFormat';
 export const rtlRow = {
   flexDirection: 'row-reverse' as const,
   direction: 'ltr' as const,
@@ -289,6 +289,7 @@ export function RadioRow({
   );
 }
 export function NumberBadge({value}: {value: number}) {
+  const {number} = useFormat();
   const p = usePalette();
   return (
     <View
@@ -459,6 +460,7 @@ export function Range({
   stops?: readonly number[];
   onChange: (v: number) => void;
 }) {
+  const {number} = useFormat();
   const p = usePalette();
   const [width, setWidth] = useState(1);
   const nearest = (value: number) =>

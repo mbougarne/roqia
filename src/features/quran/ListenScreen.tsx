@@ -9,7 +9,8 @@ import {
   SettingRow,
   SearchField,
 } from '../../design/components';
-import {bytes, number} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
+import {normalizeDigits} from '../../design/format';
 import {readRecord, saveRecord} from '../../repositories/database';
 import {PlayerScreen} from '../audio/Player';
 import {playback, segmentPlaybackSupported} from '../audio/controller';
@@ -53,6 +54,7 @@ export function ReaderVerseAudio({
 }
 
 function QuranListening({route, navigation, onClose}: any) {
+  const {number, bytes} = useFormat();
   const inline = !!onClose;
   const {runtime, ready, error, revision, retry} = useLibrary();
   const editionId: EditionId =
@@ -543,7 +545,7 @@ function QuranListening({route, navigation, onClose}: any) {
             c =>
               !surahQuery ||
               normalizeSearch(c.name).includes(normalizeSearch(surahQuery)) ||
-              String(c.number) === surahQuery,
+              String(c.number) === normalizeDigits(surahQuery),
           )
           .map(c => (
             <RadioRow

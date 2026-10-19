@@ -1,8 +1,10 @@
 export type ThemePreference = 'light' | 'dark' | 'system';
+export type DigitStyle = 'western' | 'eastern';
 export type Settings = {
   schemaVersion: 2;
   themePreference: ThemePreference;
   uiScale: number;
+  digitStyle: DigitStyle;
   readerSizeSp: number;
   readerLineHeightRatio: number;
   wifiOnly: boolean;
@@ -16,6 +18,7 @@ export const defaultSettings: Settings = {
   schemaVersion: 2,
   themePreference: 'system',
   uiScale: 1,
+  digitStyle: 'western',
   readerSizeSp: 21,
   readerLineHeightRatio: 1.8,
   wifiOnly: true,

@@ -31,9 +31,12 @@ Du'a and Tasbihat were updated using the `13-dua.png` and `14-tasbih.png` refere
 
 The mini-player has a small close icon with a 48 dp accessible target, available during playback, while paused and for an error-only bar. It uses the existing stop operation to clear the native queue, sleep timer and saved session. A pending saved-session restore is invalidated when stopping. See [verification and captures](mini-player-close/README.md).
 
-## Remaining requested batch, in order
+## 6. Persisted digit styles
 
-6. Implement persisted Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩` throughout user-visible formatting. Preserve canonical storage and IDs, source Quran text, timing math, URLs and edition/font-specific verse markers. Inspect current formatting/settings boundaries first.
+Settings now offers Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩`. Generated interface counts, times, dates, sizes and numeric fields follow the saved choice immediately and after restart. Canonical values, IDs, URLs, source Quran text and edition/font-specific inline verse markers are preserved. See [verification and captures](digit-styles/README.md).
+
+## Remaining requested batch
+
 7. Keep Doha and bundle at least two additional full regional adhans plus an honestly labelled short option. Inspect the existing sounds catalog, attribution and Android native sound handling first. Verify sources, provenance and redistribution permission; do not invent regional or performer labels. Preview, selection, scheduling and background playback must all work offline immediately, without a download. Searching for suitable recordings is authorized.
 
 Continue in this checkout on an appropriate `codex/` branch. Use only `emulator-5554`, user 0, `name.roqia.app`, with in-place updates and restored QA preferences/counters. Keep private backups outside Git. Preserve the accepted Quran recording/riwaya/numbering/integrity/native-clipping safeguards from PR #19. Do not expand visual acceptance from tests or a screenshot gallery.

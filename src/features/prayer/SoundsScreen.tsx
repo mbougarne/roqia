@@ -17,7 +17,7 @@ import {
   Ornament,
   rtlRow,
 } from '../../design/components';
-import {number} from '../../design/format';
+import {useFormat} from '../../design/useFormat';
 import {useLibrary, useOnFocus} from '../quran/context';
 import {
   sounds,
@@ -31,6 +31,7 @@ import {
 import {reconcilePrayer, requestPrayerPermission} from './service';
 import {playback} from '../audio/controller';
 export function SoundsScreen({navigation}: any) {
+  const {number} = useFormat();
   const {runtime, ready, error, retry} = useLibrary();
   const [selected, setSelected] = useState<SoundSelection>({
     normal: null,
@@ -155,7 +156,7 @@ export function SoundsScreen({navigation}: any) {
               {installed && (
                 <Button
                   secondary
-                  label={'تجربة بعد 10 ثوان: ' + sound.title}
+                  label={'تجربة بعد ' + number(10) + ' ثوان: ' + sound.title}
                   disabled={busy || Platform.OS !== 'android'}
                   onPress={() => void act(() => preview(sound, true))}
                 />

@@ -24,7 +24,7 @@ import {
   Sheet,
   usePalette,
 } from '../design/ui';
-import {number} from '../design/format';
+import {useFormat} from '../design/useFormat';
 import {ReadingCard} from '../features/devotional/ReadingCard';
 import {useConfirmReset} from '../features/devotional/ResetConfirmation';
 import {useBookmarks, reloadBookmarks} from '../features/devotional/bookmarks';
@@ -45,6 +45,7 @@ const quickChoices = [
 ];
 
 export function TasbihatScreen({navigation}: any) {
+  const {number} = useFormat();
   const confirmReset = useConfirmReset();
   const {fontScale, width} = useWindowDimensions();
   const {mode, uiScale} = useContext(themeContext);

@@ -12,6 +12,7 @@ import {
 } from '../repositories/database';
 import {legacyKeys, prepareMigration} from '../repositories/migration';
 import {
+  defaultSettings,
   type Settings,
   type ThemePreference,
   type Bookmark,
@@ -89,7 +90,8 @@ export async function loadPersistedAppState() {
 }
 export async function getSettings() {
   await hydrateStorage();
-  return (await readRecord<Settings>('settings', 'singleton'))!;
+  const saved = (await readRecord<Settings>('settings', 'singleton'))!;
+  return {...saved, digitStyle: saved.digitStyle ?? defaultSettings.digitStyle};
 }
 export async function updateSettings(
   patch: Partial<Omit<Settings, 'schemaVersion'>>,
@@ -102,12 +104,14 @@ export async function updateSettings(
       )
     ).rows;
     const next = {
+      digitStyle: defaultSettings.digitStyle,
       ...JSON.parse(rows[0].value as string),
       ...patch,
       updatedAt: Date.now(),
     };
     if (
       !['system', 'light', 'dark'].includes(next.themePreference) ||
+      !['western', 'eastern'].includes(next.digitStyle) ||
       ![next.uiScale, next.readerSizeSp, next.readerLineHeightRatio].every(
         Number.isFinite,
       ) ||

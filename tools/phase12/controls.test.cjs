@@ -26,6 +26,11 @@ Module._load = function (request, parent, ...rest) {
     if (request === 'react-native-svg')
       return {__esModule: true, default: 'Svg', Path: 'Path'};
     if (request === './Illustration') return {Illustration: 'Illustration'};
+    if (request === './useFormat')
+      return {
+        useFormat: () =>
+          require('../../src/design/format.ts').createFormatters('western'),
+      };
     if (request === './ui')
       return {
         AppText: 'AppText',

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useFormat} from '../../../design/useFormat';
 import {Alert, AppState, I18nManager, Switch, View} from 'react-native';
 import {
   IconButton,
@@ -31,6 +32,7 @@ import {
   testReminder,
 } from './service';
 export function RemindersScreen({navigation}: any) {
+  const {digits} = useFormat();
   const [rows, setRows] = useState<Reminder[]>([]),
     [status, setStatus] = useState('جار التحقق من الإذن'),
     [busy, setBusy] = useState(false),
@@ -137,7 +139,7 @@ export function RemindersScreen({navigation}: any) {
               onPress={() => setEditing(r.reminderId)}
             />
             <AppText role="label" style={{writingDirection: 'ltr'}}>
-              {r.localTimeHHmm}
+              {digits(r.localTimeHHmm)}
             </AppText>
             <Toggle
               label={'تفعيل ' + reminderLabels[r.category]}
