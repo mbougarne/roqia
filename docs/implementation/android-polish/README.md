@@ -21,11 +21,14 @@ See [verification.json](verification.json) for the build, checks and emulator da
 
 ## 2–3. Back controls and Adhkar landing
 
-The next focused change replaces the remaining text-only back buttons in search/bookmarks, the guide footer and the edition picker. It also updates only the Adhkar landing screen against both `09-adhkar.png` references. See [the review evidence](adhkar-and-back/README.md). Adhkar visual approval is pending; category subpages keep their existing presentation.
+The next focused change replaces the remaining text-only back buttons in search/bookmarks, the guide footer and the edition picker. It also updates only the Adhkar landing screen against both `09-adhkar.png` references. See [the review evidence](adhkar-and-back/README.md). **The user approved this change on 2026-10-19 and authorized the next phase.** Category subpages keep their existing presentation.
+
+## 4. Du'a and Tasbihat
+
+The next review updates Du'a against both `13-dua.png` references and Tasbihat against both `14-tasbih.png` references. Listen-to-all is removed from Du'a, and both screens retain per-item audio. The reference's texts and sample count are represented using the existing bundled content and real saved progress. See [the review evidence](dua-tasbihat/README.md). Visual approval is pending.
 
 ## Remaining requested batch, in order
 
-4. Match Du'a to light/dark `13-dua.png` and inspect light/dark `14-tasbih.png` for Tasbihat. Remove listen-to-all from both while retaining supported per-item audio. Inspect each actual reference before editing its screen.
 5. Add a small accessible mini-player close control. Stop/dismiss playback and hide the bar, including when paused and after navigation. Ensure saved-session restoration does not reopen a dismissed player. The reader-tabs idea was withdrawn; do not change reader tabs or segments.
 6. Implement persisted Western digits `0123456789` (default) and Eastern digits `٠١٢٣٤٥٦٧٨٩` throughout user-visible formatting. Preserve canonical storage and IDs, source Quran text, timing math, URLs and edition/font-specific verse markers. Inspect current formatting/settings boundaries first.
 7. Keep Doha and bundle at least two additional full regional adhans plus an honestly labelled short option. Inspect the existing sounds catalog, attribution and Android native sound handling first. Verify sources, provenance and redistribution permission; do not invent regional or performer labels. Preview, selection, scheduling and background playback must all work offline immediately, without a download. Searching for suitable recordings is authorized.

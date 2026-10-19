@@ -179,12 +179,14 @@ export function IconButton({
   onPress,
   disabled = false,
   selected,
+  color,
 }: {
   label: string;
   name: IconName;
   onPress: () => void;
   disabled?: boolean;
   selected?: boolean;
+  color?: string;
 }) {
   const p = usePalette();
   return (
@@ -204,7 +206,10 @@ export function IconButton({
           borderRadius: 12,
         },
       ]}>
-      <AppIcon name={name} color={disabled ? p.disabledText : p.iconPrimary} />
+      <AppIcon
+        name={name}
+        color={disabled ? p.disabledText : (color ?? p.iconPrimary)}
+      />
     </Pressable>
   );
 }
