@@ -85,6 +85,18 @@ PR. Generated fixtures, source data and patch files also remain untouched.
 These exclusions affect linting/formatting; they do not disable regression
 tests or content-integrity checks.
 
+Git ignores are separate from formatter exclusions. `.gitignore` excludes
+generated build output (including `web/dist/`), dependencies, local environment
+settings, signing credentials, tool caches, coverage/test reports and temporary
+editor files. The generated web output is no longer tracked; CI builds it from
+`web/src` and copies the domain, font and fallback page from `web/public`.
+
+Keep `design/`, `docs/implementation/`, `docs/feasibility/` and maintained
+`tools/` files versioned. The app imports design tokens, tests read documentation
+evidence, and the tools contain regression tests and reproducible content/patch
+recipes. Their lint/format exclusions do not remove them from Git. Store new
+private captures, device backups and ad hoc evidence in `.roqia-feasibility/`.
+
 Run existing source-integrity tests when updating content. The complete local
 Python regression suite additionally checks Quran font coverage using the
 prepared source packs in `.roqia-feasibility`; CI runs the portable Python and

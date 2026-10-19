@@ -19,8 +19,13 @@ xcuserdata
 DerivedData
 *.hmap
 *.ipa
+*.dSYM/
+*.dSYM.zip
 *.xcuserstate
 ios/.xcode.env.local
+*.p12
+*.p8
+*.mobileprovision
 
 # Android/IntelliJ
 #
@@ -31,7 +36,10 @@ local.properties
 *.iml
 *.hprof
 .cxx/
+*.apk
+*.aab
 *.keystore
+*.jks
 !debug.keystore
 android/keystore.properties
 
@@ -40,6 +48,20 @@ android/keystore.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+/web/dist/
+coverage/
+playwright-report/
+test-results/
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Local environment settings; keep documented templates versioned.
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
 
 # fastlane
 #
@@ -68,26 +90,21 @@ yarn-error.log
 
 # Maintainer feasibility downloads, packs, device backups and local evidence
 .roqia-feasibility/
-tools/feasibility/__pycache__/
-android/.kotlin/
-
-tools/phase3/__pycache__/
-
-tools/phase4/__pycache__/
-
-tools/phase5/__pycache__/
-
-tools/phase8/__pycache__/
-
-tools/phase9/__pycache__/
-
-tools/phase10/__pycache__/
-
-/tools/phase11/__pycache__/
-
-/tools/phase12/__pycache__/
+.kotlin/
 
 # Code-quality tool environments and caches
-.venv-quality/
+.venv/
+.venv-*/
 .ruff_cache/
+.pytest_cache/
+.mypy_cache/
 __pycache__/
+*.pyc
+*.pyo
+
+# Temporary editor and patch files
+*.swp
+*.swo
+*~
+*.orig
+*.rej
