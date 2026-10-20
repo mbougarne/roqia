@@ -20,8 +20,14 @@ require.extensions['.tsx'] = (module, file) =>
     file,
   );
 const keyboard = new Map();
+let ready = true,
+  libraryError = false,
+  selectionGate = null;
 const runtime = {
-  preferred: async () => ({id: 'warsh-kfgqpc-v2.1-update6'}),
+  preferred: async () => {
+    if (selectionGate) await selectionGate;
+    return {id: 'warsh-kfgqpc-v2.1-update6'};
+  },
   resume: async () => null,
   text: () => ({pack: {}}),
   installed: () => true,
@@ -32,6 +38,7 @@ Module._load = function (name, parent, ...rest) {
     if (name === 'react-native')
       return {
         View: 'View',
+        ActivityIndicator: 'Indicator',
         Pressable: 'Pressable',
         Alert: {alert() {}},
         Keyboard: {
@@ -44,7 +51,7 @@ Module._load = function (name, parent, ...rest) {
       };
     if (name === './context')
       return {
-        useLibrary: () => ({runtime, ready: true}),
+        useLibrary: () => ({runtime, ready, error: libraryError, retry() {}}),
         useOnFocus: (cb, deps) => React.useEffect(cb, deps),
       };
     if (name.endsWith('/design/ui'))
@@ -120,4 +127,60 @@ test('Android keyboard dismissal restores library context while field focus and 
   assert.equal(context(), 1);
   await act(async () => tree.unmount());
   assert.equal(keyboard.size, 0);
+});
+
+test('the first library visit shows a loader until downloads and saved selection are ready; later renders retain the library', async () => {
+  ready = false;
+  let release;
+  selectionGate = new Promise(resolve => {
+    release = resolve;
+  });
+  let tree;
+  const screen = () =>
+    React.createElement(QuranLibraryScreen, {navigation: {navigate() {}}});
+  const loading = () =>
+    tree.root.findAllByProps({testID: 'quran-library-loading'}).length;
+  await act(async () => {
+    tree = create(screen());
+  });
+  assert.equal(loading(), 1);
+  assert.equal(
+    tree.root.findAllByType('Pressable').length,
+    0,
+    'do not build 114 surah rows before the loader can paint',
+  );
+  ready = true;
+  await act(async () => tree.update(screen()));
+  assert.equal(
+    loading(),
+    1,
+    'saved edition and resume position are still pending',
+  );
+  await act(async () => {
+    release();
+  });
+  selectionGate = null;
+  assert.equal(loading(), 0);
+  assert.equal(tree.root.findAllByType('Pressable').length, 114);
+  await act(async () => tree.update(screen()));
+  assert.equal(loading(), 0);
+  await act(async () => tree.unmount());
+
+  ready = false;
+  libraryError = true;
+  await act(async () => {
+    tree = create(screen());
+  });
+  assert.equal(
+    loading(),
+    0,
+    'a failed initialization must expose retry instead of an endless loader',
+  );
+  assert.equal(
+    tree.root.findByType('StateView').props.title,
+    'تعذر فتح المكتبة',
+  );
+  await act(async () => tree.unmount());
+  ready = true;
+  libraryError = false;
 });

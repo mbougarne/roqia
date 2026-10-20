@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Keyboard, Pressable, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Keyboard,
+  Pressable,
+  View,
+} from 'react-native';
 
 import {useLibrary, useOnFocus} from './context';
 import {
@@ -51,6 +57,7 @@ export function QuranLibraryScreen({navigation}: any) {
   const p = usePalette();
   const [id, setId] = useState<EditionId>(editions[0].id),
     [resume, setResume] = useState<Locator | null>(null),
+    [selectionReady, setSelectionReady] = useState(false),
     [query, setQuery] = useState(''),
     [searchFocused, setSearchFocused] = useState(false),
     [keyboardVisible, setKeyboardVisible] = useState(Keyboard.isVisible());
@@ -69,13 +76,18 @@ export function QuranLibraryScreen({navigation}: any) {
   useOnFocus(() => {
     let active = true;
     act(
-      runtime.preferred().then(async e => {
-        const l = await runtime.resume(e.id);
-        if (active) {
-          setId(e.id);
-          setResume(l);
-        }
-      }),
+      runtime
+        .preferred()
+        .then(async e => {
+          const l = await runtime.resume(e.id);
+          if (active) {
+            setId(e.id);
+            setResume(l);
+          }
+        })
+        .finally(() => {
+          if (active) setSelectionReady(true);
+        }),
     );
     return () => {
       active = false;
@@ -84,6 +96,27 @@ export function QuranLibraryScreen({navigation}: any) {
   const edition = editionById(id),
     text = runtime.text(id),
     installed = text && runtime.installed(text.pack);
+  // Paint feedback before mounting the full surah list on the first visit.
+  // Later tab visits retain their loaded library and search state.
+  if (!error && (!ready || !selectionReady))
+    return (
+      <Page
+        title="القرآن الكريم"
+        contentStyle={{flexGrow: 1, justifyContent: 'center'}}>
+        <View
+          testID="quran-library-loading"
+          accessible
+          accessibilityRole="progressbar"
+          accessibilityLabel="جارٍ فتح القرآن الكريم"
+          accessibilityState={{busy: true}}
+          style={{alignItems: 'center', gap: 16, padding: 24}}>
+          <ActivityIndicator size="large" color={p.actionPrimary} />
+          <AppText role="bodyStrong" style={{textAlign: 'center'}}>
+            جارٍ فتح القرآن الكريم…
+          </AppText>
+        </View>
+      </Page>
+    );
   return (
     <Page
       title="القرآن الكريم"
@@ -115,8 +148,6 @@ export function QuranLibraryScreen({navigation}: any) {
               title="تعذر فتح المكتبة"
               action={{label: 'إعادة المحاولة', onPress: retry}}
             />
-          ) : !ready ? (
-            <StateView title="جارٍ فتح المكتبة" busy />
           ) : !installed ? (
             <Card>
               <AppText role="sectionTitle">
