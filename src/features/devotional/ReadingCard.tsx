@@ -136,9 +136,10 @@ export function ReadingCard({
             />
           </View>
           {files.length > 0 && (
-            <View style={{flex: 1, borderRadius: 12, overflow: 'hidden'}}>
-              <Button
-                icon={
+            <View style={{borderRadius: 12, backgroundColor: p.actionPrimary}}>
+              <IconButton
+                color={p.textOnAction}
+                name={
                   audio.activeAudioFile === files[0].fileName &&
                   !audio.isAudioPaused
                     ? 'pause'
@@ -148,7 +149,7 @@ export function ReadingCard({
                   audio.activeAudioFile === files[0].fileName &&
                   !audio.isAudioPaused
                     ? 'إيقاف مؤقت'
-                    : 'استمع'
+                    : 'استماع إلى الدعاء'
                 }
                 onPress={() => void audio.onAudioPress(files[0].fileName)}
               />

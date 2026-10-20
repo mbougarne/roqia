@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Alert, Pressable, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Alert, Keyboard, Pressable, View} from 'react-native';
 
 import {useLibrary, useOnFocus} from './context';
 import {
@@ -52,7 +52,20 @@ export function QuranLibraryScreen({navigation}: any) {
   const [id, setId] = useState<EditionId>(editions[0].id),
     [resume, setResume] = useState<Locator | null>(null),
     [query, setQuery] = useState(''),
-    [searchFocused, setSearchFocused] = useState(false);
+    [searchFocused, setSearchFocused] = useState(false),
+    [keyboardVisible, setKeyboardVisible] = useState(Keyboard.isVisible());
+  useEffect(() => {
+    const show = Keyboard.addListener('keyboardDidShow', () =>
+        setKeyboardVisible(true),
+      ),
+      hide = Keyboard.addListener('keyboardDidHide', () =>
+        setKeyboardVisible(false),
+      );
+    return () => {
+      show.remove();
+      hide.remove();
+    };
+  }, []);
   useOnFocus(() => {
     let active = true;
     act(
@@ -88,7 +101,7 @@ export function QuranLibraryScreen({navigation}: any) {
           />
         </View>
       }>
-      {!searchFocused && !query && (
+      {!(searchFocused && keyboardVisible) && !query && (
         <>
           <Group>
             <SettingRow
@@ -136,6 +149,16 @@ export function QuranLibraryScreen({navigation}: any) {
           )}
         </>
       )}
+      <Row
+        title="الاستماع للقرآن"
+        icon="headphones"
+        onPress={() =>
+          navigation.navigate('QuranPlayer', {
+            editionId: id,
+            surah: resume?.surah ?? 1,
+          })
+        }
+      />
       <Ornament title="السور" />
       <SearchField
         label="البحث عن سورة"
@@ -188,16 +211,7 @@ export function QuranLibraryScreen({navigation}: any) {
           <AppIcon name={installed ? 'check' : 'download'} size={22} />
         </Pressable>
       ))}
-      <Row
-        title="الاستماع للقرآن"
-        icon="headphones"
-        onPress={() =>
-          navigation.navigate('QuranPlayer', {
-            editionId: id,
-            surah: resume?.surah ?? 1,
-          })
-        }
-      />
+
       {!searchChapters(normalizeDigits(query)).length && (
         <StateView title="لا توجد سورة مطابقة" />
       )}
@@ -243,13 +257,6 @@ export function EditionScreen({navigation}: any) {
           navigation.navigate('QuranDownload', {editionId: selected})
         }
       />
-      <View style={{alignItems: 'center'}}>
-        <IconButton
-          name="chevron-right"
-          label="العودة دون تنزيل"
-          onPress={() => navigation.goBack()}
-        />
-      </View>
     </Page>
   );
 }

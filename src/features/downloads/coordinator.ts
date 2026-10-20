@@ -598,18 +598,22 @@ export class DownloadCoordinator {
           await this.deleteFiles(pack);
           continue;
         }
-        if (pack.state === 'ready')
-          for (const file of pack.files)
-            if (!(await this.ports.exists(file))) {
-              pack.state = 'missing';
-              for (const job of this.jobs.filter(
-                j => j.packId === pack.packId && j.version === pack.version,
-              )) {
-                job.state = 'failed';
-                job.errorCode = 'installed_file_missing';
-              }
-              break;
-            }
+        // Installed Quran packs contain hundreds of files. Check each file
+        // without serializing a native round trip for every chapter.
+        if (
+          pack.state === 'ready' &&
+          !(
+            await Promise.all(pack.files.map(file => this.ports.exists(file)))
+          ).every(Boolean)
+        ) {
+          pack.state = 'missing';
+          for (const job of this.jobs.filter(
+            j => j.packId === pack.packId && j.version === pack.version,
+          )) {
+            job.state = 'failed';
+            job.errorCode = 'installed_file_missing';
+          }
+        }
       }
       // Seed only absent/interrupted built-ins. Explicit storage removal stays removed
       // until the user chooses the pack again; existing installations stay untouched.

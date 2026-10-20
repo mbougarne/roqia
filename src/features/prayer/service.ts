@@ -97,6 +97,7 @@ async function reconcile(): Promise<Coverage> {
   });
   const notifications = effective.filter(e => !full.some(f => f.id === e.id));
   const signature = JSON.stringify([
+    2, // Refresh existing scheduled notifications after the presentation change.
     p.revision,
     status,
     [
@@ -151,7 +152,7 @@ async function reconcile(): Promise<Coverage> {
         title: e.pre
           ? `اقترب وقت ${labels[e.name]}`
           : `حان وقت ${labels[e.name]}`,
-        body: `${p.location!.name} · ${civilDate(p.location!.zone, e.at)} · ${at}`,
+        body: at,
         data: {deepLink: 'roqia://prayer'},
         android: {
           channelId: CHANNEL,

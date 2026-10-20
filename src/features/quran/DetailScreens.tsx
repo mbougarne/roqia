@@ -18,7 +18,6 @@ import {
 import {noteData} from '../../data';
 import {
   Banner,
-  Disclosure,
   Group,
   Ornament,
   RadioRow,
@@ -527,21 +526,6 @@ export function QuranSourceScreen({route, navigation}: any) {
       <Group>
         <SettingRow title={e.title} detail={e.publisher} icon="book" />
       </Group>
-      <Disclosure title="تفاصيل النسخة">
-        <AppText
-          selectable
-          style={{writingDirection: 'ltr', textAlign: 'left'}}>
-          {e.id}
-        </AppText>
-        <AppText
-          selectable
-          style={{writingDirection: 'ltr', textAlign: 'left'}}>
-          {e.numbering}
-        </AppText>
-        <AppText>
-          {t ? 'الإصدار ' + t.pack.version : 'الحزمة غير منشورة بعد'}
-        </AppText>
-      </Disclosure>
       <Banner text="لا تعني إتاحة المصدر اعتماد التطبيق أو مراجعته من الناشر." />
       <Button
         secondary
@@ -562,14 +546,6 @@ export function QuranSourceScreen({route, navigation}: any) {
           })
         }
       />
-      <AppText role="sectionTitle">إشعارات المصدر</AppText>
-      {t && (
-        <AppText
-          selectable
-          style={{writingDirection: 'auto', textAlign: 'auto'}}>
-          {t.notice}
-        </AppText>
-      )}
     </Page>
   );
 }

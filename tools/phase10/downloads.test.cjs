@@ -251,3 +251,32 @@ test('per-file any-network consent replaces only the waiting task and is durable
   assert.equal(c.listJobs()[0].state, 'paused_user');
   await c.cancel(id);
 });
+
+test('startup checks every installed file before exposing ready content and marks missing packs unavailable', async () => {
+  const f = fixture(),
+    c = f.c();
+  await c.initialize();
+  await c.enqueue(pack.id, pack.version);
+  await f.done(c);
+  const installed = f.disk.installed[0];
+  installed.files.push('content/phase10/1/second.json');
+  const checks = [];
+  f.ports.exists = path => new Promise(resolve => checks.push({path, resolve}));
+  const restarted = f.c(),
+    initializing = restarted.initialize();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(
+    checks.map(c => c.path),
+    installed.files,
+    'file checks start together',
+  );
+  checks[0].resolve(true);
+  assert.equal(restarted.listInstalled()[0].state, 'ready');
+  checks[1].resolve(false);
+  await initializing;
+  assert.equal(restarted.listInstalled()[0].state, 'missing');
+  assert.ok(
+    restarted.listJobs().every(j => j.errorCode === 'installed_file_missing'),
+  );
+  assert.equal(f.starts, 1, 'startup must not start a network replacement');
+});

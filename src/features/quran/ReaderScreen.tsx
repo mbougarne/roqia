@@ -102,10 +102,14 @@ function Reader({route, navigation}: any) {
   const continuous = useRef(false);
   continuous.current = prefs.view === 'continuous';
   const textLines = useRef<{y: number; height: number; verse: number}[]>([]);
-  const headerHeight = useRef(0);
-  const loadedRoute = useRef('');
-  const position = useRef(1);
-  const [anchor, setAnchor] = useState(1);
+  const headerHeight = useRef<number | null>(null);
+  const position = useRef(params.verse ?? 1);
+  const list = useRef<FlatList<Verse[]>>(null);
+  const pendingRestore = useRef<number | null>(params.verse ?? 1);
+  const restoreFailed = useRef(false);
+  const contentReady = useRef(false);
+  const restoreTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const layout = useRef('');
   const edition = editionById(params.editionId),
     text = runtime.text(edition.id, params.packVersion),
     surah = params.surah;
@@ -131,23 +135,17 @@ function Reader({route, navigation}: any) {
   }, [chapter, font, focused, foreground, prefs.keepAwake]);
   useEffect(() => {
     let current = true;
-    setChapter(null);
-    setFont('');
-    setFailure(false);
-    setTranslated(null);
-    setTranslationError(false);
+    // Keep the mounted chapter and scroll position while another screen covers it.
+    // Revalidate on return without turning the saved verse into a data boundary.
     if (!ready || !focused) return;
+    setFailure(false);
     void (async () => {
       if (!text) throw Error('missing_pack');
       const locator: Locator = validateLocator({
         editionId: edition.id,
         numberingScheme: params.numberingScheme ?? edition.numbering,
         surah,
-        verse:
-          loadedRoute.current ===
-          `${edition.id}:${surah}:${params.verse}:${params.packVersion}`
-            ? position.current
-            : (params.verse ?? 1),
+        verse: position.current,
         packVersion: text.pack.version,
       });
       const c = await runtime.chapter(text, surah),
@@ -168,9 +166,20 @@ function Reader({route, navigation}: any) {
         }
       }
       if (!current) return;
-      loadedRoute.current = `${edition.id}:${surah}:${params.verse}:${params.packVersion}`;
-      setAnchor(locator.verse);
-      position.current = locator.verse;
+      const nextLayout = JSON.stringify([
+        settings.view,
+        settings.size,
+        settings.lineHeight,
+        settings.translationId,
+      ]);
+      if (layout.current !== nextLayout) {
+        pendingRestore.current = position.current;
+        textLines.current = [];
+        headerHeight.current = null;
+        contentReady.current = false;
+        if (restoreTimer.current) clearTimeout(restoreTimer.current);
+      }
+      layout.current = nextLayout;
       setPrefs(settings);
       setTranslated(translation);
       setTranslationError(translationFailed);
@@ -178,7 +187,7 @@ function Reader({route, navigation}: any) {
       setFont(family);
       setChapter(c);
       // Persist an explicitly opened, validated locator; subsequent scroll updates stay edition-bound.
-      await runtime.remember(locator);
+      await runtime.remember({...locator, verse: position.current});
     })().catch(() => {
       if (current) setFailure(true);
     });
@@ -207,7 +216,11 @@ function Reader({route, navigation}: any) {
     packVersion: text!.pack.version,
   });
   const viewable = useRef(({viewableItems}: any) => {
-    if (!continuous.current && viewableItems[0])
+    if (
+      pendingRestore.current === null &&
+      !continuous.current &&
+      viewableItems[0]
+    )
       position.current = viewableItems[0].item[0].number;
   }).current;
   useEffect(() => {
@@ -228,6 +241,42 @@ function Reader({route, navigation}: any) {
       act(persist());
     };
   }, [chapter, text, runtime, edition.id, edition.numbering, surah]);
+  useEffect(
+    () => () => {
+      if (restoreTimer.current) clearTimeout(restoreTimer.current);
+    },
+    [],
+  );
+  const restorePosition = () => {
+    const verse = pendingRestore.current;
+    if (
+      verse === null ||
+      !list.current ||
+      headerHeight.current === null ||
+      !contentReady.current
+    )
+      return;
+    if (prefs.view === 'continuous') {
+      const line =
+        textLines.current.find(line => line.verse >= verse) ??
+        textLines.current[textLines.current.length - 1];
+      if (!line) return;
+      list.current.scrollToOffset({
+        offset: verse === 1 ? 0 : headerHeight.current + line.y + 4,
+        animated: false,
+      });
+    } else {
+      restoreFailed.current = false;
+      list.current.scrollToIndex({
+        index: verse - 1,
+        animated: false,
+        viewPosition: 0,
+      });
+      if (restoreFailed.current) return;
+    }
+    position.current = verse;
+    pendingRestore.current = null;
+  };
   const actions = (verse: Verse, inline = false) => (
     <View style={{...rtlRow, justifyContent: 'center', gap: 8}}>
       <IconButton
@@ -387,13 +436,32 @@ function Reader({route, navigation}: any) {
         />
       </View>
       <FlatList
-        key={`${chapter.surah}:${anchor}:${prefs.view}`}
-        data={readerPassages(
-          chapter.verses.slice(anchor - 1),
-          prefs.view === 'continuous',
-        )}
+        ref={list}
+        key={layout.current}
+        data={readerPassages(chapter.verses, prefs.view === 'continuous')}
+        onScrollToIndexFailed={({index, averageItemLength}) => {
+          restoreFailed.current = true;
+          // Before any row is measured, a zero estimate would reset the
+          // initial window to verse 1. Wait for layout instead.
+          if (averageItemLength > 0) {
+            list.current?.scrollToOffset({
+              offset: (headerHeight.current ?? 0) + index * averageItemLength,
+              animated: false,
+            });
+          }
+          if (restoreTimer.current) clearTimeout(restoreTimer.current);
+          restoreTimer.current = setTimeout(restorePosition, 100);
+        }}
+        onContentSizeChange={(_width, height) => {
+          if (height > 0) {
+            contentReady.current = true;
+            restorePosition();
+          }
+        }}
         keyExtractor={v => String(v[0].number)}
-        initialNumToRender={10}
+        // Variable-height cards need the prefix measured for an exact locator.
+        // Ordinary chapter openings still render only the first ten verses.
+        initialNumToRender={Math.max(10, pendingRestore.current ?? 1)}
         maxToRenderPerBatch={8}
         windowSize={7}
         contentContainerStyle={{
@@ -406,10 +474,10 @@ function Reader({route, navigation}: any) {
         }}
         scrollEventThrottle={80}
         onScroll={e => {
-          if (!continuous.current) return;
+          if (!continuous.current || pendingRestore.current !== null) return;
           const y = Math.max(
             0,
-            e.nativeEvent.contentOffset.y - headerHeight.current - 12,
+            e.nativeEvent.contentOffset.y - (headerHeight.current ?? 0) - 12,
           );
           const line = textLines.current.find(line => line.y + line.height > y);
           if (line) position.current = line.verse;
@@ -426,23 +494,9 @@ function Reader({route, navigation}: any) {
           <View
             onLayout={e => {
               headerHeight.current = e.nativeEvent.layout.height;
+              restorePosition();
             }}
             style={{gap: 8, marginBottom: 8}}>
-            {anchor > 1 && (
-              <Button
-                secondary
-                label="عرض الآيات السابقة"
-                onPress={() =>
-                  navigation.replace('QuranReader', {
-                    editionId: edition.id,
-                    surah,
-                    verse: Math.max(1, anchor - 20),
-                    packVersion: text!.pack.version,
-                  })
-                }
-              />
-            )}
-
             <View
               style={{
                 ...rtlRow,
@@ -475,7 +529,7 @@ function Reader({route, navigation}: any) {
                 }}
               />
             )}
-            {anchor === 1 && chapter.opening && (
+            {chapter.opening && (
               <Text
                 onPress={
                   prefs.view === 'continuous' &&
@@ -504,7 +558,6 @@ function Reader({route, navigation}: any) {
               </Text>
             )}
             {prefs.view !== 'continuous' &&
-              anchor === 1 &&
               translated?.find(v => v.number === 0) && (
                 <AppText
                   role="translation"
@@ -536,6 +589,7 @@ function Reader({route, navigation}: any) {
                       verse: passage[verseAtOffset(lengths, start)].number,
                     };
                   });
+                  restorePosition();
                 }}
                 style={{
                   fontFamily: font,
