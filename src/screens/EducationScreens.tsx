@@ -26,7 +26,6 @@ import {
   AppText,
   Button,
   Card,
-  IconButton,
   Page,
   usePalette,
   type IconName,
@@ -482,15 +481,6 @@ export function Guide({onFinish}: {onFinish: () => void}) {
             onPress={() => (step === 4 ? onFinish() : setStep(step + 1))}
           />
         </View>
-        {step > 0 && (
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <IconButton
-              name="chevron-right"
-              label="رجوع"
-              onPress={() => setStep(step - 1)}
-            />
-          </View>
-        )}
       </View>
     </Page>
   );

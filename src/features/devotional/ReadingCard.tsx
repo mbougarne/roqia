@@ -123,6 +123,7 @@ export function ReadingCard({
         <View style={{...rtlRow, alignItems: 'stretch', gap: 8}}>
           <View
             style={{
+              flex: 1,
               borderWidth: 0.5,
               borderColor: p.borderControl,
               borderRadius: 12,
@@ -136,19 +137,25 @@ export function ReadingCard({
             />
           </View>
           {files.length > 0 && (
-            <View style={{flex: 1, borderRadius: 12, overflow: 'hidden'}}>
-              <Button
-                icon={
+            <View
+              style={{
+                flex: 1,
+                borderWidth: 0.5,
+                borderColor: p.borderControl,
+                borderRadius: 12,
+              }}>
+              <IconButton
+                name={
                   audio.activeAudioFile === files[0].fileName &&
                   !audio.isAudioPaused
                     ? 'pause'
-                    : 'play'
+                    : 'volume'
                 }
                 label={
                   audio.activeAudioFile === files[0].fileName &&
                   !audio.isAudioPaused
                     ? 'إيقاف مؤقت'
-                    : 'استمع'
+                    : 'استماع إلى الدعاء'
                 }
                 onPress={() => void audio.onAudioPress(files[0].fileName)}
               />
@@ -156,6 +163,7 @@ export function ReadingCard({
           )}
           <View
             style={{
+              flex: 1,
               borderWidth: 0.5,
               borderColor: p.borderControl,
               borderRadius: 12,

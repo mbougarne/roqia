@@ -1,7 +1,8 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useFocusEffect} from '@react-navigation/native';
-import React, {useEffect, useRef, useState, useCallback} from 'react';
+import React, {useEffect, useRef, useState, useCallback, useMemo} from 'react';
 import {
+  ActivityIndicator,
   AppState,
   FlatList,
   View,
@@ -83,6 +84,7 @@ function Reader({route, navigation}: any) {
   const [chapter, setChapter] = useState<Chapter | null>(null),
     [font, setFont] = useState(''),
     [failure, setFailure] = useState(false),
+    [preparing, setPreparing] = useState(true),
     [attempt, setAttempt] = useState(0),
     [prefs, setPrefs] = useState<ReaderPreferences>(readerDefaults),
     [translated, setTranslated] = useState<DisplayTranslation[] | null>(null),
@@ -102,10 +104,14 @@ function Reader({route, navigation}: any) {
   const continuous = useRef(false);
   continuous.current = prefs.view === 'continuous';
   const textLines = useRef<{y: number; height: number; verse: number}[]>([]);
-  const headerHeight = useRef(0);
-  const loadedRoute = useRef('');
-  const position = useRef(1);
-  const [anchor, setAnchor] = useState(1);
+  const headerHeight = useRef<number | null>(null);
+  const position = useRef(params.verse ?? 1);
+  const list = useRef<FlatList<Verse[]>>(null);
+  const pendingRestore = useRef<number | null>(params.verse ?? 1);
+  const restoreFailed = useRef(false);
+  const contentReady = useRef(false);
+  const restoreTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const layout = useRef('');
   const edition = editionById(params.editionId),
     text = runtime.text(edition.id, params.packVersion),
     surah = params.surah;
@@ -131,29 +137,25 @@ function Reader({route, navigation}: any) {
   }, [chapter, font, focused, foreground, prefs.keepAwake]);
   useEffect(() => {
     let current = true;
-    setChapter(null);
-    setFont('');
-    setFailure(false);
-    setTranslated(null);
-    setTranslationError(false);
+    // Keep the mounted chapter and scroll position while another screen covers it.
+    // Revalidate on return without turning the saved verse into a data boundary.
     if (!ready || !focused) return;
+    setFailure(false);
     void (async () => {
       if (!text) throw Error('missing_pack');
       const locator: Locator = validateLocator({
         editionId: edition.id,
         numberingScheme: params.numberingScheme ?? edition.numbering,
         surah,
-        verse:
-          loadedRoute.current ===
-          `${edition.id}:${surah}:${params.verse}:${params.packVersion}`
-            ? position.current
-            : (params.verse ?? 1),
+        verse: position.current,
         packVersion: text.pack.version,
       });
-      const c = await runtime.chapter(text, surah),
-        family = await runtime.font(text, c),
-        settings = await runtime.preferences(edition.id),
-        marks = await runtime.bookmarks();
+      const [c, settings, marks] = await Promise.all([
+        runtime.chapter(text, surah),
+        runtime.preferences(edition.id),
+        runtime.bookmarks(),
+      ]);
+      const family = await runtime.font(text, c);
       let translation: null | DisplayTranslation[] = null,
         translationFailed = false;
       if (settings.translationId) {
@@ -168,9 +170,21 @@ function Reader({route, navigation}: any) {
         }
       }
       if (!current) return;
-      loadedRoute.current = `${edition.id}:${surah}:${params.verse}:${params.packVersion}`;
-      setAnchor(locator.verse);
-      position.current = locator.verse;
+      const nextLayout = JSON.stringify([
+        settings.view,
+        settings.size,
+        settings.lineHeight,
+        settings.translationId,
+      ]);
+      if (layout.current !== nextLayout) {
+        setPreparing(true);
+        pendingRestore.current = position.current;
+        textLines.current = [];
+        headerHeight.current = null;
+        contentReady.current = false;
+        if (restoreTimer.current) clearTimeout(restoreTimer.current);
+      }
+      layout.current = nextLayout;
       setPrefs(settings);
       setTranslated(translation);
       setTranslationError(translationFailed);
@@ -178,7 +192,7 @@ function Reader({route, navigation}: any) {
       setFont(family);
       setChapter(c);
       // Persist an explicitly opened, validated locator; subsequent scroll updates stay edition-bound.
-      await runtime.remember(locator);
+      await runtime.remember({...locator, verse: position.current});
     })().catch(() => {
       if (current) setFailure(true);
     });
@@ -207,7 +221,11 @@ function Reader({route, navigation}: any) {
     packVersion: text!.pack.version,
   });
   const viewable = useRef(({viewableItems}: any) => {
-    if (!continuous.current && viewableItems[0])
+    if (
+      pendingRestore.current === null &&
+      !continuous.current &&
+      viewableItems[0]
+    )
       position.current = viewableItems[0].item[0].number;
   }).current;
   useEffect(() => {
@@ -228,6 +246,50 @@ function Reader({route, navigation}: any) {
       act(persist());
     };
   }, [chapter, text, runtime, edition.id, edition.numbering, surah]);
+  useEffect(
+    () => () => {
+      if (restoreTimer.current) clearTimeout(restoreTimer.current);
+    },
+    [],
+  );
+  const restorePosition = () => {
+    const verse = pendingRestore.current;
+    if (
+      verse === null ||
+      !list.current ||
+      headerHeight.current === null ||
+      !contentReady.current
+    )
+      return;
+    if (prefs.view === 'continuous') {
+      const line =
+        textLines.current.find(line => line.verse >= verse) ??
+        textLines.current[textLines.current.length - 1];
+      if (!line) return;
+      list.current.scrollToOffset({
+        offset: verse === 1 ? 0 : headerHeight.current + line.y + 4,
+        animated: false,
+      });
+    } else {
+      restoreFailed.current = false;
+      list.current.scrollToIndex({
+        index: verse - 1,
+        animated: false,
+        viewPosition: 0,
+      });
+      if (restoreFailed.current) return;
+    }
+    position.current = verse;
+    pendingRestore.current = null;
+    setPreparing(false);
+  };
+  const passages = useMemo(
+    () =>
+      chapter
+        ? readerPassages(chapter.verses, prefs.view === 'continuous')
+        : [],
+    [chapter, prefs.view],
+  );
   const actions = (verse: Verse, inline = false) => (
     <View style={{...rtlRow, justifyContent: 'center', gap: 8}}>
       <IconButton
@@ -328,6 +390,20 @@ function Reader({route, navigation}: any) {
   const translationFor = (item: Verse) =>
     translationContent(translated?.[item.number - 1]);
   const toolbarWidth = prefs.translationId ? 240 : 184;
+  const loading = (
+    <View
+      testID="quran-reader-loading"
+      accessible
+      accessibilityRole="progressbar"
+      accessibilityLabel={`جارٍ فتح سورة ${chapters[surah - 1].name}`}
+      accessibilityState={{busy: true}}
+      style={{alignItems: 'center', gap: 16, padding: 24}}>
+      <ActivityIndicator size="large" color={p.actionPrimary} />
+      <AppText role="bodyStrong" style={{textAlign: 'center'}}>
+        جارٍ فتح السورة…
+      </AppText>
+    </View>
+  );
   if (libraryError || failure)
     return (
       <Page title="قراءة القرآن" onBack={() => navigation.goBack()}>
@@ -353,8 +429,11 @@ function Reader({route, navigation}: any) {
     );
   if (!chapter || !font)
     return (
-      <Page title="قراءة القرآن" onBack={() => navigation.goBack()}>
-        <StateView title="جارٍ التحقق من النص والخط" busy />
+      <Page
+        title={chapters[surah - 1].name}
+        onBack={() => navigation.goBack()}
+        contentStyle={{flexGrow: 1, justifyContent: 'center'}}>
+        {loading}
       </Page>
     );
   return (
@@ -381,242 +460,270 @@ function Reader({route, navigation}: any) {
         <IconButton
           name="settings"
           label="إعدادات القراءة"
+          disabled={preparing}
           onPress={() =>
             navigation.navigate('QuranPreferences', {editionId: edition.id})
           }
         />
       </View>
-      <FlatList
-        key={`${chapter.surah}:${anchor}:${prefs.view}`}
-        data={readerPassages(
-          chapter.verses.slice(anchor - 1),
-          prefs.view === 'continuous',
-        )}
-        keyExtractor={v => String(v[0].number)}
-        initialNumToRender={10}
-        maxToRenderPerBatch={8}
-        windowSize={7}
-        contentContainerStyle={{
-          padding: 16,
-          paddingTop: 4,
-          maxWidth: 560,
-          width: '100%',
-          alignSelf: 'center',
-          gap: prefs.view === 'verses' ? 12 : 0,
-        }}
-        scrollEventThrottle={80}
-        onScroll={e => {
-          if (!continuous.current) return;
-          const y = Math.max(
-            0,
-            e.nativeEvent.contentOffset.y - headerHeight.current - 12,
-          );
-          const line = textLines.current.find(line => line.y + line.height > y);
-          if (line) position.current = line.verse;
-        }}
-        onMomentumScrollEnd={() => {
-          act(runtime.remember(locator(position.current)));
-        }}
-        onScrollEndDrag={() => {
-          act(runtime.remember(locator(position.current)));
-        }}
-        onViewableItemsChanged={viewable}
-        viewabilityConfig={{viewAreaCoveragePercentThreshold: 20}}
-        ListHeaderComponent={
-          <View
-            onLayout={e => {
-              headerHeight.current = e.nativeEvent.layout.height;
-            }}
-            style={{gap: 8, marginBottom: 8}}>
-            {anchor > 1 && (
-              <Button
-                secondary
-                label="عرض الآيات السابقة"
-                onPress={() =>
-                  navigation.replace('QuranReader', {
-                    editionId: edition.id,
-                    surah,
-                    verse: Math.max(1, anchor - 20),
-                    packVersion: text!.pack.version,
-                  })
-                }
-              />
-            )}
-
+      <View style={{flex: 1}}>
+        <FlatList
+          ref={list}
+          key={layout.current}
+          data={passages}
+          style={{opacity: preparing ? 0 : 1}}
+          pointerEvents={preparing ? 'none' : 'auto'}
+          accessibilityElementsHidden={preparing}
+          importantForAccessibility={preparing ? 'no-hide-descendants' : 'auto'}
+          onScrollToIndexFailed={({index, averageItemLength}) => {
+            restoreFailed.current = true;
+            // Before any row is measured, a zero estimate would reset the
+            // initial window to verse 1. Wait for layout instead.
+            if (averageItemLength > 0) {
+              list.current?.scrollToOffset({
+                offset: (headerHeight.current ?? 0) + index * averageItemLength,
+                animated: false,
+              });
+            }
+            if (restoreTimer.current) clearTimeout(restoreTimer.current);
+            restoreTimer.current = setTimeout(restorePosition, 100);
+          }}
+          onContentSizeChange={(_width, height) => {
+            if (height > 0) {
+              contentReady.current = true;
+              restorePosition();
+            }
+          }}
+          keyExtractor={v => String(v[0].number)}
+          // Variable-height cards need the prefix measured for an exact locator.
+          // Ordinary chapter openings still render only the first ten verses.
+          initialNumToRender={Math.max(10, pendingRestore.current ?? 1)}
+          maxToRenderPerBatch={8}
+          windowSize={7}
+          contentContainerStyle={{
+            padding: 16,
+            paddingTop: 4,
+            maxWidth: 560,
+            width: '100%',
+            alignSelf: 'center',
+            gap: prefs.view === 'verses' ? 12 : 0,
+          }}
+          scrollEventThrottle={80}
+          onScroll={e => {
+            if (!continuous.current || pendingRestore.current !== null) return;
+            const y = Math.max(
+              0,
+              e.nativeEvent.contentOffset.y - (headerHeight.current ?? 0) - 12,
+            );
+            const line = textLines.current.find(
+              line => line.y + line.height > y,
+            );
+            if (line) position.current = line.verse;
+          }}
+          onMomentumScrollEnd={() => {
+            act(runtime.remember(locator(position.current)));
+          }}
+          onScrollEndDrag={() => {
+            act(runtime.remember(locator(position.current)));
+          }}
+          onViewableItemsChanged={viewable}
+          viewabilityConfig={{viewAreaCoveragePercentThreshold: 20}}
+          ListHeaderComponent={
             <View
-              style={{
-                ...rtlRow,
-                justifyContent: 'center',
-                backgroundColor: p.surfaceMuted,
-                borderRadius: 10,
-                paddingVertical: 12,
-                paddingHorizontal: 16,
-                borderWidth: 0.5,
-                borderColor: p.accent,
-              }}>
-              <AppIcon name="medallion" size={30} color={p.accent} />
-              <AppText
-                role="sectionTitle"
-                style={{flex: 1, textAlign: 'center'}}>
-                {chapters[surah - 1].name}
-              </AppText>
-              <AppIcon name="medallion" size={30} color={p.accent} />
-            </View>
-            {translationError && (
-              <StateView
-                title="الترجمة المختارة غير متاحة"
-                description="النص العربي مستقل. اختر ترجمة متوافقة أو أعد تنزيلها."
-                action={{
-                  label: 'إدارة الترجمة',
-                  onPress: () =>
-                    navigation.navigate('QuranTranslations', {
-                      editionId: edition.id,
-                    }),
-                }}
-              />
-            )}
-            {anchor === 1 && chapter.opening && (
-              <Text
-                onPress={
-                  prefs.view === 'continuous' &&
-                  translated?.some(t => t.number === 0)
-                    ? () => setTranslationVerse(0)
-                    : undefined
-                }
-                accessibilityLabel={
-                  prefs.view === 'continuous' &&
-                  translated?.some(t => t.number === 0)
-                    ? 'البسملة، ترجمة المعاني'
-                    : undefined
-                }
-                selectable={prefs.view !== 'continuous'}
+              onLayout={e => {
+                headerHeight.current = e.nativeEvent.layout.height;
+                restorePosition();
+              }}
+              style={{gap: 8, marginBottom: 8}}>
+              <View
                 style={{
-                  fontFamily: font,
-                  fontSize: prefs.size,
-                  lineHeight: prefs.size * prefs.lineHeight,
-                  fontWeight: 'normal',
-                  includeFontPadding: true,
-                  textAlign: 'center',
-                  writingDirection: 'rtl',
-                  color: p.textPrimary,
+                  ...rtlRow,
+                  justifyContent: 'center',
+                  backgroundColor: p.surfaceMuted,
+                  borderRadius: 10,
+                  paddingVertical: 12,
+                  paddingHorizontal: 16,
+                  borderWidth: 0.5,
+                  borderColor: p.accent,
                 }}>
-                {chapter.opening}
-              </Text>
-            )}
-            {prefs.view !== 'continuous' &&
-              anchor === 1 &&
-              translated?.find(v => v.number === 0) && (
+                <AppIcon name="medallion" size={30} color={p.accent} />
                 <AppText
-                  role="translation"
-                  style={{
-                    writingDirection: 'ltr',
-                    textAlign: 'left',
-                    fontFamily: 'sans-serif',
-                  }}>
-                  {translated.find(v => v.number === 0)!.text}
+                  role="sectionTitle"
+                  style={{flex: 1, textAlign: 'center'}}>
+                  {chapters[surah - 1].name}
                 </AppText>
-              )}
-          </View>
-        }
-        renderItem={({item: passage}) => (
-          <View style={{gap: 12}}>
-            {prefs.view === 'continuous' ? (
-              <Text
-                onTextLayout={e => {
-                  const source = passage.map(verseText).join('');
-                  const lengths = passage.map(v => verseText(v).length);
-                  let offset = 0;
-                  textLines.current = e.nativeEvent.lines.map(line => {
-                    const found = source.indexOf(line.text.trim(), offset);
-                    const start = found < 0 ? offset : found;
-                    offset = start + line.text.trim().length;
-                    return {
-                      y: line.y,
-                      height: line.height,
-                      verse: passage[verseAtOffset(lengths, start)].number,
-                    };
-                  });
-                }}
-                style={{
-                  fontFamily: font,
-                  fontSize: prefs.size,
-                  lineHeight: prefs.size * prefs.lineHeight,
-                  fontWeight: 'normal',
-                  includeFontPadding: true,
-                  textAlign: 'justify',
-                  direction: 'rtl',
-                  writingDirection: 'rtl',
-                  color: p.textPrimary,
-                }}>
-                {passage.map(verse => (
-                  <Text
-                    key={verse.number}
-                    accessibilityRole="button"
-                    accessibilityLabel={`الآية ${number(verse.number)}، خيارات الآية`}
-                    onPress={e => {
-                      setTapPoint({
-                        x: e.nativeEvent.pageX,
-                        y: e.nativeEvent.pageY,
-                      });
-                      position.current = verse.number;
-                      setSelectedVerse(verse);
-                    }}>
-                    {verse.text}
-                    {edition.riwaya === 'hafs'
-                      ? ` ﴿${markerNumber(verse.number)}﴾ `
-                      : ' '}
-                  </Text>
-                ))}
-              </Text>
-            ) : (
-              <View>
-                <Card
-                  style={{
-                    backgroundColor: p.surfaceMuted,
-                    borderColor: p.borderControl,
-                    borderRadius: 20,
-                  }}>
-                  <View style={{flexDirection: 'row-reverse'}}>
-                    <NumberBadge value={passage[0].number} />
-                  </View>
-                  <Text
-                    style={{
-                      fontFamily: font,
-                      fontSize: prefs.size,
-                      lineHeight: prefs.size * prefs.lineHeight,
-                      fontWeight: 'normal',
-                      includeFontPadding: true,
-                      textAlign: 'center',
-                      writingDirection: 'rtl',
-                      color: p.textPrimary,
-                    }}>
-                    {passage[0].text}
-                  </Text>
-                  {translationFor(passage[0])}
-                  {actions(passage[0])}
-                </Card>
+                <AppIcon name="medallion" size={30} color={p.accent} />
               </View>
-            )}
+              {translationError && (
+                <StateView
+                  title="الترجمة المختارة غير متاحة"
+                  description="النص العربي مستقل. اختر ترجمة متوافقة أو أعد تنزيلها."
+                  action={{
+                    label: 'إدارة الترجمة',
+                    onPress: () =>
+                      navigation.navigate('QuranTranslations', {
+                        editionId: edition.id,
+                      }),
+                  }}
+                />
+              )}
+              {chapter.opening && (
+                <Text
+                  onPress={
+                    prefs.view === 'continuous' &&
+                    translated?.some(t => t.number === 0)
+                      ? () => setTranslationVerse(0)
+                      : undefined
+                  }
+                  accessibilityLabel={
+                    prefs.view === 'continuous' &&
+                    translated?.some(t => t.number === 0)
+                      ? 'البسملة، ترجمة المعاني'
+                      : undefined
+                  }
+                  selectable={prefs.view !== 'continuous'}
+                  style={{
+                    fontFamily: font,
+                    fontSize: prefs.size,
+                    lineHeight: prefs.size * prefs.lineHeight,
+                    fontWeight: 'normal',
+                    includeFontPadding: true,
+                    textAlign: 'center',
+                    writingDirection: 'rtl',
+                    color: p.textPrimary,
+                  }}>
+                  {chapter.opening}
+                </Text>
+              )}
+              {prefs.view !== 'continuous' &&
+                translated?.find(v => v.number === 0) && (
+                  <AppText
+                    role="translation"
+                    style={{
+                      writingDirection: 'ltr',
+                      textAlign: 'left',
+                      fontFamily: 'sans-serif',
+                    }}>
+                    {translated.find(v => v.number === 0)!.text}
+                  </AppText>
+                )}
+            </View>
+          }
+          renderItem={({item: passage}) => (
+            <View style={{gap: 12}}>
+              {prefs.view === 'continuous' ? (
+                <Text
+                  onTextLayout={e => {
+                    const source = passage.map(verseText).join('');
+                    const lengths = passage.map(v => verseText(v).length);
+                    let offset = 0;
+                    textLines.current = e.nativeEvent.lines.map(line => {
+                      const found = source.indexOf(line.text.trim(), offset);
+                      const start = found < 0 ? offset : found;
+                      offset = start + line.text.trim().length;
+                      return {
+                        y: line.y,
+                        height: line.height,
+                        verse: passage[verseAtOffset(lengths, start)].number,
+                      };
+                    });
+                    restorePosition();
+                  }}
+                  style={{
+                    fontFamily: font,
+                    fontSize: prefs.size,
+                    lineHeight: prefs.size * prefs.lineHeight,
+                    fontWeight: 'normal',
+                    includeFontPadding: true,
+                    textAlign: 'justify',
+                    direction: 'rtl',
+                    writingDirection: 'rtl',
+                    color: p.textPrimary,
+                  }}>
+                  {passage.map(verse => (
+                    <Text
+                      key={verse.number}
+                      accessibilityRole="button"
+                      accessibilityLabel={`الآية ${number(verse.number)}، خيارات الآية`}
+                      onPress={e => {
+                        setTapPoint({
+                          x: e.nativeEvent.pageX,
+                          y: e.nativeEvent.pageY,
+                        });
+                        position.current = verse.number;
+                        setSelectedVerse(verse);
+                      }}>
+                      {verse.text}
+                      {edition.riwaya === 'hafs'
+                        ? ` ﴿${markerNumber(verse.number)}﴾ `
+                        : ' '}
+                    </Text>
+                  ))}
+                </Text>
+              ) : (
+                <View>
+                  <Card
+                    style={{
+                      backgroundColor: p.surfaceMuted,
+                      borderColor: p.borderControl,
+                      borderRadius: 20,
+                    }}>
+                    <View style={{flexDirection: 'row-reverse'}}>
+                      <NumberBadge value={passage[0].number} />
+                    </View>
+                    <Text
+                      style={{
+                        fontFamily: font,
+                        fontSize: prefs.size,
+                        lineHeight: prefs.size * prefs.lineHeight,
+                        fontWeight: 'normal',
+                        includeFontPadding: true,
+                        textAlign: 'center',
+                        writingDirection: 'rtl',
+                        color: p.textPrimary,
+                      }}>
+                      {passage[0].text}
+                    </Text>
+                    {translationFor(passage[0])}
+                    {actions(passage[0])}
+                  </Card>
+                </View>
+              )}
+            </View>
+          )}
+          ListFooterComponent={
+            <View style={{gap: 12, paddingTop: 20}}>
+              {surah < 114 && (
+                <Button
+                  label="السورة التالية"
+                  onPress={() =>
+                    navigation.replace('QuranReader', {
+                      editionId: edition.id,
+                      surah: surah + 1,
+                      verse: 1,
+                      packVersion: text!.pack.version,
+                    })
+                  }
+                />
+              )}
+            </View>
+          }
+        />
+        {preparing && (
+          <View
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: p.background,
+              justifyContent: 'center',
+            }}>
+            {loading}
           </View>
         )}
-        ListFooterComponent={
-          <View style={{gap: 12, paddingTop: 20}}>
-            {surah < 114 && (
-              <Button
-                label="السورة التالية"
-                onPress={() =>
-                  navigation.replace('QuranReader', {
-                    editionId: edition.id,
-                    surah: surah + 1,
-                    verse: 1,
-                    packVersion: text!.pack.version,
-                  })
-                }
-              />
-            )}
-          </View>
-        }
-      />
+      </View>
       <Modal
         transparent
         visible={selectedVerse !== null && focused}

@@ -8,12 +8,7 @@ import {
 } from 'react-native';
 
 import {tasbihatData} from '../data';
-import {
-  TasbihArch,
-  TasbihRing,
-  TasbihTouch,
-  TasbihVibration,
-} from './TasbihArtwork';
+import {TasbihRing, TasbihTouch, TasbihVibration} from './TasbihArtwork';
 import {
   Disclosure,
   Segments,
@@ -94,8 +89,7 @@ export function TasbihatScreen({navigation}: any) {
   const item = tasbihatData[index];
   const count = state.repeatCounts[id] ?? item.repeat ?? 0;
   const max = item.repeat ?? 0;
-  const size = Math.min(dark ? 300 : 240, width - 72);
-  const outsideText = largeType || (item.content?.length ?? 0) > 40;
+  const size = Math.min(largeType ? 260 : 216, width - 48);
   const activeAudio =
     audio.activeAudioFile === item.audioFile && !audio.isAudioPaused;
   return (
@@ -114,54 +108,33 @@ export function TasbihatScreen({navigation}: any) {
         style={{
           backgroundColor: dark ? 'transparent' : p.surface,
           borderRadius: 16,
-          paddingTop: dark ? 16 : 48,
+          paddingTop: 12,
           paddingBottom: 16,
           paddingHorizontal: 8,
           alignItems: 'center',
           gap: 12,
-          overflow: 'hidden',
         }}>
-        {!dark && <TasbihArch />}
-        {outsideText && (
-          <AppText
-            role="devotional"
-            selectable
-            style={{textAlign: 'center', paddingHorizontal: 16}}>
-            {item.content}
-          </AppText>
-        )}
+        <AppText
+          role="devotional"
+          selectable
+          style={{textAlign: 'center', paddingHorizontal: 8}}>
+          {item.content}
+        </AppText>
         <TasbihRing
           size={size}
           progress={max ? (max - count) / max : 0}
           dark={dark}>
           <View style={{width: size * 0.7, alignItems: 'center', gap: 4}}>
-            {!outsideText && (
-              <AppText
-                role="devotional"
-                selectable
-                style={{textAlign: 'center'}}>
-                {item.content}
-              </AppText>
-            )}
-            {dark && !outsideText && (
-              <View style={{...rtlRow, gap: 4, marginVertical: 4}}>
-                <View
-                  style={{width: 28, height: 0.5, backgroundColor: p.accent}}
-                />
-                <AppIcon name="medallion" color={p.accent} size={16} />
-                <View
-                  style={{width: 28, height: 0.5, backgroundColor: p.accent}}
-                />
-              </View>
-            )}
             <AppText
               role="counter"
+              numberOfLines={1}
+              adjustsFontSizeToFit
               accessibilityLiveRegion="polite"
               accessibilityLabel={`المتبقي ${number(count)} من ${number(max)}`}
               style={{
                 textAlign: 'center',
-                fontSize: (largeType ? 44 : 56) * uiScale,
-                lineHeight: (largeType ? 62 : 76) * uiScale,
+                fontSize: Math.min(56 * uiScale, (size * 0.27) / fontScale),
+                lineHeight: Math.min(76 * uiScale, (size * 0.34) / fontScale),
               }}>
               {number(count)}
             </AppText>
@@ -170,6 +143,8 @@ export function TasbihatScreen({navigation}: any) {
               style={{
                 textAlign: 'center',
                 color: p.textSecondary,
+                fontSize: Math.min(14 * uiScale, (size * 0.08) / fontScale),
+                lineHeight: Math.min(24 * uiScale, (size * 0.1) / fontScale),
               }}>{`المتبقي من ${number(max)}`}</AppText>
           </View>
         </TasbihRing>
@@ -184,12 +159,12 @@ export function TasbihatScreen({navigation}: any) {
               Vibration.vibrate(20);
           }}
           style={({pressed}) => ({
-            minWidth: dark ? 128 : 96,
-            minHeight: dark ? 128 : 96,
+            minWidth: 80,
+            minHeight: 80,
             borderRadius: 80,
             borderWidth: dark ? 1 : 7,
             borderColor: dark ? p.accent : p.surfaceMuted,
-            padding: 14,
+            padding: 10,
             alignItems: 'center',
             justifyContent: 'center',
             gap: 6,

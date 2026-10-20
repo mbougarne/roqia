@@ -74,6 +74,22 @@ test('prayer reconciliation is owned-only, idempotent, serialized, permission-aw
   assert.equal(permissionRequests, 0);
   await service.savePreferences(enabled());
   assert.ok(scheduled.size > 10);
+  for (const {n} of [...scheduled.values()].filter(v => v.n)) {
+    assert.match(n.title, /وقت/);
+    assert.match(n.body, /^[٠-٩0-9]{1,2}:[٠-٩0-9]{2}( [صم])?$/);
+    assert.equal(n.data.deepLink, 'roqia://prayer');
+  }
+  const oldCoverage = records.get('prayer:coverage');
+  oldCoverage.signature = JSON.stringify(
+    JSON.parse(oldCoverage.signature).slice(1),
+  );
+  const oldCreates = creates;
+  await service.reconcilePrayer();
+  assert.ok(
+    creates > oldCreates,
+    'existing notifications receive the new presentation',
+  );
+
   const count = creates;
   await service.reconcilePrayer();
   assert.equal(creates, count);

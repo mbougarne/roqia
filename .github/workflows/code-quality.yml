@@ -49,7 +49,7 @@ jobs:
         run: |
           python3 -m unittest discover -s tools/feasibility -p 'test_*.py'
           python3 -m unittest discover -s tools/phase10 -p 'test_*.py'
-          PYTHONPATH=tools/phase11 python3 -m unittest test_patch test_sleep_native
+          PYTHONPATH=tools/phase11 python3 -m unittest test_patch test_sleep_native test_font_shaping
           python3 -m unittest discover -s tools/phase12 -p 'test_*.py'
       - name: Install and build web app
         working-directory: web

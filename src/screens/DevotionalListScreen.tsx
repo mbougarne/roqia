@@ -96,6 +96,17 @@ export function DevotionalListScreen({
           label="البحث في المحتوى"
           onPress={() => navigation.navigate('Search')}
         />
+        <IconButton
+          name="reset"
+          label="إعادة عدادات هذه الصفحة"
+          onPress={() =>
+            confirmReset('إعادة عدادات هذه الصفحة؟', () =>
+              resetRepeats(
+                Object.fromEntries(items.map(i => [i.id, i.repeat ?? 0])),
+              ),
+            )
+          }
+        />
         {adhkar && (
           <AppIcon
             name={title === 'أذكار الصباح' ? 'sun' : 'moon'}
@@ -272,18 +283,6 @@ export function DevotionalListScreen({
                 <Progress value={total ? completed / total : 0} />
               </>
             )}
-            <Button
-              secondary
-              icon="reset"
-              label="إعادة عدادات هذه الصفحة"
-              onPress={() =>
-                confirmReset('إعادة عدادات هذه الصفحة؟', () =>
-                  resetRepeats(
-                    Object.fromEntries(items.map(i => [i.id, i.repeat ?? 0])),
-                  ),
-                )
-              }
-            />
           </View>
         }
         renderItem={({item, index}) =>
