@@ -24,6 +24,7 @@ let focused = true,
   remembered = [],
   scrolls = [],
   invalidFont = false,
+  chapterGate = null,
   scrollFailures = 0,
   averageLength = 50;
 const listeners = new Set();
@@ -36,12 +37,15 @@ const verses = Array.from({length: 23}, (_, i) => ({
 const text = {pack: {version: 'source-1'}};
 const runtime = {
   text: () => text,
-  chapter: async () => ({
-    editionId: edition.id,
-    surah: 2,
-    verses,
-    opening: 'OPENING',
-  }),
+  chapter: async () => {
+    if (chapterGate) await chapterGate;
+    return {
+      editionId: edition.id,
+      surah: 2,
+      verses,
+      opening: 'OPENING',
+    };
+  },
   font: async () => {
     if (invalidFont) throw Error('invalid_font');
     return 'source-font';
@@ -91,6 +95,7 @@ Module._load = function (name, parent, ...rest) {
     if (name === 'react-native')
       return {
         FlatList,
+        ActivityIndicator: 'Indicator',
         View: 'View',
         Text: 'Text',
         Pressable: 'Pressable',
@@ -185,6 +190,8 @@ async function mount(view, verse = 1) {
   return tree;
 }
 const list = tree => tree.root.findByType('List');
+const isLoading = tree =>
+  tree.root.findAllByProps({testID: 'quran-reader-loading'}).length > 0;
 
 function layoutHeader(tree) {
   list(tree).props.ListHeaderComponent.props.onLayout({
@@ -321,6 +328,11 @@ test('returning to a reader still rejects unavailable or corrupt source fonts', 
 
 test('a deep continuous locator waits for both text and scroll content layout before restoring', async () => {
   const tree = await mount('continuous', 20);
+  assert.equal(isLoading(tree), true);
+  assert.equal(
+    list(tree).props.importantForAccessibility,
+    'no-hide-descendants',
+  );
   await act(async () => {
     layoutHeader(tree);
     const paragraph = tree.root
@@ -337,8 +349,11 @@ test('a deep continuous locator waits for both text and scroll content layout be
     [],
     'scrolling before the content height exists would clamp the bookmark to the start',
   );
+  assert.equal(isLoading(tree), true, 'text layout alone is not ready to read');
   await act(async () => list(tree).props.onContentSizeChange(400, 4000));
   assert.deepEqual(scrolls, [{offset: 1054}]);
+  assert.equal(isLoading(tree), false);
+  assert.equal(list(tree).props.importantForAccessibility, 'auto');
   assert.deepEqual(
     allVerses(tree),
     verses.map(v => v.number),
@@ -358,8 +373,14 @@ test('an unmeasured deep verse retries after estimating the offset without repla
     });
   });
   assert.deepEqual(scrolls, [{index: 19}, {offset: 1050}]);
+  assert.equal(
+    isLoading(tree),
+    true,
+    'an estimated scroll is not the saved position',
+  );
   await act(async () => new Promise(resolve => setTimeout(resolve, 120)));
   assert.deepEqual(scrolls.at(-1), {index: 19});
+  assert.equal(isLoading(tree), false);
   await act(async () => list(tree).props.onScrollEndDrag());
   assert.equal(remembered.at(-1).verse, 20);
   await act(async () => tree.unmount());
@@ -378,4 +399,29 @@ test('an unmeasured deep verse retries after estimating the offset without repla
   await act(async () => new Promise(resolve => setTimeout(resolve, 120)));
   assert.deepEqual(scrolls.at(-1), {index: 19});
   await act(async () => unmeasured.unmount());
+});
+
+test('the opening loader spans asset loading and native layout, without reappearing on an unchanged settings return', async () => {
+  let release;
+  chapterGate = new Promise(resolve => {
+    release = resolve;
+  });
+  const tree = await mount('verses');
+  assert.equal(isLoading(tree), true);
+  assert.equal(tree.root.findAllByType('List').length, 0);
+  await act(async () => {
+    release();
+  });
+  chapterGate = null;
+  assert.equal(isLoading(tree), true);
+  assert.equal(list(tree).props.pointerEvents, 'none');
+  await act(async () => layoutHeader(tree));
+  assert.equal(isLoading(tree), true);
+  await act(async () => list(tree).props.onContentSizeChange(400, 4000));
+  assert.equal(isLoading(tree), false);
+  assert.equal(list(tree).props.pointerEvents, 'auto');
+  await focus(false);
+  await focus(true);
+  assert.equal(isLoading(tree), false);
+  await act(async () => tree.unmount());
 });

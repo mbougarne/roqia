@@ -123,6 +123,7 @@ export function ReadingCard({
         <View style={{...rtlRow, alignItems: 'stretch', gap: 8}}>
           <View
             style={{
+              flex: 1,
               borderWidth: 0.5,
               borderColor: p.borderControl,
               borderRadius: 12,
@@ -136,14 +137,19 @@ export function ReadingCard({
             />
           </View>
           {files.length > 0 && (
-            <View style={{borderRadius: 12, backgroundColor: p.actionPrimary}}>
+            <View
+              style={{
+                flex: 1,
+                borderWidth: 0.5,
+                borderColor: p.borderControl,
+                borderRadius: 12,
+              }}>
               <IconButton
-                color={p.textOnAction}
                 name={
                   audio.activeAudioFile === files[0].fileName &&
                   !audio.isAudioPaused
                     ? 'pause'
-                    : 'play'
+                    : 'volume'
                 }
                 label={
                   audio.activeAudioFile === files[0].fileName &&
@@ -157,6 +163,7 @@ export function ReadingCard({
           )}
           <View
             style={{
+              flex: 1,
               borderWidth: 0.5,
               borderColor: p.borderControl,
               borderRadius: 12,
