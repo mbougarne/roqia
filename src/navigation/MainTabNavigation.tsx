@@ -10,7 +10,7 @@ import {
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useContext, useEffect, useRef} from 'react';
-import {I18nManager, Pressable, View} from 'react-native';
+import {I18nManager, Platform, Pressable, View} from 'react-native';
 
 import {consumeLinks} from './linkInbox';
 import {resolveLink, type Tabs, type RootRoutes} from './routes';
@@ -335,7 +335,12 @@ export function MainTabNavigation() {
         <Stack.Screen name="BeforeSleep" component={details.BeforeSleep} />
         <Stack.Screen name="Duaa" component={details.Duaa} />
         <Stack.Screen name="Tasbihat" component={details.Tasbihat} />
-        <Stack.Screen name="Asma" component={details.Asma} />
+        <Stack.Screen
+          name="Asma"
+          component={details.Asma}
+          // Card swipes must not trigger the iOS stack's swipe-back gesture.
+          options={Platform.OS === 'ios' ? {gestureEnabled: false} : undefined}
+        />
         <Stack.Screen name="About" component={details.About} />
         <Stack.Screen name="Settings" component={details.Settings} />
         <Stack.Screen name="Downloads" component={details.Downloads} />

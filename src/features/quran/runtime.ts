@@ -1,4 +1,4 @@
-import {NativeModules, Platform} from 'react-native';
+import {NativeModules} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
 
 import {quranCatalog} from './catalog';
@@ -353,8 +353,7 @@ export const quran = new QuranRuntime(
   startDownloadServices,
 );
 
-export const supportsKeepAwake = () =>
-  Platform.OS === 'android' && !!NativeModules.RoqiaReader?.keepAwake;
+export const supportsKeepAwake = () => !!NativeModules.RoqiaReader?.keepAwake;
 
 export const keepAwake = (enabled: boolean) =>
-  NativeModules.RoqiaReader?.keepAwake(enabled);
+  NativeModules.RoqiaReader?.keepAwake?.(enabled);

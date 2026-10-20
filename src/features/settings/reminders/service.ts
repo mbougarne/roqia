@@ -4,7 +4,7 @@ import notifee, {
   RepeatFrequency,
   TriggerType,
 } from '@notifee/react-native';
-import {Platform} from 'react-native';
+import {Linking, Platform} from 'react-native';
 
 import {
   isOwnedReminder,
@@ -144,4 +144,6 @@ export async function testReminder(category = 'Morning') {
 }
 
 export const openReminderSettings = () =>
-  notifee.openNotificationSettings(REMINDER_CHANNEL);
+  Platform.OS === 'ios'
+    ? Linking.openSettings()
+    : notifee.openNotificationSettings(REMINDER_CHANNEL);

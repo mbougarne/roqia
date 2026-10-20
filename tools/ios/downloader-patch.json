@@ -1,0 +1,6 @@
+{
+  "ios/RNBackgroundDownloader.mm": {
+    "before": "da9f7056407a842fdb12759235b3d5585674b4149eacb8a4c11f61f43aa480e3",
+    "after": "449ff2b4c6ff77c93eb6fbea275c7b5976950bcdb79e318148250a937441a7a9"
+  }
+}

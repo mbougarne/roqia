@@ -11,6 +11,7 @@ import {
   Vibration,
   AppState,
   Linking,
+  Platform,
   Pressable,
   StyleSheet,
   useWindowDimensions,
@@ -411,7 +412,12 @@ export function PrayerScreen({navigation}: any) {
         </AppText>
         <AppIcon name="chevron-left" size={18} />
       </Pressable>
-      <View style={[visual.shortcuts, expanded && {flexDirection: 'column'}]}>
+      <View
+        style={[
+          visual.shortcuts,
+          expanded && {flexDirection: 'column'},
+          Platform.OS === 'ios' && {alignItems: 'stretch'},
+        ]}>
         {[
           {title: 'القبلة', icon: 'compass' as const, route: 'Qibla'},
           {
@@ -427,6 +433,11 @@ export function PrayerScreen({navigation}: any) {
             onPress={() => navigation.navigate(item.route)}
             style={({pressed}) => [
               visual.shortcut,
+              Platform.OS === 'ios' && {
+                alignSelf: 'stretch',
+                flex: expanded ? undefined : 1,
+                minHeight: 64 * uiScale,
+              },
               {
                 backgroundColor: pressed ? p.surfaceMuted : p.surface,
                 borderColor: p.borderSubtle,

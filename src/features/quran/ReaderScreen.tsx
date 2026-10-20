@@ -8,7 +8,6 @@ import {
   View,
   Text,
   AccessibilityInfo,
-  Platform,
   Pressable,
   Modal,
   useWindowDimensions,
@@ -409,11 +408,7 @@ function Reader({route, navigation}: any) {
       <Page title="قراءة القرآن" onBack={() => navigation.goBack()}>
         <StateView
           title="تعذر فتح المصحف بأمان"
-          description={
-            Platform.OS !== 'android'
-              ? 'قارىء المصحف غير متاح على هذا النظام بعد اكتمال اختبارات Android.'
-              : 'قد تكون الحزمة أو الخط المطابق غير متاحين، أو موضع القراءة غير متوافق مع الإصدار. لم نستبدل النص أو الخط.'
-          }
+          description="قد تكون الحزمة أو الخط المطابق غير متاحين، أو موضع القراءة غير متوافق مع الإصدار. لم نستبدل النص أو الخط."
           action={{
             label: 'إعادة المحاولة',
             onPress: () => setAttempt(n => n + 1),

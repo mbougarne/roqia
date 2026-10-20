@@ -21,8 +21,8 @@ export type Task = {
 export type Events = {
   begin: (headers: Record<string, string | null>) => void;
   progress: (received: number) => void;
-  done: () => void;
-  error: (code: string) => void;
+  done: () => void | Promise<void>;
+  error: (code: string) => void | Promise<void>;
 };
 
 export type DownloadPorts = {
@@ -151,7 +151,7 @@ export class DownloadCoordinator {
     const generation = job.generation,
       id = job.jobId;
     const event = (fn: (current: DownloadJob) => Promise<void>) => {
-      void this.run(async () => {
+      return this.run(async () => {
         const current = this.jobs.find(j => j.jobId === id);
         if (
           !current ||

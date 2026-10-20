@@ -32,11 +32,22 @@ const transport = () =>
   require('@kesha-antonov/react-native-background-downloader') as typeof import('@kesha-antonov/react-native-background-downloader');
 
 function attach(task: Task, events: Events) {
+  const complete = (action: () => void | Promise<void>) => {
+    if (Platform.OS !== 'ios') {
+      void action();
+      return;
+    }
+    // Release the background session only after verification and its journal commit.
+    void Promise.resolve()
+      .then(action)
+      .finally(() => transport().completeHandler(task.id))
+      .catch(() => undefined);
+  };
   (task as DownloadTask)
     .begin(e => events.begin(e.headers))
     .progress(e => events.progress(e.bytesDownloaded))
-    .done(() => events.done())
-    .error(e => events.error(String(e.errorCode)));
+    .done(() => complete(() => events.done()))
+    .error(e => complete(() => events.error(String(e.errorCode))));
 }
 
 async function verify(relative: string, asset: LocalAsset) {
@@ -143,10 +154,16 @@ export const nativeDownloadPorts: DownloadPorts = {
   start: (job, asset, events) => {
     const api = transport();
     api.setConfig({
-      maxParallelDownloads: 2,
+      // iOS recreates and cancels its session when either global option is set.
+      // The coordinator limits concurrency; the patched request carries each job's policy.
+      ...(Platform.OS === 'android'
+        ? {
+            maxParallelDownloads: 2,
+            allowsCellularAccess: job.consentNetworkPolicy === 'any',
+          }
+        : {}),
       progressInterval: 1000,
       showNotificationsEnabled: false,
-      allowsCellularAccess: job.consentNetworkPolicy === 'any',
     });
     const task = api.createDownloadTask({
       id: job.nativeTaskId!,
