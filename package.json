@@ -21,7 +21,7 @@
     "phase6:test": "node --test tools/phase6/*.test.cjs",
     "phase8:test": "node --test tools/phase8/*.test.cjs",
     "phase9:test": "node --test tools/phase9/*.test.cjs",
-    "postinstall": "python3 tools/phase10/patch-downloader.py && python3 tools/phase11/patch-player.py",
+    "postinstall": "python3 tools/phase10/patch-downloader.py && python3 tools/phase11/patch-player.py && python3 tools/ios/patch-downloader.py",
     "phase10:test": "python3 -m unittest discover -s tools/phase10 -p \"test_*.py\" && node --test tools/phase10/*.test.cjs",
     "phase11:test": "python3 -m unittest discover -s tools/phase11 -p \"test_*.py\" && node --test tools/phase11/*.test.cjs",
     "quran-audio:test": "node --test tools/quran-audio/*.test.cjs",
@@ -36,7 +36,8 @@
     "format:native": "node tools/quality/native.cjs apply",
     "format:check": "prettier . --check && .venv-quality/bin/ruff format tools --check",
     "typecheck": "tsc --noEmit",
-    "test:regression": "node --test \"tools/**/*.test.cjs\""
+    "test:regression": "node --test \"tools/**/*.test.cjs\"",
+    "ios:simulator": "node tools/ios/simulator.cjs"
   },
   "dependencies": {
     "@kesha-antonov/react-native-background-downloader": "4.6.3",

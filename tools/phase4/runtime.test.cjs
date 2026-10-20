@@ -38,13 +38,14 @@ const verify = async (relative, asset) => {
     throw Error('integrity_failed');
 };
 const load = Module._load;
+const readerNative = {loadFont: async () => 'verified-test-font'};
 Module._load = function (name, parent, isMain) {
   if (name === '@op-engineering/op-sqlite') return {open: () => adapter};
   if (name === 'react-native')
     return {
       Platform: {OS: 'android'},
       NativeModules: {
-        RoqiaReader: {loadFont: async () => 'verified-test-font'},
+        RoqiaReader: readerNative,
       },
     };
   if (name === 'react-native-file-access')
@@ -71,6 +72,8 @@ const {
     QuranRuntime,
     validateReaderPreferences,
     readerDefaults,
+    keepAwake,
+    supportsKeepAwake,
   } = require('../../src/features/quran/runtime.ts'),
   d = require('../../src/features/quran/domain.ts');
 require('../../src/repositories/database.ts');
@@ -86,6 +89,17 @@ const location = e => ({
   surah: 1,
   verse: 2,
   packVersion: 'v1',
+});
+test('a reader adapter without keep-awake support remains safe; available support is used', () => {
+  assert.equal(supportsKeepAwake(), false);
+  assert.doesNotThrow(() => keepAwake(false));
+  const calls = [];
+  readerNative.keepAwake = enabled => calls.push(enabled);
+  assert.equal(supportsKeepAwake(), true);
+  keepAwake(true);
+  keepAwake(false);
+  assert.deepEqual(calls, [true, false]);
+  delete readerNative.keepAwake;
 });
 test('edition changes never download/delete and keep independent bookmarks and restart positions', async () => {
   for (const e of d.editions) {

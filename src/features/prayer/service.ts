@@ -3,7 +3,7 @@ import notifee, {
   AuthorizationStatus,
   TriggerType,
 } from '@notifee/react-native';
-import {Platform, NativeModules} from 'react-native';
+import {Linking, Platform, NativeModules} from 'react-native';
 
 import cities from './cities.json';
 import {
@@ -231,7 +231,9 @@ export const refreshTable = (cityId: string) =>
 export const requestPrayerPermission = () => notifee.requestPermission();
 
 export const openPrayerSettings = () =>
-  notifee.openNotificationSettings(CHANNEL);
+  Platform.OS === 'ios'
+    ? Linking.openSettings()
+    : notifee.openNotificationSettings(CHANNEL);
 
 export async function testPrayerNotification() {
   const status = await permission();

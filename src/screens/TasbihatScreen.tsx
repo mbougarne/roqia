@@ -1,6 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {
   Alert,
+  Platform,
   Pressable,
   Vibration,
   View,
@@ -90,6 +91,7 @@ export function TasbihatScreen({navigation}: any) {
   const count = state.repeatCounts[id] ?? item.repeat ?? 0;
   const max = item.repeat ?? 0;
   const size = Math.min(largeType ? 260 : 216, width - 48);
+  const counterLineHeight = Math.min(76 * uiScale, (size * 0.34) / fontScale);
   const activeAudio =
     audio.activeAudioFile === item.audioFile && !audio.isAudioPaused;
   return (
@@ -124,7 +126,15 @@ export function TasbihatScreen({navigation}: any) {
           size={size}
           progress={max ? (max - count) / max : 0}
           dark={dark}>
-          <View style={{width: size * 0.7, alignItems: 'center', gap: 4}}>
+          <View
+            style={{
+              width: size * 0.7,
+              alignItems: 'center',
+              gap: 4,
+              ...(Platform.OS === 'ios'
+                ? {height: size, justifyContent: 'center'}
+                : {}),
+            }}>
             <AppText
               role="counter"
               numberOfLines={1}
@@ -134,7 +144,9 @@ export function TasbihatScreen({navigation}: any) {
               style={{
                 textAlign: 'center',
                 fontSize: Math.min(56 * uiScale, (size * 0.27) / fontScale),
-                lineHeight: Math.min(76 * uiScale, (size * 0.34) / fontScale),
+                // iOS needs this Arabic font's natural line box to avoid clipping digits.
+                lineHeight:
+                  Platform.OS === 'ios' ? undefined : counterLineHeight,
               }}>
               {number(count)}
             </AppText>
@@ -145,6 +157,12 @@ export function TasbihatScreen({navigation}: any) {
                 color: p.textSecondary,
                 fontSize: Math.min(14 * uiScale, (size * 0.08) / fontScale),
                 lineHeight: Math.min(24 * uiScale, (size * 0.1) / fontScale),
+                ...(Platform.OS === 'ios'
+                  ? {
+                      position: 'absolute',
+                      top: size / 2 + (counterLineHeight * fontScale) / 2 + 4,
+                    }
+                  : {}),
               }}>{`المتبقي من ${number(max)}`}</AppText>
           </View>
         </TasbihRing>

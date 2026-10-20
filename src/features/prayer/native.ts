@@ -14,14 +14,16 @@ export async function locate(): Promise<
     name?: string;
   }
 > {
-  if (Platform.OS !== 'android' || !adapter)
+  if (!adapter || !['android', 'ios'].includes(Platform.OS))
     throw Error('location_unavailable');
-  const result = await PermissionsAndroid.requestMultiple([
-    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-  ]);
-  if (!Object.values(result).includes(PermissionsAndroid.RESULTS.GRANTED))
-    throw Error('location_denied');
+  if (Platform.OS === 'android') {
+    const result = await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+    ]);
+    if (!Object.values(result).includes(PermissionsAndroid.RESULTS.GRANTED))
+      throw Error('location_denied');
+  }
   const fix = await adapter.locate();
   let timeout: ReturnType<typeof setTimeout> | undefined;
   try {

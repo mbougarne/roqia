@@ -19,6 +19,7 @@ declare module '@react-navigation/native-stack' {
     Screen: React.ComponentType<{
       name: keyof ParamList;
       component: React.ComponentType<any>;
+      options?: {gestureEnabled?: boolean};
     }>;
   };
 }

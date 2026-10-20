@@ -1,0 +1,13 @@
+--- a/ios/RNBackgroundDownloader.mm
++++ b/ios/RNBackgroundDownloader.mm
+@@ -530,0 +531 @@
++    BOOL allowsCellular = options.isAllowedOverMetered();
+@@ -551,0 +553 @@
++    BOOL allowsCellular = [options[@"isAllowedOverMetered"] boolValue];
+@@ -579,0 +582,2 @@
++    // Roqia: keep the background session stable; restrict cellular per request.
++    request.allowsCellularAccess = allowsCellular;
+@@ -821,0 +826 @@
++                        request.allowsCellularAccess = task ? task.originalRequest.allowsCellularAccess : NO;
+@@ -1565,0 +1571 @@
++            request.allowsCellularAccess = task.originalRequest.allowsCellularAccess;
