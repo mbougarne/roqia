@@ -1,6 +1,6 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import React, {useState} from 'react';
-import {AccessibilityInfo, Linking, Modal, Platform, View} from 'react-native';
+import {AccessibilityInfo, Linking, Modal, View} from 'react-native';
 
 import {noteData} from '../data';
 import {
@@ -193,51 +193,49 @@ export function SourcesScreen({navigation}: any) {
           onPress={() => navigation.navigate('ExternalLink', {title, url})}
         />
       ))}
-      {Platform.OS === 'ios' && (
-        <Disclosure title="فهارس أجزاء القرآن وأحزابه">
-          <AppText>
-            النص والخط من مجمع الملك فهد. استُخلصت إحداثيات فهرس حفص من
-            Quran-Center / quran-meta (MIT). فهرس ورش مقتبس من عمل Noureddine
-            El-Ahmadi / Nur al-Hifz (CC BY 4.0)، وحُوّل إلى مواضع بداية فقط؛
-            روجعت المواضع مقابل النص الأصلي. لا تعني المراجعة اعتماد التطبيق من
-            أصحاب المصادر.
+      <Disclosure title="فهارس أجزاء القرآن وأحزابه">
+        <AppText>
+          النص والخط من مجمع الملك فهد. استُخلصت إحداثيات فهرس حفص من
+          Quran-Center / quran-meta (MIT). فهرس ورش مقتبس من عمل Noureddine
+          El-Ahmadi / Nur al-Hifz (CC BY 4.0)، وحُوّل إلى مواضع بداية فقط؛ روجعت
+          المواضع مقابل النص الأصلي. لا تعني المراجعة اعتماد التطبيق من أصحاب
+          المصادر.
+        </AppText>
+        <Row
+          title="فهرس حفص · Quran-Center"
+          onPress={() =>
+            navigation.navigate('ExternalLink', {
+              title: 'Quran-Center',
+              url: 'https://github.com/quran-center/quran-meta',
+            })
+          }
+        />
+        <Row
+          title="فهرس ورش · Noureddine El-Ahmadi"
+          onPress={() =>
+            navigation.navigate('ExternalLink', {
+              title: 'فهرس ورش',
+              url: 'https://github.com/smartmaker-devs/nuralhifz-data',
+            })
+          }
+        />
+        <Row
+          title="ترخيص CC BY 4.0"
+          onPress={() =>
+            navigation.navigate('ExternalLink', {
+              title: 'CC BY 4.0',
+              url: 'https://creativecommons.org/licenses/by/4.0/',
+            })
+          }
+        />
+        <Disclosure title="نصوص تراخيص الفهارس">
+          <AppText
+            selectable
+            style={{writingDirection: 'ltr', textAlign: 'left'}}>
+            {divisionNotices.hafs + '\n\n' + divisionNotices.warsh}
           </AppText>
-          <Row
-            title="فهرس حفص · Quran-Center"
-            onPress={() =>
-              navigation.navigate('ExternalLink', {
-                title: 'Quran-Center',
-                url: 'https://github.com/quran-center/quran-meta',
-              })
-            }
-          />
-          <Row
-            title="فهرس ورش · Noureddine El-Ahmadi"
-            onPress={() =>
-              navigation.navigate('ExternalLink', {
-                title: 'فهرس ورش',
-                url: 'https://github.com/smartmaker-devs/nuralhifz-data',
-              })
-            }
-          />
-          <Row
-            title="ترخيص CC BY 4.0"
-            onPress={() =>
-              navigation.navigate('ExternalLink', {
-                title: 'CC BY 4.0',
-                url: 'https://creativecommons.org/licenses/by/4.0/',
-              })
-            }
-          />
-          <Disclosure title="نصوص تراخيص الفهارس">
-            <AppText
-              selectable
-              style={{writingDirection: 'ltr', textAlign: 'left'}}>
-              {divisionNotices.hafs + '\n\n' + divisionNotices.warsh}
-            </AppText>
-          </Disclosure>
         </Disclosure>
-      )}
+      </Disclosure>
       <Banner text="النص والخط الأصلي لكل مصحف محفوظان معا. لا تعني إتاحة المصدر اعتماد التطبيق من الناشر." />
     </Page>
   );

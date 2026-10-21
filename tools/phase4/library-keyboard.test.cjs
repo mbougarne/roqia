@@ -19,7 +19,6 @@ require.extensions['.tsx'] = (module, file) =>
     }).outputText,
     file,
   );
-const keyboard = new Map();
 let ready = true,
   libraryError = false,
   selectionGate = null;
@@ -36,7 +35,11 @@ const runtime = {
 };
 const original = Module._load;
 Module._load = function (name, parent, ...rest) {
-  if (parent?.filename.endsWith('/quran/LibraryScreens.tsx')) {
+  if (
+    ['/quran/LibraryScreens.tsx', '/quran/QuranLibrary.tsx'].some(file =>
+      parent?.filename.endsWith(file),
+    )
+  ) {
     if (name === 'react-native')
       return {
         View: 'View',
@@ -46,9 +49,8 @@ Module._load = function (name, parent, ...rest) {
         Alert: {alert() {}},
         Keyboard: {
           isVisible: () => false,
-          addListener: (event, cb) => {
-            keyboard.set(event, cb);
-            return {remove: () => keyboard.delete(event)};
+          addListener: () => {
+            return {remove() {}};
           },
         },
       };
@@ -57,8 +59,7 @@ Module._load = function (name, parent, ...rest) {
         useLibrary: () => ({runtime, ready, error: libraryError, retry() {}}),
         useOnFocus: (cb, deps) => React.useEffect(cb, deps),
       };
-    if (name === './IphoneQuranLibrary')
-      return {IphoneQuranLibrary: 'IphoneLibrary'};
+    if (name === './QuranIndex') return {QuranIndex: 'Index'};
     if (name.endsWith('/design/ui'))
       return {
         ...Object.fromEntries(
@@ -141,41 +142,7 @@ test('mushaf selection returns to reading and keeps source/translation controls 
   assert.equal(returned, 1);
   await act(async () => tree.unmount());
 });
-test('Android keyboard dismissal restores library context while field focus and search query remain independent', async () => {
-  let tree;
-  await act(async () => {
-    tree = create(
-      React.createElement(QuranLibraryScreen, {navigation: {navigate() {}}}),
-    );
-  });
-  const context = () => tree.root.findAllByType('SettingRow').length;
-  assert.equal(context(), 1);
-  await act(async () => {
-    tree.root.findByType('SearchField').props.onFocus();
-    keyboard.get('keyboardDidShow')();
-  });
-  assert.equal(context(), 0);
-  await act(async () => keyboard.get('keyboardDidHide')());
-  assert.equal(
-    context(),
-    1,
-    'Android Back dismisses the keyboard without blurring the input',
-  );
-  await act(async () => {
-    keyboard.get('keyboardDidShow')();
-    tree.root.findByType('SearchField').props.onChange('البقرة');
-  });
-  assert.equal(tree.root.findAllByType('Pressable').length, 1);
-  await act(async () => keyboard.get('keyboardDidHide')());
-  assert.equal(tree.root.findByType('SearchField').props.value, 'البقرة');
-  assert.equal(tree.root.findAllByType('Pressable').length, 1);
-  await act(async () => tree.root.findByType('SearchField').props.onChange(''));
-  assert.equal(context(), 1);
-  await act(async () => tree.unmount());
-  assert.equal(keyboard.size, 0);
-});
-
-test('the first library visit shows a loader until downloads and saved selection are ready; later renders retain the library', async () => {
+test('the shared Quran library waits for initialization and saved edition, then exposes the complete index', async () => {
   ready = false;
   let release;
   selectionGate = new Promise(resolve => {
@@ -184,49 +151,30 @@ test('the first library visit shows a loader until downloads and saved selection
   let tree;
   const screen = () =>
     React.createElement(QuranLibraryScreen, {navigation: {navigate() {}}});
-  const loading = () =>
-    tree.root.findAllByProps({testID: 'quran-library-loading'}).length;
   await act(async () => {
     tree = create(screen());
   });
-  assert.equal(loading(), 1);
-  assert.equal(
-    tree.root.findAllByType('Pressable').length,
-    0,
-    'do not build 114 surah rows before the loader can paint',
-  );
+  assert.equal(tree.root.findByType('StateView').props.busy, true);
+  assert.equal(tree.root.findAllByType('Index').length, 0);
   ready = true;
   await act(async () => tree.update(screen()));
-  assert.equal(
-    loading(),
-    1,
-    'saved edition and resume position are still pending',
-  );
-  await act(async () => {
-    release();
-  });
+  assert.equal(tree.root.findAllByType('Index').length, 0);
+  await act(async () => release());
   selectionGate = null;
-  assert.equal(loading(), 0);
-  assert.equal(tree.root.findAllByType('Pressable').length, 114);
-  await act(async () => tree.update(screen()));
-  assert.equal(loading(), 0);
+  assert.equal(
+    tree.root.findByType('Index').props.editionId,
+    'warsh-kfgqpc-v2.1-update6',
+  );
   await act(async () => tree.unmount());
-
-  ready = false;
   libraryError = true;
   await act(async () => {
     tree = create(screen());
   });
   assert.equal(
-    loading(),
-    0,
-    'a failed initialization must expose retry instead of an endless loader',
-  );
-  assert.equal(
     tree.root.findByType('StateView').props.title,
     'تعذر فتح المكتبة',
   );
+  assert.equal(tree.root.findAllByType('Index').length, 0);
   await act(async () => tree.unmount());
-  ready = true;
   libraryError = false;
 });
