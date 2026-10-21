@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Pressable, View, type ViewProps} from 'react-native';
+import {Keyboard, Pressable, View, type ViewProps} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
 
 import {Illustration} from './Illustration';
@@ -10,6 +10,7 @@ import {
   Card,
   IconButton,
   Input,
+  Button,
   usePalette,
   type IconName,
 } from './ui';
@@ -384,14 +385,19 @@ export function SearchField({
   onChange,
   onFocus,
   onBlur,
+  dismissible = false,
+  onSubmit,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  dismissible?: boolean;
+  onSubmit?: () => void;
 }) {
   const p = usePalette();
+  const [focused, setFocused] = useState(false);
   return (
     <View
       style={{
@@ -410,8 +416,25 @@ export function SearchField({
           value={value}
           placeholder={label}
           onChangeText={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={() => {
+            setFocused(true);
+            onFocus?.();
+          }}
+          onBlur={() => {
+            setFocused(false);
+            onBlur?.();
+          }}
+          returnKeyType={
+            dismissible ? (onSubmit ? 'search' : 'done') : undefined
+          }
+          onSubmitEditing={
+            dismissible
+              ? () => {
+                  Keyboard.dismiss();
+                  onSubmit?.();
+                }
+              : undefined
+          }
           style={{
             borderWidth: 0,
             backgroundColor: 'transparent',
@@ -423,8 +446,14 @@ export function SearchField({
         <IconButton
           name="close"
           label="مسح البحث"
-          onPress={() => onChange('')}
+          onPress={() => {
+            onChange('');
+            if (dismissible) Keyboard.dismiss();
+          }}
         />
+      )}
+      {dismissible && focused && (
+        <Button compact secondary label="تم" onPress={Keyboard.dismiss} />
       )}
     </View>
   );

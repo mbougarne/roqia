@@ -8,6 +8,7 @@ const Module = require('node:module');
 const rows = require('../../src/features/prayer/sounds.data.json');
 
 const records = new Map();
+const platform = {OS: 'android'};
 let failPreparation = false;
 const preparations = [];
 const native = {
@@ -25,7 +26,7 @@ const native = {
 const load = Module._load;
 Module._load = function (name, parent, isMain) {
   if (name === 'react-native')
-    return {Platform: {OS: 'android'}, NativeModules: {RoqiaPrayer: native}};
+    return {Platform: platform, NativeModules: {RoqiaPrayer: native}};
   if (name.endsWith('repositories/database'))
     return {
       listRecords: async () => {
@@ -103,6 +104,28 @@ test('the five numbered originals and separate 15-second clip match the packaged
       assert.equal(source.sourceFile, 'src/assets/audio/Adhan-05.mp3');
       assert.deepEqual(source.clip, {start: 0, end: 15});
     }
+  }
+});
+
+test('iPhone exposes the same six verified local recordings without requiring an alarm scheduler', async () => {
+  platform.OS = 'ios';
+  const status = native.adhanStatus;
+  delete native.adhanStatus;
+  try {
+    const project = fs.readFileSync(
+      path.resolve(__dirname, '../../ios/app.xcodeproj/project.pbxproj'),
+      'utf8',
+    );
+    for (const sound of sounds) {
+      assert.ok(project.includes(sound.bundled.resource + '.mp3 in Resources'));
+      const local = await localSound(sound);
+      assert.equal(local.sha256, sound.bundled.sha256);
+      assert.equal(local.bytes, sound.bundled.bytes);
+    }
+    assert.equal((await adhanCapability()).exact, false);
+  } finally {
+    platform.OS = 'android';
+    native.adhanStatus = status;
   }
 });
 

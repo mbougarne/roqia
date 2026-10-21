@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
 import {Alert, Platform} from 'react-native';
 
-import {reconcilePrayer, requestPrayerPermission} from './service';
+import {
+  openPrayerSettings,
+  reconcilePrayer,
+  requestPrayerPermission,
+} from './service';
 import {
   sounds,
   selectedSounds,
@@ -34,6 +38,9 @@ export function SoundsScreen({navigation}: any) {
           'أعد فتح الصفحة للمحاولة مجددا.',
         ),
       );
+    return () => {
+      if (Platform.OS === 'ios') adhanNative()?.stopAdhan();
+    };
   }, []);
   const act = async (fn: () => Promise<unknown>) => {
     setBusy(true);
@@ -49,12 +56,15 @@ export function SoundsScreen({navigation}: any) {
     }
   };
   const preview = async (sound: AdhanSound) => {
-    await requestPrayerPermission();
     const local = await localSound(sound),
       native = adhanNative();
     if (!local || !native?.previewAdhan) throw Error('audio_unavailable');
-    const status = await native.adhanStatus();
-    if (!status.notifications) throw Error('notification_permission_required');
+    if (Platform.OS === 'android') {
+      await requestPrayerPermission();
+      const status = await native.adhanStatus();
+      if (!status.notifications)
+        throw Error('notification_permission_required');
+    }
     await playback.pause();
     await native.previewAdhan(
       JSON.stringify({
@@ -99,7 +109,7 @@ export function SoundsScreen({navigation}: any) {
                 <IconButton
                   name="play"
                   label={'استماع: ' + sound.title}
-                  disabled={busy || Platform.OS !== 'android'}
+                  disabled={busy}
                   onPress={() => void act(() => preview(sound))}
                 />
                 <IconButton
@@ -123,10 +133,20 @@ export function SoundsScreen({navigation}: any) {
       <Button
         secondary
         label="إذن المنبهات والتذكيرات"
-        onPress={() => void act(() => adhanNative()?.openAdhanAlarms())}
+        onPress={() =>
+          void act(() =>
+            Platform.OS === 'ios'
+              ? openPrayerSettings()
+              : adhanNative()?.openAdhanAlarms(),
+          )
+        }
       />
       <Banner
-        text="نتبع مستوى صوت المنبه وعدم الإزعاج في الجهاز. معاينة الأذان لا تفعّل تنبيهات الصلاة."
+        text={
+          Platform.OS === 'ios'
+            ? 'التسجيلات متاحة للاستماع دون اتصال. معاينة الصوت لا تفعّل تنبيهات الصلاة؛ تنبيهات iPhone تستخدم صوت النظام.'
+            : 'نتبع مستوى صوت المنبه وعدم الإزعاج في الجهاز. معاينة الأذان لا تفعّل تنبيهات الصلاة.'
+        }
         icon="volume"
       />
     </Page>

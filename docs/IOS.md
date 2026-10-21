@@ -54,7 +54,7 @@ xcodebuild -workspace ios/app.xcworkspace -scheme app \
   -collect-test-diagnostics never test
 ```
 
-The native tests exercise the original Warsh source archive, all 114 surahs' font coverage and opening verses, repeated loading of the bundled legacy UI font, rejection of altered sources and paths outside private content, native audio-duration reading, and bounded verse export/reuse/range rejection. New Hafs rendering is checked separately with its bundled original pack. The test bundle includes the original audio fixture so Debug tests do not depend on Metro's asset layout. The hosted test target inherits dependency search paths; the app links the native libraries. Tests use a unique temporary directory inside the test app and remove only that directory.
+The native tests verify the six bundled adhan files, reject invalid adhan hashes and external preview paths, and exercise the original Warsh source archive, all 114 surahs' font coverage and opening verses, repeated loading of the bundled legacy UI font, rejection of altered sources and paths outside private content, native audio-duration reading, and bounded verse export/reuse/range rejection. New Hafs rendering is checked separately with its bundled original pack. The test bundle includes the original audio fixture so Debug tests do not depend on Metro's asset layout. The hosted test target inherits dependency search paths; the app links the native libraries. Tests use a unique temporary directory inside the test app and remove only that directory.
 
 ## Native integration
 
@@ -65,7 +65,7 @@ The native tests exercise the original Warsh source archive, all 114 surahs' fon
 - `RoqiaAudio` reads duration from a private downloaded recording and prepares native, bounded M4A verse files from its verified timing ranges. Track Player handles foreground/background playback and seeks within the exported verse, including when JavaScript is suspended. These derived files live in the OS-purgeable cache; the original recording remains unchanged.
 - iOS downloads acknowledge background-session completion after verification and journal persistence. Source import still verifies every expected output before marking a pack ready.
 
-Full adhan background playback and the native sleep timer retain their existing platform capability checks. Their Android implementations are not evidence that these features are supported on iOS. Verify the visible iOS fallback and describe platform limits accurately in store materials.
+The iPhone adhan screen includes the same five complete recordings and the separate 15-second clip as Android. Xcode bundles the exact reviewed MP3 files; the native adapter verifies byte counts and SHA-256 before returning a bundle path or previewing it. AVAudioPlayer provides offline in-app previews, pauses other app playback first, and stops on leaving the screen. Previewing requires no notification permission. Selected recordings are saved independently of alert enablement; iPhone prayer notifications retain the system sound, and the screen explains this limitation. Full adhan background playback and the native sleep timer retain their existing capability checks; Android support does not establish iPhone support.
 
 ## Bundled Quran sources
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View} from 'react-native';
+import {Keyboard, View} from 'react-native';
 
-import {useLibrary} from './context';
+import {useLibrary, useOnFocus} from './context';
 import {
   indexOptions,
   sectionStarts,
@@ -45,6 +45,11 @@ export function QuranIndex({
   const [kind, setKind] = useState<IndexKind>(initialKind ?? 'surah');
   const [query, setQuery] = useState('');
   const touched = useRef(false);
+  useOnFocus(() => () => Keyboard.dismiss(), []);
+  const select = (target: Locator) => {
+    Keyboard.dismiss();
+    onSelect(target);
+  };
   useEffect(() => {
     let active = true;
     if (!initialKind)
@@ -108,6 +113,7 @@ export function QuranIndex({
         }
         value={query}
         onChange={setQuery}
+        dismissible
       />
       {allowAyahJump && (
         <AppText role="caption">
@@ -120,7 +126,7 @@ export function QuranIndex({
             title={`الانتقال إلى ${chapters[jumpSurah - 1].name} · الآية ${number(jumpVerse)}`}
             icon="book"
             onPress={() =>
-              onSelect(
+              select(
                 sectionTarget(
                   editionId,
                   packVersion,
@@ -145,7 +151,7 @@ export function QuranIndex({
                   : `يبدأ من ${chapters[start.surah - 1].name} · الآية ${number(start.verse)}`
               }
               onPress={() =>
-                onSelect(sectionTarget(editionId, packVersion, section))
+                select(sectionTarget(editionId, packVersion, section))
               }
             />
           ))}

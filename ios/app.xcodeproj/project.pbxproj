@@ -31,6 +31,12 @@
 		A23000000000000000000019 /* roqia-01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A23000000000000000000018 /* roqia-01.mp3 */; };
 		B19000000000000000000001 /* roqia-offline in Resources */ = {isa = PBXBuildFile; fileRef = B19000000000000000000002 /* roqia-offline */; };
 		FF8767AAF088898F7AFCCFF3 /* libPods-appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF80F376403CCF61A950462 /* libPods-appTests.a */; };
+		AD4B00000000000000000001 /* roqia_adhan_01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD4A00000000000000000001 /* roqia_adhan_01.mp3 */; };
+		AD4B00000000000000000002 /* roqia_adhan_02.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD4A00000000000000000002 /* roqia_adhan_02.mp3 */; };
+		AD4B00000000000000000003 /* roqia_adhan_03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD4A00000000000000000003 /* roqia_adhan_03.mp3 */; };
+		AD4B00000000000000000004 /* roqia_adhan_04.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD4A00000000000000000004 /* roqia_adhan_04.mp3 */; };
+		AD4B00000000000000000005 /* roqia_adhan_05.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD4A00000000000000000005 /* roqia_adhan_05.mp3 */; };
+		AD4B00000000000000000006 /* roqia_adhan_05_short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD4A00000000000000000006 /* roqia_adhan_05_short.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +87,12 @@
 		DB99D4F6927309D6A871C08E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = app/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		EAF80F376403CCF61A950462 /* libPods-appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		AD4A00000000000000000001 /* roqia_adhan_01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "../android/app/src/main/res/raw/roqia_adhan_01.mp3"; sourceTree = SOURCE_ROOT; };
+		AD4A00000000000000000002 /* roqia_adhan_02.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "../android/app/src/main/res/raw/roqia_adhan_02.mp3"; sourceTree = SOURCE_ROOT; };
+		AD4A00000000000000000003 /* roqia_adhan_03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "../android/app/src/main/res/raw/roqia_adhan_03.mp3"; sourceTree = SOURCE_ROOT; };
+		AD4A00000000000000000004 /* roqia_adhan_04.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "../android/app/src/main/res/raw/roqia_adhan_04.mp3"; sourceTree = SOURCE_ROOT; };
+		AD4A00000000000000000005 /* roqia_adhan_05.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "../android/app/src/main/res/raw/roqia_adhan_05.mp3"; sourceTree = SOURCE_ROOT; };
+		AD4A00000000000000000006 /* roqia_adhan_05_short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "../android/app/src/main/res/raw/roqia_adhan_05_short.mp3"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +143,12 @@
 				A22F00000000000000001600 /* RoqiaArabic600.ttf */,
 				A22F00000000000000001500 /* RoqiaArabic500.ttf */,
 				A22F00000000000000001400 /* RoqiaArabic400.ttf */,
+				AD4A00000000000000000001 /* roqia_adhan_01.mp3 */,
+				AD4A00000000000000000002 /* roqia_adhan_02.mp3 */,
+				AD4A00000000000000000003 /* roqia_adhan_03.mp3 */,
+				AD4A00000000000000000004 /* roqia_adhan_04.mp3 */,
+				AD4A00000000000000000005 /* roqia_adhan_05.mp3 */,
+				AD4A00000000000000000006 /* roqia_adhan_05_short.mp3 */,
 			);
 			name = Resources;
 			path = "";
@@ -307,6 +325,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B19000000000000000000001 /* roqia-offline in Resources */,
+				AD4B00000000000000000001 /* roqia_adhan_01.mp3 in Resources */,
+				AD4B00000000000000000002 /* roqia_adhan_02.mp3 in Resources */,
+				AD4B00000000000000000003 /* roqia_adhan_03.mp3 in Resources */,
+				AD4B00000000000000000004 /* roqia_adhan_04.mp3 in Resources */,
+				AD4B00000000000000000005 /* roqia_adhan_05.mp3 in Resources */,
+				AD4B00000000000000000006 /* roqia_adhan_05_short.mp3 in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				988204B4357245ACB68B206A /* NotoSansArabic.ttf in Resources */,

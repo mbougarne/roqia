@@ -1,4 +1,6 @@
+import AVFoundation
 import CoreLocation
+import CryptoKit
 import Foundation
 import React
 import UIKit
@@ -16,6 +18,69 @@ final class RoqiaPrayer: RCTEventEmitter, CLLocationManagerDelegate {
   private var timeout: DispatchWorkItem?
   private var observing = false
   private var timeObserver: NSObjectProtocol?
+  private var adhanPlayer: AVAudioPlayer?
+
+  private func bundledAdhan(_ resource: String, bytes: Double, hash: String) throws -> URL {
+    guard resource.range(of: "^roqia_adhan_0[1-5](_short)?$", options: .regularExpression) != nil,
+      bytes.isFinite, bytes > 0, bytes <= 5 * 1024 * 1024,
+      hash.range(of: "^[a-f0-9]{64}$", options: .regularExpression) != nil,
+      let url = Bundle.main.url(forResource: resource, withExtension: "mp3")
+    else { throw NSError(domain: "RoqiaPrayer", code: 1) }
+    let data = try Data(contentsOf: url)
+    guard Double(data.count) == bytes,
+      SHA256.hash(data: data).map({ String(format: "%02x", $0) }).joined() == hash
+    else { throw NSError(domain: "RoqiaPrayer", code: 2) }
+    return url
+  }
+
+  @objc(prepareBundledAdhan:bytes:hash:resolve:reject:)
+  func prepareBundledAdhan(
+    _ resource: String, bytes: Double, hash: String,
+    resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock
+  ) {
+    do { resolve(try bundledAdhan(resource, bytes: bytes, hash: hash).path) } catch {
+      reject("bundled_adhan_unavailable", error.localizedDescription, error)
+    }
+  }
+
+  @objc(previewAdhan:resolve:reject:)
+  func previewAdhan(
+    _ payload: String, resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    DispatchQueue.main.async {
+      do {
+        guard
+          let object = try JSONSerialization.jsonObject(with: Data(payload.utf8)) as? [String: Any],
+          let path = object["path"] as? String, let bytes = object["bytes"] as? Double,
+          let hash = object["sha256"] as? String
+        else { throw NSError(domain: "RoqiaPrayer", code: 3) }
+        let requested = URL(fileURLWithPath: path).resolvingSymlinksInPath().standardizedFileURL
+        let source = try self.bundledAdhan(
+          requested.deletingPathExtension().lastPathComponent, bytes: bytes, hash: hash)
+        guard requested == source.resolvingSymlinksInPath().standardizedFileURL else {
+          throw NSError(domain: "RoqiaPrayer", code: 4)
+        }
+        self.adhanPlayer?.stop()
+        let session = AVAudioSession.sharedInstance()
+        try session.setCategory(.playback, mode: .default)
+        try session.setActive(true)
+        let player = try AVAudioPlayer(contentsOf: source)
+        guard player.prepareToPlay(), player.play() else {
+          throw NSError(domain: "RoqiaPrayer", code: 5)
+        }
+        self.adhanPlayer = player
+        resolve(nil)
+      } catch { reject("adhan_preview_unavailable", error.localizedDescription, error) }
+    }
+  }
+
+  @objc func stopAdhan() {
+    DispatchQueue.main.async {
+      self.adhanPlayer?.stop()
+      self.adhanPlayer = nil
+    }
+  }
 
   @objc override static func requiresMainQueueSetup() -> Bool { true }
 
