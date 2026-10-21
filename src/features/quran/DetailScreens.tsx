@@ -487,8 +487,8 @@ export function QuranBookmarksScreen({navigation}: any) {
         rows.map(
           b =>
             b.kind === 'quran-verse' && (
-              <Group key={b.bookmarkId}>
-                <SettingRow
+              <Card key={b.bookmarkId} style={{gap: 8}}>
+                <Row
                   title={chapters[b.surah - 1].name}
                   detail={
                     editionsTitle(b.editionId) + ' · الآية ' + number(b.verse)
@@ -498,12 +498,12 @@ export function QuranBookmarksScreen({navigation}: any) {
                 />
                 <Button
                   secondary
-                  label="إزالة العلامة"
+                  label="إزالة من المحفوظات"
                   onPress={() =>
                     act(removeBookmark(b.bookmarkId).then(refresh))
                   }
                 />
-              </Group>
+              </Card>
             ),
         )
       )}

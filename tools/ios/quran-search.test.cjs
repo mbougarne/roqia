@@ -156,7 +156,7 @@ test('Quran bookmark removal uses Arabic text and removes only the selected save
   });
   assert.equal(view.root.findAllByType('IconButton').length, 0);
   const button = view.root.findByType('Button');
-  assert.equal(button.props.label, 'إزالة العلامة');
+  assert.equal(button.props.label, 'إزالة من المحفوظات');
   assert.equal(button.props.icon, undefined);
   await act(async () => button.props.onPress());
   assert.deepEqual(removed, ['saved-hafs-4-1']);
