@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   Keyboard,
+  Platform,
   Pressable,
   View,
 } from 'react-native';
@@ -16,6 +17,7 @@ import {
   type EditionId,
   type Locator,
 } from './domain';
+import {IphoneQuranLibrary} from './IphoneQuranLibrary';
 import {
   Banner,
   FeatureCard,
@@ -51,7 +53,15 @@ export const act = (promise: Promise<unknown>) => {
   );
 };
 
-export function QuranLibraryScreen({navigation}: any) {
+export function QuranLibraryScreen(props: any) {
+  return Platform.OS === 'ios' ? (
+    <IphoneQuranLibrary {...props} />
+  ) : (
+    <SurahLibraryScreen {...props} />
+  );
+}
+
+function SurahLibraryScreen({navigation}: any) {
   const {number} = useFormat();
   const {runtime, ready, error, retry} = useLibrary();
   const p = usePalette();
@@ -268,17 +278,19 @@ export function EditionScreen({navigation}: any) {
           action={{label: 'إعادة المحاولة', onPress: retry}}
         />
       )}
-      {editions.map(e => (
-        <RadioRow
-          key={e.id}
-          title={e.title}
-          detail={e.publisher}
-          selected={selected === e.id}
-          onPress={() =>
-            act(runtime.select(e.id).then(() => setSelected(e.id)))
-          }
-        />
-      ))}
+      {runtime.catalog.texts
+        .map(t => editionById(t.editionId))
+        .map(e => (
+          <RadioRow
+            key={e.id}
+            title={e.title}
+            detail={e.publisher}
+            selected={selected === e.id}
+            onPress={() =>
+              act(runtime.select(e.id).then(() => setSelected(e.id)))
+            }
+          />
+        ))}
       <Banner text="يمكنك إضافة المصحف الآخر لاحقا؛ لكل رواية موضع قراءة مستقل." />
       <Illustration name="download" height={180} />
       <Button

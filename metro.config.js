@@ -7,9 +7,19 @@
 
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
+const defaultConfig = getDefaultConfig(__dirname);
+
 /**
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = {};
+const config = {
+  resolver: {
+    // Device backups and Xcode archives are local evidence, never app sources.
+    blockList: [
+      defaultConfig.resolver.blockList,
+      /[\\/]\.roqia-feasibility[\\/].*/,
+    ].flat(),
+  },
+};
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+module.exports = mergeConfig(defaultConfig, config);

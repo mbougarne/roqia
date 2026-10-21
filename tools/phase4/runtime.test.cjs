@@ -317,7 +317,7 @@ test('translation reader checks saved file identity, chapter, version and comple
   await assert.rejects(runtime.translation(t, chapter, text), /missing_pack/);
 });
 test('pinned Hafs-source translation serves Warsh through passage alignment and preserves source guards', async () => {
-  const e = d.editions[1],
+  const e = d.editionById(d.legacyHafsEditionId),
     w = d.editions[0];
   const value = {
     translationId: 'test-en',
@@ -380,4 +380,49 @@ test('pinned Hafs-source translation serves Warsh through passage alignment and 
       runtime.translation({...t, ...patch}, chapter, text),
       /translation_mismatch/,
     );
+});
+
+test('iPhone Hafs upgrade preserves old settings, resume position and bookmark records', async () => {
+  const {
+    saveRecord,
+    readRecord,
+  } = require('../../src/repositories/database.ts');
+  const catalog =
+    require('../../src/features/quran/catalog.ios.ts').quranCatalog;
+  const ios = new QuranRuntime(
+    catalog,
+    downloads,
+    async () => {},
+    'upgrade-test',
+  );
+  const old = {
+    ...location(d.editionById(d.legacyHafsEditionId)),
+    packVersion: 'source-1',
+    surah: 4,
+    verse: 1,
+  };
+  const preferences = {...readerDefaults, size: 30, view: 'continuous'};
+  await saveRecord('upgrade-test-preferences', old.editionId, preferences);
+  await saveRecord('upgrade-test-positions', old.editionId, old);
+  const key = d.locatorKey(old);
+  const mark = {...old, kind: 'quran-verse', bookmarkId: key, createdAt: 123};
+  await saveRecord('bookmarks', key, mark);
+  settings.preferredEditionId = old.editionId;
+  assert.equal((await ios.preferred()).id, d.hafsEditionId);
+  assert.deepEqual(await ios.preferences(d.hafsEditionId), preferences);
+  assert.deepEqual(
+    await ios.resume(d.hafsEditionId),
+    d.currentHafsLocator(old),
+  );
+  const mapped = (await ios.bookmarks()).find(b => b.bookmarkId === key);
+  assert.equal(mapped.editionId, d.hafsEditionId);
+  assert.deepEqual(await readRecord('bookmarks', key), mark);
+  assert.deepEqual(
+    await readRecord('upgrade-test-positions', old.editionId),
+    old,
+  );
+  await ios.toggleBookmark(d.currentHafsLocator(old));
+  assert.equal(await readRecord('bookmarks', key), null);
+  await ios.toggleBookmark(d.currentHafsLocator(old));
+  assert.equal((await ios.bookmarks()).filter(b => b.surah === 4).length, 1);
 });

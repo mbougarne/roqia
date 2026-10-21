@@ -253,7 +253,12 @@ export function PrayerScreen({navigation}: any) {
           <View style={{flex: 1, gap: 2}}>
             <AppText role="caption">الصلاة القادمة</AppText>
             <AppText role="bodyStrong">{labels[next.name]}</AppText>
-            <AppText role="prayerTime" style={visual.time}>
+            <AppText
+              role="prayerTime"
+              style={[
+                visual.time,
+                Platform.OS === 'ios' && {lineHeight: undefined},
+              ]}>
               {digits(clock(l.zone, next.at, prefs.format))}
             </AppText>
             <AppText role="caption" style={{color: p.textSecondary}}>
@@ -436,7 +441,7 @@ export function PrayerScreen({navigation}: any) {
               Platform.OS === 'ios' && {
                 alignSelf: 'stretch',
                 flex: expanded ? undefined : 1,
-                minHeight: 64 * uiScale,
+                minHeight: 52,
               },
               {
                 backgroundColor: pressed ? p.surfaceMuted : p.surface,
@@ -447,7 +452,11 @@ export function PrayerScreen({navigation}: any) {
               name={item.icon}
               color={mode === 'dark' ? p.accent : p.iconPrimary}
             />
-            <AppText role="label" style={{flex: 1}}>
+            <AppText
+              role="label"
+              style={{flex: 1}}
+              numberOfLines={Platform.OS === 'ios' && !expanded ? 1 : undefined}
+              adjustsFontSizeToFit={Platform.OS === 'ios' && !expanded}>
               {item.title}
             </AppText>
             <AppIcon name="chevron-left" size={16} />

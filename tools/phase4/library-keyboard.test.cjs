@@ -38,6 +38,7 @@ Module._load = function (name, parent, ...rest) {
     if (name === 'react-native')
       return {
         View: 'View',
+        Platform: {OS: 'android'},
         ActivityIndicator: 'Indicator',
         Pressable: 'Pressable',
         Alert: {alert() {}},
@@ -54,6 +55,8 @@ Module._load = function (name, parent, ...rest) {
         useLibrary: () => ({runtime, ready, error: libraryError, retry() {}}),
         useOnFocus: (cb, deps) => React.useEffect(cb, deps),
       };
+    if (name === './IphoneQuranLibrary')
+      return {IphoneQuranLibrary: 'IphoneLibrary'};
     if (name.endsWith('/design/ui'))
       return {
         ...Object.fromEntries(

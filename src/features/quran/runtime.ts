@@ -15,6 +15,11 @@ import {
   validateLocator,
   locatorKey,
   validateQuranCatalog,
+  currentHafsLocator,
+  hafsEditionId,
+  hafsPackVersion,
+  legacyHafsEditionId,
+  isLegacyHafsReference,
   normalizeSearch,
   type Recording,
 } from './domain';
@@ -79,13 +84,22 @@ export class QuranRuntime {
   private collection(key: string) {
     return `${this.namespace}-${key}`;
   }
+  async indexKind(): Promise<'surah' | 'juz' | 'hizb'> {
+    const value = await readRecord<string>(this.collection('index'), 'kind');
+    return value === 'juz' || value === 'hizb' ? value : 'surah';
+  }
+  async setIndexKind(value: 'surah' | 'juz' | 'hizb') {
+    await saveRecord(this.collection('index'), 'kind', value);
+  }
   async preferred() {
     const id = (await getSettings()).preferredEditionId;
     return editionById(
-      id &&
-        ['warsh-kfgqpc-v2.1-update6', 'hafs-tanzil-uthmani-1.1'].includes(id)
-        ? id
-        : 'warsh-kfgqpc-v2.1-update6',
+      id === legacyHafsEditionId &&
+        this.catalog.texts.some(t => t.editionId === hafsEditionId)
+        ? hafsEditionId
+        : id && this.catalog.texts.some(t => t.editionId === id)
+          ? id
+          : 'warsh-kfgqpc-v2.1-update6',
     );
   }
   async select(id: string) {
@@ -163,6 +177,13 @@ export class QuranRuntime {
     const isWarsh = chapter.editionId === 'warsh-kfgqpc-v2.1-update6';
     if (
       !isWarsh &&
+      !(
+        chapter.editionId === hafsEditionId &&
+        chapter.numberingScheme === editionById(hafsEditionId).numbering &&
+        text.editionId === hafsEditionId &&
+        text.pack.version === hafsPackVersion &&
+        isLegacyHafsReference(t)
+      ) &&
       (t.editionId !== chapter.editionId ||
         t.numberingScheme !== chapter.numberingScheme ||
         t.textVersion !== text.pack.version ||
@@ -206,10 +227,16 @@ export class QuranRuntime {
   async preferences(id: EditionId) {
     return validateReaderPreferences({
       ...readerDefaults,
-      ...(await readRecord<ReaderPreferences>(
+      ...((await readRecord<ReaderPreferences>(
         this.collection('preferences'),
         id,
-      )),
+      )) ??
+        (id === hafsEditionId
+          ? await readRecord<ReaderPreferences>(
+              this.collection('preferences'),
+              legacyHafsEditionId,
+            )
+          : null)),
     });
   }
   async savePreferences(id: EditionId, p: ReaderPreferences) {
@@ -218,32 +245,58 @@ export class QuranRuntime {
     await saveRecord(this.collection('preferences'), id, p);
   }
   async resume(id: EditionId) {
-    const l = await readRecord<Locator>(this.collection('positions'), id);
-    return l ? validateLocator(l) : null;
+    const l =
+      (await readRecord<Locator>(this.collection('positions'), id)) ??
+      (id === hafsEditionId
+        ? await readRecord<Locator>(
+            this.collection('positions'),
+            legacyHafsEditionId,
+          )
+        : null);
+    return l
+      ? id === hafsEditionId
+        ? currentHafsLocator(l)
+        : validateLocator(l)
+      : null;
   }
   async remember(l: Locator) {
     validateLocator(l);
     await saveRecord(this.collection('positions'), l.editionId, l);
   }
   async bookmarks() {
-    return (await listRecords<Bookmark>('bookmarks')).filter(
-      b => b.kind === 'quran-verse',
-    );
+    return (await listRecords<Bookmark>('bookmarks'))
+      .filter(b => b.kind === 'quran-verse')
+      .map(b => ({
+        ...b,
+        ...(this.catalog.texts.some(t => t.editionId === hafsEditionId)
+          ? currentHafsLocator(b as Locator)
+          : b),
+      }));
   }
   async toggleBookmark(l: Locator) {
     const key = locatorKey(l);
     await write(async tx => {
       const rows = (
-        await tx.execute('SELECT id FROM records WHERE collection=? AND id=?', [
+        await tx.execute('SELECT id,value FROM records WHERE collection=?', [
           'bookmarks',
-          key,
         ])
-      ).rows;
+      ).rows.filter(row => {
+        const mark = JSON.parse(row.value as string) as Bookmark;
+        return (
+          mark.kind === 'quran-verse' &&
+          locatorKey(
+            l.editionId === hafsEditionId
+              ? currentHafsLocator(mark as Locator)
+              : (mark as Locator),
+          ) === key
+        );
+      });
       if (rows.length)
-        await tx.execute('DELETE FROM records WHERE collection=? AND id=?', [
-          'bookmarks',
-          key,
-        ]);
+        for (const row of rows)
+          await tx.execute('DELETE FROM records WHERE collection=? AND id=?', [
+            'bookmarks',
+            row.id,
+          ]);
       else
         await putRecord(tx, 'bookmarks', key, {
           ...l,
@@ -344,6 +397,18 @@ export class QuranRuntime {
     chapter.durationMs = duration;
     await saveRecord('quran-audio-recordings', recording.id, recording);
     return duration as number;
+  }
+  async recordingContentTag(recording: Recording, surah: number) {
+    const chapter = recording.chapters.find(c => c.surah === surah);
+    if (!chapter) throw Error('recording_mismatch');
+    // Recover older iOS downloads whose response Etag casing was ignored.
+    // asset() first verifies the pinned SHA-256. This tag is usable only when
+    // it exactly equals the provider's independently stored strong ETag;
+    // a non-MD5 or changed provider ETag will still fail timing validation.
+    const path = await this.asset(chapter.pack, chapter.assetId);
+    const md5 = await FileSystem.hash(path, 'MD5');
+    if (!/^[a-f0-9]{32}$/.test(md5)) throw Error('audio_version_unavailable');
+    return `"${md5}"`;
   }
 }
 

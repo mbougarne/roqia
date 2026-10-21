@@ -84,7 +84,16 @@ export function ReadingCard({
       .catch(() => Alert.alert('تعذر حفظ التغيير', 'أعد المحاولة.'));
   if (dua)
     return (
-      <Card style={{gap: 12, padding: 16, borderRadius: 16}}>
+      <Card
+        style={{
+          gap: 12,
+          padding: 16,
+          borderRadius: 16,
+          ...(completed && {
+            backgroundColor: p.successSurface,
+            borderColor: p.success,
+          }),
+        }}>
         <View style={rtlRow}>
           <IconButton
             name={saved ? 'check' : 'bookmark'}

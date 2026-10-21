@@ -30,16 +30,20 @@ let plays = [],
   timing = null,
   downloaded = true,
   duration = async () => 50000,
-  start = async () => true;
+  start = async () => true,
+  contentTag = async () => '"verified-recording"';
+const platform = {OS: 'android'};
 const runtime = {
   catalog: {recordings: [recording]},
   downloads: {listJobs: () => []},
   installed: () => downloaded,
   recordingDuration: (...args) => duration(...args),
+  recordingContentTag: (...args) => contentTag(...args),
 };
 const original = Module._load;
 Module._load = function (name, parent, ...rest) {
   if (parent?.filename.endsWith('/quran/ListenScreen.tsx')) {
+    if (name === 'react-native') return {Platform: platform};
     if (name === '@react-navigation/native')
       return {useFocusEffect: cb => React.useEffect(cb, [cb])};
     if (name.endsWith('/design/ui'))
@@ -99,7 +103,10 @@ Module._load = function (name, parent, ...rest) {
     if (name === './timingCache')
       return {
         cachedTiming: async () => timing,
-        bindCachedTiming: async () => timing,
+        bindCachedTiming: async identity =>
+          platform.OS === 'ios' && !identity.audioEtag
+            ? {status: 'invalid', segments: []}
+            : timing,
         prepareTiming: async () => {
           network++;
           return timing;
@@ -185,6 +192,32 @@ test('slow local verification and playback never open preparation for a saved ve
   await unmount(view);
   duration = async () => 50000;
   start = async () => true;
+});
+test('older iPhone downloads wait for local entity recovery without flashing a download sheet', async () => {
+  let finishTag;
+  platform.OS = 'ios';
+  contentTag = () =>
+    new Promise(resolve => {
+      finishTag = resolve;
+    });
+  const before = plays.length,
+    closedBefore = closed;
+  let view;
+  try {
+    view = await mount();
+    assert.equal(view.root.findAllByType('Sheet').length, 0);
+    assert.equal(plays.length, before);
+    assert.equal(network, 0);
+    await act(async () => finishTag('"verified-recording"'));
+    assert.equal(plays.length, before + 1);
+    assert.equal(closed, closedBefore + 1);
+    assert.equal(view.root.findAllByType('Sheet').length, 0);
+    assert.equal(network, 0);
+  } finally {
+    if (view) await unmount(view);
+    platform.OS = 'android';
+    contentTag = async () => '"verified-recording"';
+  }
 });
 test('a saved recording that fails playback opens an actionable error instead of remaining hidden', async () => {
   start = async () => undefined;

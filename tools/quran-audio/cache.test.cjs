@@ -155,3 +155,55 @@ test('a persisted source sidecar binds to a completed download after restart wit
     global.fetch = online;
   }
 });
+
+test('the verified Hafs source sidecar survives the KFGQPC text upgrade without fetching or accepting another entity', async () => {
+  db = new Map();
+  invalid = false;
+  const online = global.fetch;
+  global.fetch = async url => ({
+    ok: true,
+    headers: {get: () => '"verified-md5"'},
+    text: async () =>
+      JSON.stringify(
+        url.endsWith('/reads')
+          ? [
+              {
+                id: 1,
+                rewaya: 'حفص عن عاصم',
+                folder_url: 'https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/',
+              },
+            ]
+          : url.includes('/soar?')
+            ? [{id: 112}]
+            : Array.from({length: 4}, (_, i) => ({
+                ayah: i + 1,
+                start_time: i * 1000,
+                end_time: (i + 1) * 1000,
+              })),
+      ),
+  });
+  const old = {
+    ...identity,
+    read: 1,
+    riwaya: 'hafs',
+    surah: 112,
+    numberingScheme: 'tanzil-madina-hafs',
+    audioUrl: 'https://cdn.mp3quran.net/audio/ibrahim-akhdar/r1/112.mp3',
+    audioEtag: '"verified-md5"',
+  };
+  await prepareTimingSource(old);
+  global.fetch = async () => {
+    throw Error('offline');
+  };
+  try {
+    const upgraded = {...old, numberingScheme: 'kfgqpc-madina-hafs'};
+    assert.equal((await bindCachedTiming(upgraded, 4000)).status, 'ready');
+    assert.equal(
+      (await bindCachedTiming({...upgraded, audioEtag: '"different"'}, 4000))
+        .status,
+      'invalid',
+    );
+  } finally {
+    global.fetch = online;
+  }
+});

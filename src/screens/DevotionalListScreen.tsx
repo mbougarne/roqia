@@ -291,7 +291,7 @@ export function DevotionalListScreen({
           ) : (
             <ReadingCard
               item={item}
-              showCompletion={root}
+              showCompletion
               dua={dua}
               index={adhkar ? index - 1 : index}
               count={repeatCounts[item.id] ?? item.repeat ?? 0}

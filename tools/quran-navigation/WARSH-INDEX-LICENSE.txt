@@ -1,0 +1,43 @@
+Creative Commons Attribution 4.0 International License (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Copyright (c) 2026 Noureddine El-Ahmadi
+
+You are free to:
+  • Share — copy and redistribute the material in any medium or format
+  • Adapt — remix, transform, and build upon the material
+  for any purpose, even commercially.
+
+Under the following terms:
+  • Attribution — You must give appropriate credit, provide a link to the
+    license, and indicate if changes were made. You may do so in any
+    reasonable manner, but not in any way that suggests the licensor
+    endorses you or your use.
+
+No additional restrictions — You may not apply legal terms or technological
+measures that legally restrict others from doing anything the license
+permits.
+
+-------------------------------------------------------------------------------
+
+THIS LICENSE APPLIES TO:
+  - The JSON data files in data/
+  - The raw extracted text in raw/lawh_verses.json and raw/mauri_verses.json
+  - Reports and documentation
+
+IT DOES NOT APPLY TO:
+  - Source code in scripts/ — covered by LICENSE-CODE (MIT)
+  - Page images in raw/muhammadi-pages/ — © Ministry of Habous, Morocco.
+    Distributed here for educational/study purposes. For commercial use of
+    the images, please contact https://mushaf.ma
+
+-------------------------------------------------------------------------------
+
+ATTRIBUTION TEXT (suggested):
+
+  "Verse data and eighth boundaries from the ma-mushaf-muhammadi-data project
+   by Noureddine El-Ahmadi, licensed under CC BY 4.0.
+   https://github.com/ELAHMADI/ma-mushaf-muhammadi-data"
+
+For the full legal text, see:
+https://creativecommons.org/licenses/by/4.0/legalcode

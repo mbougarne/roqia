@@ -41,6 +41,22 @@
       "bytes": 413484,
       "sha256": "e22a1a83602ef28c80f10afa1e798de4b5a299cc3c2ef65873c11fd11e7d9ed3",
       "purpose": "local compatibility evaluation only; not approved for this source pack"
+    },
+    {
+      "id": "kfgqpc-hafs-v2.0-update13",
+      "file": "UthmanicHafs_v2-0.zip",
+      "url": "https://cdn.quran.ws/KFGQPC/resources/quran-dev/uthmanic-hafs/UthmanicHafs_v2-0.zip",
+      "retrievedAt": "2026-10-21",
+      "bytes": 10729285,
+      "sha256": "a7b0e5591945712ec5e4d6142938ae4d1e9b49bdc89dff06222789bfebdfd72c",
+      "publisherUrl": "https://download.qurancomplex.gov.sa/resources_dev/UthmanicHafs_v2-0.zip",
+      "publisherPage": "https://qurancomplex.gov.sa/en/techquran/dev/",
+      "publisherMd5": "cf6841aea5b1d1fd70d032b43ff08278",
+      "publisherSha1": "36ea5ab0d7ea1702f17ff43f9b50924cccd77ebf",
+      "version": "2.0",
+      "update": "13.0",
+      "sourceDate": "2023-09-19",
+      "transport": "unofficial byte-preserving mirror; MD5/SHA-1 corroborated against indexed publisher page"
     }
   ]
 }

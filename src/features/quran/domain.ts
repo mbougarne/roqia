@@ -3,7 +3,16 @@ import {type Pack} from '../downloads/types';
 
 export {chapters};
 
-export type EditionId = 'warsh-kfgqpc-v2.1-update6' | 'hafs-tanzil-uthmani-1.1';
+export const hafsEditionId = 'hafs-kfgqpc-v2.0-update13';
+
+export const legacyHafsEditionId = 'hafs-tanzil-uthmani-1.1';
+
+export const hafsPackVersion = 'kfgqpc-2.0-update13';
+
+export type EditionId =
+  | 'warsh-kfgqpc-v2.1-update6'
+  | typeof hafsEditionId
+  | typeof legacyHafsEditionId;
 
 export type Edition = {
   id: EditionId;
@@ -14,11 +23,13 @@ export type Edition = {
   url: string;
   recommended: boolean;
   requiredFontSha256?: string;
+  sourceVerseMarkers?: boolean;
 };
 
 export const editions: Edition[] = [
   {
     id: 'warsh-kfgqpc-v2.1-update6',
+    sourceVerseMarkers: true,
     requiredFontSha256:
       'b436fb89e1d26f827cd6a3c4d632fb68a49cc954c4ac90699a9502da25555230',
     title: 'ورش عن نافع',
@@ -29,21 +40,37 @@ export const editions: Edition[] = [
     recommended: true,
   },
   {
-    id: 'hafs-tanzil-uthmani-1.1',
+    id: hafsEditionId,
+    sourceVerseMarkers: true,
+    requiredFontSha256:
+      'd560bbbc7a90a4f4d416d206a5ac48bd8a1ad00273d64d232f16ca54941bd041',
     title: 'حفص عن عاصم',
     riwaya: 'hafs',
-    numbering: 'tanzil-madina-hafs',
-    publisher: 'Tanzil Project',
-    url: 'https://tanzil.net/docs/Text_License',
+    numbering: 'kfgqpc-madina-hafs',
+    publisher: 'مجمع الملك فهد لطباعة المصحف الشريف',
+    url: 'https://qurancomplex.gov.sa/en/techquran/dev/',
     recommended: false,
   },
 ];
 
+// Historical identities remain valid for saved data and translation originals.
+const legacyHafsEdition: Edition = {
+  id: legacyHafsEditionId,
+  title: 'حفص عن عاصم',
+  riwaya: 'hafs',
+  numbering: 'tanzil-madina-hafs',
+  publisher: 'Tanzil Project',
+  url: 'https://tanzil.net/docs/Text_License',
+  recommended: false,
+};
+
 export const editionById = (id: string) => {
-  const edition = editions.find(e => e.id === id);
+  const edition = [...editions, legacyHafsEdition].find(e => e.id === id);
   if (!edition) throw Error('unknown_edition');
   return edition;
 };
+
+export type ReaderSection = {kind: 'surah' | 'juz' | 'hizb'; number: number};
 
 export type Locator = {
   editionId: EditionId;
@@ -51,6 +78,7 @@ export type Locator = {
   surah: number;
   verse: number;
   packVersion: string;
+  section?: ReaderSection;
 };
 
 export function validateLocator(l: Locator) {
@@ -73,6 +101,25 @@ export const locatorKey = (l: Locator) => {
   validateLocator(l);
   return `quran:${l.editionId}:${l.numberingScheme}:${l.surah}:${l.verse}:${l.packVersion}`;
 };
+
+// Both Hafs sources use the same 114-surah, 6236-verse Madinah numbering.
+// Only this exact historical version is mapped; Warsh is never mapped by number.
+export function currentHafsLocator(l: Locator): Locator {
+  validateLocator(l);
+  return l.editionId === legacyHafsEditionId && l.packVersion === 'source-1'
+    ? {
+        ...l,
+        editionId: hafsEditionId,
+        numberingScheme: editionById(hafsEditionId).numbering,
+        packVersion: hafsPackVersion,
+      }
+    : l;
+}
+
+export const isLegacyHafsReference = (t: TranslationPack) =>
+  t.editionId === legacyHafsEditionId &&
+  t.numberingScheme === legacyHafsEdition.numbering &&
+  t.textVersion === 'source-1';
 
 export type Verse = {number: number; text: string; sourceId?: string};
 
@@ -186,7 +233,11 @@ export function validateQuranCatalog(catalog: QuranCatalog) {
       !t.notice ||
       !['fr', 'en'].includes(t.language) ||
       !catalog.texts.some(
-        p => p.editionId === t.editionId && p.pack.version === t.textVersion,
+        p =>
+          (p.editionId === t.editionId && p.pack.version === t.textVersion) ||
+          (p.editionId === hafsEditionId &&
+            p.pack.version === hafsPackVersion &&
+            isLegacyHafsReference(t)),
       )
     )
       throw Error('unreviewed_translation_mapping');

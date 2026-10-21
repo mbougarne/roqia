@@ -169,9 +169,17 @@ export class DownloadCoordinator {
     return {
       begin: headers =>
         event(async current => {
+          // HTTP field names are case-insensitive. URLSession commonly returns
+          // Etag/Last-Modified, whereas Android's transport returns lowercase.
+          headers = Object.fromEntries(
+            Object.entries(headers).map(([name, value]) => [
+              name.toLowerCase(),
+              value,
+            ]),
+          );
           current.state = 'downloading';
           current.pauseReason = null;
-          current.etag = headers.etag ?? headers.ETag ?? null;
+          current.etag = headers.etag ?? null;
           current.lastModified = headers['last-modified'] ?? null;
           current.errorCode =
             headers['x-roqia-restart-reason'] ?? current.errorCode;

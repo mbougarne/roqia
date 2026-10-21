@@ -18,7 +18,11 @@ type SourceTiming = {
 const pending = new Map<string, Promise<CachedTiming>>();
 const sourcePending = new Map<string, Promise<SourceTiming>>();
 const sourceKey = (s: TimingSource) =>
-  `entity-v1:${s.read}:${s.riwaya}:${s.numberingScheme}:${s.surah}:${s.audioVersion}:${s.audioUrl}`;
+  `entity-v1:${s.read}:${s.riwaya}:${
+    s.riwaya === 'hafs' && s.numberingScheme === 'kfgqpc-madina-hafs'
+      ? 'tanzil-madina-hafs'
+      : s.numberingScheme
+  }:${s.surah}:${s.audioVersion}:${s.audioUrl}`;
 const strongEtag = (value: string) => /^"[^"\r\n]+"$/.test(value);
 
 async function audioEntity(url: string) {
