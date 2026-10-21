@@ -28,6 +28,7 @@ let focused = true,
   scrollFailures = 0,
   averageLength = 50;
 const listeners = new Set();
+let backPress = null;
 let edition = require('../../src/features/quran/domain.ts').editions[0];
 
 const platform = {OS: 'android'};
@@ -109,7 +110,17 @@ Module._load = function (name, parent, ...rest) {
         View: 'View',
         ScrollView: 'ScrollView',
         KeyboardAvoidingView: 'KeyboardAvoidingView',
-        Keyboard: {dismiss() {}},
+        Keyboard: {dismiss() {}, isVisible: () => false},
+        BackHandler: {
+          addEventListener: (_event, callback) => {
+            backPress = callback;
+            return {
+              remove: () => {
+                backPress = null;
+              },
+            };
+          },
+        },
         Text: 'Text',
         Pressable: 'Pressable',
         Modal: 'Modal',
@@ -504,117 +515,134 @@ test('the opening loader spans asset loading and native layout, without reappear
   await act(async () => tree.unmount());
 });
 
-test('iPhone juz ranges preserve original verse numbers, restore relative positions, and save the selected section', async () => {
-  const {editions, chapters} = require('../../src/features/quran/domain.ts');
-  const {sectionRange} = require('../../src/features/quran/divisions.ts');
-  platform.OS = 'ios';
-  try {
-    for (edition of editions) {
-      fixtureChapter = surah => ({
-        surah,
-        opening: 'OPENING',
-        verses: Array.from(
-          {
-            length:
-              edition.riwaya === 'warsh'
-                ? chapters[surah - 1].warshVerses
-                : chapters[surah - 1].hafsVerses,
-          },
-          (_, i) => ({number: i + 1, text: `SOURCE ${surah}:${i + 1}`}),
-        ),
+for (const os of ['ios', 'android']) {
+  test(`${os} juz ranges preserve original verse numbers, restore relative positions, and save the selected section`, async () => {
+    const {editions, chapters} = require('../../src/features/quran/domain.ts');
+    const {sectionRange} = require('../../src/features/quran/divisions.ts');
+    platform.OS = os;
+    try {
+      for (edition of editions) {
+        fixtureChapter = surah => ({
+          surah,
+          opening: 'OPENING',
+          verses: Array.from(
+            {
+              length:
+                edition.riwaya === 'warsh'
+                  ? chapters[surah - 1].warshVerses
+                  : chapters[surah - 1].hafsVerses,
+            },
+            (_, i) => ({number: i + 1, text: `SOURCE ${surah}:${i + 1}`}),
+          ),
+        });
+        const section = {kind: 'juz', number: 2},
+          range = sectionRange(edition.id, section);
+        const tree = await mount('verses', range.start.verse + 3, {section});
+        assert.equal(allVerses(tree)[0], range.start.verse);
+        assert.equal(allVerses(tree).at(-1), range.end.verse);
+        assert.equal(
+          tree.root
+            .findAllByType('Text')
+            .some(n => n.props.children === 'OPENING'),
+          false,
+        );
+        await act(async () => {
+          layoutHeader(tree);
+          list(tree).props.onContentSizeChange(400, 5000);
+        });
+        assert.deepEqual(scrolls.at(-1), {index: 3});
+        await act(async () => list(tree).props.onScrollEndDrag());
+        assert.deepEqual(remembered.at(-1).section, section);
+        const next = tree.root
+          .findAllByType('Button')
+          .find(n => n.props.label === 'الجزء التالي');
+        await act(async () => next.props.onPress());
+        assert.deepEqual(navigationEvents.at(-1).target.section, {
+          kind: 'juz',
+          number: 3,
+        });
+        assert.deepEqual(
+          navigationEvents.at(-1).target.verse,
+          sectionRange(edition.id, {kind: 'juz', number: 3}).start.verse,
+        );
+        await act(async () => tree.unmount());
+      }
+    } finally {
+      platform.OS = 'android';
+      fixtureChapter = null;
+      edition = editions[0];
+    }
+  });
+
+  test(`${os} keeps a multi-surah juz active across chapter continuation and uses a dismissible in-screen index`, async () => {
+    const {editions, chapters} = require('../../src/features/quran/domain.ts');
+    edition = editions[1];
+    platform.OS = os;
+    fixtureChapter = surah => ({
+      surah,
+      opening: 'OPENING',
+      verses: Array.from({length: chapters[surah - 1].hafsVerses}, (_, i) => ({
+        number: i + 1,
+        text: `SOURCE ${i + 1}`,
+      })),
+    });
+    let tree;
+    try {
+      tree = await mount('verses', 1, {
+        surah: 1,
+        section: {kind: 'juz', number: 1},
       });
-      const section = {kind: 'juz', number: 2},
-        range = sectionRange(edition.id, section);
-      const tree = await mount('verses', range.start.verse + 3, {section});
-      assert.equal(allVerses(tree)[0], range.start.verse);
-      assert.equal(allVerses(tree).at(-1), range.end.verse);
-      assert.equal(
-        tree.root
-          .findAllByType('Text')
-          .some(n => n.props.children === 'OPENING'),
-        false,
-      );
-      await act(async () => {
-        layoutHeader(tree);
-        list(tree).props.onContentSizeChange(400, 5000);
-      });
-      assert.deepEqual(scrolls.at(-1), {index: 3});
-      await act(async () => list(tree).props.onScrollEndDrag());
-      assert.deepEqual(remembered.at(-1).section, section);
       const next = tree.root
         .findAllByType('Button')
-        .find(n => n.props.label === 'الجزء التالي');
+        .find(n => n.props.label === 'متابعة الجزء · البقرة');
       await act(async () => next.props.onPress());
       assert.deepEqual(navigationEvents.at(-1).target.section, {
         kind: 'juz',
-        number: 3,
+        number: 1,
       });
-      assert.deepEqual(
-        navigationEvents.at(-1).target.verse,
-        sectionRange(edition.id, {kind: 'juz', number: 3}).start.verse,
+      assert.equal(navigationEvents.at(-1).target.surah, 2);
+      await act(async () =>
+        tree.root
+          .findAllByType('IconButton')
+          .find(n => n.props.label === 'فهرس القرآن')
+          .props.onPress(),
       );
-      await act(async () => tree.unmount());
+      assert.equal(tree.root.findAllByType('Index').length, 1);
+      assert.equal(
+        tree.root.findByType('KeyboardAvoidingView').props.behavior,
+        'padding',
+      );
+      assert.equal(
+        tree.root.findAllByType('Modal').length,
+        os === 'ios' ? 0 : 1,
+      );
+      if (os === 'android') {
+        await act(async () => assert.equal(backPress(), true));
+        assert.equal(tree.root.findAllByType('Index').length, 0);
+        await act(async () =>
+          tree.root
+            .findAllByType('IconButton')
+            .find(n => n.props.label === 'فهرس القرآن')
+            .props.onPress(),
+        );
+      }
+      const target = {
+        editionId: edition.id,
+        surah: 87,
+        verse: 1,
+        packVersion: 'source-1',
+        section: {kind: 'hizb', number: 60},
+      };
+      await act(async () =>
+        tree.root.findByType('Index').props.onSelect(target),
+      );
+      assert.equal(tree.root.findAllByType('Index').length, 0);
+      assert.deepEqual(navigationEvents.at(-1).target, target);
+    } finally {
+      if (tree) await act(async () => tree.unmount());
+      fixtureChapter = null;
+      platform.OS = 'android';
+      edition = editions[0];
     }
-  } finally {
-    platform.OS = 'android';
-    fixtureChapter = null;
-    edition = editions[0];
-  }
-});
-
-test('iPhone keeps a multi-surah juz active across chapter continuation and uses a dismissible in-screen index', async () => {
-  const {editions, chapters} = require('../../src/features/quran/domain.ts');
-  edition = editions[1];
-  platform.OS = 'ios';
-  fixtureChapter = surah => ({
-    surah,
-    opening: 'OPENING',
-    verses: Array.from({length: chapters[surah - 1].hafsVerses}, (_, i) => ({
-      number: i + 1,
-      text: `SOURCE ${i + 1}`,
-    })),
   });
-  let tree;
-  try {
-    tree = await mount('verses', 1, {
-      surah: 1,
-      section: {kind: 'juz', number: 1},
-    });
-    const next = tree.root
-      .findAllByType('Button')
-      .find(n => n.props.label === 'متابعة الجزء · البقرة');
-    await act(async () => next.props.onPress());
-    assert.deepEqual(navigationEvents.at(-1).target.section, {
-      kind: 'juz',
-      number: 1,
-    });
-    assert.equal(navigationEvents.at(-1).target.surah, 2);
-    await act(async () =>
-      tree.root
-        .findAllByType('IconButton')
-        .find(n => n.props.label === 'فهرس القرآن')
-        .props.onPress(),
-    );
-    assert.equal(tree.root.findAllByType('Index').length, 1);
-    assert.equal(
-      tree.root.findByType('KeyboardAvoidingView').props.behavior,
-      'padding',
-    );
-    assert.equal(tree.root.findAllByType('Modal').length, 0);
-    const target = {
-      editionId: edition.id,
-      surah: 87,
-      verse: 1,
-      packVersion: 'source-1',
-      section: {kind: 'hizb', number: 60},
-    };
-    await act(async () => tree.root.findByType('Index').props.onSelect(target));
-    assert.equal(tree.root.findAllByType('Index').length, 0);
-    assert.deepEqual(navigationEvents.at(-1).target, target);
-  } finally {
-    if (tree) await act(async () => tree.unmount());
-    fixtureChapter = null;
-    platform.OS = 'android';
-    edition = editions[0];
-  }
-});
+}

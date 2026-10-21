@@ -4,6 +4,7 @@ import React, {useEffect, useRef, useState, useCallback, useMemo} from 'react';
 import {
   ActivityIndicator,
   AppState,
+  BackHandler,
   FlatList,
   View,
   Text,
@@ -75,7 +76,7 @@ export function QuranReaderScreen(props: any) {
       verse: p.verse ?? 1,
       packVersion: p.packVersion ?? 'requested',
     });
-    if (Platform.OS === 'ios' && p.section) {
+    if (p.section) {
       const range = sectionRange(e.id, p.section);
       if (!containsCoordinate(range, {surah: p.surah, verse: p.verse ?? 1}))
         throw Error('section_locator_mismatch');
@@ -121,6 +122,18 @@ function Reader({route, navigation}: any) {
     Keyboard.dismiss();
     setIndexVisible(false);
   };
+  useEffect(() => {
+    if (Platform.OS !== 'android' || !indexVisible || !focused) return;
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        if (Keyboard.isVisible()) Keyboard.dismiss();
+        else setIndexVisible(false);
+        return true;
+      },
+    );
+    return () => subscription.remove();
+  }, [indexVisible, focused]);
   const [audioVerse, setAudioVerse] = useState<{
     verse: number;
     request: number;
@@ -144,10 +157,7 @@ function Reader({route, navigation}: any) {
   const edition = editionById(params.editionId),
     text = runtime.text(edition.id, params.packVersion),
     surah = params.surah;
-  const section =
-    Platform.OS === 'ios'
-      ? (params.section ?? {kind: 'surah', number: surah})
-      : undefined;
+  const section = params.section ?? {kind: 'surah', number: surah};
   const bounds = section
     ? sectionChapter(edition.id, section, surah)
     : undefined;
@@ -555,41 +565,32 @@ function Reader({route, navigation}: any) {
             label="رجوع"
             onPress={() => navigation.goBack()}
           />
-          {Platform.OS === 'ios' ? (
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="فتح فهرس القرآن والانتقال إلى موضع"
-              onPress={() => setIndexVisible(true)}
-              style={{flex: 1, minHeight: 52, justifyContent: 'center'}}>
-              <AppText role="sectionTitle" style={{textAlign: 'center'}}>
-                {chapters[surah - 1].name} ⌄
-              </AppText>
-              <AppText
-                role="caption"
-                style={{textAlign: 'center', color: p.textSecondary}}>
-                {sectionWord(
-                  sectionAt(edition.id, 'juz', {surah, verse: visibleVerse})
-                    .kind,
-                )}{' '}
-                {number(
-                  sectionAt(edition.id, 'juz', {surah, verse: visibleVerse})
-                    .number,
-                )}{' '}
-                · الحزب{' '}
-                {number(
-                  sectionAt(edition.id, 'hizb', {surah, verse: visibleVerse})
-                    .number,
-                )}
-              </AppText>
-            </Pressable>
-          ) : (
-            <AppText
-              role="screenTitle"
-              accessibilityRole="header"
-              style={{flex: 1, textAlign: 'center'}}>
-              {chapters[surah - 1].name}
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="فتح فهرس القرآن والانتقال إلى موضع"
+            onPress={() => setIndexVisible(true)}
+            style={{flex: 1, minHeight: 52, justifyContent: 'center'}}>
+            <AppText role="sectionTitle" style={{textAlign: 'center'}}>
+              {chapters[surah - 1].name} ⌄
             </AppText>
-          )}
+            <AppText
+              role="caption"
+              style={{textAlign: 'center', color: p.textSecondary}}>
+              {sectionWord(
+                sectionAt(edition.id, 'juz', {surah, verse: visibleVerse}).kind,
+              )}{' '}
+              {number(
+                sectionAt(edition.id, 'juz', {surah, verse: visibleVerse})
+                  .number,
+              )}{' '}
+              · الحزب{' '}
+              {number(
+                sectionAt(edition.id, 'hizb', {surah, verse: visibleVerse})
+                  .number,
+              )}
+            </AppText>
+          </Pressable>
+
           <IconButton
             name="settings"
             label="إعدادات القراءة"
@@ -1020,21 +1021,11 @@ function Reader({route, navigation}: any) {
               navigation.navigate('QuranTranslations', {editionId: edition.id})
             }
           />
-          {Platform.OS === 'ios' ? (
-            <IconButton
-              name="book"
-              label="فهرس القرآن"
-              onPress={() => setIndexVisible(true)}
-            />
-          ) : (
-            <IconButton
-              name="text-size"
-              label="إعدادات القراءة"
-              onPress={() =>
-                navigation.navigate('QuranPreferences', {editionId: edition.id})
-              }
-            />
-          )}
+          <IconButton
+            name="book"
+            label="فهرس القرآن"
+            onPress={() => setIndexVisible(true)}
+          />
         </View>
       </View>
       {indexVisible && focused && (

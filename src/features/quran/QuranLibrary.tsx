@@ -14,7 +14,7 @@ import {Group, SettingRow, rtlRow} from '../../design/components';
 import {AppText, AppIcon, IconButton, Page, StateView} from '../../design/ui';
 import {useFormat} from '../../design/useFormat';
 
-export function IphoneQuranLibrary({navigation}: any) {
+export function QuranLibraryScreen({navigation}: any) {
   const {runtime, ready, error, retry} = useLibrary(),
     {number} = useFormat();
   const [id, setId] = useState<EditionId>(editions[0].id),
