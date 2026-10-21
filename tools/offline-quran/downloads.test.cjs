@@ -131,10 +131,10 @@ test('both included mushafs install offline, recover old removal/missing files, 
     2,
   );
   for (const p of texts) {
-    assert.equal(c.isBundledText(p.id, p.version), true);
+    assert.equal(c.isBundledPack(p.id, p.version), true);
     await assert.rejects(
       c.deletePack(p.id, p.version),
-      /bundled_text_required/,
+      /protected_pack_required/,
     );
   }
   const state = f.disk;
@@ -151,23 +151,78 @@ test('both included mushafs install offline, recover old removal/missing files, 
   assert.ok(c.listInstalled().every(p => p.active && p.state === 'ready'));
   assert.equal(f.starts, 0);
 });
-test('bundles install without network, survive restart unchanged, and restore locally after removal', async () => {
-  const f = bundled();
+test('bundled translations cannot be deleted and recover old removed, cancelled or paused states offline', async () => {
+  const translations = [
+    'translation-fr.hamidullah',
+    'translation-en.pickthall',
+  ].map(id => ({
+    ...pack,
+    id,
+    capabilities: ['translation'],
+  }));
+  const f = bundled(translations);
+  f.ports.start = () => {
+    throw Error('network_must_not_start');
+  };
   let c = f.c();
   await c.initialize();
-  assert.equal(f.starts, 0);
-  assert.equal(c.listInstalled()[0].state, 'ready');
   const before = structuredClone(f.disk);
+  for (const p of translations) {
+    await assert.rejects(
+      c.deletePack(p.id, p.version),
+      /protected_pack_required/,
+    );
+  }
+  assert.deepEqual(f.disk, before);
   c = f.c();
   await c.initialize();
   assert.deepEqual(f.disk, before);
-  await c.deletePack(pack.id, pack.version);
+  for (const state of ['removed', 'cancelled', 'paused_user']) {
+    f.disk.installed = [];
+    f.disk.jobs.forEach(j => {
+      j.state = state;
+    });
+    f.files.clear();
+    c = f.c();
+    await c.initialize();
+    assert.equal(c.listInstalled().length, 2);
+    assert.ok(c.listInstalled().every(p => p.active && p.state === 'ready'));
+  }
+  assert.equal(f.starts, 0);
+});
+test('user-downloaded audio can still be removed and is not restored on restart', async () => {
+  const audio = {...pack, capabilities: ['audio']};
+  const f = fixture([audio]);
+  let c = f.c();
+  await c.initialize();
+  await c.networkChanged({connected: true, wifi: true});
+  await c.enqueue(audio.id, audio.version);
+  await f.done(c);
+  assert.equal(c.listInstalled().length, 1);
+  await c.deletePack(audio.id, audio.version);
   c = f.c();
   await c.initialize();
   assert.equal(c.listInstalled().length, 0);
-  await c.installBundled(pack.id, pack.version);
-  assert.equal(c.listInstalled()[0].state, 'ready');
-  assert.equal(f.starts, 0);
+  assert.equal(f.files.size, 0);
+});
+test('older installed mushafs and translations remain protected even outside the current catalog', async () => {
+  for (const capability of ['quran-text', 'translation']) {
+    const old = {...pack, capabilities: [capability]};
+    const f = fixture([old]);
+    let c = f.c();
+    await c.initialize();
+    await c.networkChanged({connected: true, wifi: true});
+    await c.enqueue(old.id, old.version);
+    await f.done(c);
+    c = new DownloadCoordinator([], f.ports);
+    await c.initialize();
+    assert.equal(c.isProtectedPack(old.id, old.version), true);
+    await assert.rejects(
+      c.deletePack(old.id, old.version),
+      /protected_pack_required/,
+    );
+    assert.equal(c.listInstalled().length, 1);
+  }
 });
 test('bad bundled bytes cannot activate and next launch recovers from a valid copy', async () => {
   const f = bundled();

@@ -58,6 +58,7 @@ The native tests verify the six bundled adhan files, reject invalid adhan hashes
 
 ## Native integration
 
+- `LaunchScreen.storyboard` uses the existing Roqia medallion and light/dark palette through `LaunchMark` and `LaunchBackground` assets. It transitions into the shared hydration screen without the React Native template labels or an added startup delay. Keep these assets aligned with `AppIcon`'s medallion and the background/accent values in `src/design/tokens/colors.json`.
 - `RoqiaSceneDelegate` retains the React Native factory and its dependency provider, creates the scene window, selects the Debug/Release bundle, and forwards warm and cold links. Scene-based startup is required when running apps built with the latest SDK on iOS 27.
 - `AppDelegate` retains application launch options and forwards background URL-session completion to the downloader.
 - `RoqiaReader` verifies and imports named archive members, extracts source opening verses, registers the original font, rejects fallback font runs, and manages the reading screen's idle timer. When the font is already bundled, its registered file must match the pinned hash before reuse.

@@ -623,20 +623,10 @@ export class DownloadCoordinator {
           }
         }
       }
-      // Mushaf text is always included, including upgrades from a previously removed pack.
-      // Optional translations retain the user's removal/pause choice.
+      // Every shipped pack is required content. Recover old removal/pause choices
+      // locally, including translations deleted by earlier versions.
       for (const pack of this.catalog) {
         if (!this.ports.bundled?.(pack)) continue;
-        const jobs = this.jobs.filter(
-          j => j.packId === pack.id && j.version === pack.version,
-        );
-        if (
-          !pack.capabilities.includes('quran-text') &&
-          jobs.some(j =>
-            ['removed', 'cancelled', 'paused_user'].includes(j.state),
-          )
-        )
-          continue;
         await this.importBundled(pack);
       }
       this.ready = true;
@@ -648,7 +638,7 @@ export class DownloadCoordinator {
       if (!this.ready) throw Error('downloads_not_initialized');
       const pack = this.catalog.find(p => p.id === id && p.version === version);
       if (!pack) throw Error('pack_unavailable');
-      if (this.isBundledText(id, version)) {
+      if (this.isBundledPack(id, version)) {
         await this.importBundled(pack);
         return;
       }
@@ -805,17 +795,23 @@ export class DownloadCoordinator {
     );
     await this.save();
   }
-  isBundledText = (id: string, version: string) => {
+  isBundledPack = (id: string, version: string) => {
     const pack = this.catalog.find(p => p.id === id && p.version === version);
+    return !!pack && !!this.ports.bundled?.(pack);
+  };
+  isProtectedPack = (id: string, version: string) => {
+    const pack =
+      this.catalog.find(p => p.id === id && p.version === version) ??
+      this.installed.find(p => p.packId === id && p.version === version);
     return (
-      !!pack &&
-      pack.capabilities.includes('quran-text') &&
-      !!this.ports.bundled?.(pack)
+      this.isBundledPack(id, version) ||
+      !!pack?.capabilities.some(c => ['quran-text', 'translation'].includes(c))
     );
   };
   deletePack = (id: string, version: string) =>
     this.run(async () => {
-      if (this.isBundledText(id, version)) throw Error('bundled_text_required');
+      if (this.isProtectedPack(id, version))
+        throw Error('protected_pack_required');
       const pack = this.installed.find(
         p => p.packId === id && p.version === version,
       );

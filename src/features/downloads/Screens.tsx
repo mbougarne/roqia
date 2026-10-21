@@ -86,7 +86,7 @@ export function DownloadsScreen({navigation}: any) {
       .listJobs()
       .filter(
         j =>
-          !runtime.catalog.texts.some(t => t.pack.id === j.packId) &&
+          !downloads.isProtectedPack(j.packId, j.version) &&
           !['removed', 'cancelled'].includes(j.state),
       );
   return (
@@ -273,7 +273,9 @@ export function StorageScreen({navigation}: any) {
     [usage, setUsage] = useState({installed: 0, partial: 0, free: 0}),
     [selected, setSelected] = useState<string[]>([]),
     [sizes, setSizes] = useState<Record<string, number>>({});
-  const packs = downloads.listInstalled(),
+  const packs = downloads
+      .listInstalled()
+      .filter(pack => !downloads.isProtectedPack(pack.packId, pack.version)),
     key = (p: InstalledPack) => `${p.packId}@${p.version}`;
   useEffect(() => {
     if (!ready) return;
@@ -282,6 +284,7 @@ export function StorageScreen({navigation}: any) {
       Promise.all(
         downloads
           .listInstalled()
+          .filter(pack => !downloads.isProtectedPack(pack.packId, pack.version))
           .map(
             async p =>
               [
@@ -333,43 +336,27 @@ export function StorageScreen({navigation}: any) {
           {!packs.length && (
             <StateView
               title="لا توجد حزم منزّلة"
-              description="المقاطع المرفقة بالتطبيق محفوظة للاستخدام دون اتصال، ولا تحذف من هذه الصفحة."
+              description="المصاحف والترجمات وأصوات الأذان المرفقة بالتطبيق محفوظة دائماً. تظهر هنا فقط الملفات التي نزّلتها بنفسك."
             />
           )}
-          <Ornament title="المحتوى المحفوظ" />
-          {packs
-            .filter(pack => downloads.isBundledText(pack.packId, pack.version))
-            .map(pack => (
-              <SettingRow
-                key={key(pack)}
-                title={packTitle(pack.packId)}
-                detail={
-                  'مرفق بالتطبيق · ' + displayBytes(sizes[key(pack)] ?? 0)
-                }
-                icon="book"
-              />
-            ))}
-          {packs
-            .filter(pack => !downloads.isBundledText(pack.packId, pack.version))
-            .map(pack => (
-              <RadioRow
-                multiple
-                key={key(pack)}
-                title={packTitle(pack.packId)}
-                detail={displayBytes(sizes[key(pack)] ?? 0)}
-                icon={
-                  pack.capabilities.includes('audio') ? 'headphones' : 'book'
-                }
-                selected={selected.includes(key(pack))}
-                onPress={() =>
-                  setSelected(s =>
-                    s.includes(key(pack))
-                      ? s.filter(k => k !== key(pack))
-                      : [...s, key(pack)],
-                  )
-                }
-              />
-            ))}
+          {!!packs.length && <Ornament title="تنزيلاتك" />}
+          {packs.map(pack => (
+            <RadioRow
+              multiple
+              key={key(pack)}
+              title={packTitle(pack.packId)}
+              detail={displayBytes(sizes[key(pack)] ?? 0)}
+              icon={pack.capabilities.includes('audio') ? 'headphones' : 'book'}
+              selected={selected.includes(key(pack))}
+              onPress={() =>
+                setSelected(s =>
+                  s.includes(key(pack))
+                    ? s.filter(k => k !== key(pack))
+                    : [...s, key(pack)],
+                )
+              }
+            />
+          ))}
           {!!chosen.length && (
             <Button
               danger
