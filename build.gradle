@@ -37,7 +37,11 @@ spotless {
         target fileTree(repository) {
             include 'android/*.gradle', 'android/app/*.gradle', '*.gradle'
         }
-        greclipse('4.35')
+        // Use the university mirror while Eclipse's download/archive hosts are unavailable.
+        greclipse('4.35').withP2Mirrors([
+            'https://download.eclipse.org/eclipse/updates/4.35/': 'https://ftp.fau.de/eclipse/eclipse/updates/4.35/',
+            'https://groovy.jfrog.io/': 'https://groovy.jfrog.io/'
+        ])
         leadingTabsToSpaces(4)
         trimTrailingWhitespace()
         endWithNewline()
