@@ -21,6 +21,8 @@ require.extensions['.tsx'] = (module, file) =>
   );
 let savedKind = 'surah',
   restoredKind = null;
+let dismissals = 0;
+const focusCleanups = new Set();
 const runtime = {
   indexKind: () => restoredKind ?? Promise.resolve(savedKind),
   setIndexKind: async k => {
@@ -30,8 +32,21 @@ const runtime = {
 const load = Module._load;
 Module._load = function (name, parent, ...rest) {
   if (parent?.filename.endsWith('/quran/QuranIndex.tsx')) {
-    if (name === 'react-native') return {View: 'View'};
-    if (name === './context') return {useLibrary: () => ({runtime})};
+    if (name === 'react-native')
+      return {View: 'View', Keyboard: {dismiss: () => dismissals++}};
+    if (name === './context')
+      return {
+        useLibrary: () => ({runtime}),
+        useOnFocus: (callback, deps) =>
+          React.useEffect(() => {
+            const cleanup = callback();
+            focusCleanups.add(cleanup);
+            return () => {
+              focusCleanups.delete(cleanup);
+              cleanup();
+            };
+          }, deps),
+      };
     if (name.endsWith('/design/components'))
       return {
         Group: 'Group',
@@ -116,4 +131,30 @@ test('a slow stored-tab read cannot override the user’s new selection', async 
     restoredKind = null;
     if (view) await act(async () => view.unmount());
   }
+});
+test('selecting a result or leaving for search/bookmarks dismisses the keyboard without clearing the query', async () => {
+  let view;
+  const before = dismissals;
+  await act(async () => {
+    view = create(
+      React.createElement(QuranIndex, {
+        editionId: editions[0].id,
+        packVersion: 'source-1',
+        initialKind: 'surah',
+        onSelect: () => assert.equal(dismissals, before + 1),
+      }),
+    );
+  });
+  await act(async () =>
+    view.root.findByType('SearchField').props.onChange('النساء'),
+  );
+  assert.equal(view.root.findByType('SearchField').props.dismissible, true);
+  await act(async () => view.root.findByType('SettingRow').props.onPress());
+  assert.equal(dismissals, before + 1);
+  await act(async () => {
+    for (const cleanup of focusCleanups) cleanup();
+  });
+  assert.equal(dismissals, before + 2);
+  assert.equal(view.root.findByType('SearchField').props.value, 'النساء');
+  await act(async () => view.unmount());
 });

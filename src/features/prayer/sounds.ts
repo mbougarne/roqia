@@ -20,7 +20,9 @@ export type AdhanSound = {
 export const sounds = data as AdhanSound[];
 
 export const adhanNative = () =>
-  Platform.OS === 'android' ? NativeModules?.RoqiaPrayer : undefined;
+  ['android', 'ios'].includes(Platform.OS)
+    ? NativeModules?.RoqiaPrayer
+    : undefined;
 
 export const bundledSoundAvailable = (sound: AdhanSound) =>
   !!sound.bundled && !!adhanNative()?.prepareBundledAdhan;

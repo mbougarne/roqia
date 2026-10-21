@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Text} from 'react-native';
+import {Keyboard, Platform, Text} from 'react-native';
 
 import {useLibrary, useOnFocus, useQuran} from './context';
 import {
@@ -29,7 +29,6 @@ import {
 } from '../../design/components';
 import {ltr} from '../../design/format';
 import {
-  IconButton,
   AppText,
   Button,
   Card,
@@ -317,6 +316,7 @@ export function QuranSearchScreen({navigation}: any) {
     act(runtime.preferred().then(e => setId(e.id)));
     act(runtime.recent().then(setRecent));
     return () => {
+      Keyboard.dismiss();
       generation.current++;
     };
   }, [runtime]);
@@ -328,6 +328,7 @@ export function QuranSearchScreen({navigation}: any) {
   const text = runtime.text(id),
     canSearch = !!text && !!runtime.installed(text.pack);
   const search = () => {
+    Keyboard.dismiss();
     const gen = ++generation.current;
     setBusy(true);
     setFailed(false);
@@ -356,6 +357,12 @@ export function QuranSearchScreen({navigation}: any) {
         label="اسم السورة أو نص الآية"
         value={query}
         onChange={setQuery}
+        dismissible={Platform.OS === 'ios'}
+        onSubmit={
+          ready && canSearch && query.trim().length >= 2 && !busy
+            ? search
+            : undefined
+        }
       />
       <Group>
         <SettingRow
@@ -480,8 +487,8 @@ export function QuranBookmarksScreen({navigation}: any) {
         rows.map(
           b =>
             b.kind === 'quran-verse' && (
-              <Group key={b.bookmarkId}>
-                <SettingRow
+              <Card key={b.bookmarkId} style={{gap: 8}}>
+                <Row
                   title={chapters[b.surah - 1].name}
                   detail={
                     editionsTitle(b.editionId) + ' · الآية ' + number(b.verse)
@@ -489,14 +496,14 @@ export function QuranBookmarksScreen({navigation}: any) {
                   icon="bookmark"
                   onPress={() => navigation.navigate('QuranReader', b)}
                 />
-                <IconButton
-                  name="trash"
-                  label="إزالة العلامة"
+                <Button
+                  secondary
+                  label="إزالة من المحفوظات"
                   onPress={() =>
                     act(removeBookmark(b.bookmarkId).then(refresh))
                   }
                 />
-              </Group>
+              </Card>
             ),
         )
       )}

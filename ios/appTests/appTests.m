@@ -5,6 +5,15 @@
 
 // Exercise the exported adapter exactly as JavaScript calls it, against the real bundled source.
 @interface NSObject (RoqiaReaderTests)
+- (void)prepareBundledAdhan:(NSString *)resource
+                      bytes:(double)bytes
+                       hash:(NSString *)hash
+                    resolve:(RCTPromiseResolveBlock)resolve
+                     reject:(RCTPromiseRejectBlock)reject;
+- (void)previewAdhan:(NSString *)payload
+             resolve:(RCTPromiseResolveBlock)resolve
+              reject:(RCTPromiseRejectBlock)reject;
+- (void)stopAdhan;
 - (void)audioDuration:(NSString *)path
               resolve:(RCTPromiseResolveBlock)resolve
                reject:(RCTPromiseRejectBlock)reject;
@@ -39,6 +48,86 @@
 @end
 
 @implementation appTests
+
+- (void)testBundledAdhansAreVerifiedAndPreviewRejectsAnExternalPath {
+  NSArray *sounds = @[
+    @[
+      @"roqia_adhan_01", @304369,
+      @"6bbc400b43e80c8fb1950aa143f1681c51fa2a58b1c053fcd14508ed9f9834cf"
+    ],
+    @[
+      @"roqia_adhan_02", @465224,
+      @"2f97e880c0a51a5eedfb7623bdff8507b0a55dba9e84f3792a56a2a989bb816c"
+    ],
+    @[
+      @"roqia_adhan_03", @318554,
+      @"bf601b1e075ace128b40270ab08a90ea30d8be989456c657858c52520991396a"
+    ],
+    @[
+      @"roqia_adhan_04", @1567897,
+      @"b7b1ec5511a6a3ddf544ea2bfea29f3c46d7253bfb503982ef580907a338a5de"
+    ],
+    @[
+      @"roqia_adhan_05", @1897034,
+      @"22202889003280d028a38f36ca32b4e1bf87bf51c3fb72cc0ca026065a606dbd"
+    ],
+    @[
+      @"roqia_adhan_05_short", @151604,
+      @"f6193e5ebd475c56038d6890534e47f84883c8a72509b0f2713904a2d572d3c4"
+    ]
+  ];
+  NSObject *prayer = [NSClassFromString(@"RoqiaPrayer") new];
+  for (NSArray *sound in sounds) {
+    [prayer prepareBundledAdhan:sound[0]
+        bytes:[sound[1] doubleValue]
+        hash:sound[2]
+        resolve:^(NSString *path) {
+          XCTAssertTrue([NSFileManager.defaultManager fileExistsAtPath:path]);
+          AVAudioPlayer *player =
+              [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:nil];
+          XCTAssertGreaterThan(player.duration, 14);
+        }
+        reject:^(NSString *code, NSString *message, NSError *error) {
+          XCTFail(@"%@ %@", code, message);
+        }];
+  }
+  [prayer prepareBundledAdhan:@"../roqia_adhan_01"
+      bytes:304369
+      hash:sounds[0][2]
+      resolve:^(id path) {
+        XCTFail(@"Accepted an invalid resource");
+      }
+      reject:^(NSString *code, NSString *message, NSError *error) {
+        XCTAssertEqualObjects(code, @"bundled_adhan_unavailable");
+      }];
+  [prayer prepareBundledAdhan:@"roqia_adhan_01"
+      bytes:304369
+      hash:[@"a" stringByPaddingToLength:64 withString:@"a" startingAtIndex:0]
+      resolve:^(id path) {
+        XCTFail(@"Accepted a mismatched hash");
+      }
+      reject:^(NSString *code, NSString *message, NSError *error) {
+        XCTAssertEqualObjects(code, @"bundled_adhan_unavailable");
+      }];
+  NSData *json = [NSJSONSerialization dataWithJSONObject:@{
+    @"path" : @"/tmp/roqia_adhan_01.mp3",
+    @"bytes" : @304369,
+    @"sha256" : sounds[0][2]
+  }
+                                                 options:0
+                                                   error:nil];
+  XCTestExpectation *rejected = [self expectationWithDescription:@"Reject external preview path"];
+  [prayer previewAdhan:[[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding]
+      resolve:^(id value) {
+        XCTFail(@"Accepted an external preview path");
+        [rejected fulfill];
+      }
+      reject:^(NSString *code, NSString *message, NSError *error) {
+        XCTAssertEqualObjects(code, @"adhan_preview_unavailable");
+        [rejected fulfill];
+      }];
+  [self waitForExpectations:@[ rejected ] timeout:10];
+}
 
 - (void)setUp {
   [super setUp];
