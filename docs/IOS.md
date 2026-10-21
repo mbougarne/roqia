@@ -54,7 +54,7 @@ xcodebuild -workspace ios/app.xcworkspace -scheme app \
   -collect-test-diagnostics never test
 ```
 
-The native tests exercise the original Warsh source archive, all 114 surahs' font coverage and opening verses, repeated loading of the bundled legacy UI font, rejection of altered sources and paths outside private content, native audio-duration reading, and bounded verse export/reuse/range rejection. New Hafs rendering is checked separately with its downloaded original pack. The test bundle includes the original audio fixture so Debug tests do not depend on Metro's asset layout. The hosted test target inherits dependency search paths; the app links the native libraries. Tests use a unique temporary directory inside the test app and remove only that directory.
+The native tests exercise the original Warsh source archive, all 114 surahs' font coverage and opening verses, repeated loading of the bundled legacy UI font, rejection of altered sources and paths outside private content, native audio-duration reading, and bounded verse export/reuse/range rejection. New Hafs rendering is checked separately with its bundled original pack. The test bundle includes the original audio fixture so Debug tests do not depend on Metro's asset layout. The hosted test target inherits dependency search paths; the app links the native libraries. Tests use a unique temporary directory inside the test app and remove only that directory.
 
 ## Native integration
 
@@ -67,11 +67,11 @@ The native tests exercise the original Warsh source archive, all 114 surahs' fon
 
 Full adhan background playback and the native sleep timer retain their existing platform capability checks. Their Android implementations are not evidence that these features are supported on iOS. Verify the visible iOS fallback and describe platform limits accurately in store materials.
 
-## iPhone Hafs source
+## Bundled Quran sources
 
-Metro selects `catalog.ios.ts` for iPhone: Hafs uses King Fahd Glorious Quran Printing Complex's UthmanicHafs v2.0, update 13.0, with its original paired Quran font. Android's existing Tanzil text descriptor is retained in `legacy-hafs.data.json` until its separate validation. Warsh, translations and recording descriptors are unchanged.
+Both platforms use the shared `catalog.ts`: Hafs uses King Fahd Glorious Quran Printing Complex's UthmanicHafs v2.0, update 13.0, with its original paired Quran font. Warsh uses the unchanged Complex v2.1 archive. Both archives ship in `bundled-content/roqia-offline` and are verified/prepared locally on first launch, without network access. The old Tanzil descriptor remains in `legacy-hafs.data.json` for saved-reference and translation compatibility; it is no longer offered as a separate mushaf. Android physical-device validation of this source upgrade is deferred until after the iPhone submission.
 
-The archive is downloaded from the same quran.ws mirror used for Warsh. Its MD5 `cf6841aea5b1d1fd70d032b43ff08278` and SHA-1 `36ea5ab0d7ea1702f17ff43f9b50924cccd77ebf` match the [Complex's developer page](https://qurancomplex.gov.sa/en/techquran/dev/); the exact archive's SHA-256, byte count and publisher provenance are pinned in `tools/feasibility/sources.lock.json`. No font editing or Quran string normalization is performed. The original font license permits free use/copy/distribution and prohibits font modification/sale; its complete notice travels with the pack.
+The bundled archive was acquired from the same quran.ws mirror used for Warsh. Its MD5 `cf6841aea5b1d1fd70d032b43ff08278` and SHA-1 `36ea5ab0d7ea1702f17ff43f9b50924cccd77ebf` match the [Complex's developer page](https://qurancomplex.gov.sa/en/techquran/dev/); the exact archive's SHA-256, byte count and publisher provenance are pinned in `tools/feasibility/sources.lock.json`. No font editing or Quran string normalization is performed. The original font license permits free use/copy/distribution and prohibits font modification/sale; its complete notice travels with the pack.
 
 `python3 tools/phase5/catalog.py --check` validates the locked originals, JSON/CSV agreement, counts, source openings and all generated chapter descriptors. Hafs has 6,236 verses: Al-Fatihah includes its basmala as verse 1, At-Tawbah has no opening, and 112 other openings are preserved verbatim from the original Word document. The source's differing shadda on the openings of At-Tin and Al-Qadr is preserved.
 

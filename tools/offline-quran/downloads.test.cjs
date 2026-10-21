@@ -25,7 +25,7 @@ const pack = {
   ],
 };
 
-function fixture() {
+function fixture(catalog = [pack]) {
   let disk = {jobs: [], installed: [], journals: []},
     files = new Map(),
     tasks = new Map(),
@@ -86,7 +86,7 @@ function fixture() {
     ports,
     files,
     tasks,
-    c: () => new DownloadCoordinator([pack], ports),
+    c: () => new DownloadCoordinator(catalog, ports),
     get disk() {
       return disk;
     },
@@ -108,12 +108,49 @@ function fixture() {
   };
 }
 
-function bundled() {
-  const f = fixture();
+function bundled(catalog) {
+  const f = fixture(catalog);
   f.ports.bundled = () => true;
   f.ports.copyBundled = async (p, a, target) => f.files.set(target, 100);
   return f;
 }
+test('both included mushafs install offline, recover old removal/missing files, and cannot be deleted', async () => {
+  const texts = ['warsh', 'hafs'].map(id => ({
+    ...pack,
+    id,
+    capabilities: ['quran-text'],
+  }));
+  const f = bundled(texts);
+  f.ports.start = () => {
+    throw Error('network_must_not_start');
+  };
+  let c = f.c();
+  await c.initialize();
+  assert.equal(
+    c.listInstalled().filter(p => p.active && p.state === 'ready').length,
+    2,
+  );
+  for (const p of texts) {
+    assert.equal(c.isBundledText(p.id, p.version), true);
+    await assert.rejects(
+      c.deletePack(p.id, p.version),
+      /bundled_text_required/,
+    );
+  }
+  const state = f.disk;
+  state.installed = [];
+  state.jobs.forEach(j => {
+    j.state = 'removed';
+  });
+  c = f.c();
+  await c.initialize();
+  assert.equal(c.listInstalled().length, 2);
+  f.files.clear();
+  c = f.c();
+  await c.initialize();
+  assert.ok(c.listInstalled().every(p => p.active && p.state === 'ready'));
+  assert.equal(f.starts, 0);
+});
 test('bundles install without network, survive restart unchanged, and restore locally after removal', async () => {
   const f = bundled();
   let c = f.c();

@@ -11,15 +11,7 @@ import {
 } from './domain';
 import {QuranIndex} from './QuranIndex';
 import {Group, SettingRow, rtlRow} from '../../design/components';
-import {
-  AppText,
-  AppIcon,
-  Button,
-  Card,
-  IconButton,
-  Page,
-  StateView,
-} from '../../design/ui';
+import {AppText, AppIcon, IconButton, Page, StateView} from '../../design/ui';
 import {useFormat} from '../../design/useFormat';
 
 export function IphoneQuranLibrary({navigation}: any) {
@@ -51,8 +43,7 @@ export function IphoneQuranLibrary({navigation}: any) {
     };
   }, [runtime, attempt]);
   const edition = editionById(id),
-    text = runtime.text(id),
-    installed = text && runtime.installed(text.pack);
+    text = runtime.text(id);
   return (
     <Page
       title="القرآن الكريم"
@@ -89,7 +80,7 @@ export function IphoneQuranLibrary({navigation}: any) {
           <Group>
             <SettingRow
               title={edition.title}
-              detail={installed ? 'محفوظ على جهازك' : 'اختيار المصحف وتنزيله'}
+              detail="متاح دون اتصال · ورش وحفص"
               icon="book"
               onPress={() => navigation.navigate('QuranEditions')}
             />
@@ -103,17 +94,6 @@ export function IphoneQuranLibrary({navigation}: any) {
                 onPress={() => navigation.navigate('QuranReader', resume)}
               />
             </Group>
-          )}
-          {!installed && (
-            <Card>
-              <AppText>نزّل المصحف مرة واحدة للقراءة دون اتصال.</AppText>
-              <Button
-                label="تنزيل المصحف"
-                onPress={() =>
-                  navigation.navigate('QuranDownload', {editionId: id})
-                }
-              />
-            </Card>
           )}
           <Pressable
             accessibilityRole="button"
@@ -138,11 +118,7 @@ export function IphoneQuranLibrary({navigation}: any) {
             <QuranIndex
               editionId={id}
               packVersion={text.pack.version}
-              onSelect={target =>
-                installed
-                  ? navigation.navigate('QuranReader', target)
-                  : navigation.navigate('QuranDownload', {editionId: id})
-              }
+              onSelect={target => navigation.navigate('QuranReader', target)}
             />
           )}
         </>

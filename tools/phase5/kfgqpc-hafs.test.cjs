@@ -1,8 +1,7 @@
 require('../foundation/register.cjs');
 const {test} = require('node:test'),
   assert = require('node:assert/strict');
-const {quranCatalog} = require('../../src/features/quran/catalog.ios.ts');
-const android = require('../../src/features/quran/catalog.ts').quranCatalog;
+const {quranCatalog} = require('../../src/features/quran/catalog.ts');
 const {
   chapters,
   validateQuranCatalog,
@@ -15,13 +14,9 @@ const {
   parseOriginalSource,
 } = require('../../src/features/quran/sourceParser.ts');
 
-test('iPhone imports paired KFGQPC Hafs text/font while Android keeps its existing source', () => {
+test('both platforms import paired KFGQPC Hafs text/font', () => {
   validateQuranCatalog(quranCatalog);
   assert.equal(quranCatalog.texts[1].editionId, hafsEditionId);
-  assert.equal(android.texts[1].editionId, 'hafs-tanzil-uthmani-1.1');
-  assert.deepEqual(quranCatalog.texts[0], android.texts[0]);
-  assert.deepEqual(quranCatalog.translations, android.translations);
-  assert.deepEqual(quranCatalog.recordings, android.recordings);
   const bad = structuredClone(quranCatalog);
   bad.texts[1].pack.derivedAssets.find(a => a.id === 'source-font').sha256 =
     '0'.repeat(64);

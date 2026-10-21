@@ -387,8 +387,7 @@ test('iPhone Hafs upgrade preserves old settings, resume position and bookmark r
     saveRecord,
     readRecord,
   } = require('../../src/repositories/database.ts');
-  const catalog =
-    require('../../src/features/quran/catalog.ios.ts').quranCatalog;
+  const catalog = require('../../src/features/quran/catalog.ts').quranCatalog;
   const ios = new QuranRuntime(
     catalog,
     downloads,

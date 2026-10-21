@@ -84,7 +84,11 @@ export function DownloadsScreen({navigation}: any) {
   const {error, ready, retry} = useDownloads(),
     jobs = downloads
       .listJobs()
-      .filter(j => !['removed', 'cancelled'].includes(j.state));
+      .filter(
+        j =>
+          !runtime.catalog.texts.some(t => t.pack.id === j.packId) &&
+          !['removed', 'cancelled'].includes(j.state),
+      );
   return (
     <Page title="التنزيلات" onBack={() => navigation.goBack()}>
       <Segments
@@ -126,7 +130,7 @@ export function DownloadsScreen({navigation}: any) {
       ) : !jobs.length ? (
         <StateView
           title="لا توجد تنزيلات"
-          description="اختر مصحفك من مكتبة القرآن لتنزيله وقراءته دون اتصال."
+          description="المصحفان متاحان دون اتصال. يمكنك تنزيل التلاوات من مشغل القرآن."
         />
       ) : (
         jobs
@@ -333,23 +337,39 @@ export function StorageScreen({navigation}: any) {
             />
           )}
           <Ornament title="المحتوى المحفوظ" />
-          {packs.map(pack => (
-            <RadioRow
-              multiple
-              key={key(pack)}
-              title={packTitle(pack.packId)}
-              detail={displayBytes(sizes[key(pack)] ?? 0)}
-              icon={pack.capabilities.includes('audio') ? 'headphones' : 'book'}
-              selected={selected.includes(key(pack))}
-              onPress={() =>
-                setSelected(s =>
-                  s.includes(key(pack))
-                    ? s.filter(k => k !== key(pack))
-                    : [...s, key(pack)],
-                )
-              }
-            />
-          ))}
+          {packs
+            .filter(pack => downloads.isBundledText(pack.packId, pack.version))
+            .map(pack => (
+              <SettingRow
+                key={key(pack)}
+                title={packTitle(pack.packId)}
+                detail={
+                  'مرفق بالتطبيق · ' + displayBytes(sizes[key(pack)] ?? 0)
+                }
+                icon="book"
+              />
+            ))}
+          {packs
+            .filter(pack => !downloads.isBundledText(pack.packId, pack.version))
+            .map(pack => (
+              <RadioRow
+                multiple
+                key={key(pack)}
+                title={packTitle(pack.packId)}
+                detail={displayBytes(sizes[key(pack)] ?? 0)}
+                icon={
+                  pack.capabilities.includes('audio') ? 'headphones' : 'book'
+                }
+                selected={selected.includes(key(pack))}
+                onPress={() =>
+                  setSelected(s =>
+                    s.includes(key(pack))
+                      ? s.filter(k => k !== key(pack))
+                      : [...s, key(pack)],
+                  )
+                }
+              />
+            ))}
           {!!chosen.length && (
             <Button
               danger

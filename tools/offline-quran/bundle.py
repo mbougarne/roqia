@@ -1,4 +1,4 @@
-"""Package the three pinned originals, byte-for-byte, for first-run offline import."""
+"""Package the four pinned originals, byte-for-byte, for first-run offline import."""
 
 import hashlib
 import json
@@ -9,12 +9,16 @@ texts = json.loads((root / 'src/features/quran/catalog.data.json').read_text())[
 translations = json.loads(
     (root / 'src/features/quran/translations.data.json').read_text()
 )
-packs = [texts[0]['pack']] + [t['pack'] for t in translations]
+packs = [t['pack'] for t in texts + translations]
 for p in packs:
     for a in p['assets']:
         source = root / (
-            '.roqia-feasibility/sources/UthmanicWarsh_v2-1.zip'
-            if p['id'] == 'quran-warsh'
+            '.roqia-feasibility/sources/'
+            + {
+                'quran-warsh': 'UthmanicWarsh_v2-1.zip',
+                'quran-hafs': 'UthmanicHafs_v2-0.zip',
+            }[p['id']]
+            if 'quran-text' in p['capabilities']
             else '.roqia-feasibility/translations/'
             + p['preparation']['translationId']
             + '.txt'
@@ -26,4 +30,4 @@ for p in packs:
         )
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(raw)
-print('Three original packs verified and bundled')
+print('Four original packs verified and bundled')

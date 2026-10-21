@@ -44,7 +44,6 @@ export type RootRoutes = {
   PrayerSources: undefined;
 
   QuranEditions: undefined;
-  QuranDownload: {editionId: EditionId};
   QuranReader: {
     editionId: EditionId;
     surah: number;
@@ -84,7 +83,6 @@ export type LinkTarget =
         | 'Recovery'
         | 'Content'
         | 'ExternalLink'
-        | 'QuranDownload'
         | 'QuranReader'
         | 'QuranPreferences'
         | 'QuranTranslations'

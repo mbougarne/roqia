@@ -153,8 +153,7 @@ function Reader({route, navigation}: any) {
     : undefined;
   const firstVerse = bounds?.first ?? 1;
   const lastVerse = bounds?.last;
-  const sourceVerseMarkers =
-    Platform.OS === 'ios' && edition.sourceVerseMarkers;
+  const sourceVerseMarkers = edition.sourceVerseMarkers;
   useFocusEffect(
     useCallback(() => {
       setFocused(true);
@@ -521,10 +520,8 @@ function Reader({route, navigation}: any) {
           }}
         />
         <Button
-          label="المصحف والتنزيل"
-          onPress={() =>
-            navigation.navigate('QuranDownload', {editionId: edition.id})
-          }
+          label="اختيار المصحف"
+          onPress={() => navigation.navigate('QuranEditions')}
         />
       </Page>
     );

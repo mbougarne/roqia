@@ -381,10 +381,7 @@ export function QuranSearchScreen({navigation}: any) {
         onPress={search}
       />
       {!canSearch && (
-        <AppText>
-          البحث في أسماء السور متاح دون تنزيل. يتطلب البحث في الآيات مصحفا
-          مثبتا.
-        </AppText>
+        <AppText>جارٍ تجهيز النص المرفق بالتطبيق للبحث دون اتصال.</AppText>
       )}
       {busy && <StateView title="جارٍ البحث" busy />}
       {failed && (

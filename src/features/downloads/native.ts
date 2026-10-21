@@ -2,6 +2,7 @@ import {type DownloadTask} from '@kesha-antonov/react-native-background-download
 import {AppState, NativeModules, Platform} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
 
+import {isBundledPack} from './bundled';
 import {catalog} from './catalog';
 import {
   DownloadCoordinator,
@@ -85,14 +86,7 @@ async function verify(relative: string, asset: LocalAsset) {
 export const nativeDownloadPorts: DownloadPorts = {
   sha256: relative => FileSystem.hash(privatePath(relative), 'SHA-256'),
   resumable: Platform.OS === 'android',
-  bundled: pack =>
-    pack.version === 'source-1' &&
-    (pack.id !== 'quran-warsh' || !!NativeModules.RoqiaReader?.extractSource) &&
-    [
-      'quran-warsh',
-      'translation-fr.hamidullah',
-      'translation-en.pickthall',
-    ].includes(pack.id),
+  bundled: isBundledPack,
   copyBundled: async (pack, asset, target) => {
     await ensurePrivateRoot();
     await ensureDirectory(privatePath('staging'));
