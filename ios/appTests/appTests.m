@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 #import <React/RCTBridgeModule.h>
 #import <XCTest/XCTest.h>
 
@@ -7,6 +8,12 @@
 - (void)audioDuration:(NSString *)path
               resolve:(RCTPromiseResolveBlock)resolve
                reject:(RCTPromiseRejectBlock)reject;
+- (void)verseAudio:(NSString *)path
+      expectedHash:(NSString *)expectedHash
+           startMs:(double)startMs
+             endMs:(double)endMs
+           resolve:(RCTPromiseResolveBlock)resolve
+            reject:(RCTPromiseRejectBlock)reject;
 - (void)extractSource:(NSString *)path
                  size:(NSInteger)size
                  hash:(NSString *)hash
@@ -170,6 +177,85 @@
         [duration fulfill];
       }];
   [self waitForExpectations:@[ duration ] timeout:10];
+}
+
+- (void)testNativeVerseClipIsBoundedAndReusable {
+  NSURL *source = [[NSBundle bundleForClass:self.class] URLForResource:@"roqia-01"
+                                                         withExtension:@"mp3"];
+  NSURL *target = [self.directory URLByAppendingPathComponent:@"clip-source.mp3"];
+  XCTAssertTrue([NSFileManager.defaultManager copyItemAtURL:source toURL:target error:nil]);
+  NSObject *audio = [NSClassFromString(@"RoqiaAudio") new];
+  NSString *hash = [@"a" stringByPaddingToLength:64 withString:@"a" startingAtIndex:0];
+  XCTestExpectation *clip = [self expectationWithDescription:@"Native bounded verse export"];
+  [audio verseAudio:target.path
+      expectedHash:hash
+      startMs:1000
+      endMs:2500
+      resolve:^(NSString *path) {
+        XCTAssertNotEqualObjects(path, target.path);
+        XCTAssertTrue([NSFileManager.defaultManager fileExistsAtPath:path]);
+        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:path] options:nil];
+        [asset
+            loadValuesAsynchronouslyForKeys:@[ @"duration" ]
+                          completionHandler:^{
+                            XCTAssertEqualWithAccuracy(CMTimeGetSeconds(asset.duration), 1.5, 0.1);
+                            [audio verseAudio:target.path
+                                expectedHash:hash
+                                startMs:1000
+                                endMs:2500
+                                resolve:^(NSString *cached) {
+                                  XCTAssertEqualObjects(path, cached);
+                                  [NSFileManager.defaultManager removeItemAtPath:path error:nil];
+                                  [clip fulfill];
+                                }
+                                reject:^(NSString *code, NSString *message, NSError *error) {
+                                  XCTFail(@"Cached clip: %@ %@", code, message);
+                                  [clip fulfill];
+                                }];
+                          }];
+      }
+      reject:^(NSString *code, NSString *message, NSError *error) {
+        XCTFail(@"Clip: %@ %@", code, message);
+        [clip fulfill];
+      }];
+  [self waitForExpectations:@[ clip ] timeout:20];
+}
+
+- (void)testNativeVerseClipRejectsUnsafePathsAndOutOfRecordingRanges {
+  NSURL *source = [[NSBundle bundleForClass:self.class] URLForResource:@"roqia-01"
+                                                         withExtension:@"mp3"];
+  NSURL *target = [self.directory URLByAppendingPathComponent:@"clip-invalid.mp3"];
+  XCTAssertTrue([NSFileManager.defaultManager copyItemAtURL:source toURL:target error:nil]);
+  NSObject *audio = [NSClassFromString(@"RoqiaAudio") new];
+  NSString *hash = [@"a" stringByPaddingToLength:64 withString:@"a" startingAtIndex:0];
+  for (NSArray *range in @[ @[ @-1, @500 ], @[ @1000, @1000 ], @[ @1000, @99999999 ] ]) {
+    XCTestExpectation *rejected = [self expectationWithDescription:@"Invalid clip rejected"];
+    [audio verseAudio:target.path
+        expectedHash:hash
+        startMs:[range[0] doubleValue]
+        endMs:[range[1] doubleValue]
+        resolve:^(id value) {
+          XCTFail(@"Accepted invalid clip");
+          [rejected fulfill];
+        }
+        reject:^(NSString *code, NSString *message, NSError *error) {
+          [rejected fulfill];
+        }];
+    [self waitForExpectations:@[ rejected ] timeout:10];
+  }
+  XCTestExpectation *unsafe = [self expectationWithDescription:@"Unsafe audio path rejected"];
+  [audio verseAudio:@"/etc/hosts"
+      expectedHash:hash
+      startMs:0
+      endMs:500
+      resolve:^(id value) {
+        XCTFail(@"Accepted unsafe path");
+        [unsafe fulfill];
+      }
+      reject:^(NSString *code, NSString *message, NSError *error) {
+        [unsafe fulfill];
+      }];
+  [self waitForExpectations:@[ unsafe ] timeout:10];
 }
 
 - (void)testHafsFontAlreadyBundledWithTheApp {

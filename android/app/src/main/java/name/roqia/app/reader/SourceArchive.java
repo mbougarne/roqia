@@ -115,7 +115,10 @@ public final class SourceArchive {
     for (int i = 0; i < paragraphs.size(); i++) {
       if (!paragraphs.get(i).startsWith("سُورَةُ")) continue;
       surah++;
-      if (i + 1 < paragraphs.size() && paragraphs.get(i + 1).startsWith("بِسْمِ"))
+      if (i + 1 < paragraphs.size()
+          && (paragraphs.get(i + 1).startsWith("بِسْمِ")
+              || paragraphs.get(i + 1).startsWith("بِسۡمِ")
+              || paragraphs.get(i + 1).startsWith("بِّسۡمِ")))
         result.put(surah, paragraphs.get(i + 1));
     }
     if (surah != 114 || result.size() != 113 || result.containsKey(9))

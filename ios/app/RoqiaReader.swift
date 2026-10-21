@@ -156,7 +156,7 @@ final class RoqiaReader: NSObject {
       for (index, paragraph) in delegate.paragraphs.enumerated() where paragraph.hasPrefix("سُورَةُ") {
         surah += 1
         if index + 1 < delegate.paragraphs.count,
-          delegate.paragraphs[index + 1].hasPrefix("بِسْمِ")
+          ["بِسْمِ", "بِسۡمِ", "بِّسۡمِ"].contains(where: delegate.paragraphs[index + 1].hasPrefix)
         {
           openings[String(surah)] = delegate.paragraphs[index + 1]
         }
@@ -187,7 +187,7 @@ final class RoqiaReader: NSObject {
       let fontName = CTFontCopyPostScriptName(font) as String
       let registered = CTFontCreateWithName(fontName as CFString, 32, nil)
       if CTFontCopyPostScriptName(registered) as String == fontName {
-        // Hafs uses the same font already included in UIAppFonts. Reuse it only
+        // Legacy Hafs uses a font already included in UIAppFonts. Reuse it only
         // when its actual file matches the pinned source, not merely its name.
         guard let registeredURL = CTFontCopyAttribute(registered, kCTFontURLAttribute) as? URL,
           registeredURL.isFileURL

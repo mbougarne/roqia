@@ -46,7 +46,6 @@ import {
 import {
   QuranLibraryScreen,
   EditionScreen,
-  MushafDownloadScreen,
 } from '../features/quran/LibraryScreens';
 import {QuranListenScreen} from '../features/quran/ListenScreen';
 import {QuranReaderScreen} from '../features/quran/ReaderScreen';
@@ -204,7 +203,6 @@ const details = {
   PrayerSounds: withPlayer(SoundsScreen),
   PrayerSources: withPlayer(PrayerSourcesScreen),
   QuranEditions: withPlayer(EditionScreen),
-  QuranDownload: withPlayer(MushafDownloadScreen),
   QuranReader: withPlayer(QuranReaderScreen),
   QuranPreferences: withPlayer(QuranPreferencesScreen),
   QuranTranslations: withPlayer(TranslationScreen),
@@ -298,7 +296,6 @@ export function MainTabNavigation() {
         <Stack.Screen name="PrayerSources" component={details.PrayerSources} />
 
         <Stack.Screen name="QuranEditions" component={details.QuranEditions} />
-        <Stack.Screen name="QuranDownload" component={details.QuranDownload} />
         <Stack.Screen name="QuranReader" component={details.QuranReader} />
         <Stack.Screen
           name="QuranPreferences"

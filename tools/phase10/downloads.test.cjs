@@ -107,6 +107,21 @@ function fixture() {
     },
   };
 }
+
+test('download validators retain URLSession header names regardless of capitalization', async () => {
+  const f = fixture(),
+    c = f.c();
+  await c.initialize();
+  await c.networkChanged({connected: true, wifi: true});
+  await c.enqueue(pack.id, pack.version, 'wifi');
+  const task = [...f.tasks.values()][0];
+  await task.events.begin({
+    Etag: '"exact-recording"',
+    'Last-Modified': 'Wed, 21 Oct 2026 00:00:00 GMT',
+  });
+  assert.equal(c.listJobs()[0].etag, '"exact-recording"');
+  assert.equal(c.listJobs()[0].lastModified, 'Wed, 21 Oct 2026 00:00:00 GMT');
+});
 test('Wi-Fi policy rejects unmetered cellular/ethernet; explicit any-network consent is independent', async () => {
   const f = fixture(),
     c = f.c();

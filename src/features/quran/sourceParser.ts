@@ -16,9 +16,10 @@ export function parseOriginalSource(
     sourceNotice: preparation.notice,
     ...(openings[c.number] !== undefined ? {opening: openings[c.number]} : {}),
   }));
-  if (edition.riwaya === 'warsh') {
+  if (preparation.archiveMembers) {
     const rows = JSON.parse(raw);
-    if (!Array.isArray(rows) || rows.length !== 6214)
+    const warsh = edition.riwaya === 'warsh';
+    if (!Array.isArray(rows) || rows.length !== (warsh ? 6214 : 6236))
       throw Error('source_record_count');
     let previous = 1;
     rows.forEach((r, i) => {
@@ -51,10 +52,14 @@ export function parseOriginalSource(
         c =>
           c.number !== 9 &&
           (typeof openings[c.number] !== 'string' ||
-            !openings[c.number].startsWith('بِسْمِ')),
+            !['بِسْمِ', 'بِسۡمِ', 'بِّسۡمِ'].some(prefix =>
+              openings[c.number].startsWith(prefix),
+            )),
       )
     )
       throw Error('source_openings');
+    // Hafs counts Al-Fatihah's basmala as verse 1; do not render it twice.
+    if (!warsh) delete result[0].opening;
   } else {
     const marker = '# PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK';
     const parts = raw.split(marker);

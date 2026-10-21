@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Pressable, View} from 'react-native';
 
 import {useLibrary} from './context';
-import {chapters} from './domain';
+import {chapters, editionById} from './domain';
 import {act} from './LibraryScreens';
 import {
   Banner,
@@ -156,7 +156,9 @@ export function OfflineAudioScreen({navigation}: any) {
                     editionId:
                       r.riwaya === 'warsh'
                         ? 'warsh-kfgqpc-v2.1-update6'
-                        : 'hafs-tanzil-uthmani-1.1',
+                        : runtime.catalog.texts.find(
+                            t => editionById(t.editionId).riwaya === 'hafs',
+                          )!.editionId,
                     surah: c.surah,
                     recordingId: r.id,
                   })

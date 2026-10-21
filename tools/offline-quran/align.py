@@ -8,12 +8,19 @@ import hashlib
 import json
 import os
 import re
+import sys
 import zipfile
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[2]
 os.chdir(root)
-for t in json.loads(Path('src/features/quran/catalog.data.json').read_text())['texts']:
+# Meaning translations retain their original Tanzil Hafs identity even though
+# iPhone Arabic rendering now uses the paired KFGQPC source/font.
+originals = [
+    json.loads(Path('src/features/quran/catalog.data.json').read_text())['texts'][0],
+    json.loads(Path('src/features/quran/legacy-hafs.data.json').read_text()),
+]
+for t in originals:
     a = t['pack']['assets'][0]
     p = Path('.roqia-feasibility/sources') / (
         'UthmanicWarsh_v2-1.zip'
@@ -92,9 +99,13 @@ output = {
     'textVersion': 'source-1',
     'chapters': result,
 }
-Path('src/features/quran/warsh-translation-map.json').write_text(
-    json.dumps(output, ensure_ascii=False, separators=(',', ':')) + '\n'
-)
+destination = Path('src/features/quran/warsh-translation-map.json')
+if '--check' in sys.argv:
+    assert json.loads(destination.read_text()) == output, 'translation_alignment_stale'
+else:
+    destination.write_text(
+        json.dumps(output, ensure_ascii=False, separators=(',', ':')) + '\n'
+    )
 print(
     'Verified',
     sum(map(len, result.values())),

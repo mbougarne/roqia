@@ -1,5 +1,6 @@
 import {useFocusEffect} from '@react-navigation/native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {Platform} from 'react-native';
 
 import {useLibrary} from './context';
 import {chapters, editionById, normalizeSearch, type EditionId} from './domain';
@@ -70,6 +71,7 @@ function QuranListening({route, navigation, onClose}: any) {
   );
   const [timing, setTiming] = useState<CachedTiming | null>(null),
     [timingBusy, setTimingBusy] = useState(false);
+  const [recoveredTag, setRecoveredTag] = useState({key: '', value: ''});
   const [message, setMessage] = useState(''),
     [waiting, setWaiting] = useState(false),
     [busy, setBusy] = useState(false);
@@ -95,9 +97,34 @@ function QuranListening({route, navigation, onClose}: any) {
   const audioHash =
     job?.expectedHash ||
     chapter?.pack.assets.find(a => a.id === chapter.assetId)?.sha256;
+  const recoveryKey = `${chosen}:${surah}:${audioHash}`;
+  const audioEtag =
+    job?.etag || (recoveredTag.key === recoveryKey ? recoveredTag.value : '');
+  const recoveringTag =
+    Platform.OS === 'ios' &&
+    !!installed &&
+    !!recording &&
+    !job?.etag &&
+    recoveredTag.key !== recoveryKey;
+  useEffect(() => {
+    let active = true;
+    if (Platform.OS === 'ios' && installed && recording && !job?.etag)
+      void runtime
+        .recordingContentTag(recording, surah)
+        .then(value => {
+          if (active) setRecoveredTag({key: recoveryKey, value});
+        })
+        .catch(() => {
+          if (active)
+            setMessage('تعذر التحقق من هوية التسجيل المحفوظ. أعد المحاولة.');
+        });
+    return () => {
+      active = false;
+    };
+  }, [recoveryKey, !!installed, job?.etag]);
   const identity =
-    recording && chapter && audioHash
-      ? timingIdentity(recording, surah, editionId, audioHash, job?.etag ?? '')
+    !recoveringTag && recording && chapter && audioHash
+      ? timingIdentity(recording, surah, editionId, audioHash, audioEtag)
       : null;
   const key = identity ? timingKey(identity) : '';
   const downloading =
@@ -157,6 +184,7 @@ function QuranListening({route, navigation, onClose}: any) {
   }, [chosen, surah, editionId]);
   useEffect(() => {
     const current = generation.current;
+    let active = true;
     setTiming(null);
     if (identity)
       void (
@@ -167,7 +195,7 @@ function QuranListening({route, navigation, onClose}: any) {
           : cachedTiming(identity)
       )
         .then(cached => {
-          if (current === generation.current) {
+          if (active && current === generation.current) {
             setTiming(cached);
             if (
               inline &&
@@ -179,11 +207,14 @@ function QuranListening({route, navigation, onClose}: any) {
           }
         })
         .catch(() => {
-          if (current === generation.current)
+          if (active && current === generation.current)
             setMessage('تعذر قراءة توقيت الآيات المحفوظ.');
         });
-    else if (inline && chosen) setShowPreparation(true);
-  }, [key, !!installed, chosen]);
+    else if (inline && chosen && !recoveringTag) setShowPreparation(true);
+    return () => {
+      active = false;
+    };
+  }, [key, !!installed, chosen, recoveringTag]);
   const prepare = async (force = false) => {
     if (!identity || !chapter || !recording) return;
     const current = generation.current;

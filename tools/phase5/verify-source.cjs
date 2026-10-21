@@ -7,19 +7,24 @@ const {
   parseOriginalSource,
 } = require('../../src/features/quran/sourceParser.ts');
 const catalog = require('../../src/features/quran/catalog.data.json');
+const legacyHafs = require('../../src/features/quran/legacy-hafs.data.json');
 
 const reports = [];
-for (const t of catalog.texts) {
-  const warsh = t.editionId.startsWith('warsh');
+for (const t of [...catalog.texts, legacyHafs]) {
+  const kind = t.editionId.startsWith('warsh') ? 'warsh' : 'hafs';
+  const archive = !!t.pack.preparation.archiveMembers;
   const raw = fs.readFileSync(
-    warsh
-      ? path.join(process.argv[2], 'warsh.json')
+    archive
+      ? path.join(process.argv[2], kind + '.json')
       : '.roqia-feasibility/sources/tanzil-uthmani.txt',
     'utf8',
   );
-  const openings = warsh
+  const openings = archive
     ? JSON.parse(
-        fs.readFileSync(path.join(process.argv[2], 'openings.json'), 'utf8'),
+        fs.readFileSync(
+          path.join(process.argv[2], kind + '-openings.json'),
+          'utf8',
+        ),
       )
     : {};
   const chapters = parseOriginalSource(t.pack.preparation, raw, openings);

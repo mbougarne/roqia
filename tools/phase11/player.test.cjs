@@ -51,19 +51,21 @@ const player = {
   },
 };
 const load = Module._load;
+const platform = {OS: 'android'};
+const nativeAudio = {
+  segmentPlayback: true,
+  sleepDeadline: async () => deadline,
+  setSleepTimer: async ms => {
+    deadline = ms ? Date.now() + ms : 0;
+  },
+};
 Module._load = function (name, parent, isMain) {
   if (name === 'react-native')
     return {
       Image: {},
-      Platform: {OS: 'android'},
+      Platform: platform,
       NativeModules: {
-        RoqiaAudio: {
-          segmentPlayback: true,
-          sleepDeadline: async () => deadline,
-          setSleepTimer: async ms => {
-            deadline = ms ? Date.now() + ms : 0;
-          },
-        },
+        RoqiaAudio: nativeAudio,
       },
     };
   if (name === 'react-native-track-player')
@@ -198,6 +200,41 @@ test('verse playback clips the same local file and session restoration retains b
   await playback.downloaded([{...entry, segment: undefined}]);
   assert.equal(queue[0].roqiaClipStartMs, undefined);
   assert.equal(repeat, 0);
+});
+test('iPhone verse playback verifies the recording before preparing a bounded file; whole-surah and Android playback stay unchanged', async () => {
+  const calls = [];
+  nativeAudio.verseAudio = async (...args) => {
+    calls.push(args);
+    return '/cache/verified-verse.m4a';
+  };
+  platform.OS = 'ios';
+  try {
+    const entry = {
+      packId: 'pack',
+      version: 'v1',
+      assetId: 'a',
+      title: 'Reciter',
+      segment: {verse: 2, startMs: 13240, endMs: 18720},
+    };
+    await playback.downloaded([entry]);
+    assert.deepEqual(calls, [
+      ['/private/roqia/packs/a.mp3', 'hash', 13240, 18720],
+    ]);
+    assert.equal(queue[0].url, 'file:///cache/verified-verse.m4a');
+    assert.equal(queue[0].roqiaClipStartMs, undefined);
+    assert.deepEqual(queue[0].downloadEntry, entry);
+    corrupt = true;
+    await playback.downloaded([entry]);
+    assert.equal(calls.length, 1);
+    corrupt = false;
+    await playback.downloaded([{...entry, segment: undefined}]);
+    assert.equal(queue[0].url, 'file:///private/roqia/packs/a.mp3');
+    assert.equal(calls.length, 1);
+  } finally {
+    platform.OS = 'android';
+    corrupt = false;
+    delete nativeAudio.verseAudio;
+  }
 });
 test('remote play restarts an ended local segment at its relative zero', async () => {
   await playback.downloaded([

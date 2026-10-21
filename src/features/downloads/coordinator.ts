@@ -169,9 +169,17 @@ export class DownloadCoordinator {
     return {
       begin: headers =>
         event(async current => {
+          // HTTP field names are case-insensitive. URLSession commonly returns
+          // Etag/Last-Modified, whereas Android's transport returns lowercase.
+          headers = Object.fromEntries(
+            Object.entries(headers).map(([name, value]) => [
+              name.toLowerCase(),
+              value,
+            ]),
+          );
           current.state = 'downloading';
           current.pauseReason = null;
-          current.etag = headers.etag ?? headers.ETag ?? null;
+          current.etag = headers.etag ?? null;
           current.lastModified = headers['last-modified'] ?? null;
           current.errorCode =
             headers['x-roqia-restart-reason'] ?? current.errorCode;
@@ -615,14 +623,15 @@ export class DownloadCoordinator {
           }
         }
       }
-      // Seed only absent/interrupted built-ins. Explicit storage removal stays removed
-      // until the user chooses the pack again; existing installations stay untouched.
+      // Mushaf text is always included, including upgrades from a previously removed pack.
+      // Optional translations retain the user's removal/pause choice.
       for (const pack of this.catalog) {
         if (!this.ports.bundled?.(pack)) continue;
         const jobs = this.jobs.filter(
           j => j.packId === pack.id && j.version === pack.version,
         );
         if (
+          !pack.capabilities.includes('quran-text') &&
           jobs.some(j =>
             ['removed', 'cancelled', 'paused_user'].includes(j.state),
           )
@@ -639,6 +648,10 @@ export class DownloadCoordinator {
       if (!this.ready) throw Error('downloads_not_initialized');
       const pack = this.catalog.find(p => p.id === id && p.version === version);
       if (!pack) throw Error('pack_unavailable');
+      if (this.isBundledText(id, version)) {
+        await this.importBundled(pack);
+        return;
+      }
       for (const asset of pack.assets) {
         const key = jobKey(pack, asset);
         const existing = this.jobs.find(j => j.jobId === key);
@@ -792,8 +805,17 @@ export class DownloadCoordinator {
     );
     await this.save();
   }
+  isBundledText = (id: string, version: string) => {
+    const pack = this.catalog.find(p => p.id === id && p.version === version);
+    return (
+      !!pack &&
+      pack.capabilities.includes('quran-text') &&
+      !!this.ports.bundled?.(pack)
+    );
+  };
   deletePack = (id: string, version: string) =>
     this.run(async () => {
+      if (this.isBundledText(id, version)) throw Error('bundled_text_required');
       const pack = this.installed.find(
         p => p.packId === id && p.version === version,
       );

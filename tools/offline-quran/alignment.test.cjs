@@ -9,10 +9,13 @@ const {
 const {chapters} = require('../../src/features/quran/domain.ts');
 const translations = require('../../src/features/quran/translations.data.json');
 const catalog = require('../../src/features/quran/catalog.data.json');
+const {isBundledPack} = require('../../src/features/downloads/bundled.ts');
 
 test('bundled originals exactly match pinned sizes and hashes', () => {
-  for (const {pack} of [catalog.texts[0], ...translations])
+  for (const {pack} of [...catalog.texts, ...translations])
     for (const a of pack.assets) {
+      assert.equal(isBundledPack(pack), true);
+      assert.equal(isBundledPack({...pack, version: 'future'}), false);
       const raw = fs.readFileSync(
         `bundled-content/roqia-offline/${pack.id}/${pack.version}/${a.file}`,
       );

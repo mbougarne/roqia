@@ -17,8 +17,9 @@ import {saveRecord, readRecord} from '../../repositories/database';
 import {type InstalledPack, type DownloadJob} from '../downloads/types';
 
 export const segmentPlaybackSupported = () =>
-  Platform.OS === 'android' &&
-  NativeModules.RoqiaAudio?.segmentPlayback === true;
+  (Platform.OS === 'android' &&
+    NativeModules.RoqiaAudio?.segmentPlayback === true) ||
+  (Platform.OS === 'ios' && !!NativeModules.RoqiaAudio?.verseAudio);
 
 export type DownloadedAudioEntry = {
   packId: string;
@@ -166,11 +167,23 @@ export const playback = {
           (await FileSystem.hash(path, 'SHA-256')) !== job.expectedHash
         )
           throw Error('audio_integrity_failed');
+        // iOS plays an exported, physically bounded local file. This continues
+        // to stop at the verse boundary when JavaScript is suspended or seeking
+        // from lock-screen controls. Android uses its existing native clip.
+        const playbackPath =
+          segment && Platform.OS === 'ios'
+            ? await NativeModules.RoqiaAudio.verseAudio(
+                path,
+                job.expectedHash,
+                segment.startMs,
+                segment.endMs,
+              )
+            : path;
         queue.push({
           id: job.jobId + (segment ? `:verse:${segment.verse}` : ''),
-          url: `file://${path}`,
+          url: `file://${playbackPath}`,
           title: entry.title + (segment ? ` · الآية ${segment.verse}` : ''),
-          ...(segment
+          ...(segment && Platform.OS === 'android'
             ? {roqiaClipStartMs: segment.startMs, roqiaClipEndMs: segment.endMs}
             : {}),
           assetVersion: entry.version,

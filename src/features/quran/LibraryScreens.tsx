@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   Keyboard,
+  Platform,
   Pressable,
   View,
 } from 'react-native';
@@ -16,6 +17,7 @@ import {
   type EditionId,
   type Locator,
 } from './domain';
+import {IphoneQuranLibrary} from './IphoneQuranLibrary';
 import {
   Banner,
   FeatureCard,
@@ -28,14 +30,12 @@ import {
   rtlRow,
 } from '../../design/components';
 import {normalizeDigits} from '../../design/format';
-import {Illustration} from '../../design/Illustration';
 import {
   AppIcon,
   IconButton,
   usePalette,
   AppText,
   Button,
-  Card,
   Page,
   Row,
   StateView,
@@ -51,7 +51,15 @@ export const act = (promise: Promise<unknown>) => {
   );
 };
 
-export function QuranLibraryScreen({navigation}: any) {
+export function QuranLibraryScreen(props: any) {
+  return Platform.OS === 'ios' ? (
+    <IphoneQuranLibrary {...props} />
+  ) : (
+    <SurahLibraryScreen {...props} />
+  );
+}
+
+function SurahLibraryScreen({navigation}: any) {
   const {number} = useFormat();
   const {runtime, ready, error, retry} = useLibrary();
   const p = usePalette();
@@ -94,8 +102,7 @@ export function QuranLibraryScreen({navigation}: any) {
     };
   }, [runtime]);
   const edition = editionById(id),
-    text = runtime.text(id),
-    installed = text && runtime.installed(text.pack);
+    text = runtime.text(id);
   // Paint feedback before mounting the full surah list on the first visit.
   // Later tab visits retain their loaded library and search state.
   if (!error && (!ready || !selectionReady))
@@ -148,21 +155,6 @@ export function QuranLibraryScreen({navigation}: any) {
               title="تعذر فتح المكتبة"
               action={{label: 'إعادة المحاولة', onPress: retry}}
             />
-          ) : !installed ? (
-            <Card>
-              <AppText role="sectionTitle">
-                اختر مصحفك للقراءة دون اتصال
-              </AppText>
-              <AppText>
-                يمكنك البحث في أسماء السور الآن. اختيار الرواية لا يبدأ التنزيل.
-              </AppText>
-              <Button
-                label="تنزيل المصحف"
-                onPress={() =>
-                  navigation.navigate('QuranDownload', {editionId: id})
-                }
-              />
-            </Card>
           ) : (
             <Banner icon="offline" text="المصحف محفوظ على جهازك" />
           )}
@@ -214,19 +206,17 @@ export function QuranLibraryScreen({navigation}: any) {
             borderColor: p.borderSubtle,
           }}
           onPress={() =>
-            !installed
-              ? navigation.navigate('QuranDownload', {editionId: id})
-              : navigation.navigate('QuranReader', {
-                  editionId: id,
-                  surah: c.number,
-                  verse: 1,
-                  ...(text
-                    ? {
-                        packVersion: text.pack.version,
-                        numberingScheme: edition.numbering,
-                      }
-                    : {}),
-                })
+            navigation.navigate('QuranReader', {
+              editionId: id,
+              surah: c.number,
+              verse: 1,
+              ...(text
+                ? {
+                    packVersion: text.pack.version,
+                    numberingScheme: edition.numbering,
+                  }
+                : {}),
+            })
           }>
           <NumberBadge value={c.number} />
           <View style={{flex: 1}}>
@@ -239,7 +229,7 @@ export function QuranLibraryScreen({navigation}: any) {
               آيات
             </AppText>
           </View>
-          <AppIcon name={installed ? 'check' : 'download'} size={22} />
+          <AppIcon name="chevron-left" size={22} />
         </Pressable>
       ))}
 
@@ -259,123 +249,55 @@ export function EditionScreen({navigation}: any) {
   return (
     <Page title="اختيار المصحف" onBack={() => navigation.goBack()}>
       <AppText>
-        اختر الرواية التي تقرأ بها. يمكنك الاحتفاظ بالمصحفين، ولكل منهما موضع
-        قراءة مستقل.
+        المصحفان ورش وحفص متاحان دون اتصال. اختر الرواية التي تقرأ بها؛ لكل
+        منهما موضع قراءة مستقل.
       </AppText>
       {error && (
         <StateView
-          title="تعذر قراءة حالة التنزيل"
+          title="تعذر فتح المصاحف"
           action={{label: 'إعادة المحاولة', onPress: retry}}
         />
       )}
-      {editions.map(e => (
-        <RadioRow
-          key={e.id}
-          title={e.title}
-          detail={e.publisher}
-          selected={selected === e.id}
-          onPress={() =>
-            act(runtime.select(e.id).then(() => setSelected(e.id)))
-          }
-        />
-      ))}
-      <Banner text="يمكنك إضافة المصحف الآخر لاحقا؛ لكل رواية موضع قراءة مستقل." />
-      <Illustration name="download" height={180} />
-      <Button
-        label="متابعة"
-        disabled={!ready || error || !selected}
-        onPress={() =>
-          navigation.navigate('QuranDownload', {editionId: selected})
-        }
+      {runtime.catalog.texts
+        .map(t => editionById(t.editionId))
+        .map(e => (
+          <RadioRow
+            key={e.id}
+            title={e.title}
+            detail={e.publisher}
+            selected={selected === e.id}
+            onPress={() =>
+              act(runtime.select(e.id).then(() => setSelected(e.id)))
+            }
+          />
+        ))}
+      <Banner
+        icon="offline"
+        text="النص والخط مرفقان بالتطبيق. التنزيل للصوت فقط."
       />
-    </Page>
-  );
-}
-
-export function MushafDownloadScreen({route, navigation}: any) {
-  const {bytes} = useFormat();
-  const {runtime, ready, error, retry} = useLibrary(),
-    e = editionById(route.params.editionId),
-    t = runtime.text(e.id),
-    installed = t && runtime.installed(t.pack);
-  const size = t
-    ? bytes(t.pack.assets.reduce((sum, a) => sum + a.bytes, 0))
-    : '—';
-  return (
-    <Page title="تحميل المصحف" onBack={() => navigation.goBack()}>
-      <FeatureCard
-        title={e.title}
-        detail={e.publisher + ' · 114 سورة'}
-        art="quran-book"
-      />
-      {error ? (
-        <StateView
-          title="تعذر فتح التنزيل"
-          action={{label: 'إعادة المحاولة', onPress: retry}}
-        />
-      ) : !t ? (
-        <StateView title="المصحف غير متاح للتنزيل بعد" />
-      ) : (
-        <>
-          <Group>
-            <SettingRow
-              title="معلومات المصحف"
-              detail={size}
-              icon="book"
-              onPress={() =>
-                navigation.navigate('QuranSource', {editionId: e.id})
-              }
-            />
-          </Group>
-          <Ornament title="ترجمة المعاني" />
-          <Row
+      {!!selected && (
+        <Group>
+          <SettingRow
+            title="معلومات المصحف"
+            icon="book"
+            onPress={() =>
+              navigation.navigate('QuranSource', {editionId: selected})
+            }
+          />
+          <SettingRow
             title="اختيار الترجمة"
             detail="Français · English · دون ترجمة"
             icon="translate"
             onPress={() =>
-              navigation.navigate('QuranTranslations', {editionId: e.id})
+              navigation.navigate('QuranTranslations', {editionId: selected})
             }
           />
-          <Group>
-            <SettingRow
-              title="سياسة التنزيل"
-              detail="حسب اختيار Wi-Fi في الإعدادات"
-              icon="wifi"
-              onPress={() => navigation.navigate('Settings')}
-            />
-            <SettingRow title="حجم التنزيل" detail={size} icon="storage" />
-          </Group>
-          <Button
-            icon={installed ? 'book' : 'download'}
-            label={installed ? 'فتح المصحف' : 'تحميل · ' + size}
-            disabled={!ready || error}
-            onPress={() =>
-              installed
-                ? navigation.navigate('QuranReader', {
-                    editionId: e.id,
-                    surah: 1,
-                    verse: 1,
-                    packVersion: t.pack.version,
-                    numberingScheme: e.numbering,
-                  })
-                : act(
-                    runtime
-                      .download(t.pack)
-                      .then(() => navigation.navigate('Downloads')),
-                  )
-            }
-          />
-        </>
+        </Group>
       )}
       <Button
-        secondary
-        label="اختيار رواية أخرى"
-        onPress={() => navigation.navigate('QuranEditions')}
-      />
-      <Row
-        title="إدارة التنزيلات"
-        icon="download"
-        onPress={() => navigation.navigate('Downloads')}
+        label="متابعة"
+        disabled={!ready || error || !selected}
+        onPress={() => navigation.goBack()}
       />
     </Page>
   );

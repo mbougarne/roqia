@@ -28,7 +28,11 @@ let focused = true,
   scrollFailures = 0,
   averageLength = 50;
 const listeners = new Set();
-const edition = require('../../src/features/quran/domain.ts').editions[0];
+let edition = require('../../src/features/quran/domain.ts').editions[0];
+
+const platform = {OS: 'android'};
+let fixtureChapter = null;
+let navigationEvents = [];
 
 const verses = Array.from({length: 23}, (_, i) => ({
   number: i + 1,
@@ -37,8 +41,9 @@ const verses = Array.from({length: 23}, (_, i) => ({
 const text = {pack: {version: 'source-1'}};
 const runtime = {
   text: () => text,
-  chapter: async () => {
+  chapter: async (_text, surah) => {
     if (chapterGate) await chapterGate;
+    if (fixtureChapter) return fixtureChapter(surah);
     return {
       editionId: edition.id,
       surah: 2,
@@ -72,11 +77,16 @@ const FlatList = React.forwardRef((props, ref) => {
     props,
     props.ListHeaderComponent,
     props.data.length === 1 ? props.renderItem({item: props.data[0]}) : null,
+    props.ListFooterComponent,
   );
 });
 const load = Module._load;
 Module._load = function (name, parent, ...rest) {
   if (parent?.filename.endsWith('/quran/ReaderScreen.tsx')) {
+    if (name === 'react-native-safe-area-context')
+      return {
+        useSafeAreaInsets: () => ({top: 50, bottom: 30, left: 0, right: 0}),
+      };
     if (name === '@react-native-clipboard/clipboard')
       return {setString: () => {}};
     if (name === '@react-navigation/native')
@@ -97,6 +107,9 @@ Module._load = function (name, parent, ...rest) {
         FlatList,
         ActivityIndicator: 'Indicator',
         View: 'View',
+        ScrollView: 'ScrollView',
+        KeyboardAvoidingView: 'KeyboardAvoidingView',
+        Keyboard: {dismiss() {}},
         Text: 'Text',
         Pressable: 'Pressable',
         Modal: 'Modal',
@@ -104,13 +117,23 @@ Module._load = function (name, parent, ...rest) {
           currentState: 'active',
           addEventListener: () => ({remove: () => {}}),
         },
-        Platform: {OS: 'android'},
+        Platform: platform,
+        StyleSheet: {
+          absoluteFillObject: {
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+          },
+        },
         AccessibilityInfo: {announceForAccessibility: () => {}},
         useWindowDimensions: () => ({width: 400, height: 800}),
       };
     if (name === './context')
       return {useLibrary: () => ({runtime, ready: true})};
     if (name === './LibraryScreens') return {act: p => void p};
+    if (name === './QuranIndex') return {QuranIndex: 'Index'};
     if (name === './ListenScreen') return {ReaderVerseAudio: 'Audio'};
     if (name === './runtime')
       return {
@@ -159,10 +182,11 @@ async function focus(value) {
   });
 }
 
-async function mount(view, verse = 1) {
+async function mount(view, verse = 1, extra = {}) {
   focused = true;
   remembered = [];
   scrolls = [];
+  navigationEvents = [];
   invalidFont = false;
   preferences = {
     size: 26,
@@ -181,9 +205,14 @@ async function mount(view, verse = 1) {
             surah: 2,
             verse,
             packVersion: 'source-1',
+            ...extra,
           },
         },
-        navigation: {goBack() {}, navigate() {}},
+        navigation: {
+          goBack() {},
+          navigate() {},
+          replace: (name, target) => navigationEvents.push({name, target}),
+        },
       }),
     );
   });
@@ -202,6 +231,55 @@ const allVerses = tree =>
   list(tree)
     .props.data.flat()
     .map(v => v.number);
+
+test('iPhone continuous verse options hand off to audio without an overlapping native modal and remain dismissible in both mushafs', async () => {
+  const originals = require('../../src/features/quran/domain.ts').editions;
+  platform.OS = 'ios';
+  try {
+    for (const selected of originals) {
+      edition = selected;
+      const tree = await mount('continuous');
+      await act(async () => layoutContinuous(tree));
+      const verse = () =>
+        tree.root
+          .findAllByType('Text')
+          .find(n => n.props.accessibilityLabel === 'الآية 1، خيارات الآية');
+      await act(async () =>
+        verse().props.onPress({nativeEvent: {pageX: 200, pageY: 250}}),
+      );
+      assert.equal(tree.root.findAllByType('Modal').length, 0);
+      const listen = tree.root
+        .findAllByType('IconButton')
+        .find(n => n.props.label === 'الاستماع للآية');
+      await act(async () => listen.props.onPress());
+      assert.equal(tree.root.findByType('Audio').props.verse, 1);
+      assert.equal(
+        tree.root.findAllByProps({accessibilityLabel: 'إغلاق خيارات الآية'})
+          .length,
+        0,
+      );
+      await act(async () => tree.root.findByType('Audio').props.onClose());
+      assert.equal(tree.root.findAllByType('Audio').length, 0);
+      await act(async () =>
+        verse().props.onPress({nativeEvent: {pageX: 200, pageY: 250}}),
+      );
+      await act(async () =>
+        tree.root
+          .findByProps({accessibilityLabel: 'إغلاق خيارات الآية'})
+          .props.onPress(),
+      );
+      assert.equal(
+        tree.root.findAllByProps({accessibilityLabel: 'إغلاق خيارات الآية'})
+          .length,
+        0,
+      );
+      await act(async () => tree.unmount());
+    }
+  } finally {
+    edition = originals[0];
+    platform.OS = 'android';
+  }
+});
 
 function layoutContinuous(tree) {
   const paragraph = tree.root
@@ -424,4 +502,119 @@ test('the opening loader spans asset loading and native layout, without reappear
   await focus(true);
   assert.equal(isLoading(tree), false);
   await act(async () => tree.unmount());
+});
+
+test('iPhone juz ranges preserve original verse numbers, restore relative positions, and save the selected section', async () => {
+  const {editions, chapters} = require('../../src/features/quran/domain.ts');
+  const {sectionRange} = require('../../src/features/quran/divisions.ts');
+  platform.OS = 'ios';
+  try {
+    for (edition of editions) {
+      fixtureChapter = surah => ({
+        surah,
+        opening: 'OPENING',
+        verses: Array.from(
+          {
+            length:
+              edition.riwaya === 'warsh'
+                ? chapters[surah - 1].warshVerses
+                : chapters[surah - 1].hafsVerses,
+          },
+          (_, i) => ({number: i + 1, text: `SOURCE ${surah}:${i + 1}`}),
+        ),
+      });
+      const section = {kind: 'juz', number: 2},
+        range = sectionRange(edition.id, section);
+      const tree = await mount('verses', range.start.verse + 3, {section});
+      assert.equal(allVerses(tree)[0], range.start.verse);
+      assert.equal(allVerses(tree).at(-1), range.end.verse);
+      assert.equal(
+        tree.root
+          .findAllByType('Text')
+          .some(n => n.props.children === 'OPENING'),
+        false,
+      );
+      await act(async () => {
+        layoutHeader(tree);
+        list(tree).props.onContentSizeChange(400, 5000);
+      });
+      assert.deepEqual(scrolls.at(-1), {index: 3});
+      await act(async () => list(tree).props.onScrollEndDrag());
+      assert.deepEqual(remembered.at(-1).section, section);
+      const next = tree.root
+        .findAllByType('Button')
+        .find(n => n.props.label === 'الجزء التالي');
+      await act(async () => next.props.onPress());
+      assert.deepEqual(navigationEvents.at(-1).target.section, {
+        kind: 'juz',
+        number: 3,
+      });
+      assert.deepEqual(
+        navigationEvents.at(-1).target.verse,
+        sectionRange(edition.id, {kind: 'juz', number: 3}).start.verse,
+      );
+      await act(async () => tree.unmount());
+    }
+  } finally {
+    platform.OS = 'android';
+    fixtureChapter = null;
+    edition = editions[0];
+  }
+});
+
+test('iPhone keeps a multi-surah juz active across chapter continuation and uses a dismissible in-screen index', async () => {
+  const {editions, chapters} = require('../../src/features/quran/domain.ts');
+  edition = editions[1];
+  platform.OS = 'ios';
+  fixtureChapter = surah => ({
+    surah,
+    opening: 'OPENING',
+    verses: Array.from({length: chapters[surah - 1].hafsVerses}, (_, i) => ({
+      number: i + 1,
+      text: `SOURCE ${i + 1}`,
+    })),
+  });
+  let tree;
+  try {
+    tree = await mount('verses', 1, {
+      surah: 1,
+      section: {kind: 'juz', number: 1},
+    });
+    const next = tree.root
+      .findAllByType('Button')
+      .find(n => n.props.label === 'متابعة الجزء · البقرة');
+    await act(async () => next.props.onPress());
+    assert.deepEqual(navigationEvents.at(-1).target.section, {
+      kind: 'juz',
+      number: 1,
+    });
+    assert.equal(navigationEvents.at(-1).target.surah, 2);
+    await act(async () =>
+      tree.root
+        .findAllByType('IconButton')
+        .find(n => n.props.label === 'فهرس القرآن')
+        .props.onPress(),
+    );
+    assert.equal(tree.root.findAllByType('Index').length, 1);
+    assert.equal(
+      tree.root.findByType('KeyboardAvoidingView').props.behavior,
+      'padding',
+    );
+    assert.equal(tree.root.findAllByType('Modal').length, 0);
+    const target = {
+      editionId: edition.id,
+      surah: 87,
+      verse: 1,
+      packVersion: 'source-1',
+      section: {kind: 'hizb', number: 60},
+    };
+    await act(async () => tree.root.findByType('Index').props.onSelect(target));
+    assert.equal(tree.root.findAllByType('Index').length, 0);
+    assert.deepEqual(navigationEvents.at(-1).target, target);
+  } finally {
+    if (tree) await act(async () => tree.unmount());
+    fixtureChapter = null;
+    platform.OS = 'android';
+    edition = editions[0];
+  }
 });

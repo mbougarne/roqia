@@ -59,7 +59,36 @@ public class SourceArchiveTest {
         out.closeEntry();
       }
       rejects(() -> SourceArchive.openings(document));
-      System.out.println("7 source archive safety checks passed");
+      for (String opening : List.of("بِسْمِ", "بِسۡمِ", "بِّسۡمِ")) {
+        StringBuilder xml =
+            new StringBuilder(
+                "<w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:body>");
+        for (int surah = 1; surah <= 114; surah++) {
+          xml.append("<w:p><w:r><w:t>سُورَةُ TEST ONLY</w:t></w:r></w:p>");
+          if (surah != 9)
+            xml.append("<w:p><w:r><w:t>").append(opening).append(" TEST ONLY</w:t></w:r></w:p>");
+        }
+        xml.append("</w:body></w:document>");
+        try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(document))) {
+          out.putNextEntry(new ZipEntry("word/document.xml"));
+          out.write(xml.toString().getBytes("UTF-8"));
+          out.closeEntry();
+        }
+        Map<Integer, String> openings = SourceArchive.openings(document);
+        if (openings.size() != 113
+            || openings.containsKey(9)
+            || !openings.get(95).equals(opening + " TEST ONLY"))
+          throw new AssertionError("Source opening changed");
+      }
+      // Optional original documents support a local source check without an Android device.
+      for (String originalDocument : args) {
+        Map<Integer, String> openings = SourceArchive.openings(new File(originalDocument));
+        if (openings.size() != 113 || openings.containsKey(9))
+          throw new AssertionError("Original opening coverage");
+      }
+      System.out.println(
+          "Source archive safety and all three opening forms passed; original documents: "
+              + args.length);
     } finally {
       try (var paths = Files.walk(dir)) {
         paths

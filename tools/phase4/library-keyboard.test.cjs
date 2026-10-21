@@ -24,6 +24,8 @@ let ready = true,
   libraryError = false,
   selectionGate = null;
 const runtime = {
+  catalog: require('../../src/features/quran/catalog.ts').quranCatalog,
+  select: async () => {},
   preferred: async () => {
     if (selectionGate) await selectionGate;
     return {id: 'warsh-kfgqpc-v2.1-update6'};
@@ -38,6 +40,7 @@ Module._load = function (name, parent, ...rest) {
     if (name === 'react-native')
       return {
         View: 'View',
+        Platform: {OS: 'android'},
         ActivityIndicator: 'Indicator',
         Pressable: 'Pressable',
         Alert: {alert() {}},
@@ -54,6 +57,8 @@ Module._load = function (name, parent, ...rest) {
         useLibrary: () => ({runtime, ready, error: libraryError, retry() {}}),
         useOnFocus: (cb, deps) => React.useEffect(cb, deps),
       };
+    if (name === './IphoneQuranLibrary')
+      return {IphoneQuranLibrary: 'IphoneLibrary'};
     if (name.endsWith('/design/ui'))
       return {
         ...Object.fromEntries(
@@ -92,9 +97,50 @@ Module._load = function (name, parent, ...rest) {
 };
 const {
   QuranLibraryScreen,
+  EditionScreen,
 } = require('../../src/features/quran/LibraryScreens.tsx');
 
 Module._load = original;
+test('mushaf selection returns to reading and keeps source/translation controls without a text download step', async () => {
+  let tree,
+    returned = 0;
+  const routes = [];
+  await act(async () => {
+    tree = create(
+      React.createElement(EditionScreen, {
+        navigation: {
+          goBack() {
+            returned++;
+          },
+          navigate(...args) {
+            routes.push(args);
+          },
+        },
+      }),
+    );
+  });
+  const editions = tree.root.findAllByType('RadioRow');
+  assert.equal(editions.length, 2);
+  await act(async () => editions[1].props.onPress());
+  assert.equal(tree.root.findAllByType('RadioRow')[1].props.selected, true);
+  const rows = tree.root.findAllByType('SettingRow');
+  await act(async () => {
+    rows[0].props.onPress();
+    rows[1].props.onPress();
+  });
+  assert.deepEqual(
+    routes.map(r => r[0]),
+    ['QuranSource', 'QuranTranslations'],
+  );
+  assert.ok(
+    routes.every(r => r[1].editionId === runtime.catalog.texts[1].editionId),
+  );
+  const next = tree.root.findByType('Button');
+  assert.equal(next.props.disabled, false);
+  await act(async () => next.props.onPress());
+  assert.equal(returned, 1);
+  await act(async () => tree.unmount());
+});
 test('Android keyboard dismissal restores library context while field focus and search query remain independent', async () => {
   let tree;
   await act(async () => {

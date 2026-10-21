@@ -16,9 +16,9 @@ test('normal catalog delivers original sources and explicitly defers manual revi
   validateCatalog(quranCatalog.texts.map(t => t.pack));
   assert.equal(quranCatalog.texts.length, 2);
   for (const t of quranCatalog.texts) {
-    assert.equal(
+    assert.match(
       t.pack.sourceMetadata.manualArabicReview,
-      'deferred-owner-2026-10-18',
+      /^(deferred-owner|pending-iphone)-\d{4}-\d{2}-\d{2}$/,
     );
     assert.equal(Object.keys(t.chapterAssets).length, 114);
     assert.ok(t.pack.derivedAssets.length >= 114);
@@ -28,8 +28,9 @@ test('normal catalog delivers original sources and explicitly defers manual revi
   assert.equal(quranCatalog.translations.length, 2);
   assert.equal(quranCatalog.recordings.length, 2);
 });
-test('Hafs importer preserves strings, rejects missing/duplicate/reordered data and missing notice', () => {
-  const p = quranCatalog.texts[1].pack.preparation;
+test('legacy Hafs importer preserves strings, rejects missing/duplicate/reordered data and missing notice', () => {
+  const p = require('../../src/features/quran/legacy-hafs.data.json').pack
+    .preparation;
   const lines = chapters.flatMap(c =>
     Array.from(
       {length: c.hafsVerses},
