@@ -18,9 +18,9 @@ export function HomePage() {
           متجر Google Play
         </a>
         <a
-          href="#"
+          href="https://apps.apple.com/app/roqia-%D8%A7%D9%84%D8%B1%D9%82%D9%8A%D8%A9-%D8%A7%D9%84%D8%B4%D8%B1%D8%B9%D9%8A%D8%A9/id6825067887"
           className="store-button"
-          aria-label="رابط App Store placeholder">
+          aria-label="تحميل رقية من App Store">
           <FaApple size={18} />
           متجر App Store
         </a>
