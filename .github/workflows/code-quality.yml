@@ -39,6 +39,15 @@ jobs:
         run: yarn lint:js && yarn lint:python
       - name: Check source formatting and TypeScript
         run: yarn format:check && yarn typecheck
+      - name: Cache Gradle dependencies
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-v1-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', '**/gradle-wrapper.properties', '**/gradle.properties', 'package-lock.json', 'yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-v1-
       - name: Check Java, Kotlin and Gradle style
         run: node tools/quality/native.cjs check jvm
       - name: Check Objective-C style
@@ -51,6 +60,13 @@ jobs:
           python3 -m unittest discover -s tools/phase10 -p 'test_*.py'
           PYTHONPATH=tools/phase11 python3 -m unittest test_patch test_sleep_native test_font_shaping
           python3 -m unittest discover -s tools/phase12 -p 'test_*.py'
+      - name: Cache web npm downloads
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-web-npm-${{ hashFiles('web/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-web-npm-
       - name: Install and build web app
         working-directory: web
         run: npm ci && npm run build
